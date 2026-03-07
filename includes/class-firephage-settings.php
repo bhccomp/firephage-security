@@ -23,7 +23,7 @@ final class Settings
             'connection_status' => 'disconnected',
             'last_sync_at' => '',
             'last_sync_error' => '',
-            'auto_sync_reports' => '0',
+            'auto_sync_reports' => '1',
         ];
 
         $value = get_option(self::OPTION_KEY, []);

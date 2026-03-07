@@ -9,7 +9,7 @@ WordPress plugin for running local security checks inside WP Admin and optionall
 - WordPress core checksum verification
 - background malware scan for high-risk PHP and JavaScript files
 - updates and maintenance exposure summary
-- optional FirePhage dashboard connection and report sync
+- optional FirePhage dashboard connection with automatic report sync once connected
 
 ## Local Development
 

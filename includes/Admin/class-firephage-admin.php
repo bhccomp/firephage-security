@@ -42,7 +42,6 @@ final class Admin
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
-        add_action('wp_ajax_firephage_sync_report', [$this, 'handleSyncReport']);
     }
 
     public function registerMenus(): void
@@ -88,8 +87,6 @@ final class Admin
                 'labels' => [
                     'startScan' => __('Start Background Scan', 'firephage-security'),
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
-                    'syncReport' => __('Send Report to Dashboard', 'firephage-security'),
-                    'syncing' => __('Sending report...', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                 ],
             ]
@@ -115,7 +112,6 @@ final class Admin
         echo '</div>';
         echo '<div class="firephage-hero-actions">';
         echo '<a class="button button-primary button-hero" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade with FirePhage', 'firephage-security') . '</a>';
-        echo '<button type="button" class="button button-secondary firephage-sync-report">' . esc_html__('Send Report to Dashboard', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
 
@@ -181,7 +177,7 @@ final class Admin
         echo '<h2>' . esc_html__('Malware Scanner', 'firephage-security') . '</h2>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->mapStateBadge((string) $scan['status'])) . '" id="firephage-scan-status-badge">' . esc_html(ucfirst((string) $scan['status'])) . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html__('Scans PHP and JavaScript-heavy code paths in background batches so large sites can finish without locking up the admin screen.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Runs in background batches so large sites can finish without locking up the admin screen.', 'firephage-security') . '</p>';
         echo '<div class="firephage-progress"><div class="firephage-progress-bar" id="firephage-scan-progress-bar" style="width:' . esc_attr((string) $this->scanProgress($scan)) . '%"></div></div>';
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html__('Start Background Scan', 'firephage-security') . '</button>';
@@ -214,7 +210,7 @@ final class Admin
         echo '<div class="firephage-grid firephage-grid--2">';
         echo '<div class="firephage-card">';
         echo '<h2>' . esc_html__('Connect to FirePhage', 'firephage-security') . '</h2>';
-        echo '<p>' . esc_html__('Generate a connection token in your FirePhage dashboard, paste it here, and the plugin will exchange it for a site-scoped credential.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Generate a connection token in your FirePhage dashboard, paste it here, and the plugin will exchange it for a site-scoped credential and start syncing local reports automatically.', 'firephage-security') . '</p>';
         echo '<form id="firephage-connect-form">';
         echo '<label class="firephage-field"><span>' . esc_html__('Dashboard URL', 'firephage-security') . '</span><input type="url" name="dashboard_url" value="' . esc_attr($settings['dashboard_url']) . '" /></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Connection token', 'firephage-security') . '</span><input type="password" name="connection_token" value="' . esc_attr($settings['connection_token']) . '" autocomplete="off" /></label>';
@@ -299,6 +295,21 @@ final class Admin
             'auto_sync_reports' => $autoSync,
         ]);
 
+        if ($autoSync === '1') {
+            $syncResponse = $this->client->sendReport($this->settings->all(), $this->reportBuilder->build());
+
+            if (is_wp_error($syncResponse)) {
+                $this->settings->update([
+                    'last_sync_error' => $syncResponse->get_error_message(),
+                ]);
+            } else {
+                $this->settings->update([
+                    'last_sync_at' => current_time('mysql'),
+                    'last_sync_error' => '',
+                ]);
+            }
+        }
+
         wp_send_json_success([
             'message' => __('The plugin is now connected to FirePhage.', 'firephage-security'),
             'settings' => $this->settings->all(),
@@ -312,32 +323,6 @@ final class Admin
 
         wp_send_json_success([
             'message' => __('The plugin has been disconnected from FirePhage.', 'firephage-security'),
-            'settings' => $this->settings->all(),
-        ]);
-    }
-
-    public function handleSyncReport(): void
-    {
-        $this->assertAjaxPermissions();
-
-        $settings = $this->settings->all();
-        $response = $this->client->sendReport($settings, $this->reportBuilder->build());
-
-        if (is_wp_error($response)) {
-            $this->settings->update([
-                'last_sync_error' => $response->get_error_message(),
-            ]);
-
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
-        }
-
-        $this->settings->update([
-            'last_sync_at' => current_time('mysql'),
-            'last_sync_error' => '',
-        ]);
-
-        wp_send_json_success([
-            'message' => __('Local report sent to FirePhage.', 'firephage-security'),
             'settings' => $this->settings->all(),
         ]);
     }

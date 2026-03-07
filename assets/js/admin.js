@@ -12,7 +12,6 @@
     const tabPanels = Array.from(document.querySelectorAll('.firephage-tab-panel'));
     const startScanButton = document.querySelector('.firephage-start-scan');
     const refreshHealthButton = document.querySelector('.firephage-refresh-health');
-    const syncReportButton = document.querySelector('.firephage-sync-report');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     let pollTimer = null;
@@ -218,25 +217,6 @@
                 })
                 .always(() => {
                     refreshHealthButton.disabled = false;
-                });
-        });
-    }
-
-    if (syncReportButton) {
-        syncReportButton.addEventListener('click', () => {
-            syncReportButton.disabled = true;
-            syncReportButton.textContent = firephageAdmin.labels.syncing;
-
-            request('firephage_sync_report')
-                .done((response) => {
-                    showToast(response.data.message || 'Report sent.');
-                })
-                .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to send report.', true);
-                })
-                .always(() => {
-                    syncReportButton.disabled = false;
-                    syncReportButton.textContent = firephageAdmin.labels.syncReport;
                 });
         });
     }

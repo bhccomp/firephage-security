@@ -104,7 +104,7 @@ final class Plugin
     {
         $settings = $this->settings->all();
 
-        if ($settings['site_token'] === '' || $settings['dashboard_url'] === '') {
+        if ($settings['site_token'] === '' || $settings['dashboard_url'] === '' || $settings['auto_sync_reports'] !== '1') {
             return;
         }
 
