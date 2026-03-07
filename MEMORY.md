@@ -34,6 +34,11 @@
   - resumable background malware scanning
   - FirePhage connection flow using a dashboard-generated token
   - automatic report sync after connection plus scheduled report sync when enabled
+- Scanner tuning follow-up:
+  - excluded FirePhage plugin files from scanner findings
+  - trusted WordPress core files that match official checksums
+  - replaced naive one-hit regex flagging with a stricter scoring model to reduce false positives
+  - scan progress bar now has active motion while running and the scan button stays disabled during active scans
 - Current UX/product expectations:
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites

@@ -15,6 +15,7 @@
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     let pollTimer = null;
+    let scanIsRunning = false;
 
     const request = (action, payload = {}) => $.post(firephageAdmin.ajaxUrl, {
         action,
@@ -101,7 +102,9 @@
         const progressBar = document.getElementById('firephage-scan-progress-bar');
         const progressLabelNode = document.getElementById('firephage-scan-progress-label');
         const findings = document.getElementById('firephage-scan-findings');
+        const progressTrack = progressBar ? progressBar.parentElement : null;
         const progress = state.discovered_files > 0 ? Math.max(5, Math.min(100, Math.floor((state.scanned_files / state.discovered_files) * 100))) : (state.status === 'completed' ? 100 : 5);
+        scanIsRunning = state.status === 'discovering' || state.status === 'scanning';
 
         if (badge) {
             badge.className = `firephage-badge ${badgeClass(state.status)}`;
@@ -110,6 +113,11 @@
 
         if (progressBar) {
             progressBar.style.width = `${progress}%`;
+            progressBar.classList.toggle('is-active', scanIsRunning);
+        }
+
+        if (progressTrack) {
+            progressTrack.classList.toggle('is-active', scanIsRunning);
         }
 
         if (progressLabelNode) {
@@ -118,6 +126,11 @@
 
         if (findings) {
             findings.innerHTML = findingsMarkup(state.findings || []);
+        }
+
+        if (startScanButton) {
+            startScanButton.disabled = scanIsRunning;
+            startScanButton.textContent = scanIsRunning ? 'Scan Running...' : firephageAdmin.labels.startScan;
         }
 
         if (state.status === 'discovering' || state.status === 'scanning') {
@@ -198,8 +211,10 @@
                     showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to start the scan.', true);
                 })
                 .always(() => {
-                    startScanButton.disabled = false;
-                    startScanButton.textContent = firephageAdmin.labels.startScan;
+                    if (!scanIsRunning) {
+                        startScanButton.disabled = false;
+                        startScanButton.textContent = firephageAdmin.labels.startScan;
+                    }
                 });
         });
     }

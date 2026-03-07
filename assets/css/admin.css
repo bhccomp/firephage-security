@@ -189,6 +189,7 @@
 }
 
 .firephage-progress {
+    position: relative;
     width: 100%;
     height: 10px;
     border-radius: 999px;
@@ -202,6 +203,18 @@
     width: 5%;
     background: linear-gradient(90deg, #0369a1 0%, #38bdf8 100%);
     transition: width 0.25s ease;
+}
+
+.firephage-progress.is-active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    animation: firephage-progress-sheen 1.2s linear infinite;
+}
+
+.firephage-progress-bar.is-active {
+    animation: firephage-progress-pulse 1.1s ease-in-out infinite;
 }
 
 .firephage-finding-list {
@@ -261,6 +274,27 @@
 
 .firephage-toast.is-error {
     background: #991b1b;
+}
+
+@keyframes firephage-progress-sheen {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes firephage-progress-pulse {
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.15);
+    }
 }
 
 @media (max-width: 782px) {
