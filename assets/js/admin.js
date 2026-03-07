@@ -66,7 +66,7 @@
 
     const progressLabel = (state) => {
         if (state.status === 'idle') {
-            return 'The scanner is idle. Start a background scan to inspect PHP and JavaScript files.';
+            return 'The scanner is idle. Start a background scan to verify repository integrity and review untrusted code paths.';
         }
 
         if (state.status === 'discovering') {
@@ -74,24 +74,29 @@
         }
 
         if (state.status === 'completed') {
-            return `Scan completed. ${state.scanned_files} files scanned, ${state.suspicious_files} suspicious files flagged.`;
+            return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} suspicious.`;
         }
 
         if (state.status === 'failed') {
             return `Scan failed: ${state.last_error || 'Unknown error'}`;
         }
 
-        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Current file: ${state.current_file || 'Waiting...'}`;
+        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted so far: ${state.trusted_files}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
     };
 
     const findingsMarkup = (findings) => {
         if (!findings || findings.length === 0) {
-            return '<p class="firephage-empty">No suspicious files flagged by the latest scan.</p>';
+            return '<p class="firephage-empty">No integrity mismatches or suspicious files were flagged by the latest scan.</p>';
         }
 
         return `<div class="firephage-finding-list">${findings.slice().reverse().map((finding) => `
             <div class="firephage-finding">
-                <strong><code>${finding.file}</code></strong>
+                <div class="firephage-finding-meta">
+                    <strong><code>${finding.file}</code></strong>
+                    <span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${(finding.type || 'review').charAt(0).toUpperCase() + (finding.type || 'review').slice(1)}</span>
+                    <span class="firephage-badge firephage-badge--neutral">Confidence: ${(finding.confidence || 'low').charAt(0).toUpperCase() + (finding.confidence || 'low').slice(1)}</span>
+                    ${finding.source ? `<span class="firephage-badge firephage-badge--neutral">Source: ${String(finding.source).replaceAll('_', ' ')}</span>` : ''}
+                </div>
                 <span>${(finding.reasons || []).join(', ')}</span>
             </div>
         `).join('')}</div>`;

@@ -78,6 +78,7 @@ final class Plugin
     public static function deactivate(): void
     {
         wp_clear_scheduled_hook(MalwareScanner::CRON_HOOK);
+        wp_clear_scheduled_hook(MalwareScanner::MONITOR_CRON_HOOK);
         wp_clear_scheduled_hook(self::REPORT_CRON_HOOK);
     }
 

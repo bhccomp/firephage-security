@@ -39,6 +39,12 @@
   - trusted WordPress core files that match official checksums
   - replaced naive one-hit regex flagging with a stricter scoring model to reduce false positives
   - scan progress bar now has active motion while running and the scan button stays disabled during active scans
+- Scanner redesign follow-up:
+  - moved the scanner to an integrity-first model inspired by the reviewed security plugins
+  - verifies WordPress core, plugin, and theme files against official WordPress package checksums where available
+  - keeps a local clean-file baseline for custom files outside official package inventories
+  - uses a monitor cron to restart stalled background scans
+  - renders findings with type, confidence, and source metadata in the admin UI instead of a flat reason list
 - Current UX/product expectations:
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites

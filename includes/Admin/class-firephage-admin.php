@@ -108,7 +108,7 @@ final class Admin
         echo '<div>';
         echo '<p class="firephage-eyebrow">' . esc_html__('Local WordPress Security', 'firephage-security') . '</p>';
         echo '<h1>' . esc_html__('FirePhage Security', 'firephage-security') . '</h1>';
-        echo '<p class="firephage-hero-copy">' . esc_html__('Run local health checks, verify WordPress core integrity, scan high-risk code files, and optionally sync reports to FirePhage.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-hero-copy">' . esc_html__('Run local health checks, verify repository integrity, scan high-risk code paths in background batches, and optionally sync reports to FirePhage.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-hero-actions">';
         echo '<a class="button button-primary button-hero" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade with FirePhage', 'firephage-security') . '</a>';
@@ -136,7 +136,7 @@ final class Admin
         echo '<ul class="firephage-list">';
         echo '<li>' . esc_html__('Local WordPress health and hardening checks', 'firephage-security') . '</li>';
         echo '<li>' . esc_html__('WordPress core checksum verification against official release hashes', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Background scanning of high-risk code files like PHP and JavaScript', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Background scanning that prioritizes repository integrity checks before heuristic review', 'firephage-security') . '</li>';
         echo '<li>' . esc_html__('Optional FirePhage dashboard sync for reports and alerts', 'firephage-security') . '</li>';
         echo '</ul>';
         echo '</div>';
@@ -177,7 +177,7 @@ final class Admin
         echo '<h2>' . esc_html__('Malware Scanner', 'firephage-security') . '</h2>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->mapStateBadge((string) $scan['status'])) . '" id="firephage-scan-status-badge">' . esc_html(ucfirst((string) $scan['status'])) . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html__('Runs in background batches so large sites can finish without locking up the admin screen.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Runs in background batches so large sites can finish without locking up the admin screen, using official package checksums and local clean baselines before suspicious-code heuristics.', 'firephage-security') . '</p>';
         echo '<div class="firephage-progress"><div class="firephage-progress-bar" id="firephage-scan-progress-bar" style="width:' . esc_attr((string) $this->scanProgress($scan)) . '%"></div></div>';
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html__('Start Background Scan', 'firephage-security') . '</button>';
@@ -185,9 +185,9 @@ final class Admin
         echo '<div class="firephage-card">';
         echo '<h3>' . esc_html__('Scan scope', 'firephage-security') . '</h3>';
         echo '<ul class="firephage-list">';
-        echo '<li>' . esc_html__('Includes: php, phtml, php5, php7, php8, inc, js', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Skips media libraries and cache-like directories', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Flags suspicious code execution and obfuscation patterns for review', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Verifies WordPress core, plugin, and theme files against official package checksums where available', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Seeds and reuses a local clean-file baseline for custom code that is not covered by repository checksums', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Skips uploads, cache-like directories, and obvious bundled/minified noise before applying weighted malware heuristics', 'firephage-security') . '</li>';
         echo '</ul>';
         echo '</div>';
         echo '</div>';
@@ -389,15 +389,28 @@ final class Admin
     private function renderFindings(array $findings): string
     {
         if ($findings === []) {
-            return '<p class="firephage-empty">' . esc_html__('No suspicious files flagged by the latest scan.', 'firephage-security') . '</p>';
+            return '<p class="firephage-empty">' . esc_html__('No integrity mismatches or suspicious files were flagged by the latest scan.', 'firephage-security') . '</p>';
         }
 
         $html = '<div class="firephage-finding-list">';
 
         foreach (array_reverse($findings) as $finding) {
             $file = isset($finding['file']) ? (string) $finding['file'] : '';
+            $type = isset($finding['type']) ? (string) $finding['type'] : 'review';
+            $confidence = isset($finding['confidence']) ? (string) $finding['confidence'] : 'low';
+            $source = isset($finding['source']) ? (string) $finding['source'] : '';
             $reasons = isset($finding['reasons']) && is_array($finding['reasons']) ? $finding['reasons'] : [];
-            $html .= '<div class="firephage-finding"><strong><code>' . esc_html($file) . '</code></strong><span>' . esc_html(implode(', ', array_map('strval', $reasons))) . '</span></div>';
+            $html .= '<div class="firephage-finding">';
+            $html .= '<div class="firephage-finding-meta">';
+            $html .= '<strong><code>' . esc_html($file) . '</code></strong>';
+            $html .= '<span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html(ucfirst($type)) . '</span>';
+            $html .= '<span class="firephage-badge firephage-badge--neutral">' . esc_html(sprintf(__('Confidence: %s', 'firephage-security'), ucfirst($confidence))) . '</span>';
+            if ($source !== '') {
+                $html .= '<span class="firephage-badge firephage-badge--neutral">' . esc_html(sprintf(__('Source: %s', 'firephage-security'), str_replace('_', ' ', $source))) . '</span>';
+            }
+            $html .= '</div>';
+            $html .= '<span>' . esc_html(implode(', ', array_map('strval', $reasons))) . '</span>';
+            $html .= '</div>';
         }
 
         return $html . '</div>';
@@ -437,7 +450,7 @@ final class Admin
         $status = (string) ($scan['status'] ?? 'idle');
 
         if ($status === 'idle') {
-            return __('The scanner is idle. Start a background scan to inspect PHP and JavaScript files.', 'firephage-security');
+            return __('The scanner is idle. Start a background scan to verify repository integrity and review untrusted code paths.', 'firephage-security');
         }
 
         if ($status === 'discovering') {
@@ -445,14 +458,28 @@ final class Admin
         }
 
         if ($status === 'completed') {
-            return sprintf(__('Scan completed. %1$d files scanned, %2$d suspicious files flagged.', 'firephage-security'), (int) ($scan['scanned_files'] ?? 0), (int) ($scan['suspicious_files'] ?? 0));
+            return sprintf(
+                __('Scan completed. %1$d files scanned, %2$d trusted, %3$d integrity mismatches, %4$d suspicious.', 'firephage-security'),
+                (int) ($scan['scanned_files'] ?? 0),
+                (int) ($scan['trusted_files'] ?? 0),
+                (int) ($scan['integrity_issues'] ?? 0),
+                (int) ($scan['suspicious_files'] ?? 0)
+            );
         }
 
         if ($status === 'failed') {
             return sprintf(__('Scan failed: %s', 'firephage-security'), (string) ($scan['last_error'] ?? __('Unknown error', 'firephage-security')));
         }
 
-        return sprintf(__('Scanning %1$d of %2$d discovered files. Current file: %3$s', 'firephage-security'), (int) ($scan['scanned_files'] ?? 0), (int) ($scan['discovered_files'] ?? 0), (string) ($scan['current_file'] ?? ''));
+        return sprintf(
+            __('Scanning %1$d of %2$d discovered files. Trusted so far: %3$d. Integrity mismatches: %4$d. Suspicious: %5$d. Current file: %6$s', 'firephage-security'),
+            (int) ($scan['scanned_files'] ?? 0),
+            (int) ($scan['discovered_files'] ?? 0),
+            (int) ($scan['trusted_files'] ?? 0),
+            (int) ($scan['integrity_issues'] ?? 0),
+            (int) ($scan['suspicious_files'] ?? 0),
+            (string) ($scan['current_file'] ?? '')
+        );
     }
 
     private function mapStateBadge(string $status): string

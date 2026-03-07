@@ -231,6 +231,13 @@
     background: #f8fafc;
 }
 
+.firephage-finding-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .firephage-field,
 .firephage-toggle {
     display: grid;
