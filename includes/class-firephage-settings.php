@@ -16,9 +16,14 @@ final class Settings
     public function all(): array
     {
         $defaults = [
-            'api_base_url' => '',
+            'dashboard_url' => 'https://waf-saas.firephage.com',
+            'connection_token' => '',
             'site_token' => '',
             'site_id' => '',
+            'connection_status' => 'disconnected',
+            'last_sync_at' => '',
+            'last_sync_error' => '',
+            'auto_sync_reports' => '0',
         ];
 
         $value = get_option(self::OPTION_KEY, []);
@@ -32,44 +37,7 @@ final class Settings
 
     public function register(): void
     {
-        register_setting(
-            'firephage_security',
-            self::OPTION_KEY,
-            [$this, 'sanitize']
-        );
-
-        add_settings_section(
-            'firephage_security_connection',
-            __('FirePhage Connection', 'firephage-security'),
-            function (): void {
-                echo '<p>' . esc_html__('Connect this WordPress site to your FirePhage dashboard.', 'firephage-security') . '</p>';
-            },
-            'firephage_security'
-        );
-
-        add_settings_field(
-            'api_base_url',
-            __('API Base URL', 'firephage-security'),
-            [$this, 'renderApiBaseUrlField'],
-            'firephage_security',
-            'firephage_security_connection'
-        );
-
-        add_settings_field(
-            'site_id',
-            __('FirePhage Site ID', 'firephage-security'),
-            [$this, 'renderSiteIdField'],
-            'firephage_security',
-            'firephage_security_connection'
-        );
-
-        add_settings_field(
-            'site_token',
-            __('Site Token', 'firephage-security'),
-            [$this, 'renderSiteTokenField'],
-            'firephage_security',
-            'firephage_security_connection'
-        );
+        register_setting('firephage_security', self::OPTION_KEY, [$this, 'sanitize']);
     }
 
     /**
@@ -79,44 +47,37 @@ final class Settings
     public function sanitize($input): array
     {
         $input = is_array($input) ? $input : [];
+        $settings = $this->all();
 
         return [
-            'api_base_url' => esc_url_raw((string) ($input['api_base_url'] ?? '')),
-            'site_id' => sanitize_text_field((string) ($input['site_id'] ?? '')),
-            'site_token' => sanitize_text_field((string) ($input['site_token'] ?? '')),
+            'dashboard_url' => esc_url_raw((string) ($input['dashboard_url'] ?? $settings['dashboard_url'])),
+            'connection_token' => sanitize_text_field((string) ($input['connection_token'] ?? $settings['connection_token'])),
+            'site_id' => sanitize_text_field((string) ($input['site_id'] ?? $settings['site_id'])),
+            'site_token' => sanitize_text_field((string) ($input['site_token'] ?? $settings['site_token'])),
+            'connection_status' => sanitize_text_field((string) ($input['connection_status'] ?? $settings['connection_status'])),
+            'last_sync_at' => sanitize_text_field((string) ($input['last_sync_at'] ?? $settings['last_sync_at'])),
+            'last_sync_error' => sanitize_text_field((string) ($input['last_sync_error'] ?? $settings['last_sync_error'])),
+            'auto_sync_reports' => ! empty($input['auto_sync_reports']) ? '1' : '0',
         ];
     }
 
-    public function renderApiBaseUrlField(): void
+    /**
+     * @param array<string, string> $values
+     */
+    public function update(array $values): void
     {
-        $settings = $this->all();
-
-        printf(
-            '<input type="url" name="%1$s[api_base_url]" value="%2$s" class="regular-text" placeholder="https://waf-saas.firephage.com" />',
-            esc_attr(self::OPTION_KEY),
-            esc_attr($settings['api_base_url'])
-        );
+        update_option(self::OPTION_KEY, array_merge($this->all(), $values), false);
     }
 
-    public function renderSiteIdField(): void
+    public function disconnect(): void
     {
-        $settings = $this->all();
-
-        printf(
-            '<input type="text" name="%1$s[site_id]" value="%2$s" class="regular-text" />',
-            esc_attr(self::OPTION_KEY),
-            esc_attr($settings['site_id'])
-        );
-    }
-
-    public function renderSiteTokenField(): void
-    {
-        $settings = $this->all();
-
-        printf(
-            '<input type="password" name="%1$s[site_token]" value="%2$s" class="regular-text" autocomplete="off" />',
-            esc_attr(self::OPTION_KEY),
-            esc_attr($settings['site_token'])
-        );
+        $this->update([
+            'connection_token' => '',
+            'site_id' => '',
+            'site_token' => '',
+            'connection_status' => 'disconnected',
+            'last_sync_at' => '',
+            'last_sync_error' => '',
+        ]);
     }
 }

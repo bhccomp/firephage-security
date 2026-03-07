@@ -2,7 +2,7 @@
 /**
  * Plugin Name: FirePhage Security
  * Plugin URI: https://firephage.com
- * Description: Connect WordPress to FirePhage and surface core security and performance insights.
+ * Description: WordPress security toolkit with local health checks, malware scanning, and optional FirePhage dashboard sync.
  * Version: 0.1.0
  * Author: FirePhage
  * Author URI: https://firephage.com
@@ -24,5 +24,8 @@ function firephage_security(): FirePhage\Security\Plugin
 {
     return FirePhage\Security\Plugin::instance();
 }
+
+register_activation_hook(FIREPHAGE_SECURITY_FILE, [FirePhage\Security\Plugin::class, 'activate']);
+register_deactivation_hook(FIREPHAGE_SECURITY_FILE, [FirePhage\Security\Plugin::class, 'deactivate']);
 
 firephage_security()->boot();

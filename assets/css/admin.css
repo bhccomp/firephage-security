@@ -1,0 +1,273 @@
+.firephage-admin {
+    margin-right: 20px;
+}
+
+.firephage-shell {
+    margin-top: 24px;
+}
+
+.firephage-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: end;
+    padding: 28px 32px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.20), transparent 32%),
+        linear-gradient(135deg, #0f172a 0%, #082f49 100%);
+    color: #f8fafc;
+    box-shadow: 0 18px 40px rgba(8, 47, 73, 0.18);
+}
+
+.firephage-eyebrow {
+    margin: 0 0 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #bae6fd;
+}
+
+.firephage-hero h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 32px;
+}
+
+.firephage-hero-copy {
+    max-width: 720px;
+    margin: 12px 0 0;
+    font-size: 15px;
+    color: rgba(241, 245, 249, 0.9);
+}
+
+.firephage-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.firephage-hero .button-hero {
+    background: #e0f2fe;
+    border-color: #e0f2fe;
+    color: #082f49;
+}
+
+.firephage-stat-grid,
+.firephage-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-top: 20px;
+}
+
+.firephage-grid--2 {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.firephage-stat-card,
+.firephage-card {
+    background: #fff;
+    border: 1px solid #d8dee6;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.firephage-stat-card {
+    background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+}
+
+.firephage-stat-label,
+.firephage-stat-description {
+    display: block;
+}
+
+.firephage-stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+}
+
+.firephage-stat-value {
+    display: block;
+    margin: 10px 0 8px;
+    font-size: 32px;
+    line-height: 1;
+    color: #0f172a;
+}
+
+.firephage-stat-description,
+.firephage-card p,
+.firephage-card li {
+    color: #475569;
+}
+
+.firephage-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.firephage-tab-button {
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: #fff;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.firephage-tab-button.is-active {
+    background: #0f172a;
+    border-color: #0f172a;
+    color: #fff;
+}
+
+.firephage-tab-panel {
+    margin-top: 20px;
+}
+
+.firephage-card-head,
+.firephage-panel-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: start;
+}
+
+.firephage-panel-header {
+    margin-bottom: 16px;
+}
+
+.firephage-panel-header h2,
+.firephage-card h2,
+.firephage-card h3,
+.firephage-card h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #0f172a;
+}
+
+.firephage-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.firephage-badge--good {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.firephage-badge--warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.firephage-badge--critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.firephage-badge--neutral,
+.firephage-badge--unknown {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.firephage-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.firephage-progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+    margin: 16px 0 12px;
+}
+
+.firephage-progress-bar {
+    height: 100%;
+    width: 5%;
+    background: linear-gradient(90deg, #0369a1 0%, #38bdf8 100%);
+    transition: width 0.25s ease;
+}
+
+.firephage-finding-list {
+    display: grid;
+    gap: 12px;
+}
+
+.firephage-finding {
+    display: grid;
+    gap: 6px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.firephage-field,
+.firephage-toggle {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.firephage-field input[type="url"],
+.firephage-field input[type="password"] {
+    width: 100%;
+    max-width: none;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    padding: 10px 12px;
+}
+
+.firephage-inline-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.firephage-empty {
+    margin: 0;
+    color: #64748b;
+}
+
+.firephage-toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+    min-width: 240px;
+    max-width: 420px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: #0f172a;
+    color: #fff;
+    box-shadow: 0 16px 30px rgba(15, 23, 42, 0.28);
+}
+
+.firephage-toast.is-error {
+    background: #991b1b;
+}
+
+@media (max-width: 782px) {
+    .firephage-hero,
+    .firephage-card-head,
+    .firephage-panel-header {
+        flex-direction: column;
+        align-items: start;
+    }
+}

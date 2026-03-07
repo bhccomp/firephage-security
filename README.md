@@ -1,16 +1,15 @@
 # FirePhage Security
 
-WordPress plugin for connecting a WordPress site to FirePhage and exposing basic security and performance insights inside WP Admin.
+WordPress plugin for running local security checks inside WP Admin and optionally syncing those reports to FirePhage.
 
-## Planned Modules
+## Current Modules
 
-- FirePhage connection and site binding
-- Firewall / CDN / cache insights
-- Malware signature scanner
-- Plugin vulnerability alerts
-- `wp-login` brute force protection
-- Security headers audit
-- Security report
+- tabbed single-screen WP Admin interface
+- local WordPress health and hardening checks
+- WordPress core checksum verification
+- background malware scan for high-risk PHP and JavaScript files
+- updates and maintenance exposure summary
+- optional FirePhage dashboard connection and report sync
 
 ## Local Development
 
@@ -19,9 +18,9 @@ WordPress plugin for connecting a WordPress site to FirePhage and exposing basic
 
 ## Current State
 
-This is the initial scaffold. It includes:
+This is the first functional implementation pass. It includes:
 
-- a valid WordPress plugin bootstrap file
-- a FirePhage admin menu
-- settings page for FirePhage connection fields
-- placeholder module pages for the planned feature set
+- a single-page admin UI with client-side tab switching
+- AJAX actions for scan control, health refresh, dashboard connection, and report sync
+- a resumable background scanner driven by WP-Cron batches
+- a local report builder that can be sent to FirePhage when connected
