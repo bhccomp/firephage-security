@@ -63,18 +63,23 @@ final class Admin
             return;
         }
 
+        $stylePath = FIREPHAGE_SECURITY_PATH . 'assets/css/admin.css';
+        $scriptPath = FIREPHAGE_SECURITY_PATH . 'assets/js/admin.js';
+        $styleVersion = file_exists($stylePath) ? (string) filemtime($stylePath) : FIREPHAGE_SECURITY_VERSION;
+        $scriptVersion = file_exists($scriptPath) ? (string) filemtime($scriptPath) : FIREPHAGE_SECURITY_VERSION;
+
         wp_enqueue_style(
             'firephage-security-admin',
             FIREPHAGE_SECURITY_URL . 'assets/css/admin.css',
             [],
-            FIREPHAGE_SECURITY_VERSION
+            $styleVersion
         );
 
         wp_enqueue_script(
             'firephage-security-admin',
             FIREPHAGE_SECURITY_URL . 'assets/js/admin.js',
             ['jquery'],
-            FIREPHAGE_SECURITY_VERSION,
+            $scriptVersion,
             true
         );
 

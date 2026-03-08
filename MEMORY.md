@@ -45,6 +45,8 @@
   - keeps a local clean-file baseline for custom files outside official package inventories
   - uses a monitor cron to restart stalled background scans
   - renders findings with type, confidence, and source metadata in the admin UI instead of a flat reason list
+  - latest findings now render as a capped, scrollable table with file path, status, and details
+  - admin assets now use file modification times for cache busting so UI changes appear immediately after deployment
 - Current UX/product expectations:
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites
