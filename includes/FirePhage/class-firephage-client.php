@@ -67,6 +67,31 @@ final class Client
     }
 
     /**
+     * @return array<string, mixed>|WP_Error
+     */
+    public function fetchPublicChecksums(string $serviceUrl, string $type, string $slug, string $version)
+    {
+        $response = wp_remote_get(
+            add_query_arg(
+                [
+                    'type' => $type,
+                    'slug' => $slug,
+                    'version' => $version,
+                ],
+                untrailingslashit($serviceUrl) . '/api/plugin/checksums'
+            ),
+            [
+                'timeout' => 12,
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ]
+        );
+
+        return $this->normalizeResponse($response, 'checksums');
+    }
+
+    /**
      * @param array<string, mixed>|WP_Error $response
      * @return array<string, mixed>|WP_Error
      */

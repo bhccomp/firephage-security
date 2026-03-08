@@ -17,6 +17,7 @@ final class Settings
     {
         $defaults = [
             'dashboard_url' => 'https://waf-saas.firephage.com',
+            'checksum_service_url' => 'https://waf-saas.firephage.com',
             'connection_token' => '',
             'site_token' => '',
             'site_id' => '',
@@ -24,6 +25,7 @@ final class Settings
             'last_sync_at' => '',
             'last_sync_error' => '',
             'auto_sync_reports' => '1',
+            'use_firephage_checksum_cache' => '1',
         ];
 
         $value = get_option(self::OPTION_KEY, []);
@@ -51,6 +53,7 @@ final class Settings
 
         return [
             'dashboard_url' => esc_url_raw((string) ($input['dashboard_url'] ?? $settings['dashboard_url'])),
+            'checksum_service_url' => esc_url_raw((string) ($input['checksum_service_url'] ?? $settings['checksum_service_url'])),
             'connection_token' => sanitize_text_field((string) ($input['connection_token'] ?? $settings['connection_token'])),
             'site_id' => sanitize_text_field((string) ($input['site_id'] ?? $settings['site_id'])),
             'site_token' => sanitize_text_field((string) ($input['site_token'] ?? $settings['site_token'])),
@@ -58,6 +61,7 @@ final class Settings
             'last_sync_at' => sanitize_text_field((string) ($input['last_sync_at'] ?? $settings['last_sync_at'])),
             'last_sync_error' => sanitize_text_field((string) ($input['last_sync_error'] ?? $settings['last_sync_error'])),
             'auto_sync_reports' => ! empty($input['auto_sync_reports']) ? '1' : '0',
+            'use_firephage_checksum_cache' => ! empty($input['use_firephage_checksum_cache']) ? '1' : '0',
         ];
     }
 

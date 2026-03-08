@@ -60,6 +60,7 @@ final class Plugin
     {
         add_action('plugins_loaded', [$this, 'loadTextdomain']);
         add_action('init', [$this, 'syncSchedules']);
+        add_action('admin_init', [$this, 'registerPrivacyPolicyContent']);
         add_action('admin_init', [$this->settings, 'register']);
         add_action('admin_menu', [$this->admin, 'registerMenus']);
         add_action('admin_enqueue_scripts', [$this->admin, 'enqueueAssets']);
@@ -99,6 +100,22 @@ final class Plugin
         if (! $shouldSchedule) {
             wp_clear_scheduled_hook(self::REPORT_CRON_HOOK);
         }
+    }
+
+    public function registerPrivacyPolicyContent(): void
+    {
+        if (! function_exists('wp_add_privacy_policy_content')) {
+            return;
+        }
+
+        wp_add_privacy_policy_content(
+            __('FirePhage Security', 'firephage-security'),
+            wp_kses_post(
+                '<p>' . esc_html__('FirePhage Security can contact external services in two cases.', 'firephage-security') . '</p>' .
+                '<p>' . esc_html__('For checksum verification, the plugin may request public package checksum metadata from FirePhage cache services and WordPress.org. Those requests include only the package type, slug, and version needed to verify repository files.', 'firephage-security') . '</p>' .
+                '<p>' . esc_html__('If you choose to connect the plugin to a paid FirePhage account, the plugin will also send site connection details and security reports to FirePhage so dashboard sync and alerting can work.', 'firephage-security') . '</p>'
+            )
+        );
     }
 
     public function sendScheduledReport(): void

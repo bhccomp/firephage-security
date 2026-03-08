@@ -194,6 +194,7 @@ final class Admin
         echo '<li>' . esc_html__('Seeds and reuses a local clean-file baseline for custom code that is not covered by repository checksums', 'firephage-security') . '</li>';
         echo '<li>' . esc_html__('Skips uploads, cache-like directories, and obvious bundled/minified noise before applying weighted malware heuristics', 'firephage-security') . '</li>';
         echo '</ul>';
+        echo '<p class="firephage-note">' . esc_html__('Checksum lookups may use FirePhage\'s public checksum cache and fall back to WordPress.org. Those requests send only package type, slug, and version. FirePhage dashboard connection remains separate and optional.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card firephage-findings-card firephage-section-spaced">';
@@ -216,6 +217,7 @@ final class Admin
         echo '<div class="firephage-card">';
         echo '<h2>' . esc_html__('Connect to FirePhage', 'firephage-security') . '</h2>';
         echo '<p>' . esc_html__('Generate a connection token in your FirePhage dashboard, paste it here, and the plugin will exchange it for a site-scoped credential and start syncing local reports automatically.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('This paid connection is only for dashboard sync and alerting. Local health checks, scanner features, and public checksum lookups do not require a connected FirePhage account.', 'firephage-security') . '</p>';
         echo '<form id="firephage-connect-form">';
         echo '<label class="firephage-field"><span>' . esc_html__('Dashboard URL', 'firephage-security') . '</span><input type="url" name="dashboard_url" value="' . esc_attr($settings['dashboard_url']) . '" /></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Connection token', 'firephage-security') . '</span><input type="password" name="connection_token" value="' . esc_attr($settings['connection_token']) . '" autocomplete="off" /></label>';

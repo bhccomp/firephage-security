@@ -108,6 +108,15 @@
     color: #475569;
 }
 
+.firephage-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #dbeafe;
+    color: #334155;
+}
+
 .firephage-tabs {
     display: flex;
     gap: 10px;

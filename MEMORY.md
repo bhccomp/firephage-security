@@ -42,11 +42,16 @@
 - Scanner redesign follow-up:
   - moved the scanner to an integrity-first model inspired by the reviewed security plugins
   - verifies WordPress core, plugin, and theme files against official WordPress package checksums where available
+  - plugin and theme package checksums now prefer a public FirePhage checksum cache and fall back to WordPress.org if FirePhage is unavailable
   - keeps a local clean-file baseline for custom files outside official package inventories
   - uses a monitor cron to restart stalled background scans
   - renders findings with type, confidence, and source metadata in the admin UI instead of a flat reason list
   - latest findings now render as a capped, scrollable table with file path, status, and details
   - admin assets now use file modification times for cache busting so UI changes appear immediately after deployment
+- WordPress.org compliance follow-up:
+  - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
+  - added privacy policy content covering public checksum lookups and optional dashboard sync
+  - added plugin readme disclosures for external services
 - Current UX/product expectations:
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites
