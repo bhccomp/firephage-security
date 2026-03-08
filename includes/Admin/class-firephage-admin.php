@@ -164,7 +164,7 @@ final class Admin
             echo $this->renderCheckCard($check);
         }
         echo '</div>';
-        echo '<div class="firephage-card firephage-checksum-card" id="firephage-core-checksum">';
+        echo '<div class="firephage-card firephage-checksum-card firephage-section-spaced" id="firephage-core-checksum">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('WordPress Core Checksums', 'firephage-security') . '</h3>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr((string) ($checksum['status'] ?? 'unknown')) . '">' . esc_html(ucfirst((string) ($checksum['status'] ?? 'unknown'))) . '</span>';
@@ -196,7 +196,7 @@ final class Admin
         echo '</ul>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="firephage-card firephage-findings-card">';
+        echo '<div class="firephage-card firephage-findings-card firephage-section-spaced">';
         echo '<h3>' . esc_html__('Latest findings', 'firephage-security') . '</h3>';
         echo '<div id="firephage-scan-findings">' . $this->renderFindings($scan['findings'] ?? []) . '</div>';
         echo '</div>';
