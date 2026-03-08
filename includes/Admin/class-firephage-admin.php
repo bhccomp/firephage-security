@@ -196,7 +196,7 @@ final class Admin
         echo '</ul>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card firephage-findings-card">';
         echo '<h3>' . esc_html__('Latest findings', 'firephage-security') . '</h3>';
         echo '<div id="firephage-scan-findings">' . $this->renderFindings($scan['findings'] ?? []) . '</div>';
         echo '</div>';
