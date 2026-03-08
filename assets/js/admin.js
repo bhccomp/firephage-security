@@ -89,17 +89,43 @@
             return '<p class="firephage-empty">No integrity mismatches or suspicious files were flagged by the latest scan.</p>';
         }
 
-        return `<div class="firephage-finding-list">${findings.slice().reverse().map((finding) => `
-            <div class="firephage-finding">
-                <div class="firephage-finding-meta">
-                    <strong><code>${finding.file}</code></strong>
-                    <span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${(finding.type || 'review').charAt(0).toUpperCase() + (finding.type || 'review').slice(1)}</span>
-                    <span class="firephage-badge firephage-badge--neutral">Confidence: ${(finding.confidence || 'low').charAt(0).toUpperCase() + (finding.confidence || 'low').slice(1)}</span>
-                    ${finding.source ? `<span class="firephage-badge firephage-badge--neutral">Source: ${String(finding.source).replaceAll('_', ' ')}</span>` : ''}
-                </div>
-                <span>${(finding.reasons || []).join(', ')}</span>
-            </div>
-        `).join('')}</div>`;
+        return `<div class="firephage-finding-table-wrap">
+            <table class="firephage-finding-table">
+                <thead>
+                    <tr>
+                        <th scope="col">File Path</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${findings.slice().reverse().map((finding) => {
+                        const status = finding.type === 'malware' ? 'Suspicious' : 'Integrity mismatch';
+                        const details = [];
+
+                        if (finding.source) {
+                            details.push(`Source: ${String(finding.source).replaceAll('_', ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`);
+                        }
+
+                        if (finding.confidence) {
+                            details.push(`Confidence: ${String(finding.confidence).charAt(0).toUpperCase()}${String(finding.confidence).slice(1)}`);
+                        }
+
+                        if (finding.reasons && finding.reasons.length) {
+                            details.push(finding.reasons.join(', '));
+                        }
+
+                        return `
+                            <tr>
+                                <td><code>${finding.file}</code></td>
+                                <td><span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${status}</span></td>
+                                <td>${details.join(' | ')}</td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            </table>
+        </div>`;
     };
 
     const renderScanState = (state) => {

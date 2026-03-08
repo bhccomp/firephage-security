@@ -392,7 +392,13 @@ final class Admin
             return '<p class="firephage-empty">' . esc_html__('No integrity mismatches or suspicious files were flagged by the latest scan.', 'firephage-security') . '</p>';
         }
 
-        $html = '<div class="firephage-finding-list">';
+        $html = '<div class="firephage-finding-table-wrap">';
+        $html .= '<table class="firephage-finding-table">';
+        $html .= '<thead><tr>';
+        $html .= '<th scope="col">' . esc_html__('File Path', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Status', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Details', 'firephage-security') . '</th>';
+        $html .= '</tr></thead><tbody>';
 
         foreach (array_reverse($findings) as $finding) {
             $file = isset($finding['file']) ? (string) $finding['file'] : '';
@@ -400,20 +406,31 @@ final class Admin
             $confidence = isset($finding['confidence']) ? (string) $finding['confidence'] : 'low';
             $source = isset($finding['source']) ? (string) $finding['source'] : '';
             $reasons = isset($finding['reasons']) && is_array($finding['reasons']) ? $finding['reasons'] : [];
-            $html .= '<div class="firephage-finding">';
-            $html .= '<div class="firephage-finding-meta">';
-            $html .= '<strong><code>' . esc_html($file) . '</code></strong>';
-            $html .= '<span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html(ucfirst($type)) . '</span>';
-            $html .= '<span class="firephage-badge firephage-badge--neutral">' . esc_html(sprintf(__('Confidence: %s', 'firephage-security'), ucfirst($confidence))) . '</span>';
+            $status = $type === 'malware' ? __('Suspicious', 'firephage-security') : __('Integrity mismatch', 'firephage-security');
+            $detailParts = [];
+
             if ($source !== '') {
-                $html .= '<span class="firephage-badge firephage-badge--neutral">' . esc_html(sprintf(__('Source: %s', 'firephage-security'), str_replace('_', ' ', $source))) . '</span>';
+                $detailParts[] = sprintf(__('Source: %s', 'firephage-security'), ucwords(str_replace('_', ' ', $source)));
             }
-            $html .= '</div>';
-            $html .= '<span>' . esc_html(implode(', ', array_map('strval', $reasons))) . '</span>';
-            $html .= '</div>';
+
+            if ($confidence !== '') {
+                $detailParts[] = sprintf(__('Confidence: %s', 'firephage-security'), ucfirst($confidence));
+            }
+
+            if ($reasons !== []) {
+                $detailParts[] = implode(', ', array_map('strval', $reasons));
+            }
+
+            $html .= '<tr>';
+            $html .= '<td><code>' . esc_html($file) . '</code></td>';
+            $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
+            $html .= '<td>' . esc_html(implode(' | ', $detailParts)) . '</td>';
+            $html .= '</tr>';
         }
 
-        return $html . '</div>';
+        $html .= '</tbody></table></div>';
+
+        return $html;
     }
 
     private function renderUpdateCard(string $title, int $count, string $description): string
