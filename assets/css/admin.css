@@ -353,6 +353,64 @@
     color: #64748b;
 }
 
+.firephage-modal[hidden] {
+    display: none;
+}
+
+.firephage-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.firephage-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+.firephage-modal-dialog {
+    position: relative;
+    width: min(100%, 520px);
+    padding: 24px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+}
+
+.firephage-modal-head,
+.firephage-modal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.firephage-modal-head {
+    margin-bottom: 12px;
+}
+
+.firephage-modal-head h3 {
+    margin: 0;
+    color: #0f172a;
+}
+
+.firephage-modal-close {
+    font-size: 28px;
+    line-height: 1;
+    color: #64748b;
+    text-decoration: none;
+}
+
+.firephage-modal-dialog p {
+    margin: 0 0 20px;
+    color: #475569;
+}
+
 .firephage-toast {
     position: fixed;
     right: 24px;

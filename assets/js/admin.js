@@ -14,11 +14,16 @@
     const refreshHealthButton = document.querySelector('.firephage-refresh-health');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
+    const confirmModal = document.getElementById('firephage-confirm-modal');
+    const confirmModalTitle = document.getElementById('firephage-confirm-modal-title');
+    const confirmModalBody = document.getElementById('firephage-confirm-modal-body');
+    const confirmModalSubmit = document.getElementById('firephage-confirm-modal-submit');
     let pollTimer = null;
     let scanIsRunning = false;
     let currentScanState = {};
     let findingsPage = 1;
     let findingsPageSize = 25;
+    let pendingConfirmation = null;
 
     const request = (action, payload = {}) => $.post(firephageAdmin.ajaxUrl, {
         action,
@@ -39,6 +44,75 @@
         showToast.timer = window.setTimeout(() => {
             toast.hidden = true;
         }, 3200);
+    };
+
+    const closeConfirmModal = () => {
+        pendingConfirmation = null;
+
+        if (!confirmModal || !confirmModalSubmit) {
+            return;
+        }
+
+        confirmModal.hidden = true;
+        confirmModalSubmit.disabled = false;
+    };
+
+    const openConfirmModal = ({ title, body, onConfirm }) => {
+        if (!confirmModal || !confirmModalTitle || !confirmModalBody || !confirmModalSubmit) {
+            onConfirm();
+            return;
+        }
+
+        pendingConfirmation = onConfirm;
+        confirmModalTitle.textContent = title;
+        confirmModalBody.textContent = body;
+        confirmModal.hidden = false;
+        confirmModalSubmit.disabled = false;
+    };
+
+    const deleteAllSuspiciousFiles = (button) => {
+        button.setAttribute('disabled', 'disabled');
+
+        request('firephage_delete_suspicious_files')
+            .done((response) => {
+                if (response.success) {
+                    findingsPage = 1;
+                    renderScanState(response.data.state);
+                    showToast(response.data.message || 'Suspicious files deleted.');
+                } else {
+                    showToast((response.data && response.data.message) || 'Unable to delete suspicious files.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete suspicious files.', true);
+            })
+            .always(() => {
+                button.removeAttribute('disabled');
+                closeConfirmModal();
+            });
+    };
+
+    const deleteSingleSuspiciousFile = (button) => {
+        button.setAttribute('disabled', 'disabled');
+
+        request('firephage_delete_suspicious_file', {
+            file: button.dataset.file || '',
+        })
+            .done((response) => {
+                if (response.success) {
+                    renderScanState(response.data.state);
+                    showToast(response.data.message || 'The suspicious file was deleted.');
+                } else {
+                    showToast((response.data && response.data.message) || 'Unable to delete the file.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete the file.', true);
+            })
+            .always(() => {
+                button.removeAttribute('disabled');
+                closeConfirmModal();
+            });
     };
 
     const setActiveTab = (tabId) => {
@@ -425,49 +499,36 @@
         }
 
         if (target.classList.contains('firephage-delete-suspicious-files')) {
-            target.setAttribute('disabled', 'disabled');
-
-            request('firephage_delete_suspicious_files')
-                .done((response) => {
-                    if (response.success) {
-                        findingsPage = 1;
-                        renderScanState(response.data.state);
-                        showToast(response.data.message || 'Suspicious files deleted.');
-                    } else {
-                        showToast((response.data && response.data.message) || 'Unable to delete suspicious files.', true);
-                    }
-                })
-                .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete suspicious files.', true);
-                })
-                .always(() => {
-                    target.removeAttribute('disabled');
-                });
+            openConfirmModal({
+                title: firephageAdmin.labels.confirmDeleteAllTitle,
+                body: firephageAdmin.labels.confirmDeleteAllBody,
+                onConfirm: () => deleteAllSuspiciousFiles(target),
+            });
             return;
         }
 
         if (target.classList.contains('firephage-delete-finding')) {
-            target.setAttribute('disabled', 'disabled');
+            openConfirmModal({
+                title: firephageAdmin.labels.confirmDeleteTitle,
+                body: firephageAdmin.labels.confirmDeleteBody,
+                onConfirm: () => deleteSingleSuspiciousFile(target),
+            });
+            return;
+        }
 
-            request('firephage_delete_suspicious_file', {
-                file: target.dataset.file || '',
-            })
-                .done((response) => {
-                    if (response.success) {
-                        renderScanState(response.data.state);
-                        showToast(response.data.message || 'The suspicious file was deleted.');
-                    } else {
-                        showToast((response.data && response.data.message) || 'Unable to delete the file.', true);
-                    }
-                })
-                .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete the file.', true);
-                })
-                .always(() => {
-                    target.removeAttribute('disabled');
-                });
+        if (target.dataset.modalClose === '1') {
+            closeConfirmModal();
         }
     });
+
+    if (confirmModalSubmit) {
+        confirmModalSubmit.addEventListener('click', () => {
+            if (typeof pendingConfirmation === 'function') {
+                confirmModalSubmit.disabled = true;
+                pendingConfirmation();
+            }
+        });
+    }
 
     try {
         currentScanState = JSON.parse(app.dataset.scanStatus || '{}');

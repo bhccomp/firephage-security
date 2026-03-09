@@ -99,6 +99,12 @@ final class Admin
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
                     'deleteSuspiciousFiles' => __('Delete All Suspicious Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
+                    'confirmDeleteTitle' => __('Delete Suspicious File?', 'firephage-security'),
+                    'confirmDeleteAllTitle' => __('Delete All Suspicious Files?', 'firephage-security'),
+                    'confirmDeleteBody' => __('This will permanently delete the selected suspicious file from the server. This action cannot be undone.', 'firephage-security'),
+                    'confirmDeleteAllBody' => __('This will permanently delete every file currently flagged as suspicious malware. Protected core files will be skipped. This action cannot be undone.', 'firephage-security'),
+                    'confirmAction' => __('Delete', 'firephage-security'),
+                    'cancelAction' => __('Cancel', 'firephage-security'),
                 ],
             ]
         );
@@ -241,6 +247,20 @@ final class Admin
         echo '</div>';
         echo '</div>';
         echo '</section>';
+        echo '</div>';
+        echo '<div class="firephage-modal" id="firephage-confirm-modal" hidden>';
+        echo '<div class="firephage-modal-backdrop" data-modal-close="1"></div>';
+        echo '<div class="firephage-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="firephage-confirm-modal-title">';
+        echo '<div class="firephage-modal-head">';
+        echo '<h3 id="firephage-confirm-modal-title">' . esc_html__('Confirm Action', 'firephage-security') . '</h3>';
+        echo '<button type="button" class="button-link firephage-modal-close" data-modal-close="1" aria-label="' . esc_attr__('Close dialog', 'firephage-security') . '">&times;</button>';
+        echo '</div>';
+        echo '<p id="firephage-confirm-modal-body"></p>';
+        echo '<div class="firephage-modal-actions">';
+        echo '<button type="button" class="button button-secondary" data-modal-close="1">' . esc_html__('Cancel', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button firephage-button-danger" id="firephage-confirm-modal-submit">' . esc_html__('Delete', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</div>';
         echo '</div>';
         echo '<div class="firephage-toast" id="firephage-toast" hidden></div>';
         echo '</div>';
