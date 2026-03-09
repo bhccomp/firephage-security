@@ -87,12 +87,28 @@
         return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
     };
 
+    const pageSizeOptions = (count) => {
+        const options = [];
+
+        [10, 25, 50, 100].forEach((option) => {
+            if (count >= option || options.length === 0) {
+                options.push(option);
+            }
+        });
+
+        return options;
+    };
+
     const findingsMarkup = (findings) => {
         if (!findings || findings.length === 0) {
             return '<p class="firephage-empty">No integrity mismatches or suspicious files were flagged by the latest scan.</p>';
         }
 
         const rows = findings.slice().reverse();
+        const availablePageSizes = pageSizeOptions(rows.length);
+        if (!availablePageSizes.includes(findingsPageSize)) {
+            findingsPageSize = availablePageSizes.includes(25) ? 25 : availablePageSizes[availablePageSizes.length - 1];
+        }
         const totalPages = Math.max(1, Math.ceil(rows.length / findingsPageSize));
         findingsPage = Math.min(findingsPage, totalPages);
         const start = (findingsPage - 1) * findingsPageSize;
@@ -102,10 +118,7 @@
             <label class="firephage-findings-rows">
                 <span>Rows</span>
                 <select class="firephage-findings-page-size">
-                    <option value="10" ${findingsPageSize === 10 ? 'selected' : ''}>10</option>
-                    <option value="25" ${findingsPageSize === 25 ? 'selected' : ''}>25</option>
-                    <option value="50" ${findingsPageSize === 50 ? 'selected' : ''}>50</option>
-                    <option value="100" ${findingsPageSize === 100 ? 'selected' : ''}>100</option>
+                    ${availablePageSizes.map((option) => `<option value="${option}" ${findingsPageSize === option ? 'selected' : ''}>${option}</option>`).join('')}
                 </select>
             </label>
             <div class="firephage-findings-actions">

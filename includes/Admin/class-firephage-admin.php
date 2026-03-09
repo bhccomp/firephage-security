@@ -441,10 +441,15 @@ final class Admin
             return '<p class="firephage-empty">' . esc_html__('No integrity mismatches or suspicious files were flagged by the latest scan.', 'firephage-security') . '</p>';
         }
 
+        $pageSizeOptions = $this->pageSizeOptions(count($findings));
         $html = '<div class="firephage-findings-toolbar">';
-        $html .= '<label class="firephage-findings-rows"><span>' . esc_html__('Rows', 'firephage-security') . '</span><select class="firephage-findings-page-size"><option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option></select></label>';
+        $html .= '<label class="firephage-findings-rows"><span>' . esc_html__('Rows', 'firephage-security') . '</span><select class="firephage-findings-page-size">';
+        foreach ($pageSizeOptions as $option) {
+            $html .= '<option value="' . esc_attr((string) $option) . '"' . selected($option, 25, false) . '>' . esc_html((string) $option) . '</option>';
+        }
+        $html .= '</select></label>';
         $html .= '<div class="firephage-findings-actions">';
-        $html .= '<button type="button" class="button button-secondary firephage-delete-suspicious-files">' . esc_html__('Delete Suspicious Files', 'firephage-security') . '</button>';
+        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete Suspicious Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
         $html .= '</div>';
         $html .= '</div>';
@@ -496,6 +501,22 @@ final class Admin
         $html .= '<div class="firephage-findings-pagination" aria-live="polite"></div>';
 
         return $html;
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    private function pageSizeOptions(int $findingsCount): array
+    {
+        $options = [];
+
+        foreach ([10, 25, 50, 100] as $option) {
+            if ($findingsCount >= $option || $options === []) {
+                $options[] = $option;
+            }
+        }
+
+        return $options;
     }
 
     private function renderUpdateCard(string $title, int $count, string $description): string
