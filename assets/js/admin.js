@@ -15,8 +15,10 @@
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
+    const overviewNewScanButton = document.querySelector('.firephage-overview-new-scan');
     const overviewViewResultsButton = document.querySelector('.firephage-overview-view-results');
     const stopScanButton = document.querySelector('.firephage-stop-scan');
+    const startNewScanButton = document.querySelector('.firephage-start-new-scan');
     const confirmModal = document.getElementById('firephage-confirm-modal');
     const confirmModalTitle = document.getElementById('firephage-confirm-modal-title');
     const confirmModalBody = document.getElementById('firephage-confirm-modal-body');
@@ -381,6 +383,16 @@
             overviewViewResultsButton.style.display = scanIsRunning ? '' : 'none';
         }
 
+        if (startNewScanButton) {
+            startNewScanButton.style.display = state.status === 'stopped' ? '' : 'none';
+            startNewScanButton.disabled = scanIsRunning;
+        }
+
+        if (overviewNewScanButton) {
+            overviewNewScanButton.style.display = state.status === 'stopped' ? '' : 'none';
+            overviewNewScanButton.disabled = scanIsRunning;
+        }
+
         if (stopScanButton) {
             stopScanButton.style.display = scanIsRunning ? '' : 'none';
             stopScanButton.disabled = !scanIsRunning;
@@ -446,24 +458,35 @@
         }, 3000);
     };
 
-    const startBackgroundScan = (button = null) => {
+    const startBackgroundScan = (button = null, forceNew = false) => {
         const resumingScan = currentScanState.status === 'stopped';
+        const startingFresh = forceNew;
 
         if (button) {
             button.disabled = true;
-            button.textContent = resumingScan ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
+            button.textContent = (resumingScan && !startingFresh) ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
         }
 
         if (startScanButton) {
             startScanButton.disabled = true;
-            startScanButton.textContent = resumingScan ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
+            startScanButton.textContent = (resumingScan && !startingFresh) ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
         }
 
-        request('firephage_start_scan')
+        if (startNewScanButton) {
+            startNewScanButton.disabled = true;
+        }
+
+        if (overviewNewScanButton) {
+            overviewNewScanButton.disabled = true;
+        }
+
+        request('firephage_start_scan', {
+            force_new: forceNew ? '1' : '',
+        })
             .done((response) => {
                 if (response.success) {
                     renderScanState(response.data.state);
-                    showToast(resumingScan ? 'Background malware scan resumed.' : 'Background malware scan started.');
+                    showToast(startingFresh ? 'A new background malware scan started.' : (resumingScan ? 'Background malware scan resumed.' : 'Background malware scan started.'));
                 } else {
                     showToast(response.data.message || 'Unable to start the scan.', true);
                 }
@@ -482,6 +505,14 @@
                         button.disabled = false;
                         button.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.overviewResumeScan : firephageAdmin.labels.overviewStartScan;
                     }
+
+                    if (startNewScanButton) {
+                        startNewScanButton.disabled = false;
+                    }
+
+                    if (overviewNewScanButton) {
+                        overviewNewScanButton.disabled = false;
+                    }
                 }
             });
     };
@@ -497,6 +528,12 @@
     if (startScanButton) {
         startScanButton.addEventListener('click', () => {
             startBackgroundScan();
+        });
+    }
+
+    if (startNewScanButton) {
+        startNewScanButton.addEventListener('click', () => {
+            startBackgroundScan(startNewScanButton, true);
         });
     }
 
@@ -533,6 +570,18 @@
             }
 
             startBackgroundScan(overviewStartScanButton);
+        });
+    }
+
+    if (overviewNewScanButton) {
+        overviewNewScanButton.addEventListener('click', () => {
+            setActiveTab('scanner');
+
+            if (scanIsRunning) {
+                return;
+            }
+
+            startBackgroundScan(overviewNewScanButton, true);
         });
     }
 

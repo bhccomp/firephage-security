@@ -97,8 +97,10 @@ final class Admin
                 'nonce' => wp_create_nonce('firephage_admin'),
                 'labels' => [
                     'startScan' => __('Start Background Scan', 'firephage-security'),
+                    'startNewScan' => __('Start New Scan', 'firephage-security'),
                     'resumeScan' => __('Resume Scan', 'firephage-security'),
                     'overviewStartScan' => __('Scan My Website For Malware', 'firephage-security'),
+                    'overviewStartNewScan' => __('Start New Malware Scan', 'firephage-security'),
                     'overviewResumeScan' => __('Resume Malware Scan', 'firephage-security'),
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
                     'scanResuming' => __('Resuming scan...', 'firephage-security'),
@@ -179,6 +181,7 @@ final class Admin
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Malware Scan', 'firephage-security') : __('Scan My Website For Malware', 'firephage-security')) . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-overview-new-scan" style="' . esc_attr($scan['status'] === 'stopped' ? '' : 'display:none;') . '">' . esc_html__('Start New Malware Scan', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-overview-view-results" style="' . esc_attr(($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'display:none;') . '">' . esc_html__('View Results', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
@@ -226,6 +229,7 @@ final class Admin
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Scan', 'firephage-security') : __('Start Background Scan', 'firephage-security')) . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-start-new-scan" style="' . esc_attr($scan['status'] === 'stopped' ? '' : 'display:none;') . '">' . esc_html__('Start New Scan', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-stop-scan" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'style="display:none;"') . '>' . esc_html__('Cancel Current Scan', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
@@ -315,7 +319,8 @@ final class Admin
     {
         $this->assertAjaxPermissions();
 
-        $result = $this->scanner->startScan();
+        $forceNew = isset($_POST['force_new']) && sanitize_text_field((string) $_POST['force_new']) === '1';
+        $result = $this->scanner->startScan($forceNew);
 
         if (is_wp_error($result)) {
             wp_send_json_error(['message' => $result->get_error_message()], 400);
