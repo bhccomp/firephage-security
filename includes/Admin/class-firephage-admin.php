@@ -167,13 +167,6 @@ final class Admin
         echo '</div>';
         echo '</div>';
 
-        echo '<div class="firephage-stat-grid">';
-        echo $this->renderStatCard(__('Checks Passing', 'firephage-security'), (string) ($health['summary']['good'] ?? 0), __('Local hardening checks currently passing.', 'firephage-security'));
-        echo $this->renderStatCard(__('Updates Pending', 'firephage-security'), (string) (($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)), __('Core, plugin, and theme updates waiting.', 'firephage-security'));
-        echo $this->renderStatCard(__('Suspicious Files', 'firephage-security'), (string) ($scan['suspicious_files'] ?? 0), __('Latest malware scan findings.', 'firephage-security'), 'firephage-suspicious-files-stat');
-        echo $this->renderStatCard(__('Dashboard Status', 'firephage-security'), ucfirst((string) ($settings['connection_status'] ?? 'disconnected')), __('Whether local reports can be synced to FirePhage.', 'firephage-security'));
-        echo '</div>';
-
         echo '<div class="firephage-tabs" role="tablist" aria-label="' . esc_attr__('FirePhage sections', 'firephage-security') . '">';
         foreach ($this->tabs() as $tabId => $tab) {
             echo $this->renderTabButton($tabId, $tab);
