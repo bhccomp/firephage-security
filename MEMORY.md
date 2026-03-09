@@ -71,6 +71,7 @@
   - cancelled scans now preserve their manifest/state and can be resumed later instead of always restarting from zero
   - when a scan is cancelled, the UI now offers both `Resume Scan` and `Start New Scan` so the operator can choose continuation or a full restart
   - stopped/cancelled scans now show a dedicated progress summary instead of falling through to the generic active-scan message
+  - added first-pass `Firewall` and `Performance` Pro tab mockups with visible `Pro` tab pills, locked placeholder controls, and upgrade/connect CTAs before API wiring
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection

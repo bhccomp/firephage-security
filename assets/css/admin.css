@@ -125,6 +125,9 @@
 }
 
 .firephage-tab-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     border: 1px solid #cbd5e1;
     border-radius: 999px;
     padding: 10px 16px;
@@ -137,6 +140,26 @@
 .firephage-tab-button.is-active {
     background: #0f172a;
     border-color: #0f172a;
+    color: #fff;
+}
+
+.firephage-tab-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.firephage-tab-button.is-active .firephage-tab-pill {
+    background: rgba(255, 255, 255, 0.16);
     color: #fff;
 }
 
@@ -364,6 +387,147 @@
     flex-wrap: wrap;
 }
 
+.firephage-pro-shell {
+    display: grid;
+    gap: 16px;
+}
+
+.firephage-pro-shell__hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: start;
+    padding: 24px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.18), transparent 34%),
+        linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    color: #f8fafc;
+}
+
+.firephage-pro-shell__hero h2 {
+    margin: 0 0 10px;
+    color: #fff;
+}
+
+.firephage-pro-shell__hero p {
+    margin: 0;
+    max-width: 760px;
+    color: rgba(241, 245, 249, 0.88);
+}
+
+.firephage-pro-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #fb923c;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.firephage-pro-card {
+    background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+}
+
+.firephage-pro-metric-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    margin-top: 16px;
+}
+
+.firephage-pro-metric {
+    padding: 14px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.firephage-pro-metric__label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+}
+
+.firephage-pro-metric__value {
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.firephage-pro-table {
+    margin-top: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.firephage-pro-table__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+}
+
+.firephage-pro-table__row:first-child {
+    border-top: 0;
+}
+
+.firephage-pro-table__row--head {
+    background: #e2e8f0;
+    color: #0f172a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.firephage-pro-fieldset {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.firephage-pro-field {
+    display: grid;
+    gap: 8px;
+}
+
+.firephage-pro-field span {
+    color: #475569;
+    font-size: 13px;
+}
+
+.firephage-pro-field input[type="text"],
+.firephage-pro-field select {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    padding: 10px 12px;
+    background: #f8fafc;
+}
+
+.firephage-pro-field input[disabled],
+.firephage-pro-field select[disabled] {
+    color: #64748b;
+}
+
+.firephage-pro-upgrade {
+    border-color: #fed7aa;
+    background:
+        radial-gradient(circle at top right, rgba(251, 146, 60, 0.14), transparent 40%),
+        linear-gradient(180deg, #fff7ed 0%, #fff 100%);
+}
+
 .firephage-empty {
     margin: 0;
     color: #64748b;
@@ -488,8 +652,13 @@
 @media (max-width: 782px) {
     .firephage-hero,
     .firephage-card-head,
-    .firephage-panel-header {
+    .firephage-panel-header,
+    .firephage-pro-shell__hero {
         flex-direction: column;
         align-items: start;
+    }
+
+    .firephage-pro-table__row {
+        grid-template-columns: 1fr;
     }
 }

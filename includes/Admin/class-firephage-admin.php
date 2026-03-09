@@ -154,8 +154,8 @@ final class Admin
         echo '</div>';
 
         echo '<div class="firephage-tabs" role="tablist" aria-label="' . esc_attr__('FirePhage sections', 'firephage-security') . '">';
-        foreach ($this->tabs() as $tabId => $label) {
-            echo '<button type="button" class="firephage-tab-button" data-tab="' . esc_attr($tabId) . '">' . esc_html($label) . '</button>';
+        foreach ($this->tabs() as $tabId => $tab) {
+            echo $this->renderTabButton($tabId, $tab);
         }
         echo '</div>';
 
@@ -278,6 +278,117 @@ final class Admin
         echo '<h3>' . esc_html__('Why this flow is safer', 'firephage-security') . '</h3>';
         echo '<p>' . esc_html__('The dashboard issues a scoped token first. That avoids trusting domain names alone and makes it possible to verify both site ownership and account intent before reports are accepted.', 'firephage-security') . '</p>';
         echo '<p><strong>' . esc_html__('Connected site ID:', 'firephage-security') . '</strong> <span id="firephage-connected-site-id">' . esc_html($settings['site_id'] !== '' ? $settings['site_id'] : __('Not connected', 'firephage-security')) . '</span></p>';
+        echo '</div>';
+        echo '</div>';
+        echo '</section>';
+
+        echo '<section class="firephage-tab-panel" data-panel="firewall">';
+        echo '<div class="firephage-pro-shell">';
+        echo '<div class="firephage-pro-shell__hero">';
+        echo '<div>';
+        echo '<p class="firephage-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p>';
+        echo '<h2>' . esc_html__('Firewall Control', 'firephage-security') . '</h2>';
+        echo '<p>' . esc_html__('Review live protection status, inspect recent firewall activity, and manage paid WAF controls from WordPress once this site is connected to FirePhage.', 'firephage-security') . '</p>';
+        echo '</div>';
+        echo '<span class="firephage-pro-badge">' . esc_html__('Pro', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div class="firephage-grid firephage-grid--2">';
+        echo '<div class="firephage-card firephage-pro-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Firewall Status', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Pro Preview', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('Surface protection mode, current zone health, recent attack counts, and shield status here after dashboard wiring is ready.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-pro-metric-grid">';
+        echo $this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'));
+        echo $this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'));
+        echo $this->renderLockedMetricCard(__('Bot Pressure', 'firephage-security'));
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-card firephage-pro-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Recent Firewall Activity', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Locked', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div class="firephage-pro-table">';
+        echo '<div class="firephage-pro-table__row firephage-pro-table__row--head"><span>' . esc_html__('Time', 'firephage-security') . '</span><span>' . esc_html__('Action', 'firephage-security') . '</span><span>' . esc_html__('Path', 'firephage-security') . '</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>--</span><span>' . esc_html__('Blocked', 'firephage-security') . '</span><span>/wp-login.php</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>--</span><span>' . esc_html__('Challenge', 'firephage-security') . '</span><span>/xmlrpc.php</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>--</span><span>' . esc_html__('Allowed', 'firephage-security') . '</span><span>/checkout</span></div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-grid firephage-grid--2 firephage-section-spaced">';
+        echo '<div class="firephage-card firephage-pro-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Protected Controls', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--warning">' . esc_html__('Upgrade Required', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div class="firephage-pro-fieldset">';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Protection mode', 'firephage-security') . '</span><select disabled><option>' . esc_html__('Adaptive WAF', 'firephage-security') . '</option></select></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Trusted IP list', 'firephage-security') . '</span><input type="text" value="203.0.113.10" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Country blocks', 'firephage-security') . '</span><input type="text" value="RU, CN" disabled /></label>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-card firephage-pro-upgrade">';
+        echo '<h3>' . esc_html__('Unlock Firewall Management', 'firephage-security') . '</h3>';
+        echo '<p>' . esc_html__('Connect this site to FirePhage Pro to review firewall logs, manage protection modes, and jump into the full dashboard without leaving WordPress.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-inline-actions">';
+        echo '<a class="button button-primary" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
+        echo '<button type="button" class="button button-secondary" data-tab-target="connect">' . esc_html__('Connect to FirePhage', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</section>';
+
+        echo '<section class="firephage-tab-panel" data-panel="performance">';
+        echo '<div class="firephage-pro-shell">';
+        echo '<div class="firephage-pro-shell__hero">';
+        echo '<div>';
+        echo '<p class="firephage-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p>';
+        echo '<h2>' . esc_html__('Performance', 'firephage-security') . '</h2>';
+        echo '<p>' . esc_html__('Put CDN and cache controls in one place so paid users can manage acceleration, purge flows, and edge behavior directly from the plugin.', 'firephage-security') . '</p>';
+        echo '</div>';
+        echo '<span class="firephage-pro-badge">' . esc_html__('Pro', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div class="firephage-grid firephage-grid--2">';
+        echo '<div class="firephage-card firephage-pro-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('CDN', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Locked', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('This area can show edge status, cached asset ratio, active hostname routing, and quick links to purge or inspect delivery behavior.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-pro-fieldset">';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Zone hostname', 'firephage-security') . '</span><input type="text" value="cdn.example.com" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Smart image optimization', 'firephage-security') . '</span><input type="checkbox" checked disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Edge compression', 'firephage-security') . '</span><input type="checkbox" checked disabled /></label>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-card firephage-pro-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Cache', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Locked', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('Use this panel for purge actions, bypass rules, cache TTL presets, and page-specific exclusions once the FirePhage API is wired.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-pro-table">';
+        echo '<div class="firephage-pro-table__row firephage-pro-table__row--head"><span>' . esc_html__('Rule', 'firephage-security') . '</span><span>' . esc_html__('Behavior', 'firephage-security') . '</span><span>' . esc_html__('State', 'firephage-security') . '</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>/cart</span><span>' . esc_html__('Bypass cache', 'firephage-security') . '</span><span>' . esc_html__('Enabled', 'firephage-security') . '</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>/checkout</span><span>' . esc_html__('Bypass cache', 'firephage-security') . '</span><span>' . esc_html__('Enabled', 'firephage-security') . '</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>/blog/*</span><span>' . esc_html__('TTL 1 hour', 'firephage-security') . '</span><span>' . esc_html__('Enabled', 'firephage-security') . '</span></div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-card firephage-pro-upgrade firephage-section-spaced">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Unlock FirePhage Performance', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--warning">' . esc_html__('Pro Required', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('Upgrade to manage CDN delivery and cache behavior from WordPress, then use the plugin as a lightweight control surface for your connected FirePhage site.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-inline-actions">';
+        echo '<a class="button button-primary" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
+        echo '<button type="button" class="button button-secondary" data-tab-target="connect">' . esc_html__('Connect to FirePhage', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
@@ -496,11 +607,35 @@ final class Admin
     private function tabs(): array
     {
         return [
-            'overview' => __('Overview', 'firephage-security'),
-            'scanner' => __('Malware Scan', 'firephage-security'),
-            'updates' => __('Updates', 'firephage-security'),
-            'connect' => __('FirePhage Connect', 'firephage-security'),
+            'overview' => ['label' => __('Overview', 'firephage-security')],
+            'scanner' => ['label' => __('Malware Scan', 'firephage-security')],
+            'updates' => ['label' => __('Updates', 'firephage-security')],
+            'firewall' => ['label' => __('Firewall', 'firephage-security'), 'pro' => true],
+            'performance' => ['label' => __('Performance', 'firephage-security'), 'pro' => true],
+            'connect' => ['label' => __('FirePhage Connect', 'firephage-security')],
         ];
+    }
+
+    /**
+     * @param array{label: string, pro?: bool} $tab
+     */
+    private function renderTabButton(string $tabId, array $tab): string
+    {
+        $html = '<button type="button" class="firephage-tab-button" data-tab="' . esc_attr($tabId) . '">';
+        $html .= '<span>' . esc_html($tab['label']) . '</span>';
+
+        if (! empty($tab['pro'])) {
+            $html .= '<span class="firephage-tab-pill">' . esc_html__('Pro', 'firephage-security') . '</span>';
+        }
+
+        $html .= '</button>';
+
+        return $html;
+    }
+
+    private function renderLockedMetricCard(string $label): string
+    {
+        return '<div class="firephage-pro-metric"><span class="firephage-pro-metric__label">' . esc_html($label) . '</span><strong class="firephage-pro-metric__value">--</strong></div>';
     }
 
     private function renderStatCard(string $label, string $value, string $description, string $extraClass = ''): string

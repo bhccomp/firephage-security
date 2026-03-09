@@ -684,6 +684,13 @@
             return;
         }
 
+        const tabTargetButton = target.closest('[data-tab-target]');
+
+        if (tabTargetButton instanceof HTMLElement) {
+            setActiveTab(tabTargetButton.dataset.tabTarget || 'overview');
+            return;
+        }
+
         if (target.classList.contains('firephage-findings-prev')) {
             if (findingsPage > 1) {
                 findingsPage -= 1;
