@@ -18,6 +18,8 @@ Scanner changes
 - Directory-level correlation now detects staged loader chains and clusters of randomized PHP fragments.
 - Webshell behavior markers now cover command execution, socket usage, file-manager actions, upload forms, raw input handlers, and common shell UI strings like `FilesMan` and `auth_pass`.
 - Sensitive WordPress bootstrap files receive extra scrutiny for remote script injection and obfuscated runtime code.
+- Executable files in the site root or untracked plugin/theme directories no longer get seeded into the local clean baseline.
+- If a prior scan captured malware as part of the baseline, clear the saved baseline before rerunning the scan.
 
 UI changes
 - Scan copy now explains the checksum-plus-baseline model instead of a simple extension list.

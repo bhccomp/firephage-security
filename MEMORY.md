@@ -55,6 +55,8 @@
   - added stronger webshell behavior markers for command execution, file-manager actions, raw input handling, shell UI strings, and suspicious JS runtime compilation
   - added stronger weighting for suspicious injections inside sensitive WordPress bootstrap files such as `wp-load.php`
   - scan summaries now account for clean custom files and skipped files so totals reconcile with scanned-file counts
+  - risky executable files in the site root or untracked plugin/theme directories are no longer eligible for baseline seeding
+  - if a site was previously scanned while infected, clear `firephage_security_scan_baseline` before relying on retest results because the old baseline may already trust those file hashes
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync
