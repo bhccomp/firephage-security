@@ -160,7 +160,7 @@ final class Admin
         echo '<div>';
         echo '<p class="firephage-eyebrow">' . esc_html__('Local WordPress Security', 'firephage-security') . '</p>';
         echo '<h1>' . esc_html__('FirePhage Security', 'firephage-security') . '</h1>';
-        echo '<p class="firephage-hero-copy">' . esc_html__('Secure WordPress with malware scanning, brute-force protection, health checks, update visibility, and an optional FirePhage connection for advanced protection and performance controls.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-hero-copy">' . esc_html__('Secure WordPress with malware scanning, brute-force protection, health checks, update visibility, and an optional FirePhage connection for advanced firewall protection plus CDN and cache services that deliver major performance gains.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-hero-actions">';
         echo '<a class="button button-primary button-hero" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade with FirePhage', 'firephage-security') . '</a>';
