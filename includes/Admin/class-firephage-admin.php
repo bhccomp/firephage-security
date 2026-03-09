@@ -53,6 +53,7 @@ final class Admin
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_save_bruteforce_settings', [$this, 'handleSaveBruteForceSettings']);
         add_action('wp_ajax_firephage_clear_bruteforce_lockouts', [$this, 'handleClearBruteForceLockouts']);
+        add_action('wp_ajax_firephage_save_scanner_settings', [$this, 'handleSaveScannerSettings']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
         add_action('wp_ajax_firephage_fetch_firewall_summary', [$this, 'handleFetchFirewallSummary']);
@@ -133,6 +134,8 @@ final class Admin
                     'proInactive' => __('A connected FirePhage site was found, but this site does not currently have an active Pro plan.', 'firephage-security'),
                     'saveProtectionSettings' => __('Save Protection Settings', 'firephage-security'),
                     'savingProtectionSettings' => __('Saving settings...', 'firephage-security'),
+                    'saveScannerSettings' => __('Save Scanner Settings', 'firephage-security'),
+                    'savingScannerSettings' => __('Saving scanner settings...', 'firephage-security'),
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
                     'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
                     'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
@@ -259,13 +262,28 @@ final class Admin
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card">';
-        echo '<h3>' . esc_html__('Scan scope', 'firephage-security') . '</h3>';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Scanner Settings', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Local', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<form id="firephage-scanner-settings-form">';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="malware_auto_scans_enabled" value="1" ' . checked($settings['malware_auto_scans_enabled'], '1', false) . ' /><span>' . esc_html__('Enable automatic malware scans', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Scan frequency', 'firephage-security') . '</span><select name="malware_auto_scan_interval">';
+        echo '<option value="daily"' . selected($settings['malware_auto_scan_interval'], 'daily', false) . '>' . esc_html__('Once per day', 'firephage-security') . '</option>';
+        echo '<option value="twice_daily"' . selected($settings['malware_auto_scan_interval'], 'twice_daily', false) . '>' . esc_html__('Twice per day', 'firephage-security') . '</option>';
+        echo '<option value="four_times_daily"' . selected($settings['malware_auto_scan_interval'], 'four_times_daily', false) . '>' . esc_html__('Four times per day', 'firephage-security') . '</option>';
+        echo '</select></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Excluded paths or filenames', 'firephage-security') . '</span><textarea name="malware_scan_exclusions" rows="5" placeholder="/wp-content/cache/*&#10;/wp-content/backups/*&#10;*.log">' . esc_textarea($settings['malware_scan_exclusions']) . '</textarea></label>';
+        echo '<div class="firephage-inline-actions">';
+        echo '<button type="submit" class="button button-primary firephage-save-scanner-settings">' . esc_html__('Save Scanner Settings', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</form>';
+        echo '<p class="firephage-note">' . esc_html__('Checksum lookups may use FirePhage\'s public checksum cache and fall back to WordPress.org. Those requests send only package type, slug, and version. FirePhage dashboard connection remains separate and optional.', 'firephage-security') . '</p>';
         echo '<ul class="firephage-list">';
         echo '<li>' . esc_html__('Verifies WordPress core, plugin, and theme files against official package checksums where available', 'firephage-security') . '</li>';
         echo '<li>' . esc_html__('Seeds and reuses a local clean-file baseline for custom code that is not covered by repository checksums', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Skips uploads, cache-like directories, and obvious bundled/minified noise before applying weighted malware heuristics', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Supports wildcard exclusions such as /wp-content/cache/* or *.log for paths you never want scanned', 'firephage-security') . '</li>';
         echo '</ul>';
-        echo '<p class="firephage-note">' . esc_html__('Checksum lookups may use FirePhage\'s public checksum cache and fall back to WordPress.org. Those requests send only package type, slug, and version. FirePhage dashboard connection remains separate and optional.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card firephage-findings-card firephage-section-spaced">';
@@ -640,6 +658,27 @@ final class Admin
         ]);
     }
 
+    public function handleSaveScannerSettings(): void
+    {
+        $this->assertAjaxPermissions();
+        $current = $this->settings->all();
+        $settings = isset($_POST['settings']) && is_array($_POST['settings']) ? wp_unslash($_POST['settings']) : [];
+
+        $this->settings->update([
+            'malware_auto_scans_enabled' => ! empty($settings['malware_auto_scans_enabled']) ? '1' : '0',
+            'malware_auto_scan_interval' => in_array((string) ($settings['malware_auto_scan_interval'] ?? $current['malware_auto_scan_interval']), ['daily', 'twice_daily', 'four_times_daily'], true)
+                ? (string) ($settings['malware_auto_scan_interval'] ?? $current['malware_auto_scan_interval'])
+                : 'twice_daily',
+            'malware_scan_exclusions' => sanitize_textarea_field((string) ($settings['malware_scan_exclusions'] ?? $current['malware_scan_exclusions'])),
+        ]);
+        do_action('firephage_security_settings_changed');
+
+        wp_send_json_success([
+            'message' => __('Scanner settings were saved.', 'firephage-security'),
+            'settings' => $this->settings->all(),
+        ]);
+    }
+
     public function handleConnectDashboard(): void
     {
         $this->assertAjaxPermissions();
@@ -758,7 +797,7 @@ final class Admin
         return [
             'overview' => ['label' => __('Overview', 'firephage-security')],
             'scanner' => ['label' => __('Malware Scan', 'firephage-security')],
-            'bruteforce' => ['label' => __('Brute Force', 'firephage-security')],
+            'bruteforce' => ['label' => __('Brute Force Protection', 'firephage-security')],
             'updates' => ['label' => __('Updates', 'firephage-security')],
             'firewall' => ['label' => __('Firewall', 'firephage-security'), 'pro' => true],
             'performance' => ['label' => __('Performance', 'firephage-security'), 'pro' => true],

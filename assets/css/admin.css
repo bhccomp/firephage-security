@@ -390,12 +390,19 @@
 
 .firephage-field input[type="url"],
 .firephage-field input[type="password"],
-.firephage-field input[type="number"] {
+.firephage-field input[type="number"],
+.firephage-field select,
+.firephage-field textarea {
     width: 100%;
     max-width: none;
     border-radius: 10px;
     border: 1px solid #cbd5e1;
     padding: 10px 12px;
+}
+
+.firephage-field textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
 .firephage-inline-actions {

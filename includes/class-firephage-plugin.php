@@ -24,6 +24,7 @@ require_once FIREPHAGE_SECURITY_PATH . 'includes/Admin/class-firephage-admin.php
 final class Plugin
 {
     private const REPORT_CRON_HOOK = 'firephage_security_sync_report';
+    private const AUTO_SCAN_CRON_HOOK = 'firephage_security_auto_scan';
 
     private static ?self $instance = null;
 
@@ -65,11 +66,14 @@ final class Plugin
     {
         add_action('plugins_loaded', [$this, 'loadTextdomain']);
         add_action('init', [$this, 'syncSchedules']);
+        add_action('firephage_security_settings_changed', [$this, 'syncSchedules']);
+        add_filter('cron_schedules', [$this, 'registerSchedules']);
         add_action('admin_init', [$this, 'registerPrivacyPolicyContent']);
         add_action('admin_init', [$this->settings, 'register']);
         add_action('admin_menu', [$this->admin, 'registerMenus']);
         add_action('admin_enqueue_scripts', [$this->admin, 'enqueueAssets']);
         add_action(self::REPORT_CRON_HOOK, [$this, 'sendScheduledReport']);
+        add_action(self::AUTO_SCAN_CRON_HOOK, [$this, 'runScheduledMalwareScan']);
 
         $this->scanner->registerHooks();
         $this->bruteForceProtection->registerHooks();
@@ -87,6 +91,7 @@ final class Plugin
         wp_clear_scheduled_hook(MalwareScanner::CRON_HOOK);
         wp_clear_scheduled_hook(MalwareScanner::MONITOR_CRON_HOOK);
         wp_clear_scheduled_hook(self::REPORT_CRON_HOOK);
+        wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
     }
 
     public function loadTextdomain(): void
@@ -98,6 +103,8 @@ final class Plugin
     {
         $settings = $this->settings->all();
         $shouldSchedule = $settings['auto_sync_reports'] === '1' && $settings['site_token'] !== '';
+        $scanSchedule = $this->malwareScanSchedule((string) ($settings['malware_auto_scan_interval'] ?? 'twice_daily'));
+        $shouldScheduleScans = ($settings['malware_auto_scans_enabled'] ?? '0') === '1';
 
         if ($shouldSchedule && ! wp_next_scheduled(self::REPORT_CRON_HOOK)) {
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'hourly', self::REPORT_CRON_HOOK);
@@ -106,6 +113,39 @@ final class Plugin
         if (! $shouldSchedule) {
             wp_clear_scheduled_hook(self::REPORT_CRON_HOOK);
         }
+
+        $autoScanEvent = function_exists('wp_get_scheduled_event') ? wp_get_scheduled_event(self::AUTO_SCAN_CRON_HOOK) : false;
+
+        if ($shouldScheduleScans && $autoScanEvent === false) {
+            wp_schedule_event(time() + MINUTE_IN_SECONDS, $scanSchedule, self::AUTO_SCAN_CRON_HOOK);
+        }
+
+        if ($shouldScheduleScans && $autoScanEvent !== false && isset($autoScanEvent->schedule) && $autoScanEvent->schedule !== $scanSchedule) {
+            wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
+            wp_schedule_event(time() + MINUTE_IN_SECONDS, $scanSchedule, self::AUTO_SCAN_CRON_HOOK);
+        }
+
+        if (! $shouldScheduleScans) {
+            wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
+        }
+    }
+
+    /**
+     * @param array<string, array<string, mixed>> $schedules
+     * @return array<string, array<string, mixed>>
+     */
+    public function registerSchedules(array $schedules): array
+    {
+        $schedules['firephage_twice_daily'] = [
+            'interval' => 12 * HOUR_IN_SECONDS,
+            'display' => __('FirePhage Twice Daily', 'firephage-security'),
+        ];
+        $schedules['firephage_four_times_daily'] = [
+            'interval' => 6 * HOUR_IN_SECONDS,
+            'display' => __('FirePhage Four Times Daily', 'firephage-security'),
+        ];
+
+        return $schedules;
     }
 
     public function registerPrivacyPolicyContent(): void
@@ -146,5 +186,25 @@ final class Plugin
             'last_sync_at' => current_time('mysql'),
             'last_sync_error' => '',
         ]);
+    }
+
+    public function runScheduledMalwareScan(): void
+    {
+        $state = $this->scanner->getState();
+
+        if (in_array((string) ($state['status'] ?? 'idle'), ['discovering', 'scanning'], true)) {
+            return;
+        }
+
+        $this->scanner->startScan(true);
+    }
+
+    private function malwareScanSchedule(string $value): string
+    {
+        return match ($value) {
+            'daily' => 'daily',
+            'four_times_daily' => 'firephage_four_times_daily',
+            default => 'firephage_twice_daily',
+        };
     }
 }

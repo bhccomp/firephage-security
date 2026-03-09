@@ -31,6 +31,9 @@ final class Settings
             'bruteforce_window_minutes' => '15',
             'bruteforce_lockout_minutes' => '30',
             'bruteforce_protect_xmlrpc' => '1',
+            'malware_auto_scans_enabled' => '0',
+            'malware_auto_scan_interval' => 'twice_daily',
+            'malware_scan_exclusions' => '',
         ];
 
         $value = get_option(self::OPTION_KEY, []);
@@ -72,6 +75,11 @@ final class Settings
             'bruteforce_window_minutes' => (string) max(5, min(120, absint($input['bruteforce_window_minutes'] ?? $settings['bruteforce_window_minutes']))),
             'bruteforce_lockout_minutes' => (string) max(5, min(1440, absint($input['bruteforce_lockout_minutes'] ?? $settings['bruteforce_lockout_minutes']))),
             'bruteforce_protect_xmlrpc' => ! empty($input['bruteforce_protect_xmlrpc']) ? '1' : '0',
+            'malware_auto_scans_enabled' => ! empty($input['malware_auto_scans_enabled']) ? '1' : '0',
+            'malware_auto_scan_interval' => in_array((string) ($input['malware_auto_scan_interval'] ?? $settings['malware_auto_scan_interval']), ['daily', 'twice_daily', 'four_times_daily'], true)
+                ? (string) ($input['malware_auto_scan_interval'] ?? $settings['malware_auto_scan_interval'])
+                : 'twice_daily',
+            'malware_scan_exclusions' => sanitize_textarea_field((string) ($input['malware_scan_exclusions'] ?? $settings['malware_scan_exclusions'])),
         ];
     }
 

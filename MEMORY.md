@@ -80,6 +80,12 @@
   - added a new local `Brute Force` tab with lightweight login and XML-RPC rate limiting, temporary lockouts, recent lockout history, and Overview status integration
   - the brute-force layer stores only local counters/lockouts in WordPress options and can be cleared from the plugin UI
   - brute-force summary data is now included in the local report payload so FirePhage dashboard pages can surface it later
+  - the `Brute Force` tab label is now `Brute Force Protection`, and the tab includes an explicit enable/disable toggle for the local protection layer
+  - the `Malware Scan` tab now contains scanner settings instead of only scope copy, including:
+    - automatic scan toggle
+    - daily / twice-daily / four-times-daily scheduling
+    - wildcard path and filename exclusions such as `/wp-content/cache/*` or `*.log`
+  - saving scanner settings now updates the scheduled malware-scan cron immediately
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page

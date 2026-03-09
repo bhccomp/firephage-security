@@ -14,6 +14,7 @@
     const refreshHealthButton = document.querySelector('.firephage-refresh-health');
     const bruteForceForm = document.getElementById('firephage-bruteforce-form');
     const clearBruteForceLockoutsButton = document.querySelector('.firephage-clear-bruteforce-lockouts');
+    const scannerSettingsForm = document.getElementById('firephage-scanner-settings-form');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
@@ -939,6 +940,46 @@
                         });
                 },
             });
+        });
+    }
+
+    if (scannerSettingsForm) {
+        scannerSettingsForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const submitButton = scannerSettingsForm.querySelector('.firephage-save-scanner-settings');
+            const formData = new window.FormData(scannerSettingsForm);
+            const settings = {};
+            formData.forEach((value, key) => {
+                settings[key] = value;
+            });
+
+            if (!Object.prototype.hasOwnProperty.call(settings, 'malware_auto_scans_enabled')) {
+                settings.malware_auto_scans_enabled = '';
+            }
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = firephageAdmin.labels.savingScannerSettings;
+            }
+
+            request('firephage_save_scanner_settings', { settings })
+                .done((response) => {
+                    if (response.success) {
+                        showToast(response.data.message || 'Scanner settings saved.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to save scanner settings.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save scanner settings.', true);
+                })
+                .always(() => {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = firephageAdmin.labels.saveScannerSettings;
+                    }
+                });
         });
     }
 
