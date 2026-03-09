@@ -101,6 +101,10 @@
   - notification emails use a branded FirePhage HTML layout and include Pro upsell links for WAF, CDN, and Cache services
   - weekly report scheduling is controlled by plugin settings and notification alert emails are deduplicated per scan ID
   - saving scanner settings now updates the scheduled malware-scan cron immediately
+  - malware signatures now use a hybrid model:
+    - bundled fallback signatures remain in the plugin scanner
+    - FirePhage can serve public signature metadata which the plugin caches locally and merges into the active ruleset
+  - scanner settings now expose a toggle for FirePhage signature updates so the local engine can keep receiving signature refreshes without plugin releases
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page

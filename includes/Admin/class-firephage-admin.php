@@ -550,13 +550,14 @@ final class Admin
         echo '</div>';
         echo '<form id="firephage-scanner-settings-form">';
         echo '<label class="firephage-toggle"><input type="checkbox" name="malware_auto_scans_enabled" value="1" ' . checked($settings['malware_auto_scans_enabled'], '1', false) . ' /><span>' . esc_html__('Enable automatic malware scans', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="use_firephage_signature_feed" value="1" ' . checked($settings['use_firephage_signature_feed'] ?? '1', '1', false) . ' /><span>' . esc_html__('Use FirePhage signature updates for local malware detection', 'firephage-security') . '</span></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Scan frequency', 'firephage-security') . '</span><select name="malware_auto_scan_interval">';
         echo '<option value="daily"' . selected($settings['malware_auto_scan_interval'], 'daily', false) . '>' . esc_html__('Once per day', 'firephage-security') . '</option>';
         echo '<option value="twice_daily"' . selected($settings['malware_auto_scan_interval'], 'twice_daily', false) . '>' . esc_html__('Twice per day', 'firephage-security') . '</option>';
         echo '<option value="four_times_daily"' . selected($settings['malware_auto_scan_interval'], 'four_times_daily', false) . '>' . esc_html__('Four times per day', 'firephage-security') . '</option>';
         echo '</select></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Excluded paths or filenames', 'firephage-security') . '</span><textarea name="malware_scan_exclusions" rows="5" placeholder="/wp-content/cache/*&#10;/wp-content/backups/*&#10;*.log">' . esc_textarea($settings['malware_scan_exclusions']) . '</textarea></label>';
-        echo '<p class="firephage-note">' . esc_html__('Use one exclusion per line. Wildcards are supported, so paths like /wp-content/cache/* or filenames like *.log can be skipped during scan discovery.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('Use one exclusion per line. Wildcards are supported, so paths like /wp-content/cache/* or filenames like *.log can be skipped during scan discovery. Signature updates are fetched as data only, cached locally, and the bundled fallback signatures remain available if FirePhage is unreachable.', 'firephage-security') . '</p>';
         echo '<div class="firephage-modal-actions">';
         echo '<button type="button" class="button button-secondary" data-scanner-settings-close="1">' . esc_html__('Cancel', 'firephage-security') . '</button>';
         echo '<button type="submit" class="button button-primary firephage-save-scanner-settings">' . esc_html__('Save Scanner Settings', 'firephage-security') . '</button>';
@@ -706,6 +707,7 @@ final class Admin
 
         $this->settings->update([
             'malware_auto_scans_enabled' => ! empty($settings['malware_auto_scans_enabled']) ? '1' : '0',
+            'use_firephage_signature_feed' => ! empty($settings['use_firephage_signature_feed']) ? '1' : '0',
             'malware_auto_scan_interval' => in_array((string) ($settings['malware_auto_scan_interval'] ?? $current['malware_auto_scan_interval']), ['daily', 'twice_daily', 'four_times_daily'], true)
                 ? (string) ($settings['malware_auto_scan_interval'] ?? $current['malware_auto_scan_interval'])
                 : 'daily',

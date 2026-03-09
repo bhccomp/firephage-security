@@ -180,7 +180,7 @@ final class Plugin
             __('FirePhage Security', 'firephage-security'),
             wp_kses_post(
                 '<p>' . esc_html__('FirePhage Security can contact external services in two cases.', 'firephage-security') . '</p>' .
-                '<p>' . esc_html__('For checksum verification, the plugin may request public package checksum metadata from FirePhage cache services and WordPress.org. Those requests include only the package type, slug, and version needed to verify repository files.', 'firephage-security') . '</p>' .
+                '<p>' . esc_html__('For checksum verification and malware-signature refreshes, the plugin may request public package checksum metadata and signature data from FirePhage cache services, with checksum fallback to WordPress.org. Those requests include only package identifiers or signature-feed fetches needed for local scanning.', 'firephage-security') . '</p>' .
                 '<p>' . esc_html__('If you choose to connect the plugin to a paid FirePhage account, the plugin will also send site connection details and security reports to FirePhage so dashboard sync and alerting can work.', 'firephage-security') . '</p>'
             )
         );

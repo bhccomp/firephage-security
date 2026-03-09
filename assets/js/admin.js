@@ -1011,6 +1011,10 @@
                 settings.malware_auto_scans_enabled = '';
             }
 
+            if (!Object.prototype.hasOwnProperty.call(settings, 'use_firephage_signature_feed')) {
+                settings.use_firephage_signature_feed = '';
+            }
+
             if (submitButton) {
                 submitButton.disabled = true;
                 submitButton.textContent = firephageAdmin.labels.savingScannerSettings;

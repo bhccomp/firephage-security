@@ -34,6 +34,7 @@ final class Settings
             'malware_auto_scans_enabled' => '0',
             'malware_auto_scan_interval' => 'daily',
             'malware_scan_exclusions' => '',
+            'use_firephage_signature_feed' => '1',
             'notifications_enabled' => '1',
             'notification_email' => '',
             'notifications_weekly_report' => '1',
@@ -85,6 +86,7 @@ final class Settings
                 ? (string) ($input['malware_auto_scan_interval'] ?? $settings['malware_auto_scan_interval'])
                 : 'daily',
             'malware_scan_exclusions' => sanitize_textarea_field((string) ($input['malware_scan_exclusions'] ?? $settings['malware_scan_exclusions'])),
+            'use_firephage_signature_feed' => ! empty($input['use_firephage_signature_feed']) ? '1' : '0',
             'notifications_enabled' => ! empty($input['notifications_enabled']) ? '1' : '0',
             'notification_email' => sanitize_email((string) ($input['notification_email'] ?? $settings['notification_email'])),
             'notifications_weekly_report' => ! empty($input['notifications_weekly_report']) ? '1' : '0',

@@ -92,6 +92,24 @@ final class Client
     }
 
     /**
+     * @return array<string, mixed>|WP_Error
+     */
+    public function fetchPublicSignatures(string $serviceUrl)
+    {
+        $response = wp_remote_get(
+            untrailingslashit($serviceUrl) . '/api/plugin/signatures',
+            [
+                'timeout' => 12,
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ]
+        );
+
+        return $this->normalizeResponse($response, 'signatures');
+    }
+
+    /**
      * @param array<string, string> $settings
      * @return array<string, mixed>|WP_Error
      */
