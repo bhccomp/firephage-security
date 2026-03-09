@@ -388,6 +388,19 @@ final class Admin
         echo '<div class="firephage-pro-table__row"><span>' . esc_html__('Core edits', 'firephage-security') . '</span><span>' . esc_html($notificationState['last_core_alert_scan_id'] !== '' ? $notificationState['last_core_alert_scan_id'] : __('No alert yet', 'firephage-security')) . '</span><span>' . esc_html(($settings['notifications_alert_core_edits'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span></div>';
         echo '</div>';
         echo '</div>';
+        echo '<div class="firephage-note firephage-pro-note">';
+        echo '<strong>' . esc_html__('FirePhage Pro channels', 'firephage-security') . '</strong> ';
+        echo esc_html__('Webhook, Slack, and Phone notifications are part of FirePhage Pro together with WAF, CDN, and Cache controls.', 'firephage-security');
+        echo '</div>';
+        echo '<div class="firephage-pro-fieldset firephage-pro-fieldset--disabled">';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Webhook', 'firephage-security') . ' <span class="firephage-inline-pro-pill">' . esc_html__('Pro', 'firephage-security') . '</span></span><input type="url" value="https://hooks.example.com/firephage" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Slack', 'firephage-security') . ' <span class="firephage-inline-pro-pill">' . esc_html__('Pro', 'firephage-security') . '</span></span><input type="text" value="' . esc_attr__('#security-alerts', 'firephage-security') . '" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Phone', 'firephage-security') . ' <span class="firephage-inline-pro-pill">' . esc_html__('Pro', 'firephage-security') . '</span></span><input type="tel" value="+1 555 010 7788" disabled /></label>';
+        echo '</div>';
+        echo '<div class="firephage-inline-actions firephage-section-spaced">';
+        echo '<button type="button" class="button button-secondary" data-tab-target="firewall">' . esc_html__('View Pro Protection', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary" data-tab-target="performance">' . esc_html__('View Pro Performance', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
@@ -1052,9 +1065,9 @@ final class Admin
         return [
             'overview' => ['label' => __('Overview', 'firephage-security')],
             'scanner' => ['label' => __('Malware Scanner', 'firephage-security')],
-            'notifications' => ['label' => __('Notifications', 'firephage-security')],
             'bruteforce' => ['label' => __('Brute Force Protection', 'firephage-security')],
             'updates' => ['label' => __('Updates', 'firephage-security')],
+            'notifications' => ['label' => __('Notifications', 'firephage-security')],
             'firewall' => ['label' => __('Firewall', 'firephage-security'), 'pro' => true],
             'performance' => ['label' => __('Performance', 'firephage-security'), 'pro' => true],
             'connect' => ['label' => __('FirePhage Connect', 'firephage-security')],

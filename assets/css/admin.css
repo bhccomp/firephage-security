@@ -130,6 +130,31 @@
     color: #334155;
 }
 
+.firephage-pro-note {
+    background: linear-gradient(180deg, #fff7ed 0%, #fff 100%);
+    border-color: #fed7aa;
+}
+
+.firephage-pro-fieldset--disabled {
+    opacity: 0.84;
+}
+
+.firephage-inline-pro-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    margin-left: 6px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
 .firephage-tabs {
     display: flex;
     gap: 10px;

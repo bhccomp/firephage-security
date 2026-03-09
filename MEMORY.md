@@ -94,11 +94,13 @@
   - the Overview page no longer repeats the separate `WordPress Core Checksums` card because checksum verification already lives within the malware-scanner workflow
   - the main scanner tab label is now `Malware Scanner`
   - added a dedicated `Notifications` tab for admin email settings
+  - the `Notifications` tab now appears after `Updates` in the top-level tab order
   - local notifications now support:
     - weekly security summary emails with scanner, brute-force, and update reminder sections
     - immediate malware alert emails after a completed scan finds suspicious files
     - immediate WordPress core edit alerts when completed scans find core checksum mismatches
   - notification emails use a branded FirePhage HTML layout and include Pro upsell links for WAF, CDN, and Cache services
+  - the `Notifications` tab now also shows disabled Pro-only channels for `Webhook`, `Slack`, and `Phone` with visible Pro labeling tied to FirePhage WAF, CDN, and Cache offerings
   - weekly report scheduling is controlled by plugin settings and notification alert emails are deduplicated per scan ID
   - saving scanner settings now updates the scheduled malware-scan cron immediately
   - malware signatures now use a hybrid model:
