@@ -32,7 +32,7 @@ final class Settings
             'bruteforce_lockout_minutes' => '30',
             'bruteforce_protect_xmlrpc' => '1',
             'malware_auto_scans_enabled' => '0',
-            'malware_auto_scan_interval' => 'twice_daily',
+            'malware_auto_scan_interval' => 'daily',
             'malware_scan_exclusions' => '',
         ];
 
@@ -78,7 +78,7 @@ final class Settings
             'malware_auto_scans_enabled' => ! empty($input['malware_auto_scans_enabled']) ? '1' : '0',
             'malware_auto_scan_interval' => in_array((string) ($input['malware_auto_scan_interval'] ?? $settings['malware_auto_scan_interval']), ['daily', 'twice_daily', 'four_times_daily'], true)
                 ? (string) ($input['malware_auto_scan_interval'] ?? $settings['malware_auto_scan_interval'])
-                : 'twice_daily',
+                : 'daily',
             'malware_scan_exclusions' => sanitize_textarea_field((string) ($input['malware_scan_exclusions'] ?? $settings['malware_scan_exclusions'])),
         ];
     }

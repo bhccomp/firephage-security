@@ -103,7 +103,7 @@ final class Plugin
     {
         $settings = $this->settings->all();
         $shouldSchedule = $settings['auto_sync_reports'] === '1' && $settings['site_token'] !== '';
-        $scanSchedule = $this->malwareScanSchedule((string) ($settings['malware_auto_scan_interval'] ?? 'twice_daily'));
+        $scanSchedule = $this->malwareScanSchedule((string) ($settings['malware_auto_scan_interval'] ?? 'daily'));
         $shouldScheduleScans = ($settings['malware_auto_scans_enabled'] ?? '0') === '1';
 
         if ($shouldSchedule && ! wp_next_scheduled(self::REPORT_CRON_HOOK)) {

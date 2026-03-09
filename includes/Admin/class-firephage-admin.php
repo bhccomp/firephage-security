@@ -668,7 +668,7 @@ final class Admin
             'malware_auto_scans_enabled' => ! empty($settings['malware_auto_scans_enabled']) ? '1' : '0',
             'malware_auto_scan_interval' => in_array((string) ($settings['malware_auto_scan_interval'] ?? $current['malware_auto_scan_interval']), ['daily', 'twice_daily', 'four_times_daily'], true)
                 ? (string) ($settings['malware_auto_scan_interval'] ?? $current['malware_auto_scan_interval'])
-                : 'twice_daily',
+                : 'daily',
             'malware_scan_exclusions' => sanitize_textarea_field((string) ($settings['malware_scan_exclusions'] ?? $current['malware_scan_exclusions'])),
         ]);
         do_action('firephage_security_settings_changed');
