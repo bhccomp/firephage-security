@@ -66,6 +66,8 @@
   - destructive delete actions in the findings UI are now visually marked with red danger-button styling
   - destructive delete actions now route through a custom confirmation modal for both single-file and bulk suspicious-file deletion
   - latest findings now support checkbox selection plus a `Delete Selected Files` action for chosen malware findings
+  - latest findings now include a per-row `Preview` action that opens a read-only modal with escaped file content for both suspicious and integrity-mismatch entries
+  - the Malware Scan view now includes a `Stop Current Scan` action while background scanning is active
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection

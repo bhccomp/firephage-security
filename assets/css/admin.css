@@ -272,6 +272,13 @@
     justify-content: flex-end;
 }
 
+.firephage-row-actions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
 .firephage-button-danger {
     border-color: #dc2626 !important;
     background: #dc2626 !important;
@@ -391,6 +398,10 @@
     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
 }
 
+.firephage-modal-dialog--wide {
+    width: min(100%, 860px);
+}
+
 .firephage-modal-head,
 .firephage-modal-actions {
     display: flex;
@@ -418,6 +429,21 @@
 .firephage-modal-dialog p {
     margin: 0 0 20px;
     color: #475569;
+}
+
+.firephage-preview-content {
+    margin: 0;
+    max-height: min(70vh, 720px);
+    overflow: auto;
+    padding: 16px;
+    border-radius: 14px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .firephage-toast {

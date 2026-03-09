@@ -16,10 +16,15 @@
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
     const overviewViewResultsButton = document.querySelector('.firephage-overview-view-results');
+    const stopScanButton = document.querySelector('.firephage-stop-scan');
     const confirmModal = document.getElementById('firephage-confirm-modal');
     const confirmModalTitle = document.getElementById('firephage-confirm-modal-title');
     const confirmModalBody = document.getElementById('firephage-confirm-modal-body');
     const confirmModalSubmit = document.getElementById('firephage-confirm-modal-submit');
+    const previewModal = document.getElementById('firephage-preview-modal');
+    const previewModalTitle = document.getElementById('firephage-preview-modal-title');
+    const previewModalMeta = document.getElementById('firephage-preview-modal-meta');
+    const previewModalContent = document.getElementById('firephage-preview-modal-content');
     let pollTimer = null;
     let scanIsRunning = false;
     let currentScanState = {};
@@ -71,6 +76,29 @@
         confirmModalBody.textContent = body;
         confirmModal.hidden = false;
         confirmModalSubmit.disabled = false;
+    };
+
+    const closePreviewModal = () => {
+        if (!previewModal || !previewModalMeta || !previewModalContent) {
+            return;
+        }
+
+        previewModal.hidden = true;
+        previewModalMeta.textContent = '';
+        previewModalContent.textContent = '';
+    };
+
+    const openPreviewModal = ({ file, content, truncated }) => {
+        if (!previewModal || !previewModalTitle || !previewModalMeta || !previewModalContent) {
+            return;
+        }
+
+        previewModalTitle.textContent = firephageAdmin.labels.previewFile || 'File Preview';
+        previewModalMeta.textContent = truncated
+            ? `${file} • Preview truncated to keep the browser responsive.`
+            : file;
+        previewModalContent.textContent = content || '';
+        previewModal.hidden = false;
     };
 
     const deleteAllSuspiciousFiles = (button) => {
@@ -268,8 +296,8 @@
                                 <td><span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${status}</span></td>
                                 <td>${details.join(' | ')}</td>
                                 <td>${finding.type === 'malware'
-                                    ? `<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button>`
-                                    : '<span class="firephage-empty">Protected</span>'}</td>
+                                    ? `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button></div>`
+                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><span class="firephage-empty">Protected</span></div>`}</td>
                             </tr>
                         `;
                     }).join('')}
@@ -343,6 +371,11 @@
 
         if (overviewViewResultsButton) {
             overviewViewResultsButton.style.display = scanIsRunning ? '' : 'none';
+        }
+
+        if (stopScanButton) {
+            stopScanButton.style.display = scanIsRunning ? '' : 'none';
+            stopScanButton.disabled = !scanIsRunning;
         }
 
         if (state.status === 'discovering' || state.status === 'scanning') {
@@ -454,6 +487,30 @@
     if (startScanButton) {
         startScanButton.addEventListener('click', () => {
             startBackgroundScan();
+        });
+    }
+
+    if (stopScanButton) {
+        stopScanButton.addEventListener('click', () => {
+            stopScanButton.disabled = true;
+
+            request('firephage_stop_scan')
+                .done((response) => {
+                    if (response.success) {
+                        renderScanState(response.data.state);
+                        showToast(response.data.message || 'Scan stopped.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to stop the scan.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to stop the scan.', true);
+                })
+                .always(() => {
+                    if (!scanIsRunning) {
+                        stopScanButton.disabled = true;
+                    }
+                });
         });
     }
 
@@ -605,6 +662,28 @@
             return;
         }
 
+        if (target.classList.contains('firephage-preview-file')) {
+            target.setAttribute('disabled', 'disabled');
+
+            request('firephage_preview_file', {
+                file: target.dataset.file || '',
+            })
+                .done((response) => {
+                    if (response.success) {
+                        openPreviewModal(response.data.preview);
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to preview the file.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to preview the file.', true);
+                })
+                .always(() => {
+                    target.removeAttribute('disabled');
+                });
+            return;
+        }
+
         if (target.classList.contains('firephage-delete-suspicious-files')) {
             openConfirmModal({
                 title: firephageAdmin.labels.confirmDeleteAllTitle,
@@ -649,6 +728,16 @@
 
             if (target instanceof HTMLElement && target.dataset.modalClose === '1') {
                 closeConfirmModal();
+            }
+        });
+    }
+
+    if (previewModal) {
+        previewModal.addEventListener('click', (event) => {
+            const target = event.target;
+
+            if (target instanceof HTMLElement && target.dataset.previewClose === '1') {
+                closePreviewModal();
             }
         });
     }

@@ -38,7 +38,9 @@ final class Admin
         $this->client = $client;
 
         add_action('wp_ajax_firephage_start_scan', [$this, 'handleStartScan']);
+        add_action('wp_ajax_firephage_stop_scan', [$this, 'handleStopScan']);
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
+        add_action('wp_ajax_firephage_preview_file', [$this, 'handlePreviewFile']);
         add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
         add_action('wp_ajax_firephage_delete_suspicious_files', [$this, 'handleDeleteSuspiciousFiles']);
         add_action('wp_ajax_firephage_delete_selected_suspicious_files', [$this, 'handleDeleteSelectedSuspiciousFiles']);
@@ -97,11 +99,13 @@ final class Admin
                     'startScan' => __('Start Background Scan', 'firephage-security'),
                     'overviewStartScan' => __('Scan My Website For Malware', 'firephage-security'),
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
+                    'stopScan' => __('Stop Current Scan', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
                     'deleteSuspiciousFiles' => __('Delete All Suspicious Files', 'firephage-security'),
                     'deleteSelectedFiles' => __('Delete Selected Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
+                    'previewFile' => __('Preview', 'firephage-security'),
                     'confirmDeleteTitle' => __('Delete Suspicious File?', 'firephage-security'),
                     'confirmDeleteAllTitle' => __('Delete All Suspicious Files?', 'firephage-security'),
                     'confirmDeleteSelectedTitle' => __('Delete Selected Suspicious Files?', 'firephage-security'),
@@ -217,7 +221,10 @@ final class Admin
         echo '<p>' . esc_html__('Runs in background batches so large sites can finish without locking up the admin screen, using official package checksums and local clean baselines before suspicious-code heuristics.', 'firephage-security') . '</p>';
         echo '<div class="firephage-progress"><div class="firephage-progress-bar" id="firephage-scan-progress-bar" style="width:' . esc_attr((string) $this->scanProgress($scan)) . '%"></div></div>';
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
+        echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html__('Start Background Scan', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-stop-scan" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'style="display:none;"') . '>' . esc_html__('Stop Current Scan', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<h3>' . esc_html__('Scan scope', 'firephage-security') . '</h3>';
@@ -282,6 +289,20 @@ final class Admin
         echo '</div>';
         echo '</div>';
         echo '</div>';
+        echo '<div class="firephage-modal" id="firephage-preview-modal" hidden>';
+        echo '<div class="firephage-modal-backdrop" data-preview-close="1"></div>';
+        echo '<div class="firephage-modal-dialog firephage-modal-dialog--wide" role="dialog" aria-modal="true" aria-labelledby="firephage-preview-modal-title">';
+        echo '<div class="firephage-modal-head">';
+        echo '<h3 id="firephage-preview-modal-title">' . esc_html__('File Preview', 'firephage-security') . '</h3>';
+        echo '<button type="button" class="button-link firephage-modal-close" data-preview-close="1" aria-label="' . esc_attr__('Close preview dialog', 'firephage-security') . '">&times;</button>';
+        echo '</div>';
+        echo '<p class="firephage-note" id="firephage-preview-modal-meta"></p>';
+        echo '<pre class="firephage-preview-content" id="firephage-preview-modal-content"></pre>';
+        echo '<div class="firephage-modal-actions">';
+        echo '<button type="button" class="button button-secondary" data-preview-close="1">' . esc_html__('Close', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
         echo '<div class="firephage-toast" id="firephage-toast" hidden></div>';
         echo '</div>';
         echo '</div>';
@@ -300,10 +321,39 @@ final class Admin
         wp_send_json_success(['state' => $result]);
     }
 
+    public function handleStopScan(): void
+    {
+        $this->assertAjaxPermissions();
+
+        $result = $this->scanner->stopScan();
+
+        if (is_wp_error($result)) {
+            wp_send_json_error(['message' => $result->get_error_message()], 400);
+        }
+
+        wp_send_json_success([
+            'message' => __('The malware scan has been stopped.', 'firephage-security'),
+            'state' => $result,
+        ]);
+    }
+
     public function handleScanStatus(): void
     {
         $this->assertAjaxPermissions();
         wp_send_json_success(['state' => $this->scanner->getState()]);
+    }
+
+    public function handlePreviewFile(): void
+    {
+        $this->assertAjaxPermissions();
+        $file = sanitize_text_field((string) ($_POST['file'] ?? ''));
+        $result = $this->scanner->previewFile($file);
+
+        if (is_wp_error($result)) {
+            wp_send_json_error(['message' => $result->get_error_message()], 400);
+        }
+
+        wp_send_json_success($result);
     }
 
     public function handleClearFindings(): void
@@ -554,6 +604,7 @@ final class Admin
             $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
             $html .= '<td>' . esc_html(implode(' | ', $detailParts)) . '</td>';
             $html .= '<td>';
+            $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Preview', 'firephage-security') . '</button> ';
             if ($type === 'malware') {
                 $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete File', 'firephage-security') . '</button>';
             } else {
