@@ -516,9 +516,6 @@
             return;
         }
 
-        if (target.dataset.modalClose === '1') {
-            closeConfirmModal();
-        }
     });
 
     if (confirmModalSubmit) {
@@ -526,6 +523,16 @@
             if (typeof pendingConfirmation === 'function') {
                 confirmModalSubmit.disabled = true;
                 pendingConfirmation();
+            }
+        });
+    }
+
+    if (confirmModal) {
+        confirmModal.addEventListener('click', (event) => {
+            const target = event.target;
+
+            if (target instanceof HTMLElement && target.dataset.modalClose === '1') {
+                closeConfirmModal();
             }
         });
     }
