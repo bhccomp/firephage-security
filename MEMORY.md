@@ -86,6 +86,8 @@
     - daily / twice-daily / four-times-daily scheduling
     - wildcard path and filename exclusions such as `/wp-content/cache/*` or `*.log`
   - default automatic-scan interval is now `Once per day` for new installs
+  - scanner settings now open in a modal from the `Malware Scan` card so `Latest findings` stays visible beside the main scanner state
+  - the `Malware Scan` layout now favors a 1/3 scanner card and 2/3 findings table on desktop, collapsing back to one column on smaller screens
   - saving scanner settings now updates the scheduled malware-scan cron immediately
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page

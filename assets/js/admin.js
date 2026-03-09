@@ -15,6 +15,7 @@
     const bruteForceForm = document.getElementById('firephage-bruteforce-form');
     const clearBruteForceLockoutsButton = document.querySelector('.firephage-clear-bruteforce-lockouts');
     const scannerSettingsForm = document.getElementById('firephage-scanner-settings-form');
+    const openScannerSettingsButton = document.querySelector('.firephage-open-scanner-settings');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
@@ -30,6 +31,7 @@
     const previewModalTitle = document.getElementById('firephage-preview-modal-title');
     const previewModalMeta = document.getElementById('firephage-preview-modal-meta');
     const previewModalContent = document.getElementById('firephage-preview-modal-content');
+    const scannerSettingsModal = document.getElementById('firephage-scanner-settings-modal');
     const firewallStatusBadge = document.getElementById('firephage-firewall-status-badge');
     const firewallSummaryText = document.getElementById('firephage-firewall-summary-text');
     const firewallConnectionNote = document.getElementById('firephage-firewall-connection-note');
@@ -138,6 +140,22 @@
             : file;
         previewModalContent.textContent = content || '';
         previewModal.hidden = false;
+    };
+
+    const closeScannerSettingsModal = () => {
+        if (!scannerSettingsModal) {
+            return;
+        }
+
+        scannerSettingsModal.hidden = true;
+    };
+
+    const openScannerSettingsModal = () => {
+        if (!scannerSettingsModal) {
+            return;
+        }
+
+        scannerSettingsModal.hidden = false;
     };
 
     const deleteAllSuspiciousFiles = (button) => {
@@ -967,6 +985,7 @@
                 .done((response) => {
                     if (response.success) {
                         showToast(response.data.message || 'Scanner settings saved.');
+                        closeScannerSettingsModal();
                     } else {
                         showToast((response.data && response.data.message) || 'Unable to save scanner settings.', true);
                     }
@@ -980,6 +999,12 @@
                         submitButton.textContent = firephageAdmin.labels.saveScannerSettings;
                     }
                 });
+        });
+    }
+
+    if (openScannerSettingsButton) {
+        openScannerSettingsButton.addEventListener('click', () => {
+            openScannerSettingsModal();
         });
     }
 
@@ -1183,6 +1208,16 @@
 
             if (target instanceof HTMLElement && target.dataset.previewClose === '1') {
                 closePreviewModal();
+            }
+        });
+    }
+
+    if (scannerSettingsModal) {
+        scannerSettingsModal.addEventListener('click', (event) => {
+            const target = event.target;
+
+            if (target instanceof HTMLElement && target.dataset.scannerSettingsClose === '1') {
+                closeScannerSettingsModal();
             }
         });
     }

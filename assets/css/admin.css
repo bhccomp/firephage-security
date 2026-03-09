@@ -65,6 +65,11 @@
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
+.firephage-grid--scanner {
+    grid-template-columns: minmax(280px, 1fr) minmax(520px, 2fr);
+    align-items: start;
+}
+
 .firephage-grid--3 {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
@@ -230,6 +235,10 @@
 .firephage-list {
     margin: 0;
     padding-left: 18px;
+}
+
+.firephage-list-spaced {
+    margin-top: 16px;
 }
 
 .firephage-progress {
@@ -659,6 +668,12 @@
 
     to {
         transform: translateX(100%);
+    }
+}
+
+@media (max-width: 960px) {
+    .firephage-grid--scanner {
+        grid-template-columns: 1fr;
     }
 }
 
