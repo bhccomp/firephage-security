@@ -14,6 +14,7 @@
     const refreshHealthButton = document.querySelector('.firephage-refresh-health');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
+    const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
     const confirmModal = document.getElementById('firephage-confirm-modal');
     const confirmModalTitle = document.getElementById('firephage-confirm-modal-title');
     const confirmModalBody = document.getElementById('firephage-confirm-modal-body');
@@ -334,6 +335,11 @@
             startScanButton.textContent = scanIsRunning ? 'Scan Running...' : firephageAdmin.labels.startScan;
         }
 
+        if (overviewStartScanButton) {
+            overviewStartScanButton.disabled = scanIsRunning;
+            overviewStartScanButton.textContent = scanIsRunning ? 'Scan Running...' : firephageAdmin.labels.overviewStartScan;
+        }
+
         if (state.status === 'discovering' || state.status === 'scanning') {
             schedulePoll();
         } else if (pollTimer) {
@@ -394,6 +400,44 @@
         }, 3000);
     };
 
+    const startBackgroundScan = (button = null) => {
+        if (button) {
+            button.disabled = true;
+            button.textContent = firephageAdmin.labels.scanStarting;
+        }
+
+        if (startScanButton) {
+            startScanButton.disabled = true;
+            startScanButton.textContent = firephageAdmin.labels.scanStarting;
+        }
+
+        request('firephage_start_scan')
+            .done((response) => {
+                if (response.success) {
+                    renderScanState(response.data.state);
+                    showToast('Background malware scan started.');
+                } else {
+                    showToast(response.data.message || 'Unable to start the scan.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to start the scan.', true);
+            })
+            .always(() => {
+                if (!scanIsRunning) {
+                    if (startScanButton) {
+                        startScanButton.disabled = false;
+                        startScanButton.textContent = firephageAdmin.labels.startScan;
+                    }
+
+                    if (button) {
+                        button.disabled = false;
+                        button.textContent = firephageAdmin.labels.overviewStartScan;
+                    }
+                }
+            });
+    };
+
     tabButtons.forEach((button) => {
         button.addEventListener('click', () => {
             setActiveTab(button.dataset.tab);
@@ -404,27 +448,19 @@
 
     if (startScanButton) {
         startScanButton.addEventListener('click', () => {
-            startScanButton.disabled = true;
-            startScanButton.textContent = firephageAdmin.labels.scanStarting;
+            startBackgroundScan();
+        });
+    }
 
-            request('firephage_start_scan')
-                .done((response) => {
-                    if (response.success) {
-                        renderScanState(response.data.state);
-                        showToast('Background malware scan started.');
-                    } else {
-                        showToast(response.data.message || 'Unable to start the scan.', true);
-                    }
-                })
-                .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to start the scan.', true);
-                })
-                .always(() => {
-                    if (!scanIsRunning) {
-                        startScanButton.disabled = false;
-                        startScanButton.textContent = firephageAdmin.labels.startScan;
-                    }
-                });
+    if (overviewStartScanButton) {
+        overviewStartScanButton.addEventListener('click', () => {
+            setActiveTab('scanner');
+
+            if (scanIsRunning) {
+                return;
+            }
+
+            startBackgroundScan(overviewStartScanButton);
         });
     }
 

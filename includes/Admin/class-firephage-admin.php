@@ -95,6 +95,7 @@ final class Admin
                 'nonce' => wp_create_nonce('firephage_admin'),
                 'labels' => [
                     'startScan' => __('Start Background Scan', 'firephage-security'),
+                    'overviewStartScan' => __('Scan My Website For Malware', 'firephage-security'),
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
@@ -169,6 +170,7 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->mapStateBadge((string) $scan['status'])) . '" id="firephage-overview-scan-status-badge">' . esc_html(ucfirst((string) $scan['status'])) . '</span>';
         echo '</div>';
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
+        echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html__('Scan My Website For Malware', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
