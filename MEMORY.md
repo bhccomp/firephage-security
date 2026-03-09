@@ -73,6 +73,12 @@
   - stopped/cancelled scans now show a dedicated progress summary instead of falling through to the generic active-scan message
   - added first-pass `Firewall` and `Performance` Pro tab mockups with visible `Pro` tab pills, locked placeholder controls, and upgrade/connect CTAs before API wiring
   - those Pro tabs now start loading live FirePhage read-only summaries through plugin AJAX when the plugin is connected, while still keeping the existing mockup layout as the fallback
+  - the plugin now depends on the FirePhage dashboard-side plugin integration endpoints for:
+    - connection exchange
+    - report ingestion
+    - read-only `Firewall` and `Performance` summaries
+  - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
+  - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
