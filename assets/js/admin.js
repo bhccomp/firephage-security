@@ -112,6 +112,44 @@
         }, 3200);
     };
 
+    const escapeHtml = (value) => String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+    const humanizeTimestamp = (value) => {
+        if (!value) {
+            return 'Never';
+        }
+
+        const parsed = new Date(String(value).replace(' ', 'T'));
+
+        if (Number.isNaN(parsed.getTime())) {
+            return value;
+        }
+
+        const delta = Date.now() - parsed.getTime();
+
+        if (delta < 60000) {
+            return 'Just now';
+        }
+
+        if (delta < 3600000) {
+            const minutes = Math.max(1, Math.floor(delta / 60000));
+            return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+        }
+
+        if (delta < 86400000) {
+            const hours = Math.max(1, Math.floor(delta / 3600000));
+            return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+        }
+
+        const days = Math.max(1, Math.floor(delta / 86400000));
+        return `${days} day${days === 1 ? '' : 's'} ago`;
+    };
+
     const closeConfirmModal = () => {
         pendingConfirmation = null;
 
@@ -131,7 +169,7 @@
 
         pendingConfirmation = onConfirm;
         confirmModalTitle.textContent = title;
-        confirmModalBody.textContent = body;
+        confirmModalBody.innerHTML = body;
         confirmModal.hidden = false;
         confirmModalSubmit.disabled = false;
     };
@@ -341,8 +379,8 @@
 
         if (!payload.connected) {
             setBadge(firewallStatusBadge, 'Connect', 'neutral');
-            firewallSummaryText.textContent = firephageAdmin.labels.connectRequired;
-            firewallConnectionNote.textContent = payload.message || firephageAdmin.labels.connectRequired;
+            firewallSummaryText.textContent = 'Connect to view live firewall analytics.';
+            firewallConnectionNote.textContent = payload.message || 'Upgrade required to manage WAF controls from WordPress.';
             return;
         }
 
@@ -378,7 +416,7 @@
         if (firewallActivityBody && Array.isArray(payload.activity)) {
             firewallActivityBody.innerHTML = payload.activity.length
                 ? payload.activity.map((row) => `<div class="firephage-pro-table__row"><span>${row.timestamp ? new Date(row.timestamp).toLocaleString() : '--'}</span><span>${row.action || 'ALLOW'}</span><span>${row.path || '/'}</span></div>`).join('')
-                : '<div class="firephage-pro-table__row"><span>--</span><span>No activity yet</span><span>/</span></div>';
+                : '<div class="firephage-pro-table__row"><span>No recent events</span><span>Live firewall analytics will appear here after traffic is processed.</span><span>/</span></div>';
         }
 
         if (firewallUpgradeCard) {
@@ -393,8 +431,8 @@
 
         if (!payload.connected) {
             setBadge(performanceStatusBadge, 'Connect', 'neutral');
-            performanceSummaryText.textContent = firephageAdmin.labels.connectRequired;
-            performanceConnectionNote.textContent = payload.message || firephageAdmin.labels.connectRequired;
+            performanceSummaryText.textContent = 'Connect to load performance data.';
+            performanceConnectionNote.textContent = payload.message || 'Upgrade required to manage CDN and cache settings from WordPress.';
             return;
         }
 
@@ -418,7 +456,7 @@
         if (performanceCacheRules && Array.isArray(payload.cache_rules)) {
             performanceCacheRules.innerHTML = payload.cache_rules.length
                 ? payload.cache_rules.map((rule) => `<div class="firephage-pro-table__row"><span>${rule.path}</span><span>${rule.behavior}</span><span>${rule.state}</span></div>`).join('')
-                : '<div class="firephage-pro-table__row"><span>--</span><span>No managed cache rules yet</span><span>--</span></div>';
+                : '<div class="firephage-pro-table__row"><span>No live rules yet</span><span>Connect FirePhage to review managed cache behavior.</span><span>Waiting</span></div>';
         }
 
         if (performanceUpgradeCard) {
@@ -428,7 +466,7 @@
 
     const bruteForceRowsMarkup = (rows, showRemaining = false) => {
         if (!rows || rows.length === 0) {
-            return '<p class="firephage-empty">No entries to show right now.</p>';
+            return `<p class="firephage-empty">${showRemaining ? 'No active lockouts right now.' : 'No recent lockout events right now.'}</p>`;
         }
 
         return `<div class="firephage-finding-table-wrap firephage-finding-table-wrap--compact">
@@ -604,6 +642,30 @@
         return 'firephage-badge--neutral';
     };
 
+    const statusLabel = (status) => {
+        if (status === 'completed') {
+            return 'Completed';
+        }
+
+        if (status === 'failed') {
+            return 'Needs Review';
+        }
+
+        if (status === 'discovering') {
+            return 'Preparing Scan';
+        }
+
+        if (status === 'scanning') {
+            return 'Scanning';
+        }
+
+        if (status === 'stopped') {
+            return 'Cancelled';
+        }
+
+        return 'Idle';
+    };
+
     const progressLabel = (state) => {
         if (state.status === 'idle') {
             return 'The scanner is idle. Start a background scan to verify repository integrity and review untrusted code paths.';
@@ -643,7 +705,7 @@
     const findingsMarkup = (findings) => {
         if (!findings || findings.length === 0) {
             selectedFindings = new Set();
-            return '<p class="firephage-empty">No integrity mismatches or suspicious files were flagged by the latest scan.</p>';
+            return '<p class="firephage-empty">No suspicious files detected in the latest scan.</p>';
         }
 
         const rows = findings.slice().reverse();
@@ -736,12 +798,12 @@
 
         if (badge) {
             badge.className = `firephage-badge ${badgeClass(state.status)}`;
-            badge.textContent = state.status.charAt(0).toUpperCase() + state.status.slice(1);
+            badge.textContent = statusLabel(state.status);
         }
 
         if (overviewBadge) {
             overviewBadge.className = `firephage-badge ${badgeClass(state.status)}`;
-            overviewBadge.textContent = state.status.charAt(0).toUpperCase() + state.status.slice(1);
+            overviewBadge.textContent = statusLabel(state.status);
         }
 
         if (progressBar) {
@@ -759,6 +821,17 @@
 
         if (overviewSummary) {
             overviewSummary.textContent = progressLabel(state);
+        }
+
+        const scannerLastScan = document.getElementById('firephage-scanner-last-scan');
+        const overviewLastScan = document.getElementById('firephage-overview-last-scan');
+
+        if (scannerLastScan) {
+            scannerLastScan.textContent = humanizeTimestamp(state.finished_at || '');
+        }
+
+        if (overviewLastScan) {
+            overviewLastScan.textContent = humanizeTimestamp(state.finished_at || '');
         }
 
         if (findings) {
@@ -1003,7 +1076,7 @@
                 .done((response) => {
                     if (response.success) {
                         renderHealth(response.data.report);
-                        showToast('Health checks refreshed.');
+                        showToast(firephageAdmin.labels.refreshHealthDone || 'Health checks refreshed.');
                     }
                 })
                 .always(() => {
@@ -1113,6 +1186,10 @@
             request('firephage_save_scanner_settings', { settings })
                 .done((response) => {
                     if (response.success) {
+                        const autoScanNode = document.getElementById('firephage-scanner-auto-scan');
+                        if (autoScanNode && response.data.settings) {
+                            autoScanNode.textContent = response.data.settings.malware_auto_scans_enabled === '1' ? 'Enabled' : 'Disabled';
+                        }
                         showToast(response.data.message || 'Scanner settings saved.');
                         closeScannerSettingsModal();
                     } else {
@@ -1467,27 +1544,30 @@
         }
 
         if (target.classList.contains('firephage-delete-suspicious-files')) {
+            const malwareFiles = (currentScanState.findings || []).filter((finding) => finding.type === 'malware').map((finding) => finding.file);
             openConfirmModal({
                 title: firephageAdmin.labels.confirmDeleteAllTitle,
-                body: firephageAdmin.labels.confirmDeleteAllBody,
+                body: `<p>${escapeHtml(firephageAdmin.labels.confirmDeleteAllBody)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalWarning)}</strong></p><p>${escapeHtml(firephageAdmin.labels.deleteModalBackup)}</p>${malwareFiles.length ? `<p><strong>${escapeHtml(firephageAdmin.labels.deleteModalFilesLabel)}:</strong></p><div class="firephage-confirm-files">${malwareFiles.slice(0, 8).map((file) => `<code>${escapeHtml(file)}</code>`).join('')}</div>` : ''}`,
                 onConfirm: () => deleteAllSuspiciousFiles(target),
             });
             return;
         }
 
         if (target.classList.contains('firephage-delete-selected-suspicious-files')) {
+            const files = Array.from(selectedFindings);
             openConfirmModal({
                 title: firephageAdmin.labels.confirmDeleteSelectedTitle,
-                body: `${firephageAdmin.labels.confirmDeleteSelectedBody} (${selectedFindings.size} selected)`,
+                body: `<p>${escapeHtml(firephageAdmin.labels.confirmDeleteSelectedBody)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalWarning)}</strong></p><p>${escapeHtml(firephageAdmin.labels.deleteModalBackup)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalFilesLabel)}:</strong></p><div class="firephage-confirm-files">${files.slice(0, 8).map((file) => `<code>${escapeHtml(file)}</code>`).join('')}</div>`,
                 onConfirm: () => deleteSelectedSuspiciousFiles(target),
             });
             return;
         }
 
         if (target.classList.contains('firephage-delete-finding')) {
+            const filePath = target.dataset.file || '';
             openConfirmModal({
                 title: firephageAdmin.labels.confirmDeleteTitle,
-                body: firephageAdmin.labels.confirmDeleteBody,
+                body: `<p>${escapeHtml(firephageAdmin.labels.confirmDeleteBody)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalWarning)}</strong></p><p>${escapeHtml(firephageAdmin.labels.deleteModalBackup)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalFileLabel)}:</strong></p><div class="firephage-confirm-files"><code>${escapeHtml(filePath)}</code></div>`,
                 onConfirm: () => deleteSingleSuspiciousFile(target),
             });
             return;

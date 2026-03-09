@@ -141,3 +141,10 @@
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites
   - after plugin changes in this repo, complete the full workflow through remote sync on the WordPress server in the same task
+- Admin polish follow-up:
+  - Overview now includes a derived `Security Score` card with dynamic improvement hints based on current health checks, scan state, brute-force protection, updates, and FirePhage connection state
+  - Overview and Malware Scanner now show human-readable freshness labels such as `Last scan` and `Last report sync`
+  - Malware Scanner now surfaces `Auto scan` state directly in the panel
+  - Firewall and Performance locked states now use clearer action-oriented copy instead of bare placeholder values
+  - Performance includes an estimated CDN/cache improvement upsell block
+  - suspicious-file deletion confirmations now warn about functionality risk, recommend backups, and show file paths in the modal
