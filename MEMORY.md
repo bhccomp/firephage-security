@@ -109,6 +109,7 @@
     - FirePhage can serve public signature metadata which the plugin caches locally and merges into the active ruleset
   - scanner settings now expose a toggle for FirePhage signature updates so the local engine can keep receiving signature refreshes without plugin releases
   - scanner settings now also expose a manual `Refresh Signatures` action that clears the locally cached FirePhage signature payload and fetches the latest approved rules immediately instead of waiting for the normal cache TTL
+  - follow-up bug fix: the manual refresh path must use the existing `getClient()` helper inside the scanner class; calling a non-existent `client()` method causes the scan/refresh flow to fail
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
