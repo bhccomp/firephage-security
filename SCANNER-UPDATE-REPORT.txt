@@ -1,10 +1,11 @@
 FirePhage Security Scanner Update
-Date: 2026-03-07
+Date: 2026-03-09
 
 Summary
 - Reworked the scanner around an integrity-first model based on the malware-plugin review.
 - Repository checks now happen before heuristic malware scoring.
 - The admin UI now exposes richer scan state and finding metadata.
+- The scanner now covers more staged webshell and obfuscated JavaScript patterns from recent malware sample analysis.
 
 Scanner changes
 - WordPress core files are verified against official core checksums.
@@ -13,10 +14,14 @@ Scanner changes
 - Custom files outside official package inventories are added to a local clean baseline.
 - A monitor cron can restart a stalled background scan if batch execution stops progressing.
 - Heuristic findings are now separated from integrity mismatches.
+- Embedded base64 blobs are decoded and inspected for executable code markers before the file is treated as clean.
+- Directory-level correlation now detects staged loader chains and clusters of randomized PHP fragments.
+- Webshell behavior markers now cover command execution, socket usage, file-manager actions, upload forms, raw input handlers, and common shell UI strings like `FilesMan` and `auth_pass`.
+- Sensitive WordPress bootstrap files receive extra scrutiny for remote script injection and obfuscated runtime code.
 
 UI changes
 - Scan copy now explains the checksum-plus-baseline model instead of a simple extension list.
-- Progress text now reports trusted files, integrity mismatches, and suspicious findings.
+- Progress text now reports trusted files, clean custom files, skipped files, integrity mismatches, and suspicious findings.
 - Latest findings now show type, confidence, and source badges.
 - The start button remains disabled while a scan is active.
 

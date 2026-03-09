@@ -483,9 +483,11 @@ final class Admin
 
         if ($status === 'completed') {
             return sprintf(
-                __('Scan completed. %1$d files scanned, %2$d trusted, %3$d integrity mismatches, %4$d suspicious.', 'firephage-security'),
+                __('Scan completed. %1$d files scanned, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d integrity mismatches, %6$d suspicious.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
+                (int) ($scan['clean_files'] ?? 0),
+                (int) ($scan['skipped_files'] ?? 0),
                 (int) ($scan['integrity_issues'] ?? 0),
                 (int) ($scan['suspicious_files'] ?? 0)
             );
@@ -496,10 +498,12 @@ final class Admin
         }
 
         return sprintf(
-            __('Scanning %1$d of %2$d discovered files. Trusted so far: %3$d. Integrity mismatches: %4$d. Suspicious: %5$d. Current file: %6$s', 'firephage-security'),
+            __('Scanning %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Suspicious: %7$d. Current file: %8$s', 'firephage-security'),
             (int) ($scan['scanned_files'] ?? 0),
             (int) ($scan['discovered_files'] ?? 0),
             (int) ($scan['trusted_files'] ?? 0),
+            (int) ($scan['clean_files'] ?? 0),
+            (int) ($scan['skipped_files'] ?? 0),
             (int) ($scan['integrity_issues'] ?? 0),
             (int) ($scan['suspicious_files'] ?? 0),
             (string) ($scan['current_file'] ?? '')

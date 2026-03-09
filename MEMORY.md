@@ -48,6 +48,13 @@
   - renders findings with type, confidence, and source metadata in the admin UI instead of a flat reason list
   - latest findings now render as a capped, scrollable table with file path, status, and details
   - admin assets now use file modification times for cache busting so UI changes appear immediately after deployment
+- Scanner malware-coverage follow-up:
+  - expanded local heuristics using ideas from reviewed security plugins, ClamAV webshell signatures, and uploaded malware samples without copying third-party code
+  - added decoded-payload inspection for embedded base64 blobs so the scanner can spot executable code hidden inside encoded strings
+  - added staged-loader and same-directory correlation so clustered fragment shells can be detected instead of only single-file matches
+  - added stronger webshell behavior markers for command execution, file-manager actions, raw input handling, shell UI strings, and suspicious JS runtime compilation
+  - added stronger weighting for suspicious injections inside sensitive WordPress bootstrap files such as `wp-load.php`
+  - scan summaries now account for clean custom files and skipped files so totals reconcile with scanned-file counts
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync

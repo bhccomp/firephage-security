@@ -74,14 +74,14 @@
         }
 
         if (state.status === 'completed') {
-            return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} suspicious.`;
+            return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} suspicious.`;
         }
 
         if (state.status === 'failed') {
             return `Scan failed: ${state.last_error || 'Unknown error'}`;
         }
 
-        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted so far: ${state.trusted_files}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
+        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
     };
 
     const findingsMarkup = (findings) => {
