@@ -151,7 +151,6 @@ final class Admin
         $scan = $this->scanner->getState();
         $health = $report['health'];
         $updates = $health['updates'];
-        $checksum = $health['core_checksum'];
         $bruteForce = $this->bruteForceProtection->getSummary();
 
         echo '<div class="wrap firephage-admin">';
@@ -226,15 +225,6 @@ final class Admin
         foreach ($health['checks'] as $check) {
             echo $this->renderCheckCard($check);
         }
-        echo '</div>';
-        echo '<div class="firephage-card firephage-checksum-card firephage-section-spaced" id="firephage-core-checksum">';
-        echo '<div class="firephage-card-head">';
-        echo '<h3>' . esc_html__('WordPress Core Checksums', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--' . esc_attr((string) ($checksum['status'] ?? 'unknown')) . '">' . esc_html(ucfirst((string) ($checksum['status'] ?? 'unknown'))) . '</span>';
-        echo '</div>';
-        echo '<p>' . esc_html((string) ($checksum['summary'] ?? '')) . '</p>';
-        echo $this->renderChecksumList(__('Modified files', 'firephage-security'), $checksum['modified'] ?? []);
-        echo $this->renderChecksumList(__('Missing files', 'firephage-security'), $checksum['missing'] ?? []);
         echo '</div>';
         echo '</section>';
 
@@ -795,7 +785,7 @@ final class Admin
     {
         return [
             'overview' => ['label' => __('Overview', 'firephage-security')],
-            'scanner' => ['label' => __('Malware Scan', 'firephage-security')],
+            'scanner' => ['label' => __('Malware Scanner', 'firephage-security')],
             'bruteforce' => ['label' => __('Brute Force Protection', 'firephage-security')],
             'updates' => ['label' => __('Updates', 'firephage-security')],
             'firewall' => ['label' => __('Firewall', 'firephage-security'), 'pro' => true],
