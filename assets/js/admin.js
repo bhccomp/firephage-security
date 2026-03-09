@@ -342,7 +342,7 @@
         }
 
         if (overviewViewResultsButton) {
-            overviewViewResultsButton.hidden = !scanIsRunning;
+            overviewViewResultsButton.style.display = scanIsRunning ? '' : 'none';
         }
 
         if (state.status === 'discovering' || state.status === 'scanning') {
