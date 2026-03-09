@@ -52,7 +52,7 @@ final class Admin
     {
         add_menu_page(
             __('FirePhage Security', 'firephage-security'),
-            __('FirePhage', 'firephage-security'),
+            __('FirePhage Security', 'firephage-security'),
             'manage_options',
             'firephage-security',
             [$this, 'renderOverviewPage'],
