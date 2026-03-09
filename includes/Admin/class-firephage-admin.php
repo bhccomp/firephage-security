@@ -97,7 +97,7 @@ final class Admin
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
-                    'deleteSuspiciousFiles' => __('Delete Suspicious Files', 'firephage-security'),
+                    'deleteSuspiciousFiles' => __('Delete All Suspicious Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
                 ],
             ]
@@ -449,7 +449,7 @@ final class Admin
         }
         $html .= '</select></label>';
         $html .= '<div class="firephage-findings-actions">';
-        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete Suspicious Files', 'firephage-security') . '</button>';
+        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Suspicious Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
         $html .= '</div>';
         $html .= '</div>';

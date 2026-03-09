@@ -273,22 +273,23 @@
 }
 
 .firephage-button-danger {
-    border-color: #dc2626;
-    background: #dc2626;
-    color: #fff;
+    border-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: #fff !important;
+    box-shadow: none !important;
 }
 
 .firephage-button-danger:hover,
 .firephage-button-danger:focus {
-    border-color: #b91c1c;
-    background: #b91c1c;
-    color: #fff;
+    border-color: #b91c1c !important;
+    background: #b91c1c !important;
+    color: #fff !important;
 }
 
 .firephage-button-danger[disabled] {
-    border-color: #fca5a5;
-    background: #fca5a5;
-    color: #fff;
+    border-color: #fca5a5 !important;
+    background: #fca5a5 !important;
+    color: #fff !important;
 }
 
 .firephage-finding-table {
