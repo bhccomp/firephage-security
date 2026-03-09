@@ -7,6 +7,7 @@ use FirePhage\Security\FirePhage\Client;
 use FirePhage\Security\Health\HealthChecker;
 use FirePhage\Security\Reports\ReportBuilder;
 use FirePhage\Security\Scanner\MalwareScanner;
+use FirePhage\Security\Security\BruteForceProtection;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -14,6 +15,7 @@ if (! defined('ABSPATH')) {
 
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Health/class-firephage-health-checker.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Scanner/class-firephage-malware-scanner.php';
+require_once FIREPHAGE_SECURITY_PATH . 'includes/Security/class-firephage-brute-force-protection.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Reports/class-firephage-report-builder.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/FirePhage/class-firephage-client.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/class-firephage-settings.php';
@@ -30,6 +32,8 @@ final class Plugin
     private MalwareScanner $scanner;
 
     private HealthChecker $healthChecker;
+
+    private BruteForceProtection $bruteForceProtection;
 
     private ReportBuilder $reportBuilder;
 
@@ -51,9 +55,10 @@ final class Plugin
         $this->settings = new Settings();
         $this->scanner = new MalwareScanner();
         $this->healthChecker = new HealthChecker();
-        $this->reportBuilder = new ReportBuilder($this->healthChecker, $this->scanner);
+        $this->bruteForceProtection = new BruteForceProtection($this->settings);
+        $this->reportBuilder = new ReportBuilder($this->healthChecker, $this->scanner, $this->bruteForceProtection);
         $this->client = new Client();
-        $this->admin = new Admin($this->settings, $this->scanner, $this->healthChecker, $this->reportBuilder, $this->client);
+        $this->admin = new Admin($this->settings, $this->scanner, $this->healthChecker, $this->reportBuilder, $this->client, $this->bruteForceProtection);
     }
 
     public function boot(): void
@@ -67,6 +72,7 @@ final class Plugin
         add_action(self::REPORT_CRON_HOOK, [$this, 'sendScheduledReport']);
 
         $this->scanner->registerHooks();
+        $this->bruteForceProtection->registerHooks();
     }
 
     public static function activate(): void

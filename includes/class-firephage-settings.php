@@ -26,6 +26,11 @@ final class Settings
             'last_sync_error' => '',
             'auto_sync_reports' => '1',
             'use_firephage_checksum_cache' => '1',
+            'bruteforce_enabled' => '1',
+            'bruteforce_threshold' => '5',
+            'bruteforce_window_minutes' => '15',
+            'bruteforce_lockout_minutes' => '30',
+            'bruteforce_protect_xmlrpc' => '1',
         ];
 
         $value = get_option(self::OPTION_KEY, []);
@@ -62,6 +67,11 @@ final class Settings
             'last_sync_error' => sanitize_text_field((string) ($input['last_sync_error'] ?? $settings['last_sync_error'])),
             'auto_sync_reports' => ! empty($input['auto_sync_reports']) ? '1' : '0',
             'use_firephage_checksum_cache' => ! empty($input['use_firephage_checksum_cache']) ? '1' : '0',
+            'bruteforce_enabled' => ! empty($input['bruteforce_enabled']) ? '1' : '0',
+            'bruteforce_threshold' => (string) max(3, min(20, absint($input['bruteforce_threshold'] ?? $settings['bruteforce_threshold']))),
+            'bruteforce_window_minutes' => (string) max(5, min(120, absint($input['bruteforce_window_minutes'] ?? $settings['bruteforce_window_minutes']))),
+            'bruteforce_lockout_minutes' => (string) max(5, min(1440, absint($input['bruteforce_lockout_minutes'] ?? $settings['bruteforce_lockout_minutes']))),
+            'bruteforce_protect_xmlrpc' => ! empty($input['bruteforce_protect_xmlrpc']) ? '1' : '0',
         ];
     }
 

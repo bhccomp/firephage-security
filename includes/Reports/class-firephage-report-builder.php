@@ -4,6 +4,7 @@ namespace FirePhage\Security\Reports;
 
 use FirePhage\Security\Health\HealthChecker;
 use FirePhage\Security\Scanner\MalwareScanner;
+use FirePhage\Security\Security\BruteForceProtection;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -15,10 +16,13 @@ final class ReportBuilder
 
     private MalwareScanner $scanner;
 
-    public function __construct(HealthChecker $healthChecker, MalwareScanner $scanner)
+    private BruteForceProtection $bruteForceProtection;
+
+    public function __construct(HealthChecker $healthChecker, MalwareScanner $scanner, BruteForceProtection $bruteForceProtection)
     {
         $this->healthChecker = $healthChecker;
         $this->scanner = $scanner;
+        $this->bruteForceProtection = $bruteForceProtection;
     }
 
     /**
@@ -50,6 +54,7 @@ final class ReportBuilder
                 'skipped_files' => (int) $scan['skipped_files'],
                 'findings' => array_slice(is_array($scan['findings']) ? $scan['findings'] : [], -20),
             ],
+            'brute_force' => $this->bruteForceProtection->getSummary(),
         ];
     }
 }

@@ -6,6 +6,7 @@ use FirePhage\Security\FirePhage\Client;
 use FirePhage\Security\Health\HealthChecker;
 use FirePhage\Security\Reports\ReportBuilder;
 use FirePhage\Security\Scanner\MalwareScanner;
+use FirePhage\Security\Security\BruteForceProtection;
 use FirePhage\Security\Settings;
 
 if (! defined('ABSPATH')) {
@@ -24,18 +25,22 @@ final class Admin
 
     private Client $client;
 
+    private BruteForceProtection $bruteForceProtection;
+
     public function __construct(
         Settings $settings,
         MalwareScanner $scanner,
         HealthChecker $healthChecker,
         ReportBuilder $reportBuilder,
-        Client $client
+        Client $client,
+        BruteForceProtection $bruteForceProtection
     ) {
         $this->settings = $settings;
         $this->scanner = $scanner;
         $this->healthChecker = $healthChecker;
         $this->reportBuilder = $reportBuilder;
         $this->client = $client;
+        $this->bruteForceProtection = $bruteForceProtection;
 
         add_action('wp_ajax_firephage_start_scan', [$this, 'handleStartScan']);
         add_action('wp_ajax_firephage_stop_scan', [$this, 'handleStopScan']);
@@ -46,6 +51,8 @@ final class Admin
         add_action('wp_ajax_firephage_delete_selected_suspicious_files', [$this, 'handleDeleteSelectedSuspiciousFiles']);
         add_action('wp_ajax_firephage_delete_suspicious_file', [$this, 'handleDeleteSuspiciousFile']);
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
+        add_action('wp_ajax_firephage_save_bruteforce_settings', [$this, 'handleSaveBruteForceSettings']);
+        add_action('wp_ajax_firephage_clear_bruteforce_lockouts', [$this, 'handleClearBruteForceLockouts']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
         add_action('wp_ajax_firephage_fetch_firewall_summary', [$this, 'handleFetchFirewallSummary']);
@@ -124,6 +131,11 @@ final class Admin
                     'connectRequired' => __('Connect the plugin to FirePhage to load live Pro data.', 'firephage-security'),
                     'loadingProData' => __('Loading FirePhage data...', 'firephage-security'),
                     'proInactive' => __('A connected FirePhage site was found, but this site does not currently have an active Pro plan.', 'firephage-security'),
+                    'saveProtectionSettings' => __('Save Protection Settings', 'firephage-security'),
+                    'savingProtectionSettings' => __('Saving settings...', 'firephage-security'),
+                    'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
+                    'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
+                    'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
                 ],
             ]
         );
@@ -137,6 +149,7 @@ final class Admin
         $health = $report['health'];
         $updates = $health['updates'];
         $checksum = $health['core_checksum'];
+        $bruteForce = $this->bruteForceProtection->getSummary();
 
         echo '<div class="wrap firephage-admin">';
         echo '<div class="firephage-shell">';
@@ -196,6 +209,13 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr((($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)) > 0 ? 'warning' : 'good') . '">' . esc_html((($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)) > 0 ? __('Updates Pending', 'firephage-security') : __('Current', 'firephage-security')) . '</span>';
         echo '</div>';
         echo '<p>' . esc_html(sprintf(__('%1$d core, %2$d plugin, and %3$d theme updates are waiting. %4$d inactive plugins should be reviewed.', 'firephage-security'), (int) ($updates['core_updates'] ?? 0), (int) ($updates['plugin_updates'] ?? 0), (int) ($updates['theme_updates'] ?? 0), (int) ($updates['inactive_plugins'] ?? 0))) . '</p>';
+        echo '</div>';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Brute Force Protection', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr((string) ($bruteForce['status'] ?? 'neutral')) . '" id="firephage-bruteforce-overview-badge">' . esc_html(($bruteForce['enabled'] ?? false) ? (($bruteForce['active_lockouts_count'] ?? 0) > 0 ? __('Active Lockouts', 'firephage-security') : __('Enabled', 'firephage-security')) : __('Disabled', 'firephage-security')) . '</span>';
+        echo '</div>';
+        echo '<p id="firephage-bruteforce-overview-summary">' . esc_html((string) ($bruteForce['summary'] ?? '')) . '</p>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
@@ -260,6 +280,60 @@ final class Admin
         echo $this->renderUpdateCard(__('Plugin updates', 'firephage-security'), (int) ($updates['plugin_updates'] ?? 0), __('Installed plugins with updates available.', 'firephage-security'));
         echo $this->renderUpdateCard(__('Theme updates', 'firephage-security'), (int) ($updates['theme_updates'] ?? 0), __('Installed themes with updates available.', 'firephage-security'));
         echo $this->renderUpdateCard(__('Inactive plugins', 'firephage-security'), (int) ($updates['inactive_plugins'] ?? 0), __('Inactive plugins increase maintenance surface and should be reviewed.', 'firephage-security'));
+        echo '</div>';
+        echo '</section>';
+
+        echo '<section class="firephage-tab-panel" data-panel="bruteforce">';
+        echo '<div class="firephage-grid firephage-grid--2">';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h2>' . esc_html__('Brute Force Protection', 'firephage-security') . '</h2>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr((string) ($bruteForce['status'] ?? 'neutral')) . '" id="firephage-bruteforce-status-badge">' . esc_html(($bruteForce['enabled'] ?? false) ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span>';
+        echo '</div>';
+        echo '<p id="firephage-bruteforce-summary-text">' . esc_html((string) ($bruteForce['summary'] ?? '')) . '</p>';
+        echo '<form id="firephage-bruteforce-form">';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="bruteforce_enabled" value="1" ' . checked($settings['bruteforce_enabled'], '1', false) . ' /><span>' . esc_html__('Enable local login protection', 'firephage-security') . '</span></label>';
+        echo '<div class="firephage-grid firephage-grid--3 firephage-grid--compact">';
+        echo '<label class="firephage-field"><span>' . esc_html__('Failed attempts', 'firephage-security') . '</span><input type="number" min="3" max="20" step="1" name="bruteforce_threshold" value="' . esc_attr($settings['bruteforce_threshold']) . '" /></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Detection window (minutes)', 'firephage-security') . '</span><input type="number" min="5" max="120" step="1" name="bruteforce_window_minutes" value="' . esc_attr($settings['bruteforce_window_minutes']) . '" /></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Lockout duration (minutes)', 'firephage-security') . '</span><input type="number" min="5" max="1440" step="1" name="bruteforce_lockout_minutes" value="' . esc_attr($settings['bruteforce_lockout_minutes']) . '" /></label>';
+        echo '</div>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="bruteforce_protect_xmlrpc" value="1" ' . checked($settings['bruteforce_protect_xmlrpc'], '1', false) . ' /><span>' . esc_html__('Apply the same protection rules to XML-RPC authentication', 'firephage-security') . '</span></label>';
+        echo '<div class="firephage-inline-actions">';
+        echo '<button type="submit" class="button button-primary firephage-save-bruteforce">' . esc_html__('Save Protection Settings', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-clear-bruteforce-lockouts">' . esc_html__('Clear Active Lockouts', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</form>';
+        echo '<p class="firephage-note">' . esc_html__('This is a lightweight local protection layer for the free plugin. Once FirePhage Pro firewall controls are connected, that edge layer should become the primary brute-force defense and this local layer can stay conservative.', 'firephage-security') . '</p>';
+        echo '</div>';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Protection Snapshot', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Local', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div class="firephage-pro-metric-grid" id="firephage-bruteforce-metrics">';
+        echo $this->renderLockedMetricCard(__('Threshold', 'firephage-security'), 'firephage-bruteforce-threshold');
+        echo $this->renderLockedMetricCard(__('Window', 'firephage-security'), 'firephage-bruteforce-window');
+        echo $this->renderLockedMetricCard(__('Active Lockouts', 'firephage-security'), 'firephage-bruteforce-active-count');
+        echo '</div>';
+        echo '<p class="firephage-note" id="firephage-bruteforce-xmlrpc-note">' . esc_html(($bruteForce['protect_xmlrpc'] ?? false) ? __('XML-RPC authentication is currently covered by the same rate-limit rules.', 'firephage-security') : __('XML-RPC authentication is currently excluded from local brute-force protection.', 'firephage-security')) . '</p>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-grid firephage-grid--2 firephage-section-spaced">';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Active Lockouts', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--warning" id="firephage-bruteforce-active-lockouts-badge">' . esc_html(sprintf(__('%d active', 'firephage-security'), (int) ($bruteForce['active_lockouts_count'] ?? 0))) . '</span>';
+        echo '</div>';
+        echo '<div id="firephage-bruteforce-active-lockouts">' . $this->renderBruteForceRows($bruteForce['active_lockouts'] ?? [], true) . '</div>';
+        echo '</div>';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Recent Lockout Events', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('History', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div id="firephage-bruteforce-recent-events">' . $this->renderBruteForceRows($bruteForce['recent_events'] ?? [], false) . '</div>';
+        echo '</div>';
         echo '</div>';
         echo '</section>';
 
@@ -544,6 +618,28 @@ final class Admin
         wp_send_json_success(['report' => $this->reportBuilder->build(true)]);
     }
 
+    public function handleSaveBruteForceSettings(): void
+    {
+        $this->assertAjaxPermissions();
+        $summary = $this->bruteForceProtection->saveSettings(isset($_POST['settings']) && is_array($_POST['settings']) ? wp_unslash($_POST['settings']) : []);
+
+        wp_send_json_success([
+            'message' => __('Brute-force protection settings were saved.', 'firephage-security'),
+            'summary' => $summary,
+        ]);
+    }
+
+    public function handleClearBruteForceLockouts(): void
+    {
+        $this->assertAjaxPermissions();
+        $summary = $this->bruteForceProtection->clearActiveLockouts();
+
+        wp_send_json_success([
+            'message' => __('Active local lockouts were cleared.', 'firephage-security'),
+            'summary' => $summary,
+        ]);
+    }
+
     public function handleConnectDashboard(): void
     {
         $this->assertAjaxPermissions();
@@ -662,6 +758,7 @@ final class Admin
         return [
             'overview' => ['label' => __('Overview', 'firephage-security')],
             'scanner' => ['label' => __('Malware Scan', 'firephage-security')],
+            'bruteforce' => ['label' => __('Brute Force', 'firephage-security')],
             'updates' => ['label' => __('Updates', 'firephage-security')],
             'firewall' => ['label' => __('Firewall', 'firephage-security'), 'pro' => true],
             'performance' => ['label' => __('Performance', 'firephage-security'), 'pro' => true],
@@ -843,6 +940,47 @@ final class Admin
             esc_html((string) $count),
             esc_html($description)
         );
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $rows
+     */
+    private function renderBruteForceRows(array $rows, bool $showRemaining): string
+    {
+        if ($rows === []) {
+            return '<p class="firephage-empty">' . esc_html__('No entries to show right now.', 'firephage-security') . '</p>';
+        }
+
+        $html = '<div class="firephage-finding-table-wrap firephage-finding-table-wrap--compact"><table class="firephage-finding-table firephage-finding-table--auto">';
+        $html .= '<thead><tr>';
+        $html .= '<th scope="col">' . esc_html__('Username', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('IP', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Surface', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Attempts', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Started', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Expires', 'firephage-security') . '</th>';
+        if ($showRemaining) {
+            $html .= '<th scope="col">' . esc_html__('Remaining', 'firephage-security') . '</th>';
+        }
+        $html .= '</tr></thead><tbody>';
+
+        foreach ($rows as $row) {
+            $html .= '<tr>';
+            $html .= '<td>' . esc_html((string) ($row['username'] !== '' ? $row['username'] : __('Any username', 'firephage-security'))) . '</td>';
+            $html .= '<td><code>' . esc_html((string) ($row['ip'] ?? 'unknown')) . '</code></td>';
+            $html .= '<td>' . esc_html(strtoupper((string) ($row['surface'] ?? 'login'))) . '</td>';
+            $html .= '<td>' . esc_html((string) ($row['failed_attempts'] ?? 0)) . '</td>';
+            $html .= '<td>' . esc_html((string) ($row['started_at'] ?? '')) . '</td>';
+            $html .= '<td>' . esc_html((string) ($row['expires_at'] ?? '')) . '</td>';
+            if ($showRemaining) {
+                $html .= '<td>' . esc_html(sprintf(__('%d min', 'firephage-security'), (int) ($row['remaining'] ?? 0))) . '</td>';
+            }
+            $html .= '</tr>';
+        }
+
+        $html .= '</tbody></table></div>';
+
+        return $html;
     }
 
     /**

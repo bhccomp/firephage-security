@@ -65,6 +65,14 @@
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
+.firephage-grid--3 {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.firephage-grid--compact {
+    margin-top: 0;
+}
+
 .firephage-stat-card,
 .firephage-card {
     background: #fff;
@@ -329,6 +337,14 @@
     table-layout: fixed;
 }
 
+.firephage-finding-table--auto {
+    table-layout: auto;
+}
+
+.firephage-finding-table-wrap--compact {
+    max-height: 320px;
+}
+
 .firephage-finding-table thead th {
     position: sticky;
     top: 0;
@@ -373,7 +389,8 @@
 }
 
 .firephage-field input[type="url"],
-.firephage-field input[type="password"] {
+.firephage-field input[type="password"],
+.firephage-field input[type="number"] {
     width: 100%;
     max-width: none;
     border-radius: 10px;

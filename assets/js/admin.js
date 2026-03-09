@@ -12,6 +12,8 @@
     const tabPanels = Array.from(document.querySelectorAll('.firephage-tab-panel'));
     const startScanButton = document.querySelector('.firephage-start-scan');
     const refreshHealthButton = document.querySelector('.firephage-refresh-health');
+    const bruteForceForm = document.getElementById('firephage-bruteforce-form');
+    const clearBruteForceLockoutsButton = document.querySelector('.firephage-clear-bruteforce-lockouts');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
@@ -46,6 +48,17 @@
     const performanceEdgeCompression = document.getElementById('firephage-performance-edge-compression');
     const performanceCacheRules = document.getElementById('firephage-performance-cache-rules');
     const performanceUpgradeCard = document.getElementById('firephage-performance-upgrade-card');
+    const bruteForceOverviewBadge = document.getElementById('firephage-bruteforce-overview-badge');
+    const bruteForceOverviewSummary = document.getElementById('firephage-bruteforce-overview-summary');
+    const bruteForceStatusBadge = document.getElementById('firephage-bruteforce-status-badge');
+    const bruteForceSummaryText = document.getElementById('firephage-bruteforce-summary-text');
+    const bruteForceThreshold = document.getElementById('firephage-bruteforce-threshold');
+    const bruteForceWindow = document.getElementById('firephage-bruteforce-window');
+    const bruteForceActiveCount = document.getElementById('firephage-bruteforce-active-count');
+    const bruteForceXmlrpcNote = document.getElementById('firephage-bruteforce-xmlrpc-note');
+    const bruteForceActiveBadge = document.getElementById('firephage-bruteforce-active-lockouts-badge');
+    const bruteForceActiveLockouts = document.getElementById('firephage-bruteforce-active-lockouts');
+    const bruteForceRecentEvents = document.getElementById('firephage-bruteforce-recent-events');
     let pollTimer = null;
     let scanIsRunning = false;
     let currentScanState = {};
@@ -295,6 +308,89 @@
 
         if (performanceUpgradeCard) {
             performanceUpgradeCard.style.display = payload.pro_enabled ? 'none' : '';
+        }
+    };
+
+    const bruteForceRowsMarkup = (rows, showRemaining = false) => {
+        if (!rows || rows.length === 0) {
+            return '<p class="firephage-empty">No entries to show right now.</p>';
+        }
+
+        return `<div class="firephage-finding-table-wrap firephage-finding-table-wrap--compact">
+            <table class="firephage-finding-table firephage-finding-table--auto">
+                <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">IP</th>
+                        <th scope="col">Surface</th>
+                        <th scope="col">Attempts</th>
+                        <th scope="col">Started</th>
+                        <th scope="col">Expires</th>
+                        ${showRemaining ? '<th scope="col">Remaining</th>' : ''}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${rows.map((row) => `<tr>
+                        <td>${row.username || 'Any username'}</td>
+                        <td><code>${row.ip || 'unknown'}</code></td>
+                        <td>${String(row.surface || 'login').toUpperCase()}</td>
+                        <td>${row.failed_attempts || 0}</td>
+                        <td>${row.started_at || ''}</td>
+                        <td>${row.expires_at || ''}</td>
+                        ${showRemaining ? `<td>${row.remaining || 0} min</td>` : ''}
+                    </tr>`).join('')}
+                </tbody>
+            </table>
+        </div>`;
+    };
+
+    const renderBruteForceSummary = (summary) => {
+        if (!summary) {
+            return;
+        }
+
+        const badgeTone = summary.status || 'neutral';
+        const overviewText = !summary.enabled ? 'Disabled' : ((summary.active_lockouts_count || 0) > 0 ? 'Active Lockouts' : 'Enabled');
+
+        setBadge(bruteForceOverviewBadge, overviewText, badgeTone);
+        setBadge(bruteForceStatusBadge, summary.enabled ? 'Enabled' : 'Disabled', badgeTone);
+
+        if (bruteForceOverviewSummary) {
+            bruteForceOverviewSummary.textContent = summary.summary || '';
+        }
+
+        if (bruteForceSummaryText) {
+            bruteForceSummaryText.textContent = summary.summary || '';
+        }
+
+        if (bruteForceThreshold) {
+            bruteForceThreshold.textContent = `${summary.threshold || 0}`;
+        }
+
+        if (bruteForceWindow) {
+            bruteForceWindow.textContent = `${summary.window_minutes || 0}m / ${summary.lockout_minutes || 0}m`;
+        }
+
+        if (bruteForceActiveCount) {
+            bruteForceActiveCount.textContent = `${summary.active_lockouts_count || 0}`;
+        }
+
+        if (bruteForceXmlrpcNote) {
+            bruteForceXmlrpcNote.textContent = summary.protect_xmlrpc
+                ? 'XML-RPC authentication is currently covered by the same rate-limit rules.'
+                : 'XML-RPC authentication is currently excluded from local brute-force protection.';
+        }
+
+        if (bruteForceActiveBadge) {
+            setBadge(bruteForceActiveBadge, `${summary.active_lockouts_count || 0} active`, (summary.active_lockouts_count || 0) > 0 ? 'warning' : 'neutral');
+        }
+
+        if (bruteForceActiveLockouts && Array.isArray(summary.active_lockouts)) {
+            bruteForceActiveLockouts.innerHTML = bruteForceRowsMarkup(summary.active_lockouts || [], true);
+        }
+
+        if (bruteForceRecentEvents && Array.isArray(summary.recent_events)) {
+            bruteForceRecentEvents.innerHTML = bruteForceRowsMarkup(summary.recent_events || [], false);
         }
     };
 
@@ -772,6 +868,80 @@
         });
     }
 
+    if (bruteForceForm) {
+        bruteForceForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const submitButton = bruteForceForm.querySelector('.firephage-save-bruteforce');
+            const formData = new window.FormData(bruteForceForm);
+            const settings = {};
+            formData.forEach((value, key) => {
+                settings[key] = value;
+            });
+
+            if (!Object.prototype.hasOwnProperty.call(settings, 'bruteforce_enabled')) {
+                settings.bruteforce_enabled = '';
+            }
+
+            if (!Object.prototype.hasOwnProperty.call(settings, 'bruteforce_protect_xmlrpc')) {
+                settings.bruteforce_protect_xmlrpc = '';
+            }
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = firephageAdmin.labels.savingProtectionSettings;
+            }
+
+            request('firephage_save_bruteforce_settings', { settings })
+                .done((response) => {
+                    if (response.success) {
+                        renderBruteForceSummary(response.data.summary);
+                        showToast(response.data.message || 'Protection settings saved.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to save protection settings.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save protection settings.', true);
+                })
+                .always(() => {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = firephageAdmin.labels.saveProtectionSettings;
+                    }
+                });
+        });
+    }
+
+    if (clearBruteForceLockoutsButton) {
+        clearBruteForceLockoutsButton.addEventListener('click', () => {
+            openConfirmModal({
+                title: firephageAdmin.labels.confirmClearLockoutsTitle,
+                body: firephageAdmin.labels.confirmClearLockoutsBody,
+                onConfirm: () => {
+                    clearBruteForceLockoutsButton.disabled = true;
+
+                    request('firephage_clear_bruteforce_lockouts')
+                        .done((response) => {
+                            if (response.success) {
+                                renderBruteForceSummary(response.data.summary);
+                                showToast(response.data.message || 'Active lockouts cleared.');
+                            } else {
+                                showToast((response.data && response.data.message) || 'Unable to clear lockouts.', true);
+                            }
+                        })
+                        .fail((xhr) => {
+                            showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to clear lockouts.', true);
+                        })
+                        .always(() => {
+                            clearBruteForceLockoutsButton.disabled = false;
+                            closeConfirmModal();
+                        });
+                },
+            });
+        });
+    }
+
     if (connectForm) {
         connectForm.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -982,5 +1152,18 @@
     } catch (error) {
         currentScanState = { status: 'idle', discovered_files: 0, scanned_files: 0, findings: [] };
         renderScanState(currentScanState);
+    }
+
+    if (bruteForceSummaryText) {
+        renderBruteForceSummary({
+            enabled: bruteForceForm ? !!bruteForceForm.querySelector('input[name="bruteforce_enabled"]')?.checked : false,
+            protect_xmlrpc: bruteForceForm ? !!bruteForceForm.querySelector('input[name="bruteforce_protect_xmlrpc"]')?.checked : false,
+            threshold: bruteForceForm ? parseInt(bruteForceForm.querySelector('input[name="bruteforce_threshold"]')?.value || '0', 10) : 0,
+            window_minutes: bruteForceForm ? parseInt(bruteForceForm.querySelector('input[name="bruteforce_window_minutes"]')?.value || '0', 10) : 0,
+            lockout_minutes: bruteForceForm ? parseInt(bruteForceForm.querySelector('input[name="bruteforce_lockout_minutes"]')?.value || '0', 10) : 0,
+            active_lockouts_count: bruteForceActiveBadge ? parseInt((bruteForceActiveBadge.textContent || '0').replace(/\D+/g, ''), 10) || 0 : 0,
+            status: bruteForceStatusBadge ? bruteForceStatusBadge.className.replace('firephage-badge firephage-badge--', '') : 'neutral',
+            summary: bruteForceSummaryText.textContent || '',
+        });
     }
 }(jQuery));

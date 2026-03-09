@@ -77,6 +77,9 @@
     - connection exchange
     - report ingestion
     - read-only `Firewall` and `Performance` summaries
+  - added a new local `Brute Force` tab with lightweight login and XML-RPC rate limiting, temporary lockouts, recent lockout history, and Overview status integration
+  - the brute-force layer stores only local counters/lockouts in WordPress options and can be cleared from the plugin UI
+  - brute-force summary data is now included in the local report payload so FirePhage dashboard pages can surface it later
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
