@@ -72,6 +72,7 @@
   - when a scan is cancelled, the UI now offers both `Resume Scan` and `Start New Scan` so the operator can choose continuation or a full restart
   - stopped/cancelled scans now show a dedicated progress summary instead of falling through to the generic active-scan message
   - added first-pass `Firewall` and `Performance` Pro tab mockups with visible `Pro` tab pills, locked placeholder controls, and upgrade/connect CTAs before API wiring
+  - those Pro tabs now start loading live FirePhage read-only summaries through plugin AJAX when the plugin is connected, while still keeping the existing mockup layout as the fallback
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection

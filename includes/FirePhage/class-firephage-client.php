@@ -92,6 +92,53 @@ final class Client
     }
 
     /**
+     * @param array<string, string> $settings
+     * @return array<string, mixed>|WP_Error
+     */
+    public function fetchFirewallSummary(array $settings)
+    {
+        return $this->fetchProtectedSummary($settings, '/api/plugin/firewall-summary', 'firewall summary');
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @return array<string, mixed>|WP_Error
+     */
+    public function fetchPerformanceSummary(array $settings)
+    {
+        return $this->fetchProtectedSummary($settings, '/api/plugin/performance-summary', 'performance summary');
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @return array<string, mixed>|WP_Error
+     */
+    private function fetchProtectedSummary(array $settings, string $path, string $context)
+    {
+        if (($settings['site_token'] ?? '') === '' || ($settings['site_id'] ?? '') === '' || ($settings['dashboard_url'] ?? '') === '') {
+            return new WP_Error('missing_site_token', __('Connect the plugin before loading FirePhage Pro data.', 'firephage-security'));
+        }
+
+        $response = wp_remote_get(
+            add_query_arg(
+                [
+                    'site_id' => $settings['site_id'],
+                ],
+                untrailingslashit($settings['dashboard_url']) . $path
+            ),
+            [
+                'timeout' => 15,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $settings['site_token'],
+                ],
+            ]
+        );
+
+        return $this->normalizeResponse($response, $context);
+    }
+
+    /**
      * @param array<string, mixed>|WP_Error $response
      * @return array<string, mixed>|WP_Error
      */

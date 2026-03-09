@@ -48,6 +48,8 @@ final class Admin
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
+        add_action('wp_ajax_firephage_fetch_firewall_summary', [$this, 'handleFetchFirewallSummary']);
+        add_action('wp_ajax_firephage_fetch_performance_summary', [$this, 'handleFetchPerformanceSummary']);
     }
 
     public function registerMenus(): void
@@ -119,6 +121,9 @@ final class Admin
                     'confirmDeleteSelectedBody' => __('This will permanently delete the selected suspicious malware files. Protected core files will be skipped. This action cannot be undone.', 'firephage-security'),
                     'confirmAction' => __('Delete', 'firephage-security'),
                     'cancelAction' => __('Cancel', 'firephage-security'),
+                    'connectRequired' => __('Connect the plugin to FirePhage to load live Pro data.', 'firephage-security'),
+                    'loadingProData' => __('Loading FirePhage data...', 'firephage-security'),
+                    'proInactive' => __('A connected FirePhage site was found, but this site does not currently have an active Pro plan.', 'firephage-security'),
                 ],
             ]
         );
@@ -296,13 +301,14 @@ final class Admin
         echo '<div class="firephage-card firephage-pro-card">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('Firewall Status', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Pro Preview', 'firephage-security') . '</span>';
+        echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-firewall-status-badge">' . esc_html__('Pro Preview', 'firephage-security') . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html__('Surface protection mode, current zone health, recent attack counts, and shield status here after dashboard wiring is ready.', 'firephage-security') . '</p>';
+        echo '<p id="firephage-firewall-summary-text">' . esc_html__('Surface protection mode, current zone health, recent attack counts, and shield status here after dashboard wiring is ready.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note" id="firephage-firewall-connection-note">' . esc_html__('Connect this site to FirePhage to load live firewall status and activity into this tab.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-metric-grid">';
-        echo $this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'));
-        echo $this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'));
-        echo $this->renderLockedMetricCard(__('Bot Pressure', 'firephage-security'));
+        echo $this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'), 'firephage-firewall-requests-blocked');
+        echo $this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'), 'firephage-firewall-challenge-rate');
+        echo $this->renderLockedMetricCard(__('Bot Pressure', 'firephage-security'), 'firephage-firewall-bot-pressure');
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card firephage-pro-card">';
@@ -312,9 +318,11 @@ final class Admin
         echo '</div>';
         echo '<div class="firephage-pro-table">';
         echo '<div class="firephage-pro-table__row firephage-pro-table__row--head"><span>' . esc_html__('Time', 'firephage-security') . '</span><span>' . esc_html__('Action', 'firephage-security') . '</span><span>' . esc_html__('Path', 'firephage-security') . '</span></div>';
+        echo '<div id="firephage-firewall-activity-body">';
         echo '<div class="firephage-pro-table__row"><span>--</span><span>' . esc_html__('Blocked', 'firephage-security') . '</span><span>/wp-login.php</span></div>';
         echo '<div class="firephage-pro-table__row"><span>--</span><span>' . esc_html__('Challenge', 'firephage-security') . '</span><span>/xmlrpc.php</span></div>';
         echo '<div class="firephage-pro-table__row"><span>--</span><span>' . esc_html__('Allowed', 'firephage-security') . '</span><span>/checkout</span></div>';
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -325,12 +333,12 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--warning">' . esc_html__('Upgrade Required', 'firephage-security') . '</span>';
         echo '</div>';
         echo '<div class="firephage-pro-fieldset">';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Protection mode', 'firephage-security') . '</span><select disabled><option>' . esc_html__('Adaptive WAF', 'firephage-security') . '</option></select></label>';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Trusted IP list', 'firephage-security') . '</span><input type="text" value="203.0.113.10" disabled /></label>';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Country blocks', 'firephage-security') . '</span><input type="text" value="RU, CN" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Protection mode', 'firephage-security') . '</span><select id="firephage-firewall-protection-mode" disabled><option>' . esc_html__('Adaptive WAF', 'firephage-security') . '</option></select></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Trusted IP list', 'firephage-security') . '</span><input type="text" id="firephage-firewall-trusted-ips" value="203.0.113.10" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Country blocks', 'firephage-security') . '</span><input type="text" id="firephage-firewall-country-blocks" value="RU, CN" disabled /></label>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="firephage-card firephage-pro-upgrade">';
+        echo '<div class="firephage-card firephage-pro-upgrade" id="firephage-firewall-upgrade-card">';
         echo '<h3>' . esc_html__('Unlock Firewall Management', 'firephage-security') . '</h3>';
         echo '<p>' . esc_html__('Connect this site to FirePhage Pro to review firewall logs, manage protection modes, and jump into the full dashboard without leaving WordPress.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
@@ -356,13 +364,14 @@ final class Admin
         echo '<div class="firephage-card firephage-pro-card">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('CDN', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Locked', 'firephage-security') . '</span>';
+        echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-performance-status-badge">' . esc_html__('Locked', 'firephage-security') . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html__('This area can show edge status, cached asset ratio, active hostname routing, and quick links to purge or inspect delivery behavior.', 'firephage-security') . '</p>';
+        echo '<p id="firephage-performance-summary-text">' . esc_html__('This area can show edge status, cached asset ratio, active hostname routing, and quick links to purge or inspect delivery behavior.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note" id="firephage-performance-connection-note">' . esc_html__('Connect this site to FirePhage to load live CDN and cache data into this tab.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-fieldset">';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Zone hostname', 'firephage-security') . '</span><input type="text" value="cdn.example.com" disabled /></label>';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Smart image optimization', 'firephage-security') . '</span><input type="checkbox" checked disabled /></label>';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Edge compression', 'firephage-security') . '</span><input type="checkbox" checked disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Zone hostname', 'firephage-security') . '</span><input type="text" id="firephage-performance-hostname" value="cdn.example.com" disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Smart image optimization', 'firephage-security') . '</span><input type="checkbox" id="firephage-performance-image-optimization" checked disabled /></label>';
+        echo '<label class="firephage-pro-field"><span>' . esc_html__('Edge compression', 'firephage-security') . '</span><input type="checkbox" id="firephage-performance-edge-compression" checked disabled /></label>';
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card firephage-pro-card">';
@@ -373,13 +382,15 @@ final class Admin
         echo '<p>' . esc_html__('Use this panel for purge actions, bypass rules, cache TTL presets, and page-specific exclusions once the FirePhage API is wired.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-table">';
         echo '<div class="firephage-pro-table__row firephage-pro-table__row--head"><span>' . esc_html__('Rule', 'firephage-security') . '</span><span>' . esc_html__('Behavior', 'firephage-security') . '</span><span>' . esc_html__('State', 'firephage-security') . '</span></div>';
+        echo '<div id="firephage-performance-cache-rules">';
         echo '<div class="firephage-pro-table__row"><span>/cart</span><span>' . esc_html__('Bypass cache', 'firephage-security') . '</span><span>' . esc_html__('Enabled', 'firephage-security') . '</span></div>';
         echo '<div class="firephage-pro-table__row"><span>/checkout</span><span>' . esc_html__('Bypass cache', 'firephage-security') . '</span><span>' . esc_html__('Enabled', 'firephage-security') . '</span></div>';
         echo '<div class="firephage-pro-table__row"><span>/blog/*</span><span>' . esc_html__('TTL 1 hour', 'firephage-security') . '</span><span>' . esc_html__('Enabled', 'firephage-security') . '</span></div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="firephage-card firephage-pro-upgrade firephage-section-spaced">';
+        echo '</div>';
+        echo '<div class="firephage-card firephage-pro-upgrade firephage-section-spaced" id="firephage-performance-upgrade-card">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('Unlock FirePhage Performance', 'firephage-security') . '</h3>';
         echo '<span class="firephage-badge firephage-badge--warning">' . esc_html__('Pro Required', 'firephage-security') . '</span>';
@@ -601,6 +612,48 @@ final class Admin
         ]);
     }
 
+    public function handleFetchFirewallSummary(): void
+    {
+        $this->assertAjaxPermissions();
+        $settings = $this->settings->all();
+
+        if ($settings['site_token'] === '' || $settings['site_id'] === '' || $settings['connection_status'] !== 'connected') {
+            wp_send_json_success([
+                'connected' => false,
+                'message' => __('Connect the plugin to FirePhage to load firewall data.', 'firephage-security'),
+            ]);
+        }
+
+        $response = $this->client->fetchFirewallSummary($settings);
+
+        if (is_wp_error($response)) {
+            wp_send_json_error(['message' => $response->get_error_message()], 400);
+        }
+
+        wp_send_json_success($response);
+    }
+
+    public function handleFetchPerformanceSummary(): void
+    {
+        $this->assertAjaxPermissions();
+        $settings = $this->settings->all();
+
+        if ($settings['site_token'] === '' || $settings['site_id'] === '' || $settings['connection_status'] !== 'connected') {
+            wp_send_json_success([
+                'connected' => false,
+                'message' => __('Connect the plugin to FirePhage to load performance data.', 'firephage-security'),
+            ]);
+        }
+
+        $response = $this->client->fetchPerformanceSummary($settings);
+
+        if (is_wp_error($response)) {
+            wp_send_json_error(['message' => $response->get_error_message()], 400);
+        }
+
+        wp_send_json_success($response);
+    }
+
     /**
      * @return array<string, string>
      */
@@ -633,9 +686,11 @@ final class Admin
         return $html;
     }
 
-    private function renderLockedMetricCard(string $label): string
+    private function renderLockedMetricCard(string $label, string $valueId = ''): string
     {
-        return '<div class="firephage-pro-metric"><span class="firephage-pro-metric__label">' . esc_html($label) . '</span><strong class="firephage-pro-metric__value">--</strong></div>';
+        $id = $valueId !== '' ? ' id="' . esc_attr($valueId) . '"' : '';
+
+        return '<div class="firephage-pro-metric"><span class="firephage-pro-metric__label">' . esc_html($label) . '</span><strong class="firephage-pro-metric__value"' . $id . '>--</strong></div>';
     }
 
     private function renderStatCard(string $label, string $value, string $description, string $extraClass = ''): string

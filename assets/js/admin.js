@@ -27,6 +27,25 @@
     const previewModalTitle = document.getElementById('firephage-preview-modal-title');
     const previewModalMeta = document.getElementById('firephage-preview-modal-meta');
     const previewModalContent = document.getElementById('firephage-preview-modal-content');
+    const firewallStatusBadge = document.getElementById('firephage-firewall-status-badge');
+    const firewallSummaryText = document.getElementById('firephage-firewall-summary-text');
+    const firewallConnectionNote = document.getElementById('firephage-firewall-connection-note');
+    const firewallRequestsBlocked = document.getElementById('firephage-firewall-requests-blocked');
+    const firewallChallengeRate = document.getElementById('firephage-firewall-challenge-rate');
+    const firewallBotPressure = document.getElementById('firephage-firewall-bot-pressure');
+    const firewallActivityBody = document.getElementById('firephage-firewall-activity-body');
+    const firewallProtectionMode = document.getElementById('firephage-firewall-protection-mode');
+    const firewallTrustedIps = document.getElementById('firephage-firewall-trusted-ips');
+    const firewallCountryBlocks = document.getElementById('firephage-firewall-country-blocks');
+    const firewallUpgradeCard = document.getElementById('firephage-firewall-upgrade-card');
+    const performanceStatusBadge = document.getElementById('firephage-performance-status-badge');
+    const performanceSummaryText = document.getElementById('firephage-performance-summary-text');
+    const performanceConnectionNote = document.getElementById('firephage-performance-connection-note');
+    const performanceHostname = document.getElementById('firephage-performance-hostname');
+    const performanceImageOptimization = document.getElementById('firephage-performance-image-optimization');
+    const performanceEdgeCompression = document.getElementById('firephage-performance-edge-compression');
+    const performanceCacheRules = document.getElementById('firephage-performance-cache-rules');
+    const performanceUpgradeCard = document.getElementById('firephage-performance-upgrade-card');
     let pollTimer = null;
     let scanIsRunning = false;
     let currentScanState = {};
@@ -34,6 +53,10 @@
     let findingsPageSize = 25;
     let pendingConfirmation = null;
     let selectedFindings = new Set();
+    let proTabState = {
+        firewallLoaded: false,
+        performanceLoaded: false,
+    };
 
     const request = (action, payload = {}) => $.post(firephageAdmin.ajaxUrl, {
         action,
@@ -174,6 +197,145 @@
             });
     };
 
+    const setBadge = (node, text, tone = 'neutral') => {
+        if (!node) {
+            return;
+        }
+
+        node.className = `firephage-badge firephage-badge--${tone}`;
+        node.textContent = text;
+    };
+
+    const renderFirewallSummary = (payload) => {
+        if (!firewallSummaryText || !firewallConnectionNote) {
+            return;
+        }
+
+        if (!payload.connected) {
+            setBadge(firewallStatusBadge, 'Connect', 'neutral');
+            firewallSummaryText.textContent = firephageAdmin.labels.connectRequired;
+            firewallConnectionNote.textContent = payload.message || firephageAdmin.labels.connectRequired;
+            return;
+        }
+
+        const statusTone = payload.pro_enabled ? 'good' : 'warning';
+        setBadge(firewallStatusBadge, payload.pro_enabled ? 'Live' : 'Plan Required', statusTone);
+        firewallSummaryText.textContent = `${payload.status.label} on ${payload.site.domain}. WAF status: ${payload.status.waf_status}.`;
+        firewallConnectionNote.textContent = payload.pro_enabled ? 'Live firewall telemetry is loaded from your connected FirePhage site.' : firephageAdmin.labels.proInactive;
+
+        if (firewallRequestsBlocked) {
+            firewallRequestsBlocked.textContent = `${payload.metrics.requests_blocked || 0}`;
+        }
+
+        if (firewallChallengeRate) {
+            firewallChallengeRate.textContent = `${payload.metrics.challenge_rate || 0}%`;
+        }
+
+        if (firewallBotPressure) {
+            firewallBotPressure.textContent = `${payload.metrics.bot_pressure || 0}%`;
+        }
+
+        if (firewallProtectionMode) {
+            firewallProtectionMode.innerHTML = `<option>${payload.controls.protection_mode || 'Adaptive WAF'}</option>`;
+        }
+
+        if (firewallTrustedIps) {
+            firewallTrustedIps.value = payload.controls.trusted_ips || 'No managed allowlist entries yet';
+        }
+
+        if (firewallCountryBlocks) {
+            firewallCountryBlocks.value = payload.controls.country_blocks || 'No managed country blocks';
+        }
+
+        if (firewallActivityBody && Array.isArray(payload.activity)) {
+            firewallActivityBody.innerHTML = payload.activity.length
+                ? payload.activity.map((row) => `<div class="firephage-pro-table__row"><span>${row.timestamp ? new Date(row.timestamp).toLocaleString() : '--'}</span><span>${row.action || 'ALLOW'}</span><span>${row.path || '/'}</span></div>`).join('')
+                : '<div class="firephage-pro-table__row"><span>--</span><span>No activity yet</span><span>/</span></div>';
+        }
+
+        if (firewallUpgradeCard) {
+            firewallUpgradeCard.style.display = payload.pro_enabled ? 'none' : '';
+        }
+    };
+
+    const renderPerformanceSummary = (payload) => {
+        if (!performanceSummaryText || !performanceConnectionNote) {
+            return;
+        }
+
+        if (!payload.connected) {
+            setBadge(performanceStatusBadge, 'Connect', 'neutral');
+            performanceSummaryText.textContent = firephageAdmin.labels.connectRequired;
+            performanceConnectionNote.textContent = payload.message || firephageAdmin.labels.connectRequired;
+            return;
+        }
+
+        const tone = payload.pro_enabled ? 'good' : 'warning';
+        setBadge(performanceStatusBadge, payload.pro_enabled ? 'Live' : 'Plan Required', tone);
+        performanceSummaryText.textContent = `${payload.summary.requests_24h || 0} requests over the last 24 hours. Cache hit ratio: ${payload.summary.cache_hit_ratio || 0}%.`;
+        performanceConnectionNote.textContent = payload.pro_enabled ? 'Live CDN and cache telemetry is loaded from your connected FirePhage site.' : firephageAdmin.labels.proInactive;
+
+        if (performanceHostname) {
+            performanceHostname.value = payload.summary.edge_hostname || 'No edge hostname yet';
+        }
+
+        if (performanceImageOptimization) {
+            performanceImageOptimization.checked = !!payload.settings.smart_image_optimization;
+        }
+
+        if (performanceEdgeCompression) {
+            performanceEdgeCompression.checked = !!payload.settings.edge_compression;
+        }
+
+        if (performanceCacheRules && Array.isArray(payload.cache_rules)) {
+            performanceCacheRules.innerHTML = payload.cache_rules.length
+                ? payload.cache_rules.map((rule) => `<div class="firephage-pro-table__row"><span>${rule.path}</span><span>${rule.behavior}</span><span>${rule.state}</span></div>`).join('')
+                : '<div class="firephage-pro-table__row"><span>--</span><span>No managed cache rules yet</span><span>--</span></div>';
+        }
+
+        if (performanceUpgradeCard) {
+            performanceUpgradeCard.style.display = payload.pro_enabled ? 'none' : '';
+        }
+    };
+
+    const maybeLoadProTab = (tabId) => {
+        if (tabId === 'firewall' && !proTabState.firewallLoaded) {
+            proTabState.firewallLoaded = true;
+            renderFirewallSummary({ connected: false, message: firephageAdmin.labels.loadingProData });
+            request('firephage_fetch_firewall_summary')
+                .done((response) => {
+                    if (response.success) {
+                        renderFirewallSummary(response.data);
+                    } else {
+                        proTabState.firewallLoaded = false;
+                        showToast((response.data && response.data.message) || 'Unable to load firewall data.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    proTabState.firewallLoaded = false;
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to load firewall data.', true);
+                });
+        }
+
+        if (tabId === 'performance' && !proTabState.performanceLoaded) {
+            proTabState.performanceLoaded = true;
+            renderPerformanceSummary({ connected: false, message: firephageAdmin.labels.loadingProData });
+            request('firephage_fetch_performance_summary')
+                .done((response) => {
+                    if (response.success) {
+                        renderPerformanceSummary(response.data);
+                    } else {
+                        proTabState.performanceLoaded = false;
+                        showToast((response.data && response.data.message) || 'Unable to load performance data.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    proTabState.performanceLoaded = false;
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to load performance data.', true);
+                });
+        }
+    };
+
     const setActiveTab = (tabId) => {
         tabButtons.forEach((button) => {
             button.classList.toggle('is-active', button.dataset.tab === tabId);
@@ -182,6 +344,8 @@
         tabPanels.forEach((panel) => {
             panel.hidden = panel.dataset.panel !== tabId;
         });
+
+        maybeLoadProTab(tabId);
     };
 
     const badgeClass = (status) => {
@@ -632,6 +796,8 @@
                         tokenInput.value = '';
                     }
 
+                    proTabState.firewallLoaded = false;
+                    proTabState.performanceLoaded = false;
                     showToast(response.data.message || 'Plugin connected.');
                 })
                 .fail((xhr) => {
@@ -650,6 +816,8 @@
                         siteId.textContent = firephageAdmin.labels.notConnected;
                     }
 
+                    proTabState.firewallLoaded = false;
+                    proTabState.performanceLoaded = false;
                     showToast(response.data.message || 'Plugin disconnected.');
                 })
                 .fail(() => {
