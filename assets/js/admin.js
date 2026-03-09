@@ -24,6 +24,7 @@
     let findingsPage = 1;
     let findingsPageSize = 25;
     let pendingConfirmation = null;
+    let selectedFindings = new Set();
 
     const request = (action, payload = {}) => $.post(firephageAdmin.ajaxUrl, {
         action,
@@ -115,6 +116,32 @@
             });
     };
 
+    const deleteSelectedSuspiciousFiles = (button) => {
+        const files = Array.from(selectedFindings);
+
+        button.setAttribute('disabled', 'disabled');
+
+        request('firephage_delete_selected_suspicious_files', {
+            files,
+        })
+            .done((response) => {
+                if (response.success) {
+                    selectedFindings = new Set();
+                    renderScanState(response.data.state);
+                    showToast(response.data.message || 'Selected suspicious files deleted.');
+                } else {
+                    showToast((response.data && response.data.message) || 'Unable to delete selected files.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete selected files.', true);
+            })
+            .always(() => {
+                button.removeAttribute('disabled');
+                closeConfirmModal();
+            });
+    };
+
     const setActiveTab = (tabId) => {
         tabButtons.forEach((button) => {
             button.classList.toggle('is-active', button.dataset.tab === tabId);
@@ -175,6 +202,7 @@
 
     const findingsMarkup = (findings) => {
         if (!findings || findings.length === 0) {
+            selectedFindings = new Set();
             return '<p class="firephage-empty">No integrity mismatches or suspicious files were flagged by the latest scan.</p>';
         }
 
@@ -196,6 +224,7 @@
                 </select>
             </label>
             <div class="firephage-findings-actions">
+                <button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" ${selectedFindings.size === 0 ? 'disabled' : ''}>${firephageAdmin.labels.deleteSelectedFiles}</button>
                 <button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">${firephageAdmin.labels.deleteSuspiciousFiles}</button>
                 <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
             </div>
@@ -204,6 +233,7 @@
             <table class="firephage-finding-table">
                 <thead>
                     <tr>
+                        <th scope="col">Select</th>
                         <th scope="col">File Path</th>
                         <th scope="col">Status</th>
                         <th scope="col">Details</th>
@@ -229,6 +259,9 @@
 
                         return `
                             <tr>
+                                <td>${finding.type === 'malware'
+                                    ? `<input type="checkbox" class="firephage-findings-select" value="${finding.file}" ${selectedFindings.has(finding.file) ? 'checked' : ''}>`
+                                    : '<span class="firephage-empty">No</span>'}</td>
                                 <td><code>${finding.file}</code></td>
                                 <td><span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${status}</span></td>
                                 <td>${details.join(' | ')}</td>
@@ -451,6 +484,17 @@
             findingsPageSize = parseInt(event.target.value, 10) || 25;
             findingsPage = 1;
             rerenderFindings();
+            return;
+        }
+
+        if (event.target instanceof HTMLInputElement && event.target.classList.contains('firephage-findings-select')) {
+            if (event.target.checked) {
+                selectedFindings.add(event.target.value);
+            } else {
+                selectedFindings.delete(event.target.value);
+            }
+
+            rerenderFindings();
         }
     });
 
@@ -503,6 +547,15 @@
                 title: firephageAdmin.labels.confirmDeleteAllTitle,
                 body: firephageAdmin.labels.confirmDeleteAllBody,
                 onConfirm: () => deleteAllSuspiciousFiles(target),
+            });
+            return;
+        }
+
+        if (target.classList.contains('firephage-delete-selected-suspicious-files')) {
+            openConfirmModal({
+                title: firephageAdmin.labels.confirmDeleteSelectedTitle,
+                body: `${firephageAdmin.labels.confirmDeleteSelectedBody} (${selectedFindings.size} selected)`,
+                onConfirm: () => deleteSelectedSuspiciousFiles(target),
             });
             return;
         }

@@ -41,6 +41,7 @@ final class Admin
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
         add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
         add_action('wp_ajax_firephage_delete_suspicious_files', [$this, 'handleDeleteSuspiciousFiles']);
+        add_action('wp_ajax_firephage_delete_selected_suspicious_files', [$this, 'handleDeleteSelectedSuspiciousFiles']);
         add_action('wp_ajax_firephage_delete_suspicious_file', [$this, 'handleDeleteSuspiciousFile']);
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
@@ -98,11 +99,14 @@ final class Admin
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
                     'deleteSuspiciousFiles' => __('Delete All Suspicious Files', 'firephage-security'),
+                    'deleteSelectedFiles' => __('Delete Selected Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
                     'confirmDeleteTitle' => __('Delete Suspicious File?', 'firephage-security'),
                     'confirmDeleteAllTitle' => __('Delete All Suspicious Files?', 'firephage-security'),
+                    'confirmDeleteSelectedTitle' => __('Delete Selected Suspicious Files?', 'firephage-security'),
                     'confirmDeleteBody' => __('This will permanently delete the selected suspicious file from the server. This action cannot be undone.', 'firephage-security'),
                     'confirmDeleteAllBody' => __('This will permanently delete every file currently flagged as suspicious malware. Protected core files will be skipped. This action cannot be undone.', 'firephage-security'),
+                    'confirmDeleteSelectedBody' => __('This will permanently delete the selected suspicious malware files. Protected core files will be skipped. This action cannot be undone.', 'firephage-security'),
                     'confirmAction' => __('Delete', 'firephage-security'),
                     'cancelAction' => __('Cancel', 'firephage-security'),
                 ],
@@ -322,6 +326,22 @@ final class Admin
         ]);
     }
 
+    public function handleDeleteSelectedSuspiciousFiles(): void
+    {
+        $this->assertAjaxPermissions();
+        $files = isset($_POST['files']) && is_array($_POST['files']) ? array_map('sanitize_text_field', $_POST['files']) : [];
+        $result = $this->scanner->deleteSelectedSuspiciousFiles($files);
+
+        wp_send_json_success([
+            'message' => sprintf(
+                __('Deleted %1$d selected suspicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
+                (int) ($result['deleted_files'] ?? 0),
+                (int) ($result['skipped_files'] ?? 0)
+            ),
+            'state' => $result['state'] ?? $this->scanner->getState(),
+        ]);
+    }
+
     public function handleRefreshHealth(): void
     {
         $this->assertAjaxPermissions();
@@ -469,6 +489,7 @@ final class Admin
         }
         $html .= '</select></label>';
         $html .= '<div class="firephage-findings-actions">';
+        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" disabled>' . esc_html__('Delete Selected Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Suspicious Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
         $html .= '</div>';
@@ -476,6 +497,7 @@ final class Admin
         $html .= '<div class="firephage-finding-table-wrap">';
         $html .= '<table class="firephage-finding-table">';
         $html .= '<thead><tr>';
+        $html .= '<th scope="col">' . esc_html__('Select', 'firephage-security') . '</th>';
         $html .= '<th scope="col">' . esc_html__('File Path', 'firephage-security') . '</th>';
         $html .= '<th scope="col">' . esc_html__('Status', 'firephage-security') . '</th>';
         $html .= '<th scope="col">' . esc_html__('Details', 'firephage-security') . '</th>';
@@ -504,6 +526,14 @@ final class Admin
             }
 
             $html .= '<tr>';
+            $html .= '<td>';
+            if ($type === 'malware') {
+                $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select suspicious file', 'firephage-security') . '</label>';
+                $html .= '<input type="checkbox" id="firephage-select-' . esc_attr(md5($file)) . '" class="firephage-findings-select" value="' . esc_attr($file) . '" />';
+            } else {
+                $html .= '<span class="firephage-empty">' . esc_html__('No', 'firephage-security') . '</span>';
+            }
+            $html .= '</td>';
             $html .= '<td><code>' . esc_html($file) . '</code></td>';
             $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
             $html .= '<td>' . esc_html(implode(' | ', $detailParts)) . '</td>';

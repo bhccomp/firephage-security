@@ -326,6 +326,15 @@
     word-break: break-all;
 }
 
+.firephage-finding-table th:first-child,
+.firephage-finding-table td:first-child {
+    width: 72px;
+}
+
+.firephage-findings-select {
+    margin: 0;
+}
+
 .firephage-field,
 .firephage-toggle {
     display: grid;
