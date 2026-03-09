@@ -109,7 +109,7 @@
                 </select>
             </label>
             <div class="firephage-findings-actions">
-                <button type="button" class="button button-secondary firephage-delete-suspicious-files">${firephageAdmin.labels.deleteSuspiciousFiles}</button>
+                <button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">${firephageAdmin.labels.deleteSuspiciousFiles}</button>
                 <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
             </div>
         </div>
@@ -120,6 +120,7 @@
                         <th scope="col">File Path</th>
                         <th scope="col">Status</th>
                         <th scope="col">Details</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,6 +145,9 @@
                                 <td><code>${finding.file}</code></td>
                                 <td><span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${status}</span></td>
                                 <td>${details.join(' | ')}</td>
+                                <td>${finding.type === 'malware'
+                                    ? `<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button>`
+                                    : '<span class="firephage-empty">Protected</span>'}</td>
                             </tr>
                         `;
                     }).join('')}
@@ -422,6 +426,29 @@
                 })
                 .fail((xhr) => {
                     showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete suspicious files.', true);
+                })
+                .always(() => {
+                    target.removeAttribute('disabled');
+                });
+            return;
+        }
+
+        if (target.classList.contains('firephage-delete-finding')) {
+            target.setAttribute('disabled', 'disabled');
+
+            request('firephage_delete_suspicious_file', {
+                file: target.dataset.file || '',
+            })
+                .done((response) => {
+                    if (response.success) {
+                        renderScanState(response.data.state);
+                        showToast(response.data.message || 'The suspicious file was deleted.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to delete the file.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete the file.', true);
                 })
                 .always(() => {
                     target.removeAttribute('disabled');

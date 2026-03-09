@@ -41,6 +41,7 @@ final class Admin
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
         add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
         add_action('wp_ajax_firephage_delete_suspicious_files', [$this, 'handleDeleteSuspiciousFiles']);
+        add_action('wp_ajax_firephage_delete_suspicious_file', [$this, 'handleDeleteSuspiciousFile']);
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
@@ -97,6 +98,7 @@ final class Admin
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
                     'deleteSuspiciousFiles' => __('Delete Suspicious Files', 'firephage-security'),
+                    'deleteFile' => __('Delete File', 'firephage-security'),
                 ],
             ]
         );
@@ -288,6 +290,18 @@ final class Admin
         ]);
     }
 
+    public function handleDeleteSuspiciousFile(): void
+    {
+        $this->assertAjaxPermissions();
+        $file = sanitize_text_field((string) ($_POST['file'] ?? ''));
+        $result = $this->scanner->deleteSuspiciousFile($file);
+
+        wp_send_json_success([
+            'message' => (string) ($result['message'] ?? __('The request has been processed.', 'firephage-security')),
+            'state' => $result['state'] ?? $this->scanner->getState(),
+        ]);
+    }
+
     public function handleRefreshHealth(): void
     {
         $this->assertAjaxPermissions();
@@ -440,6 +454,7 @@ final class Admin
         $html .= '<th scope="col">' . esc_html__('File Path', 'firephage-security') . '</th>';
         $html .= '<th scope="col">' . esc_html__('Status', 'firephage-security') . '</th>';
         $html .= '<th scope="col">' . esc_html__('Details', 'firephage-security') . '</th>';
+        $html .= '<th scope="col">' . esc_html__('Action', 'firephage-security') . '</th>';
         $html .= '</tr></thead><tbody>';
 
         foreach (array_reverse($findings) as $finding) {
@@ -467,6 +482,13 @@ final class Admin
             $html .= '<td><code>' . esc_html($file) . '</code></td>';
             $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
             $html .= '<td>' . esc_html(implode(' | ', $detailParts)) . '</td>';
+            $html .= '<td>';
+            if ($type === 'malware') {
+                $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete File', 'firephage-security') . '</button>';
+            } else {
+                $html .= '<span class="firephage-empty">' . esc_html__('Protected', 'firephage-security') . '</span>';
+            }
+            $html .= '</td>';
             $html .= '</tr>';
         }
 

@@ -61,6 +61,8 @@
   - latest findings now include a `Clear Findings` action to remove the current findings list from saved scan state
   - latest findings now include a `Delete Suspicious Files` action that only removes files currently flagged as malware findings and refuses WordPress core paths
   - the findings table no longer forces a large static minimum width now that paging keeps row counts manageable
+  - latest findings now include a per-row `Delete File` action for individual malware findings
+  - destructive delete actions in the findings UI are now visually marked with red danger-button styling
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync

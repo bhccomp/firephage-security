@@ -272,6 +272,25 @@
     justify-content: flex-end;
 }
 
+.firephage-button-danger {
+    border-color: #dc2626;
+    background: #dc2626;
+    color: #fff;
+}
+
+.firephage-button-danger:hover,
+.firephage-button-danger:focus {
+    border-color: #b91c1c;
+    background: #b91c1c;
+    color: #fff;
+}
+
+.firephage-button-danger[disabled] {
+    border-color: #fca5a5;
+    background: #fca5a5;
+    color: #fff;
+}
+
 .firephage-finding-table {
     width: 100%;
     border-collapse: collapse;
