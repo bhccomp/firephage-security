@@ -207,6 +207,10 @@
             return `Discovering candidate files: ${state.discovered_files} found so far.`;
         }
 
+        if (state.status === 'stopped') {
+            return `Scan cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
+        }
+
         if (state.status === 'completed') {
             return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} suspicious.`;
         }
@@ -361,12 +365,16 @@
 
         if (startScanButton) {
             startScanButton.disabled = scanIsRunning;
-            startScanButton.textContent = scanIsRunning ? 'Scan Running...' : firephageAdmin.labels.startScan;
+            startScanButton.textContent = scanIsRunning
+                ? 'Scan Running...'
+                : (state.status === 'stopped' ? firephageAdmin.labels.resumeScan : firephageAdmin.labels.startScan);
         }
 
         if (overviewStartScanButton) {
             overviewStartScanButton.disabled = scanIsRunning;
-            overviewStartScanButton.textContent = scanIsRunning ? 'Scan Running...' : firephageAdmin.labels.overviewStartScan;
+            overviewStartScanButton.textContent = scanIsRunning
+                ? 'Scan Running...'
+                : (state.status === 'stopped' ? firephageAdmin.labels.overviewResumeScan : firephageAdmin.labels.overviewStartScan);
         }
 
         if (overviewViewResultsButton) {
@@ -439,21 +447,23 @@
     };
 
     const startBackgroundScan = (button = null) => {
+        const resumingScan = currentScanState.status === 'stopped';
+
         if (button) {
             button.disabled = true;
-            button.textContent = firephageAdmin.labels.scanStarting;
+            button.textContent = resumingScan ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
         }
 
         if (startScanButton) {
             startScanButton.disabled = true;
-            startScanButton.textContent = firephageAdmin.labels.scanStarting;
+            startScanButton.textContent = resumingScan ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
         }
 
         request('firephage_start_scan')
             .done((response) => {
                 if (response.success) {
                     renderScanState(response.data.state);
-                    showToast('Background malware scan started.');
+                    showToast(resumingScan ? 'Background malware scan resumed.' : 'Background malware scan started.');
                 } else {
                     showToast(response.data.message || 'Unable to start the scan.', true);
                 }
@@ -465,12 +475,12 @@
                 if (!scanIsRunning) {
                     if (startScanButton) {
                         startScanButton.disabled = false;
-                        startScanButton.textContent = firephageAdmin.labels.startScan;
+                        startScanButton.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.resumeScan : firephageAdmin.labels.startScan;
                     }
 
                     if (button) {
                         button.disabled = false;
-                        button.textContent = firephageAdmin.labels.overviewStartScan;
+                        button.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.overviewResumeScan : firephageAdmin.labels.overviewStartScan;
                     }
                 }
             });

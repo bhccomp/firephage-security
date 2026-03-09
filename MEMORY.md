@@ -67,7 +67,9 @@
   - destructive delete actions now route through a custom confirmation modal for both single-file and bulk suspicious-file deletion
   - latest findings now support checkbox selection plus a `Delete Selected Files` action for chosen malware findings
   - latest findings now include a per-row `Preview` action that opens a read-only modal with escaped file content for both suspicious and integrity-mismatch entries
-  - the Malware Scan view now includes a `Stop Current Scan` action while background scanning is active
+  - the Malware Scan view now includes a `Cancel Current Scan` action while background scanning is active
+  - cancelled scans now preserve their manifest/state and can be resumed later instead of always restarting from zero
+  - stopped/cancelled scans now show a dedicated progress summary instead of falling through to the generic active-scan message
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection

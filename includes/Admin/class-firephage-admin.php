@@ -97,9 +97,12 @@ final class Admin
                 'nonce' => wp_create_nonce('firephage_admin'),
                 'labels' => [
                     'startScan' => __('Start Background Scan', 'firephage-security'),
+                    'resumeScan' => __('Resume Scan', 'firephage-security'),
                     'overviewStartScan' => __('Scan My Website For Malware', 'firephage-security'),
+                    'overviewResumeScan' => __('Resume Malware Scan', 'firephage-security'),
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
-                    'stopScan' => __('Stop Current Scan', 'firephage-security'),
+                    'scanResuming' => __('Resuming scan...', 'firephage-security'),
+                    'stopScan' => __('Cancel Current Scan', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
                     'deleteSuspiciousFiles' => __('Delete All Suspicious Files', 'firephage-security'),
@@ -175,7 +178,7 @@ final class Admin
         echo '</div>';
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<div class="firephage-inline-actions">';
-        echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html__('Scan My Website For Malware', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Malware Scan', 'firephage-security') : __('Scan My Website For Malware', 'firephage-security')) . '</button>';
         echo '<button type="button" class="button button-secondary firephage-overview-view-results" style="' . esc_attr(($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'display:none;') . '">' . esc_html__('View Results', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
@@ -222,8 +225,8 @@ final class Admin
         echo '<div class="firephage-progress"><div class="firephage-progress-bar" id="firephage-scan-progress-bar" style="width:' . esc_attr((string) $this->scanProgress($scan)) . '%"></div></div>';
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<div class="firephage-inline-actions">';
-        echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html__('Start Background Scan', 'firephage-security') . '</button>';
-        echo '<button type="button" class="button button-secondary firephage-stop-scan" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'style="display:none;"') . '>' . esc_html__('Stop Current Scan', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Scan', 'firephage-security') : __('Start Background Scan', 'firephage-security')) . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-stop-scan" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'style="display:none;"') . '>' . esc_html__('Cancel Current Scan', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card">';
@@ -332,7 +335,7 @@ final class Admin
         }
 
         wp_send_json_success([
-            'message' => __('The malware scan has been stopped.', 'firephage-security'),
+            'message' => __('The malware scan has been cancelled. You can resume it later.', 'firephage-security'),
             'state' => $result,
         ]);
     }
@@ -675,6 +678,19 @@ final class Admin
 
         if ($status === 'discovering') {
             return sprintf(__('Discovering candidate files: %d found so far.', 'firephage-security'), (int) ($scan['discovered_files'] ?? 0));
+        }
+
+        if ($status === 'stopped') {
+            return sprintf(
+                __('Scan cancelled at %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Suspicious: %7$d. Use Resume Scan to continue from the saved position.', 'firephage-security'),
+                (int) ($scan['scanned_files'] ?? 0),
+                (int) ($scan['discovered_files'] ?? 0),
+                (int) ($scan['trusted_files'] ?? 0),
+                (int) ($scan['clean_files'] ?? 0),
+                (int) ($scan['skipped_files'] ?? 0),
+                (int) ($scan['integrity_issues'] ?? 0),
+                (int) ($scan['suspicious_files'] ?? 0)
+            );
         }
 
         if ($status === 'completed') {
