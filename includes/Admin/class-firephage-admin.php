@@ -170,7 +170,10 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->mapStateBadge((string) $scan['status'])) . '" id="firephage-overview-scan-status-badge">' . esc_html(ucfirst((string) $scan['status'])) . '</span>';
         echo '</div>';
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
+        echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html__('Scan My Website For Malware', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-overview-view-results" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'hidden') . '>' . esc_html__('View Results', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';

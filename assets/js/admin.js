@@ -15,6 +15,7 @@
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
+    const overviewViewResultsButton = document.querySelector('.firephage-overview-view-results');
     const confirmModal = document.getElementById('firephage-confirm-modal');
     const confirmModalTitle = document.getElementById('firephage-confirm-modal-title');
     const confirmModalBody = document.getElementById('firephage-confirm-modal-body');
@@ -340,6 +341,10 @@
             overviewStartScanButton.textContent = scanIsRunning ? 'Scan Running...' : firephageAdmin.labels.overviewStartScan;
         }
 
+        if (overviewViewResultsButton) {
+            overviewViewResultsButton.hidden = !scanIsRunning;
+        }
+
         if (state.status === 'discovering' || state.status === 'scanning') {
             schedulePoll();
         } else if (pollTimer) {
@@ -461,6 +466,12 @@
             }
 
             startBackgroundScan(overviewStartScanButton);
+        });
+    }
+
+    if (overviewViewResultsButton) {
+        overviewViewResultsButton.addEventListener('click', () => {
+            setActiveTab('scanner');
         });
     }
 
