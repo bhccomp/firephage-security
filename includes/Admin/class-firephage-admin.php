@@ -40,6 +40,7 @@ final class Admin
         add_action('wp_ajax_firephage_start_scan', [$this, 'handleStartScan']);
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
         add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
+        add_action('wp_ajax_firephage_delete_suspicious_files', [$this, 'handleDeleteSuspiciousFiles']);
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
@@ -95,6 +96,7 @@ final class Admin
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
+                    'deleteSuspiciousFiles' => __('Delete Suspicious Files', 'firephage-security'),
                 ],
             ]
         );
@@ -271,6 +273,21 @@ final class Admin
         ]);
     }
 
+    public function handleDeleteSuspiciousFiles(): void
+    {
+        $this->assertAjaxPermissions();
+        $result = $this->scanner->deleteSuspiciousFiles();
+
+        wp_send_json_success([
+            'message' => sprintf(
+                __('Deleted %1$d suspicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
+                (int) ($result['deleted_files'] ?? 0),
+                (int) ($result['skipped_files'] ?? 0)
+            ),
+            'state' => $result['state'] ?? $this->scanner->getState(),
+        ]);
+    }
+
     public function handleRefreshHealth(): void
     {
         $this->assertAjaxPermissions();
@@ -412,7 +429,10 @@ final class Admin
 
         $html = '<div class="firephage-findings-toolbar">';
         $html .= '<label class="firephage-findings-rows"><span>' . esc_html__('Rows', 'firephage-security') . '</span><select class="firephage-findings-page-size"><option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option></select></label>';
+        $html .= '<div class="firephage-findings-actions">';
+        $html .= '<button type="button" class="button button-secondary firephage-delete-suspicious-files">' . esc_html__('Delete Suspicious Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
+        $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="firephage-finding-table-wrap">';
         $html .= '<table class="firephage-finding-table">';

@@ -59,6 +59,8 @@
   - if a site was previously scanned while infected, clear `firephage_security_scan_baseline` before relying on retest results because the old baseline may already trust those file hashes
   - latest findings now support client-side paging with 10, 25, 50, or 100 rows per page
   - latest findings now include a `Clear Findings` action to remove the current findings list from saved scan state
+  - latest findings now include a `Delete Suspicious Files` action that only removes files currently flagged as malware findings and refuses WordPress core paths
+  - the findings table no longer forces a large static minimum width now that paging keeps row counts manageable
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync

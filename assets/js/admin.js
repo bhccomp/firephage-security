@@ -108,7 +108,10 @@
                     <option value="100" ${findingsPageSize === 100 ? 'selected' : ''}>100</option>
                 </select>
             </label>
-            <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
+            <div class="firephage-findings-actions">
+                <button type="button" class="button button-secondary firephage-delete-suspicious-files">${firephageAdmin.labels.deleteSuspiciousFiles}</button>
+                <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
+            </div>
         </div>
         <div class="firephage-finding-table-wrap">
             <table class="firephage-finding-table">
@@ -397,6 +400,28 @@
                 })
                 .fail((xhr) => {
                     showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to clear findings.', true);
+                })
+                .always(() => {
+                    target.removeAttribute('disabled');
+                });
+            return;
+        }
+
+        if (target.classList.contains('firephage-delete-suspicious-files')) {
+            target.setAttribute('disabled', 'disabled');
+
+            request('firephage_delete_suspicious_files')
+                .done((response) => {
+                    if (response.success) {
+                        findingsPage = 1;
+                        renderScanState(response.data.state);
+                        showToast(response.data.message || 'Suspicious files deleted.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to delete suspicious files.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete suspicious files.', true);
                 })
                 .always(() => {
                     target.removeAttribute('disabled');

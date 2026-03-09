@@ -265,11 +265,18 @@
     min-width: 74px;
 }
 
+.firephage-findings-actions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
 .firephage-finding-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 720px;
     background: #f8fafc;
+    table-layout: fixed;
 }
 
 .firephage-finding-table thead th {
