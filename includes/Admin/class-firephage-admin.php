@@ -62,6 +62,7 @@ final class Admin
         add_action('wp_ajax_firephage_save_notification_settings', [$this, 'handleSaveNotificationSettings']);
         add_action('wp_ajax_firephage_register_free_token', [$this, 'handleRegisterFreeToken']);
         add_action('wp_ajax_firephage_decline_free_token', [$this, 'handleDeclineFreeToken']);
+        add_action('wp_ajax_firephage_dismiss_free_token_prompt', [$this, 'handleDismissFreeTokenPrompt']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
         add_action('wp_ajax_firephage_fetch_firewall_summary', [$this, 'handleFetchFirewallSummary']);
@@ -151,6 +152,7 @@ final class Admin
                     'registerFreeToken' => __('Email My Free Token', 'firephage-security'),
                     'registeringFreeToken' => __('Sending token...', 'firephage-security'),
                     'declineFreeToken' => __('No Thanks', 'firephage-security'),
+                    'dismissFreeToken' => __('Do not bother me again', 'firephage-security'),
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
                     'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
                     'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
@@ -599,12 +601,13 @@ final class Admin
         echo '<h3 id="firephage-free-token-title">' . esc_html__('Free FirePhage Signature Token', 'firephage-security') . '</h3>';
         echo '<button type="button" class="button-link firephage-modal-close" data-free-token-close="1" aria-label="' . esc_attr__('Close free token dialog', 'firephage-security') . '">&times;</button>';
         echo '</div>';
-        echo '<p>' . esc_html__('Enter the email address that should receive the free FirePhage token for signature updates. This keeps malware-signature delivery opt-in and separate from paid dashboard features.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Enter the email address to receive the free FirePhage token for signature updates. This keeps malware-signature delivery opt-in and separate from paid dashboard features. If you decline this, you can still use the Malware Scanner, but with limited malware signatures and without receiving signature updates created from the newest malware samples our team collects 24/7.', 'firephage-security') . '</p>';
         echo '<form id="firephage-free-token-form">';
         echo '<label class="firephage-field"><span>' . esc_html__('Email address', 'firephage-security') . '</span><input type="email" name="email" value="' . esc_attr(($settings['free_signature_token_email'] ?? '') !== '' ? $settings['free_signature_token_email'] : get_option('admin_email', '')) . '" required /></label>';
         echo '<label class="firephage-toggle"><input type="checkbox" name="marketing_opt_in" value="1" ' . checked($settings['free_signature_token_marketing_opt_in'] ?? '0', '1', false) . ' /><span>' . esc_html__('I want to receive occasional FirePhage promo codes, Pro offers, and product updates', 'firephage-security') . '</span></label>';
         echo '<p class="firephage-note">' . esc_html__('This marketing checkbox is optional and not required for the free token. If you close this modal without choosing, it will appear again next time you open FirePhage Security.', 'firephage-security') . '</p>';
         echo '<div class="firephage-modal-actions">';
+        echo '<button type="button" class="button button-secondary firephage-dismiss-free-token">' . esc_html__('Do not bother me again', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-decline-free-token">' . esc_html__('No Thanks', 'firephage-security') . '</button>';
         echo '<button type="submit" class="button button-primary firephage-register-free-token">' . esc_html__('Email My Free Token', 'firephage-security') . '</button>';
         echo '</div>';
@@ -817,6 +820,20 @@ final class Admin
         ]);
     }
 
+    public function handleDismissFreeTokenPrompt(): void
+    {
+        $this->assertAjaxPermissions();
+
+        $this->settings->update([
+            'free_signature_token_status' => 'dismissed',
+        ]);
+
+        wp_send_json_success([
+            'message' => __('The free-token prompt will stay hidden unless you open it again manually.', 'firephage-security'),
+            'settings' => $this->settings->all(),
+        ]);
+    }
+
     public function handleSaveNotificationSettings(): void
     {
         $this->assertAjaxPermissions();
@@ -991,6 +1008,7 @@ final class Admin
         return match ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
             'registered' => __('Active', 'firephage-security'),
             'declined' => __('Declined', 'firephage-security'),
+            'dismissed' => __('Hidden', 'firephage-security'),
             default => __('Pending', 'firephage-security'),
         };
     }
@@ -1003,6 +1021,7 @@ final class Admin
         return match ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
             'registered' => 'good',
             'declined' => 'neutral',
+            'dismissed' => 'neutral',
             default => 'warning',
         };
     }
@@ -1021,6 +1040,10 @@ final class Admin
 
         if ($status === 'declined') {
             return __('Remote FirePhage signature updates are turned off. You can request a free token later at any time.', 'firephage-security');
+        }
+
+        if ($status === 'dismissed') {
+            return __('The free-token prompt is hidden. You can still request a free token later from the plugin whenever you want fresher FirePhage signature updates.', 'firephage-security');
         }
 
         return __('Choose whether you want a free FirePhage token for fresher malware-signature updates. Until you confirm yes or no, the plugin will ask again when you open this screen.', 'firephage-security');

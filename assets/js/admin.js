@@ -21,6 +21,7 @@
     const freeTokenForm = document.getElementById('firephage-free-token-form');
     const openFreeTokenButtons = Array.from(document.querySelectorAll('.firephage-open-free-token-modal'));
     const declineFreeTokenButton = document.querySelector('.firephage-decline-free-token');
+    const dismissFreeTokenButton = document.querySelector('.firephage-dismiss-free-token');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
@@ -306,6 +307,10 @@
             badgeText = 'Declined';
             badgeTone = 'neutral';
             summaryText = 'Remote FirePhage signature updates are turned off. You can request a free token later at any time.';
+        } else if (freeTokenState.status === 'dismissed') {
+            badgeText = 'Hidden';
+            badgeTone = 'neutral';
+            summaryText = 'The free-token prompt is hidden. You can still request a free token later from the plugin whenever you want fresher FirePhage signature updates.';
         }
 
         setBadge(freeTokenStatusBadge, badgeText, badgeTone);
@@ -1229,6 +1234,29 @@
                 })
                 .always(() => {
                     declineFreeTokenButton.disabled = false;
+                });
+        });
+    }
+
+    if (dismissFreeTokenButton) {
+        dismissFreeTokenButton.addEventListener('click', () => {
+            dismissFreeTokenButton.disabled = true;
+
+            request('firephage_dismiss_free_token_prompt')
+                .done((response) => {
+                    if (response.success) {
+                        renderFreeTokenSummary(response.data.settings || null);
+                        showToast(response.data.message || 'Prompt hidden.');
+                        closeFreeTokenModal();
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to save your choice.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save your choice.', true);
+                })
+                .always(() => {
+                    dismissFreeTokenButton.disabled = false;
                 });
         });
     }
