@@ -422,6 +422,22 @@
     margin-bottom: 16px;
 }
 
+.firephage-toggle {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.firephage-toggle input[type="checkbox"] {
+    margin: 2px 0 0;
+    flex: 0 0 auto;
+}
+
+.firephage-toggle span {
+    display: inline;
+    line-height: 1.45;
+}
+
 .firephage-field input[type="url"],
 .firephage-field input[type="password"],
 .firephage-field input[type="email"],
@@ -559,6 +575,10 @@
 .firephage-pro-field {
     display: grid;
     gap: 8px;
+}
+
+.firephage-pro-field.firephage-toggle {
+    display: inline-flex;
 }
 
 .firephage-pro-field span {

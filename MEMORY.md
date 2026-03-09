@@ -101,6 +101,7 @@
     - immediate WordPress core edit alerts when completed scans find core checksum mismatches
   - notification emails use a branded FirePhage HTML layout and include Pro upsell links for WAF, CDN, and Cache services
   - the `Notifications` tab now also shows disabled Pro-only channels for `Webhook`, `Slack`, and `Phone` with visible Pro labeling tied to FirePhage WAF, CDN, and Cache offerings
+  - checkbox labels across the plugin admin are expected to stay inline with their checkboxes, including the disabled Pro checkboxes shown on the `Performance` tab
   - weekly report scheduling is controlled by plugin settings and notification alert emails are deduplicated per scan ID
   - saving scanner settings now updates the scheduled malware-scan cron immediately
   - malware signatures now use a hybrid model:

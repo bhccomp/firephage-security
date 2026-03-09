@@ -521,8 +521,8 @@ final class Admin
         echo '<p class="firephage-note" id="firephage-performance-connection-note">' . esc_html__('Connect this site to FirePhage to load live CDN and cache data into this tab.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-fieldset">';
         echo '<label class="firephage-pro-field"><span>' . esc_html__('Zone hostname', 'firephage-security') . '</span><input type="text" id="firephage-performance-hostname" value="cdn.example.com" disabled /></label>';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Smart image optimization', 'firephage-security') . '</span><input type="checkbox" id="firephage-performance-image-optimization" checked disabled /></label>';
-        echo '<label class="firephage-pro-field"><span>' . esc_html__('Edge compression', 'firephage-security') . '</span><input type="checkbox" id="firephage-performance-edge-compression" checked disabled /></label>';
+        echo '<label class="firephage-pro-field firephage-toggle"><input type="checkbox" id="firephage-performance-image-optimization" checked disabled /><span>' . esc_html__('Smart image optimization', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-pro-field firephage-toggle"><input type="checkbox" id="firephage-performance-edge-compression" checked disabled /><span>' . esc_html__('Edge compression', 'firephage-security') . '</span></label>';
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card firephage-pro-card">';
