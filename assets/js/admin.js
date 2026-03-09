@@ -287,6 +287,7 @@
         const progressBar = document.getElementById('firephage-scan-progress-bar');
         const progressLabelNode = document.getElementById('firephage-scan-progress-label');
         const findings = document.getElementById('firephage-scan-findings');
+        const suspiciousStat = document.querySelector('.firephage-suspicious-files-stat .firephage-stat-value');
         const progressTrack = progressBar ? progressBar.parentElement : null;
         const progress = state.discovered_files > 0 ? Math.max(5, Math.min(100, Math.floor((state.scanned_files / state.discovered_files) * 100))) : (state.status === 'completed' ? 100 : 5);
         scanIsRunning = state.status === 'discovering' || state.status === 'scanning';
@@ -311,6 +312,10 @@
 
         if (findings) {
             findings.innerHTML = findingsMarkup(state.findings || []);
+        }
+
+        if (suspiciousStat) {
+            suspiciousStat.textContent = `${state.suspicious_files || 0}`;
         }
 
         if (startScanButton) {

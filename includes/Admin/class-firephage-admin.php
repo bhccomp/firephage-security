@@ -139,7 +139,7 @@ final class Admin
         echo '<div class="firephage-stat-grid">';
         echo $this->renderStatCard(__('Checks Passing', 'firephage-security'), (string) ($health['summary']['good'] ?? 0), __('Local hardening checks currently passing.', 'firephage-security'));
         echo $this->renderStatCard(__('Updates Pending', 'firephage-security'), (string) (($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)), __('Core, plugin, and theme updates waiting.', 'firephage-security'));
-        echo $this->renderStatCard(__('Suspicious Files', 'firephage-security'), (string) ($scan['suspicious_files'] ?? 0), __('Latest malware scan findings.', 'firephage-security'));
+        echo $this->renderStatCard(__('Suspicious Files', 'firephage-security'), (string) ($scan['suspicious_files'] ?? 0), __('Latest malware scan findings.', 'firephage-security'), 'firephage-suspicious-files-stat');
         echo $this->renderStatCard(__('Dashboard Status', 'firephage-security'), ucfirst((string) ($settings['connection_status'] ?? 'disconnected')), __('Whether local reports can be synced to FirePhage.', 'firephage-security'));
         echo '</div>';
 
@@ -430,13 +430,14 @@ final class Admin
         ];
     }
 
-    private function renderStatCard(string $label, string $value, string $description): string
+    private function renderStatCard(string $label, string $value, string $description, string $extraClass = ''): string
     {
         return sprintf(
-            '<div class="firephage-stat-card"><span class="firephage-stat-label">%1$s</span><strong class="firephage-stat-value">%2$s</strong><span class="firephage-stat-description">%3$s</span></div>',
+            '<div class="firephage-stat-card %4$s"><span class="firephage-stat-label">%1$s</span><strong class="firephage-stat-value">%2$s</strong><span class="firephage-stat-description">%3$s</span></div>',
             esc_html($label),
             esc_html($value),
-            esc_html($description)
+            esc_html($description),
+            esc_attr($extraClass)
         );
     }
 
