@@ -212,7 +212,7 @@ final class Admin
         echo '<div id="firephage-admin-app" data-scan-status="' . esc_attr(wp_json_encode($scan)) . '">';
         echo '<section class="firephage-tab-panel" data-panel="overview">';
         echo '<div class="firephage-panel-header">';
-        echo '<div><h2>' . esc_html__('Overview', 'firephage-security') . '</h2><p>' . esc_html__('A quick view of local health, malware scan state, update exposure, and FirePhage sync status.', 'firephage-security') . '</p></div>';
+        echo '<div><p>' . esc_html__('A quick view of local health, malware scan state, update exposure, and FirePhage sync status.', 'firephage-security') . '</p></div>';
         echo '<button type="button" class="button button-secondary firephage-refresh-health">' . esc_html__('Refresh Checks', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<div class="firephage-grid firephage-grid--2">';
