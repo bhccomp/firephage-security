@@ -4,6 +4,7 @@ namespace FirePhage\Security\Admin;
 
 use FirePhage\Security\FirePhage\Client;
 use FirePhage\Security\Health\HealthChecker;
+use FirePhage\Security\Notifications;
 use FirePhage\Security\Reports\ReportBuilder;
 use FirePhage\Security\Scanner\MalwareScanner;
 use FirePhage\Security\Security\BruteForceProtection;
@@ -27,13 +28,16 @@ final class Admin
 
     private BruteForceProtection $bruteForceProtection;
 
+    private Notifications $notifications;
+
     public function __construct(
         Settings $settings,
         MalwareScanner $scanner,
         HealthChecker $healthChecker,
         ReportBuilder $reportBuilder,
         Client $client,
-        BruteForceProtection $bruteForceProtection
+        BruteForceProtection $bruteForceProtection,
+        Notifications $notifications
     ) {
         $this->settings = $settings;
         $this->scanner = $scanner;
@@ -41,6 +45,7 @@ final class Admin
         $this->reportBuilder = $reportBuilder;
         $this->client = $client;
         $this->bruteForceProtection = $bruteForceProtection;
+        $this->notifications = $notifications;
 
         add_action('wp_ajax_firephage_start_scan', [$this, 'handleStartScan']);
         add_action('wp_ajax_firephage_stop_scan', [$this, 'handleStopScan']);
@@ -54,6 +59,7 @@ final class Admin
         add_action('wp_ajax_firephage_save_bruteforce_settings', [$this, 'handleSaveBruteForceSettings']);
         add_action('wp_ajax_firephage_clear_bruteforce_lockouts', [$this, 'handleClearBruteForceLockouts']);
         add_action('wp_ajax_firephage_save_scanner_settings', [$this, 'handleSaveScannerSettings']);
+        add_action('wp_ajax_firephage_save_notification_settings', [$this, 'handleSaveNotificationSettings']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
         add_action('wp_ajax_firephage_fetch_firewall_summary', [$this, 'handleFetchFirewallSummary']);
@@ -136,6 +142,8 @@ final class Admin
                     'savingProtectionSettings' => __('Saving settings...', 'firephage-security'),
                     'saveScannerSettings' => __('Save Scanner Settings', 'firephage-security'),
                     'savingScannerSettings' => __('Saving scanner settings...', 'firephage-security'),
+                    'saveNotificationSettings' => __('Save Notification Settings', 'firephage-security'),
+                    'savingNotificationSettings' => __('Saving notification settings...', 'firephage-security'),
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
                     'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
                     'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
@@ -152,6 +160,7 @@ final class Admin
         $health = $report['health'];
         $updates = $health['updates'];
         $bruteForce = $this->bruteForceProtection->getSummary();
+        $notificationState = $this->notifications->state();
 
         echo '<div class="wrap firephage-admin">';
         echo '<div class="firephage-shell">';
@@ -317,6 +326,48 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('History', 'firephage-security') . '</span>';
         echo '</div>';
         echo '<div id="firephage-bruteforce-recent-events">' . $this->renderBruteForceRows($bruteForce['recent_events'] ?? [], false) . '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</section>';
+
+        echo '<section class="firephage-tab-panel" data-panel="notifications">';
+        echo '<div class="firephage-grid firephage-grid--2">';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h2>' . esc_html__('Notifications', 'firephage-security') . '</h2>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr(($settings['notifications_enabled'] ?? '1') === '1' ? 'good' : 'neutral') . '">' . esc_html(($settings['notifications_enabled'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('Send branded FirePhage Security emails to your preferred admin inbox, including weekly summaries and immediate alerts for malware findings or unexpected WordPress core edits.', 'firephage-security') . '</p>';
+        echo '<form id="firephage-notification-settings-form">';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="notifications_enabled" value="1" ' . checked($settings['notifications_enabled'] ?? '1', '1', false) . ' /><span>' . esc_html__('Enable email notifications', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Notification email', 'firephage-security') . '</span><input type="email" name="notification_email" value="' . esc_attr($settings['notification_email'] !== '' ? $settings['notification_email'] : get_option('admin_email', '')) . '" /></label>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="notifications_weekly_report" value="1" ' . checked($settings['notifications_weekly_report'] ?? '1', '1', false) . ' /><span>' . esc_html__('Send weekly security report', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="notifications_alert_malware" value="1" ' . checked($settings['notifications_alert_malware'] ?? '1', '1', false) . ' /><span>' . esc_html__('Alert when malware is detected', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="notifications_alert_core_edits" value="1" ' . checked($settings['notifications_alert_core_edits'] ?? '1', '1', false) . ' /><span>' . esc_html__('Alert when WordPress core files are edited', 'firephage-security') . '</span></label>';
+        echo '<div class="firephage-inline-actions">';
+        echo '<button type="submit" class="button button-primary firephage-save-notification-settings">' . esc_html__('Save Notification Settings', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</form>';
+        echo '<p class="firephage-note">' . esc_html__('Weekly reports summarize malware scans, brute-force lockouts, and outdated core, plugin, or theme versions. Immediate alerts are deduplicated per scan so the same result does not spam the inbox repeatedly.', 'firephage-security') . '</p>';
+        echo '</div>';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Notification Snapshot', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Email', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<div class="firephage-pro-metric-grid">';
+        echo $this->renderLockedMetricCard(__('Recipient', 'firephage-security'), 'firephage-notification-recipient');
+        echo $this->renderLockedMetricCard(__('Weekly Report', 'firephage-security'), 'firephage-notification-weekly');
+        echo $this->renderLockedMetricCard(__('Malware Alerts', 'firephage-security'), 'firephage-notification-malware');
+        echo '</div>';
+        echo '<p class="firephage-note"><strong>' . esc_html__('Last weekly report:', 'firephage-security') . '</strong> <span id="firephage-notification-last-weekly">' . esc_html($notificationState['last_weekly_report_at'] !== '' ? $notificationState['last_weekly_report_at'] : __('Not sent yet', 'firephage-security')) . '</span></p>';
+        echo '<div class="firephage-pro-table">';
+        echo '<div class="firephage-pro-table__row firephage-pro-table__row--head"><span>' . esc_html__('Alert Type', 'firephage-security') . '</span><span>' . esc_html__('Latest Trigger', 'firephage-security') . '</span><span>' . esc_html__('State', 'firephage-security') . '</span></div>';
+        echo '<div id="firephage-notification-alert-summary">';
+        echo '<div class="firephage-pro-table__row"><span>' . esc_html__('Malware', 'firephage-security') . '</span><span>' . esc_html($notificationState['last_malware_alert_scan_id'] !== '' ? $notificationState['last_malware_alert_scan_id'] : __('No alert yet', 'firephage-security')) . '</span><span>' . esc_html(($settings['notifications_alert_malware'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span></div>';
+        echo '<div class="firephage-pro-table__row"><span>' . esc_html__('Core edits', 'firephage-security') . '</span><span>' . esc_html($notificationState['last_core_alert_scan_id'] !== '' ? $notificationState['last_core_alert_scan_id'] : __('No alert yet', 'firephage-security')) . '</span><span>' . esc_html(($settings['notifications_alert_core_edits'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span></div>';
+        echo '</div>';
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
@@ -668,6 +719,28 @@ final class Admin
         ]);
     }
 
+    public function handleSaveNotificationSettings(): void
+    {
+        $this->assertAjaxPermissions();
+        $current = $this->settings->all();
+        $settings = isset($_POST['settings']) && is_array($_POST['settings']) ? wp_unslash($_POST['settings']) : [];
+
+        $this->settings->update([
+            'notifications_enabled' => ! empty($settings['notifications_enabled']) ? '1' : '0',
+            'notification_email' => sanitize_email((string) ($settings['notification_email'] ?? $current['notification_email'])),
+            'notifications_weekly_report' => ! empty($settings['notifications_weekly_report']) ? '1' : '0',
+            'notifications_alert_malware' => ! empty($settings['notifications_alert_malware']) ? '1' : '0',
+            'notifications_alert_core_edits' => ! empty($settings['notifications_alert_core_edits']) ? '1' : '0',
+        ]);
+        do_action('firephage_security_settings_changed');
+
+        wp_send_json_success([
+            'message' => __('Notification settings were saved.', 'firephage-security'),
+            'settings' => $this->settings->all(),
+            'state' => $this->notifications->state(),
+        ]);
+    }
+
     public function handleConnectDashboard(): void
     {
         $this->assertAjaxPermissions();
@@ -786,6 +859,7 @@ final class Admin
         return [
             'overview' => ['label' => __('Overview', 'firephage-security')],
             'scanner' => ['label' => __('Malware Scanner', 'firephage-security')],
+            'notifications' => ['label' => __('Notifications', 'firephage-security')],
             'bruteforce' => ['label' => __('Brute Force Protection', 'firephage-security')],
             'updates' => ['label' => __('Updates', 'firephage-security')],
             'firewall' => ['label' => __('Firewall', 'firephage-security'), 'pro' => true],

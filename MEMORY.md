@@ -93,6 +93,13 @@
   - the plugin hero/banner description has been updated to reflect malware scanning, brute-force protection, health checks, update visibility, and optional FirePhage connectivity
   - the Overview page no longer repeats the separate `WordPress Core Checksums` card because checksum verification already lives within the malware-scanner workflow
   - the main scanner tab label is now `Malware Scanner`
+  - added a dedicated `Notifications` tab for admin email settings
+  - local notifications now support:
+    - weekly security summary emails with scanner, brute-force, and update reminder sections
+    - immediate malware alert emails after a completed scan finds suspicious files
+    - immediate WordPress core edit alerts when completed scans find core checksum mismatches
+  - notification emails use a branded FirePhage HTML layout and include Pro upsell links for WAF, CDN, and Cache services
+  - weekly report scheduling is controlled by plugin settings and notification alert emails are deduplicated per scan ID
   - saving scanner settings now updates the scheduled malware-scan cron immediately
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page

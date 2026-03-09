@@ -5,6 +5,7 @@ namespace FirePhage\Security;
 use FirePhage\Security\Admin\Admin;
 use FirePhage\Security\FirePhage\Client;
 use FirePhage\Security\Health\HealthChecker;
+use FirePhage\Security\Notifications;
 use FirePhage\Security\Reports\ReportBuilder;
 use FirePhage\Security\Scanner\MalwareScanner;
 use FirePhage\Security\Security\BruteForceProtection;
@@ -16,6 +17,7 @@ if (! defined('ABSPATH')) {
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Health/class-firephage-health-checker.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Scanner/class-firephage-malware-scanner.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Security/class-firephage-brute-force-protection.php';
+require_once FIREPHAGE_SECURITY_PATH . 'includes/class-firephage-notifications.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Reports/class-firephage-report-builder.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/FirePhage/class-firephage-client.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/class-firephage-settings.php';
@@ -25,6 +27,7 @@ final class Plugin
 {
     private const REPORT_CRON_HOOK = 'firephage_security_sync_report';
     private const AUTO_SCAN_CRON_HOOK = 'firephage_security_auto_scan';
+    private const WEEKLY_NOTIFICATION_CRON_HOOK = 'firephage_security_weekly_notifications';
 
     private static ?self $instance = null;
 
@@ -35,6 +38,8 @@ final class Plugin
     private HealthChecker $healthChecker;
 
     private BruteForceProtection $bruteForceProtection;
+
+    private Notifications $notifications;
 
     private ReportBuilder $reportBuilder;
 
@@ -58,8 +63,9 @@ final class Plugin
         $this->healthChecker = new HealthChecker();
         $this->bruteForceProtection = new BruteForceProtection($this->settings);
         $this->reportBuilder = new ReportBuilder($this->healthChecker, $this->scanner, $this->bruteForceProtection);
+        $this->notifications = new Notifications($this->settings, $this->reportBuilder);
         $this->client = new Client();
-        $this->admin = new Admin($this->settings, $this->scanner, $this->healthChecker, $this->reportBuilder, $this->client, $this->bruteForceProtection);
+        $this->admin = new Admin($this->settings, $this->scanner, $this->healthChecker, $this->reportBuilder, $this->client, $this->bruteForceProtection, $this->notifications);
     }
 
     public function boot(): void
@@ -74,6 +80,8 @@ final class Plugin
         add_action('admin_enqueue_scripts', [$this->admin, 'enqueueAssets']);
         add_action(self::REPORT_CRON_HOOK, [$this, 'sendScheduledReport']);
         add_action(self::AUTO_SCAN_CRON_HOOK, [$this, 'runScheduledMalwareScan']);
+        add_action(self::WEEKLY_NOTIFICATION_CRON_HOOK, [$this->notifications, 'sendWeeklySummary']);
+        add_action('firephage_security_scan_completed', [$this->notifications, 'handleScanCompleted']);
 
         $this->scanner->registerHooks();
         $this->bruteForceProtection->registerHooks();
@@ -92,6 +100,7 @@ final class Plugin
         wp_clear_scheduled_hook(MalwareScanner::MONITOR_CRON_HOOK);
         wp_clear_scheduled_hook(self::REPORT_CRON_HOOK);
         wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
+        wp_clear_scheduled_hook(self::WEEKLY_NOTIFICATION_CRON_HOOK);
     }
 
     public function loadTextdomain(): void
@@ -105,6 +114,7 @@ final class Plugin
         $shouldSchedule = $settings['auto_sync_reports'] === '1' && $settings['site_token'] !== '';
         $scanSchedule = $this->malwareScanSchedule((string) ($settings['malware_auto_scan_interval'] ?? 'daily'));
         $shouldScheduleScans = ($settings['malware_auto_scans_enabled'] ?? '0') === '1';
+        $shouldScheduleNotifications = ($settings['notifications_enabled'] ?? '1') === '1' && ($settings['notifications_weekly_report'] ?? '1') === '1';
 
         if ($shouldSchedule && ! wp_next_scheduled(self::REPORT_CRON_HOOK)) {
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'hourly', self::REPORT_CRON_HOOK);
@@ -128,6 +138,14 @@ final class Plugin
         if (! $shouldScheduleScans) {
             wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
         }
+
+        if ($shouldScheduleNotifications && ! wp_next_scheduled(self::WEEKLY_NOTIFICATION_CRON_HOOK)) {
+            wp_schedule_event(time() + HOUR_IN_SECONDS, 'weekly', self::WEEKLY_NOTIFICATION_CRON_HOOK);
+        }
+
+        if (! $shouldScheduleNotifications) {
+            wp_clear_scheduled_hook(self::WEEKLY_NOTIFICATION_CRON_HOOK);
+        }
     }
 
     /**
@@ -143,6 +161,10 @@ final class Plugin
         $schedules['firephage_four_times_daily'] = [
             'interval' => 6 * HOUR_IN_SECONDS,
             'display' => __('FirePhage Four Times Daily', 'firephage-security'),
+        ];
+        $schedules['weekly'] = $schedules['weekly'] ?? [
+            'interval' => WEEK_IN_SECONDS,
+            'display' => __('Once Weekly', 'firephage-security'),
         ];
 
         return $schedules;

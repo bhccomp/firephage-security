@@ -399,6 +399,7 @@
 
 .firephage-field input[type="url"],
 .firephage-field input[type="password"],
+.firephage-field input[type="email"],
 .firephage-field input[type="number"],
 .firephage-field select,
 .firephage-field textarea {

@@ -34,6 +34,11 @@ final class Settings
             'malware_auto_scans_enabled' => '0',
             'malware_auto_scan_interval' => 'daily',
             'malware_scan_exclusions' => '',
+            'notifications_enabled' => '1',
+            'notification_email' => '',
+            'notifications_weekly_report' => '1',
+            'notifications_alert_malware' => '1',
+            'notifications_alert_core_edits' => '1',
         ];
 
         $value = get_option(self::OPTION_KEY, []);
@@ -80,6 +85,11 @@ final class Settings
                 ? (string) ($input['malware_auto_scan_interval'] ?? $settings['malware_auto_scan_interval'])
                 : 'daily',
             'malware_scan_exclusions' => sanitize_textarea_field((string) ($input['malware_scan_exclusions'] ?? $settings['malware_scan_exclusions'])),
+            'notifications_enabled' => ! empty($input['notifications_enabled']) ? '1' : '0',
+            'notification_email' => sanitize_email((string) ($input['notification_email'] ?? $settings['notification_email'])),
+            'notifications_weekly_report' => ! empty($input['notifications_weekly_report']) ? '1' : '0',
+            'notifications_alert_malware' => ! empty($input['notifications_alert_malware']) ? '1' : '0',
+            'notifications_alert_core_edits' => ! empty($input['notifications_alert_core_edits']) ? '1' : '0',
         ];
     }
 

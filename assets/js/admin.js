@@ -15,6 +15,7 @@
     const bruteForceForm = document.getElementById('firephage-bruteforce-form');
     const clearBruteForceLockoutsButton = document.querySelector('.firephage-clear-bruteforce-lockouts');
     const scannerSettingsForm = document.getElementById('firephage-scanner-settings-form');
+    const notificationSettingsForm = document.getElementById('firephage-notification-settings-form');
     const openScannerSettingsButton = document.querySelector('.firephage-open-scanner-settings');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
@@ -62,6 +63,11 @@
     const bruteForceActiveBadge = document.getElementById('firephage-bruteforce-active-lockouts-badge');
     const bruteForceActiveLockouts = document.getElementById('firephage-bruteforce-active-lockouts');
     const bruteForceRecentEvents = document.getElementById('firephage-bruteforce-recent-events');
+    const notificationRecipient = document.getElementById('firephage-notification-recipient');
+    const notificationWeekly = document.getElementById('firephage-notification-weekly');
+    const notificationMalware = document.getElementById('firephage-notification-malware');
+    const notificationLastWeekly = document.getElementById('firephage-notification-last-weekly');
+    const notificationAlertSummary = document.getElementById('firephage-notification-alert-summary');
     let pollTimer = null;
     let scanIsRunning = false;
     let currentScanState = {};
@@ -410,6 +416,35 @@
 
         if (bruteForceRecentEvents && Array.isArray(summary.recent_events)) {
             bruteForceRecentEvents.innerHTML = bruteForceRowsMarkup(summary.recent_events || [], false);
+        }
+    };
+
+    const renderNotificationSummary = (settings, state = null) => {
+        if (!settings) {
+            return;
+        }
+
+        if (notificationRecipient) {
+            notificationRecipient.textContent = settings.notification_email || 'Admin email';
+        }
+
+        if (notificationWeekly) {
+            notificationWeekly.textContent = settings.notifications_weekly_report === '1' ? 'On' : 'Off';
+        }
+
+        if (notificationMalware) {
+            notificationMalware.textContent = settings.notifications_alert_malware === '1' ? 'On' : 'Off';
+        }
+
+        if (notificationLastWeekly && state) {
+            notificationLastWeekly.textContent = state.last_weekly_report_at || 'Not sent yet';
+        }
+
+        if (notificationAlertSummary && state) {
+            notificationAlertSummary.innerHTML = `
+                <div class="firephage-pro-table__row"><span>Malware</span><span>${state.last_malware_alert_scan_id || 'No alert yet'}</span><span>${settings.notifications_alert_malware === '1' ? 'Enabled' : 'Disabled'}</span></div>
+                <div class="firephage-pro-table__row"><span>Core edits</span><span>${state.last_core_alert_scan_id || 'No alert yet'}</span><span>${settings.notifications_alert_core_edits === '1' ? 'Enabled' : 'Disabled'}</span></div>
+            `;
         }
     };
 
@@ -1002,6 +1037,49 @@
         });
     }
 
+    if (notificationSettingsForm) {
+        notificationSettingsForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const submitButton = notificationSettingsForm.querySelector('.firephage-save-notification-settings');
+            const formData = new window.FormData(notificationSettingsForm);
+            const settings = {};
+            formData.forEach((value, key) => {
+                settings[key] = value;
+            });
+
+            ['notifications_enabled', 'notifications_weekly_report', 'notifications_alert_malware', 'notifications_alert_core_edits'].forEach((key) => {
+                if (!Object.prototype.hasOwnProperty.call(settings, key)) {
+                    settings[key] = '';
+                }
+            });
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = firephageAdmin.labels.savingNotificationSettings;
+            }
+
+            request('firephage_save_notification_settings', { settings })
+                .done((response) => {
+                    if (response.success) {
+                        renderNotificationSummary(response.data.settings, response.data.state);
+                        showToast(response.data.message || 'Notification settings saved.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to save notification settings.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save notification settings.', true);
+                })
+                .always(() => {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = firephageAdmin.labels.saveNotificationSettings;
+                    }
+                });
+        });
+    }
+
     if (openScannerSettingsButton) {
         openScannerSettingsButton.addEventListener('click', () => {
             openScannerSettingsModal();
@@ -1240,6 +1318,15 @@
             active_lockouts_count: bruteForceActiveBadge ? parseInt((bruteForceActiveBadge.textContent || '0').replace(/\D+/g, ''), 10) || 0 : 0,
             status: bruteForceStatusBadge ? bruteForceStatusBadge.className.replace('firephage-badge firephage-badge--', '') : 'neutral',
             summary: bruteForceSummaryText.textContent || '',
+        });
+    }
+
+    if (notificationSettingsForm) {
+        renderNotificationSummary({
+            notification_email: notificationSettingsForm.querySelector('input[name="notification_email"]')?.value || '',
+            notifications_weekly_report: notificationSettingsForm.querySelector('input[name="notifications_weekly_report"]')?.checked ? '1' : '0',
+            notifications_alert_malware: notificationSettingsForm.querySelector('input[name="notifications_alert_malware"]')?.checked ? '1' : '0',
+            notifications_alert_core_edits: notificationSettingsForm.querySelector('input[name="notifications_alert_core_edits"]')?.checked ? '1' : '0',
         });
     }
 }(jQuery));
