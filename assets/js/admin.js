@@ -128,7 +128,7 @@
                         const details = [];
 
                         if (finding.source) {
-                            details.push(`Source: ${String(finding.source).replaceAll('_', ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`);
+                            details.push(`Source: ${String(finding.source).replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`);
                         }
 
                         if (finding.confidence) {
