@@ -27,6 +27,7 @@ final class Settings
             'auto_sync_reports' => '1',
             'use_firephage_checksum_cache' => '1',
             'free_signature_token' => '',
+            'free_signature_status_token' => '',
             'free_signature_token_email' => '',
             'free_signature_token_status' => 'pending',
             'free_signature_token_last_requested_at' => '',
@@ -82,8 +83,9 @@ final class Settings
             'auto_sync_reports' => ! empty($input['auto_sync_reports']) ? '1' : '0',
             'use_firephage_checksum_cache' => ! empty($input['use_firephage_checksum_cache']) ? '1' : '0',
             'free_signature_token' => sanitize_text_field((string) ($input['free_signature_token'] ?? $settings['free_signature_token'])),
+            'free_signature_status_token' => sanitize_text_field((string) ($input['free_signature_status_token'] ?? $settings['free_signature_status_token'])),
             'free_signature_token_email' => sanitize_email((string) ($input['free_signature_token_email'] ?? $settings['free_signature_token_email'])),
-            'free_signature_token_status' => in_array((string) ($input['free_signature_token_status'] ?? $settings['free_signature_token_status']), ['pending', 'registered', 'declined', 'dismissed'], true)
+            'free_signature_token_status' => in_array((string) ($input['free_signature_token_status'] ?? $settings['free_signature_token_status']), ['pending', 'awaiting_verification', 'registered', 'declined', 'dismissed'], true)
                 ? (string) ($input['free_signature_token_status'] ?? $settings['free_signature_token_status'])
                 : 'pending',
             'free_signature_token_last_requested_at' => sanitize_text_field((string) ($input['free_signature_token_last_requested_at'] ?? $settings['free_signature_token_last_requested_at'])),

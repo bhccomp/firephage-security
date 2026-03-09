@@ -61,6 +61,7 @@ final class Admin
         add_action('wp_ajax_firephage_save_scanner_settings', [$this, 'handleSaveScannerSettings']);
         add_action('wp_ajax_firephage_save_notification_settings', [$this, 'handleSaveNotificationSettings']);
         add_action('wp_ajax_firephage_register_free_token', [$this, 'handleRegisterFreeToken']);
+        add_action('wp_ajax_firephage_check_free_token_status', [$this, 'handleCheckFreeTokenStatus']);
         add_action('wp_ajax_firephage_decline_free_token', [$this, 'handleDeclineFreeToken']);
         add_action('wp_ajax_firephage_dismiss_free_token_prompt', [$this, 'handleDismissFreeTokenPrompt']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
@@ -151,6 +152,8 @@ final class Admin
                     'savingNotificationSettings' => __('Saving notification settings...', 'firephage-security'),
                     'registerFreeToken' => __('Email My Free Token', 'firephage-security'),
                     'registeringFreeToken' => __('Sending token...', 'firephage-security'),
+                    'checkFreeTokenStatus' => __('Check Verification Status', 'firephage-security'),
+                    'checkingFreeTokenStatus' => __('Checking verification...', 'firephage-security'),
                     'declineFreeToken' => __('No Thanks', 'firephage-security'),
                     'dismissFreeToken' => __('Do not bother me again', 'firephage-security'),
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
@@ -412,6 +415,7 @@ final class Admin
         echo '<p class="firephage-note">' . esc_html__('The free token enables fresher FirePhage signature updates for local malware detection. It is separate from the paid dashboard connection and can include an optional promo opt-in checkbox.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-secondary firephage-open-free-token-modal">' . esc_html__('Manage Free Token', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-check-free-token-status" style="' . esc_attr(($settings['free_signature_token_status'] ?? 'pending') === 'awaiting_verification' ? '' : 'display:none;') . '">' . esc_html__('Check Verification Status', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<p><strong>' . esc_html__('Connected site ID:', 'firephage-security') . '</strong> <span id="firephage-connected-site-id">' . esc_html($settings['site_id'] !== '' ? $settings['site_id'] : __('Not connected', 'firephage-security')) . '</span></p>';
         echo '<p class="firephage-note">' . esc_html__('The dashboard issues a scoped token first. That avoids trusting domain names alone and makes it possible to verify both site ownership and account intent before reports are accepted.', 'firephage-security') . '</p>';
@@ -579,7 +583,10 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->freeTokenStatusTone($settings)) . '" id="firephage-free-token-settings-badge">' . esc_html($this->freeTokenStatusLabel($settings)) . '</span>';
         echo '</div>';
         echo '<p class="firephage-note" id="firephage-free-token-settings-summary">' . esc_html($this->freeTokenSummary($settings)) . '</p>';
+        echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-secondary firephage-open-free-token-modal">' . esc_html__('Get or Manage Free Token', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-check-free-token-status" style="' . esc_attr(($settings['free_signature_token_status'] ?? 'pending') === 'awaiting_verification' ? '' : 'display:none;') . '">' . esc_html__('Check Verification Status', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '<label class="firephage-field"><span>' . esc_html__('Scan frequency', 'firephage-security') . '</span><select name="malware_auto_scan_interval">';
         echo '<option value="daily"' . selected($settings['malware_auto_scan_interval'], 'daily', false) . '>' . esc_html__('Once per day', 'firephage-security') . '</option>';
         echo '<option value="twice_daily"' . selected($settings['malware_auto_scan_interval'], 'twice_daily', false) . '>' . esc_html__('Twice per day', 'firephage-security') . '</option>';
@@ -605,7 +612,7 @@ final class Admin
         echo '<form id="firephage-free-token-form">';
         echo '<label class="firephage-field"><span>' . esc_html__('Email address', 'firephage-security') . '</span><input type="email" name="email" value="' . esc_attr(($settings['free_signature_token_email'] ?? '') !== '' ? $settings['free_signature_token_email'] : get_option('admin_email', '')) . '" required /></label>';
         echo '<label class="firephage-toggle"><input type="checkbox" name="marketing_opt_in" value="1" ' . checked($settings['free_signature_token_marketing_opt_in'] ?? '0', '1', false) . ' /><span>' . esc_html__('I want to receive occasional FirePhage promo codes, Pro offers, and product updates', 'firephage-security') . '</span></label>';
-        echo '<p class="firephage-note">' . esc_html__('This marketing checkbox is optional and not required for the free token. If you close this modal without choosing, it will appear again next time you open FirePhage Security.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('This marketing checkbox is optional and not required for the free token. After you submit this form, verify the email link we send before FirePhage activates remote signature updates.', 'firephage-security') . '</p>';
         echo '<div class="firephage-modal-actions">';
         echo '<button type="button" class="button button-secondary firephage-dismiss-free-token">' . esc_html__('Do not bother me again', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-decline-free-token">' . esc_html__('No Thanks', 'firephage-security') . '</button>';
@@ -789,16 +796,56 @@ final class Admin
         }
 
         $this->settings->update([
-            'free_signature_token' => sanitize_text_field((string) ($response['token'] ?? '')),
+            'free_signature_token' => '',
+            'free_signature_status_token' => sanitize_text_field((string) ($response['status_token'] ?? '')),
             'free_signature_token_email' => sanitize_email((string) ($response['email'] ?? $email)),
-            'free_signature_token_status' => 'registered',
+            'free_signature_token_status' => 'awaiting_verification',
             'free_signature_token_last_requested_at' => current_time('mysql'),
             'free_signature_token_marketing_opt_in' => $marketingOptIn ? '1' : '0',
             'use_firephage_signature_feed' => '1',
         ]);
 
         wp_send_json_success([
-            'message' => __('Your free FirePhage token was emailed and signature updates are now active.', 'firephage-security'),
+            'message' => __('Check your inbox and verify your email address. FirePhage will activate remote signature updates after verification.', 'firephage-security'),
+            'settings' => $this->settings->all(),
+        ]);
+    }
+
+    public function handleCheckFreeTokenStatus(): void
+    {
+        $this->assertAjaxPermissions();
+        $settings = $this->settings->all();
+        $serviceUrl = esc_url_raw((string) ($settings['checksum_service_url'] ?? ''));
+        $statusToken = sanitize_text_field((string) ($settings['free_signature_status_token'] ?? ''));
+
+        if ($serviceUrl === '' || $statusToken === '') {
+            wp_send_json_error(['message' => __('There is no pending FirePhage email verification request for this site.', 'firephage-security')], 400);
+        }
+
+        $response = $this->client->fetchFreeTokenStatus($serviceUrl, $statusToken);
+
+        if (is_wp_error($response)) {
+            wp_send_json_error(['message' => $response->get_error_message()], 400);
+        }
+
+        if (($response['status'] ?? '') === 'verified') {
+            $this->settings->update([
+                'free_signature_token' => sanitize_text_field((string) ($response['token'] ?? '')),
+                'free_signature_token_status' => 'registered',
+            ]);
+
+            wp_send_json_success([
+                'message' => __('Email verified. FirePhage signature updates are now active.', 'firephage-security'),
+                'settings' => $this->settings->all(),
+            ]);
+        }
+
+        $this->settings->update([
+            'free_signature_token_status' => 'awaiting_verification',
+        ]);
+
+        wp_send_json_success([
+            'message' => __('Verification is still pending. Open the email from FirePhage and click the verification link first.', 'firephage-security'),
             'settings' => $this->settings->all(),
         ]);
     }
@@ -809,6 +856,7 @@ final class Admin
 
         $this->settings->update([
             'free_signature_token' => '',
+            'free_signature_status_token' => '',
             'free_signature_token_status' => 'declined',
             'free_signature_token_marketing_opt_in' => '0',
             'use_firephage_signature_feed' => '0',
@@ -1007,6 +1055,7 @@ final class Admin
     {
         return match ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
             'registered' => __('Active', 'firephage-security'),
+            'awaiting_verification' => __('Verify Email', 'firephage-security'),
             'declined' => __('Declined', 'firephage-security'),
             'dismissed' => __('Hidden', 'firephage-security'),
             default => __('Pending', 'firephage-security'),
@@ -1020,6 +1069,7 @@ final class Admin
     {
         return match ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
             'registered' => 'good',
+            'awaiting_verification' => 'warning',
             'declined' => 'neutral',
             'dismissed' => 'neutral',
             default => 'warning',
@@ -1044,6 +1094,10 @@ final class Admin
 
         if ($status === 'dismissed') {
             return __('The free-token prompt is hidden. You can still request a free token later from the plugin whenever you want fresher FirePhage signature updates.', 'firephage-security');
+        }
+
+        if ($status === 'awaiting_verification') {
+            return __('Verification email sent. Open your inbox, click the FirePhage verification link, then return here and check verification status to activate remote signature updates.', 'firephage-security');
         }
 
         return __('Choose whether you want a free FirePhage token for fresher malware-signature updates. Until you confirm yes or no, the plugin will ask again when you open this screen.', 'firephage-security');

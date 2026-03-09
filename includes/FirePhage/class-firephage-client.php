@@ -129,6 +129,29 @@ final class Client
     /**
      * @return array<string, mixed>|WP_Error
      */
+    public function fetchFreeTokenStatus(string $serviceUrl, string $statusToken)
+    {
+        $response = wp_remote_get(
+            add_query_arg(
+                [
+                    'status_token' => $statusToken,
+                ],
+                untrailingslashit($serviceUrl) . '/api/plugin/free-token/status'
+            ),
+            [
+                'timeout' => 12,
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ]
+        );
+
+        return $this->normalizeResponse($response, 'free token status');
+    }
+
+    /**
+     * @return array<string, mixed>|WP_Error
+     */
     public function fetchProtectedSignatures(string $serviceUrl, string $freeToken)
     {
         $response = wp_remote_get(

@@ -22,6 +22,7 @@
     const openFreeTokenButtons = Array.from(document.querySelectorAll('.firephage-open-free-token-modal'));
     const declineFreeTokenButton = document.querySelector('.firephage-decline-free-token');
     const dismissFreeTokenButton = document.querySelector('.firephage-dismiss-free-token');
+    const checkFreeTokenButtons = Array.from(document.querySelectorAll('.firephage-check-free-token-status'));
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
@@ -303,6 +304,10 @@
             summaryText = freeTokenState.email
                 ? `Signature updates are active with the free FirePhage token sent to ${freeTokenState.email}.`
                 : 'Signature updates are active with your free FirePhage token.';
+        } else if (freeTokenState.status === 'awaiting_verification') {
+            badgeText = 'Verify Email';
+            badgeTone = 'warning';
+            summaryText = 'Verification email sent. Open your inbox, click the FirePhage verification link, then return here and check verification status to activate remote signature updates.';
         } else if (freeTokenState.status === 'declined') {
             badgeText = 'Declined';
             badgeTone = 'neutral';
@@ -323,6 +328,10 @@
         if (freeTokenSettingsSummary) {
             freeTokenSettingsSummary.textContent = summaryText;
         }
+
+        checkFreeTokenButtons.forEach((button) => {
+            button.style.display = freeTokenState.status === 'awaiting_verification' ? '' : 'none';
+        });
     };
 
     const renderFirewallSummary = (payload) => {
@@ -1260,6 +1269,32 @@
                 });
         });
     }
+
+    checkFreeTokenButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            button.disabled = true;
+            button.textContent = firephageAdmin.labels.checkingFreeTokenStatus;
+
+            request('firephage_check_free_token_status')
+                .done((response) => {
+                    if (response.success) {
+                        renderFreeTokenSummary(response.data.settings || null);
+                        showToast(response.data.message || 'Verification status updated.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to check verification status.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to check verification status.', true);
+                })
+                .always(() => {
+                    checkFreeTokenButtons.forEach((node) => {
+                        node.disabled = false;
+                        node.textContent = firephageAdmin.labels.checkFreeTokenStatus;
+                    });
+                });
+        });
+    });
 
     if (connectForm) {
         connectForm.addEventListener('submit', (event) => {

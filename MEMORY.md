@@ -122,11 +122,15 @@
     - email address for token delivery
     - optional promo opt-in checkbox for future FirePhage offers
   - when registration succeeds:
-    - FirePhage emails the token
-    - the plugin also stores it locally and enables remote signature updates immediately
+    - FirePhage emails a verification link, not the active token directly
+    - the plugin stores a separate status token and moves into an `awaiting verification` state
+    - the admin must verify the email link, then click `Check Verification Status` in the plugin to activate remote signature updates
   - when the admin declines:
     - the plugin stops prompting
     - bundled local fallback signatures remain available
+  - when the admin clicks `Do not bother me again`:
+    - the prompt is hidden without marking the feature as permanently declined
+    - the admin can still open the free-token flow later manually
   - a manual `Manage Free Token` / `Get or Manage Free Token` entry point now exists in the plugin UI so users can change their mind later
 - Current UX/product expectations:
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
