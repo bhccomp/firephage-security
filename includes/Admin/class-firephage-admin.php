@@ -56,6 +56,7 @@ final class Admin
         add_action('wp_ajax_firephage_delete_selected_suspicious_files', [$this, 'handleDeleteSelectedSuspiciousFiles']);
         add_action('wp_ajax_firephage_delete_suspicious_file', [$this, 'handleDeleteSuspiciousFile']);
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
+        add_action('wp_ajax_firephage_refresh_signatures', [$this, 'handleRefreshSignatures']);
         add_action('wp_ajax_firephage_save_bruteforce_settings', [$this, 'handleSaveBruteForceSettings']);
         add_action('wp_ajax_firephage_clear_bruteforce_lockouts', [$this, 'handleClearBruteForceLockouts']);
         add_action('wp_ajax_firephage_save_scanner_settings', [$this, 'handleSaveScannerSettings']);
@@ -157,6 +158,8 @@ final class Admin
                     'checkingFreeTokenStatus' => __('Checking verification...', 'firephage-security'),
                     'declineFreeToken' => __('No Thanks', 'firephage-security'),
                     'dismissFreeToken' => __('Do not bother me again', 'firephage-security'),
+                    'refreshSignatures' => __('Refresh Signatures', 'firephage-security'),
+                    'refreshingSignatures' => __('Refreshing signatures...', 'firephage-security'),
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
                     'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
                     'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
@@ -165,6 +168,7 @@ final class Admin
                     'deleteModalFileLabel' => __('File', 'firephage-security'),
                     'deleteModalFilesLabel' => __('Files', 'firephage-security'),
                     'refreshHealthDone' => __('Health checks refreshed.', 'firephage-security'),
+                    'refreshSignaturesDone' => __('FirePhage signatures refreshed.', 'firephage-security'),
                 ],
                 'freeToken' => [
                     'status' => (string) ($settings['free_signature_token_status'] ?? 'pending'),
@@ -639,6 +643,7 @@ final class Admin
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-secondary firephage-open-free-token-modal">' . esc_html__('Get or Manage Free Token', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-check-free-token-status" style="' . esc_attr(($settings['free_signature_token_status'] ?? 'pending') === 'awaiting_verification' ? '' : 'display:none;') . '">' . esc_html__('Check Verification Status', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-refresh-signatures">' . esc_html__('Refresh Signatures', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<label class="firephage-field"><span>' . esc_html__('Scan frequency', 'firephage-security') . '</span><select name="malware_auto_scan_interval">';
         echo '<option value="daily"' . selected($settings['malware_auto_scan_interval'], 'daily', false) . '>' . esc_html__('Once per day', 'firephage-security') . '</option>';
@@ -784,6 +789,20 @@ final class Admin
     {
         $this->assertAjaxPermissions();
         wp_send_json_success(['report' => $this->reportBuilder->build(true)]);
+    }
+
+    public function handleRefreshSignatures(): void
+    {
+        $this->assertAjaxPermissions();
+        $result = $this->scanner->refreshSignatureFeed();
+
+        if (is_wp_error($result)) {
+            wp_send_json_error(['message' => $result->get_error_message()], 400);
+        }
+
+        wp_send_json_success([
+            'message' => __('FirePhage signatures were refreshed.', 'firephage-security'),
+        ]);
     }
 
     public function handleSaveBruteForceSettings(): void

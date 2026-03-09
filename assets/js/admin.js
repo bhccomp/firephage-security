@@ -15,6 +15,7 @@
     const bruteForceForm = document.getElementById('firephage-bruteforce-form');
     const clearBruteForceLockoutsButton = document.querySelector('.firephage-clear-bruteforce-lockouts');
     const scannerSettingsForm = document.getElementById('firephage-scanner-settings-form');
+    const refreshSignaturesButton = document.querySelector('.firephage-refresh-signatures');
     const notificationSettingsForm = document.getElementById('firephage-notification-settings-form');
     const openScannerSettingsButton = document.querySelector('.firephage-open-scanner-settings');
     const freeTokenModal = document.getElementById('firephage-free-token-modal');
@@ -1204,6 +1205,29 @@
                         submitButton.disabled = false;
                         submitButton.textContent = firephageAdmin.labels.saveScannerSettings;
                     }
+                });
+        });
+    }
+
+    if (refreshSignaturesButton) {
+        refreshSignaturesButton.addEventListener('click', () => {
+            refreshSignaturesButton.disabled = true;
+            refreshSignaturesButton.textContent = firephageAdmin.labels.refreshingSignatures || 'Refreshing signatures...';
+
+            request('firephage_refresh_signatures')
+                .done((response) => {
+                    if (response.success) {
+                        showToast((response.data && response.data.message) || firephageAdmin.labels.refreshSignaturesDone || 'FirePhage signatures refreshed.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to refresh signatures.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to refresh signatures.', true);
+                })
+                .always(() => {
+                    refreshSignaturesButton.disabled = false;
+                    refreshSignaturesButton.textContent = firephageAdmin.labels.refreshSignatures || 'Refresh Signatures';
                 });
         });
     }
