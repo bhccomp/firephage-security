@@ -39,6 +39,7 @@ final class Admin
 
         add_action('wp_ajax_firephage_start_scan', [$this, 'handleStartScan']);
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
+        add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
         add_action('wp_ajax_firephage_refresh_health', [$this, 'handleRefreshHealth']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
@@ -93,6 +94,7 @@ final class Admin
                     'startScan' => __('Start Background Scan', 'firephage-security'),
                     'scanStarting' => __('Starting scan...', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
+                    'clearFindings' => __('Clear Findings', 'firephage-security'),
                 ],
             ]
         );
@@ -260,6 +262,15 @@ final class Admin
         wp_send_json_success(['state' => $this->scanner->getState()]);
     }
 
+    public function handleClearFindings(): void
+    {
+        $this->assertAjaxPermissions();
+        wp_send_json_success([
+            'message' => __('Latest findings were cleared.', 'firephage-security'),
+            'state' => $this->scanner->clearFindings(),
+        ]);
+    }
+
     public function handleRefreshHealth(): void
     {
         $this->assertAjaxPermissions();
@@ -399,7 +410,11 @@ final class Admin
             return '<p class="firephage-empty">' . esc_html__('No integrity mismatches or suspicious files were flagged by the latest scan.', 'firephage-security') . '</p>';
         }
 
-        $html = '<div class="firephage-finding-table-wrap">';
+        $html = '<div class="firephage-findings-toolbar">';
+        $html .= '<label class="firephage-findings-rows"><span>' . esc_html__('Rows', 'firephage-security') . '</span><select class="firephage-findings-page-size"><option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option></select></label>';
+        $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
+        $html .= '</div>';
+        $html .= '<div class="firephage-finding-table-wrap">';
         $html .= '<table class="firephage-finding-table">';
         $html .= '<thead><tr>';
         $html .= '<th scope="col">' . esc_html__('File Path', 'firephage-security') . '</th>';
@@ -436,6 +451,7 @@ final class Admin
         }
 
         $html .= '</tbody></table></div>';
+        $html .= '<div class="firephage-findings-pagination" aria-live="polite"></div>';
 
         return $html;
     }

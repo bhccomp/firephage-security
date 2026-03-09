@@ -237,6 +237,34 @@
     border-radius: 14px;
 }
 
+.firephage-findings-toolbar,
+.firephage-findings-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.firephage-findings-toolbar {
+    margin-bottom: 12px;
+}
+
+.firephage-findings-pagination {
+    margin-top: 12px;
+}
+
+.firephage-findings-rows {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #475569;
+    font-size: 13px;
+}
+
+.firephage-findings-rows select {
+    min-width: 74px;
+}
+
 .firephage-finding-table {
     width: 100%;
     border-collapse: collapse;

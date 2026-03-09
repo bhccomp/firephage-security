@@ -57,6 +57,8 @@
   - scan summaries now account for clean custom files and skipped files so totals reconcile with scanned-file counts
   - risky executable files in the site root or untracked plugin/theme directories are no longer eligible for baseline seeding
   - if a site was previously scanned while infected, clear `firephage_security_scan_baseline` before relying on retest results because the old baseline may already trust those file hashes
+  - latest findings now support client-side paging with 10, 25, 50, or 100 rows per page
+  - latest findings now include a `Clear Findings` action to remove the current findings list from saved scan state
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync

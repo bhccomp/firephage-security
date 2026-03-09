@@ -16,6 +16,9 @@
     const disconnectButton = document.querySelector('.firephage-disconnect');
     let pollTimer = null;
     let scanIsRunning = false;
+    let currentScanState = {};
+    let findingsPage = 1;
+    let findingsPageSize = 25;
 
     const request = (action, payload = {}) => $.post(firephageAdmin.ajaxUrl, {
         action,
@@ -89,7 +92,25 @@
             return '<p class="firephage-empty">No integrity mismatches or suspicious files were flagged by the latest scan.</p>';
         }
 
-        return `<div class="firephage-finding-table-wrap">
+        const rows = findings.slice().reverse();
+        const totalPages = Math.max(1, Math.ceil(rows.length / findingsPageSize));
+        findingsPage = Math.min(findingsPage, totalPages);
+        const start = (findingsPage - 1) * findingsPageSize;
+        const pagedRows = rows.slice(start, start + findingsPageSize);
+
+        return `<div class="firephage-findings-toolbar">
+            <label class="firephage-findings-rows">
+                <span>Rows</span>
+                <select class="firephage-findings-page-size">
+                    <option value="10" ${findingsPageSize === 10 ? 'selected' : ''}>10</option>
+                    <option value="25" ${findingsPageSize === 25 ? 'selected' : ''}>25</option>
+                    <option value="50" ${findingsPageSize === 50 ? 'selected' : ''}>50</option>
+                    <option value="100" ${findingsPageSize === 100 ? 'selected' : ''}>100</option>
+                </select>
+            </label>
+            <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
+        </div>
+        <div class="firephage-finding-table-wrap">
             <table class="firephage-finding-table">
                 <thead>
                     <tr>
@@ -99,7 +120,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    ${findings.slice().reverse().map((finding) => {
+                    ${pagedRows.map((finding) => {
                         const status = finding.type === 'malware' ? 'Suspicious' : 'Integrity mismatch';
                         const details = [];
 
@@ -125,10 +146,16 @@
                     }).join('')}
                 </tbody>
             </table>
+        </div>
+        <div class="firephage-findings-pagination">
+            <button type="button" class="button button-secondary firephage-findings-prev" ${findingsPage === 1 ? 'disabled' : ''}>Previous</button>
+            <span>Page ${findingsPage} of ${totalPages}</span>
+            <button type="button" class="button button-secondary firephage-findings-next" ${findingsPage >= totalPages ? 'disabled' : ''}>Next</button>
         </div>`;
     };
 
     const renderScanState = (state) => {
+        currentScanState = state;
         const badge = document.getElementById('firephage-scan-status-badge');
         const progressBar = document.getElementById('firephage-scan-progress-bar');
         const progressLabelNode = document.getElementById('firephage-scan-progress-label');
@@ -168,6 +195,14 @@
             schedulePoll();
         } else if (pollTimer) {
             window.clearTimeout(pollTimer);
+        }
+    };
+
+    const rerenderFindings = () => {
+        const findings = document.getElementById('firephage-scan-findings');
+
+        if (findings) {
+            findings.innerHTML = findingsMarkup(currentScanState.findings || []);
         }
     };
 
@@ -317,9 +352,63 @@
         });
     }
 
+    app.addEventListener('change', (event) => {
+        if (event.target instanceof HTMLSelectElement && event.target.classList.contains('firephage-findings-page-size')) {
+            findingsPageSize = parseInt(event.target.value, 10) || 25;
+            findingsPage = 1;
+            rerenderFindings();
+        }
+    });
+
+    app.addEventListener('click', (event) => {
+        const target = event.target;
+
+        if (!(target instanceof HTMLElement)) {
+            return;
+        }
+
+        if (target.classList.contains('firephage-findings-prev')) {
+            if (findingsPage > 1) {
+                findingsPage -= 1;
+                rerenderFindings();
+            }
+
+            return;
+        }
+
+        if (target.classList.contains('firephage-findings-next')) {
+            findingsPage += 1;
+            rerenderFindings();
+            return;
+        }
+
+        if (target.classList.contains('firephage-clear-findings')) {
+            target.setAttribute('disabled', 'disabled');
+
+            request('firephage_clear_findings')
+                .done((response) => {
+                    if (response.success) {
+                        findingsPage = 1;
+                        renderScanState(response.data.state);
+                        showToast(response.data.message || 'Latest findings were cleared.');
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to clear findings.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to clear findings.', true);
+                })
+                .always(() => {
+                    target.removeAttribute('disabled');
+                });
+        }
+    });
+
     try {
-        renderScanState(JSON.parse(app.dataset.scanStatus || '{}'));
+        currentScanState = JSON.parse(app.dataset.scanStatus || '{}');
+        renderScanState(currentScanState);
     } catch (error) {
-        renderScanState({ status: 'idle', discovered_files: 0, scanned_files: 0, findings: [] });
+        currentScanState = { status: 'idle', discovered_files: 0, scanned_files: 0, findings: [] };
+        renderScanState(currentScanState);
     }
 }(jQuery));
