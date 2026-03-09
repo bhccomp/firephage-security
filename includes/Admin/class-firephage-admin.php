@@ -68,7 +68,7 @@ final class Admin
             'manage_options',
             'firephage-security',
             [$this, 'renderOverviewPage'],
-            'dashicons-shield-alt',
+            $this->menuIcon(),
             58
         );
     }
@@ -160,7 +160,7 @@ final class Admin
         echo '<div>';
         echo '<p class="firephage-eyebrow">' . esc_html__('Local WordPress Security', 'firephage-security') . '</p>';
         echo '<h1>' . esc_html__('FirePhage Security', 'firephage-security') . '</h1>';
-        echo '<p class="firephage-hero-copy">' . esc_html__('Run local health checks, verify repository integrity, scan high-risk code paths in background batches, and optionally sync reports to FirePhage.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-hero-copy">' . esc_html__('Secure WordPress with malware scanning, brute-force protection, health checks, update visibility, and an optional FirePhage connection for advanced protection and performance controls.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-hero-actions">';
         echo '<a class="button button-primary button-hero" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade with FirePhage', 'firephage-security') . '</a>';
@@ -826,6 +826,27 @@ final class Admin
         $id = $valueId !== '' ? ' id="' . esc_attr($valueId) . '"' : '';
 
         return '<div class="firephage-pro-metric"><span class="firephage-pro-metric__label">' . esc_html($label) . '</span><strong class="firephage-pro-metric__value"' . $id . '>--</strong></div>';
+    }
+
+    private function menuIcon(): string
+    {
+        $svg = <<<'SVG'
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldPhageGradient" x1="20" y1="14" x2="104" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <path d="M64 10L108 30V68C108 95 88 115 64 124C40 115 20 95 20 68V30L64 10Z" stroke="url(#shieldPhageGradient)" stroke-width="8"/>
+  <path d="M64 40L79 49V65L64 74L49 65V49L64 40Z" stroke="#7DD3FC" stroke-width="5"/>
+  <path d="M64 74V91" stroke="#7DD3FC" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64 91L51 105" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64 91L77 105" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round"/>
+</svg>
+SVG;
+
+        return 'data:image/svg+xml;base64,' . base64_encode($svg);
     }
 
     private function renderStatCard(string $label, string $value, string $description, string $extraClass = ''): string

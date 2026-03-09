@@ -89,6 +89,8 @@
   - scanner settings now open in a modal from the `Malware Scan` card so `Latest findings` stays visible beside the main scanner state
   - the `Malware Scan` layout now favors a 1/3 scanner card and 2/3 findings table on desktop, collapsing back to one column on smaller screens
   - the top-level stat-card row above the main tabs has been removed to reduce clutter
+  - the WordPress admin menu now uses the FirePhage shield/phage mark instead of a Dashicon
+  - the plugin hero/banner description has been updated to reflect malware scanning, brute-force protection, health checks, update visibility, and optional FirePhage connectivity
   - saving scanner settings now updates the scheduled malware-scan cron immediately
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
