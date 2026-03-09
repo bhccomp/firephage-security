@@ -124,7 +124,9 @@
   - when registration succeeds:
     - FirePhage emails a verification link, not the active token directly
     - the plugin stores a separate status token and moves into an `awaiting verification` state
-    - the admin must verify the email link, then click `Check Verification Status` in the plugin to activate remote signature updates
+    - the verification email now lands back on the WordPress plugin page using `firephage_verify`
+    - the plugin completes verification against FirePhage automatically in the background when that WordPress link is opened
+    - `Check Verification Status` still exists as a fallback/manual retry path
   - when the admin declines:
     - the plugin stops prompting
     - bundled local fallback signatures remain available

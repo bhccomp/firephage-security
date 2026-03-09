@@ -152,6 +152,28 @@ final class Client
     /**
      * @return array<string, mixed>|WP_Error
      */
+    public function verifyFreeToken(string $serviceUrl, string $verificationToken)
+    {
+        $response = wp_remote_post(
+            untrailingslashit($serviceUrl) . '/api/plugin/free-token/verify',
+            [
+                'timeout' => 15,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => wp_json_encode([
+                    'verification_token' => $verificationToken,
+                ]),
+            ]
+        );
+
+        return $this->normalizeResponse($response, 'free token verification');
+    }
+
+    /**
+     * @return array<string, mixed>|WP_Error
+     */
     public function fetchProtectedSignatures(string $serviceUrl, string $freeToken)
     {
         $response = wp_remote_get(

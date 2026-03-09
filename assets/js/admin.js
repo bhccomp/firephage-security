@@ -85,7 +85,7 @@
     let findingsPageSize = 25;
     let pendingConfirmation = null;
     let selectedFindings = new Set();
-    let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true };
+    let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true, verificationToken: '' };
     let proTabState = {
         firewallLoaded: false,
         performanceLoaded: false,
@@ -1295,6 +1295,30 @@
                 });
         });
     });
+
+    if (freeTokenState.verificationToken) {
+        request('firephage_verify_free_token', {
+            verification_token: freeTokenState.verificationToken,
+        })
+            .done((response) => {
+                if (response.success) {
+                    renderFreeTokenSummary(response.data.settings || null);
+                    showToast(response.data.message || 'Email verified.');
+                } else {
+                    showToast((response.data && response.data.message) || 'Unable to verify the email link.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to verify the email link.', true);
+            })
+            .always(() => {
+                if (window.history && typeof window.history.replaceState === 'function') {
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete('firephage_verify');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
+            });
+    }
 
     if (connectForm) {
         connectForm.addEventListener('submit', (event) => {

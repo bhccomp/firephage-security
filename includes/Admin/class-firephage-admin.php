@@ -62,6 +62,7 @@ final class Admin
         add_action('wp_ajax_firephage_save_notification_settings', [$this, 'handleSaveNotificationSettings']);
         add_action('wp_ajax_firephage_register_free_token', [$this, 'handleRegisterFreeToken']);
         add_action('wp_ajax_firephage_check_free_token_status', [$this, 'handleCheckFreeTokenStatus']);
+        add_action('wp_ajax_firephage_verify_free_token', [$this, 'handleVerifyFreeToken']);
         add_action('wp_ajax_firephage_decline_free_token', [$this, 'handleDeclineFreeToken']);
         add_action('wp_ajax_firephage_dismiss_free_token_prompt', [$this, 'handleDismissFreeTokenPrompt']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
@@ -165,6 +166,7 @@ final class Admin
                     'email' => (string) (($settings['free_signature_token_email'] ?? '') !== '' ? $settings['free_signature_token_email'] : get_option('admin_email', '')),
                     'marketingOptIn' => (($settings['free_signature_token_marketing_opt_in'] ?? '0') === '1'),
                     'requiresDecision' => (($settings['free_signature_token_status'] ?? 'pending') === 'pending'),
+                    'verificationToken' => isset($_GET['firephage_verify']) ? sanitize_text_field((string) wp_unslash($_GET['firephage_verify'])) : '',
                 ],
             ]
         );
@@ -846,6 +848,34 @@ final class Admin
 
         wp_send_json_success([
             'message' => __('Verification is still pending. Open the email from FirePhage and click the verification link first.', 'firephage-security'),
+            'settings' => $this->settings->all(),
+        ]);
+    }
+
+    public function handleVerifyFreeToken(): void
+    {
+        $this->assertAjaxPermissions();
+        $settings = $this->settings->all();
+        $serviceUrl = esc_url_raw((string) ($settings['checksum_service_url'] ?? ''));
+        $verificationToken = sanitize_text_field((string) ($_POST['verification_token'] ?? ''));
+
+        if ($serviceUrl === '' || $verificationToken === '') {
+            wp_send_json_error(['message' => __('A valid verification request is required.', 'firephage-security')], 400);
+        }
+
+        $response = $this->client->verifyFreeToken($serviceUrl, $verificationToken);
+
+        if (is_wp_error($response)) {
+            wp_send_json_error(['message' => $response->get_error_message()], 400);
+        }
+
+        $this->settings->update([
+            'free_signature_token' => sanitize_text_field((string) ($response['token'] ?? '')),
+            'free_signature_token_status' => 'registered',
+        ]);
+
+        wp_send_json_success([
+            'message' => __('Email verified on this WordPress site. FirePhage signature updates are now active.', 'firephage-security'),
             'settings' => $this->settings->all(),
         ]);
     }
