@@ -29,6 +29,7 @@
 - The plugin now has a first functional admin implementation instead of scaffold-only placeholders.
 - Current shipped pieces:
   - single-screen admin UI with client-side tabs
+  - overview-first admin page that summarizes local health, malware scan state, updates, and sync status
   - local health checks
   - WordPress core checksum verification
   - resumable background malware scanning
@@ -65,6 +66,7 @@
   - destructive delete actions in the findings UI are now visually marked with red danger-button styling
   - destructive delete actions now route through a custom confirmation modal for both single-file and bulk suspicious-file deletion
   - latest findings now support checkbox selection plus a `Delete Selected Files` action for chosen malware findings
+  - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync

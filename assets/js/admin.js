@@ -284,8 +284,10 @@
     const renderScanState = (state) => {
         currentScanState = state;
         const badge = document.getElementById('firephage-scan-status-badge');
+        const overviewBadge = document.getElementById('firephage-overview-scan-status-badge');
         const progressBar = document.getElementById('firephage-scan-progress-bar');
         const progressLabelNode = document.getElementById('firephage-scan-progress-label');
+        const overviewSummary = document.getElementById('firephage-overview-scan-summary');
         const findings = document.getElementById('firephage-scan-findings');
         const suspiciousStat = document.querySelector('.firephage-suspicious-files-stat .firephage-stat-value');
         const progressTrack = progressBar ? progressBar.parentElement : null;
@@ -295,6 +297,11 @@
         if (badge) {
             badge.className = `firephage-badge ${badgeClass(state.status)}`;
             badge.textContent = state.status.charAt(0).toUpperCase() + state.status.slice(1);
+        }
+
+        if (overviewBadge) {
+            overviewBadge.className = `firephage-badge ${badgeClass(state.status)}`;
+            overviewBadge.textContent = state.status.charAt(0).toUpperCase() + state.status.slice(1);
         }
 
         if (progressBar) {
@@ -308,6 +315,10 @@
 
         if (progressLabelNode) {
             progressLabelNode.textContent = progressLabel(state);
+        }
+
+        if (overviewSummary) {
+            overviewSummary.textContent = progressLabel(state);
         }
 
         if (findings) {

@@ -151,29 +151,40 @@ final class Admin
 
         echo '<div id="firephage-admin-app" data-scan-status="' . esc_attr(wp_json_encode($scan)) . '">';
         echo '<section class="firephage-tab-panel" data-panel="overview">';
+        echo '<div class="firephage-panel-header">';
+        echo '<div><h2>' . esc_html__('Overview', 'firephage-security') . '</h2><p>' . esc_html__('A quick view of local health, malware scan state, update exposure, and FirePhage sync status.', 'firephage-security') . '</p></div>';
+        echo '<button type="button" class="button button-secondary firephage-refresh-health">' . esc_html__('Refresh Checks', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '<div class="firephage-grid firephage-grid--2">';
         echo '<div class="firephage-card">';
-        echo '<h2>' . esc_html__('What this plugin covers', 'firephage-security') . '</h2>';
-        echo '<ul class="firephage-list">';
-        echo '<li>' . esc_html__('Local WordPress health and hardening checks', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('WordPress core checksum verification against official release hashes', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Background scanning that prioritizes repository integrity checks before heuristic review', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Optional FirePhage dashboard sync for reports and alerts', 'firephage-security') . '</li>';
-        echo '</ul>';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Health Snapshot', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr(($health['summary']['bad'] ?? 0) > 0 ? 'warning' : 'good') . '">' . esc_html(($health['summary']['bad'] ?? 0) > 0 ? __('Attention', 'firephage-security') : __('Healthy', 'firephage-security')) . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html(sprintf(__('%1$d checks passing, %2$d need review.', 'firephage-security'), (int) ($health['summary']['good'] ?? 0), (int) ($health['summary']['bad'] ?? 0))) . '</p>';
         echo '</div>';
         echo '<div class="firephage-card">';
-        echo '<h2>' . esc_html__('Latest sync', 'firephage-security') . '</h2>';
-        echo '<p><strong>' . esc_html__('Connection:', 'firephage-security') . '</strong> ' . esc_html(ucfirst($settings['connection_status'])) . '</p>';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Malware Scanner', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->mapStateBadge((string) $scan['status'])) . '" id="firephage-overview-scan-status-badge">' . esc_html(ucfirst((string) $scan['status'])) . '</span>';
+        echo '</div>';
+        echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
+        echo '</div>';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Updates Status', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr((($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)) > 0 ? 'warning' : 'good') . '">' . esc_html((($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)) > 0 ? __('Updates Pending', 'firephage-security') : __('Current', 'firephage-security')) . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html(sprintf(__('%1$d core, %2$d plugin, and %3$d theme updates are waiting. %4$d inactive plugins should be reviewed.', 'firephage-security'), (int) ($updates['core_updates'] ?? 0), (int) ($updates['plugin_updates'] ?? 0), (int) ($updates['theme_updates'] ?? 0), (int) ($updates['inactive_plugins'] ?? 0))) . '</p>';
+        echo '</div>';
+        echo '<div class="firephage-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Latest Sync', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr(($settings['connection_status'] ?? 'disconnected') === 'connected' ? 'good' : 'neutral') . '">' . esc_html(ucfirst((string) ($settings['connection_status'] ?? 'disconnected'))) . '</span>';
+        echo '</div>';
         echo '<p><strong>' . esc_html__('Last report sync:', 'firephage-security') . '</strong> ' . esc_html($settings['last_sync_at'] !== '' ? $settings['last_sync_at'] : __('Not sent yet', 'firephage-security')) . '</p>';
         echo '<p><strong>' . esc_html__('Last sync error:', 'firephage-security') . '</strong> ' . esc_html($settings['last_sync_error'] !== '' ? $settings['last_sync_error'] : __('None', 'firephage-security')) . '</p>';
         echo '</div>';
-        echo '</div>';
-        echo '</section>';
-
-        echo '<section class="firephage-tab-panel" data-panel="health">';
-        echo '<div class="firephage-panel-header">';
-        echo '<div><h2>' . esc_html__('Health Checks', 'firephage-security') . '</h2><p>' . esc_html__('Fast local checks focused on common WordPress exposure points.', 'firephage-security') . '</p></div>';
-        echo '<button type="button" class="button button-secondary firephage-refresh-health">' . esc_html__('Refresh Checks', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<div class="firephage-grid" id="firephage-health-checks">';
         foreach ($health['checks'] as $check) {
@@ -423,7 +434,6 @@ final class Admin
     {
         return [
             'overview' => __('Overview', 'firephage-security'),
-            'health' => __('Health Checks', 'firephage-security'),
             'scanner' => __('Malware Scan', 'firephage-security'),
             'updates' => __('Updates', 'firephage-security'),
             'connect' => __('FirePhage Connect', 'firephage-security'),
