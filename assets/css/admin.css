@@ -629,6 +629,21 @@
     color: #475569;
 }
 
+.firephage-inline-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 8px;
+}
+
+.firephage-inline-summary__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
 .firephage-preview-content {
     margin: 0;
     max-height: min(70vh, 720px);

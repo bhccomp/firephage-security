@@ -22,12 +22,15 @@ FirePhage Security includes:
 
 == External services ==
 
-This plugin can contact external services in two cases.
+This plugin can contact external services in three cases.
 
 1. Public checksum verification
 The plugin may request WordPress.org plugin and theme checksum metadata from FirePhage cache services. If that cache is unavailable, the plugin falls back to WordPress.org directly. These requests send only the package type, slug, and version needed for checksum verification.
 
-2. Optional paid FirePhage connection
+2. Optional free FirePhage signature token
+If the site owner explicitly requests a free FirePhage signature token, the plugin sends the chosen email address, site URL details, plugin version, and optional marketing-consent preference to FirePhage so the token can be emailed and remote signature updates can be enabled.
+
+3. Optional paid FirePhage connection
 If the site owner explicitly connects the plugin to FirePhage, the plugin sends site connection details and security reports to FirePhage so dashboard sync and alerting can work.
 
 == Installation ==

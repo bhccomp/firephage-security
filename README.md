@@ -34,5 +34,8 @@ FirePhage Security can contact external services in two cases:
   - the scanner may request WordPress.org plugin/theme checksum metadata from FirePhage cache services
   - if FirePhage cache is unavailable, the plugin falls back to WordPress.org directly
   - these requests send only package type, slug, and version
+- Optional free FirePhage signature token:
+  - if a user explicitly requests a free signature token, the plugin sends the chosen email address, site URL details, plugin version, and optional marketing-consent preference to FirePhage
+  - FirePhage emails the token and the plugin can use it for remote signature updates
 - Optional paid FirePhage connection:
   - when a user explicitly connects the plugin, the plugin sends site connection details and security reports to FirePhage for dashboard sync and alerts

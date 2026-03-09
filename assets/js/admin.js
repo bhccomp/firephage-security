@@ -17,6 +17,10 @@
     const scannerSettingsForm = document.getElementById('firephage-scanner-settings-form');
     const notificationSettingsForm = document.getElementById('firephage-notification-settings-form');
     const openScannerSettingsButton = document.querySelector('.firephage-open-scanner-settings');
+    const freeTokenModal = document.getElementById('firephage-free-token-modal');
+    const freeTokenForm = document.getElementById('firephage-free-token-form');
+    const openFreeTokenButtons = Array.from(document.querySelectorAll('.firephage-open-free-token-modal'));
+    const declineFreeTokenButton = document.querySelector('.firephage-decline-free-token');
     const connectForm = document.getElementById('firephage-connect-form');
     const disconnectButton = document.querySelector('.firephage-disconnect');
     const overviewStartScanButton = document.querySelector('.firephage-overview-start-scan');
@@ -52,6 +56,10 @@
     const performanceEdgeCompression = document.getElementById('firephage-performance-edge-compression');
     const performanceCacheRules = document.getElementById('firephage-performance-cache-rules');
     const performanceUpgradeCard = document.getElementById('firephage-performance-upgrade-card');
+    const freeTokenStatusBadge = document.getElementById('firephage-free-token-status-badge');
+    const freeTokenSummary = document.getElementById('firephage-free-token-summary');
+    const freeTokenSettingsBadge = document.getElementById('firephage-free-token-settings-badge');
+    const freeTokenSettingsSummary = document.getElementById('firephage-free-token-settings-summary');
     const bruteForceOverviewBadge = document.getElementById('firephage-bruteforce-overview-badge');
     const bruteForceOverviewSummary = document.getElementById('firephage-bruteforce-overview-summary');
     const bruteForceStatusBadge = document.getElementById('firephage-bruteforce-status-badge');
@@ -75,6 +83,7 @@
     let findingsPageSize = 25;
     let pendingConfirmation = null;
     let selectedFindings = new Set();
+    let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true };
     let proTabState = {
         firewallLoaded: false,
         performanceLoaded: false,
@@ -164,6 +173,35 @@
         scannerSettingsModal.hidden = false;
     };
 
+    const closeFreeTokenModal = () => {
+        if (!freeTokenModal) {
+            return;
+        }
+
+        freeTokenModal.hidden = true;
+    };
+
+    const openFreeTokenModal = () => {
+        if (!freeTokenModal) {
+            return;
+        }
+
+        if (freeTokenForm) {
+            const emailInput = freeTokenForm.querySelector('input[name="email"]');
+            const marketingInput = freeTokenForm.querySelector('input[name="marketing_opt_in"]');
+
+            if (emailInput && freeTokenState.email && !emailInput.value) {
+                emailInput.value = freeTokenState.email;
+            }
+
+            if (marketingInput) {
+                marketingInput.checked = !!freeTokenState.marketingOptIn;
+            }
+        }
+
+        freeTokenModal.hidden = false;
+    };
+
     const deleteAllSuspiciousFiles = (button) => {
         button.setAttribute('disabled', 'disabled');
 
@@ -242,6 +280,44 @@
 
         node.className = `firephage-badge firephage-badge--${tone}`;
         node.textContent = text;
+    };
+
+    const renderFreeTokenSummary = (settings = null) => {
+        if (settings) {
+            freeTokenState = {
+                status: settings.free_signature_token_status || 'pending',
+                email: settings.free_signature_token_email || '',
+                marketingOptIn: settings.free_signature_token_marketing_opt_in === '1',
+                requiresDecision: (settings.free_signature_token_status || 'pending') === 'pending',
+            };
+        }
+
+        let badgeText = 'Pending';
+        let badgeTone = 'warning';
+        let summaryText = 'Choose whether you want a free FirePhage token for fresher malware-signature updates.';
+
+        if (freeTokenState.status === 'registered') {
+            badgeText = 'Active';
+            badgeTone = 'good';
+            summaryText = freeTokenState.email
+                ? `Signature updates are active with the free FirePhage token sent to ${freeTokenState.email}.`
+                : 'Signature updates are active with your free FirePhage token.';
+        } else if (freeTokenState.status === 'declined') {
+            badgeText = 'Declined';
+            badgeTone = 'neutral';
+            summaryText = 'Remote FirePhage signature updates are turned off. You can request a free token later at any time.';
+        }
+
+        setBadge(freeTokenStatusBadge, badgeText, badgeTone);
+        setBadge(freeTokenSettingsBadge, badgeText, badgeTone);
+
+        if (freeTokenSummary) {
+            freeTokenSummary.textContent = summaryText;
+        }
+
+        if (freeTokenSettingsSummary) {
+            freeTokenSettingsSummary.textContent = summaryText;
+        }
     };
 
     const renderFirewallSummary = (payload) => {
@@ -1090,6 +1166,73 @@
         });
     }
 
+    openFreeTokenButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            openFreeTokenModal();
+        });
+    });
+
+    if (freeTokenForm) {
+        freeTokenForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const submitButton = freeTokenForm.querySelector('.firephage-register-free-token');
+            const emailInput = freeTokenForm.querySelector('input[name="email"]');
+            const marketingInput = freeTokenForm.querySelector('input[name="marketing_opt_in"]');
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = firephageAdmin.labels.registeringFreeToken;
+            }
+
+            request('firephage_register_free_token', {
+                email: emailInput ? emailInput.value : '',
+                marketing_opt_in: marketingInput && marketingInput.checked ? '1' : '',
+            })
+                .done((response) => {
+                    if (response.success) {
+                        renderFreeTokenSummary(response.data.settings || null);
+                        showToast(response.data.message || 'Free token activated.');
+                        closeFreeTokenModal();
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to register the free token.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to register the free token.', true);
+                })
+                .always(() => {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = firephageAdmin.labels.registerFreeToken;
+                    }
+                });
+        });
+    }
+
+    if (declineFreeTokenButton) {
+        declineFreeTokenButton.addEventListener('click', () => {
+            declineFreeTokenButton.disabled = true;
+
+            request('firephage_decline_free_token')
+                .done((response) => {
+                    if (response.success) {
+                        renderFreeTokenSummary(response.data.settings || null);
+                        showToast(response.data.message || 'Free token declined.');
+                        closeFreeTokenModal();
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to save your choice.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save your choice.', true);
+                })
+                .always(() => {
+                    declineFreeTokenButton.disabled = false;
+                });
+        });
+    }
+
     if (connectForm) {
         connectForm.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -1304,6 +1447,16 @@
         });
     }
 
+    if (freeTokenModal) {
+        freeTokenModal.addEventListener('click', (event) => {
+            const target = event.target;
+
+            if (target instanceof HTMLElement && target.dataset.freeTokenClose === '1') {
+                closeFreeTokenModal();
+            }
+        });
+    }
+
     try {
         currentScanState = JSON.parse(app.dataset.scanStatus || '{}');
         renderScanState(currentScanState);
@@ -1332,5 +1485,11 @@
             notifications_alert_malware: notificationSettingsForm.querySelector('input[name="notifications_alert_malware"]')?.checked ? '1' : '0',
             notifications_alert_core_edits: notificationSettingsForm.querySelector('input[name="notifications_alert_core_edits"]')?.checked ? '1' : '0',
         });
+    }
+
+    renderFreeTokenSummary();
+
+    if (freeTokenState.requiresDecision) {
+        openFreeTokenModal();
     }
 }(jQuery));

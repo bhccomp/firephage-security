@@ -112,6 +112,22 @@
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync
   - added plugin readme disclosures for external services
+  - free FirePhage signature-token registration is now treated as a separate explicit opt-in flow with its own disclosure and optional promo checkbox
+- Free signature-token follow-up:
+  - FirePhage signature updates are no longer treated as a public anonymous feed from the plugin side
+  - the plugin now stores a separate free signature token and consent state in settings
+  - default consent state is `pending`, so the plugin prompts again on the plugin screen until the admin explicitly chooses to request the free token or decline it
+  - the prompt is implemented as a plugin-page modal, not a site-wide nag or forced activation redirect
+  - the modal collects:
+    - email address for token delivery
+    - optional promo opt-in checkbox for future FirePhage offers
+  - when registration succeeds:
+    - FirePhage emails the token
+    - the plugin also stores it locally and enables remote signature updates immediately
+  - when the admin declines:
+    - the plugin stops prompting
+    - bundled local fallback signatures remain available
+  - a manual `Manage Free Token` / `Get or Manage Free Token` entry point now exists in the plugin UI so users can change their mind later
 - Current UX/product expectations:
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites

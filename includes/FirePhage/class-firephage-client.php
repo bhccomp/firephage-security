@@ -96,12 +96,48 @@ final class Client
      */
     public function fetchPublicSignatures(string $serviceUrl)
     {
+        return new WP_Error('missing_signature_token', __('A free FirePhage signature token is required.', 'firephage-security'));
+    }
+
+    /**
+     * @return array<string, mixed>|WP_Error
+     */
+    public function registerFreeToken(string $serviceUrl, string $email, bool $marketingOptIn)
+    {
+        $response = wp_remote_post(
+            untrailingslashit($serviceUrl) . '/api/plugin/free-token/register',
+            [
+                'timeout' => 15,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => wp_json_encode([
+                    'email' => $email,
+                    'home_url' => home_url('/'),
+                    'site_url' => site_url('/'),
+                    'admin_email' => get_option('admin_email'),
+                    'plugin_version' => FIREPHAGE_SECURITY_VERSION,
+                    'marketing_opt_in' => $marketingOptIn,
+                ]),
+            ]
+        );
+
+        return $this->normalizeResponse($response, 'free token registration');
+    }
+
+    /**
+     * @return array<string, mixed>|WP_Error
+     */
+    public function fetchProtectedSignatures(string $serviceUrl, string $freeToken)
+    {
         $response = wp_remote_get(
             untrailingslashit($serviceUrl) . '/api/plugin/signatures',
             [
                 'timeout' => 12,
                 'headers' => [
                     'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $freeToken,
                 ],
             ]
         );
