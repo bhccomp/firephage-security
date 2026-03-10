@@ -1553,7 +1553,7 @@
             })
                 .done((response) => {
                     if (response.success) {
-                        openPreviewModal(response.data.preview);
+                        openPreviewModal(response.data.preview || response.data);
                     } else {
                         showToast((response.data && response.data.message) || 'Unable to preview the file.', true);
                     }

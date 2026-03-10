@@ -110,6 +110,7 @@
   - scanner settings now expose a toggle for FirePhage signature updates so the local engine can keep receiving signature refreshes without plugin releases
   - scanner settings now also expose a manual `Refresh Signatures` action that clears the locally cached FirePhage signature payload and fetches the latest approved rules immediately instead of waiting for the normal cache TTL
   - follow-up bug fix: the manual refresh path must use the existing `getClient()` helper inside the scanner class; calling a non-existent `client()` method causes the scan/refresh flow to fail
+  - follow-up bug fix: the file-preview modal expects the preview payload directly from the AJAX response; using `response.data.preview` breaks the Preview action because the handler returns the preview fields at the top level of `response.data`
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
