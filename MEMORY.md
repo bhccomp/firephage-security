@@ -126,6 +126,16 @@
       - local baselines
       - high-confidence signatures only
     - remote FirePhage signatures are still loaded, but only high-confidence detections remain active in the plugin runtime until a safer heuristic model is reintroduced later
+  - local fallback tightening follow-up:
+    - bundled fallback signatures were reduced to a very small, low-ambiguity set
+    - active local fallback markers are now limited to:
+      - `eval(base64_decode())`
+      - `gzinflate(base64_decode())`
+      - `preg_replace /e`
+      - `FilesMan`
+      - `auth_pass`
+      - repeated staged `__DIR__` include chains
+    - bundled fallback heuristics are now intentionally empty so broader pattern coverage comes from FirePhage-delivered signatures instead of noisy local defaults
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
