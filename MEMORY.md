@@ -136,6 +136,13 @@
       - `auth_pass`
       - repeated staged `__DIR__` include chains
     - bundled fallback heuristics are now intentionally empty so broader pattern coverage comes from FirePhage-delivered signatures instead of noisy local defaults
+  - remote-signature-first follow-up:
+    - bundled local malware signatures are now fully disabled
+    - the plugin-side malware engine now depends on:
+      - integrity checks
+      - baseline checks
+      - FirePhage-delivered signatures when available
+    - without FirePhage signatures, the malware scanner still provides integrity and baseline visibility but no bundled signature detections
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
