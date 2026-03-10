@@ -111,6 +111,14 @@
   - scanner settings now also expose a manual `Refresh Signatures` action that clears the locally cached FirePhage signature payload and fetches the latest approved rules immediately instead of waiting for the normal cache TTL
   - follow-up bug fix: the manual refresh path must use the existing `getClient()` helper inside the scanner class; calling a non-existent `client()` method causes the scan/refresh flow to fail
   - follow-up bug fix: the file-preview modal expects the preview payload directly from the AJAX response; using `response.data.preview` breaks the Preview action because the handler returns the preview fields at the top level of `response.data`
+  - false-positive reduction follow-up:
+    - downgraded generic upload/admin-form heuristics so normal import UIs are less likely to be flagged on their own
+    - moved `new Function` out of the high-confidence set and reduced related JavaScript signal weights
+    - tightened `encoded payload helper` so a single normal `base64_decode()` call in vendor libraries does not trip the scanner
+    - tightened staged-loader detection to require repeated local include/require chains instead of single normal bootstrap/autoload patterns
+    - suppressed directory-cluster heuristics inside common library paths such as `vendor/`, `tests/`, `dist/`, `build/`, and common bootstrap/autoload files
+    - only treat randomized 8-character PHP filenames as suspicious in untrusted or untracked locations, not across normal plugin code
+    - reduced the standalone score impact of untracked plugin/theme directories to avoid over-flagging disabled/inactive plugin trees
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
