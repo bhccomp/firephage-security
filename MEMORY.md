@@ -119,6 +119,13 @@
     - suppressed directory-cluster heuristics inside common library paths such as `vendor/`, `tests/`, `dist/`, `build/`, and common bootstrap/autoload files
     - only treat randomized 8-character PHP filenames as suspicious in untrusted or untracked locations, not across normal plugin code
     - reduced the standalone score impact of untracked plugin/theme directories to avoid over-flagging disabled/inactive plugin trees
+  - scanner strategy reset follow-up:
+    - disabled generic `heuristic_cluster` scoring entirely after production-like tests showed it still produced excessive false positives on normal plugin/vendor code
+    - the scanner now relies on:
+      - integrity mismatches
+      - local baselines
+      - high-confidence signatures only
+    - remote FirePhage signatures are still loaded, but only high-confidence detections remain active in the plugin runtime until a safer heuristic model is reintroduced later
   - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
   - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
   - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
