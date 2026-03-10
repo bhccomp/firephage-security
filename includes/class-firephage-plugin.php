@@ -28,6 +28,7 @@ final class Plugin
     private const REPORT_CRON_HOOK = 'firephage_security_sync_report';
     private const AUTO_SCAN_CRON_HOOK = 'firephage_security_auto_scan';
     private const WEEKLY_NOTIFICATION_CRON_HOOK = 'firephage_security_weekly_notifications';
+    private const ACTIVATION_REDIRECT_OPTION = 'firephage_security_activation_redirect';
 
     private static ?self $instance = null;
 
@@ -75,6 +76,7 @@ final class Plugin
         add_action('firephage_security_settings_changed', [$this, 'syncSchedules']);
         add_filter('cron_schedules', [$this, 'registerSchedules']);
         add_action('admin_init', [$this, 'registerPrivacyPolicyContent']);
+        add_action('admin_init', [$this, 'maybeRedirectAfterActivation']);
         add_action('admin_init', [$this->settings, 'register']);
         add_action('admin_menu', [$this->admin, 'registerMenus']);
         add_action('admin_enqueue_scripts', [$this->admin, 'enqueueAssets']);
@@ -92,6 +94,8 @@ final class Plugin
         if (get_option(Settings::OPTION_KEY, null) === null) {
             update_option(Settings::OPTION_KEY, (new Settings())->all(), false);
         }
+
+        add_option(self::ACTIVATION_REDIRECT_OPTION, '1', '', false);
     }
 
     public static function deactivate(): void
@@ -101,6 +105,27 @@ final class Plugin
         wp_clear_scheduled_hook(self::REPORT_CRON_HOOK);
         wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
         wp_clear_scheduled_hook(self::WEEKLY_NOTIFICATION_CRON_HOOK);
+        delete_option(self::ACTIVATION_REDIRECT_OPTION);
+    }
+
+    public function maybeRedirectAfterActivation(): void
+    {
+        if (! is_admin() || wp_doing_ajax() || ! current_user_can('activate_plugins')) {
+            return;
+        }
+
+        if (is_network_admin() || isset($_GET['activate-multi'])) {
+            delete_option(self::ACTIVATION_REDIRECT_OPTION);
+            return;
+        }
+
+        if (get_option(self::ACTIVATION_REDIRECT_OPTION, '') !== '1') {
+            return;
+        }
+
+        delete_option(self::ACTIVATION_REDIRECT_OPTION);
+        wp_safe_redirect(admin_url('plugins.php'));
+        exit;
     }
 
     public function loadTextdomain(): void

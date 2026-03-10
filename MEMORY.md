@@ -144,6 +144,9 @@
   - do not expose a manual `Send Report to Dashboard` button in the plugin UI
   - auto-sync should be enabled by default for connected sites
   - after plugin changes in this repo, complete the full workflow through remote sync on the WordPress server in the same task
+- Activation follow-up:
+  - the plugin now sets a one-time post-activation redirect flag and sends admins to `plugins.php` after activation
+  - the redirect is skipped for network-admin bulk activation and AJAX contexts
 - Admin polish follow-up:
   - Overview now includes a derived `Security Score` card with dynamic improvement hints based on current health checks, scan state, brute-force protection, updates, and FirePhage connection state
   - Overview and Malware Scanner now show human-readable freshness labels such as `Last scan` and `Last report sync`
