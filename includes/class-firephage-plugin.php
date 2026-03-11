@@ -15,6 +15,7 @@ if (! defined('ABSPATH')) {
 }
 
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Health/class-firephage-health-checker.php';
+require_once FIREPHAGE_SECURITY_PATH . 'includes/Scanner/class-firephage-signature-bundle.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Scanner/class-firephage-malware-scanner.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/Security/class-firephage-brute-force-protection.php';
 require_once FIREPHAGE_SECURITY_PATH . 'includes/class-firephage-notifications.php';

@@ -148,9 +148,34 @@
       - baseline checks
       - bundled snapshot
       - refreshed FirePhage signature updates downloaded from the dashboard service
-  - the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
-  - the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
-  - the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
+    - plugin runtime follow-up:
+      - the old hardcoded local heuristic PHP regexes have now been removed from the scanner
+      - `MalwareScanner` boots with a bundled signature manifest loaded from:
+        - `includes/Scanner/class-firephage-signature-bundle.php`
+      - remote FirePhage signature payloads still merge on top of that bundled manifest when a verified free token is available
+      - current bundled manifest snapshot contains:
+        - `1386` high-confidence signatures
+        - `0` heuristic signatures
+      - scanner strategy is now:
+        - trust official checksums first
+        - trust local baseline where appropriate
+        - scan the remaining files with the generated FirePhage signature set
+      - local behavior heuristics should not be reintroduced casually because they previously caused excessive false positives
+- FirePhage signature-lab workflow reset follow-up:
+  - the dashboard-side sample/signature library is now content-based, not filename-based
+  - sample uploads and ZIP imports now reject exact duplicate file content by `sha256`
+  - current dashboard-side library state is:
+    - `1386` unique malware samples
+    - `1386` matching signatures
+    - no duplicate-content or duplicate-name sample groups
+  - signature generation is now one-sample-oriented and deterministic:
+    - build narrow exact anchors from the sample file itself
+    - avoid generic function-based or behavior-based regexes
+  - practical expectation for plugin releases:
+    - refresh the bundled snapshot from the dashboard signature set when shipping updated plugin builds
+- the preferred dashboard UX is now a dedicated `WordPress` page on FirePhage, not `Status Hub`
+- the plugin-side connection flow is expected to use a token generated from that dedicated FirePhage `WordPress` page
+- the separate `Health Checks` tab has been removed and its content now lives on the `Overview` page
 - WordPress.org compliance follow-up:
   - added admin disclosure copy for external checksum services versus optional paid FirePhage connection
   - added privacy policy content covering public checksum lookups and optional dashboard sync
