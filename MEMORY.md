@@ -135,6 +135,10 @@
     - the plugin scanner now supports a separate `malicious_domains` feed in addition to exact malware hashes and regex signatures
     - domain IOC matches are evaluated by extracting hostnames from file contents and checking them against the feed, not by turning domains into regex signatures
     - the bundled plugin snapshot now ships with the `romainmarcoux/malicious-domains` feed merged in as `140964` normalized malicious domains
+  - repo-sync hash IOC follow-up:
+    - the plugin scanner now supports a separate `repo_sync_hash` detection source for external md5/sha1/sha256 feeds
+    - SaaS ships these under a separate `repo_sync_hashes` manifest section so they stay isolated from the sample-derived `high_confidence_hashes`
+    - the current bundled snapshot includes `28690` synced hashes from `romainmarcoux/malicious-hash`
   - local fallback tightening follow-up:
     - bundled fallback signatures were reduced to a very small, low-ambiguity set
     - active local fallback markers are now limited to:
