@@ -126,6 +126,10 @@
       - local baselines
       - high-confidence signatures only
     - remote FirePhage signatures are still loaded, but only high-confidence detections remain active in the plugin runtime until a safer heuristic model is reintroduced later
+  - scan-capacity follow-up:
+    - scanner maximum analyzed file size is now `3 MB` instead of `1 MB`
+    - this is controlled by `MalwareScanner::MAX_FILE_SIZE_BYTES`
+    - reason: the stricter exact-hash malware test corpus includes valid malicious PHP samples above `1 MB`, so the earlier limit caused too many files to be skipped during scanner validation
   - local fallback tightening follow-up:
     - bundled fallback signatures were reduced to a very small, low-ambiguity set
     - active local fallback markers are now limited to:
