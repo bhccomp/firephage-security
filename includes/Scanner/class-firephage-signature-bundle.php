@@ -2,7 +2,7 @@
 
 namespace FirePhage\Security\Scanner;
 
-if (! defined(ABSPATH)) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
