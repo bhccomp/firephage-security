@@ -131,6 +131,10 @@
     - this is controlled by `MalwareScanner::MAX_FILE_SIZE_BYTES`
     - reason: the stricter exact-hash malware test corpus includes valid malicious PHP samples above `1 MB`, so the earlier limit caused too many files to be skipped during scanner validation
     - scanner discovery now resumes large directories across batches instead of dropping the remainder of a folder after `500` processed directory entries; this fixed flat malware test folders like `wp-content/test` only discovering the first `168` files
+  - malicious domain IOC follow-up:
+    - the plugin scanner now supports a separate `malicious_domains` feed in addition to exact malware hashes and regex signatures
+    - domain IOC matches are evaluated by extracting hostnames from file contents and checking them against the feed, not by turning domains into regex signatures
+    - the bundled plugin snapshot now ships with the `romainmarcoux/malicious-domains` feed merged in as `140964` normalized malicious domains
   - local fallback tightening follow-up:
     - bundled fallback signatures were reduced to a very small, low-ambiguity set
     - active local fallback markers are now limited to:
