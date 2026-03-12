@@ -130,6 +130,7 @@
     - scanner maximum analyzed file size is now `3 MB` instead of `1 MB`
     - this is controlled by `MalwareScanner::MAX_FILE_SIZE_BYTES`
     - reason: the stricter exact-hash malware test corpus includes valid malicious PHP samples above `1 MB`, so the earlier limit caused too many files to be skipped during scanner validation
+    - scanner discovery now resumes large directories across batches instead of dropping the remainder of a folder after `500` processed directory entries; this fixed flat malware test folders like `wp-content/test` only discovering the first `168` files
   - local fallback tightening follow-up:
     - bundled fallback signatures were reduced to a very small, low-ambiguity set
     - active local fallback markers are now limited to:
