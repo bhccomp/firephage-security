@@ -16,19 +16,40 @@ if (! defined('ABSPATH')) {
 
 final class Admin
 {
-    private Settings $settings;
+    /**
+     * @var Settings
+     */
+    private $settings;
 
-    private MalwareScanner $scanner;
+    /**
+     * @var MalwareScanner
+     */
+    private $scanner;
 
-    private HealthChecker $healthChecker;
+    /**
+     * @var HealthChecker
+     */
+    private $healthChecker;
 
-    private ReportBuilder $reportBuilder;
+    /**
+     * @var ReportBuilder
+     */
+    private $reportBuilder;
 
-    private Client $client;
+    /**
+     * @var Client
+     */
+    private $client;
 
-    private BruteForceProtection $bruteForceProtection;
+    /**
+     * @var BruteForceProtection
+     */
+    private $bruteForceProtection;
 
-    private Notifications $notifications;
+    /**
+     * @var Notifications
+     */
+    private $notifications;
 
     public function __construct(
         Settings $settings,
@@ -1153,13 +1174,22 @@ final class Admin
      */
     private function freeTokenStatusLabel(array $settings): string
     {
-        return match ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
-            'registered' => __('Active', 'firephage-security'),
-            'awaiting_verification' => __('Verify Email', 'firephage-security'),
-            'declined' => __('Declined', 'firephage-security'),
-            'dismissed' => __('Hidden', 'firephage-security'),
-            default => __('Pending', 'firephage-security'),
-        };
+        switch ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
+            case 'registered':
+                return __('Active', 'firephage-security');
+
+            case 'awaiting_verification':
+                return __('Verify Email', 'firephage-security');
+
+            case 'declined':
+                return __('Declined', 'firephage-security');
+
+            case 'dismissed':
+                return __('Hidden', 'firephage-security');
+
+            default:
+                return __('Pending', 'firephage-security');
+        }
     }
 
     /**
@@ -1167,13 +1197,20 @@ final class Admin
      */
     private function freeTokenStatusTone(array $settings): string
     {
-        return match ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
-            'registered' => 'good',
-            'awaiting_verification' => 'warning',
-            'declined' => 'neutral',
-            'dismissed' => 'neutral',
-            default => 'warning',
-        };
+        switch ((string) ($settings['free_signature_token_status'] ?? 'pending')) {
+            case 'registered':
+                return 'good';
+
+            case 'awaiting_verification':
+                return 'warning';
+
+            case 'declined':
+            case 'dismissed':
+                return 'neutral';
+
+            default:
+                return 'warning';
+        }
     }
 
     /**
@@ -1498,43 +1535,74 @@ SVG;
 
     private function mapStateBadge(string $status): string
     {
-        return match ($status) {
-            'completed' => 'good',
-            'failed' => 'critical',
-            'discovering', 'scanning' => 'warning',
-            default => 'neutral',
-        };
+        switch ($status) {
+            case 'completed':
+                return 'good';
+
+            case 'failed':
+                return 'critical';
+
+            case 'discovering':
+            case 'scanning':
+                return 'warning';
+
+            default:
+                return 'neutral';
+        }
     }
 
     private function scanStatusLabel(string $status): string
     {
-        return match ($status) {
-            'completed' => __('Completed', 'firephage-security'),
-            'failed' => __('Needs Review', 'firephage-security'),
-            'discovering' => __('Preparing Scan', 'firephage-security'),
-            'scanning' => __('Scanning', 'firephage-security'),
-            'stopped' => __('Cancelled', 'firephage-security'),
-            default => __('Idle', 'firephage-security'),
-        };
+        switch ($status) {
+            case 'completed':
+                return __('Completed', 'firephage-security');
+
+            case 'failed':
+                return __('Needs Review', 'firephage-security');
+
+            case 'discovering':
+                return __('Preparing Scan', 'firephage-security');
+
+            case 'scanning':
+                return __('Scanning', 'firephage-security');
+
+            case 'stopped':
+                return __('Cancelled', 'firephage-security');
+
+            default:
+                return __('Idle', 'firephage-security');
+        }
     }
 
     private function connectionStatusLabel(string $status): string
     {
-        return match ($status) {
-            'connected' => __('Connected', 'firephage-security'),
-            'error' => __('Needs Attention', 'firephage-security'),
-            default => __('Not Connected', 'firephage-security'),
-        };
+        switch ($status) {
+            case 'connected':
+                return __('Connected', 'firephage-security');
+
+            case 'error':
+                return __('Needs Attention', 'firephage-security');
+
+            default:
+                return __('Not Connected', 'firephage-security');
+        }
     }
 
     private function humanizeCheckStatus(string $status): string
     {
-        return match ($status) {
-            'good' => __('Healthy', 'firephage-security'),
-            'warning' => __('Needs Review', 'firephage-security'),
-            'critical' => __('Action Needed', 'firephage-security'),
-            default => ucfirst($status),
-        };
+        switch ($status) {
+            case 'good':
+                return __('Healthy', 'firephage-security');
+
+            case 'warning':
+                return __('Needs Review', 'firephage-security');
+
+            case 'critical':
+                return __('Action Needed', 'firephage-security');
+
+            default:
+                return ucfirst($status);
+        }
     }
 
     private function humanizeTimestamp(string $timestamp): string

@@ -16,12 +16,15 @@ final class BruteForceProtection
 
     private const MAX_EVENT_LOG = 50;
 
-    private Settings $settings;
+    /**
+     * @var Settings
+     */
+    private $settings;
 
     /**
      * @var array<string, string>
      */
-    private array $currentContext = [];
+    private $currentContext = [];
 
     public function __construct(?Settings $settings = null)
     {
@@ -179,9 +182,13 @@ final class BruteForceProtection
         $settings = $this->settings->all();
         $state = $this->readState(true);
         $lockouts = array_values($state['lockouts']);
-        usort($lockouts, static fn (array $left, array $right): int => ((int) $right['expires_at']) <=> ((int) $left['expires_at']));
+        usort($lockouts, static function (array $left, array $right): int {
+            return ((int) $right['expires_at']) <=> ((int) $left['expires_at']);
+        });
         $events = array_values($state['events']);
-        usort($events, static fn (array $left, array $right): int => ((int) $right['started_at']) <=> ((int) $left['started_at']));
+        usort($events, static function (array $left, array $right): int {
+            return ((int) $right['started_at']) <=> ((int) $left['started_at']);
+        });
 
         return [
             'enabled' => $this->isEnabled($settings),
@@ -350,7 +357,9 @@ final class BruteForceProtection
 
         $state['events'] = array_values(array_filter(
             $state['events'],
-            static fn (array $event): bool => ((int) ($event['expires_at'] ?? 0)) > ($now - WEEK_IN_SECONDS)
+            static function (array $event) use ($now): bool {
+                return ((int) ($event['expires_at'] ?? 0)) > ($now - WEEK_IN_SECONDS);
+            }
         ));
 
         if (count($state['events']) > self::MAX_EVENT_LOG) {

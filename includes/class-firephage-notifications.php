@@ -12,9 +12,15 @@ final class Notifications
 {
     public const STATE_OPTION_KEY = 'firephage_security_notification_state';
 
-    private Settings $settings;
+    /**
+     * @var Settings
+     */
+    private $settings;
 
-    private ReportBuilder $reportBuilder;
+    /**
+     * @var ReportBuilder
+     */
+    private $reportBuilder;
 
     public function __construct(Settings $settings, ReportBuilder $reportBuilder)
     {

@@ -229,3 +229,7 @@
   - Firewall and Performance locked states now use clearer action-oriented copy instead of bare placeholder values
   - Performance includes an estimated CDN/cache improvement upsell block
   - suspicious-file deletion confirmations now warn about functionality risk, recommend backups, and show file paths in the modal
+- PHP compatibility follow-up:
+  - plugin runtime code was reduced to a PHP 7.2-safe subset for broader shared-hosting compatibility
+  - parser blockers such as `match`, arrow functions, typed properties, and native `str_starts_with` / `str_contains` / `str_ends_with` usage were removed from the plugin runtime
+  - current scanner behavior, bundled signatures, exact-hash matching, repo-sync hash matching, and malicious-domain matching were kept intact while restoring compatibility

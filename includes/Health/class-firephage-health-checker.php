@@ -46,7 +46,7 @@ final class HealthChecker
             $this->makeCheck(
                 'https',
                 __('HTTPS is enabled', 'firephage-security'),
-                str_starts_with(home_url(), 'https://'),
+                strpos(home_url(), 'https://') === 0,
                 __('Site URLs use HTTPS.', 'firephage-security'),
                 __('WordPress is not configured to use HTTPS for the site URL.', 'firephage-security'),
                 'critical'

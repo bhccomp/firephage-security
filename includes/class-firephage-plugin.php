@@ -31,23 +31,50 @@ final class Plugin
     private const WEEKLY_NOTIFICATION_CRON_HOOK = 'firephage_security_weekly_notifications';
     private const ACTIVATION_REDIRECT_OPTION = 'firephage_security_activation_redirect';
 
-    private static ?self $instance = null;
+    /**
+     * @var self|null
+     */
+    private static $instance = null;
 
-    private Settings $settings;
+    /**
+     * @var Settings
+     */
+    private $settings;
 
-    private MalwareScanner $scanner;
+    /**
+     * @var MalwareScanner
+     */
+    private $scanner;
 
-    private HealthChecker $healthChecker;
+    /**
+     * @var HealthChecker
+     */
+    private $healthChecker;
 
-    private BruteForceProtection $bruteForceProtection;
+    /**
+     * @var BruteForceProtection
+     */
+    private $bruteForceProtection;
 
-    private Notifications $notifications;
+    /**
+     * @var Notifications
+     */
+    private $notifications;
 
-    private ReportBuilder $reportBuilder;
+    /**
+     * @var ReportBuilder
+     */
+    private $reportBuilder;
 
-    private Client $client;
+    /**
+     * @var Client
+     */
+    private $client;
 
-    private Admin $admin;
+    /**
+     * @var Admin
+     */
+    private $admin;
 
     public static function instance(): self
     {
@@ -250,10 +277,15 @@ final class Plugin
 
     private function malwareScanSchedule(string $value): string
     {
-        return match ($value) {
-            'daily' => 'daily',
-            'four_times_daily' => 'firephage_four_times_daily',
-            default => 'firephage_twice_daily',
-        };
+        switch ($value) {
+            case 'daily':
+                return 'daily';
+
+            case 'four_times_daily':
+                return 'firephage_four_times_daily';
+
+            default:
+                return 'firephage_twice_daily';
+        }
     }
 }

@@ -12,11 +12,20 @@ if (! defined('ABSPATH')) {
 
 final class ReportBuilder
 {
-    private HealthChecker $healthChecker;
+    /**
+     * @var HealthChecker
+     */
+    private $healthChecker;
 
-    private MalwareScanner $scanner;
+    /**
+     * @var MalwareScanner
+     */
+    private $scanner;
 
-    private BruteForceProtection $bruteForceProtection;
+    /**
+     * @var BruteForceProtection
+     */
+    private $bruteForceProtection;
 
     public function __construct(HealthChecker $healthChecker, MalwareScanner $scanner, BruteForceProtection $bruteForceProtection)
     {
