@@ -152,16 +152,16 @@ final class Admin
                     'stopScan' => __('Cancel Current Scan', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
-                    'deleteSuspiciousFiles' => __('Delete All Suspicious Files', 'firephage-security'),
+                    'deleteSuspiciousFiles' => __('Delete All Malicious Files', 'firephage-security'),
                     'deleteSelectedFiles' => __('Delete Selected Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
                     'previewFile' => __('Preview', 'firephage-security'),
-                    'confirmDeleteTitle' => __('Delete Suspicious File?', 'firephage-security'),
-                    'confirmDeleteAllTitle' => __('Delete All Suspicious Files?', 'firephage-security'),
-                    'confirmDeleteSelectedTitle' => __('Delete Selected Suspicious Files?', 'firephage-security'),
-                    'confirmDeleteBody' => __('Deleting a suspicious file can affect site functionality. Suspicious does not always mean malicious, so create a backup first and review the file path before continuing.', 'firephage-security'),
-                    'confirmDeleteAllBody' => __('Deleting all suspicious files can affect site functionality. Suspicious does not always mean malicious, so create a backup first and review the files before continuing. Protected core files will still be skipped.', 'firephage-security'),
-                    'confirmDeleteSelectedBody' => __('Deleting selected suspicious files can affect site functionality. Suspicious does not always mean malicious, so create a backup first and review the files before continuing. Protected core files will still be skipped.', 'firephage-security'),
+                    'confirmDeleteTitle' => __('Delete Malicious File?', 'firephage-security'),
+                    'confirmDeleteAllTitle' => __('Delete All Malicious Files?', 'firephage-security'),
+                    'confirmDeleteSelectedTitle' => __('Delete Selected Malicious Files?', 'firephage-security'),
+                    'confirmDeleteBody' => __('Deleting a malicious file can affect site functionality, so create a backup first and review the file path before continuing.', 'firephage-security'),
+                    'confirmDeleteAllBody' => __('Deleting all malicious files can affect site functionality, so create a backup first and review the files before continuing. Protected core files will still be skipped.', 'firephage-security'),
+                    'confirmDeleteSelectedBody' => __('Deleting selected malicious files can affect site functionality, so create a backup first and review the files before continuing. Protected core files will still be skipped.', 'firephage-security'),
                     'confirmAction' => __('Delete', 'firephage-security'),
                     'cancelAction' => __('Cancel', 'firephage-security'),
                     'connectRequired' => __('Connect the plugin to FirePhage to load live Pro data.', 'firephage-security'),
@@ -184,7 +184,7 @@ final class Admin
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
                     'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
                     'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
-                    'deleteModalWarning' => __('This action can affect site functionality. Suspicious does not always mean malicious.', 'firephage-security'),
+                    'deleteModalWarning' => __('This action can affect site functionality. Review the file paths carefully before continuing.', 'firephage-security'),
                     'deleteModalBackup' => __('Create a backup before deleting files.', 'firephage-security'),
                     'deleteModalFileLabel' => __('File', 'firephage-security'),
                     'deleteModalFilesLabel' => __('Files', 'firephage-security'),
@@ -770,7 +770,7 @@ final class Admin
 
         wp_send_json_success([
             'message' => sprintf(
-                __('Deleted %1$d suspicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
+                __('Deleted %1$d malicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
                 (int) ($result['deleted_files'] ?? 0),
                 (int) ($result['skipped_files'] ?? 0)
             ),
@@ -798,7 +798,7 @@ final class Admin
 
         wp_send_json_success([
             'message' => sprintf(
-                __('Deleted %1$d selected suspicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
+                __('Deleted %1$d selected malicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
                 (int) ($result['deleted_files'] ?? 0),
                 (int) ($result['skipped_files'] ?? 0)
             ),
@@ -1317,7 +1317,7 @@ SVG;
     private function renderFindings(array $findings): string
     {
         if ($findings === []) {
-            return '<p class="firephage-empty">' . esc_html__('No suspicious files detected in the latest scan.', 'firephage-security') . '</p>';
+            return '<p class="firephage-empty">' . esc_html__('No malicious files detected in the latest scan.', 'firephage-security') . '</p>';
         }
 
         $pageSizeOptions = $this->pageSizeOptions(count($findings));
@@ -1329,7 +1329,7 @@ SVG;
         $html .= '</select></label>';
         $html .= '<div class="firephage-findings-actions">';
         $html .= '<button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" disabled>' . esc_html__('Delete Selected Files', 'firephage-security') . '</button>';
-        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Suspicious Files', 'firephage-security') . '</button>';
+        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Malicious Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
         $html .= '</div>';
         $html .= '</div>';
@@ -1349,7 +1349,7 @@ SVG;
             $confidence = isset($finding['confidence']) ? (string) $finding['confidence'] : 'low';
             $source = isset($finding['source']) ? (string) $finding['source'] : '';
             $reasons = isset($finding['reasons']) && is_array($finding['reasons']) ? $finding['reasons'] : [];
-            $status = $type === 'malware' ? __('Suspicious', 'firephage-security') : __('Integrity mismatch', 'firephage-security');
+            $status = $type === 'malware' ? __('Malicious', 'firephage-security') : __('Integrity mismatch', 'firephage-security');
             $detailParts = [];
 
             if ($source !== '') {
@@ -1367,7 +1367,7 @@ SVG;
             $html .= '<tr>';
             $html .= '<td>';
             if ($type === 'malware') {
-                $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select suspicious file', 'firephage-security') . '</label>';
+                $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select malicious file', 'firephage-security') . '</label>';
                 $html .= '<input type="checkbox" id="firephage-select-' . esc_attr(md5($file)) . '" class="firephage-findings-select" value="' . esc_attr($file) . '" />';
             } else {
                 $html .= '<span class="firephage-empty">' . esc_html__('No', 'firephage-security') . '</span>';
@@ -1493,7 +1493,7 @@ SVG;
 
         if ($status === 'stopped') {
             return sprintf(
-                __('Scan cancelled at %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Suspicious: %7$d. Use Resume Scan to continue from the saved position.', 'firephage-security'),
+                __('Scan cancelled at %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Malicious: %7$d. Use Resume Scan to continue from the saved position.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['discovered_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
@@ -1506,7 +1506,7 @@ SVG;
 
         if ($status === 'completed') {
             return sprintf(
-                __('Scan completed. %1$d files scanned, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d integrity mismatches, %6$d suspicious.', 'firephage-security'),
+                __('Scan completed. %1$d files scanned, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d integrity mismatches, %6$d malicious.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
                 (int) ($scan['clean_files'] ?? 0),
@@ -1521,7 +1521,7 @@ SVG;
         }
 
         return sprintf(
-            __('Scanning %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Suspicious: %7$d. Current file: %8$s', 'firephage-security'),
+            __('Scanning %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Malicious: %7$d. Current file: %8$s', 'firephage-security'),
             (int) ($scan['scanned_files'] ?? 0),
             (int) ($scan['discovered_files'] ?? 0),
             (int) ($scan['trusted_files'] ?? 0),
@@ -1703,7 +1703,7 @@ SVG;
         } else {
             if ($suspicious > 0) {
                 $score -= min(18, $suspicious * 3);
-                $addHint($hints, __('+5 resolve suspicious file findings', 'firephage-security'));
+                $addHint($hints, __('+5 resolve malicious file findings', 'firephage-security'));
             }
 
             if ($integrity > 0) {

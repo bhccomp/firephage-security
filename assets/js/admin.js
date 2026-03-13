@@ -251,13 +251,13 @@
                 if (response.success) {
                     findingsPage = 1;
                     renderScanState(response.data.state);
-                    showToast(response.data.message || 'Suspicious files deleted.');
+                    showToast(response.data.message || 'Malicious files deleted.');
                 } else {
-                    showToast((response.data && response.data.message) || 'Unable to delete suspicious files.', true);
+                    showToast((response.data && response.data.message) || 'Unable to delete malicious files.', true);
                 }
             })
             .fail((xhr) => {
-                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete suspicious files.', true);
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to delete malicious files.', true);
             })
             .always(() => {
                 button.removeAttribute('disabled');
@@ -274,7 +274,7 @@
             .done((response) => {
                 if (response.success) {
                     renderScanState(response.data.state);
-                    showToast(response.data.message || 'The suspicious file was deleted.');
+                    showToast(response.data.message || 'The malicious file was deleted.');
                 } else {
                     showToast((response.data && response.data.message) || 'Unable to delete the file.', true);
                 }
@@ -300,7 +300,7 @@
                 if (response.success) {
                     selectedFindings = new Set();
                     renderScanState(response.data.state);
-                    showToast(response.data.message || 'Selected suspicious files deleted.');
+                    showToast(response.data.message || 'Selected malicious files deleted.');
                 } else {
                     showToast((response.data && response.data.message) || 'Unable to delete selected files.', true);
                 }
@@ -677,18 +677,18 @@
         }
 
         if (state.status === 'stopped') {
-            return `Scan cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
+            return `Scan cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
         }
 
         if (state.status === 'completed') {
-            return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} suspicious.`;
+            return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} malicious.`;
         }
 
         if (state.status === 'failed') {
             return `Scan failed: ${state.last_error || 'Unknown error'}`;
         }
 
-        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Suspicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
+        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
     };
 
     const pageSizeOptions = (count) => {
@@ -706,7 +706,7 @@
     const findingsMarkup = (findings) => {
         if (!findings || findings.length === 0) {
             selectedFindings = new Set();
-            return '<p class="firephage-empty">No suspicious files detected in the latest scan.</p>';
+            return '<p class="firephage-empty">No malicious files detected in the latest scan.</p>';
         }
 
         const rows = findings.slice().reverse();
@@ -745,7 +745,7 @@
                 </thead>
                 <tbody>
                     ${pagedRows.map((finding) => {
-                        const status = finding.type === 'malware' ? 'Suspicious' : 'Integrity mismatch';
+                        const status = finding.type === 'malware' ? 'Malicious' : 'Integrity mismatch';
                         const details = [];
 
                         if (finding.source) {

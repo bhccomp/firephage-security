@@ -243,3 +243,5 @@
   - full-content inspection is skipped for files already decided by integrity trust or exact hash indicators
   - known integrity mismatches now return immediately as integrity findings instead of doing full content inspection first
   - discovery now processes larger directory batches and buffers manifest writes to reduce repeated rescans of large folders and per-file I/O overhead
+- Malware scan findings are no longer capped at 100 rows; delete-all operations must operate on the full findings list, not the current visible page.
+- User-facing plugin wording should use "Malicious" instead of "Suspicious" for malware findings and deletion actions.

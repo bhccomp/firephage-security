@@ -173,12 +173,12 @@ final class Notifications
         }
 
         if ($items === '') {
-            $items = '<li>' . esc_html__('Suspicious files were detected, but the current alert does not include individual rows.', 'firephage-security') . '</li>';
+            $items = '<li>' . esc_html__('Malicious files were detected, but the current alert does not include individual rows.', 'firephage-security') . '</li>';
         }
 
-        $content = '<p>' . esc_html__('FirePhage Security detected suspicious files during the latest malware scan.', 'firephage-security') . '</p>';
-        $content .= '<div class="metric-row"><div class="metric-card"><span>Suspicious Files</span><strong>' . (int) ($state['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Integrity Issues</span><strong>' . (int) ($state['integrity_issues'] ?? 0) . '</strong></div></div>';
-        $content .= '<h3>' . esc_html__('Recent suspicious paths', 'firephage-security') . '</h3><ul>' . $items . '</ul>';
+        $content = '<p>' . esc_html__('FirePhage Security detected malicious files during the latest malware scan.', 'firephage-security') . '</p>';
+        $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($state['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Integrity Issues</span><strong>' . (int) ($state['integrity_issues'] ?? 0) . '</strong></div></div>';
+        $content .= '<h3>' . esc_html__('Recent malicious paths', 'firephage-security') . '</h3><ul>' . $items . '</ul>';
         $content .= '<p><a class="button" href="' . esc_url(admin_url('admin.php?page=firephage-security')) . '">' . esc_html__('Open FirePhage Security', 'firephage-security') . '</a></p>';
         $content .= $this->upsellPanel($settings);
 
@@ -235,7 +235,7 @@ final class Notifications
         $pendingUpdates = (int) ($updates['core_updates'] ?? 0) + (int) ($updates['plugin_updates'] ?? 0) + (int) ($updates['theme_updates'] ?? 0);
 
         $content = '<p>' . esc_html__('Here is your weekly FirePhage Security summary for this WordPress site.', 'firephage-security') . '</p>';
-        $content .= '<div class="metric-row"><div class="metric-card"><span>Suspicious Files</span><strong>' . (int) ($scan['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Active Lockouts</span><strong>' . (int) ($bruteForce['active_lockouts_count'] ?? 0) . '</strong></div><div class="metric-card"><span>Pending Updates</span><strong>' . $pendingUpdates . '</strong></div></div>';
+        $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($scan['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Active Lockouts</span><strong>' . (int) ($bruteForce['active_lockouts_count'] ?? 0) . '</strong></div><div class="metric-card"><span>Pending Updates</span><strong>' . $pendingUpdates . '</strong></div></div>';
         $content .= '<h3>' . esc_html__('Update reminders', 'firephage-security') . '</h3><ul><li>' . sprintf(esc_html__('%d WordPress core updates pending', 'firephage-security'), (int) ($updates['core_updates'] ?? 0)) . '</li><li>' . sprintf(esc_html__('%d plugin updates pending', 'firephage-security'), (int) ($updates['plugin_updates'] ?? 0)) . '</li><li>' . sprintf(esc_html__('%d theme updates pending', 'firephage-security'), (int) ($updates['theme_updates'] ?? 0)) . '</li></ul>';
         $content .= '<h3>' . esc_html__('Scanner and login protection', 'firephage-security') . '</h3><ul><li>' . sprintf(esc_html__('Last scan status: %s', 'firephage-security'), esc_html(ucfirst((string) ($scan['status'] ?? 'idle')))) . '</li><li>' . sprintf(esc_html__('Files scanned: %d', 'firephage-security'), (int) ($scan['scanned_files'] ?? 0)) . '</li><li>' . sprintf(esc_html__('Active brute-force lockouts: %d', 'firephage-security'), (int) ($bruteForce['active_lockouts_count'] ?? 0)) . '</li></ul>';
         $content .= '<p><a class="button" href="' . esc_url(admin_url('admin.php?page=firephage-security')) . '">' . esc_html__('Open FirePhage Security', 'firephage-security') . '</a></p>';
