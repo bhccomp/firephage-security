@@ -160,6 +160,8 @@ final class Admin
                     'stopScan' => __('Cancel Current Scan', 'firephage-security'),
                     'notConnected' => __('Not connected', 'firephage-security'),
                     'clearFindings' => __('Clear Findings', 'firephage-security'),
+                    'findingsSearchPlaceholder' => __('Search findings...', 'firephage-security'),
+                    'findingsSearchLabel' => __('Search findings', 'firephage-security'),
                     'deleteSuspiciousFiles' => __('Delete All Malicious Files', 'firephage-security'),
                     'deleteSelectedFiles' => __('Delete Selected Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
@@ -1333,6 +1335,7 @@ SVG;
 
         $pageSizeOptions = $this->pageSizeOptions(count($findings));
         $html = '<div class="firephage-findings-toolbar">';
+        $html .= '<label class="firephage-findings-search"><span class="screen-reader-text">' . esc_html__('Search findings', 'firephage-security') . '</span><input type="search" class="firephage-findings-search-input" placeholder="' . esc_attr__('Search findings...', 'firephage-security') . '" /></label>';
         $html .= '<label class="firephage-findings-rows"><span>' . esc_html__('Rows', 'firephage-security') . '</span><select class="firephage-findings-page-size">';
         foreach ($pageSizeOptions as $option) {
             $html .= '<option value="' . esc_attr((string) $option) . '"' . selected($option, 25, false) . '>' . esc_html((string) $option) . '</option>';

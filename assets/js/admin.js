@@ -85,6 +85,7 @@
     let currentScanState = {};
     let findingsPage = 1;
     let findingsPageSize = 25;
+    let findingsSearchQuery = '';
     let pendingConfirmation = null;
     let selectedFindings = new Set();
     let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true, verificationToken: '' };
@@ -708,13 +709,53 @@
         return options;
     };
 
+    const findingsSearchText = (finding) => {
+        if (!finding || typeof finding !== 'object') {
+            return '';
+        }
+
+        const parts = [
+            finding.file || '',
+            finding.type || '',
+            finding.source || '',
+            finding.confidence || '',
+        ];
+
+        if (finding.reasons && Array.isArray(finding.reasons)) {
+            parts.push(finding.reasons.join(' '));
+        }
+
+        return parts.join(' ').toLowerCase();
+    };
+
     const findingsMarkup = (findings) => {
         if (!findings || findings.length === 0) {
             selectedFindings = new Set();
             return '<p class="firephage-empty">No malicious files detected in the latest scan.</p>';
         }
 
-        const rows = findings.slice().reverse();
+        const searchQuery = findingsSearchQuery.trim().toLowerCase();
+        const rows = findings.slice().reverse().filter((finding) => {
+            if (searchQuery === '') {
+                return true;
+            }
+
+            return findingsSearchText(finding).includes(searchQuery);
+        });
+
+        if (rows.length === 0) {
+            return `<div class="firephage-findings-toolbar">
+                <label class="firephage-findings-search">
+                    <span class="screen-reader-text">${escapeHtml(firephageAdmin.labels.findingsSearchLabel || 'Search findings')}</span>
+                    <input type="search" class="firephage-findings-search-input" placeholder="${escapeHtml(firephageAdmin.labels.findingsSearchPlaceholder || 'Search findings...')}" value="${escapeHtml(findingsSearchQuery)}" />
+                </label>
+                <div class="firephage-findings-actions">
+                    <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
+                </div>
+            </div>
+            <p class="firephage-empty">No findings match the current search.</p>`;
+        }
+
         const availablePageSizes = pageSizeOptions(rows.length);
         if (!availablePageSizes.includes(findingsPageSize)) {
             findingsPageSize = availablePageSizes.includes(25) ? 25 : availablePageSizes[availablePageSizes.length - 1];
@@ -725,6 +766,10 @@
         const pagedRows = rows.slice(start, start + findingsPageSize);
 
         return `<div class="firephage-findings-toolbar">
+            <label class="firephage-findings-search">
+                <span class="screen-reader-text">${escapeHtml(firephageAdmin.labels.findingsSearchLabel || 'Search findings')}</span>
+                <input type="search" class="firephage-findings-search-input" placeholder="${escapeHtml(firephageAdmin.labels.findingsSearchPlaceholder || 'Search findings...')}" value="${escapeHtml(findingsSearchQuery)}" />
+            </label>
             <label class="firephage-findings-rows">
                 <span>Rows</span>
                 <select class="firephage-findings-page-size">
@@ -1529,6 +1574,16 @@
 
             rerenderFindings();
         }
+    });
+
+    app.addEventListener('input', (event) => {
+        if (!(event.target instanceof HTMLInputElement) || !event.target.classList.contains('firephage-findings-search-input')) {
+            return;
+        }
+
+        findingsSearchQuery = event.target.value || '';
+        findingsPage = 1;
+        rerenderFindings();
     });
 
     app.addEventListener('click', (event) => {
