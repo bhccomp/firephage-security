@@ -95,6 +95,7 @@
 .firephage-scanner-card {
     display: flex;
     flex-direction: column;
+    min-height: 640px;
 }
 
 .firephage-scanner-card .firephage-note {
@@ -828,6 +829,10 @@
 @media (max-width: 960px) {
     .firephage-grid--scanner {
         grid-template-columns: 1fr;
+    }
+
+    .firephage-scanner-card {
+        min-height: 0;
     }
 }
 
