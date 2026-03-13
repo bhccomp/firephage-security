@@ -152,7 +152,7 @@ final class Plugin
         }
 
         delete_option(self::ACTIVATION_REDIRECT_OPTION);
-        wp_safe_redirect(admin_url('plugins.php'));
+        wp_safe_redirect(admin_url('admin.php?page=firephage-security'));
         exit;
     }
 
