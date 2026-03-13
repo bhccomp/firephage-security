@@ -233,3 +233,7 @@
   - plugin runtime code was reduced to a PHP 7.2-safe subset for broader shared-hosting compatibility
   - parser blockers such as `match`, arrow functions, typed properties, and native `str_starts_with` / `str_contains` / `str_ends_with` usage were removed from the plugin runtime
   - current scanner behavior, bundled signatures, exact-hash matching, repo-sync hash matching, and malicious-domain matching were kept intact while restoring compatibility
+- Malicious strings follow-up:
+  - plugin scanners now support a separate `malicious_strings` feed from FirePhage
+  - each entry is matched with a literal substring search (`strpos`) against file contents
+  - no regex is used for this feed, so pasted PHP/code snippets are treated as inert text
