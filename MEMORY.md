@@ -237,3 +237,7 @@
   - plugin scanners now support a separate `malicious_strings` feed from FirePhage
   - each entry is matched with a literal substring search (`strpos`) against file contents
   - no regex is used for this feed, so pasted PHP/code snippets are treated as inert text
+- Scanner performance follow-up:
+  - file analysis now streams `sha256` / `sha1` / `md5` hashing in chunks instead of using separate whole-file helpers
+  - scanners now return early on trusted checksum matches and exact hash matches before reading full file contents
+  - full-content inspection is skipped for files already decided by integrity trust or exact hash indicators
