@@ -265,7 +265,7 @@ final class Admin
         }
         echo '</div>';
         echo '</div>';
-        echo '<div class="firephage-card firephage-scanner-card">';
+        echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('Health Snapshot', 'firephage-security') . '</h3>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr(($health['summary']['bad'] ?? 0) > 0 ? 'warning' : 'good') . '">' . esc_html(($health['summary']['bad'] ?? 0) > 0 ? __('Attention', 'firephage-security') : __('Healthy', 'firephage-security')) . '</span>';

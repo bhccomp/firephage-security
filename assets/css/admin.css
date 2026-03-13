@@ -67,7 +67,7 @@
 
 .firephage-grid--scanner {
     grid-template-columns: minmax(280px, 1fr) minmax(520px, 2fr);
-    align-items: stretch;
+    align-items: start;
 }
 
 .firephage-grid--3 {
@@ -85,20 +85,6 @@
     border-radius: 18px;
     padding: 20px;
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-}
-
-.firephage-scanner-card,
-.firephage-findings-card {
-    height: 100%;
-}
-
-.firephage-scanner-card {
-    display: flex;
-    flex-direction: column;
-}
-
-.firephage-scanner-card .firephage-note {
-    margin-top: auto;
 }
 
 .firephage-section-spaced {
