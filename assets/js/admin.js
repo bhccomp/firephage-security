@@ -40,6 +40,7 @@
     const previewModalMeta = document.getElementById('firephage-preview-modal-meta');
     const previewModalContent = document.getElementById('firephage-preview-modal-content');
     const scannerSettingsModal = document.getElementById('firephage-scanner-settings-modal');
+    const startQuickScanButton = document.querySelector('.firephage-start-quick-scan');
     const firewallStatusBadge = document.getElementById('firephage-firewall-status-badge');
     const firewallSummaryText = document.getElementById('firephage-firewall-summary-text');
     const firewallConnectionNote = document.getElementById('firephage-firewall-connection-note');
@@ -162,7 +163,7 @@
         confirmModalSubmit.disabled = false;
     };
 
-    const openConfirmModal = ({ title, body, onConfirm }) => {
+    const openConfirmModal = ({ title, body, onConfirm, actionLabel = null, danger = true }) => {
         if (!confirmModal || !confirmModalTitle || !confirmModalBody || !confirmModalSubmit) {
             onConfirm();
             return;
@@ -171,6 +172,8 @@
         pendingConfirmation = onConfirm;
         confirmModalTitle.textContent = title;
         confirmModalBody.innerHTML = body;
+        confirmModalSubmit.textContent = actionLabel || (firephageAdmin.labels.confirmAction || 'Confirm');
+        confirmModalSubmit.className = danger ? 'button firephage-button-danger' : 'button button-primary';
         confirmModal.hidden = false;
         confirmModalSubmit.disabled = false;
     };
@@ -668,27 +671,29 @@
     };
 
     const progressLabel = (state) => {
+        const scanModeLabel = state.scan_mode === 'quick' ? 'Quick Scan' : 'Deep Scan';
+
         if (state.status === 'idle') {
             return 'The scanner is idle. Start a background scan to verify repository integrity and review untrusted code paths.';
         }
 
         if (state.status === 'discovering') {
-            return `Discovering candidate files: ${state.discovered_files} found so far.`;
+            return `${scanModeLabel}: discovering candidate files: ${state.discovered_files} found so far.`;
         }
 
         if (state.status === 'stopped') {
-            return `Scan cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
+            return `${scanModeLabel} cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
         }
 
         if (state.status === 'completed') {
-            return `Scan completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} malicious.`;
+            return `${scanModeLabel} completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} malicious.`;
         }
 
         if (state.status === 'failed') {
             return `Scan failed: ${state.last_error || 'Unknown error'}`;
         }
 
-        return `Scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
+        return `${scanModeLabel}: scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
     };
 
     const pageSizeOptions = (count) => {
@@ -847,7 +852,7 @@
             startScanButton.disabled = scanIsRunning;
             startScanButton.textContent = scanIsRunning
                 ? 'Scan Running...'
-                : (state.status === 'stopped' ? firephageAdmin.labels.resumeScan : firephageAdmin.labels.startScan);
+                : (state.status === 'stopped' ? firephageAdmin.labels.resumeScan : (firephageAdmin.labels.startDeepScan || firephageAdmin.labels.startScan));
         }
 
         if (overviewStartScanButton) {
@@ -864,6 +869,11 @@
         if (startNewScanButton) {
             startNewScanButton.style.display = state.status === 'stopped' ? '' : 'none';
             startNewScanButton.disabled = scanIsRunning;
+        }
+
+        if (startQuickScanButton) {
+            startQuickScanButton.style.display = scanIsRunning ? 'none' : '';
+            startQuickScanButton.disabled = scanIsRunning;
         }
 
         if (overviewNewScanButton) {
@@ -936,22 +946,30 @@
         }, 3000);
     };
 
-    const startBackgroundScan = (button = null, forceNew = false) => {
+    const startBackgroundScan = (button = null, forceNew = false, scanMode = 'deep') => {
         const resumingScan = currentScanState.status === 'stopped';
         const startingFresh = forceNew;
+        const effectiveMode = resumingScan && !startingFresh ? (currentScanState.scan_mode || 'deep') : scanMode;
+        const startingLabel = effectiveMode === 'quick'
+            ? (firephageAdmin.labels.scanStartingQuick || 'Starting Quick Scan…')
+            : (firephageAdmin.labels.scanStartingDeep || firephageAdmin.labels.scanStarting);
 
         if (button) {
             button.disabled = true;
-            button.textContent = (resumingScan && !startingFresh) ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
+            button.textContent = (resumingScan && !startingFresh) ? firephageAdmin.labels.scanResuming : startingLabel;
         }
 
         if (startScanButton) {
             startScanButton.disabled = true;
-            startScanButton.textContent = (resumingScan && !startingFresh) ? firephageAdmin.labels.scanResuming : firephageAdmin.labels.scanStarting;
+            startScanButton.textContent = (resumingScan && !startingFresh) ? firephageAdmin.labels.scanResuming : startingLabel;
         }
 
         if (startNewScanButton) {
             startNewScanButton.disabled = true;
+        }
+
+        if (startQuickScanButton) {
+            startQuickScanButton.disabled = true;
         }
 
         if (overviewNewScanButton) {
@@ -960,11 +978,14 @@
 
         request('firephage_start_scan', {
             force_new: forceNew ? '1' : '',
+            scan_mode: effectiveMode,
         })
             .done((response) => {
                 if (response.success) {
                     renderScanState(response.data.state);
-                    showToast(startingFresh ? 'A new background malware scan started.' : (resumingScan ? 'Background malware scan resumed.' : 'Background malware scan started.'));
+                    showToast(startingFresh
+                        ? (effectiveMode === 'quick' ? 'A new Quick Scan started.' : 'A new Deep Scan started.')
+                        : (resumingScan ? 'Background malware scan resumed.' : (effectiveMode === 'quick' ? 'Quick Scan started.' : 'Deep Scan started.')));
                 } else {
                     showToast(response.data.message || 'Unable to start the scan.', true);
                 }
@@ -976,16 +997,20 @@
                 if (!scanIsRunning) {
                     if (startScanButton) {
                         startScanButton.disabled = false;
-                        startScanButton.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.resumeScan : firephageAdmin.labels.startScan;
+                        startScanButton.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.resumeScan : (firephageAdmin.labels.startDeepScan || firephageAdmin.labels.startScan);
                     }
 
                     if (button) {
                         button.disabled = false;
-                        button.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.overviewResumeScan : firephageAdmin.labels.overviewStartScan;
+                        button.textContent = currentScanState.status === 'stopped' ? firephageAdmin.labels.overviewResumeScan : (effectiveMode === 'quick' ? (firephageAdmin.labels.startQuickScan || 'Start Quick Scan') : (firephageAdmin.labels.startDeepScan || firephageAdmin.labels.overviewStartScan));
                     }
 
                     if (startNewScanButton) {
                         startNewScanButton.disabled = false;
+                    }
+
+                    if (startQuickScanButton) {
+                        startQuickScanButton.disabled = false;
                     }
 
                     if (overviewNewScanButton) {
@@ -1006,6 +1031,18 @@
     if (startScanButton) {
         startScanButton.addEventListener('click', () => {
             startBackgroundScan();
+        });
+    }
+
+    if (startQuickScanButton) {
+        startQuickScanButton.addEventListener('click', () => {
+            openConfirmModal({
+                title: firephageAdmin.labels.quickScanTitle || 'Start Quick Scan?',
+                body: `<p>${escapeHtml(firephageAdmin.labels.quickScanBody || 'Quick Scan is faster, but it is less effective than Deep Scan.')}</p>`,
+                actionLabel: firephageAdmin.labels.quickScanAction || 'Start Quick Scan',
+                danger: false,
+                onConfirm: () => startBackgroundScan(startQuickScanButton, true, 'quick'),
+            });
         });
     }
 

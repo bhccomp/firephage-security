@@ -141,9 +141,17 @@ final class Admin
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('firephage_admin'),
                 'labels' => [
-                    'startScan' => __('Start Background Scan', 'firephage-security'),
-                    'startNewScan' => __('Start New Scan', 'firephage-security'),
+                    'startScan' => __('Start Deep Scan', 'firephage-security'),
+                    'startNewScan' => __('Start New Deep Scan', 'firephage-security'),
                     'resumeScan' => __('Resume Scan', 'firephage-security'),
+                    'startQuickScan' => __('Start Quick Scan', 'firephage-security'),
+                    'startDeepScan' => __('Start Deep Scan', 'firephage-security'),
+                    'startNewDeepScan' => __('Start New Deep Scan', 'firephage-security'),
+                    'scanStartingQuick' => __('Starting Quick Scan…', 'firephage-security'),
+                    'scanStartingDeep' => __('Starting Deep Scan…', 'firephage-security'),
+                    'quickScanTitle' => __('Start Quick Scan?', 'firephage-security'),
+                    'quickScanBody' => __('Quick Scan is faster, but it is less effective than Deep Scan because it skips broader malware-signature, malicious-domain, and heuristic analysis. If you suspect malware, Deep Scan is strongly recommended.', 'firephage-security'),
+                    'quickScanAction' => __('Start Quick Scan', 'firephage-security'),
                     'overviewStartScan' => __('Scan My Website For Malware', 'firephage-security'),
                     'overviewStartNewScan' => __('Start New Malware Scan', 'firephage-security'),
                     'overviewResumeScan' => __('Resume Malware Scan', 'firephage-security'),
@@ -319,8 +327,9 @@ final class Admin
         echo '<span><strong>' . esc_html__('Auto scan:', 'firephage-security') . '</strong> <span id="firephage-scanner-auto-scan">' . esc_html(($settings['malware_auto_scans_enabled'] ?? '0') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span></span>';
         echo '</div>';
         echo '<div class="firephage-inline-actions">';
-        echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Scan', 'firephage-security') : __('Start Background Scan', 'firephage-security')) . '</button>';
-        echo '<button type="button" class="button button-secondary firephage-start-new-scan" style="' . esc_attr($scan['status'] === 'stopped' ? '' : 'display:none;') . '">' . esc_html__('Start New Scan', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-primary firephage-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Scan', 'firephage-security') : __('Start Deep Scan', 'firephage-security')) . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-start-quick-scan" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? 'style="display:none;"' : '') . '>' . esc_html__('Start Quick Scan', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-start-new-scan" style="' . esc_attr($scan['status'] === 'stopped' ? '' : 'display:none;') . '">' . esc_html__('Start New Deep Scan', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-stop-scan" ' . (($scan['status'] === 'discovering' || $scan['status'] === 'scanning') ? '' : 'style="display:none;"') . '>' . esc_html__('Cancel Current Scan', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-open-scanner-settings">' . esc_html__('Settings', 'firephage-security') . '</button>';
         echo '</div>';
@@ -710,7 +719,8 @@ final class Admin
         $this->assertAjaxPermissions();
 
         $forceNew = isset($_POST['force_new']) && sanitize_text_field((string) $_POST['force_new']) === '1';
-        $result = $this->scanner->startScan($forceNew);
+        $scanMode = sanitize_text_field((string) ($_POST['scan_mode'] ?? 'deep'));
+        $result = $this->scanner->startScan($forceNew, $scanMode);
 
         if (is_wp_error($result)) {
             wp_send_json_error(['message' => $result->get_error_message()], 400);
