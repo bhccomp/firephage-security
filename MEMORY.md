@@ -241,3 +241,4 @@
   - file analysis now streams `sha256` / `sha1` / `md5` hashing in chunks instead of using separate whole-file helpers
   - scanners now return early on trusted checksum matches and exact hash matches before reading full file contents
   - full-content inspection is skipped for files already decided by integrity trust or exact hash indicators
+  - known integrity mismatches now return immediately as integrity findings instead of doing full content inspection first
