@@ -1608,7 +1608,7 @@
             const malwareFiles = (currentScanState.findings || []).filter((finding) => finding.type === 'malware').map((finding) => finding.file);
             openConfirmModal({
                 title: firephageAdmin.labels.confirmDeleteAllTitle,
-                body: `<p>${escapeHtml(firephageAdmin.labels.confirmDeleteAllBody)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalWarning)}</strong></p><p>${escapeHtml(firephageAdmin.labels.deleteModalBackup)}</p>${malwareFiles.length ? `<p><strong>${escapeHtml(firephageAdmin.labels.deleteModalFilesLabel)}:</strong></p><div class="firephage-confirm-files">${malwareFiles.slice(0, 8).map((file) => `<code>${escapeHtml(file)}</code>`).join('')}</div>` : ''}`,
+                body: `<p>${escapeHtml(firephageAdmin.labels.confirmDeleteAllBody)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalWarning)}</strong></p><p>${escapeHtml(firephageAdmin.labels.deleteModalBackup)}</p><p><strong>${escapeHtml(firephageAdmin.labels.deleteModalCountLabel || 'Files marked as malicious')}:</strong> ${malwareFiles.length}</p>`,
                 onConfirm: () => deleteAllSuspiciousFiles(target),
             });
             return;

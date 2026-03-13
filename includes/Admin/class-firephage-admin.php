@@ -194,6 +194,7 @@ final class Admin
                     'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
                     'deleteModalWarning' => __('This action can affect site functionality. Review the file paths carefully before continuing.', 'firephage-security'),
                     'deleteModalBackup' => __('Create a backup before deleting files.', 'firephage-security'),
+                    'deleteModalCountLabel' => __('Files marked as malicious', 'firephage-security'),
                     'deleteModalFileLabel' => __('File', 'firephage-security'),
                     'deleteModalFilesLabel' => __('Files', 'firephage-security'),
                     'refreshHealthDone' => __('Health checks refreshed.', 'firephage-security'),
