@@ -16,8 +16,8 @@ final class Settings
     public function all(): array
     {
         $defaults = [
-            'dashboard_url' => 'https://waf-saas.firephage.com',
-            'checksum_service_url' => 'https://waf-saas.firephage.com',
+            'dashboard_url' => 'https://firephage.com',
+            'checksum_service_url' => 'https://firephage.com',
             'connection_token' => '',
             'site_token' => '',
             'site_id' => '',

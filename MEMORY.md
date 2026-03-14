@@ -25,6 +25,17 @@
   - commit and push the plugin repo
   - pull the latest changes on the remote WordPress server so `nodesfoundry.com` has the updated plugin code
 
+## Canonical Dashboard Domain (Latest)
+- Plugin defaults now point at the canonical FirePhage domain:
+  - `https://firephage.com`
+- Updated plugin-side defaults/fallbacks:
+  - dashboard URL default
+  - checksum service URL default
+  - malware scanner SaaS fallback base URL
+  - notification upsell link fallback
+- Practical effect:
+  - new plugin installs and untouched default settings should now connect to `firephage.com` instead of the older `waf-saas.firephage.com` host.
+
 ## Current Plugin State
 - The plugin now has a first functional admin implementation instead of scaffold-only placeholders.
 - Current shipped pieces:

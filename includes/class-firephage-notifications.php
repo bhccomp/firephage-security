@@ -253,7 +253,7 @@ final class Notifications
      */
     private function upsellPanel(array $settings): string
     {
-        return '<div class="upsell-panel"><p class="upsell-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p><h3>' . esc_html__('Upgrade to WAF, CDN, and Cache', 'firephage-security') . '</h3><p>' . esc_html__('Add advanced firewall protection, global CDN delivery, and cache controls built for major WordPress performance gains.', 'firephage-security') . '</p><p><a class="button button-alt" href="' . esc_url((string) ($settings['dashboard_url'] ?? 'https://waf-saas.firephage.com')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Explore FirePhage', 'firephage-security') . '</a></p></div>';
+        return '<div class="upsell-panel"><p class="upsell-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p><h3>' . esc_html__('Upgrade to WAF, CDN, and Cache', 'firephage-security') . '</h3><p>' . esc_html__('Add advanced firewall protection, global CDN delivery, and cache controls built for major WordPress performance gains.', 'firephage-security') . '</p><p><a class="button button-alt" href="' . esc_url((string) ($settings['dashboard_url'] ?? 'https://firephage.com')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Explore FirePhage', 'firephage-security') . '</a></p></div>';
     }
 
     private function wrapEmail(string $eyebrow, string $title, string $content): string
