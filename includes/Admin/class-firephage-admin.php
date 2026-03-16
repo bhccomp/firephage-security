@@ -507,7 +507,7 @@ final class Admin
         echo '<div>';
         echo '<p class="firephage-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p>';
         echo '<h2>' . esc_html__('Firewall Control', 'firephage-security') . '</h2>';
-        echo '<p>' . esc_html__('Review live protection status, inspect recent firewall activity, and manage paid WAF controls from WordPress once this site is connected to FirePhage.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Review live protection status, inspect recent firewall activity, and manage paid WAF controls from WordPress whenever this site is connected and covered by an active FirePhage plan.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<span class="firephage-pro-badge">' . esc_html__('Pro', 'firephage-security') . '</span>';
         echo '</div>';
@@ -515,10 +515,10 @@ final class Admin
         echo '<div class="firephage-card firephage-pro-card">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('Firewall Status', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-firewall-status-badge">' . esc_html__('Pro Preview', 'firephage-security') . '</span>';
+        echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-firewall-status-badge">' . esc_html__('Waiting', 'firephage-security') . '</span>';
         echo '</div>';
-        echo '<p id="firephage-firewall-summary-text">' . esc_html__('Surface protection mode, current zone health, recent attack counts, and shield status here after dashboard wiring is ready.', 'firephage-security') . '</p>';
-        echo '<p class="firephage-note" id="firephage-firewall-connection-note">' . esc_html__('Connect FirePhage to view live firewall analytics, then upgrade if you want to manage WAF controls from WordPress.', 'firephage-security') . '</p>';
+        echo '<p id="firephage-firewall-summary-text">' . esc_html__('FirePhage will load current zone health, recent attack counts, and recent firewall decisions here for paid connected sites.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note" id="firephage-firewall-connection-note">' . esc_html__('Connect FirePhage to view live firewall analytics. An active paid plan unlocks the live firewall and performance data shown here.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-metric-grid">';
         echo $this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'), 'firephage-firewall-requests-blocked', __('Connect to load live counts', 'firephage-security'));
         echo $this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'), 'firephage-firewall-challenge-rate', __('Connect to load live challenge data', 'firephage-security'));
@@ -570,7 +570,7 @@ final class Admin
         echo '<div>';
         echo '<p class="firephage-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p>';
         echo '<h2>' . esc_html__('Performance', 'firephage-security') . '</h2>';
-        echo '<p>' . esc_html__('Put CDN and cache controls in one place so paid users can manage acceleration, purge flows, and edge behavior directly from the plugin.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Put CDN and cache controls in one place so paid users can review acceleration, purge flows, and edge behavior directly from the plugin.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<span class="firephage-pro-badge">' . esc_html__('Pro', 'firephage-security') . '</span>';
         echo '</div>';
@@ -580,8 +580,8 @@ final class Admin
         echo '<h3>' . esc_html__('CDN', 'firephage-security') . '</h3>';
         echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-performance-status-badge">' . esc_html__('Locked', 'firephage-security') . '</span>';
         echo '</div>';
-        echo '<p id="firephage-performance-summary-text">' . esc_html__('This area can show edge status, cached asset ratio, active hostname routing, and quick links to purge or inspect delivery behavior.', 'firephage-security') . '</p>';
-        echo '<p class="firephage-note" id="firephage-performance-connection-note">' . esc_html__('Connect FirePhage to load performance data, then upgrade if you want to manage CDN and cache settings from WordPress.', 'firephage-security') . '</p>';
+        echo '<p id="firephage-performance-summary-text">' . esc_html__('FirePhage will load edge status, cache efficiency, active hostname routing, and delivery behavior here for paid connected sites.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note" id="firephage-performance-connection-note">' . esc_html__('Connect FirePhage to load performance data. An active paid plan unlocks the live CDN and cache telemetry shown here.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-fieldset">';
         echo '<label class="firephage-pro-field"><span>' . esc_html__('Zone hostname', 'firephage-security') . '</span><input type="text" id="firephage-performance-hostname" value="' . esc_attr__('Connect to load edge hostname', 'firephage-security') . '" disabled /></label>';
         echo '<label class="firephage-pro-field firephage-toggle"><input type="checkbox" id="firephage-performance-image-optimization" checked disabled /><span>' . esc_html__('Smart image optimization', 'firephage-security') . '</span></label>';

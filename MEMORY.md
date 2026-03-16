@@ -256,3 +256,13 @@
   - discovery now processes larger directory batches and buffers manifest writes to reduce repeated rescans of large folders and per-file I/O overhead
 - Malware scan findings are no longer capped at 100 rows; delete-all operations must operate on the full findings list, not the current visible page.
 - User-facing plugin wording should use "Malicious" instead of "Suspicious" for malware findings and deletion actions.
+- WordPress Pro tab follow-up:
+  - plugin firewall/performance tabs are now aligned with the live FirePhage SaaS integration rather than old preview wording
+  - plugin copy now explains that live firewall/performance telemetry depends on:
+    - a connected FirePhage site
+    - an active paid plan covering that site
+  - plugin JS now surfaces the SaaS-provided billing/access message for unpaid sites instead of only generic `Pro inactive` copy
+  - the plugin still reads firewall/performance payloads from FirePhage AJAX endpoints:
+    - `/api/plugin/firewall-summary`
+    - `/api/plugin/performance-summary`
+  - paid-site gating is now enforced on the SaaS side per covered site, so plugin Pro tabs only become fully live when the exact site is billed

@@ -392,7 +392,7 @@
         const statusTone = payload.pro_enabled ? 'good' : 'warning';
         setBadge(firewallStatusBadge, payload.pro_enabled ? 'Live' : 'Plan Required', statusTone);
         firewallSummaryText.textContent = `${payload.status.label} on ${payload.site.domain}. WAF status: ${payload.status.waf_status}.`;
-        firewallConnectionNote.textContent = payload.pro_enabled ? 'Live firewall telemetry is loaded from your connected FirePhage site.' : firephageAdmin.labels.proInactive;
+        firewallConnectionNote.textContent = payload.pro_enabled ? 'Live firewall telemetry is loaded from your connected FirePhage site.' : (payload.message || firephageAdmin.labels.proInactive);
 
         if (firewallRequestsBlocked) {
             firewallRequestsBlocked.textContent = `${payload.metrics.requests_blocked || 0}`;
@@ -444,7 +444,7 @@
         const tone = payload.pro_enabled ? 'good' : 'warning';
         setBadge(performanceStatusBadge, payload.pro_enabled ? 'Live' : 'Plan Required', tone);
         performanceSummaryText.textContent = `${payload.summary.requests_24h || 0} requests over the last 24 hours. Cache hit ratio: ${payload.summary.cache_hit_ratio || 0}%.`;
-        performanceConnectionNote.textContent = payload.pro_enabled ? 'Live CDN and cache telemetry is loaded from your connected FirePhage site.' : firephageAdmin.labels.proInactive;
+        performanceConnectionNote.textContent = payload.pro_enabled ? 'Live CDN and cache telemetry is loaded from your connected FirePhage site.' : (payload.message || firephageAdmin.labels.proInactive);
 
         if (performanceHostname) {
             performanceHostname.value = payload.summary.edge_hostname || 'No edge hostname yet';
