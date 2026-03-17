@@ -25,6 +25,16 @@
   - commit and push the plugin repo
   - pull the latest changes on the remote WordPress server so `nodesfoundry.com` has the updated plugin code
 
+## Cross-Project Coordination (Latest)
+- The SaaS marketing site now has public `Blog` and `Services` sections plus a shared marketing header/navigation.
+- Current relevant SaaS public URLs:
+  - `/blog`
+  - `/services`
+  - individual `/services/{service}` pages, including the WordPress Plugin page
+- Practical coordination note:
+  - when plugin messaging or upsell copy references dashboard/site capabilities, keep it aligned with the current SaaS public positioning across pricing, services, and blog content
+  - the dedicated WordPress Plugin service page now exists on the SaaS side and should be treated as the public explainer surface for that capability
+
 ## Canonical Dashboard Domain (Latest)
 - Plugin defaults now point at the canonical FirePhage domain:
   - `https://firephage.com`
