@@ -2,8 +2,12 @@
     margin-right: 20px;
 }
 
+.firephage-admin .wp-header-end {
+    margin: 0 0 20px;
+}
+
 .firephage-shell {
-    margin-top: 24px;
+    margin-top: 0;
 }
 
 .firephage-hero {
@@ -11,7 +15,7 @@
     justify-content: space-between;
     gap: 24px;
     align-items: end;
-    padding: 28px 32px;
+    padding: 24px 30px;
     border-radius: 20px;
     background:
         radial-gradient(circle at top right, rgba(56, 189, 248, 0.20), transparent 32%),
@@ -31,12 +35,12 @@
 .firephage-hero h1 {
     margin: 0;
     color: #fff;
-    font-size: 32px;
+    font-size: 30px;
 }
 
 .firephage-hero-copy {
     max-width: 720px;
-    margin: 12px 0 0;
+    margin: 10px 0 0;
     font-size: 15px;
     color: rgba(241, 245, 249, 0.9);
 }
@@ -83,8 +87,9 @@
     background: #fff;
     border: 1px solid #d8dee6;
     border-radius: 18px;
-    padding: 20px;
+    padding: 22px;
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .firephage-section-spaced {
@@ -99,6 +104,7 @@
     background:
         radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 34%),
         linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 14px 28px rgba(8, 47, 73, 0.08);
 }
 
 .firephage-score-value {
@@ -124,7 +130,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 .firephage-score-hint {
@@ -136,6 +142,23 @@
     color: #075985;
     font-size: 12px;
     font-weight: 600;
+}
+
+.firephage-recommendation-box {
+    margin-top: 20px;
+    padding: 16px 16px 0;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #eff6ff 0%, rgba(255,255,255,0) 100%);
+    border-top: 1px solid #dbe7f1;
+}
+
+.firephage-section-kicker {
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0369a1;
 }
 
 .firephage-meta-line {
@@ -177,9 +200,36 @@
     color: #334155;
 }
 
+.firephage-mini-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin: 16px 0 0;
+}
+
+.firephage-stat-card--compact {
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.firephage-stat-card--compact .firephage-stat-value {
+    font-size: 24px;
+    margin: 8px 0 6px;
+}
+
+.firephage-panel-header--subsection {
+    margin-top: 24px;
+}
+
+.firephage-panel-header--subsection h3 {
+    margin: 0 0 6px;
+}
+
 .firephage-pro-note {
-    background: linear-gradient(180deg, #fff7ed 0%, #fff 100%);
-    border-color: #fed7aa;
+    background: linear-gradient(180deg, #fffaf2 0%, #fff 100%);
+    border-color: #fde3bd;
+    color: #5b4a30;
 }
 
 .firephage-pro-fieldset--disabled {
@@ -264,6 +314,11 @@
     margin-bottom: 16px;
 }
 
+.firephage-panel-header p {
+    margin: 0;
+    max-width: 760px;
+}
+
 .firephage-panel-header h2,
 .firephage-card h2,
 .firephage-card h3,
@@ -311,6 +366,10 @@
 
 .firephage-list-spaced {
     margin-top: 16px;
+}
+
+.firephage-list li {
+    margin-bottom: 8px;
 }
 
 .firephage-progress {
@@ -361,6 +420,10 @@
     margin-bottom: 12px;
 }
 
+.firephage-findings-intro {
+    margin: 0 0 16px;
+}
+
 .firephage-findings-pagination {
     margin-top: 12px;
 }
@@ -409,6 +472,26 @@
     border-color: #fca5a5 !important;
     background: #fca5a5 !important;
     color: #fff !important;
+}
+
+.firephage-inline-actions .button,
+.firephage-findings-actions .button,
+.firephage-row-actions .button {
+    transition: all 0.18s ease;
+}
+
+.firephage-inline-actions .button-secondary,
+.firephage-findings-actions .button-secondary,
+.firephage-row-actions .button-secondary {
+    border-color: #cbd5e1;
+    color: #334155;
+}
+
+.firephage-inline-actions .button-secondary:hover,
+.firephage-findings-actions .button-secondary:hover,
+.firephage-row-actions .button-secondary:hover {
+    border-color: #94a3b8;
+    color: #0f172a;
 }
 
 .firephage-finding-table {
@@ -522,8 +605,8 @@
     padding: 24px;
     border-radius: 20px;
     background:
-        radial-gradient(circle at top right, rgba(249, 115, 22, 0.18), transparent 34%),
-        linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 34%),
+        linear-gradient(135deg, #172033 0%, #1f2937 100%);
     color: #f8fafc;
 }
 
@@ -544,7 +627,7 @@
     justify-content: center;
     padding: 8px 14px;
     border-radius: 999px;
-    background: #fb923c;
+    background: #f59e0b;
     color: #fff;
     font-size: 12px;
     font-weight: 700;
@@ -553,7 +636,8 @@
 }
 
 .firephage-pro-card {
-    background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+    background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+    border-color: #dde5ee;
 }
 
 .firephage-pro-metric-grid {
@@ -567,7 +651,7 @@
     padding: 14px;
     border: 1px dashed #cbd5e1;
     border-radius: 14px;
-    background: #fff;
+    background: #fcfdff;
 }
 
 .firephage-pro-metric__label {
@@ -648,10 +732,10 @@
 }
 
 .firephage-pro-upgrade {
-    border-color: #fed7aa;
+    border-color: #fde7c6;
     background:
-        radial-gradient(circle at top right, rgba(251, 146, 60, 0.14), transparent 40%),
-        linear-gradient(180deg, #fff7ed 0%, #fff 100%);
+        radial-gradient(circle at top right, rgba(251, 146, 60, 0.08), transparent 40%),
+        linear-gradient(180deg, #fffaf4 0%, #fff 100%);
 }
 
 .firephage-empty {
@@ -761,6 +845,35 @@
     color: #64748b;
 }
 
+.firephage-inline-summary__value {
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.firephage-modal-feedback {
+    margin: 12px 0 16px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.firephage-modal-feedback.is-success {
+    border-color: #86efac;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.firephage-modal-feedback.is-error {
+    border-color: #fca5a5;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
 .firephage-preview-content {
     margin: 0;
     max-height: min(70vh, 720px);
@@ -780,7 +893,7 @@
     position: fixed;
     right: 24px;
     bottom: 24px;
-    z-index: 9999;
+    z-index: 100001;
     min-width: 240px;
     max-width: 420px;
     padding: 14px 16px;
@@ -797,8 +910,27 @@
 .firephage-estimate-card {
     border-color: #bae6fd;
     background:
-        radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 38%),
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.06), transparent 38%),
         linear-gradient(180deg, #f8fdff 0%, #fff 100%);
+}
+
+.firephage-inline-actions--quiet {
+    gap: 16px;
+}
+
+.firephage-link-button {
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #0f5f99 !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    box-shadow: none !important;
+}
+
+.firephage-link-button:hover,
+.firephage-link-button:focus {
+    color: #0c4a6e !important;
 }
 
 @keyframes firephage-progress-sheen {

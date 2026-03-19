@@ -40,6 +40,9 @@
     const previewModalMeta = document.getElementById('firephage-preview-modal-meta');
     const previewModalContent = document.getElementById('firephage-preview-modal-content');
     const scannerSettingsModal = document.getElementById('firephage-scanner-settings-modal');
+    const scannerSettingsFeedback = document.getElementById('firephage-scanner-settings-feedback');
+    const signatureLastRefreshed = document.getElementById('firephage-signature-last-refreshed');
+    const freeTokenFeedback = document.getElementById('firephage-free-token-feedback');
     const startQuickScanButton = document.querySelector('.firephage-start-quick-scan');
     const firewallStatusBadge = document.getElementById('firephage-firewall-status-badge');
     const firewallSummaryText = document.getElementById('firephage-firewall-summary-text');
@@ -113,6 +116,28 @@
         showToast.timer = window.setTimeout(() => {
             toast.hidden = true;
         }, 3200);
+    };
+
+    const clearModalFeedback = (feedbackNode) => {
+        if (!feedbackNode) {
+            return;
+        }
+
+        feedbackNode.hidden = true;
+        feedbackNode.textContent = '';
+        feedbackNode.classList.remove('is-error', 'is-success');
+    };
+
+    const showModalFeedback = (feedbackNode, message, isError = false) => {
+        if (!feedbackNode) {
+            showToast(message, isError);
+            return;
+        }
+
+        feedbackNode.hidden = false;
+        feedbackNode.textContent = message;
+        feedbackNode.classList.toggle('is-error', isError);
+        feedbackNode.classList.toggle('is-success', !isError);
     };
 
     const escapeHtml = (value) => String(value || '')
@@ -207,6 +232,7 @@
             return;
         }
 
+        clearModalFeedback(scannerSettingsFeedback);
         scannerSettingsModal.hidden = true;
     };
 
@@ -215,6 +241,7 @@
             return;
         }
 
+        clearModalFeedback(scannerSettingsFeedback);
         scannerSettingsModal.hidden = false;
     };
 
@@ -223,6 +250,7 @@
             return;
         }
 
+        clearModalFeedback(freeTokenFeedback);
         freeTokenModal.hidden = true;
     };
 
@@ -244,6 +272,7 @@
             }
         }
 
+        clearModalFeedback(freeTokenFeedback);
         freeTokenModal.hidden = false;
     };
 
@@ -1245,6 +1274,7 @@
     if (scannerSettingsForm) {
         scannerSettingsForm.addEventListener('submit', (event) => {
             event.preventDefault();
+            clearModalFeedback(scannerSettingsFeedback);
 
             const submitButton = scannerSettingsForm.querySelector('.firephage-save-scanner-settings');
             const formData = new window.FormData(scannerSettingsForm);
@@ -1273,14 +1303,13 @@
                         if (autoScanNode && response.data.settings) {
                             autoScanNode.textContent = response.data.settings.malware_auto_scans_enabled === '1' ? 'Enabled' : 'Disabled';
                         }
-                        showToast(response.data.message || 'Scanner settings saved.');
-                        closeScannerSettingsModal();
+                        showModalFeedback(scannerSettingsFeedback, response.data.message || 'Scanner settings saved.');
                     } else {
-                        showToast((response.data && response.data.message) || 'Unable to save scanner settings.', true);
+                        showModalFeedback(scannerSettingsFeedback, (response.data && response.data.message) || 'Unable to save scanner settings.', true);
                     }
                 })
                 .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save scanner settings.', true);
+                    showModalFeedback(scannerSettingsFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save scanner settings.', true);
                 })
                 .always(() => {
                     if (submitButton) {
@@ -1293,19 +1322,23 @@
 
     if (refreshSignaturesButton) {
         refreshSignaturesButton.addEventListener('click', () => {
+            clearModalFeedback(scannerSettingsFeedback);
             refreshSignaturesButton.disabled = true;
             refreshSignaturesButton.textContent = firephageAdmin.labels.refreshingSignatures || 'Refreshing signatures...';
 
             request('firephage_refresh_signatures')
                 .done((response) => {
                     if (response.success) {
-                        showToast((response.data && response.data.message) || firephageAdmin.labels.refreshSignaturesDone || 'FirePhage signatures refreshed.');
+                        if (signatureLastRefreshed && response.data && response.data.last_refreshed_label) {
+                            signatureLastRefreshed.textContent = response.data.last_refreshed_label;
+                        }
+                        showModalFeedback(scannerSettingsFeedback, (response.data && response.data.message) || firephageAdmin.labels.refreshSignaturesDone || 'FirePhage signatures refreshed.');
                     } else {
-                        showToast((response.data && response.data.message) || 'Unable to refresh signatures.', true);
+                        showModalFeedback(scannerSettingsFeedback, (response.data && response.data.message) || 'Unable to refresh signatures.', true);
                     }
                 })
                 .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to refresh signatures.', true);
+                    showModalFeedback(scannerSettingsFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to refresh signatures.', true);
                 })
                 .always(() => {
                     refreshSignaturesButton.disabled = false;
@@ -1372,6 +1405,7 @@
     if (freeTokenForm) {
         freeTokenForm.addEventListener('submit', (event) => {
             event.preventDefault();
+            clearModalFeedback(freeTokenFeedback);
 
             const submitButton = freeTokenForm.querySelector('.firephage-register-free-token');
             const emailInput = freeTokenForm.querySelector('input[name="email"]');
@@ -1389,14 +1423,13 @@
                 .done((response) => {
                     if (response.success) {
                         renderFreeTokenSummary(response.data.settings || null);
-                        showToast(response.data.message || 'Free token activated.');
-                        closeFreeTokenModal();
+                        showModalFeedback(freeTokenFeedback, response.data.message || 'Free token activated.');
                     } else {
-                        showToast((response.data && response.data.message) || 'Unable to register the free token.', true);
+                        showModalFeedback(freeTokenFeedback, (response.data && response.data.message) || 'Unable to register the free token.', true);
                     }
                 })
                 .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to register the free token.', true);
+                    showModalFeedback(freeTokenFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to register the free token.', true);
                 })
                 .always(() => {
                     if (submitButton) {
@@ -1409,20 +1442,20 @@
 
     if (declineFreeTokenButton) {
         declineFreeTokenButton.addEventListener('click', () => {
+            clearModalFeedback(freeTokenFeedback);
             declineFreeTokenButton.disabled = true;
 
             request('firephage_decline_free_token')
                 .done((response) => {
                     if (response.success) {
                         renderFreeTokenSummary(response.data.settings || null);
-                        showToast(response.data.message || 'Free token declined.');
-                        closeFreeTokenModal();
+                        showModalFeedback(freeTokenFeedback, response.data.message || 'Free token declined.');
                     } else {
-                        showToast((response.data && response.data.message) || 'Unable to save your choice.', true);
+                        showModalFeedback(freeTokenFeedback, (response.data && response.data.message) || 'Unable to save your choice.', true);
                     }
                 })
                 .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save your choice.', true);
+                    showModalFeedback(freeTokenFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save your choice.', true);
                 })
                 .always(() => {
                     declineFreeTokenButton.disabled = false;
@@ -1432,20 +1465,20 @@
 
     if (dismissFreeTokenButton) {
         dismissFreeTokenButton.addEventListener('click', () => {
+            clearModalFeedback(freeTokenFeedback);
             dismissFreeTokenButton.disabled = true;
 
             request('firephage_dismiss_free_token_prompt')
                 .done((response) => {
                     if (response.success) {
                         renderFreeTokenSummary(response.data.settings || null);
-                        showToast(response.data.message || 'Prompt hidden.');
-                        closeFreeTokenModal();
+                        showModalFeedback(freeTokenFeedback, response.data.message || 'Prompt hidden.');
                     } else {
-                        showToast((response.data && response.data.message) || 'Unable to save your choice.', true);
+                        showModalFeedback(freeTokenFeedback, (response.data && response.data.message) || 'Unable to save your choice.', true);
                     }
                 })
                 .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save your choice.', true);
+                    showModalFeedback(freeTokenFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save your choice.', true);
                 })
                 .always(() => {
                     dismissFreeTokenButton.disabled = false;
@@ -1455,6 +1488,7 @@
 
     checkFreeTokenButtons.forEach((button) => {
         button.addEventListener('click', () => {
+            clearModalFeedback(freeTokenFeedback);
             button.disabled = true;
             button.textContent = firephageAdmin.labels.checkingFreeTokenStatus;
 
@@ -1462,13 +1496,13 @@
                 .done((response) => {
                     if (response.success) {
                         renderFreeTokenSummary(response.data.settings || null);
-                        showToast(response.data.message || 'Verification status updated.');
+                        showModalFeedback(freeTokenFeedback, response.data.message || 'Verification status updated.');
                     } else {
-                        showToast((response.data && response.data.message) || 'Unable to check verification status.', true);
+                        showModalFeedback(freeTokenFeedback, (response.data && response.data.message) || 'Unable to check verification status.', true);
                     }
                 })
                 .fail((xhr) => {
-                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to check verification status.', true);
+                    showModalFeedback(freeTokenFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to check verification status.', true);
                 })
                 .always(() => {
                     checkFreeTokenButtons.forEach((node) => {

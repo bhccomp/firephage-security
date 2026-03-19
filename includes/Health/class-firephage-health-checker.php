@@ -48,15 +48,15 @@ final class HealthChecker
                 __('HTTPS is enabled', 'firephage-security'),
                 strpos(home_url(), 'https://') === 0,
                 __('Site URLs use HTTPS.', 'firephage-security'),
-                __('WordPress is not configured to use HTTPS for the site URL.', 'firephage-security'),
+                __('WordPress is not using HTTPS for the site URL yet.', 'firephage-security'),
                 'critical'
             ),
             $this->makeCheck(
                 'debug_display',
-                __('Debug display is disabled', 'firephage-security'),
+                __('Debug messages are hidden from visitors', 'firephage-security'),
                 ! (defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY),
-                __('Errors are not exposed to visitors.', 'firephage-security'),
-                __('WP_DEBUG_DISPLAY appears to be enabled and may expose PHP errors publicly.', 'firephage-security'),
+                __('Debug messages are not shown to visitors.', 'firephage-security'),
+                __('Debug messages may be visible to visitors right now.', 'firephage-security'),
                 'warning'
             ),
             $this->makeCheck(
@@ -64,15 +64,15 @@ final class HealthChecker
                 __('Plugin and theme editor is disabled', 'firephage-security'),
                 defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT,
                 __('In-dashboard file editing is disabled.', 'firephage-security'),
-                __('Enable DISALLOW_FILE_EDIT to reduce the impact of compromised admin accounts.', 'firephage-security'),
+                __('Turn off the built-in file editor to reduce the impact of a compromised admin account.', 'firephage-security'),
                 'warning'
             ),
             $this->makeCheck(
                 'registration',
                 __('Public user registration is disabled', 'firephage-security'),
                 ! (bool) get_option('users_can_register'),
-                __('Anyone cannot register new accounts automatically.', 'firephage-security'),
-                __('Anyone can register accounts on this site. Confirm that this is intentional.', 'firephage-security'),
+                __('Visitors cannot create accounts automatically.', 'firephage-security'),
+                __('Anyone can register on this site. Make sure that is intentional.', 'firephage-security'),
                 'warning'
             ),
             $this->makeCheck(
@@ -80,7 +80,7 @@ final class HealthChecker
                 __('XML-RPC is disabled', 'firephage-security'),
                 ! apply_filters('xmlrpc_enabled', true),
                 __('XML-RPC is disabled.', 'firephage-security'),
-                __('XML-RPC is enabled and can increase brute-force or abuse exposure.', 'firephage-security'),
+                __('XML-RPC is enabled and can increase login abuse exposure.', 'firephage-security'),
                 'warning'
             ),
             $this->makeCheck(
@@ -88,7 +88,7 @@ final class HealthChecker
                 __('Default "admin" username is not present', 'firephage-security'),
                 ! username_exists('admin'),
                 __('No user account named "admin" was found.', 'firephage-security'),
-                __('A user account named "admin" exists. Rename or remove it if possible.', 'firephage-security'),
+                __('A user account named "admin" still exists. Rename or remove it if possible.', 'firephage-security'),
                 'critical'
             ),
         ];
@@ -147,7 +147,7 @@ final class HealthChecker
         if (! is_array($checksums) || $checksums === []) {
             return [
                 'status' => 'unknown',
-                'summary' => __('WordPress.org checksums are not available for this install.', 'firephage-security'),
+                'summary' => __('WordPress.org file checks are not available for this install.', 'firephage-security'),
                 'modified' => [],
                 'missing' => [],
             ];
@@ -174,7 +174,7 @@ final class HealthChecker
         if ($modified === [] && $missing === []) {
             return [
                 'status' => 'good',
-                'summary' => __('WordPress core checksums match the official release.', 'firephage-security'),
+                'summary' => __('WordPress core files match the official release.', 'firephage-security'),
                 'modified' => [],
                 'missing' => [],
             ];
@@ -182,7 +182,7 @@ final class HealthChecker
 
         return [
             'status' => 'warning',
-            'summary' => __('Some WordPress core files differ from the official checksums.', 'firephage-security'),
+            'summary' => __('Some WordPress core files look modified compared with the official release.', 'firephage-security'),
             'modified' => array_slice($modified, 0, 20),
             'missing' => array_slice($missing, 0, 20),
         ];

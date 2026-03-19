@@ -150,7 +150,7 @@ final class Admin
                     'scanStartingQuick' => __('Starting Quick Scan…', 'firephage-security'),
                     'scanStartingDeep' => __('Starting Deep Scan…', 'firephage-security'),
                     'quickScanTitle' => __('Start Quick Scan?', 'firephage-security'),
-                    'quickScanBody' => __('Quick Scan is faster, but it is less effective than Deep Scan because it skips broader malware-signature, malicious-domain, and heuristic analysis. If you suspect malware, Deep Scan is strongly recommended.', 'firephage-security'),
+                    'quickScanBody' => __('Quick Scan is faster, but it checks less than a Deep Scan. If you already suspect malware, Deep Scan is the safer choice.', 'firephage-security'),
                     'quickScanAction' => __('Start Quick Scan', 'firephage-security'),
                     'overviewStartScan' => __('Scan My Website For Malware', 'firephage-security'),
                     'overviewStartNewScan' => __('Start New Malware Scan', 'firephage-security'),
@@ -176,7 +176,7 @@ final class Admin
                     'cancelAction' => __('Cancel', 'firephage-security'),
                     'connectRequired' => __('Connect the plugin to FirePhage to load live Pro data.', 'firephage-security'),
                     'loadingProData' => __('Loading FirePhage data...', 'firephage-security'),
-                    'proInactive' => __('A connected FirePhage site was found, but this site does not currently have an active Pro plan.', 'firephage-security'),
+                    'proInactive' => __('This site is connected, but it does not currently have an active Pro plan.', 'firephage-security'),
                     'saveProtectionSettings' => __('Save Protection Settings', 'firephage-security'),
                     'savingProtectionSettings' => __('Saving settings...', 'firephage-security'),
                     'saveScannerSettings' => __('Save Scanner Settings', 'firephage-security'),
@@ -193,7 +193,7 @@ final class Admin
                     'refreshingSignatures' => __('Refreshing signatures...', 'firephage-security'),
                     'clearActiveLockouts' => __('Clear Active Lockouts', 'firephage-security'),
                     'confirmClearLockoutsTitle' => __('Clear Active Lockouts?', 'firephage-security'),
-                    'confirmClearLockoutsBody' => __('This will immediately remove all active local lockouts and attempt counters for the free brute-force protection layer.', 'firephage-security'),
+                    'confirmClearLockoutsBody' => __('This will immediately clear all active local lockouts and failed-login counters for the plugin’s local protection layer.', 'firephage-security'),
                     'deleteModalWarning' => __('This action can affect site functionality. Review the file paths carefully before continuing.', 'firephage-security'),
                     'deleteModalBackup' => __('Create a backup before deleting files.', 'firephage-security'),
                     'deleteModalCountLabel' => __('Files marked as malicious', 'firephage-security'),
@@ -225,8 +225,13 @@ final class Admin
         $securityScore = $this->buildSecurityScore($health, $scan, $bruteForce, $settings);
         $lastScanFreshness = $this->humanizeTimestamp((string) ($scan['finished_at'] ?? ''));
         $lastSyncFreshness = $this->humanizeTimestamp((string) ($settings['last_sync_at'] ?? ''));
+        $pendingUpdates = (int) (($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0));
+        $scannerFindings = (int) ($scan['suspicious_files'] ?? 0);
+        $modifiedFiles = (int) ($scan['integrity_issues'] ?? 0);
 
         echo '<div class="wrap firephage-admin">';
+        echo '<h1 class="wp-heading-inline screen-reader-text">' . esc_html__('FirePhage Security', 'firephage-security') . '</h1>';
+        echo '<hr class="wp-header-end">';
         echo '<div class="firephage-shell">';
         echo '<div class="firephage-hero">';
         echo '<div>';
@@ -248,8 +253,8 @@ final class Admin
         echo '<div id="firephage-admin-app" data-scan-status="' . esc_attr(wp_json_encode($scan)) . '">';
         echo '<section class="firephage-tab-panel" data-panel="overview">';
         echo '<div class="firephage-panel-header">';
-        echo '<div><p>' . esc_html__('A quick view of local health, malware scan state, update exposure, and FirePhage sync status.', 'firephage-security') . '</p></div>';
-        echo '<button type="button" class="button button-secondary firephage-refresh-health">' . esc_html__('Refresh Checks', 'firephage-security') . '</button>';
+        echo '<div><h2>' . esc_html__('Overview', 'firephage-security') . '</h2><p>' . esc_html__('Start here to see whether the site looks healthy, what needs attention, and which fix to tackle next.', 'firephage-security') . '</p></div>';
+        echo '<button type="button" class="button button-secondary firephage-refresh-health">' . esc_html__('Refresh Site Checks', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<div class="firephage-grid firephage-grid--2">';
         echo '<div class="firephage-card firephage-score-card" id="firephage-security-score-card">';
@@ -259,18 +264,41 @@ final class Admin
         echo '</div>';
         echo '<div class="firephage-score-value"><strong id="firephage-security-score-value">' . esc_html((string) $securityScore['score']) . '</strong><span>/ 100</span></div>';
         echo '<p id="firephage-security-score-summary">' . esc_html($securityScore['summary']) . '</p>';
+        echo '<div class="firephage-recommendation-box">';
+        echo '<p class="firephage-section-kicker">' . esc_html__('Recommended next steps', 'firephage-security') . '</p>';
         echo '<div class="firephage-score-hints" id="firephage-security-score-hints">';
         foreach ($securityScore['hints'] as $hint) {
             echo '<span class="firephage-score-hint">' . esc_html($hint) . '</span>';
         }
         echo '</div>';
         echo '</div>';
+        echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
-        echo '<h3>' . esc_html__('Health Snapshot', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--' . esc_attr(($health['summary']['bad'] ?? 0) > 0 ? 'warning' : 'good') . '">' . esc_html(($health['summary']['bad'] ?? 0) > 0 ? __('Attention', 'firephage-security') : __('Healthy', 'firephage-security')) . '</span>';
+        echo '<h3>' . esc_html__('Site Status', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr(($health['summary']['bad'] ?? 0) > 0 ? 'warning' : 'good') . '">' . esc_html(($health['summary']['bad'] ?? 0) > 0 ? __('Needs review', 'firephage-security') : __('Looking good', 'firephage-security')) . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html(sprintf(__('%1$d checks passing, %2$d need review.', 'firephage-security'), (int) ($health['summary']['good'] ?? 0), (int) ($health['summary']['bad'] ?? 0))) . '</p>';
+        echo '<p>' . esc_html__('A quick summary of local protection, site checks, and the latest dashboard sync.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-mini-grid">';
+        echo $this->renderStatCard(
+            __('Security checks', 'firephage-security'),
+            sprintf(__('%1$d / %2$d', 'firephage-security'), (int) ($health['summary']['good'] ?? 0), (int) (($health['summary']['good'] ?? 0) + ($health['summary']['bad'] ?? 0))),
+            (int) ($health['summary']['bad'] ?? 0) > 0 ? __('Some checks still need review.', 'firephage-security') : __('Core settings look good.', 'firephage-security'),
+            'firephage-stat-card--compact'
+        );
+        echo $this->renderStatCard(
+            __('Local login protection', 'firephage-security'),
+            ($settings['bruteforce_enabled'] ?? '0') === '1' ? __('On', 'firephage-security') : __('Off', 'firephage-security'),
+            (string) ($bruteForce['summary'] ?? __('Login protection is not enabled yet.', 'firephage-security')),
+            'firephage-stat-card--compact'
+        );
+        echo $this->renderStatCard(
+            __('Last sync', 'firephage-security'),
+            $lastSyncFreshness,
+            $settings['last_sync_error'] !== '' ? __('The last dashboard sync reported an issue.', 'firephage-security') : __('The latest dashboard report was sent successfully.', 'firephage-security'),
+            'firephage-stat-card--compact'
+        );
+        echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
@@ -279,6 +307,10 @@ final class Admin
         echo '</div>';
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<p class="firephage-meta-line"><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-overview-last-scan">' . esc_html($lastScanFreshness) . '</span></p>';
+        echo '<div class="firephage-mini-grid">';
+        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files carefully before deleting anything.', 'firephage-security') : __('No malicious files were found in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files differ from a trusted version and should be reviewed.', 'firephage-security') : __('No modified core files were flagged.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo '</div>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Malware Scan', 'firephage-security') : __('Scan My Website For Malware', 'firephage-security')) . '</button>';
         echo '<button type="button" class="button button-secondary firephage-overview-new-scan" style="' . esc_attr($scan['status'] === 'stopped' ? '' : 'display:none;') . '">' . esc_html__('Start New Malware Scan', 'firephage-security') . '</button>';
@@ -288,25 +320,15 @@ final class Admin
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('Updates Status', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--' . esc_attr((($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)) > 0 ? 'warning' : 'good') . '">' . esc_html((($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0)) > 0 ? __('Updates Pending', 'firephage-security') : __('Current', 'firephage-security')) . '</span>';
+        echo '<span class="firephage-badge firephage-badge--' . esc_attr($pendingUpdates > 0 ? 'warning' : 'good') . '">' . esc_html($pendingUpdates > 0 ? __('Updates waiting', 'firephage-security') : __('All clear', 'firephage-security')) . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html(sprintf(__('%1$d core, %2$d plugin, and %3$d theme updates are waiting. %4$d inactive plugins should be reviewed.', 'firephage-security'), (int) ($updates['core_updates'] ?? 0), (int) ($updates['plugin_updates'] ?? 0), (int) ($updates['theme_updates'] ?? 0), (int) ($updates['inactive_plugins'] ?? 0))) . '</p>';
+        echo '<p>' . esc_html($pendingUpdates > 0
+            ? sprintf(__('%1$d updates are waiting across WordPress core, plugins, and themes. %2$d inactive plugins should also be reviewed.', 'firephage-security'), $pendingUpdates, (int) ($updates['inactive_plugins'] ?? 0))
+            : __('WordPress core, plugins, and themes are up to date right now.', 'firephage-security')) . '</p>';
         echo '</div>';
-        echo '<div class="firephage-card">';
-        echo '<div class="firephage-card-head">';
-        echo '<h3>' . esc_html__('Brute Force Protection', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--' . esc_attr((string) ($bruteForce['status'] ?? 'neutral')) . '" id="firephage-bruteforce-overview-badge">' . esc_html(($bruteForce['enabled'] ?? false) ? (($bruteForce['active_lockouts_count'] ?? 0) > 0 ? __('Active Lockouts', 'firephage-security') : __('Enabled', 'firephage-security')) : __('Disabled', 'firephage-security')) . '</span>';
         echo '</div>';
-        echo '<p id="firephage-bruteforce-overview-summary">' . esc_html((string) ($bruteForce['summary'] ?? '')) . '</p>';
-        echo '</div>';
-        echo '<div class="firephage-card">';
-        echo '<div class="firephage-card-head">';
-        echo '<h3>' . esc_html__('Latest Sync', 'firephage-security') . '</h3>';
-        echo '<span class="firephage-badge firephage-badge--' . esc_attr(($settings['connection_status'] ?? 'disconnected') === 'connected' ? 'good' : 'neutral') . '">' . esc_html($this->connectionStatusLabel((string) ($settings['connection_status'] ?? 'disconnected'))) . '</span>';
-        echo '</div>';
-        echo '<p><strong>' . esc_html__('Last report sync:', 'firephage-security') . '</strong> <span id="firephage-last-sync-freshness">' . esc_html($lastSyncFreshness) . '</span></p>';
-        echo '<p><strong>' . esc_html__('Last sync error:', 'firephage-security') . '</strong> ' . esc_html($settings['last_sync_error'] !== '' ? $settings['last_sync_error'] : __('None', 'firephage-security')) . '</p>';
-        echo '</div>';
+        echo '<div class="firephage-panel-header firephage-panel-header--subsection">';
+        echo '<div><h3>' . esc_html__('Detailed checks', 'firephage-security') . '</h3><p>' . esc_html__('These checks help explain why the score looks the way it does.', 'firephage-security') . '</p></div>';
         echo '</div>';
         echo '<div class="firephage-grid" id="firephage-health-checks">';
         foreach ($health['checks'] as $check) {
@@ -322,9 +344,14 @@ final class Admin
         echo '<h2>' . esc_html__('Malware Scanner', 'firephage-security') . '</h2>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->mapStateBadge((string) $scan['status'])) . '" id="firephage-scan-status-badge">' . esc_html($this->scanStatusLabel((string) $scan['status'])) . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html__('Runs in background batches so large sites can finish without locking up the admin screen, using official package checksums and local clean baselines before suspicious-code heuristics.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Runs safely in the background so larger sites can finish scanning without locking up wp-admin. FirePhage checks trusted WordPress packages, local clean-file history, and malware signatures when available.', 'firephage-security') . '</p>';
         echo '<div class="firephage-progress"><div class="firephage-progress-bar" id="firephage-scan-progress-bar" style="width:' . esc_attr((string) $this->scanProgress($scan)) . '%"></div></div>';
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
+        echo '<div class="firephage-mini-grid">';
+        echo $this->renderStatCard(__('Files checked', 'firephage-security'), (string) ((int) ($scan['scanned_files'] ?? 0)), __('Files reviewed in the current scan.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files before deciding whether to delete them.', 'firephage-security') : __('No malicious files were flagged in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files do not match a trusted version and should be checked.', 'firephage-security') : __('No modified core files were reported.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo '</div>';
         echo '<div class="firephage-inline-summary firephage-inline-summary--stacked">';
         echo '<span><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-scanner-last-scan">' . esc_html($lastScanFreshness) . '</span></span>';
         echo '<span><strong>' . esc_html__('Auto scan:', 'firephage-security') . '</strong> <span id="firephage-scanner-auto-scan">' . esc_html(($settings['malware_auto_scans_enabled'] ?? '0') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span></span>';
@@ -337,25 +364,29 @@ final class Admin
         echo '<button type="button" class="button button-secondary firephage-open-scanner-settings">' . esc_html__('Settings', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<ul class="firephage-list firephage-list-spaced">';
-        echo '<li>' . esc_html__('Verifies WordPress core, plugin, and theme files against official package checksums where available', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Seeds and reuses a local clean-file baseline for custom code that is not covered by repository checksums', 'firephage-security') . '</li>';
-        echo '<li>' . esc_html__('Supports wildcard exclusions such as /wp-content/cache/* or *.log for paths you never want scanned', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Checks WordPress core, plugins, and themes against official package checksums when available.', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Keeps a local clean-file baseline for custom code that WordPress.org cannot verify.', 'firephage-security') . '</li>';
+        echo '<li>' . esc_html__('Lets you exclude paths such as /wp-content/cache/* or *.log if you never want them scanned.', 'firephage-security') . '</li>';
         echo '</ul>';
-        echo '<p class="firephage-note">' . esc_html__('Checksum lookups may use FirePhage\'s public checksum cache and fall back to WordPress.org. Those requests send only package type, slug, and version. FirePhage dashboard connection remains separate and optional.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('Checksum lookups use FirePhage\'s public checksum cache first and fall back to WordPress.org. That sends only package type, slug, and version. Your paid dashboard connection is separate and optional.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-card firephage-findings-card">';
         echo '<h3>' . esc_html__('Latest findings', 'firephage-security') . '</h3>';
+        echo '<p class="firephage-findings-intro">' . esc_html__('Review flagged files carefully. Nothing is deleted automatically, and WordPress core files marked as protected will stay untouched.', 'firephage-security') . '</p>';
         echo '<div id="firephage-scan-findings">' . $this->renderFindings($scan['findings'] ?? []) . '</div>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
 
         echo '<section class="firephage-tab-panel" data-panel="updates">';
+        echo '<div class="firephage-panel-header">';
+        echo '<div><h2>' . esc_html__('Updates', 'firephage-security') . '</h2><p>' . esc_html__('See what is out of date without digging through several WordPress screens.', 'firephage-security') . '</p></div>';
+        echo '</div>';
         echo '<div class="firephage-grid">';
         echo $this->renderUpdateCard(__('Core updates', 'firephage-security'), (int) ($updates['core_updates'] ?? 0), __('Pending WordPress core releases.', 'firephage-security'));
         echo $this->renderUpdateCard(__('Plugin updates', 'firephage-security'), (int) ($updates['plugin_updates'] ?? 0), __('Installed plugins with updates available.', 'firephage-security'));
         echo $this->renderUpdateCard(__('Theme updates', 'firephage-security'), (int) ($updates['theme_updates'] ?? 0), __('Installed themes with updates available.', 'firephage-security'));
-        echo $this->renderUpdateCard(__('Inactive plugins', 'firephage-security'), (int) ($updates['inactive_plugins'] ?? 0), __('Inactive plugins increase maintenance surface and should be reviewed.', 'firephage-security'));
+        echo $this->renderUpdateCard(__('Inactive plugins', 'firephage-security'), (int) ($updates['inactive_plugins'] ?? 0), __('Inactive plugins can be removed if they are no longer needed.', 'firephage-security'));
         echo '</div>';
         echo '</section>';
 
@@ -370,17 +401,17 @@ final class Admin
         echo '<form id="firephage-bruteforce-form">';
         echo '<label class="firephage-toggle"><input type="checkbox" name="bruteforce_enabled" value="1" ' . checked($settings['bruteforce_enabled'], '1', false) . ' /><span>' . esc_html__('Enable local login protection', 'firephage-security') . '</span></label>';
         echo '<div class="firephage-grid firephage-grid--3 firephage-grid--compact">';
-        echo '<label class="firephage-field"><span>' . esc_html__('Failed attempts', 'firephage-security') . '</span><input type="number" min="3" max="20" step="1" name="bruteforce_threshold" value="' . esc_attr($settings['bruteforce_threshold']) . '" /></label>';
-        echo '<label class="firephage-field"><span>' . esc_html__('Detection window (minutes)', 'firephage-security') . '</span><input type="number" min="5" max="120" step="1" name="bruteforce_window_minutes" value="' . esc_attr($settings['bruteforce_window_minutes']) . '" /></label>';
-        echo '<label class="firephage-field"><span>' . esc_html__('Lockout duration (minutes)', 'firephage-security') . '</span><input type="number" min="5" max="1440" step="1" name="bruteforce_lockout_minutes" value="' . esc_attr($settings['bruteforce_lockout_minutes']) . '" /></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Failed logins before lockout', 'firephage-security') . '</span><input type="number" min="3" max="20" step="1" name="bruteforce_threshold" value="' . esc_attr($settings['bruteforce_threshold']) . '" /></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('How long to watch failed logins (minutes)', 'firephage-security') . '</span><input type="number" min="5" max="120" step="1" name="bruteforce_window_minutes" value="' . esc_attr($settings['bruteforce_window_minutes']) . '" /></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('How long to block logins (minutes)', 'firephage-security') . '</span><input type="number" min="5" max="1440" step="1" name="bruteforce_lockout_minutes" value="' . esc_attr($settings['bruteforce_lockout_minutes']) . '" /></label>';
         echo '</div>';
-        echo '<label class="firephage-toggle"><input type="checkbox" name="bruteforce_protect_xmlrpc" value="1" ' . checked($settings['bruteforce_protect_xmlrpc'], '1', false) . ' /><span>' . esc_html__('Apply the same protection rules to XML-RPC authentication', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="bruteforce_protect_xmlrpc" value="1" ' . checked($settings['bruteforce_protect_xmlrpc'], '1', false) . ' /><span>' . esc_html__('Apply the same rules to XML-RPC logins', 'firephage-security') . '</span></label>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="submit" class="button button-primary firephage-save-bruteforce">' . esc_html__('Save Protection Settings', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-clear-bruteforce-lockouts">' . esc_html__('Clear Active Lockouts', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</form>';
-        echo '<p class="firephage-note">' . esc_html__('This is a lightweight local protection layer for the free plugin. Once FirePhage Pro firewall controls are connected, that edge layer should become the primary brute-force defense and this local layer can stay conservative.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('This is the plugin’s local login protection. If you later connect FirePhage Pro, the edge firewall becomes your main login shield and this local layer can stay conservative.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
@@ -420,7 +451,7 @@ final class Admin
         echo '<h2>' . esc_html__('Notifications', 'firephage-security') . '</h2>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr(($settings['notifications_enabled'] ?? '1') === '1' ? 'good' : 'neutral') . '">' . esc_html(($settings['notifications_enabled'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security')) . '</span>';
         echo '</div>';
-        echo '<p>' . esc_html__('Send branded FirePhage Security emails to your preferred admin inbox, including weekly summaries and immediate alerts for malware findings or unexpected WordPress core edits.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Send FirePhage Security emails to the inbox you want to watch, including weekly summaries and immediate alerts for malware findings or unexpected WordPress core edits.', 'firephage-security') . '</p>';
         echo '<form id="firephage-notification-settings-form">';
         echo '<label class="firephage-toggle"><input type="checkbox" name="notifications_enabled" value="1" ' . checked($settings['notifications_enabled'] ?? '1', '1', false) . ' /><span>' . esc_html__('Enable email notifications', 'firephage-security') . '</span></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Notification email', 'firephage-security') . '</span><input type="email" name="notification_email" value="' . esc_attr($settings['notification_email'] !== '' ? $settings['notification_email'] : get_option('admin_email', '')) . '" /></label>';
@@ -431,7 +462,7 @@ final class Admin
         echo '<button type="submit" class="button button-primary firephage-save-notification-settings">' . esc_html__('Save Notification Settings', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</form>';
-        echo '<p class="firephage-note">' . esc_html__('Weekly reports summarize malware scans, brute-force lockouts, and outdated core, plugin, or theme versions. Immediate alerts are deduplicated per scan so the same result does not spam the inbox repeatedly.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('Weekly reports summarize scans, lockouts, and pending updates. Immediate alerts are deduplicated so the same scan does not flood your inbox.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-card">';
         echo '<div class="firephage-card-head">';
@@ -452,17 +483,17 @@ final class Admin
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-note firephage-pro-note">';
-        echo '<strong>' . esc_html__('FirePhage Pro channels', 'firephage-security') . '</strong> ';
-        echo esc_html__('Webhook, Slack, and Phone notifications are part of FirePhage Pro together with WAF, CDN, and Cache controls.', 'firephage-security');
+        echo '<strong>' . esc_html__('Extra notification channels', 'firephage-security') . '</strong> ';
+        echo esc_html__('Webhook, Slack, and phone alerts are available in FirePhage Pro if you later want broader alert routing.', 'firephage-security');
         echo '</div>';
         echo '<div class="firephage-pro-fieldset firephage-pro-fieldset--disabled">';
         echo '<label class="firephage-pro-field"><span>' . esc_html__('Webhook', 'firephage-security') . ' <span class="firephage-inline-pro-pill">' . esc_html__('Pro', 'firephage-security') . '</span></span><input type="url" value="https://hooks.example.com/firephage" disabled /></label>';
         echo '<label class="firephage-pro-field"><span>' . esc_html__('Slack', 'firephage-security') . ' <span class="firephage-inline-pro-pill">' . esc_html__('Pro', 'firephage-security') . '</span></span><input type="text" value="' . esc_attr__('#security-alerts', 'firephage-security') . '" disabled /></label>';
         echo '<label class="firephage-pro-field"><span>' . esc_html__('Phone', 'firephage-security') . ' <span class="firephage-inline-pro-pill">' . esc_html__('Pro', 'firephage-security') . '</span></span><input type="tel" value="+1 555 010 7788" disabled /></label>';
         echo '</div>';
-        echo '<div class="firephage-inline-actions firephage-section-spaced">';
-        echo '<button type="button" class="button button-secondary" data-tab-target="firewall">' . esc_html__('View Pro Protection', 'firephage-security') . '</button>';
-        echo '<button type="button" class="button button-secondary" data-tab-target="performance">' . esc_html__('View Pro Performance', 'firephage-security') . '</button>';
+        echo '<div class="firephage-inline-actions firephage-inline-actions--quiet firephage-section-spaced">';
+        echo '<button type="button" class="button-link firephage-link-button" data-tab-target="firewall">' . esc_html__('View Pro protection', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button-link firephage-link-button" data-tab-target="performance">' . esc_html__('View Pro performance', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -472,8 +503,8 @@ final class Admin
         echo '<div class="firephage-grid firephage-grid--2">';
         echo '<div class="firephage-card">';
         echo '<h2>' . esc_html__('Connect to FirePhage', 'firephage-security') . '</h2>';
-        echo '<p>' . esc_html__('Generate a connection token in your FirePhage dashboard, paste it here, and the plugin will exchange it for a site-scoped credential and start syncing local reports automatically.', 'firephage-security') . '</p>';
-        echo '<p class="firephage-note">' . esc_html__('This paid connection is only for dashboard sync and alerting. Local health checks and checksum lookups do not require a connected FirePhage account. FirePhage signature updates use a separate free token flow.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Generate a connection token in your FirePhage dashboard, paste it here, and the plugin will exchange it for a site-specific credential for dashboard sync.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('This paid connection is optional. Local scans, local protection, and checksum lookups work without it. The free signature token is a separate option for fresher malware signatures.', 'firephage-security') . '</p>';
         echo '<form id="firephage-connect-form">';
         echo '<label class="firephage-field"><span>' . esc_html__('Dashboard URL', 'firephage-security') . '</span><input type="url" name="dashboard_url" value="' . esc_attr($settings['dashboard_url']) . '" /></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Connection token', 'firephage-security') . '</span><input type="password" name="connection_token" value="' . esc_attr($settings['connection_token']) . '" autocomplete="off" /></label>';
@@ -490,13 +521,13 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->freeTokenStatusTone($settings)) . '" id="firephage-free-token-status-badge">' . esc_html($this->freeTokenStatusLabel($settings)) . '</span>';
         echo '</div>';
         echo '<p id="firephage-free-token-summary">' . esc_html($this->freeTokenSummary($settings)) . '</p>';
-        echo '<p class="firephage-note">' . esc_html__('The free token enables fresher FirePhage signature updates for local malware detection. It is separate from the paid dashboard connection and can include an optional promo opt-in checkbox.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('The free token enables fresher FirePhage signature updates for local malware detection. It is separate from the paid dashboard connection, and the marketing opt-in remains optional.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-secondary firephage-open-free-token-modal">' . esc_html__('Manage Free Token', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-check-free-token-status" style="' . esc_attr(($settings['free_signature_token_status'] ?? 'pending') === 'awaiting_verification' ? '' : 'display:none;') . '">' . esc_html__('Check Verification Status', 'firephage-security') . '</button>';
         echo '</div>';
         echo '<p><strong>' . esc_html__('Connected site ID:', 'firephage-security') . '</strong> <span id="firephage-connected-site-id">' . esc_html($settings['site_id'] !== '' ? $settings['site_id'] : __('Not connected', 'firephage-security')) . '</span></p>';
-        echo '<p class="firephage-note">' . esc_html__('The dashboard issues a scoped token first. That avoids trusting domain names alone and makes it possible to verify both site ownership and account intent before reports are accepted.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note">' . esc_html__('FirePhage issues a site-specific token after you connect so reports can be matched to the correct dashboard site without relying on the domain name alone.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
@@ -557,7 +588,7 @@ final class Admin
         echo '<p>' . esc_html__('Connect this site to FirePhage Pro to review firewall logs, manage protection modes, and jump into the full dashboard without leaving WordPress.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
         echo '<a class="button button-primary" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
-        echo '<button type="button" class="button button-secondary" data-tab-target="connect">' . esc_html__('Connect to FirePhage', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button-link firephage-link-button" data-tab-target="connect">' . esc_html__('Open connection settings', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -624,7 +655,7 @@ final class Admin
         echo '<p>' . esc_html__('Upgrade to manage CDN delivery and cache behavior from WordPress, then use the plugin as a lightweight control surface for your connected FirePhage site.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
         echo '<a class="button button-primary" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
-        echo '<button type="button" class="button button-secondary" data-tab-target="connect">' . esc_html__('Connect to FirePhage', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button-link firephage-link-button" data-tab-target="connect">' . esc_html__('Open connection settings', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -672,7 +703,12 @@ final class Admin
         echo '<span class="firephage-inline-summary__label">' . esc_html__('Token status', 'firephage-security') . '</span>';
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($this->freeTokenStatusTone($settings)) . '" id="firephage-free-token-settings-badge">' . esc_html($this->freeTokenStatusLabel($settings)) . '</span>';
         echo '</div>';
+        echo '<div class="firephage-inline-summary">';
+        echo '<span class="firephage-inline-summary__label">' . esc_html__('Last signature update', 'firephage-security') . '</span>';
+        echo '<span class="firephage-inline-summary__value" id="firephage-signature-last-refreshed">' . esc_html($this->formatRecordedTimeLabel((string) ($settings['signature_feed_last_refreshed_at'] ?? ''))) . '</span>';
+        echo '</div>';
         echo '<p class="firephage-note" id="firephage-free-token-settings-summary">' . esc_html($this->freeTokenSummary($settings)) . '</p>';
+        echo '<div class="firephage-modal-feedback" id="firephage-scanner-settings-feedback" hidden aria-live="polite"></div>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-secondary firephage-open-free-token-modal">' . esc_html__('Get or Manage Free Token', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-check-free-token-status" style="' . esc_attr(($settings['free_signature_token_status'] ?? 'pending') === 'awaiting_verification' ? '' : 'display:none;') . '">' . esc_html__('Check Verification Status', 'firephage-security') . '</button>';
@@ -701,6 +737,7 @@ final class Admin
         echo '</div>';
         echo '<p>' . esc_html__('Enter the email address to receive the free FirePhage token for signature updates. This keeps malware-signature delivery opt-in and separate from paid dashboard features. If you decline this, you can still use the Malware Scanner, but with limited malware signatures and without receiving signature updates created from the newest malware samples our team collects 24/7.', 'firephage-security') . '</p>';
         echo '<form id="firephage-free-token-form">';
+        echo '<div class="firephage-modal-feedback" id="firephage-free-token-feedback" hidden aria-live="polite"></div>';
         echo '<label class="firephage-field"><span>' . esc_html__('Email address', 'firephage-security') . '</span><input type="email" name="email" value="' . esc_attr(($settings['free_signature_token_email'] ?? '') !== '' ? $settings['free_signature_token_email'] : get_option('admin_email', '')) . '" required /></label>';
         echo '<label class="firephage-toggle"><input type="checkbox" name="marketing_opt_in" value="1" ' . checked($settings['free_signature_token_marketing_opt_in'] ?? '0', '1', false) . ' /><span>' . esc_html__('I want to receive occasional FirePhage promo codes, Pro offers, and product updates', 'firephage-security') . '</span></label>';
         echo '<p class="firephage-note">' . esc_html__('This marketing checkbox is optional and not required for the free token. After you submit this form, verify the email link we send before FirePhage activates remote signature updates.', 'firephage-security') . '</p>';
@@ -834,8 +871,15 @@ final class Admin
             wp_send_json_error(['message' => $result->get_error_message()], 400);
         }
 
+        $refreshedAt = current_time('mysql');
+        $this->settings->update([
+            'signature_feed_last_refreshed_at' => $refreshedAt,
+        ]);
+
         wp_send_json_success([
             'message' => __('FirePhage signatures were refreshed.', 'firephage-security'),
+            'last_refreshed_at' => $refreshedAt,
+            'last_refreshed_label' => $this->formatRecordedTimeLabel($refreshedAt),
         ]);
     }
 
@@ -1239,18 +1283,37 @@ final class Admin
         }
 
         if ($status === 'declined') {
-            return __('Remote FirePhage signature updates are turned off. You can request a free token later at any time.', 'firephage-security');
+            return __('Free FirePhage signature updates are turned off. You can request a token later at any time.', 'firephage-security');
         }
 
         if ($status === 'dismissed') {
-            return __('The free-token prompt is hidden. You can still request a free token later from the plugin whenever you want fresher FirePhage signature updates.', 'firephage-security');
+            return __('The free-token prompt is hidden. You can still request a free token later whenever you want fresher FirePhage signatures.', 'firephage-security');
         }
 
         if ($status === 'awaiting_verification') {
-            return __('Verification email sent. Open your inbox, click the FirePhage verification link, then return here and check verification status to activate remote signature updates.', 'firephage-security');
+            return __('Verification email sent. Open it, confirm the link, then return here and check the status to activate remote signature updates.', 'firephage-security');
         }
 
-        return __('Choose whether you want a free FirePhage token for fresher malware-signature updates. Until you confirm yes or no, the plugin will ask again when you open this screen.', 'firephage-security');
+        return __('Choose whether you want a free FirePhage token for fresher malware signatures. Until you decide, the plugin will remind you when you return here.', 'firephage-security');
+    }
+
+    private function formatRecordedTimeLabel(string $timestamp): string
+    {
+        if ($timestamp === '') {
+            return __('Never', 'firephage-security');
+        }
+
+        $epoch = strtotime($timestamp);
+
+        if ($epoch === false) {
+            return $timestamp;
+        }
+
+        return sprintf(
+            __('%1$s (%2$s ago)', 'firephage-security'),
+            wp_date(get_option('date_format') . ' ' . get_option('time_format'), $epoch),
+            human_time_diff($epoch, current_time('timestamp'))
+        );
     }
 
     private function renderLockedMetricCard(string $label, string $valueId = '', string $value = '--'): string
@@ -1330,7 +1393,7 @@ SVG;
     private function renderFindings(array $findings): string
     {
         if ($findings === []) {
-            return '<p class="firephage-empty">' . esc_html__('No malicious files detected in the latest scan.', 'firephage-security') . '</p>';
+            return '<p class="firephage-empty">' . esc_html__('No flagged files were found in the latest scan.', 'firephage-security') . '</p>';
         }
 
         $pageSizeOptions = $this->pageSizeOptions(count($findings));
@@ -1342,8 +1405,8 @@ SVG;
         }
         $html .= '</select></label>';
         $html .= '<div class="firephage-findings-actions">';
-        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" disabled>' . esc_html__('Delete Selected Files', 'firephage-security') . '</button>';
-        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Malicious Files', 'firephage-security') . '</button>';
+        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" disabled>' . esc_html__('Delete Selected Flagged Files', 'firephage-security') . '</button>';
+        $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Flagged Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
         $html .= '</div>';
         $html .= '</div>';
@@ -1363,7 +1426,7 @@ SVG;
             $confidence = isset($finding['confidence']) ? (string) $finding['confidence'] : 'low';
             $source = isset($finding['source']) ? (string) $finding['source'] : '';
             $reasons = isset($finding['reasons']) && is_array($finding['reasons']) ? $finding['reasons'] : [];
-            $status = $type === 'malware' ? __('Malicious', 'firephage-security') : __('Integrity mismatch', 'firephage-security');
+            $status = $type === 'malware' ? __('Flagged', 'firephage-security') : __('Modified file', 'firephage-security');
             $detailParts = [];
 
             if ($source !== '') {
@@ -1381,7 +1444,7 @@ SVG;
             $html .= '<tr>';
             $html .= '<td>';
             if ($type === 'malware') {
-                $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select malicious file', 'firephage-security') . '</label>';
+                $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select flagged file', 'firephage-security') . '</label>';
                 $html .= '<input type="checkbox" id="firephage-select-' . esc_attr(md5($file)) . '" class="firephage-findings-select" value="' . esc_attr($file) . '" />';
             } else {
                 $html .= '<span class="firephage-empty">' . esc_html__('No', 'firephage-security') . '</span>';
@@ -1391,9 +1454,9 @@ SVG;
             $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
             $html .= '<td>' . esc_html(implode(' | ', $detailParts)) . '</td>';
             $html .= '<td>';
-            $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Preview', 'firephage-security') . '</button> ';
+            $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Review File', 'firephage-security') . '</button> ';
             if ($type === 'malware') {
-                $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete File', 'firephage-security') . '</button>';
+                $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete Flagged File', 'firephage-security') . '</button>';
             } else {
                 $html .= '<span class="firephage-empty">' . esc_html__('Protected', 'firephage-security') . '</span>';
             }
@@ -1429,8 +1492,8 @@ SVG;
             '<div class="firephage-card"><div class="firephage-card-head"><h3>%1$s</h3><span class="firephage-badge firephage-badge--%2$s">%3$s</span></div><p>%4$s</p></div>',
             esc_html($title),
             esc_attr($count > 0 ? 'warning' : 'good'),
-            esc_html((string) $count),
-            esc_html($description)
+            esc_html($count > 0 ? (string) $count : __('All clear', 'firephage-security')),
+            esc_html($count > 0 ? $description : __('Nothing needs attention here right now.', 'firephage-security'))
         );
     }
 
@@ -1498,16 +1561,16 @@ SVG;
         $status = (string) ($scan['status'] ?? 'idle');
 
         if ($status === 'idle') {
-            return __('The scanner is idle. Start a background scan to verify repository integrity and review untrusted code paths.', 'firephage-security');
+            return __('No scan is running. Start a scan to check WordPress files and review anything unusual.', 'firephage-security');
         }
 
         if ($status === 'discovering') {
-            return sprintf(__('Discovering candidate files: %d found so far.', 'firephage-security'), (int) ($scan['discovered_files'] ?? 0));
+            return sprintf(__('Getting ready to scan. %d files have been queued so far.', 'firephage-security'), (int) ($scan['discovered_files'] ?? 0));
         }
 
         if ($status === 'stopped') {
             return sprintf(
-                __('Scan cancelled at %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Malicious: %7$d. Use Resume Scan to continue from the saved position.', 'firephage-security'),
+                __('The scan was paused after %1$d of %2$d files. Trusted files: %3$d. Clean custom files: %4$d. Skipped: %5$d. Modified files: %6$d. Flagged files: %7$d. Use Resume Scan to continue.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['discovered_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
@@ -1520,7 +1583,7 @@ SVG;
 
         if ($status === 'completed') {
             return sprintf(
-                __('Scan completed. %1$d files scanned, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d integrity mismatches, %6$d malicious.', 'firephage-security'),
+                __('Latest scan finished. %1$d files were checked, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d modified files, and %6$d flagged files.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
                 (int) ($scan['clean_files'] ?? 0),
@@ -1535,7 +1598,7 @@ SVG;
         }
 
         return sprintf(
-            __('Scanning %1$d of %2$d discovered files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Integrity mismatches: %6$d. Malicious: %7$d. Current file: %8$s', 'firephage-security'),
+            __('Scanning %1$d of %2$d files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Modified files: %6$d. Flagged files: %7$d. Current file: %8$s', 'firephage-security'),
             (int) ($scan['scanned_files'] ?? 0),
             (int) ($scan['discovered_files'] ?? 0),
             (int) ($scan['trusted_files'] ?? 0),
@@ -1572,7 +1635,7 @@ SVG;
                 return __('Completed', 'firephage-security');
 
             case 'failed':
-                return __('Needs Review', 'firephage-security');
+                return __('Attention Needed', 'firephage-security');
 
             case 'discovering':
                 return __('Preparing Scan', 'firephage-security');
@@ -1581,7 +1644,7 @@ SVG;
                 return __('Scanning', 'firephage-security');
 
             case 'stopped':
-                return __('Cancelled', 'firephage-security');
+                return __('Paused', 'firephage-security');
 
             default:
                 return __('Idle', 'firephage-security');
@@ -1609,7 +1672,7 @@ SVG;
                 return __('Healthy', 'firephage-security');
 
             case 'warning':
-                return __('Needs Review', 'firephage-security');
+                return __('Review', 'firephage-security');
 
             case 'critical':
                 return __('Action Needed', 'firephage-security');
@@ -1681,12 +1744,12 @@ SVG;
 
         $score += ($checks['https'] ?? '') === 'good' ? 10 : 0;
         if (($checks['https'] ?? '') !== 'good') {
-            $addHint($hints, __('+10 enable HTTPS across the site', 'firephage-security'));
+            $addHint($hints, __('Turn on HTTPS across the site.', 'firephage-security'));
         }
 
         $score += ($checks['debug_display'] ?? '') === 'good' ? 6 : 0;
         if (($checks['debug_display'] ?? '') !== 'good') {
-            $addHint($hints, __('+3 disable debug display', 'firephage-security'));
+            $addHint($hints, __('Hide debug messages from visitors.', 'firephage-security'));
         }
 
         $score += ($checks['file_editor'] ?? '') === 'good' ? 6 : 0;
@@ -1697,7 +1760,7 @@ SVG;
         if (($settings['bruteforce_enabled'] ?? '0') === '1') {
             $score += 8;
         } else {
-            $addHint($hints, __('+5 enable brute force protection', 'firephage-security'));
+            $addHint($hints, __('Enable local login protection.', 'firephage-security'));
         }
 
         $pendingUpdates = (int) (($health['updates']['core_updates'] ?? 0) + ($health['updates']['plugin_updates'] ?? 0) + ($health['updates']['theme_updates'] ?? 0));
@@ -1705,9 +1768,9 @@ SVG;
             $score += 10;
         } elseif ($pendingUpdates <= 3) {
             $score += 4;
-            $addHint($hints, __('+4 apply pending updates', 'firephage-security'));
+            $addHint($hints, __('Apply the pending updates.', 'firephage-security'));
         } else {
-            $addHint($hints, __('+8 reduce update exposure', 'firephage-security'));
+            $addHint($hints, __('Work through the pending updates.', 'firephage-security'));
         }
 
         $suspicious = (int) ($scan['suspicious_files'] ?? 0);
@@ -1717,7 +1780,7 @@ SVG;
         } else {
             if ($suspicious > 0) {
                 $score -= min(18, $suspicious * 3);
-                $addHint($hints, __('+5 resolve malicious file findings', 'firephage-security'));
+                $addHint($hints, __('Review the flagged files first.', 'firephage-security'));
             }
 
             if ($integrity > 0) {
@@ -1728,7 +1791,7 @@ SVG;
         if (($settings['connection_status'] ?? 'disconnected') === 'connected') {
             $score += 5;
         } else {
-            $addHint($hints, __('+10 connect FirePhage Pro firewall', 'firephage-security'));
+            $addHint($hints, __('Connect FirePhage if you want dashboard sync and edge protection.', 'firephage-security'));
         }
 
         $score = max(0, min(100, $score));
@@ -1736,10 +1799,10 @@ SVG;
         $tone = $score >= 85 ? 'good' : ($score >= 65 ? 'warning' : 'critical');
         $label = $score >= 85 ? __('Strong', 'firephage-security') : ($score >= 65 ? __('Good', 'firephage-security') : __('Needs Work', 'firephage-security'));
         $summary = $score >= 85
-            ? __('Core security controls look healthy. Keep scans and updates consistent.', 'firephage-security')
+            ? __('Your site looks healthy. Keep scans and updates consistent.', 'firephage-security')
             : ($score >= 65
-                ? __('The site is in a decent state, but a few improvements would raise protection quickly.', 'firephage-security')
-                : __('Several security signals need attention. Start with the highest-impact issues below.', 'firephage-security'));
+                ? __('Your site is in a decent place, but a few small fixes would tighten it up quickly.', 'firephage-security')
+                : __('Your site needs attention. Start with the recommended fixes below.', 'firephage-security'));
 
         if ($hints === []) {
             $hints[] = __('Keep updates current and review each completed scan.', 'firephage-security');

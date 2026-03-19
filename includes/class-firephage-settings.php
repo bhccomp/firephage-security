@@ -31,6 +31,7 @@ final class Settings
             'free_signature_token_email' => '',
             'free_signature_token_status' => 'pending',
             'free_signature_token_last_requested_at' => '',
+            'signature_feed_last_refreshed_at' => '',
             'free_signature_token_marketing_opt_in' => '0',
             'bruteforce_enabled' => '1',
             'bruteforce_threshold' => '5',
@@ -54,7 +55,11 @@ final class Settings
             return $defaults;
         }
 
-        return array_merge($defaults, array_intersect_key($value, $defaults));
+        $settings = array_merge($defaults, array_intersect_key($value, $defaults));
+        $settings['dashboard_url'] = $this->normalizeFirePhageUrl($settings['dashboard_url']);
+        $settings['checksum_service_url'] = $this->normalizeFirePhageUrl($settings['checksum_service_url']);
+
+        return $settings;
     }
 
     public function register(): void
@@ -72,8 +77,8 @@ final class Settings
         $settings = $this->all();
 
         return [
-            'dashboard_url' => esc_url_raw((string) ($input['dashboard_url'] ?? $settings['dashboard_url'])),
-            'checksum_service_url' => esc_url_raw((string) ($input['checksum_service_url'] ?? $settings['checksum_service_url'])),
+            'dashboard_url' => $this->normalizeFirePhageUrl(esc_url_raw((string) ($input['dashboard_url'] ?? $settings['dashboard_url']))),
+            'checksum_service_url' => $this->normalizeFirePhageUrl(esc_url_raw((string) ($input['checksum_service_url'] ?? $settings['checksum_service_url']))),
             'connection_token' => sanitize_text_field((string) ($input['connection_token'] ?? $settings['connection_token'])),
             'site_id' => sanitize_text_field((string) ($input['site_id'] ?? $settings['site_id'])),
             'site_token' => sanitize_text_field((string) ($input['site_token'] ?? $settings['site_token'])),
@@ -89,6 +94,7 @@ final class Settings
                 ? (string) ($input['free_signature_token_status'] ?? $settings['free_signature_token_status'])
                 : 'pending',
             'free_signature_token_last_requested_at' => sanitize_text_field((string) ($input['free_signature_token_last_requested_at'] ?? $settings['free_signature_token_last_requested_at'])),
+            'signature_feed_last_refreshed_at' => sanitize_text_field((string) ($input['signature_feed_last_refreshed_at'] ?? $settings['signature_feed_last_refreshed_at'])),
             'free_signature_token_marketing_opt_in' => ! empty($input['free_signature_token_marketing_opt_in']) ? '1' : '0',
             'bruteforce_enabled' => ! empty($input['bruteforce_enabled']) ? '1' : '0',
             'bruteforce_threshold' => (string) max(3, min(20, absint($input['bruteforce_threshold'] ?? $settings['bruteforce_threshold']))),
@@ -127,5 +133,14 @@ final class Settings
             'last_sync_at' => '',
             'last_sync_error' => '',
         ]);
+    }
+
+    private function normalizeFirePhageUrl(string $url): string
+    {
+        if ($url === '') {
+            return $url;
+        }
+
+        return str_replace('https://waf-saas.firephage.com', 'https://firephage.com', $url);
     }
 }
