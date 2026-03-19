@@ -87,6 +87,7 @@ final class Admin
         add_action('wp_ajax_firephage_verify_free_token', [$this, 'handleVerifyFreeToken']);
         add_action('wp_ajax_firephage_decline_free_token', [$this, 'handleDeclineFreeToken']);
         add_action('wp_ajax_firephage_dismiss_free_token_prompt', [$this, 'handleDismissFreeTokenPrompt']);
+        add_action('wp_ajax_firephage_dismiss_setup_wizard', [$this, 'handleDismissSetupWizard']);
         add_action('wp_ajax_firephage_complete_setup_wizard', [$this, 'handleCompleteSetupWizard']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
@@ -813,9 +814,25 @@ final class Admin
         echo '<h3 id="firephage-setup-wizard-title">' . esc_html__('Recommended First-Time Setup', 'firephage-security') . '</h3>';
         echo '<button type="button" class="button-link firephage-modal-close" data-setup-wizard-close="1" aria-label="' . esc_attr__('Close setup wizard', 'firephage-security') . '">&times;</button>';
         echo '</div>';
-        echo '<p>' . esc_html__('Choose how often FirePhage should scan this site and how strict local login protection should be. When you finish, FirePhage will start the first deep scan automatically.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-setup-steps">';
+        echo '<span class="firephage-setup-step-indicator is-active" data-step-indicator="token">' . esc_html__('1. Free Token', 'firephage-security') . '</span>';
+        echo '<span class="firephage-setup-step-indicator" data-step-indicator="settings">' . esc_html__('2. Recommended Settings', 'firephage-security') . '</span>';
+        echo '</div>';
         echo '<form id="firephage-setup-wizard-form">';
         echo '<div class="firephage-modal-feedback" id="firephage-setup-wizard-feedback" hidden aria-live="polite"></div>';
+        echo '<div class="firephage-setup-step" data-setup-step="token">';
+        echo '<p>' . esc_html__('Start with the optional free FirePhage token for fresher malware signatures. It is separate from the paid dashboard connection, and the promo checkbox stays optional.', 'firephage-security') . '</p>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="request_free_token" value="1" checked /><span>' . esc_html__('Email me a free FirePhage token for fresher signature updates', 'firephage-security') . '</span></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Email address', 'firephage-security') . '</span><input type="email" name="setup_token_email" value="' . esc_attr(($settings['free_signature_token_email'] ?? '') !== '' ? $settings['free_signature_token_email'] : get_option('admin_email', '')) . '" /></label>';
+        echo '<label class="firephage-toggle"><input type="checkbox" name="setup_marketing_opt_in" value="1" ' . checked($settings['free_signature_token_marketing_opt_in'] ?? '0', '1', false) . ' /><span>' . esc_html__('I want to receive occasional FirePhage promo codes, Pro offers, and product updates', 'firephage-security') . '</span></label>';
+        echo '<p class="firephage-note firephage-note--subtle">' . esc_html__('You can skip this and keep using the bundled local signatures. If you request the free token, verify the email link later to activate remote signature updates.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-modal-actions">';
+        echo '<button type="button" class="button button-secondary" data-setup-wizard-close="1">' . esc_html__('Not now', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-primary firephage-setup-wizard-next">' . esc_html__('Next', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-setup-step" data-setup-step="settings" hidden>';
+        echo '<p>' . esc_html__('Choose how often FirePhage should scan this site and how strict local login protection should be. When you finish, FirePhage will start the first deep scan automatically.', 'firephage-security') . '</p>';
         echo '<label class="firephage-field"><span>' . esc_html__('Automatic malware scans', 'firephage-security') . '</span><select name="malware_auto_scan_interval">';
         echo '<option value="daily">' . esc_html__('Once per day', 'firephage-security') . '</option>';
         echo '<option value="twice_daily" selected>' . esc_html__('Twice per day (recommended)', 'firephage-security') . '</option>';
@@ -828,9 +845,10 @@ final class Admin
         echo '</select></label>';
         echo '<p class="firephage-note firephage-note--subtle">' . esc_html__('Recommended settings enable automatic scans twice per day and a balanced local login-protection profile with XML-RPC protection turned on.', 'firephage-security') . '</p>';
         echo '<div class="firephage-modal-actions">';
-        echo '<button type="button" class="button button-secondary" data-setup-wizard-close="1">' . esc_html__('Not now', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-setup-wizard-back">' . esc_html__('Back', 'firephage-security') . '</button>';
         echo '<button type="button" class="button button-secondary firephage-apply-recommended-setup">' . esc_html__('Apply Recommended Settings', 'firephage-security') . '</button>';
         echo '<button type="submit" class="button button-primary firephage-save-setup-wizard">' . esc_html__('Save and Start First Scan', 'firephage-security') . '</button>';
+        echo '</div>';
         echo '</div>';
         echo '</form>';
         echo '</div>';
@@ -1143,6 +1161,17 @@ final class Admin
         wp_send_json_success([
             'message' => __('The free-token prompt will stay hidden unless you open it again manually.', 'firephage-security'),
             'settings' => $this->settings->all(),
+        ]);
+    }
+
+    public function handleDismissSetupWizard(): void
+    {
+        $this->assertAjaxPermissions();
+
+        delete_option('firephage_security_show_setup_wizard');
+
+        wp_send_json_success([
+            'message' => __('You can finish setup later from the plugin settings whenever you are ready.', 'firephage-security'),
         ]);
     }
 

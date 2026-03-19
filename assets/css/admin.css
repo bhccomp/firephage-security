@@ -968,6 +968,33 @@
     color: #991b1b;
 }
 
+.firephage-setup-steps {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 16px;
+}
+
+.firephage-setup-step-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.firephage-setup-step-indicator.is-active {
+    background: #dbeafe;
+    color: #075985;
+}
+
+.firephage-setup-step[hidden] {
+    display: none !important;
+}
+
 .firephage-preview-content {
     margin: 0;
     max-height: min(70vh, 720px);

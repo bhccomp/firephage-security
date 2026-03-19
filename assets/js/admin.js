@@ -46,6 +46,8 @@
     const setupWizardModal = document.getElementById('firephage-setup-wizard-modal');
     const setupWizardForm = document.getElementById('firephage-setup-wizard-form');
     const setupWizardFeedback = document.getElementById('firephage-setup-wizard-feedback');
+    const setupWizardNextButton = document.querySelector('.firephage-setup-wizard-next');
+    const setupWizardBackButton = document.querySelector('.firephage-setup-wizard-back');
     const applyRecommendedSetupButton = document.querySelector('.firephage-apply-recommended-setup');
     const startQuickScanButton = document.querySelector('.firephage-start-quick-scan');
     const firewallStatusBadge = document.getElementById('firephage-firewall-status-badge');
@@ -98,6 +100,7 @@
     let selectedFindings = new Set();
     let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true, verificationToken: '' };
     let setupWizardState = firephageAdmin.setupWizard || { shouldOpen: false };
+    let currentSetupWizardStep = 'token';
     let proTabState = {
         firewallLoaded: false,
         performanceLoaded: false,
@@ -269,6 +272,15 @@
         setupWizardModal.hidden = true;
     };
 
+    const dismissSetupWizard = () => {
+        setupWizardState.shouldOpen = false;
+
+        request('firephage_dismiss_setup_wizard')
+            .always(() => {
+                closeSetupWizardModal();
+            });
+    };
+
     const openFreeTokenModal = () => {
         if (!freeTokenModal) {
             return;
@@ -297,7 +309,32 @@
         }
 
         clearModalFeedback(setupWizardFeedback);
+        setSetupWizardStep('token');
         setupWizardModal.hidden = false;
+    };
+
+    const setSetupWizardStep = (step) => {
+        currentSetupWizardStep = step;
+
+        if (!setupWizardForm) {
+            return;
+        }
+
+        setupWizardForm.querySelectorAll('[data-setup-step]').forEach((node) => {
+            if (!(node instanceof HTMLElement)) {
+                return;
+            }
+
+            node.hidden = node.dataset.setupStep !== step;
+        });
+
+        document.querySelectorAll('[data-step-indicator]').forEach((node) => {
+            if (!(node instanceof HTMLElement)) {
+                return;
+            }
+
+            node.classList.toggle('is-active', node.dataset.stepIndicator === step);
+        });
     };
 
     const deleteAllSuspiciousFiles = (button) => {
@@ -1421,6 +1458,61 @@
         });
     }
 
+    const continueSetupWizardFromToken = () => {
+        if (!setupWizardForm) {
+            return;
+        }
+
+        clearModalFeedback(setupWizardFeedback);
+
+        const requestTokenInput = setupWizardForm.querySelector('input[name="request_free_token"]');
+        const emailInput = setupWizardForm.querySelector('input[name="setup_token_email"]');
+        const marketingInput = setupWizardForm.querySelector('input[name="setup_marketing_opt_in"]');
+        const wantsToken = !!(requestTokenInput && requestTokenInput.checked);
+
+        if (freeTokenState.status && freeTokenState.status !== 'pending') {
+            setSetupWizardStep('settings');
+            return;
+        }
+
+        if (!wantsToken) {
+            setSetupWizardStep('settings');
+            return;
+        }
+
+        if (!emailInput || !emailInput.value.trim()) {
+            showModalFeedback(setupWizardFeedback, 'Enter an email address or turn off the free-token option to continue.', true);
+            return;
+        }
+
+        if (setupWizardNextButton) {
+            setupWizardNextButton.disabled = true;
+            setupWizardNextButton.textContent = firephageAdmin.labels.registeringFreeToken;
+        }
+
+        request('firephage_register_free_token', {
+            email: emailInput.value.trim(),
+            marketing_opt_in: marketingInput && marketingInput.checked ? '1' : '',
+        })
+            .done((response) => {
+                if (response.success) {
+                    renderFreeTokenSummary(response.data.settings || null);
+                    setSetupWizardStep('settings');
+                } else {
+                    showModalFeedback(setupWizardFeedback, (response.data && response.data.message) || 'Unable to request the free token.', true);
+                }
+            })
+            .fail((xhr) => {
+                showModalFeedback(setupWizardFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to request the free token.', true);
+            })
+            .always(() => {
+                if (setupWizardNextButton) {
+                    setupWizardNextButton.disabled = false;
+                    setupWizardNextButton.textContent = 'Next';
+                }
+            });
+    };
+
     const completeSetupWizard = (mode = 'custom') => {
         if (!setupWizardForm) {
             return;
@@ -1549,6 +1641,19 @@
             }
 
             completeSetupWizard('recommended');
+        });
+    }
+
+    if (setupWizardNextButton) {
+        setupWizardNextButton.addEventListener('click', () => {
+            continueSetupWizardFromToken();
+        });
+    }
+
+    if (setupWizardBackButton) {
+        setupWizardBackButton.addEventListener('click', () => {
+            clearModalFeedback(setupWizardFeedback);
+            setSetupWizardStep('token');
         });
     }
 
@@ -1941,7 +2046,7 @@
             const target = event.target;
 
             if (target instanceof HTMLElement && target.dataset.setupWizardClose === '1') {
-                closeSetupWizardModal();
+                dismissSetupWizard();
             }
         });
     }
