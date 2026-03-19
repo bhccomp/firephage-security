@@ -55,6 +55,7 @@
     const firewallTrustedIps = document.getElementById('firephage-firewall-trusted-ips');
     const firewallCountryBlocks = document.getElementById('firephage-firewall-country-blocks');
     const firewallUpgradeCard = document.getElementById('firephage-firewall-upgrade-card');
+    const firewallPreviewCard = document.getElementById('firephage-firewall-preview-card');
     const performanceStatusBadge = document.getElementById('firephage-performance-status-badge');
     const performanceSummaryText = document.getElementById('firephage-performance-summary-text');
     const performanceConnectionNote = document.getElementById('firephage-performance-connection-note');
@@ -414,7 +415,10 @@
         if (!payload.connected) {
             setBadge(firewallStatusBadge, 'Connect', 'neutral');
             firewallSummaryText.textContent = 'Connect to view live firewall analytics.';
-            firewallConnectionNote.textContent = payload.message || 'Upgrade required to manage WAF controls from WordPress.';
+            firewallConnectionNote.textContent = payload.message || 'Connect FirePhage to load live traffic filtering and edge analytics for this site.';
+            if (firewallPreviewCard) {
+                firewallPreviewCard.style.display = '';
+            }
             return;
         }
 
@@ -455,6 +459,10 @@
 
         if (firewallUpgradeCard) {
             firewallUpgradeCard.style.display = payload.pro_enabled ? 'none' : '';
+        }
+
+        if (firewallPreviewCard) {
+            firewallPreviewCard.style.display = payload.pro_enabled ? 'none' : '';
         }
     };
 

@@ -200,6 +200,15 @@
     color: #334155;
 }
 
+.firephage-note--subtle {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+.firephage-context-note .button {
+    margin-top: 10px;
+}
+
 .firephage-mini-grid {
     display: grid;
     gap: 12px;
@@ -230,6 +239,61 @@
     background: linear-gradient(180deg, #fffaf2 0%, #fff 100%);
     border-color: #fde3bd;
     color: #5b4a30;
+}
+
+.firephage-preview-card {
+    background: linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+    border-style: dashed;
+}
+
+.firephage-preview-split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.firephage-preview-panel {
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(248, 250, 252, 0.92);
+    border: 1px solid #dbeafe;
+}
+
+.firephage-preview-panel h4 {
+    margin: 0 0 12px;
+    font-size: 13px;
+}
+
+.firephage-preview-bar + .firephage-preview-bar {
+    margin-top: 10px;
+}
+
+.firephage-preview-bar__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+    color: #475569;
+    font-size: 12px;
+}
+
+.firephage-preview-bar__track {
+    height: 8px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.firephage-preview-bar__track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #94a3b8 0%, #cbd5e1 100%);
+}
+
+.firephage-preview-note {
+    margin-top: 16px;
 }
 
 .firephage-pro-fieldset--disabled {

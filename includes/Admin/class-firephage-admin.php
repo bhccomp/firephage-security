@@ -240,7 +240,7 @@ final class Admin
         echo '<p class="firephage-hero-copy">' . esc_html__('Secure WordPress with malware scanning, brute-force protection, health checks, update visibility, and an optional FirePhage connection for advanced firewall protection plus CDN and cache services that deliver major performance gains.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<div class="firephage-hero-actions">';
-        echo '<a class="button button-primary button-hero" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade with FirePhage', 'firephage-security') . '</a>';
+        echo '<a class="button button-primary button-hero" href="' . esc_url($this->firephageTrackedUrl($settings, 'overview', 'hero_upgrade')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade with FirePhage', 'firephage-security') . '</a>';
         echo '</div>';
         echo '</div>';
 
@@ -373,6 +373,15 @@ final class Admin
         echo '<div class="firephage-card firephage-findings-card">';
         echo '<h3>' . esc_html__('Latest findings', 'firephage-security') . '</h3>';
         echo '<p class="firephage-findings-intro">' . esc_html__('Review flagged files carefully. Nothing is deleted automatically, and WordPress core files marked as protected will stay untouched.', 'firephage-security') . '</p>';
+        if ($scannerFindings > 0) {
+            $helperCopy = $scannerFindings >= 5
+                ? __('Need a second set of eyes? FirePhage can help with deeper review and cleanup planning when a scan turns up several flagged files.', 'firephage-security')
+                : __('Need a deeper review? FirePhage can help with advanced analysis and cleanup workflows when you want another layer of guidance.', 'firephage-security');
+            echo '<div class="firephage-note firephage-context-note">';
+            echo '<p>' . esc_html($helperCopy) . '</p>';
+            echo '<a class="button button-secondary" href="' . esc_url($this->firephageTrackedUrl($settings, 'malware-scanner', 'review_cleanup_options')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Review Cleanup Options', 'firephage-security') . '</a>';
+            echo '</div>';
+        }
         echo '<div id="firephage-scan-findings">' . $this->renderFindings($scan['findings'] ?? []) . '</div>';
         echo '</div>';
         echo '</div>';
@@ -505,6 +514,11 @@ final class Admin
         echo '<h2>' . esc_html__('Connect to FirePhage', 'firephage-security') . '</h2>';
         echo '<p>' . esc_html__('Generate a connection token in your FirePhage dashboard, paste it here, and the plugin will exchange it for a site-specific credential for dashboard sync.', 'firephage-security') . '</p>';
         echo '<p class="firephage-note">' . esc_html__('This paid connection is optional. Local scans, local protection, and checksum lookups work without it. The free signature token is a separate option for fresher malware signatures.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note firephage-note--subtle">' . sprintf(
+            /* translators: %s: FirePhage link */
+            wp_kses_post(__('Need to finish setup in FirePhage first? <a href="%s" target="_blank" rel="noopener noreferrer">Open the dashboard</a>.', 'firephage-security')),
+            esc_url($this->firephageTrackedUrl($settings, 'connect', 'open_dashboard'))
+        ) . '</p>';
         echo '<form id="firephage-connect-form">';
         echo '<label class="firephage-field"><span>' . esc_html__('Dashboard URL', 'firephage-security') . '</span><input type="url" name="dashboard_url" value="' . esc_attr($settings['dashboard_url']) . '" /></label>';
         echo '<label class="firephage-field"><span>' . esc_html__('Connection token', 'firephage-security') . '</span><input type="password" name="connection_token" value="' . esc_attr($settings['connection_token']) . '" autocomplete="off" /></label>';
@@ -538,7 +552,7 @@ final class Admin
         echo '<div>';
         echo '<p class="firephage-eyebrow">' . esc_html__('FirePhage Pro', 'firephage-security') . '</p>';
         echo '<h2>' . esc_html__('Firewall Control', 'firephage-security') . '</h2>';
-        echo '<p>' . esc_html__('Review live protection status, inspect recent firewall activity, and manage paid WAF controls from WordPress whenever this site is connected and covered by an active FirePhage plan.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('The plugin handles local login safeguards and scan-driven protection checks. Connect FirePhage when you want live traffic filtering, edge protection, and real firewall visibility from the network layer.', 'firephage-security') . '</p>';
         echo '</div>';
         echo '<span class="firephage-pro-badge">' . esc_html__('Pro', 'firephage-security') . '</span>';
         echo '</div>';
@@ -549,7 +563,7 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-firewall-status-badge">' . esc_html__('Waiting', 'firephage-security') . '</span>';
         echo '</div>';
         echo '<p id="firephage-firewall-summary-text">' . esc_html__('FirePhage will load current zone health, recent attack counts, and recent firewall decisions here for paid connected sites.', 'firephage-security') . '</p>';
-        echo '<p class="firephage-note" id="firephage-firewall-connection-note">' . esc_html__('Connect FirePhage to view live firewall analytics. An active paid plan unlocks the live firewall and performance data shown here.', 'firephage-security') . '</p>';
+        echo '<p class="firephage-note" id="firephage-firewall-connection-note">' . esc_html__('Connect FirePhage to load live traffic filtering and firewall analytics. This plugin still keeps local login protection available even before you connect.', 'firephage-security') . '</p>';
         echo '<div class="firephage-pro-metric-grid">';
         echo $this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'), 'firephage-firewall-requests-blocked', __('Connect to load live counts', 'firephage-security'));
         echo $this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'), 'firephage-firewall-challenge-rate', __('Connect to load live challenge data', 'firephage-security'));
@@ -574,6 +588,45 @@ final class Admin
         echo '<div class="firephage-grid firephage-grid--2 firephage-section-spaced">';
         echo '<div class="firephage-card firephage-pro-card">';
         echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Local Protection', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Included', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('These plugin-level safeguards run on your WordPress site today. FirePhage edge protection adds live traffic filtering and fuller WAF visibility on top of them.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-pro-metric-grid firephage-pro-metric-grid--local">';
+        echo $this->renderLockedMetricCard(__('Login protection', 'firephage-security'), '', ($settings['bruteforce_enabled'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security'));
+        echo $this->renderLockedMetricCard(__('XML-RPC rules', 'firephage-security'), '', ($settings['bruteforce_protect_xmlrpc'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security'));
+        echo $this->renderLockedMetricCard(__('Local scanner', 'firephage-security'), '', __('Available', 'firephage-security'));
+        echo '</div>';
+        echo '<p class="firephage-note firephage-note--subtle">' . esc_html__('Local protection helps with login abuse and scan-driven review. FirePhage edge protection adds live filtering before traffic reaches WordPress.', 'firephage-security') . '</p>';
+        echo '</div>';
+        echo '<div class="firephage-card firephage-pro-card firephage-preview-card" id="firephage-firewall-preview-card">';
+        echo '<div class="firephage-card-head">';
+        echo '<h3>' . esc_html__('Traffic Insights Preview', 'firephage-security') . '</h3>';
+        echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Preview', 'firephage-security') . '</span>';
+        echo '</div>';
+        echo '<p>' . esc_html__('Live traffic insights become available after connecting FirePhage. This preview shows the kinds of patterns you can review once edge analytics are enabled.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-preview-split">';
+        echo '<div class="firephage-preview-panel">';
+        echo '<h4>' . esc_html__('Traffic by country', 'firephage-security') . '</h4>';
+        echo $this->renderFirewallPreviewBar(__('United States', 'firephage-security'), '72%');
+        echo $this->renderFirewallPreviewBar(__('Germany', 'firephage-security'), '41%');
+        echo $this->renderFirewallPreviewBar(__('United Kingdom', 'firephage-security'), '33%');
+        echo $this->renderFirewallPreviewBar(__('Japan', 'firephage-security'), '19%');
+        echo '</div>';
+        echo '<div class="firephage-preview-panel">';
+        echo '<h4>' . esc_html__('Requests vs blocked (24h)', 'firephage-security') . '</h4>';
+        echo $this->renderFirewallPreviewBar(__('Allowed requests', 'firephage-security'), '88%');
+        echo $this->renderFirewallPreviewBar(__('Blocked requests', 'firephage-security'), '24%');
+        echo $this->renderFirewallPreviewBar(__('Challenge rate', 'firephage-security'), '17%');
+        echo $this->renderFirewallPreviewBar(__('Bot activity', 'firephage-security'), '29%');
+        echo '</div>';
+        echo '</div>';
+        echo '<p class="firephage-note firephage-note--subtle firephage-preview-note">' . esc_html__('Preview values are illustrative only. Connect FirePhage to load real firewall events and live traffic patterns for this site.', 'firephage-security') . '</p>';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="firephage-grid firephage-grid--2 firephage-section-spaced">';
+        echo '<div class="firephage-card firephage-pro-card">';
+        echo '<div class="firephage-card-head">';
         echo '<h3>' . esc_html__('Protected Controls', 'firephage-security') . '</h3>';
         echo '<span class="firephage-badge firephage-badge--warning">' . esc_html__('Upgrade Required', 'firephage-security') . '</span>';
         echo '</div>';
@@ -585,9 +638,9 @@ final class Admin
         echo '</div>';
         echo '<div class="firephage-card firephage-pro-upgrade" id="firephage-firewall-upgrade-card">';
         echo '<h3>' . esc_html__('Unlock Firewall Management', 'firephage-security') . '</h3>';
-        echo '<p>' . esc_html__('Connect this site to FirePhage Pro to review firewall logs, manage protection modes, and jump into the full dashboard without leaving WordPress.', 'firephage-security') . '</p>';
+        echo '<p>' . esc_html__('Connect this site to FirePhage Pro to review live firewall events, inspect edge protection decisions, and manage WAF controls from WordPress.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
-        echo '<a class="button button-primary" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
+        echo '<a class="button button-primary" href="' . esc_url($this->firephageTrackedUrl($settings, 'firewall', 'connect_live_data')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
         echo '<button type="button" class="button-link firephage-link-button" data-tab-target="connect">' . esc_html__('Open connection settings', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
@@ -654,7 +707,7 @@ final class Admin
         echo '</div>';
         echo '<p>' . esc_html__('Upgrade to manage CDN delivery and cache behavior from WordPress, then use the plugin as a lightweight control surface for your connected FirePhage site.', 'firephage-security') . '</p>';
         echo '<div class="firephage-inline-actions">';
-        echo '<a class="button button-primary" href="' . esc_url($settings['dashboard_url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
+        echo '<a class="button button-primary" href="' . esc_url($this->firephageTrackedUrl($settings, 'performance', 'connect_live_data')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Purchase Pro Plan', 'firephage-security') . '</a>';
         echo '<button type="button" class="button-link firephage-link-button" data-tab-target="connect">' . esc_html__('Open connection settings', 'firephage-security') . '</button>';
         echo '</div>';
         echo '</div>';
@@ -1314,6 +1367,34 @@ final class Admin
             wp_date(get_option('date_format') . ' ' . get_option('time_format'), $epoch),
             human_time_diff($epoch, current_time('timestamp'))
         );
+    }
+
+    /**
+     * @param array<string, string> $settings
+     */
+    private function firephageTrackedUrl(array $settings, string $screen, string $cta, string $path = ''): string
+    {
+        $baseUrl = (string) ($settings['dashboard_url'] ?? 'https://firephage.com');
+        $target = $path !== '' ? trailingslashit(untrailingslashit($baseUrl)) . ltrim($path, '/') : $baseUrl;
+        $query = wp_parse_url($target, PHP_URL_QUERY);
+        $params = [];
+
+        if (is_string($query) && $query !== '') {
+            parse_str($query, $params);
+        }
+
+        $params['source'] = 'wp-plugin';
+        $params['screen'] = $screen;
+        $params['cta'] = $cta;
+        $params['v'] = FIREPHAGE_SECURITY_VERSION;
+        $params['site'] = substr(hash('sha256', (string) wp_parse_url(home_url('/'), PHP_URL_HOST)), 0, 12);
+
+        return add_query_arg($params, remove_query_arg(array_keys($params), $target));
+    }
+
+    private function renderFirewallPreviewBar(string $label, string $width): string
+    {
+        return '<div class="firephage-preview-bar"><div class="firephage-preview-bar__meta"><span>' . esc_html($label) . '</span><span>' . esc_html($width) . '</span></div><div class="firephage-preview-bar__track"><span style="width:' . esc_attr($width) . ';"></span></div></div>';
     }
 
     private function renderLockedMetricCard(string $label, string $valueId = '', string $value = '--'): string
