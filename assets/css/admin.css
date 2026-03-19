@@ -205,8 +205,38 @@
     border-color: #e2e8f0;
 }
 
-.firephage-context-note .button {
-    margin-top: 10px;
+.firephage-context-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    border: 1px solid #dbe7f1;
+    border-radius: 12px;
+    background: #f8fbff;
+}
+
+.firephage-context-bar p {
+    margin: 0;
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.firephage-context-bar__link {
+    flex-shrink: 0;
+    color: #0369a1;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.firephage-context-bar__link:hover,
+.firephage-context-bar__link:focus {
+    color: #075985;
+    text-decoration: underline;
 }
 
 .firephage-mini-grid {

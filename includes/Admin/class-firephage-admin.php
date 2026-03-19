@@ -374,12 +374,10 @@ final class Admin
         echo '<h3>' . esc_html__('Latest findings', 'firephage-security') . '</h3>';
         echo '<p class="firephage-findings-intro">' . esc_html__('Review flagged files carefully. Nothing is deleted automatically, and WordPress core files marked as protected will stay untouched.', 'firephage-security') . '</p>';
         if ($scannerFindings > 0) {
-            $helperCopy = $scannerFindings >= 5
-                ? __('Need a second set of eyes? FirePhage can help with deeper review and cleanup planning when a scan turns up several flagged files.', 'firephage-security')
-                : __('Need a deeper review? FirePhage can help with advanced analysis and cleanup workflows when you want another layer of guidance.', 'firephage-security');
-            echo '<div class="firephage-note firephage-context-note">';
+            $helperCopy = __('Need help reviewing these files? FirePhage offers deeper analysis and cleanup options.', 'firephage-security');
+            echo '<div class="firephage-context-bar">';
             echo '<p>' . esc_html($helperCopy) . '</p>';
-            echo '<a class="button button-secondary" href="' . esc_url($this->firephageTrackedUrl($settings, 'malware-scanner', 'review_cleanup_options')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Review Cleanup Options', 'firephage-security') . '</a>';
+            echo '<a class="firephage-context-bar__link" href="' . esc_url($this->firephageTrackedUrl($settings, 'malware-scanner', 'review_cleanup_options')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Review Cleanup Options', 'firephage-security') . '</a>';
             echo '</div>';
         }
         echo '<div id="firephage-scan-findings">' . $this->renderFindings($scan['findings'] ?? []) . '</div>';
