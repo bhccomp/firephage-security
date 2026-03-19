@@ -394,13 +394,42 @@ final class Admin
 
         echo '<section class="firephage-tab-panel" data-panel="updates">';
         echo '<div class="firephage-panel-header">';
-        echo '<div><h2>' . esc_html__('Updates', 'firephage-security') . '</h2><p>' . esc_html__('See what is out of date without digging through several WordPress screens.', 'firephage-security') . '</p></div>';
+        echo '<div><h2>' . esc_html__('Updates', 'firephage-security') . '</h2><p>' . esc_html__('Updates often include security fixes and reliability improvements.', 'firephage-security') . '</p></div>';
         echo '</div>';
+        echo $this->renderUpdatesSummary($updates);
         echo '<div class="firephage-grid">';
-        echo $this->renderUpdateCard(__('Core updates', 'firephage-security'), (int) ($updates['core_updates'] ?? 0), __('Pending WordPress core releases.', 'firephage-security'));
-        echo $this->renderUpdateCard(__('Plugin updates', 'firephage-security'), (int) ($updates['plugin_updates'] ?? 0), __('Installed plugins with updates available.', 'firephage-security'));
-        echo $this->renderUpdateCard(__('Theme updates', 'firephage-security'), (int) ($updates['theme_updates'] ?? 0), __('Installed themes with updates available.', 'firephage-security'));
-        echo $this->renderUpdateCard(__('Inactive plugins', 'firephage-security'), (int) ($updates['inactive_plugins'] ?? 0), __('Inactive plugins can be removed if they are no longer needed.', 'firephage-security'));
+        echo $this->renderUpdateCard(
+            __('Core updates', 'firephage-security'),
+            (int) ($updates['core_updates'] ?? 0),
+            __('New WordPress core releases are ready to review.', 'firephage-security'),
+            __('WordPress core is up to date.', 'firephage-security'),
+            __('Open WordPress updates', 'firephage-security'),
+            admin_url('update-core.php')
+        );
+        echo $this->renderUpdateCard(
+            __('Plugin updates', 'firephage-security'),
+            (int) ($updates['plugin_updates'] ?? 0),
+            __('Installed plugins with updates ready to review.', 'firephage-security'),
+            __('No plugin updates are needed right now.', 'firephage-security'),
+            __('View plugins', 'firephage-security'),
+            admin_url('plugins.php')
+        );
+        echo $this->renderUpdateCard(
+            __('Theme updates', 'firephage-security'),
+            (int) ($updates['theme_updates'] ?? 0),
+            __('Installed themes with updates ready to review.', 'firephage-security'),
+            __('No theme updates are needed right now.', 'firephage-security'),
+            __('View themes', 'firephage-security'),
+            admin_url('themes.php')
+        );
+        echo $this->renderUpdateCard(
+            __('Inactive plugins', 'firephage-security'),
+            (int) ($updates['inactive_plugins'] ?? 0),
+            __('Inactive plugins should still be reviewed as part of routine site maintenance.', 'firephage-security'),
+            __('No inactive plugins need review right now.', 'firephage-security'),
+            __('Review plugins', 'firephage-security'),
+            admin_url('plugins.php?plugin_status=inactive')
+        );
         echo '</div>';
         echo '</section>';
 
@@ -1695,14 +1724,117 @@ SVG;
         return $options;
     }
 
-    private function renderUpdateCard(string $title, int $count, string $description): string
+    private function renderUpdateCard(string $title, int $count, string $description, string $clearMessage, string $actionLabel, string $actionUrl): string
     {
         return sprintf(
-            '<div class="firephage-card"><div class="firephage-card-head"><h3>%1$s</h3><span class="firephage-badge firephage-badge--%2$s">%3$s</span></div><p>%4$s</p></div>',
+            '<div class="firephage-card"><div class="firephage-card-head"><h3>%1$s</h3><span class="firephage-badge firephage-badge--%2$s">%3$s</span></div><p>%4$s</p><a class="firephage-card-action" href="%5$s">%6$s</a></div>',
             esc_html($title),
             esc_attr($count > 0 ? 'warning' : 'good'),
             esc_html($count > 0 ? (string) $count : __('All clear', 'firephage-security')),
-            esc_html($count > 0 ? $description : __('Nothing needs attention here right now.', 'firephage-security'))
+            esc_html($count > 0 ? $description : $clearMessage),
+            esc_url($actionUrl),
+            esc_html($actionLabel)
+        );
+    }
+
+    private function renderUpdatesSummary(array $updates): string
+    {
+        $coreUpdates = (int) ($updates['core_updates'] ?? 0);
+        $pluginUpdates = (int) ($updates['plugin_updates'] ?? 0);
+        $themeUpdates = (int) ($updates['theme_updates'] ?? 0);
+        $inactivePlugins = (int) ($updates['inactive_plugins'] ?? 0);
+        $pendingUpdates = $coreUpdates + $pluginUpdates + $themeUpdates;
+        $lastChecked = $this->getUpdatesLastCheckedLabel();
+
+        $items = [
+            [
+                'label' => __('Pending updates', 'firephage-security'),
+                'value' => (string) $pendingUpdates,
+                'tone' => $pendingUpdates > 0 ? 'warning' : 'good',
+                'description' => $pendingUpdates > 0
+                    ? __('Across WordPress core, plugins, and themes.', 'firephage-security')
+                    : __('Everything looks up to date.', 'firephage-security'),
+            ],
+            [
+                'label' => __('WordPress core', 'firephage-security'),
+                'value' => $coreUpdates > 0 ? sprintf(_n('%d update', '%d updates', $coreUpdates, 'firephage-security'), $coreUpdates) : __('Up to date', 'firephage-security'),
+                'tone' => $coreUpdates > 0 ? 'warning' : 'good',
+                'description' => $coreUpdates > 0 ? __('A core update is ready to review.', 'firephage-security') : __('No core update is waiting.', 'firephage-security'),
+            ],
+            [
+                'label' => __('Plugins & themes', 'firephage-security'),
+                'value' => ($pluginUpdates + $themeUpdates) > 0
+                    ? sprintf(_n('%d update', '%d updates', $pluginUpdates + $themeUpdates, 'firephage-security'), $pluginUpdates + $themeUpdates)
+                    : __('Up to date', 'firephage-security'),
+                'tone' => ($pluginUpdates + $themeUpdates) > 0 ? 'warning' : 'good',
+                'description' => ($pluginUpdates + $themeUpdates) > 0
+                    ? __('Some installed items are ready to update.', 'firephage-security')
+                    : __('Plugins and themes are current.', 'firephage-security'),
+            ],
+            [
+                'label' => __('Inactive plugins', 'firephage-security'),
+                'value' => $inactivePlugins > 0
+                    ? sprintf(_n('%d plugin', '%d plugins', $inactivePlugins, 'firephage-security'), $inactivePlugins)
+                    : __('Reviewed', 'firephage-security'),
+                'tone' => $inactivePlugins > 0 ? 'neutral' : 'good',
+                'description' => $inactivePlugins > 0
+                    ? __('Inactive plugins should still be reviewed from time to time.', 'firephage-security')
+                    : __('No inactive plugins are waiting for review.', 'firephage-security'),
+            ],
+        ];
+
+        $html = '<div class="firephage-updates-summary">';
+        $html .= '<div class="firephage-updates-summary__header">';
+        $html .= '<p class="firephage-updates-summary__intro">' . esc_html__('Keeping WordPress, plugins, and themes updated helps reduce risk and avoids avoidable site issues.', 'firephage-security') . '</p>';
+        if ($lastChecked !== '') {
+            $html .= '<p class="firephage-updates-summary__meta">' . esc_html(sprintf(__('Last checked %s', 'firephage-security'), $lastChecked)) . '</p>';
+        }
+        $html .= '</div>';
+        $html .= '<div class="firephage-mini-grid firephage-mini-grid--updates">';
+
+        foreach ($items as $item) {
+            $html .= sprintf(
+                '<div class="firephage-stat-card firephage-stat-card--compact firephage-stat-card--summary"><span class="firephage-badge firephage-badge--%1$s">%2$s</span><span class="firephage-stat-value">%3$s</span><p class="firephage-stat-label">%4$s</p><p class="firephage-stat-description">%5$s</p></div>',
+                esc_attr((string) $item['tone']),
+                esc_html((string) $item['label']),
+                esc_html((string) $item['value']),
+                esc_html((string) $item['label']),
+                esc_html((string) $item['description'])
+            );
+        }
+
+        $html .= '</div>';
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    private function getUpdatesLastCheckedLabel(): string
+    {
+        $timestamps = [];
+
+        foreach (['update_core', 'update_plugins', 'update_themes'] as $transient) {
+            $data = get_site_transient($transient);
+
+            if (is_object($data) && isset($data->last_checked) && is_numeric($data->last_checked)) {
+                $timestamps[] = (int) $data->last_checked;
+            }
+        }
+
+        if ($timestamps === []) {
+            return '';
+        }
+
+        $lastChecked = max($timestamps);
+
+        if ($lastChecked <= 0) {
+            return '';
+        }
+
+        return sprintf(
+            '%1$s (%2$s)',
+            wp_date(get_option('date_format') . ' ' . get_option('time_format'), $lastChecked),
+            human_time_diff($lastChecked, time()) . ' ' . __('ago', 'firephage-security')
         );
     }
 

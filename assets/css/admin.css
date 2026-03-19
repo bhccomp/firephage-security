@@ -246,6 +246,10 @@
     margin: 16px 0 0;
 }
 
+.firephage-mini-grid--updates {
+    margin-top: 0;
+}
+
 .firephage-stat-card--compact {
     padding: 16px;
     border-radius: 16px;
@@ -255,6 +259,26 @@
 .firephage-stat-card--compact .firephage-stat-value {
     font-size: 24px;
     margin: 8px 0 6px;
+}
+
+.firephage-stat-card--summary .firephage-badge {
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.firephage-card-action {
+    display: inline-flex;
+    margin-top: 10px;
+    color: #0f5f99;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.firephage-card-action:hover,
+.firephage-card-action:focus {
+    color: #0c4a6e;
+    text-decoration: underline;
 }
 
 .firephage-panel-header--subsection {
@@ -406,6 +430,38 @@
 
 .firephage-panel-header {
     margin-bottom: 16px;
+}
+
+.firephage-updates-summary {
+    margin-bottom: 18px;
+    padding: 16px 18px;
+    border: 1px solid #dbe7f1;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+}
+
+.firephage-updates-summary__header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.firephage-updates-summary__intro,
+.firephage-updates-summary__meta {
+    margin: 0;
+}
+
+.firephage-updates-summary__intro {
+    color: #334155;
+    max-width: 760px;
+}
+
+.firephage-updates-summary__meta {
+    color: #64748b;
+    font-size: 13px;
 }
 
 .firephage-panel-header p {
@@ -1085,6 +1141,7 @@
     .firephage-hero,
     .firephage-card-head,
     .firephage-panel-header,
+    .firephage-updates-summary__header,
     .firephage-pro-shell__hero {
         flex-direction: column;
         align-items: start;
