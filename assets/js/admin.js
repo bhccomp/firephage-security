@@ -43,6 +43,10 @@
     const scannerSettingsFeedback = document.getElementById('firephage-scanner-settings-feedback');
     const signatureLastRefreshed = document.getElementById('firephage-signature-last-refreshed');
     const freeTokenFeedback = document.getElementById('firephage-free-token-feedback');
+    const setupWizardModal = document.getElementById('firephage-setup-wizard-modal');
+    const setupWizardForm = document.getElementById('firephage-setup-wizard-form');
+    const setupWizardFeedback = document.getElementById('firephage-setup-wizard-feedback');
+    const applyRecommendedSetupButton = document.querySelector('.firephage-apply-recommended-setup');
     const startQuickScanButton = document.querySelector('.firephage-start-quick-scan');
     const firewallStatusBadge = document.getElementById('firephage-firewall-status-badge');
     const firewallSummaryText = document.getElementById('firephage-firewall-summary-text');
@@ -93,6 +97,7 @@
     let pendingConfirmation = null;
     let selectedFindings = new Set();
     let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true, verificationToken: '' };
+    let setupWizardState = firephageAdmin.setupWizard || { shouldOpen: false };
     let proTabState = {
         firewallLoaded: false,
         performanceLoaded: false,
@@ -255,6 +260,15 @@
         freeTokenModal.hidden = true;
     };
 
+    const closeSetupWizardModal = () => {
+        if (!setupWizardModal) {
+            return;
+        }
+
+        clearModalFeedback(setupWizardFeedback);
+        setupWizardModal.hidden = true;
+    };
+
     const openFreeTokenModal = () => {
         if (!freeTokenModal) {
             return;
@@ -275,6 +289,15 @@
 
         clearModalFeedback(freeTokenFeedback);
         freeTokenModal.hidden = false;
+    };
+
+    const openSetupWizardModal = () => {
+        if (!setupWizardModal) {
+            return;
+        }
+
+        clearModalFeedback(setupWizardFeedback);
+        setupWizardModal.hidden = false;
     };
 
     const deleteAllSuspiciousFiles = (button) => {
@@ -1398,6 +1421,137 @@
         });
     }
 
+    const completeSetupWizard = (mode = 'custom') => {
+        if (!setupWizardForm) {
+            return;
+        }
+
+        clearModalFeedback(setupWizardFeedback);
+
+        const submitButton = setupWizardForm.querySelector('.firephage-save-setup-wizard');
+        const frequencySelect = setupWizardForm.querySelector('select[name="malware_auto_scan_interval"]');
+        const profileSelect = setupWizardForm.querySelector('select[name="bruteforce_profile"]');
+
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = mode === 'recommended'
+                ? (firephageAdmin.labels.applyRecommendedSetup || 'Applying recommended settings...')
+                : (firephageAdmin.labels.saveSetupWizard || 'Saving setup and starting your first scan...');
+        }
+
+        if (applyRecommendedSetupButton) {
+            applyRecommendedSetupButton.disabled = true;
+        }
+
+        request('firephage_complete_setup_wizard', {
+            mode,
+            malware_auto_scan_interval: frequencySelect ? frequencySelect.value : 'twice_daily',
+            bruteforce_profile: profileSelect ? profileSelect.value : 'recommended',
+        })
+            .done((response) => {
+                if (response.success) {
+                    setupWizardState.shouldOpen = false;
+
+                    if (scannerSettingsForm && response.data.settings) {
+                        const autoScanToggle = scannerSettingsForm.querySelector('input[name="malware_auto_scans_enabled"]');
+                        const scanInterval = scannerSettingsForm.querySelector('select[name="malware_auto_scan_interval"]');
+                        const scannerAutoScanStatus = document.getElementById('firephage-scanner-auto-scan');
+
+                        if (autoScanToggle) {
+                            autoScanToggle.checked = response.data.settings.malware_auto_scans_enabled === '1';
+                        }
+
+                        if (scanInterval) {
+                            scanInterval.value = response.data.settings.malware_auto_scan_interval || 'twice_daily';
+                        }
+
+                         if (scannerAutoScanStatus) {
+                            scannerAutoScanStatus.textContent = response.data.settings.malware_auto_scans_enabled === '1' ? 'Enabled' : 'Disabled';
+                        }
+                    }
+
+                    if (bruteForceForm && response.data.settings) {
+                        const enabledToggle = bruteForceForm.querySelector('input[name="bruteforce_enabled"]');
+                        const xmlrpcToggle = bruteForceForm.querySelector('input[name="bruteforce_protect_xmlrpc"]');
+                        const thresholdInput = bruteForceForm.querySelector('input[name="bruteforce_threshold"]');
+                        const windowInput = bruteForceForm.querySelector('input[name="bruteforce_window_minutes"]');
+                        const lockoutInput = bruteForceForm.querySelector('input[name="bruteforce_lockout_minutes"]');
+
+                        if (enabledToggle) {
+                            enabledToggle.checked = response.data.settings.bruteforce_enabled === '1';
+                        }
+
+                        if (xmlrpcToggle) {
+                            xmlrpcToggle.checked = response.data.settings.bruteforce_protect_xmlrpc === '1';
+                        }
+
+                        if (thresholdInput) {
+                            thresholdInput.value = response.data.settings.bruteforce_threshold || thresholdInput.value;
+                        }
+
+                        if (windowInput) {
+                            windowInput.value = response.data.settings.bruteforce_window_minutes || windowInput.value;
+                        }
+
+                        if (lockoutInput) {
+                            lockoutInput.value = response.data.settings.bruteforce_lockout_minutes || lockoutInput.value;
+                        }
+                    }
+
+                    if (response.data.bruteforce_summary) {
+                        renderBruteForceSummary(response.data.bruteforce_summary);
+                    }
+
+                    if (response.data.scan_state) {
+                        renderScanState(response.data.scan_state);
+                    }
+
+                    closeSetupWizardModal();
+                    setActiveTab('scanner');
+                    showToast(response.data.message || 'Setup saved. Your first scan has started.');
+                } else {
+                    showModalFeedback(setupWizardFeedback, (response.data && response.data.message) || 'Unable to save setup right now.', true);
+                }
+            })
+            .fail((xhr) => {
+                showModalFeedback(setupWizardFeedback, (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to save setup right now.', true);
+            })
+            .always(() => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Save and Start First Scan';
+                }
+
+                if (applyRecommendedSetupButton) {
+                    applyRecommendedSetupButton.disabled = false;
+                }
+            });
+    };
+
+    if (setupWizardForm) {
+        setupWizardForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            completeSetupWizard('custom');
+        });
+    }
+
+    if (applyRecommendedSetupButton && setupWizardForm) {
+        applyRecommendedSetupButton.addEventListener('click', () => {
+            const frequencySelect = setupWizardForm.querySelector('select[name="malware_auto_scan_interval"]');
+            const profileSelect = setupWizardForm.querySelector('select[name="bruteforce_profile"]');
+
+            if (frequencySelect) {
+                frequencySelect.value = 'twice_daily';
+            }
+
+            if (profileSelect) {
+                profileSelect.value = 'recommended';
+            }
+
+            completeSetupWizard('recommended');
+        });
+    }
+
     if (openScannerSettingsButton) {
         openScannerSettingsButton.addEventListener('click', () => {
             openScannerSettingsModal();
@@ -1782,6 +1936,16 @@
         });
     }
 
+    if (setupWizardModal) {
+        setupWizardModal.addEventListener('click', (event) => {
+            const target = event.target;
+
+            if (target instanceof HTMLElement && target.dataset.setupWizardClose === '1') {
+                closeSetupWizardModal();
+            }
+        });
+    }
+
     try {
         currentScanState = JSON.parse(app.dataset.scanStatus || '{}');
         renderScanState(currentScanState);
@@ -1814,7 +1978,9 @@
 
     renderFreeTokenSummary();
 
-    if (freeTokenState.requiresDecision) {
+    if (setupWizardState.shouldOpen) {
+        openSetupWizardModal();
+    } else if (freeTokenState.requiresDecision) {
         openFreeTokenModal();
     }
 }(jQuery));

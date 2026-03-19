@@ -87,6 +87,7 @@ final class Admin
         add_action('wp_ajax_firephage_verify_free_token', [$this, 'handleVerifyFreeToken']);
         add_action('wp_ajax_firephage_decline_free_token', [$this, 'handleDeclineFreeToken']);
         add_action('wp_ajax_firephage_dismiss_free_token_prompt', [$this, 'handleDismissFreeTokenPrompt']);
+        add_action('wp_ajax_firephage_complete_setup_wizard', [$this, 'handleCompleteSetupWizard']);
         add_action('wp_ajax_firephage_connect_dashboard', [$this, 'handleConnectDashboard']);
         add_action('wp_ajax_firephage_disconnect_dashboard', [$this, 'handleDisconnectDashboard']);
         add_action('wp_ajax_firephage_fetch_firewall_summary', [$this, 'handleFetchFirewallSummary']);
@@ -201,6 +202,8 @@ final class Admin
                     'deleteModalFilesLabel' => __('Files', 'firephage-security'),
                     'refreshHealthDone' => __('Health checks refreshed.', 'firephage-security'),
                     'refreshSignaturesDone' => __('FirePhage signatures refreshed.', 'firephage-security'),
+                    'applyRecommendedSetup' => __('Applying recommended settings...', 'firephage-security'),
+                    'saveSetupWizard' => __('Saving setup and starting your first scan...', 'firephage-security'),
                 ],
                 'freeToken' => [
                     'status' => (string) ($settings['free_signature_token_status'] ?? 'pending'),
@@ -208,6 +211,9 @@ final class Admin
                     'marketingOptIn' => (($settings['free_signature_token_marketing_opt_in'] ?? '0') === '1'),
                     'requiresDecision' => (($settings['free_signature_token_status'] ?? 'pending') === 'pending'),
                     'verificationToken' => isset($_GET['firephage_verify']) ? sanitize_text_field((string) wp_unslash($_GET['firephage_verify'])) : '',
+                ],
+                'setupWizard' => [
+                    'shouldOpen' => get_option('firephage_security_show_setup_wizard', '') === '1',
                 ],
             ]
         );
@@ -800,6 +806,35 @@ final class Admin
         echo '</form>';
         echo '</div>';
         echo '</div>';
+        echo '<div class="firephage-modal" id="firephage-setup-wizard-modal" hidden>';
+        echo '<div class="firephage-modal-backdrop" data-setup-wizard-close="1"></div>';
+        echo '<div class="firephage-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="firephage-setup-wizard-title">';
+        echo '<div class="firephage-modal-head">';
+        echo '<h3 id="firephage-setup-wizard-title">' . esc_html__('Recommended First-Time Setup', 'firephage-security') . '</h3>';
+        echo '<button type="button" class="button-link firephage-modal-close" data-setup-wizard-close="1" aria-label="' . esc_attr__('Close setup wizard', 'firephage-security') . '">&times;</button>';
+        echo '</div>';
+        echo '<p>' . esc_html__('Choose how often FirePhage should scan this site and how strict local login protection should be. When you finish, FirePhage will start the first deep scan automatically.', 'firephage-security') . '</p>';
+        echo '<form id="firephage-setup-wizard-form">';
+        echo '<div class="firephage-modal-feedback" id="firephage-setup-wizard-feedback" hidden aria-live="polite"></div>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Automatic malware scans', 'firephage-security') . '</span><select name="malware_auto_scan_interval">';
+        echo '<option value="daily">' . esc_html__('Once per day', 'firephage-security') . '</option>';
+        echo '<option value="twice_daily" selected>' . esc_html__('Twice per day (recommended)', 'firephage-security') . '</option>';
+        echo '<option value="four_times_daily">' . esc_html__('Four times per day', 'firephage-security') . '</option>';
+        echo '</select></label>';
+        echo '<label class="firephage-field"><span>' . esc_html__('Local login protection', 'firephage-security') . '</span><select name="bruteforce_profile">';
+        echo '<option value="basic">' . esc_html__('Basic', 'firephage-security') . '</option>';
+        echo '<option value="recommended" selected>' . esc_html__('Recommended', 'firephage-security') . '</option>';
+        echo '<option value="strict">' . esc_html__('Stricter', 'firephage-security') . '</option>';
+        echo '</select></label>';
+        echo '<p class="firephage-note firephage-note--subtle">' . esc_html__('Recommended settings enable automatic scans twice per day and a balanced local login-protection profile with XML-RPC protection turned on.', 'firephage-security') . '</p>';
+        echo '<div class="firephage-modal-actions">';
+        echo '<button type="button" class="button button-secondary" data-setup-wizard-close="1">' . esc_html__('Not now', 'firephage-security') . '</button>';
+        echo '<button type="button" class="button button-secondary firephage-apply-recommended-setup">' . esc_html__('Apply Recommended Settings', 'firephage-security') . '</button>';
+        echo '<button type="submit" class="button button-primary firephage-save-setup-wizard">' . esc_html__('Save and Start First Scan', 'firephage-security') . '</button>';
+        echo '</div>';
+        echo '</form>';
+        echo '</div>';
+        echo '</div>';
         echo '<div class="firephage-toast" id="firephage-toast" hidden></div>';
         echo '</div>';
         echo '</div>';
@@ -1108,6 +1143,72 @@ final class Admin
         wp_send_json_success([
             'message' => __('The free-token prompt will stay hidden unless you open it again manually.', 'firephage-security'),
             'settings' => $this->settings->all(),
+        ]);
+    }
+
+    public function handleCompleteSetupWizard(): void
+    {
+        $this->assertAjaxPermissions();
+
+        $mode = sanitize_text_field((string) ($_POST['mode'] ?? 'custom'));
+        $interval = sanitize_text_field((string) ($_POST['malware_auto_scan_interval'] ?? 'twice_daily'));
+        $profile = sanitize_text_field((string) ($_POST['bruteforce_profile'] ?? 'recommended'));
+
+        if ($mode === 'recommended') {
+            $interval = 'twice_daily';
+            $profile = 'recommended';
+        }
+
+        if (! in_array($interval, ['daily', 'twice_daily', 'four_times_daily'], true)) {
+            $interval = 'twice_daily';
+        }
+
+        $profiles = [
+            'basic' => [
+                'bruteforce_enabled' => '1',
+                'bruteforce_threshold' => '6',
+                'bruteforce_window_minutes' => '15',
+                'bruteforce_lockout_minutes' => '20',
+                'bruteforce_protect_xmlrpc' => '0',
+            ],
+            'recommended' => [
+                'bruteforce_enabled' => '1',
+                'bruteforce_threshold' => '5',
+                'bruteforce_window_minutes' => '15',
+                'bruteforce_lockout_minutes' => '30',
+                'bruteforce_protect_xmlrpc' => '1',
+            ],
+            'strict' => [
+                'bruteforce_enabled' => '1',
+                'bruteforce_threshold' => '4',
+                'bruteforce_window_minutes' => '15',
+                'bruteforce_lockout_minutes' => '45',
+                'bruteforce_protect_xmlrpc' => '1',
+            ],
+        ];
+
+        $selectedProfile = $profiles[$profile] ?? $profiles['recommended'];
+
+        $this->settings->update(array_merge($selectedProfile, [
+            'malware_auto_scans_enabled' => '1',
+            'malware_auto_scan_interval' => $interval,
+        ]));
+
+        delete_option('firephage_security_show_setup_wizard');
+        do_action('firephage_security_settings_changed');
+
+        $scanResult = $this->scanner->startScan(false, 'deep');
+        $message = __('Setup saved. Your first deep scan has started.', 'firephage-security');
+
+        if (is_wp_error($scanResult)) {
+            $message = __('Setup saved. FirePhage could not start the first scan automatically, so you can start it from the Malware Scanner tab.', 'firephage-security');
+        }
+
+        wp_send_json_success([
+            'message' => $message,
+            'settings' => $this->settings->all(),
+            'bruteforce_summary' => $this->bruteForceProtection->getSummary(),
+            'scan_state' => $this->scanner->getState(),
         ]);
     }
 

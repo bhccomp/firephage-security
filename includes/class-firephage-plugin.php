@@ -30,6 +30,7 @@ final class Plugin
     private const AUTO_SCAN_CRON_HOOK = 'firephage_security_auto_scan';
     private const WEEKLY_NOTIFICATION_CRON_HOOK = 'firephage_security_weekly_notifications';
     private const ACTIVATION_REDIRECT_OPTION = 'firephage_security_activation_redirect';
+    private const SHOW_SETUP_WIZARD_OPTION = 'firephage_security_show_setup_wizard';
 
     /**
      * @var self|null
@@ -124,6 +125,7 @@ final class Plugin
         }
 
         add_option(self::ACTIVATION_REDIRECT_OPTION, '1', '', false);
+        add_option(self::SHOW_SETUP_WIZARD_OPTION, '1', '', false);
     }
 
     public static function deactivate(): void
@@ -134,6 +136,7 @@ final class Plugin
         wp_clear_scheduled_hook(self::AUTO_SCAN_CRON_HOOK);
         wp_clear_scheduled_hook(self::WEEKLY_NOTIFICATION_CRON_HOOK);
         delete_option(self::ACTIVATION_REDIRECT_OPTION);
+        delete_option(self::SHOW_SETUP_WIZARD_OPTION);
     }
 
     public function maybeRedirectAfterActivation(): void
