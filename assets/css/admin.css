@@ -1088,6 +1088,18 @@
     min-height: 340px;
 }
 
+.firephage-confirm-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    color: #334155;
+}
+
+.firephage-confirm-check input {
+    margin-top: 2px;
+}
+
 .firephage-toast {
     position: fixed;
     right: 24px;

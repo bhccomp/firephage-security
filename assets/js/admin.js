@@ -98,6 +98,7 @@
     let findingsSearchQuery = '';
     let pendingConfirmation = null;
     let selectedFindings = new Set();
+    let restoreWarningDismissedForScanId = '';
     let freeTokenState = firephageAdmin.freeToken || { status: 'pending', email: '', marketingOptIn: false, requiresDecision: true, verificationToken: '' };
     let setupWizardState = firephageAdmin.setupWizard || { shouldOpen: false };
     let currentSetupWizardStep = 'token';
@@ -458,6 +459,92 @@
                 button.removeAttribute('disabled');
                 closeConfirmModal();
             });
+    };
+
+    const restoreSingleIntegrityFile = (button) => {
+        button.setAttribute('disabled', 'disabled');
+
+        request('firephage_restore_file', {
+            file: button.dataset.file || '',
+            source: button.dataset.source || '',
+        })
+            .done((response) => {
+                if (response.success) {
+                    renderScanState(response.data.state);
+                    showToast(response.data.message || 'The official file was restored.');
+                } else {
+                    showToast((response.data && response.data.message) || 'Unable to restore the file.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to restore the file.', true);
+            })
+            .always(() => {
+                button.removeAttribute('disabled');
+                closeConfirmModal();
+            });
+    };
+
+    const restoreAllIntegrityFiles = (button) => {
+        button.setAttribute('disabled', 'disabled');
+
+        request('firephage_restore_all_integrity_files')
+            .done((response) => {
+                if (response.success) {
+                    findingsPage = 1;
+                    renderScanState(response.data.state);
+                    showToast(response.data.message || 'Modified files restored.');
+                } else {
+                    showToast((response.data && response.data.message) || 'Unable to restore the modified files.', true);
+                }
+            })
+            .fail((xhr) => {
+                showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to restore the modified files.', true);
+            })
+            .always(() => {
+                button.removeAttribute('disabled');
+                closeConfirmModal();
+            });
+    };
+
+    const confirmRestoreAction = ({ title, body, button, onConfirm, fileCount = 0 }) => {
+        const scanId = String((currentScanState && currentScanState.scan_id) || '');
+
+        if (scanId && restoreWarningDismissedForScanId === scanId) {
+            onConfirm(button);
+            return;
+        }
+
+        const checkboxId = `firephage-restore-acknowledge-${Date.now()}`;
+        const countMarkup = fileCount > 0
+            ? `<p><strong>${escapeHtml(firephageAdmin.labels.confirmRestoreCountLabel || 'Files ready to restore')}:</strong> ${fileCount}</p>`
+            : '';
+
+        openConfirmModal({
+            title,
+            body: `<p>${escapeHtml(body)}</p>${countMarkup}<p><strong>${escapeHtml(firephageAdmin.labels.confirmRestoreBackup || 'Create a backup before restoring files.')}</strong></p><p class="firephage-note">${escapeHtml(firephageAdmin.labels.confirmRestoreWarning || 'Restoring official files will overwrite local edits.')}</p><label class="firephage-confirm-check"><input type="checkbox" id="${checkboxId}" /> <span>${escapeHtml(firephageAdmin.labels.confirmRestoreAcknowledge || 'I understand this will overwrite local changes. Do not show this warning again until the next scan.')}</span></label>`,
+            actionLabel: firephageAdmin.labels.restoreFile || 'Restore',
+            danger: false,
+            onConfirm: () => {
+                const checkbox = document.getElementById(checkboxId);
+
+                if (!(checkbox instanceof HTMLInputElement) || !checkbox.checked) {
+                    showToast(firephageAdmin.labels.confirmRestoreAcknowledge || 'Please confirm that you understand the restore action.', true);
+
+                    if (confirmModalSubmit) {
+                        confirmModalSubmit.disabled = false;
+                    }
+
+                    return;
+                }
+
+                if (scanId) {
+                    restoreWarningDismissedForScanId = scanId;
+                }
+
+                onConfirm(button);
+            },
+        });
     };
 
     const setBadge = (node, text, tone = 'neutral') => {
@@ -913,6 +1000,7 @@
         findingsPage = Math.min(findingsPage, totalPages);
         const start = (findingsPage - 1) * findingsPageSize;
         const pagedRows = rows.slice(start, start + findingsPageSize);
+        const restorableCount = rows.filter((finding) => finding.type !== 'malware' && ['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source)).length;
 
         return `<div class="firephage-findings-toolbar">
             <label class="firephage-findings-search">
@@ -926,6 +1014,7 @@
                 </select>
             </label>
             <div class="firephage-findings-actions">
+                ${restorableCount > 0 ? `<button type="button" class="button button-secondary firephage-restore-integrity-files">${firephageAdmin.labels.restoreAllFiles || 'Restore All Modified Files'}</button>` : ''}
                 <button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" ${selectedFindings.size === 0 ? 'disabled' : ''}>${firephageAdmin.labels.deleteSelectedFiles}</button>
                 <button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">${firephageAdmin.labels.deleteSuspiciousFiles}</button>
                 <button type="button" class="button button-secondary firephage-clear-findings">${firephageAdmin.labels.clearFindings}</button>
@@ -969,7 +1058,7 @@
                                 <td>${details.join(' | ')}</td>
                                 <td>${finding.type === 'malware'
                                     ? `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button></div>`
-                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<button type="button" class="button button-link firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button>` : ''}<span class="firephage-empty">Protected</span></div>`}</td>
+                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<button type="button" class="button button-link firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button><button type="button" class="button button-link firephage-restore-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.restoreFile || 'Restore'}</button>` : ''}<span class="firephage-empty">Protected</span></div>`}</td>
                             </tr>
                         `;
                     }).join('')}
@@ -984,7 +1073,11 @@
     };
 
     const renderScanState = (state) => {
+        const previousScanId = currentScanState && currentScanState.scan_id ? String(currentScanState.scan_id) : '';
         currentScanState = state;
+        if (String(state.scan_id || '') !== previousScanId) {
+            restoreWarningDismissedForScanId = '';
+        }
         const badge = document.getElementById('firephage-scan-status-badge');
         const overviewBadge = document.getElementById('firephage-overview-scan-status-badge');
         const progressBar = document.getElementById('firephage-scan-progress-bar');
@@ -2032,6 +2125,29 @@
                 .always(() => {
                     target.removeAttribute('disabled');
                 });
+            return;
+        }
+
+        if (target.classList.contains('firephage-restore-integrity-files')) {
+            const count = (currentScanState.findings || []).filter((finding) => finding.type !== 'malware' && ['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source)).length;
+            confirmRestoreAction({
+                title: firephageAdmin.labels.confirmRestoreAllTitle || 'Restore All Modified Files?',
+                body: firephageAdmin.labels.confirmRestoreAllBody || 'This will overwrite every checksum-based modified file in the current findings list with the official WordPress.org package version.',
+                button: target,
+                fileCount: count,
+                onConfirm: restoreAllIntegrityFiles,
+            });
+            return;
+        }
+
+        if (target.classList.contains('firephage-restore-file')) {
+            confirmRestoreAction({
+                title: firephageAdmin.labels.confirmRestoreTitle || 'Restore Official File?',
+                body: firephageAdmin.labels.confirmRestoreBody || 'This will overwrite the local file with the official WordPress.org version for the installed package release.',
+                button: target,
+                fileCount: 1,
+                onConfirm: restoreSingleIntegrityFile,
+            });
             return;
         }
 

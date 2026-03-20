@@ -73,6 +73,8 @@ final class Admin
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
         add_action('wp_ajax_firephage_preview_file', [$this, 'handlePreviewFile']);
         add_action('wp_ajax_firephage_compare_file', [$this, 'handleCompareFile']);
+        add_action('wp_ajax_firephage_restore_file', [$this, 'handleRestoreFile']);
+        add_action('wp_ajax_firephage_restore_all_integrity_files', [$this, 'handleRestoreAllIntegrityFiles']);
         add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
         add_action('wp_ajax_firephage_delete_suspicious_files', [$this, 'handleDeleteSuspiciousFiles']);
         add_action('wp_ajax_firephage_delete_selected_suspicious_files', [$this, 'handleDeleteSelectedSuspiciousFiles']);
@@ -170,10 +172,20 @@ final class Admin
                     'deleteFile' => __('Delete File', 'firephage-security'),
                     'previewFile' => __('Preview', 'firephage-security'),
                     'compareFile' => __('Compare', 'firephage-security'),
+                    'restoreFile' => __('Restore', 'firephage-security'),
+                    'restoreAllFiles' => __('Restore All Modified Files', 'firephage-security'),
                     'compareTitle' => __('Compare Files', 'firephage-security'),
                     'localFile' => __('Local file', 'firephage-security'),
                     'officialReference' => __('Official reference', 'firephage-security'),
                     'previewTruncated' => __('Preview truncated to keep the browser responsive.', 'firephage-security'),
+                    'confirmRestoreTitle' => __('Restore Official File?', 'firephage-security'),
+                    'confirmRestoreAllTitle' => __('Restore All Modified Files?', 'firephage-security'),
+                    'confirmRestoreBody' => __('This will overwrite the local file with the official WordPress.org version for the installed package release.', 'firephage-security'),
+                    'confirmRestoreAllBody' => __('This will overwrite every checksum-based modified file in the current findings list with the official WordPress.org package version.', 'firephage-security'),
+                    'confirmRestoreBackup' => __('Create a backup before restoring files.', 'firephage-security'),
+                    'confirmRestoreWarning' => __('Restoring official files will overwrite local edits.', 'firephage-security'),
+                    'confirmRestoreAcknowledge' => __('I understand this will overwrite local changes. Do not show this warning again until the next scan.', 'firephage-security'),
+                    'confirmRestoreCountLabel' => __('Files ready to restore', 'firephage-security'),
                     'confirmDeleteTitle' => __('Delete Malicious File?', 'firephage-security'),
                     'confirmDeleteAllTitle' => __('Delete All Malicious Files?', 'firephage-security'),
                     'confirmDeleteSelectedTitle' => __('Delete Selected Malicious Files?', 'firephage-security'),
@@ -963,6 +975,36 @@ final class Admin
         wp_send_json_success($result);
     }
 
+    public function handleRestoreFile(): void
+    {
+        $this->assertAjaxPermissions();
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $file = sanitize_text_field((string) wp_unslash($_POST['file'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $source = sanitize_text_field((string) wp_unslash($_POST['source'] ?? ''));
+        $result = $this->scanner->restoreIntegrityFile($file, $source);
+
+        wp_send_json_success([
+            'message' => (string) ($result['message'] ?? __('The file restore request has been processed.', 'firephage-security')),
+            'state' => $result['state'] ?? $this->scanner->getState(),
+        ]);
+    }
+
+    public function handleRestoreAllIntegrityFiles(): void
+    {
+        $this->assertAjaxPermissions();
+        $result = $this->scanner->restoreAllIntegrityFiles();
+
+        wp_send_json_success([
+            'message' => sprintf(
+                __('Restored %1$d modified files. Skipped %2$d files that could not be restored.', 'firephage-security'),
+                (int) ($result['restored_files'] ?? 0),
+                (int) ($result['skipped_files'] ?? 0)
+            ),
+            'state' => $result['state'] ?? $this->scanner->getState(),
+        ]);
+    }
+
     public function handleClearFindings(): void
     {
         $this->assertAjaxPermissions();
@@ -1682,6 +1724,14 @@ SVG;
         }
 
         $pageSizeOptions = $this->pageSizeOptions(count($findings));
+        $restorableCount = 0;
+
+        foreach ($findings as $finding) {
+            if (is_array($finding) && (($finding['type'] ?? '') !== 'malware') && in_array((string) ($finding['source'] ?? ''), ['core_checksum', 'plugin_checksum', 'theme_checksum'], true)) {
+                $restorableCount++;
+            }
+        }
+
         $html = '<div class="firephage-findings-toolbar">';
         $html .= '<label class="firephage-findings-search"><span class="screen-reader-text">' . esc_html__('Search findings', 'firephage-security') . '</span><input type="search" class="firephage-findings-search-input" placeholder="' . esc_attr__('Search findings...', 'firephage-security') . '" /></label>';
         $html .= '<label class="firephage-findings-rows"><span>' . esc_html__('Rows', 'firephage-security') . '</span><select class="firephage-findings-page-size">';
@@ -1690,6 +1740,9 @@ SVG;
         }
         $html .= '</select></label>';
         $html .= '<div class="firephage-findings-actions">';
+        if ($restorableCount > 0) {
+            $html .= '<button type="button" class="button button-secondary firephage-restore-integrity-files">' . esc_html__('Restore All Modified Files', 'firephage-security') . '</button>';
+        }
         $html .= '<button type="button" class="button firephage-button-danger firephage-delete-selected-suspicious-files" disabled>' . esc_html__('Delete Selected Flagged Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button firephage-button-danger firephage-delete-suspicious-files">' . esc_html__('Delete All Flagged Files', 'firephage-security') . '</button>';
         $html .= '<button type="button" class="button button-secondary firephage-clear-findings">' . esc_html__('Clear Findings', 'firephage-security') . '</button>';
@@ -1745,6 +1798,7 @@ SVG;
             } else {
                 if (in_array($source, ['core_checksum', 'plugin_checksum', 'theme_checksum'], true)) {
                     $html .= '<button type="button" class="button button-link firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button> ';
+                    $html .= '<button type="button" class="button button-link firephage-restore-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Restore', 'firephage-security') . '</button> ';
                 }
                 $html .= '<span class="firephage-empty">' . esc_html__('Protected', 'firephage-security') . '</span>';
             }
