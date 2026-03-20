@@ -891,8 +891,11 @@ final class Admin
     {
         $this->assertAjaxPermissions();
 
-        $forceNew = isset($_POST['force_new']) && sanitize_text_field((string) $_POST['force_new']) === '1';
-        $scanMode = sanitize_text_field((string) ($_POST['scan_mode'] ?? 'deep'));
+        // Nonce and capability checks are handled centrally in assertAjaxPermissions().
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $forceNew = isset($_POST['force_new']) && sanitize_text_field((string) wp_unslash($_POST['force_new'])) === '1';
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $scanMode = sanitize_text_field((string) wp_unslash($_POST['scan_mode'] ?? 'deep'));
         $result = $this->scanner->startScan($forceNew, $scanMode);
 
         if (is_wp_error($result)) {
@@ -927,7 +930,8 @@ final class Admin
     public function handlePreviewFile(): void
     {
         $this->assertAjaxPermissions();
-        $file = sanitize_text_field((string) ($_POST['file'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $file = sanitize_text_field((string) wp_unslash($_POST['file'] ?? ''));
         $result = $this->scanner->previewFile($file);
 
         if (is_wp_error($result)) {
@@ -964,7 +968,8 @@ final class Admin
     public function handleDeleteSuspiciousFile(): void
     {
         $this->assertAjaxPermissions();
-        $file = sanitize_text_field((string) ($_POST['file'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $file = sanitize_text_field((string) wp_unslash($_POST['file'] ?? ''));
         $result = $this->scanner->deleteSuspiciousFile($file);
 
         wp_send_json_success([
@@ -976,7 +981,10 @@ final class Admin
     public function handleDeleteSelectedSuspiciousFiles(): void
     {
         $this->assertAjaxPermissions();
-        $files = isset($_POST['files']) && is_array($_POST['files']) ? array_map('sanitize_text_field', $_POST['files']) : [];
+        // phpcs:disable WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Verified in assertAjaxPermissions(); entries are unslashed and sanitized immediately below.
+        $rawFiles = isset($_POST['files']) && is_array($_POST['files']) ? $_POST['files'] : [];
+        // phpcs:enable
+        $files = array_map('sanitize_text_field', array_map('wp_unslash', $rawFiles));
         $result = $this->scanner->deleteSelectedSuspiciousFiles($files);
 
         wp_send_json_success([
@@ -1019,6 +1027,8 @@ final class Admin
     public function handleSaveBruteForceSettings(): void
     {
         $this->assertAjaxPermissions();
+        // Settings values are sanitized in BruteForceProtection::saveSettings().
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified in assertAjaxPermissions(); values sanitized in saveSettings().
         $summary = $this->bruteForceProtection->saveSettings(isset($_POST['settings']) && is_array($_POST['settings']) ? wp_unslash($_POST['settings']) : []);
 
         wp_send_json_success([
@@ -1042,6 +1052,8 @@ final class Admin
     {
         $this->assertAjaxPermissions();
         $current = $this->settings->all();
+        // Individual values are normalized before saving below.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified in assertAjaxPermissions(); values sanitized below.
         $settings = isset($_POST['settings']) && is_array($_POST['settings']) ? wp_unslash($_POST['settings']) : [];
 
         $this->settings->update([
@@ -1065,7 +1077,9 @@ final class Admin
         $this->assertAjaxPermissions();
         $settings = $this->settings->all();
         $serviceUrl = esc_url_raw((string) ($settings['checksum_service_url'] ?? ''));
-        $email = sanitize_email((string) ($_POST['email'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $email = sanitize_email((string) wp_unslash($_POST['email'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
         $marketingOptIn = ! empty($_POST['marketing_opt_in']);
 
         if ($serviceUrl === '' || $email === '') {
@@ -1138,7 +1152,8 @@ final class Admin
         $this->assertAjaxPermissions();
         $settings = $this->settings->all();
         $serviceUrl = esc_url_raw((string) ($settings['checksum_service_url'] ?? ''));
-        $verificationToken = sanitize_text_field((string) ($_POST['verification_token'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $verificationToken = sanitize_text_field((string) wp_unslash($_POST['verification_token'] ?? ''));
 
         if ($serviceUrl === '' || $verificationToken === '') {
             wp_send_json_error(['message' => __('A valid verification request is required.', 'firephage-security')], 400);
@@ -1208,9 +1223,12 @@ final class Admin
     {
         $this->assertAjaxPermissions();
 
-        $mode = sanitize_text_field((string) ($_POST['mode'] ?? 'custom'));
-        $interval = sanitize_text_field((string) ($_POST['malware_auto_scan_interval'] ?? 'twice_daily'));
-        $profile = sanitize_text_field((string) ($_POST['bruteforce_profile'] ?? 'recommended'));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $mode = sanitize_text_field((string) wp_unslash($_POST['mode'] ?? 'custom'));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $interval = sanitize_text_field((string) wp_unslash($_POST['malware_auto_scan_interval'] ?? 'twice_daily'));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $profile = sanitize_text_field((string) wp_unslash($_POST['bruteforce_profile'] ?? 'recommended'));
 
         if ($mode === 'recommended') {
             $interval = 'twice_daily';
@@ -1274,6 +1292,8 @@ final class Admin
     {
         $this->assertAjaxPermissions();
         $current = $this->settings->all();
+        // Individual values are normalized before saving below.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Verified in assertAjaxPermissions(); values sanitized below.
         $settings = isset($_POST['settings']) && is_array($_POST['settings']) ? wp_unslash($_POST['settings']) : [];
 
         $this->settings->update([
@@ -1296,8 +1316,11 @@ final class Admin
     {
         $this->assertAjaxPermissions();
 
-        $dashboardUrl = esc_url_raw((string) ($_POST['dashboard_url'] ?? ''));
-        $connectionToken = sanitize_text_field((string) ($_POST['connection_token'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $dashboardUrl = esc_url_raw((string) wp_unslash($_POST['dashboard_url'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $connectionToken = sanitize_text_field((string) wp_unslash($_POST['connection_token'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
         $autoSync = ! empty($_POST['auto_sync_reports']) ? '1' : '0';
 
         if ($dashboardUrl === '' || $connectionToken === '') {
@@ -1522,7 +1545,7 @@ final class Admin
         return sprintf(
             __('%1$s (%2$s ago)', 'firephage-security'),
             wp_date(get_option('date_format') . ' ' . get_option('time_format'), $epoch),
-            human_time_diff($epoch, current_time('timestamp'))
+            human_time_diff($epoch, time())
         );
     }
 
