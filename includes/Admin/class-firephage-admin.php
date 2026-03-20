@@ -1797,7 +1797,7 @@ SVG;
                 $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Review File', 'firephage-security') . '</button>';
                 if (in_array($source, ['core_checksum', 'plugin_checksum', 'theme_checksum'], true)) {
                     $html .= '<details class="firephage-action-menu">';
-                    $html .= '<summary class="button button-secondary">' . esc_html__('Actions', 'firephage-security') . '</summary>';
+                    $html .= '<summary class="button button-secondary">' . esc_html__('Actions', 'firephage-security') . ' <span class="firephage-action-menu__chevron" aria-hidden="true">▾</span></summary>';
                     $html .= '<div class="firephage-action-menu__panel">';
                     $html .= '<button type="button" class="button button-secondary firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button>';
                     $html .= '<button type="button" class="button button-secondary firephage-restore-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Restore', 'firephage-security') . '</button>';
