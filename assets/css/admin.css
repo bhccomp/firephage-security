@@ -1066,6 +1066,28 @@
     word-break: break-word;
 }
 
+.firephage-compare-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.firephage-compare-pane {
+    display: grid;
+    gap: 8px;
+}
+
+.firephage-compare-pane__title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.firephage-compare-pane .firephage-preview-content {
+    min-height: 340px;
+}
+
 .firephage-toast {
     position: fixed;
     right: 24px;

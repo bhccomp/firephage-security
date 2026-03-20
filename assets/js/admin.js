@@ -220,7 +220,7 @@
 
         previewModal.hidden = true;
         previewModalMeta.textContent = '';
-        previewModalContent.textContent = '';
+        previewModalContent.innerHTML = '';
     };
 
     const openPreviewModal = ({ file, content, truncated }) => {
@@ -230,9 +230,61 @@
 
         previewModalTitle.textContent = firephageAdmin.labels.previewFile || 'File Preview';
         previewModalMeta.textContent = truncated
-            ? `${file} • Preview truncated to keep the browser responsive.`
+            ? `${file} • ${firephageAdmin.labels.previewTruncated || 'Preview truncated to keep the browser responsive.'}`
             : file;
-        previewModalContent.textContent = content || '';
+        const pre = document.createElement('pre');
+        pre.className = 'firephage-preview-content';
+        pre.textContent = content || '';
+        previewModalContent.innerHTML = '';
+        previewModalContent.appendChild(pre);
+        previewModal.hidden = false;
+    };
+
+    const openCompareModal = ({ file, local, reference }) => {
+        if (!previewModal || !previewModalTitle || !previewModalMeta || !previewModalContent) {
+            return;
+        }
+
+        previewModalTitle.textContent = firephageAdmin.labels.compareTitle || 'Compare Files';
+
+        const metaBits = [file];
+
+        if (reference && reference.type && reference.version) {
+            const typeLabel = reference.type.charAt(0).toUpperCase() + reference.type.slice(1);
+            metaBits.push(`${typeLabel} ${reference.version}`);
+        }
+
+        if ((local && local.truncated) || (reference && reference.truncated)) {
+            metaBits.push(firephageAdmin.labels.previewTruncated || 'Preview truncated to keep the browser responsive.');
+        }
+
+        previewModalMeta.textContent = metaBits.join(' • ');
+        previewModalContent.innerHTML = '';
+
+        const compare = document.createElement('div');
+        compare.className = 'firephage-compare-grid';
+
+        const makePane = (label, contentValue) => {
+            const pane = document.createElement('section');
+            pane.className = 'firephage-compare-pane';
+
+            const heading = document.createElement('h4');
+            heading.className = 'firephage-compare-pane__title';
+            heading.textContent = label;
+
+            const pre = document.createElement('pre');
+            pre.className = 'firephage-preview-content';
+            pre.textContent = contentValue || '';
+
+            pane.appendChild(heading);
+            pane.appendChild(pre);
+
+            return pane;
+        };
+
+        compare.appendChild(makePane(firephageAdmin.labels.localFile || 'Local file', local && local.content ? local.content : ''));
+        compare.appendChild(makePane(firephageAdmin.labels.officialReference || 'Official reference', reference && reference.content ? reference.content : ''));
+        previewModalContent.appendChild(compare);
         previewModal.hidden = false;
     };
 
@@ -917,7 +969,7 @@
                                 <td>${details.join(' | ')}</td>
                                 <td>${finding.type === 'malware'
                                     ? `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button></div>`
-                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><span class="firephage-empty">Protected</span></div>`}</td>
+                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<button type="button" class="button button-link firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button>` : ''}<span class="firephage-empty">Protected</span></div>`}</td>
                             </tr>
                         `;
                     }).join('')}
@@ -1953,6 +2005,29 @@
                 })
                 .fail((xhr) => {
                     showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to preview the file.', true);
+                })
+                .always(() => {
+                    target.removeAttribute('disabled');
+                });
+            return;
+        }
+
+        if (target.classList.contains('firephage-compare-file')) {
+            target.setAttribute('disabled', 'disabled');
+
+            request('firephage_compare_file', {
+                file: target.dataset.file || '',
+                source: target.dataset.source || '',
+            })
+                .done((response) => {
+                    if (response.success) {
+                        openCompareModal(response.data.compare || response.data);
+                    } else {
+                        showToast((response.data && response.data.message) || 'Unable to compare the file.', true);
+                    }
+                })
+                .fail((xhr) => {
+                    showToast((xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) || 'Unable to compare the file.', true);
                 })
                 .always(() => {
                     target.removeAttribute('disabled');

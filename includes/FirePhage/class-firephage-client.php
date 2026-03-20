@@ -94,6 +94,37 @@ final class Client
     /**
      * @return array<string, mixed>|WP_Error
      */
+    public function fetchPublicReferenceFile(string $serviceUrl, string $type, string $version, string $path, string $slug = '')
+    {
+        $query = [
+            'type' => $type,
+            'version' => $version,
+            'path' => $path,
+        ];
+
+        if ($slug !== '') {
+            $query['slug'] = $slug;
+        }
+
+        $response = wp_remote_get(
+            add_query_arg(
+                $query,
+                untrailingslashit($serviceUrl) . '/api/plugin/reference-file'
+            ),
+            [
+                'timeout' => 20,
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ]
+        );
+
+        return $this->normalizeResponse($response, 'reference file');
+    }
+
+    /**
+     * @return array<string, mixed>|WP_Error
+     */
     public function fetchPublicSignatures(string $serviceUrl)
     {
         return new WP_Error('missing_signature_token', __('A free FirePhage signature token is required.', 'firephage-security'));

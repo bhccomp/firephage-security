@@ -72,6 +72,7 @@ final class Admin
         add_action('wp_ajax_firephage_stop_scan', [$this, 'handleStopScan']);
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
         add_action('wp_ajax_firephage_preview_file', [$this, 'handlePreviewFile']);
+        add_action('wp_ajax_firephage_compare_file', [$this, 'handleCompareFile']);
         add_action('wp_ajax_firephage_clear_findings', [$this, 'handleClearFindings']);
         add_action('wp_ajax_firephage_delete_suspicious_files', [$this, 'handleDeleteSuspiciousFiles']);
         add_action('wp_ajax_firephage_delete_selected_suspicious_files', [$this, 'handleDeleteSelectedSuspiciousFiles']);
@@ -168,6 +169,11 @@ final class Admin
                     'deleteSelectedFiles' => __('Delete Selected Files', 'firephage-security'),
                     'deleteFile' => __('Delete File', 'firephage-security'),
                     'previewFile' => __('Preview', 'firephage-security'),
+                    'compareFile' => __('Compare', 'firephage-security'),
+                    'compareTitle' => __('Compare Files', 'firephage-security'),
+                    'localFile' => __('Local file', 'firephage-security'),
+                    'officialReference' => __('Official reference', 'firephage-security'),
+                    'previewTruncated' => __('Preview truncated to keep the browser responsive.', 'firephage-security'),
                     'confirmDeleteTitle' => __('Delete Malicious File?', 'firephage-security'),
                     'confirmDeleteAllTitle' => __('Delete All Malicious Files?', 'firephage-security'),
                     'confirmDeleteSelectedTitle' => __('Delete Selected Malicious Files?', 'firephage-security'),
@@ -770,7 +776,7 @@ final class Admin
         echo '<button type="button" class="button-link firephage-modal-close" data-preview-close="1" aria-label="' . esc_attr__('Close preview dialog', 'firephage-security') . '">&times;</button>';
         echo '</div>';
         echo '<p class="firephage-note" id="firephage-preview-modal-meta"></p>';
-        echo '<pre class="firephage-preview-content" id="firephage-preview-modal-content"></pre>';
+        echo '<div id="firephage-preview-modal-content"></div>';
         echo '<div class="firephage-modal-actions">';
         echo '<button type="button" class="button button-secondary" data-preview-close="1">' . esc_html__('Close', 'firephage-security') . '</button>';
         echo '</div>';
@@ -933,6 +939,22 @@ final class Admin
         // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
         $file = sanitize_text_field((string) wp_unslash($_POST['file'] ?? ''));
         $result = $this->scanner->previewFile($file);
+
+        if (is_wp_error($result)) {
+            wp_send_json_error(['message' => $result->get_error_message()], 400);
+        }
+
+        wp_send_json_success($result);
+    }
+
+    public function handleCompareFile(): void
+    {
+        $this->assertAjaxPermissions();
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $file = sanitize_text_field((string) wp_unslash($_POST['file'] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in assertAjaxPermissions().
+        $source = sanitize_text_field((string) wp_unslash($_POST['source'] ?? ''));
+        $result = $this->scanner->compareFile($file, $source);
 
         if (is_wp_error($result)) {
             wp_send_json_error(['message' => $result->get_error_message()], 400);
@@ -1721,6 +1743,9 @@ SVG;
             if ($type === 'malware') {
                 $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete Flagged File', 'firephage-security') . '</button>';
             } else {
+                if (in_array($source, ['core_checksum', 'plugin_checksum', 'theme_checksum'], true)) {
+                    $html .= '<button type="button" class="button button-link firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button> ';
+                }
                 $html .= '<span class="firephage-empty">' . esc_html__('Protected', 'firephage-security') . '</span>';
             }
             $html .= '</td>';
