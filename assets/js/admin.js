@@ -150,6 +150,47 @@
         feedbackNode.classList.toggle('is-success', !isError);
     };
 
+    const ensureConfirmModalError = () => {
+        if (!confirmModalBody) {
+            return null;
+        }
+
+        let node = document.getElementById('firephage-confirm-modal-inline-error');
+
+        if (!node) {
+            node = document.createElement('div');
+            node.id = 'firephage-confirm-modal-inline-error';
+            node.className = 'firephage-modal-feedback is-error';
+            node.hidden = true;
+            confirmModalBody.prepend(node);
+        }
+
+        return node;
+    };
+
+    const clearConfirmModalError = () => {
+        const node = document.getElementById('firephage-confirm-modal-inline-error');
+
+        if (!node) {
+            return;
+        }
+
+        node.hidden = true;
+        node.textContent = '';
+    };
+
+    const showConfirmModalError = (message) => {
+        const node = ensureConfirmModalError();
+
+        if (!node) {
+            showToast(message, true);
+            return;
+        }
+
+        node.hidden = false;
+        node.textContent = message;
+    };
+
     const escapeHtml = (value) => String(value || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -190,6 +231,7 @@
 
     const closeConfirmModal = () => {
         pendingConfirmation = null;
+        clearConfirmModalError();
 
         if (!confirmModal || !confirmModalSubmit) {
             return;
@@ -208,6 +250,7 @@
         pendingConfirmation = onConfirm;
         confirmModalTitle.textContent = title;
         confirmModalBody.innerHTML = body;
+        clearConfirmModalError();
         confirmModalSubmit.textContent = actionLabel || (firephageAdmin.labels.confirmAction || 'Confirm');
         confirmModalSubmit.className = danger ? 'button firephage-button-danger' : 'button button-primary';
         confirmModal.hidden = false;
@@ -264,8 +307,11 @@
 
         const compare = document.createElement('div');
         compare.className = 'firephage-compare-grid';
+        const localLines = String(local && local.content ? local.content : '').split('\n');
+        const referenceLines = String(reference && reference.content ? reference.content : '').split('\n');
+        const totalLines = Math.max(localLines.length, referenceLines.length);
 
-        const makePane = (label, contentValue) => {
+        const makePane = (label, lines, otherLines) => {
             const pane = document.createElement('section');
             pane.className = 'firephage-compare-pane';
 
@@ -273,18 +319,40 @@
             heading.className = 'firephage-compare-pane__title';
             heading.textContent = label;
 
-            const pre = document.createElement('pre');
-            pre.className = 'firephage-preview-content';
-            pre.textContent = contentValue || '';
+            const body = document.createElement('div');
+            body.className = 'firephage-compare-lines';
+
+            for (let index = 0; index < totalLines; index += 1) {
+                const line = lines[index] ?? '';
+                const otherLine = otherLines[index] ?? '';
+                const row = document.createElement('div');
+                row.className = 'firephage-compare-line';
+
+                if (line !== otherLine) {
+                    row.classList.add('is-different');
+                }
+
+                const lineNumber = document.createElement('span');
+                lineNumber.className = 'firephage-compare-line__number';
+                lineNumber.textContent = `${index + 1}`;
+
+                const lineContent = document.createElement('code');
+                lineContent.className = 'firephage-compare-line__content';
+                lineContent.textContent = line === '' ? ' ' : line;
+
+                row.appendChild(lineNumber);
+                row.appendChild(lineContent);
+                body.appendChild(row);
+            }
 
             pane.appendChild(heading);
-            pane.appendChild(pre);
+            pane.appendChild(body);
 
             return pane;
         };
 
-        compare.appendChild(makePane(firephageAdmin.labels.localFile || 'Local file', local && local.content ? local.content : ''));
-        compare.appendChild(makePane(firephageAdmin.labels.officialReference || 'Official reference', reference && reference.content ? reference.content : ''));
+        compare.appendChild(makePane(firephageAdmin.labels.localFile || 'Local file', localLines, referenceLines));
+        compare.appendChild(makePane(firephageAdmin.labels.officialReference || 'Official reference', referenceLines, localLines));
         previewModalContent.appendChild(compare);
         previewModal.hidden = false;
     };
@@ -529,7 +597,7 @@
                 const checkbox = document.getElementById(checkboxId);
 
                 if (!(checkbox instanceof HTMLInputElement) || !checkbox.checked) {
-                    showToast(firephageAdmin.labels.confirmRestoreAcknowledge || 'Please confirm that you understand the restore action.', true);
+                    showConfirmModalError(firephageAdmin.labels.confirmRestoreAcknowledgeRequired || 'Please check the confirmation box before restoring files.');
 
                     if (confirmModalSubmit) {
                         confirmModalSubmit.disabled = false;
@@ -1056,7 +1124,7 @@
                                 <td>${details.join(' | ')}</td>
                                 <td>${finding.type === 'malware'
                                     ? `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button></div>`
-                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<button type="button" class="button button-secondary firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button><button type="button" class="button button-secondary firephage-restore-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.restoreFile || 'Restore'}</button>` : ''}</div>`}</td>
+                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<details class="firephage-action-menu"><summary class="button button-secondary">${firephageAdmin.labels.moreActions || 'Actions'}</summary><div class="firephage-action-menu__panel"><button type="button" class="button button-secondary firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button><button type="button" class="button button-secondary firephage-restore-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.restoreFile || 'Restore'}</button></div></details>` : ''}</div>`}</td>
                             </tr>
                         `;
                     }).join('')}
@@ -1082,7 +1150,10 @@
         const progressLabelNode = document.getElementById('firephage-scan-progress-label');
         const overviewSummary = document.getElementById('firephage-overview-scan-summary');
         const findings = document.getElementById('firephage-scan-findings');
-        const suspiciousStat = document.querySelector('.firephage-suspicious-files-stat .firephage-stat-value');
+        const scannerFlaggedStat = document.querySelector('.firephage-scanner-flagged-stat .firephage-stat-value');
+        const scannerModifiedStat = document.querySelector('.firephage-scanner-modified-stat .firephage-stat-value');
+        const overviewFlaggedStat = document.querySelector('.firephage-overview-flagged-stat .firephage-stat-value');
+        const overviewModifiedStat = document.querySelector('.firephage-overview-modified-stat .firephage-stat-value');
         const progressTrack = progressBar ? progressBar.parentElement : null;
         const progress = state.discovered_files > 0 ? Math.max(5, Math.min(100, Math.floor((state.scanned_files / state.discovered_files) * 100))) : (state.status === 'completed' ? 100 : 5);
         scanIsRunning = state.status === 'discovering' || state.status === 'scanning';
@@ -1129,9 +1200,17 @@
             findings.innerHTML = findingsMarkup(state.findings || []);
         }
 
-        if (suspiciousStat) {
-            suspiciousStat.textContent = `${state.suspicious_files || 0}`;
-        }
+        [scannerFlaggedStat, overviewFlaggedStat].forEach((node) => {
+            if (node) {
+                node.textContent = `${state.suspicious_files || 0}`;
+            }
+        });
+
+        [scannerModifiedStat, overviewModifiedStat].forEach((node) => {
+            if (node) {
+                node.textContent = `${state.integrity_issues || 0}`;
+            }
+        });
 
         if (startScanButton) {
             startScanButton.disabled = scanIsRunning;

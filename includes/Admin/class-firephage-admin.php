@@ -185,6 +185,7 @@ final class Admin
                     'confirmRestoreBackup' => __('Create a backup before restoring files.', 'firephage-security'),
                     'confirmRestoreWarning' => __('Restoring official files will overwrite local edits.', 'firephage-security'),
                     'confirmRestoreAcknowledge' => __('I understand this will overwrite local changes. Do not show this warning again until the next scan.', 'firephage-security'),
+                    'confirmRestoreAcknowledgeRequired' => __('Please check the confirmation box before restoring files.', 'firephage-security'),
                     'confirmRestoreCountLabel' => __('Files ready to restore', 'firephage-security'),
                     'confirmDeleteTitle' => __('Delete Malicious File?', 'firephage-security'),
                     'confirmDeleteAllTitle' => __('Delete All Malicious Files?', 'firephage-security'),
@@ -333,8 +334,8 @@ final class Admin
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<p class="firephage-meta-line"><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-overview-last-scan">' . esc_html($lastScanFreshness) . '</span></p>';
         echo '<div class="firephage-mini-grid">';
-        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files carefully before deleting anything.', 'firephage-security') : __('No malicious files were found in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact');
-        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files differ from a trusted version and should be reviewed.', 'firephage-security') : __('No modified core files were flagged.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files carefully before deleting anything.', 'firephage-security') : __('No malicious files were found in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-flagged-stat');
+        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files differ from a trusted version and should be reviewed.', 'firephage-security') : __('No modified core files were flagged.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-modified-stat');
         echo '</div>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Malware Scan', 'firephage-security') : __('Scan My Website For Malware', 'firephage-security')) . '</button>';
@@ -374,8 +375,8 @@ final class Admin
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<div class="firephage-mini-grid">';
         echo $this->renderStatCard(__('Files checked', 'firephage-security'), (string) ((int) ($scan['scanned_files'] ?? 0)), __('Files reviewed in the current scan.', 'firephage-security'), 'firephage-stat-card--compact');
-        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files before deciding whether to delete them.', 'firephage-security') : __('No malicious files were flagged in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact');
-        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files do not match a trusted version and should be checked.', 'firephage-security') : __('No modified core files were reported.', 'firephage-security'), 'firephage-stat-card--compact');
+        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files before deciding whether to delete them.', 'firephage-security') : __('No malicious files were flagged in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-flagged-stat');
+        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files do not match a trusted version and should be checked.', 'firephage-security') : __('No modified core files were reported.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-modified-stat');
         echo '</div>';
         echo '<div class="firephage-inline-summary firephage-inline-summary--stacked">';
         echo '<span><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-scanner-last-scan">' . esc_html($lastScanFreshness) . '</span></span>';
@@ -1788,14 +1789,22 @@ SVG;
             $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
             $html .= '<td>' . esc_html(implode(' | ', $detailParts)) . '</td>';
             $html .= '<td>';
-            $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Review File', 'firephage-security') . '</button> ';
             if ($type === 'malware') {
+                $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Review File', 'firephage-security') . '</button> ';
                 $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete Flagged File', 'firephage-security') . '</button>';
             } else {
+                $html .= '<div class="firephage-row-actions">';
+                $html .= '<button type="button" class="button button-secondary firephage-preview-file" data-file="' . esc_attr($file) . '">' . esc_html__('Review File', 'firephage-security') . '</button>';
                 if (in_array($source, ['core_checksum', 'plugin_checksum', 'theme_checksum'], true)) {
-                    $html .= '<button type="button" class="button button-secondary firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button> ';
-                    $html .= '<button type="button" class="button button-secondary firephage-restore-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Restore', 'firephage-security') . '</button> ';
+                    $html .= '<details class="firephage-action-menu">';
+                    $html .= '<summary class="button button-secondary">' . esc_html__('Actions', 'firephage-security') . '</summary>';
+                    $html .= '<div class="firephage-action-menu__panel">';
+                    $html .= '<button type="button" class="button button-secondary firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button>';
+                    $html .= '<button type="button" class="button button-secondary firephage-restore-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Restore', 'firephage-security') . '</button>';
+                    $html .= '</div>';
+                    $html .= '</details>';
                 }
+                $html .= '</div>';
             }
             $html .= '</td>';
             $html .= '</tr>';
