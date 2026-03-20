@@ -1050,15 +1050,13 @@
 
                         return `
                             <tr>
-                                <td>${finding.type === 'malware'
-                                    ? `<input type="checkbox" class="firephage-findings-select" value="${finding.file}" ${selectedFindings.has(finding.file) ? 'checked' : ''}>`
-                                    : '<span class="firephage-empty">No</span>'}</td>
+                                <td><input type="checkbox" class="firephage-findings-select" value="${finding.file}" ${selectedFindings.has(finding.file) ? 'checked' : ''}></td>
                                 <td><code>${finding.file}</code></td>
                                 <td><span class="firephage-badge firephage-badge--${finding.type === 'malware' ? 'critical' : 'warning'}">${status}</span></td>
                                 <td>${details.join(' | ')}</td>
                                 <td>${finding.type === 'malware'
                                     ? `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button><button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="${finding.file}">${firephageAdmin.labels.deleteFile}</button></div>`
-                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<button type="button" class="button button-link firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button><button type="button" class="button button-link firephage-restore-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.restoreFile || 'Restore'}</button>` : ''}<span class="firephage-empty">Protected</span></div>`}</td>
+                                    : `<div class="firephage-row-actions"><button type="button" class="button button-secondary firephage-preview-file" data-file="${finding.file}">${firephageAdmin.labels.previewFile}</button>${['core_checksum', 'plugin_checksum', 'theme_checksum'].includes(finding.source) ? `<button type="button" class="button button-secondary firephage-compare-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.compareFile || 'Compare'}</button><button type="button" class="button button-secondary firephage-restore-file" data-file="${finding.file}" data-source="${finding.source}">${firephageAdmin.labels.restoreFile || 'Restore'}</button>` : ''}</div>`}</td>
                             </tr>
                         `;
                     }).join('')}

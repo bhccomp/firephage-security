@@ -1781,12 +1781,8 @@ SVG;
 
             $html .= '<tr>';
             $html .= '<td>';
-            if ($type === 'malware') {
-                $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select flagged file', 'firephage-security') . '</label>';
-                $html .= '<input type="checkbox" id="firephage-select-' . esc_attr(md5($file)) . '" class="firephage-findings-select" value="' . esc_attr($file) . '" />';
-            } else {
-                $html .= '<span class="firephage-empty">' . esc_html__('No', 'firephage-security') . '</span>';
-            }
+            $html .= '<label class="screen-reader-text" for="firephage-select-' . esc_attr(md5($file)) . '">' . esc_html__('Select file', 'firephage-security') . '</label>';
+            $html .= '<input type="checkbox" id="firephage-select-' . esc_attr(md5($file)) . '" class="firephage-findings-select" value="' . esc_attr($file) . '" />';
             $html .= '</td>';
             $html .= '<td><code>' . esc_html($file) . '</code></td>';
             $html .= '<td><span class="firephage-badge firephage-badge--' . esc_attr($type === 'malware' ? 'critical' : 'warning') . '">' . esc_html($status) . '</span></td>';
@@ -1797,10 +1793,9 @@ SVG;
                 $html .= '<button type="button" class="button firephage-button-danger firephage-delete-finding" data-file="' . esc_attr($file) . '">' . esc_html__('Delete Flagged File', 'firephage-security') . '</button>';
             } else {
                 if (in_array($source, ['core_checksum', 'plugin_checksum', 'theme_checksum'], true)) {
-                    $html .= '<button type="button" class="button button-link firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button> ';
-                    $html .= '<button type="button" class="button button-link firephage-restore-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Restore', 'firephage-security') . '</button> ';
+                    $html .= '<button type="button" class="button button-secondary firephage-compare-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Compare', 'firephage-security') . '</button> ';
+                    $html .= '<button type="button" class="button button-secondary firephage-restore-file" data-file="' . esc_attr($file) . '" data-source="' . esc_attr($source) . '">' . esc_html__('Restore', 'firephage-security') . '</button> ';
                 }
-                $html .= '<span class="firephage-empty">' . esc_html__('Protected', 'firephage-security') . '</span>';
             }
             $html .= '</td>';
             $html .= '</tr>';
