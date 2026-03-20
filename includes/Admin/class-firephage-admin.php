@@ -1273,10 +1273,11 @@ final class Admin
         delete_option('firephage_security_show_setup_wizard');
         do_action('firephage_security_settings_changed');
 
-        $scanResult = $this->scanner->startScan(false, 'deep');
+        $scanResult = $this->scanner->startScan(true, 'deep');
         $message = __('Setup saved. Your first deep scan has started.', 'firephage-security');
+        $scanStarted = ! is_wp_error($scanResult);
 
-        if (is_wp_error($scanResult)) {
+        if (! $scanStarted) {
             $message = __('Setup saved. FirePhage could not start the first scan automatically, so you can start it from the Malware Scanner tab.', 'firephage-security');
         }
 
@@ -1284,7 +1285,8 @@ final class Admin
             'message' => $message,
             'settings' => $this->settings->all(),
             'bruteforce_summary' => $this->bruteForceProtection->getSummary(),
-            'scan_state' => $this->scanner->getState(),
+            'scan_started' => $scanStarted,
+            'scan_state' => $scanStarted && is_array($scanResult) ? $scanResult : $this->scanner->getState(),
         ]);
     }
 
