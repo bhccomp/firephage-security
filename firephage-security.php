@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: FirePhage Security
- * Plugin URI: https://firephage.com/wordpress-security-plugin
+ * Plugin URI: https://firephage.com/services/wordpress-plugin
  * Description: WordPress security plugin with malware scanning, file integrity checks, login protection, and optional FirePhage dashboard sync.
  * Version: 0.1.0
  * Author: FirePhage

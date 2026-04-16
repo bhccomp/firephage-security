@@ -329,7 +329,7 @@ final class Admin
 
         echo '<div class="firephage-tabs" role="tablist" aria-label="' . esc_attr__('FirePhage sections', 'firephage-security') . '">';
         foreach ($this->tabs() as $tabId => $tab) {
-            echo $this->renderTabButton($tabId, $tab, $activeTab === $tabId);
+            echo wp_kses($this->renderTabButton($tabId, $tab, $activeTab === $tabId), $this->adminAllowedHtml());
         }
         echo '</div>';
 
@@ -363,24 +363,24 @@ final class Admin
         echo '</div>';
         echo '<p id="firephage-overview-status-summary">' . esc_html($overviewStatus['summary']) . '</p>';
         echo '<div class="firephage-mini-grid">';
-        echo $this->renderStatCard(
+        echo wp_kses($this->renderStatCard(
             __('Security checks', 'firephage-security'),
             $overviewStatus['checks_value'],
             $overviewStatus['checks_summary'],
             'firephage-stat-card--compact firephage-overview-checks-stat'
-        );
-        echo $this->renderStatCard(
+        ), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(
             __('Local login protection', 'firephage-security'),
             $overviewStatus['protection_value'],
             $overviewStatus['protection_summary'],
             'firephage-stat-card--compact firephage-overview-protection-stat'
-        );
-        echo $this->renderStatCard(
+        ), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(
             __('Last sync', 'firephage-security'),
             $overviewStatus['sync_value'],
             $overviewStatus['sync_summary'],
             'firephage-stat-card--compact firephage-overview-sync-stat'
-        );
+        ), $this->adminAllowedHtml());
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card">';
@@ -391,8 +391,8 @@ final class Admin
         echo '<p id="firephage-overview-scan-summary">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<p class="firephage-meta-line"><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-overview-last-scan">' . esc_html($lastScanFreshness) . '</span></p>';
         echo '<div class="firephage-mini-grid">';
-        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files carefully before deleting anything.', 'firephage-security') : __('No malicious files were found in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-flagged-stat');
-        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files differ from a trusted version and should be reviewed.', 'firephage-security') : __('No modified core files were flagged.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-modified-stat');
+        echo wp_kses($this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files carefully before deleting anything.', 'firephage-security') : __('No malicious files were found in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-flagged-stat'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files differ from a trusted version and should be reviewed.', 'firephage-security') : __('No modified core files were flagged.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-modified-stat'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Malware Scan', 'firephage-security') : __('Scan My Website For Malware', 'firephage-security')) . '</button>';
@@ -415,7 +415,7 @@ final class Admin
         echo '</div>';
         echo '<div class="firephage-grid" id="firephage-health-checks">';
         foreach ($health['checks'] as $check) {
-            echo $this->renderCheckCard($check);
+            echo wp_kses($this->renderCheckCard($check), $this->adminAllowedHtml());
         }
         echo '</div>';
         echo '</section>';
@@ -431,9 +431,9 @@ final class Admin
         echo '<div class="firephage-progress"><div class="firephage-progress-bar" id="firephage-scan-progress-bar" style="width:' . esc_attr((string) $this->scanProgress($scan)) . '%"></div></div>';
         echo '<p id="firephage-scan-progress-label">' . esc_html($this->scanProgressLabel($scan)) . '</p>';
         echo '<div class="firephage-mini-grid">';
-        echo $this->renderStatCard(__('Files checked', 'firephage-security'), (string) ((int) ($scan['scanned_files'] ?? 0)), __('Files reviewed in the current scan.', 'firephage-security'), 'firephage-stat-card--compact');
-        echo $this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files before deciding whether to delete them.', 'firephage-security') : __('No malicious files were flagged in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-flagged-stat');
-        echo $this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files do not match a trusted version and should be checked.', 'firephage-security') : __('No modified core files were reported.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-modified-stat');
+        echo wp_kses($this->renderStatCard(__('Files checked', 'firephage-security'), (string) ((int) ($scan['scanned_files'] ?? 0)), __('Files reviewed in the current scan.', 'firephage-security'), 'firephage-stat-card--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files before deciding whether to delete them.', 'firephage-security') : __('No malicious files were flagged in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-flagged-stat'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files do not match a trusted version and should be checked.', 'firephage-security') : __('No modified core files were reported.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-modified-stat'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-inline-summary firephage-inline-summary--stacked">';
         echo '<span><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-scanner-last-scan">' . esc_html($lastScanFreshness) . '</span></span>';
@@ -463,46 +463,46 @@ final class Admin
             echo '<a class="firephage-context-bar__link" href="' . esc_url($this->firephageTrackedUrl($settings, 'malware-scanner', 'review_cleanup_options')) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Review Cleanup Options', 'firephage-security') . '</a>';
             echo '</div>';
         }
-        echo '<div id="firephage-scan-findings">' . $this->renderFindings($scan['findings'] ?? []) . '</div>';
+        echo '<div id="firephage-scan-findings">' . wp_kses($this->renderFindings($scan['findings'] ?? []), $this->adminAllowedHtml()) . '</div>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
 
         echo '<section class="firephage-tab-panel" data-panel="updates"' . ($activeTab === 'updates' ? '' : ' hidden') . '>';
-        echo $this->renderUpdatesSummary($updates);
+        echo wp_kses($this->renderUpdatesSummary($updates), $this->adminAllowedHtml());
         echo '<div class="firephage-grid">';
-        echo $this->renderUpdateCard(
+        echo wp_kses($this->renderUpdateCard(
             __('Core updates', 'firephage-security'),
             (int) ($updates['core_updates'] ?? 0),
             __('New WordPress core releases are ready to review.', 'firephage-security'),
             __('WordPress core is up to date.', 'firephage-security'),
             __('Open WordPress updates', 'firephage-security'),
             admin_url('update-core.php')
-        );
-        echo $this->renderUpdateCard(
+        ), $this->adminAllowedHtml());
+        echo wp_kses($this->renderUpdateCard(
             __('Plugin updates', 'firephage-security'),
             (int) ($updates['plugin_updates'] ?? 0),
             __('Installed plugins with updates ready to review.', 'firephage-security'),
             __('No plugin updates are needed right now.', 'firephage-security'),
             __('View plugins', 'firephage-security'),
             admin_url('plugins.php')
-        );
-        echo $this->renderUpdateCard(
+        ), $this->adminAllowedHtml());
+        echo wp_kses($this->renderUpdateCard(
             __('Theme updates', 'firephage-security'),
             (int) ($updates['theme_updates'] ?? 0),
             __('Installed themes with updates ready to review.', 'firephage-security'),
             __('No theme updates are needed right now.', 'firephage-security'),
             __('View themes', 'firephage-security'),
             admin_url('themes.php')
-        );
-        echo $this->renderUpdateCard(
+        ), $this->adminAllowedHtml());
+        echo wp_kses($this->renderUpdateCard(
             __('Inactive plugins', 'firephage-security'),
             (int) ($updates['inactive_plugins'] ?? 0),
             __('Inactive plugins should still be reviewed as part of routine site maintenance.', 'firephage-security'),
             __('No inactive plugins need review right now.', 'firephage-security'),
             __('Review plugins', 'firephage-security'),
             admin_url('plugins.php?plugin_status=inactive')
-        );
+        ), $this->adminAllowedHtml());
         echo '</div>';
         echo '</section>';
 
@@ -546,9 +546,9 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--neutral" id="firephage-bruteforce-snapshot-badge">' . esc_html($bruteforceWafManaged ? __('Edge', 'firephage-security') : __('Local', 'firephage-security')) . '</span>';
         echo '</div>';
         echo '<div class="firephage-pro-metric-grid" id="firephage-bruteforce-metrics">';
-        echo $this->renderLockedMetricCard($bruteforceWafManaged ? __('Login endpoint', 'firephage-security') : __('Threshold', 'firephage-security'), 'firephage-bruteforce-threshold', $bruteforceWafManaged ? __('WAF managed', 'firephage-security') : '', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard($bruteforceWafManaged ? __('XML-RPC', 'firephage-security') : __('Window', 'firephage-security'), 'firephage-bruteforce-window', $bruteforceWafManaged ? __('Protected at edge', 'firephage-security') : '', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard($bruteforceWafManaged ? __('Local PHP lockouts', 'firephage-security') : __('Active Lockouts', 'firephage-security'), 'firephage-bruteforce-active-count', $bruteforceWafManaged ? __('Disabled while WAF is active', 'firephage-security') : '', 'firephage-pro-metric__value--compact');
+        echo wp_kses($this->renderLockedMetricCard($bruteforceWafManaged ? __('Login endpoint', 'firephage-security') : __('Threshold', 'firephage-security'), 'firephage-bruteforce-threshold', $bruteforceWafManaged ? __('WAF managed', 'firephage-security') : '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard($bruteforceWafManaged ? __('XML-RPC', 'firephage-security') : __('Window', 'firephage-security'), 'firephage-bruteforce-window', $bruteforceWafManaged ? __('Protected at edge', 'firephage-security') : '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard($bruteforceWafManaged ? __('Local PHP lockouts', 'firephage-security') : __('Active Lockouts', 'firephage-security'), 'firephage-bruteforce-active-count', $bruteforceWafManaged ? __('Disabled while WAF is active', 'firephage-security') : '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<p class="firephage-note" id="firephage-bruteforce-xmlrpc-note">' . esc_html(($bruteForce['protect_xmlrpc'] ?? false) ? __('XML-RPC authentication is currently covered by the same rate-limit rules.', 'firephage-security') : __('XML-RPC authentication is currently excluded from local brute-force protection.', 'firephage-security')) . '</p>';
         echo '</div>';
@@ -566,14 +566,14 @@ final class Admin
         echo '<h4>' . esc_html__('Active Lockouts', 'firephage-security') . '</h4>';
         echo '<span class="firephage-badge firephage-badge--warning" id="firephage-bruteforce-active-lockouts-badge">' . esc_html(sprintf(__('%d active', 'firephage-security'), (int) ($bruteForce['active_lockouts_count'] ?? 0))) . '</span>';
         echo '</div>';
-        echo '<div id="firephage-bruteforce-active-lockouts">' . $this->renderBruteForceRows($bruteForce['active_lockouts'] ?? [], true) . '</div>';
+        echo '<div id="firephage-bruteforce-active-lockouts">' . wp_kses($this->renderBruteForceRows($bruteForce['active_lockouts'] ?? [], true), $this->adminAllowedHtml()) . '</div>';
         echo '</div>';
         echo '<div class="firephage-bruteforce-view" data-bruteforce-panel="recent" hidden>';
         echo '<div class="firephage-card-head firephage-card-head--subsection">';
         echo '<h4>' . esc_html__('Recent Lockout Events', 'firephage-security') . '</h4>';
         echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('History', 'firephage-security') . '</span>';
         echo '</div>';
-        echo '<div id="firephage-bruteforce-recent-events">' . $this->renderBruteForceRows($bruteForce['recent_events'] ?? [], false) . '</div>';
+        echo '<div id="firephage-bruteforce-recent-events">' . wp_kses($this->renderBruteForceRows($bruteForce['recent_events'] ?? [], false), $this->adminAllowedHtml()) . '</div>';
         echo '</div>';
         echo '</div>';
         echo '</section>';
@@ -622,9 +622,9 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--neutral">' . esc_html__('Email', 'firephage-security') . '</span>';
         echo '</div>';
         echo '<div class="firephage-pro-metric-grid firephage-pro-metric-grid--notification">';
-        echo $this->renderLockedMetricCard(__('Recipient', 'firephage-security'), 'firephage-notification-recipient', '--', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Weekly Report', 'firephage-security'), 'firephage-notification-weekly', '--', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Malware Alerts', 'firephage-security'), 'firephage-notification-malware', '--', 'firephage-pro-metric__value--compact');
+        echo wp_kses($this->renderLockedMetricCard(__('Recipient', 'firephage-security'), 'firephage-notification-recipient', '--', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Weekly Report', 'firephage-security'), 'firephage-notification-weekly', '--', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Malware Alerts', 'firephage-security'), 'firephage-notification-malware', '--', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<p class="firephage-note"><strong>' . esc_html__('Last weekly report:', 'firephage-security') . '</strong> <span id="firephage-notification-last-weekly">' . esc_html($notificationState['last_weekly_report_at'] !== '' ? $notificationState['last_weekly_report_at'] : __('Not sent yet', 'firephage-security')) . '</span></p>';
         echo '<div class="firephage-pro-table">';
@@ -643,8 +643,8 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($notificationBadgeClass) . '" id="firephage-notification-pro-badge">' . esc_html($notificationBadgeLabel) . '</span>';
         echo '</div>';
         echo '<div class="firephage-pro-metric-grid firephage-pro-metric-grid--notification-channels" id="firephage-notification-pro-fields">';
-        echo $this->renderLockedMetricCard(__('Webhook', 'firephage-security'), 'firephage-notification-webhook-status', $webhookStatus, 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Slack', 'firephage-security'), 'firephage-notification-slack-status', $slackStatus, 'firephage-pro-metric__value--compact');
+        echo wp_kses($this->renderLockedMetricCard(__('Webhook', 'firephage-security'), 'firephage-notification-webhook-status', $webhookStatus, 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Slack', 'firephage-security'), 'firephage-notification-slack-status', $slackStatus, 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-inline-actions firephage-inline-actions--quiet firephage-section-spaced">';
         echo '<button type="button" class="button-link firephage-link-button" data-tab-target="firewall">' . esc_html__('View Pro protection', 'firephage-security') . '</button>';
@@ -718,10 +718,10 @@ final class Admin
             ? __('Local plugin safeguards still protect login attempts and XML-RPC traffic on this WordPress site. FirePhage WAF adds the edge-side layer before traffic reaches WordPress.', 'firephage-security')
             : __('This site is currently using local WordPress protection only. Connect a paid FirePhage site to add edge filtering and live firewall analytics before traffic reaches WordPress.', 'firephage-security')) . '</p>';
         echo '<div class="firephage-pro-metric-grid">';
-        echo $this->renderLockedMetricCard(__('Total Requests', 'firephage-security'), 'firephage-firewall-total-requests', '', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'), 'firephage-firewall-requests-blocked', '', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'), 'firephage-firewall-challenge-rate', '', 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Bot Pressure', 'firephage-security'), 'firephage-firewall-bot-pressure', '', 'firephage-pro-metric__value--compact');
+        echo wp_kses($this->renderLockedMetricCard(__('Total Requests', 'firephage-security'), 'firephage-firewall-total-requests', '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Requests Blocked', 'firephage-security'), 'firephage-firewall-requests-blocked', '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Challenge Rate', 'firephage-security'), 'firephage-firewall-challenge-rate', '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Bot Pressure', 'firephage-security'), 'firephage-firewall-bot-pressure', '', 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-context-bar firephage-context-bar--rules firephage-section-spaced">';
         echo '<p>' . esc_html($remoteProEnabled
@@ -729,9 +729,9 @@ final class Admin
             : __('Firewall metrics and configured access rules are available only on connected paid FirePhage sites. Local login protection and XML-RPC safeguards continue to run in WordPress.', 'firephage-security')) . '</p>';
         echo '</div>';
         echo '<div class="firephage-pro-metric-grid firephage-pro-metric-grid--local firephage-section-spaced">';
-        echo $this->renderLockedMetricCard(__('Login protection', 'firephage-security'), '', ($settings['bruteforce_enabled'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security'), 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('XML-RPC rules', 'firephage-security'), '', ($settings['bruteforce_protect_xmlrpc'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security'), 'firephage-pro-metric__value--compact');
-        echo $this->renderLockedMetricCard(__('Local scanner', 'firephage-security'), '', __('Available', 'firephage-security'), 'firephage-pro-metric__value--compact');
+        echo wp_kses($this->renderLockedMetricCard(__('Login protection', 'firephage-security'), '', ($settings['bruteforce_enabled'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security'), 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('XML-RPC rules', 'firephage-security'), '', ($settings['bruteforce_protect_xmlrpc'] ?? '1') === '1' ? __('Enabled', 'firephage-security') : __('Disabled', 'firephage-security'), 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderLockedMetricCard(__('Local scanner', 'firephage-security'), '', __('Available', 'firephage-security'), 'firephage-pro-metric__value--compact'), $this->adminAllowedHtml());
         echo '</div>';
         echo '</div>';
         echo '<div class="firephage-card firephage-pro-card">';
@@ -755,17 +755,17 @@ final class Admin
         echo '<div class="firephage-preview-split">';
         echo '<div class="firephage-preview-panel" id="firephage-firewall-countries-panel">';
         echo '<h4>' . esc_html__('Traffic by country', 'firephage-security') . '</h4>';
-        echo $this->renderFirewallPreviewBar(__('United States', 'firephage-security'), '72%');
-        echo $this->renderFirewallPreviewBar(__('Germany', 'firephage-security'), '41%');
-        echo $this->renderFirewallPreviewBar(__('United Kingdom', 'firephage-security'), '33%');
-        echo $this->renderFirewallPreviewBar(__('Japan', 'firephage-security'), '19%');
+        echo wp_kses($this->renderFirewallPreviewBar(__('United States', 'firephage-security'), '72%'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderFirewallPreviewBar(__('Germany', 'firephage-security'), '41%'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderFirewallPreviewBar(__('United Kingdom', 'firephage-security'), '33%'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderFirewallPreviewBar(__('Japan', 'firephage-security'), '19%'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-preview-panel" id="firephage-firewall-ips-panel">';
         echo '<h4>' . esc_html__('Top IPs', 'firephage-security') . '</h4>';
-        echo $this->renderFirewallPreviewBar(__('Allowed requests', 'firephage-security'), '88%');
-        echo $this->renderFirewallPreviewBar(__('Blocked requests', 'firephage-security'), '24%');
-        echo $this->renderFirewallPreviewBar(__('Challenge rate', 'firephage-security'), '17%');
-        echo $this->renderFirewallPreviewBar(__('Bot activity', 'firephage-security'), '29%');
+        echo wp_kses($this->renderFirewallPreviewBar(__('Allowed requests', 'firephage-security'), '88%'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderFirewallPreviewBar(__('Blocked requests', 'firephage-security'), '24%'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderFirewallPreviewBar(__('Challenge rate', 'firephage-security'), '17%'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderFirewallPreviewBar(__('Bot activity', 'firephage-security'), '29%'), $this->adminAllowedHtml());
         echo '</div>';
         echo '</div>';
         echo '<p class="firephage-note firephage-note--subtle firephage-preview-note" id="firephage-firewall-insights-note">' . esc_html__('Preview values are illustrative only. Connect FirePhage to load real firewall events and live traffic patterns for this site.', 'firephage-security') . '</p>';
@@ -1042,7 +1042,7 @@ final class Admin
         $result = $this->scanner->startScan($forceNew, $scanMode);
 
         if (is_wp_error($result)) {
-            wp_send_json_error(['message' => $result->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($result->get_error_message())], 400);
         }
 
         wp_send_json_success(['state' => $result]);
@@ -1055,7 +1055,7 @@ final class Admin
         $result = $this->scanner->stopScan();
 
         if (is_wp_error($result)) {
-            wp_send_json_error(['message' => $result->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($result->get_error_message())], 400);
         }
 
         wp_send_json_success([
@@ -1078,7 +1078,7 @@ final class Admin
         $result = $this->scanner->previewFile($file);
 
         if (is_wp_error($result)) {
-            wp_send_json_error(['message' => $result->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($result->get_error_message())], 400);
         }
 
         wp_send_json_success($result);
@@ -1094,7 +1094,7 @@ final class Admin
         $result = $this->scanner->compareFile($file, $source);
 
         if (is_wp_error($result)) {
-            wp_send_json_error(['message' => $result->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($result->get_error_message())], 400);
         }
 
         wp_send_json_success($result);
@@ -1110,7 +1110,7 @@ final class Admin
         $result = $this->scanner->restoreIntegrityFile($file, $source);
 
         wp_send_json_success([
-            'message' => (string) ($result['message'] ?? __('The file restore request has been processed.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($result['message'] ?? __('The file restore request has been processed.', 'firephage-security'))),
             'state' => $result['state'] ?? $this->scanner->getState(),
         ]);
     }
@@ -1162,7 +1162,7 @@ final class Admin
         $result = $this->scanner->deleteSuspiciousFile($file);
 
         wp_send_json_success([
-            'message' => (string) ($result['message'] ?? __('The request has been processed.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($result['message'] ?? __('The request has been processed.', 'firephage-security'))),
             'state' => $result['state'] ?? $this->scanner->getState(),
         ]);
     }
@@ -1209,7 +1209,7 @@ final class Admin
         $result = $this->scanner->refreshSignatureFeed();
 
         if (is_wp_error($result)) {
-            wp_send_json_error(['message' => $result->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($result->get_error_message())], 400);
         }
 
         $refreshedAt = current_time('mysql');
@@ -1290,7 +1290,7 @@ final class Admin
         $response = $this->client->registerFreeToken($serviceUrl, $email, $marketingOptIn);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $this->settings->update([
@@ -1323,7 +1323,7 @@ final class Admin
         $response = $this->client->fetchFreeTokenStatus($serviceUrl, $statusToken);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         if (($response['status'] ?? '') === 'verified') {
@@ -1363,7 +1363,7 @@ final class Admin
         $response = $this->client->verifyFreeToken($serviceUrl, $verificationToken);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $this->settings->update([
@@ -1559,11 +1559,11 @@ final class Admin
                 'dashboard_url' => $dashboardUrl,
                 'connection_token' => $connectionToken,
                 'connection_status' => 'error',
-                'last_sync_error' => $response->get_error_message(),
+                'last_sync_error' => sanitize_text_field($response->get_error_message()),
                 'auto_sync_reports' => $autoSync,
             ]);
 
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $this->settings->update([
@@ -1581,7 +1581,7 @@ final class Admin
 
             if (is_wp_error($syncResponse)) {
                 $this->settings->update([
-                    'last_sync_error' => $syncResponse->get_error_message(),
+                    'last_sync_error' => sanitize_text_field($syncResponse->get_error_message()),
                 ]);
             } else {
                 $this->settings->update([
@@ -1639,7 +1639,7 @@ final class Admin
         $response = $this->client->fetchFirewallSummary($settings, $range);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $this->cacheRemotePlanState($response);
@@ -1661,7 +1661,7 @@ final class Admin
         $response = $this->client->fetchStatus($settings);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $this->cacheRemotePlanState($response);
@@ -1683,7 +1683,7 @@ final class Admin
         $response = $this->client->fetchPerformanceSummary($settings);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $this->cacheRemotePlanState($response);
@@ -1709,19 +1709,19 @@ final class Admin
         ]);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $summary = $this->client->fetchFirewallSummary($settings);
         if (is_wp_error($summary)) {
             wp_send_json_success([
-                'message' => (string) ($response['message'] ?? __('Firewall rule created.', 'firephage-security')),
+                'message' => sanitize_text_field((string) ($response['message'] ?? __('Firewall rule created.', 'firephage-security'))),
             ]);
         }
 
         $this->cacheRemotePlanState($summary);
         wp_send_json_success([
-            'message' => (string) ($response['message'] ?? __('Firewall rule created.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($response['message'] ?? __('Firewall rule created.', 'firephage-security'))),
             'summary' => $summary,
         ]);
     }
@@ -1746,19 +1746,19 @@ final class Admin
         ]);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $summary = $this->client->fetchFirewallSummary($settings);
         if (is_wp_error($summary)) {
             wp_send_json_success([
-                'message' => (string) ($response['message'] ?? __('Firewall rule removed.', 'firephage-security')),
+                'message' => sanitize_text_field((string) ($response['message'] ?? __('Firewall rule removed.', 'firephage-security'))),
             ]);
         }
 
         $this->cacheRemotePlanState($summary);
         wp_send_json_success([
-            'message' => (string) ($response['message'] ?? __('Firewall rule removed.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($response['message'] ?? __('Firewall rule removed.', 'firephage-security'))),
             'summary' => $summary,
         ]);
     }
@@ -1783,19 +1783,19 @@ final class Admin
         ]);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $summary = $this->client->fetchFirewallSummary($settings);
         if (is_wp_error($summary)) {
             wp_send_json_success([
-                'message' => (string) ($response['message'] ?? __('Firewall rule updated.', 'firephage-security')),
+                'message' => sanitize_text_field((string) ($response['message'] ?? __('Firewall rule updated.', 'firephage-security'))),
             ]);
         }
 
         $this->cacheRemotePlanState($summary);
         wp_send_json_success([
-            'message' => (string) ($response['message'] ?? __('Firewall rule updated.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($response['message'] ?? __('Firewall rule updated.', 'firephage-security'))),
             'summary' => $summary,
         ]);
     }
@@ -1810,11 +1810,11 @@ final class Admin
         ]);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         wp_send_json_success([
-            'message' => (string) ($response['message'] ?? __('Edge cache purge requested.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($response['message'] ?? __('Edge cache purge requested.', 'firephage-security'))),
         ]);
     }
 
@@ -1829,20 +1829,79 @@ final class Admin
         $response = $this->client->toggleTroubleshootingMode($settings, $enabled);
 
         if (is_wp_error($response)) {
-            wp_send_json_error(['message' => $response->get_error_message()], 400);
+            wp_send_json_error(['message' => sanitize_text_field($response->get_error_message())], 400);
         }
 
         $summary = $this->client->fetchPerformanceSummary($settings);
         if (is_wp_error($summary)) {
             wp_send_json_success([
-                'message' => (string) ($response['message'] ?? __('Troubleshooting mode updated.', 'firephage-security')),
+                'message' => sanitize_text_field((string) ($response['message'] ?? __('Troubleshooting mode updated.', 'firephage-security'))),
             ]);
         }
 
         wp_send_json_success([
-            'message' => (string) ($response['message'] ?? __('Troubleshooting mode updated.', 'firephage-security')),
+            'message' => sanitize_text_field((string) ($response['message'] ?? __('Troubleshooting mode updated.', 'firephage-security'))),
             'summary' => $summary,
         ]);
+    }
+
+    /**
+     * Allowed markup for FirePhage admin UI fragments rendered by helper methods.
+     *
+     * @return array<string, array<string, true>>
+     */
+    private function adminAllowedHtml(): array
+    {
+        $global = [
+            'id' => true,
+            'class' => true,
+            'style' => true,
+            'title' => true,
+            'role' => true,
+            'hidden' => true,
+            'aria-hidden' => true,
+            'aria-label' => true,
+            'aria-live' => true,
+            'aria-pressed' => true,
+            'aria-expanded' => true,
+            'aria-controls' => true,
+            'data-tab' => true,
+            'data-tab-target' => true,
+            'data-file' => true,
+            'data-source' => true,
+            'data-bruteforce-view' => true,
+            'data-bruteforce-panel' => true,
+            'data-firewall-rule-tab' => true,
+            'data-firewall-rule-panel' => true,
+        ];
+
+        return [
+            'a' => $global + ['href' => true, 'target' => true, 'rel' => true],
+            'button' => $global + ['type' => true, 'disabled' => true, 'name' => true, 'value' => true],
+            'code' => $global,
+            'details' => $global + ['open' => true],
+            'div' => $global,
+            'h2' => $global,
+            'h3' => $global,
+            'h4' => $global,
+            'input' => $global + ['type' => true, 'name' => true, 'value' => true, 'placeholder' => true, 'checked' => true, 'disabled' => true, 'readonly' => true, 'min' => true, 'max' => true, 'step' => true, 'autocomplete' => true],
+            'label' => $global + ['for' => true],
+            'li' => $global,
+            'option' => $global + ['value' => true, 'selected' => true],
+            'p' => $global,
+            'select' => $global + ['name' => true, 'disabled' => true],
+            'small' => $global,
+            'span' => $global,
+            'strong' => $global,
+            'summary' => $global,
+            'table' => $global,
+            'tbody' => $global,
+            'td' => $global + ['colspan' => true],
+            'th' => $global + ['scope' => true, 'colspan' => true],
+            'thead' => $global,
+            'tr' => $global,
+            'ul' => $global,
+        ];
     }
 
     /**
