@@ -259,6 +259,7 @@ final class Admin
                     'email' => (string) (($settings['free_signature_token_email'] ?? '') !== '' ? $settings['free_signature_token_email'] : get_option('admin_email', '')),
                     'marketingOptIn' => (($settings['free_signature_token_marketing_opt_in'] ?? '0') === '1'),
                     'requiresDecision' => (($settings['free_signature_token_status'] ?? 'pending') === 'pending'),
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only email verification token passed to JavaScript; sanitized before use.
                     'verificationToken' => isset($_GET['firephage_verify']) ? sanitize_text_field((string) wp_unslash($_GET['firephage_verify'])) : '',
                 ],
                 'setupWizard' => [
@@ -278,6 +279,7 @@ final class Admin
         }
 
         $settings = $this->settings->all();
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin tab selector; sanitized and allowlisted below.
         $requestedTab = isset($_GET['tab']) ? sanitize_key((string) wp_unslash($_GET['tab'])) : 'overview';
         $availableTabs = array_keys($this->tabs());
         $activeTab = in_array($requestedTab, $availableTabs, true) ? $requestedTab : 'overview';
@@ -406,6 +408,7 @@ final class Admin
         echo '<span class="firephage-badge firephage-badge--' . esc_attr($pendingUpdates > 0 ? 'warning' : 'good') . '">' . esc_html($pendingUpdates > 0 ? __('Updates waiting', 'firephage-security') : __('All clear', 'firephage-security')) . '</span>';
         echo '</div>';
         echo '<p>' . esc_html($pendingUpdates > 0
+            /* translators: 1: Number of pending updates. 2: Number of inactive plugins. */
             ? sprintf(__('%1$d updates are waiting across WordPress core, plugins, and themes. %2$d inactive plugins should also be reviewed.', 'firephage-security'), $pendingUpdates, (int) ($updates['inactive_plugins'] ?? 0))
             : __('WordPress core, plugins, and themes are up to date right now.', 'firephage-security')) . '</p>';
         echo '</div>';
@@ -564,6 +567,7 @@ final class Admin
         echo '<div class="firephage-bruteforce-view" data-bruteforce-panel="active">';
         echo '<div class="firephage-card-head firephage-card-head--subsection">';
         echo '<h4>' . esc_html__('Active Lockouts', 'firephage-security') . '</h4>';
+        /* translators: %d: Number of active brute-force lockouts. */
         echo '<span class="firephage-badge firephage-badge--warning" id="firephage-bruteforce-active-lockouts-badge">' . esc_html(sprintf(__('%d active', 'firephage-security'), (int) ($bruteForce['active_lockouts_count'] ?? 0))) . '</span>';
         echo '</div>';
         echo '<div id="firephage-bruteforce-active-lockouts">' . wp_kses($this->renderBruteForceRows($bruteForce['active_lockouts'] ?? [], true), $this->adminAllowedHtml()) . '</div>';
@@ -1122,6 +1126,7 @@ final class Admin
 
         wp_send_json_success([
             'message' => sprintf(
+                /* translators: 1: Number of restored files. 2: Number of skipped files. */
                 __('Restored %1$d modified files. Skipped %2$d files that could not be restored.', 'firephage-security'),
                 (int) ($result['restored_files'] ?? 0),
                 (int) ($result['skipped_files'] ?? 0)
@@ -1146,6 +1151,7 @@ final class Admin
 
         wp_send_json_success([
             'message' => sprintf(
+                /* translators: 1: Number of deleted files. 2: Number of skipped files. */
                 __('Deleted %1$d malicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
                 (int) ($result['deleted_files'] ?? 0),
                 (int) ($result['skipped_files'] ?? 0)
@@ -1178,6 +1184,7 @@ final class Admin
 
         wp_send_json_success([
             'message' => sprintf(
+                /* translators: 1: Number of deleted files. 2: Number of skipped files. */
                 __('Deleted %1$d selected malicious files. Skipped %2$d protected or unavailable files.', 'firephage-security'),
                 (int) ($result['deleted_files'] ?? 0),
                 (int) ($result['skipped_files'] ?? 0)
@@ -1991,6 +1998,7 @@ final class Admin
         $email = (string) ($settings['free_signature_token_email'] ?? '');
 
         if ($status === 'registered' && $email !== '') {
+            /* translators: %s: Email address that received the free token. */
             return sprintf(__('Signature updates are active with the free FirePhage token sent to %s.', 'firephage-security'), $email);
         }
 
@@ -2022,6 +2030,7 @@ final class Admin
         }
 
         return sprintf(
+            /* translators: 1: Formatted date and time. 2: Human readable elapsed time. */
             __('%1$s (%2$s ago)', 'firephage-security'),
             wp_date(get_option('date_format') . ' ' . get_option('time_format'), $epoch),
             human_time_diff($epoch, time())
@@ -2201,10 +2210,12 @@ SVG;
             $detailParts = [];
 
             if ($source !== '') {
+                /* translators: %s: Malware finding source. */
                 $detailParts[] = sprintf(__('Source: %s', 'firephage-security'), ucwords(str_replace('_', ' ', $source)));
             }
 
             if ($confidence !== '') {
+                /* translators: %s: Malware finding confidence level. */
                 $detailParts[] = sprintf(__('Confidence: %s', 'firephage-security'), ucfirst($confidence));
             }
 
@@ -2297,6 +2308,7 @@ SVG;
             ],
             [
                 'label' => __('WordPress core', 'firephage-security'),
+                /* translators: %d: Number of WordPress core updates. */
                 'value' => $coreUpdates > 0 ? sprintf(_n('%d update', '%d updates', $coreUpdates, 'firephage-security'), $coreUpdates) : __('Up to date', 'firephage-security'),
                 'tone' => $coreUpdates > 0 ? 'warning' : 'good',
                 'description' => $coreUpdates > 0 ? __('A core update is ready to review.', 'firephage-security') : __('No core update is waiting.', 'firephage-security'),
@@ -2304,6 +2316,7 @@ SVG;
             [
                 'label' => __('Plugins & themes', 'firephage-security'),
                 'value' => ($pluginUpdates + $themeUpdates) > 0
+                    /* translators: %d: Number of plugin and theme updates. */
                     ? sprintf(_n('%d update', '%d updates', $pluginUpdates + $themeUpdates, 'firephage-security'), $pluginUpdates + $themeUpdates)
                     : __('Up to date', 'firephage-security'),
                 'tone' => ($pluginUpdates + $themeUpdates) > 0 ? 'warning' : 'good',
@@ -2314,6 +2327,7 @@ SVG;
             [
                 'label' => __('Inactive plugins', 'firephage-security'),
                 'value' => $inactivePlugins > 0
+                    /* translators: %d: Number of inactive plugins. */
                     ? sprintf(_n('%d plugin', '%d plugins', $inactivePlugins, 'firephage-security'), $inactivePlugins)
                     : __('Reviewed', 'firephage-security'),
                 'tone' => $inactivePlugins > 0 ? 'neutral' : 'good',
@@ -2327,6 +2341,7 @@ SVG;
         $html .= '<div class="firephage-updates-summary__header">';
         $html .= '<p class="firephage-updates-summary__intro">' . esc_html__('Keeping WordPress, plugins, and themes updated helps reduce risk and avoids avoidable site issues.', 'firephage-security') . '</p>';
         if ($lastChecked !== '') {
+            /* translators: %s: Human readable last checked time. */
             $html .= '<p class="firephage-updates-summary__meta">' . esc_html(sprintf(__('Last checked %s', 'firephage-security'), $lastChecked)) . '</p>';
         }
         $html .= '</div>';
@@ -2409,6 +2424,7 @@ SVG;
             $html .= '<td>' . esc_html((string) ($row['started_at'] ?? '')) . '</td>';
             $html .= '<td>' . esc_html((string) ($row['expires_at'] ?? '')) . '</td>';
             if ($showRemaining) {
+                /* translators: %d: Minutes remaining in the lockout. */
                 $html .= '<td>' . esc_html(sprintf(__('%d min', 'firephage-security'), (int) ($row['remaining'] ?? 0))) . '</td>';
             }
             $html .= '</tr>';
@@ -2446,11 +2462,13 @@ SVG;
         }
 
         if ($status === 'discovering') {
+            /* translators: %d: Number of files discovered so far. */
             return sprintf(__('Getting ready to scan. %d files have been queued so far.', 'firephage-security'), (int) ($scan['discovered_files'] ?? 0));
         }
 
         if ($status === 'stopped') {
             return sprintf(
+                /* translators: 1: Scanned files. 2: Discovered files. 3: Trusted files. 4: Clean custom files. 5: Skipped files. 6: Modified files. 7: Flagged files. */
                 __('The scan was paused after %1$d of %2$d files. Trusted files: %3$d. Clean custom files: %4$d. Skipped: %5$d. Modified files: %6$d. Flagged files: %7$d. Use Resume Scan to continue.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['discovered_files'] ?? 0),
@@ -2464,6 +2482,7 @@ SVG;
 
         if ($status === 'completed') {
             return sprintf(
+                /* translators: 1: Scanned files. 2: Trusted files. 3: Clean custom files. 4: Skipped files. 5: Modified files. 6: Flagged files. */
                 __('Latest scan finished. %1$d files were checked, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d modified files, and %6$d flagged files.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
@@ -2475,10 +2494,12 @@ SVG;
         }
 
         if ($status === 'failed') {
+            /* translators: %s: Scan failure message. */
             return sprintf(__('Scan failed: %s', 'firephage-security'), (string) ($scan['last_error'] ?? __('Unknown error', 'firephage-security')));
         }
 
         return sprintf(
+            /* translators: 1: Scanned files. 2: Discovered files. 3: Trusted files. 4: Clean custom files. 5: Skipped files. 6: Modified files. 7: Flagged files. 8: Current file path. */
             __('Scanning %1$d of %2$d files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Modified files: %6$d. Flagged files: %7$d. Current file: %8$s', 'firephage-security'),
             (int) ($scan['scanned_files'] ?? 0),
             (int) ($scan['discovered_files'] ?? 0),
@@ -2583,16 +2604,19 @@ SVG;
 
         if ($delta < HOUR_IN_SECONDS) {
             $minutes = max(1, (int) floor($delta / MINUTE_IN_SECONDS));
+            /* translators: %d: Number of minutes elapsed. */
             return sprintf(_n('%d minute ago', '%d minutes ago', $minutes, 'firephage-security'), $minutes);
         }
 
         if ($delta < DAY_IN_SECONDS) {
             $hours = max(1, (int) floor($delta / HOUR_IN_SECONDS));
+            /* translators: %d: Number of hours elapsed. */
             return sprintf(_n('%d hour ago', '%d hours ago', $hours, 'firephage-security'), $hours);
         }
 
         $days = max(1, (int) floor($delta / DAY_IN_SECONDS));
 
+        /* translators: %d: Number of days elapsed. */
         return sprintf(_n('%d day ago', '%d days ago', $days, 'firephage-security'), $days);
     }
 
@@ -2783,6 +2807,7 @@ SVG;
             'tone' => $tone,
             'label' => $label,
             'summary' => $summary,
+            /* translators: 1: Number of passing checks. 2: Total number of checks. */
             'checks_value' => sprintf(__('%1$d / %2$d', 'firephage-security'), $goodChecks, $totalChecks),
             'checks_summary' => $badChecks > 0 ? __('Some checks still need review.', 'firephage-security') : __('Core settings look good.', 'firephage-security'),
             'protection_value' => $protectionValue,

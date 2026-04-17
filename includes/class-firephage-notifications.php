@@ -295,10 +295,23 @@ final class Notifications
         $updates = $health['updates'];
         $pendingUpdates = (int) ($updates['core_updates'] ?? 0) + (int) ($updates['plugin_updates'] ?? 0) + (int) ($updates['theme_updates'] ?? 0);
 
+        /* translators: %d: Number of WordPress core updates pending. */
+        $coreUpdatesText = sprintf(esc_html__('%d WordPress core updates pending', 'firephage-security'), (int) ($updates['core_updates'] ?? 0));
+        /* translators: %d: Number of plugin updates pending. */
+        $pluginUpdatesText = sprintf(esc_html__('%d plugin updates pending', 'firephage-security'), (int) ($updates['plugin_updates'] ?? 0));
+        /* translators: %d: Number of theme updates pending. */
+        $themeUpdatesText = sprintf(esc_html__('%d theme updates pending', 'firephage-security'), (int) ($updates['theme_updates'] ?? 0));
+        /* translators: %s: Latest malware scan status. */
+        $scanStatusText = sprintf(esc_html__('Last scan status: %s', 'firephage-security'), esc_html(ucfirst((string) ($scan['status'] ?? 'idle'))));
+        /* translators: %d: Number of files scanned. */
+        $filesScannedText = sprintf(esc_html__('Files scanned: %d', 'firephage-security'), (int) ($scan['scanned_files'] ?? 0));
+        /* translators: %d: Number of active brute-force lockouts. */
+        $activeLockoutsText = sprintf(esc_html__('Active brute-force lockouts: %d', 'firephage-security'), (int) ($bruteForce['active_lockouts_count'] ?? 0));
+
         $content = '<p>' . esc_html__('Here is your weekly FirePhage Security summary for this WordPress site.', 'firephage-security') . '</p>';
         $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($scan['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Active Lockouts</span><strong>' . (int) ($bruteForce['active_lockouts_count'] ?? 0) . '</strong></div><div class="metric-card"><span>Pending Updates</span><strong>' . $pendingUpdates . '</strong></div></div>';
-        $content .= '<h3>' . esc_html__('Update reminders', 'firephage-security') . '</h3><ul><li>' . sprintf(esc_html__('%d WordPress core updates pending', 'firephage-security'), (int) ($updates['core_updates'] ?? 0)) . '</li><li>' . sprintf(esc_html__('%d plugin updates pending', 'firephage-security'), (int) ($updates['plugin_updates'] ?? 0)) . '</li><li>' . sprintf(esc_html__('%d theme updates pending', 'firephage-security'), (int) ($updates['theme_updates'] ?? 0)) . '</li></ul>';
-        $content .= '<h3>' . esc_html__('Scanner and login protection', 'firephage-security') . '</h3><ul><li>' . sprintf(esc_html__('Last scan status: %s', 'firephage-security'), esc_html(ucfirst((string) ($scan['status'] ?? 'idle')))) . '</li><li>' . sprintf(esc_html__('Files scanned: %d', 'firephage-security'), (int) ($scan['scanned_files'] ?? 0)) . '</li><li>' . sprintf(esc_html__('Active brute-force lockouts: %d', 'firephage-security'), (int) ($bruteForce['active_lockouts_count'] ?? 0)) . '</li></ul>';
+        $content .= '<h3>' . esc_html__('Update reminders', 'firephage-security') . '</h3><ul><li>' . $coreUpdatesText . '</li><li>' . $pluginUpdatesText . '</li><li>' . $themeUpdatesText . '</li></ul>';
+        $content .= '<h3>' . esc_html__('Scanner and login protection', 'firephage-security') . '</h3><ul><li>' . $scanStatusText . '</li><li>' . $filesScannedText . '</li><li>' . $activeLockoutsText . '</li></ul>';
         $content .= '<p><a class="button" href="' . esc_url(admin_url('admin.php?page=firephage-security')) . '">' . esc_html__('Open FirePhage Security', 'firephage-security') . '</a></p>';
         $content .= $this->upsellPanel($settings);
 
@@ -420,8 +433,11 @@ final class Notifications
             'confirm' => '1',
         ], home_url('/'));
 
+        /* translators: %s: Alert email address. */
+        $alertEmailText = sprintf(__('Alert email: %s', 'firephage-security'), $email);
+
         wp_die(
-            '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="margin:0;background:#eef5f9;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a;"><div style="max-width:560px;margin:48px auto;padding:0 16px;"><div style="background:#fff;border:1px solid #dbe7ef;border-radius:24px;box-shadow:0 20px 40px rgba(15,23,42,.08);padding:32px;"><p style="margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#0ea5e9;">' . esc_html__('FirePhage Security', 'firephage-security') . '</p><h1 style="margin:0 0 14px;font-size:28px;line-height:1.2;">' . esc_html($title) . '</h1><p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#334155;">' . esc_html($body) . '</p><p style="margin:0 0 22px;font-size:14px;color:#64748b;">' . esc_html(sprintf(__('Alert email: %s', 'firephage-security'), $email)) . '</p><p style="margin:0 0 12px;"><a href="' . esc_url($confirmUrl) . '" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#fff;text-decoration:none;font-weight:600;">' . esc_html__('Yes, stop this alert', 'firephage-security') . '</a></p><p style="margin:0;"><a href="' . esc_url(admin_url('admin.php?page=firephage-security&tab=notifications')) . '" style="color:#475569;text-decoration:underline;">' . esc_html__('Keep alerts enabled', 'firephage-security') . '</a></p></div></div></body></html>',
+            '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="margin:0;background:#eef5f9;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a;"><div style="max-width:560px;margin:48px auto;padding:0 16px;"><div style="background:#fff;border:1px solid #dbe7ef;border-radius:24px;box-shadow:0 20px 40px rgba(15,23,42,.08);padding:32px;"><p style="margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#0ea5e9;">' . esc_html__('FirePhage Security', 'firephage-security') . '</p><h1 style="margin:0 0 14px;font-size:28px;line-height:1.2;">' . esc_html($title) . '</h1><p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#334155;">' . esc_html($body) . '</p><p style="margin:0 0 22px;font-size:14px;color:#64748b;">' . esc_html($alertEmailText) . '</p><p style="margin:0 0 12px;"><a href="' . esc_url($confirmUrl) . '" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#0f766e;color:#fff;text-decoration:none;font-weight:600;">' . esc_html__('Yes, stop this alert', 'firephage-security') . '</a></p><p style="margin:0;"><a href="' . esc_url(admin_url('admin.php?page=firephage-security&tab=notifications')) . '" style="color:#475569;text-decoration:underline;">' . esc_html__('Keep alerts enabled', 'firephage-security') . '</a></p></div></div></body></html>',
             esc_html__('FirePhage Security', 'firephage-security'),
             ['response' => 200]
         );

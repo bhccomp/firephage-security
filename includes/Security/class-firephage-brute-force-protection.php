@@ -80,6 +80,7 @@ final class BruteForceProtection
         return new WP_Error(
             'firephage_bruteforce_locked',
             sprintf(
+                /* translators: %d: Minutes until the login lockout expires. */
                 __('Too many login attempts. Try again in %d minute(s).', 'firephage-security'),
                 $minutes
             )
@@ -207,6 +208,7 @@ final class BruteForceProtection
                 : (! $effectiveEnabled
                     ? __('Local brute-force protection is currently disabled.', 'firephage-security')
                 : sprintf(
+                    /* translators: 1: Failed login threshold. 2: Lockout window in minutes. 3: Current active lockout count. */
                     __('Lock out repeated login attempts after %1$d failures inside %2$d minutes. Current active lockouts: %3$d.', 'firephage-security'),
                     (int) ($settings['bruteforce_threshold'] ?? 5),
                     (int) ($settings['bruteforce_window_minutes'] ?? 15),

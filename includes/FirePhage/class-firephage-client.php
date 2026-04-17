@@ -406,6 +406,7 @@ final class Client
         if ($code < 200 || $code >= 300) {
             $message = is_array($payload) && isset($payload['message']) && is_string($payload['message'])
                 ? $payload['message']
+                /* translators: %s: FirePhage API request context. */
                 : sprintf(__('FirePhage %s request failed.', 'firephage-security'), $context);
 
             return new WP_Error('firephage_request_failed', $message, ['status' => $code]);

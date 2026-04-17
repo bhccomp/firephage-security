@@ -150,6 +150,7 @@ final class Plugin
             return;
         }
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only WordPress core activation redirect flag.
         if (is_network_admin() || isset($_GET['activate-multi'])) {
             delete_option(self::ACTIVATION_REDIRECT_OPTION);
             return;
@@ -166,7 +167,7 @@ final class Plugin
 
     public function loadTextdomain(): void
     {
-        load_plugin_textdomain('firephage-security', false, dirname(plugin_basename(FIREPHAGE_SECURITY_FILE)) . '/languages');
+        // WordPress.org loads plugin translations automatically for hosted plugins.
     }
 
     public function syncSchedules(): void

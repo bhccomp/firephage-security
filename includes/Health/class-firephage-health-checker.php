@@ -78,6 +78,7 @@ final class HealthChecker
             $this->makeCheck(
                 'xmlrpc',
                 __('XML-RPC is disabled', 'firephage-security'),
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- This is the WordPress core XML-RPC filter.
                 ! apply_filters('xmlrpc_enabled', true),
                 __('XML-RPC is disabled.', 'firephage-security'),
                 __('XML-RPC is enabled and can increase login abuse exposure.', 'firephage-security'),
