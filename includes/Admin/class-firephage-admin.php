@@ -71,6 +71,7 @@ final class Admin
         add_action('wp_ajax_firephage_start_scan', [$this, 'handleStartScan']);
         add_action('wp_ajax_firephage_stop_scan', [$this, 'handleStopScan']);
         add_action('wp_ajax_firephage_scan_status', [$this, 'handleScanStatus']);
+        add_action('wp_ajax_firephage_process_scan_batch', [$this, 'handleProcessScanBatch']);
         add_action('wp_ajax_firephage_preview_file', [$this, 'handlePreviewFile']);
         add_action('wp_ajax_firephage_compare_file', [$this, 'handleCompareFile']);
         add_action('wp_ajax_firephage_restore_file', [$this, 'handleRestoreFile']);
@@ -1071,6 +1072,13 @@ final class Admin
     public function handleScanStatus(): void
     {
         $this->assertAjaxPermissions();
+        wp_send_json_success(['state' => $this->scanner->getState()]);
+    }
+
+    public function handleProcessScanBatch(): void
+    {
+        $this->assertAjaxPermissions();
+        $this->scanner->processBatch();
         wp_send_json_success(['state' => $this->scanner->getState()]);
     }
 

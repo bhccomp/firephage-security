@@ -131,6 +131,7 @@
     const heroUpgradeButton = document.getElementById('firephage-hero-upgrade-button');
     let pollTimer = null;
     let scanIsRunning = false;
+    let scanPollRequest = null;
     let currentScanState = {};
     let findingsPage = 1;
     let findingsPageSize = 25;
@@ -2142,11 +2143,18 @@
         }
 
         pollTimer = window.setTimeout(() => {
-            request('firephage_scan_status')
-                .done((response) => {
-                    if (response.success) {
-                        renderScanState(response.data.state);
-                    }
+            if (scanPollRequest && typeof scanPollRequest.abort === 'function') {
+                scanPollRequest.abort();
+            }
+
+            scanPollRequest = request('firephage_process_scan_batch')
+                .always(() => {
+                    request('firephage_scan_status')
+                        .done((response) => {
+                            if (response.success) {
+                                renderScanState(response.data.state);
+                            }
+                        });
                 });
         }, 3000);
     };

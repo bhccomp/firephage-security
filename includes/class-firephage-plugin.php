@@ -32,6 +32,8 @@ final class Plugin
     private const ACTIVATION_REDIRECT_OPTION = 'firephage_security_activation_redirect';
     private const SHOW_SETUP_WIZARD_OPTION = 'firephage_security_show_setup_wizard';
     private const SETUP_WIZARD_SEEN_OPTION = 'firephage_security_setup_wizard_seen';
+    private const STORAGE_SCHEMA_VERSION_OPTION = 'firephage_security_storage_schema_version';
+    private const STORAGE_SCHEMA_VERSION = '1';
 
     /**
      * @var self|null
@@ -101,6 +103,7 @@ final class Plugin
 
     public function boot(): void
     {
+        add_action('plugins_loaded', [$this, 'maybeUpgradeStorage'], 1);
         add_action('plugins_loaded', [$this, 'loadTextdomain']);
         add_action('init', [$this, 'syncSchedules']);
         add_action('firephage_security_settings_changed', [$this, 'syncSchedules']);
@@ -126,6 +129,8 @@ final class Plugin
             update_option(Settings::OPTION_KEY, (new Settings())->all(), false);
         }
 
+        self::ensureStorageSchema();
+
         add_option(self::ACTIVATION_REDIRECT_OPTION, '1', '', false);
 
         if (get_option(self::SETUP_WIZARD_SEEN_OPTION, '') !== '1') {
@@ -142,6 +147,11 @@ final class Plugin
         wp_clear_scheduled_hook(self::WEEKLY_NOTIFICATION_CRON_HOOK);
         delete_option(self::ACTIVATION_REDIRECT_OPTION);
         delete_option(self::SHOW_SETUP_WIZARD_OPTION);
+    }
+
+    public function maybeUpgradeStorage(): void
+    {
+        self::ensureStorageSchema();
     }
 
     public function maybeRedirectAfterActivation(): void
@@ -168,6 +178,18 @@ final class Plugin
     public function loadTextdomain(): void
     {
         // WordPress.org loads plugin translations automatically for hosted plugins.
+    }
+
+    private static function ensureStorageSchema(): void
+    {
+        $installedVersion = (string) get_option(self::STORAGE_SCHEMA_VERSION_OPTION, '');
+
+        if ($installedVersion === self::STORAGE_SCHEMA_VERSION && BruteForceProtection::storageTablesExist()) {
+            return;
+        }
+
+        BruteForceProtection::installStorage();
+        update_option(self::STORAGE_SCHEMA_VERSION_OPTION, self::STORAGE_SCHEMA_VERSION, false);
     }
 
     public function syncSchedules(): void

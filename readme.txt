@@ -1,10 +1,10 @@
 === FirePhage Security ===
-Contributors: firephage
+Contributors: bhccomp
 Tags: security, malware scanner, malware, file integrity, login security
 Requires at least: 5.3
 Tested up to: 6.9
 Requires PHP: 7.1
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,3 +77,10 @@ Terms: https://firephage.com/terms
 1. Upload the plugin to `/wp-content/plugins/` or install it through WordPress.
 2. Activate the plugin.
 3. Open the FirePhage admin page to run local checks and scans.
+
+== Changelog ==
+
+= 0.1.1 =
+* Moved brute-force attempt and lockout tracking out of a hot `wp_options` row into dedicated custom database tables.
+* Added automatic table creation and legacy state migration during plugin activation and upgrades.
+* Reduced heavy database rewrites and MySQL binary log growth under login and bot traffic.
