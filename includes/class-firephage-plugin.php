@@ -80,6 +80,11 @@ final class Plugin
      */
     private $admin;
 
+    /**
+     * @var bool
+     */
+    private $cachePurgeQueuedForRequest = false;
+
     public static function instance(): self
     {
         if (self::$instance === null) {
@@ -106,6 +111,7 @@ final class Plugin
         add_action('plugins_loaded', [$this, 'maybeUpgradeStorage'], 1);
         add_action('plugins_loaded', [$this, 'loadTextdomain']);
         add_action('init', [$this, 'syncSchedules']);
+        add_action('wp_after_insert_post', [$this, 'maybePurgeEdgeCacheAfterContentChange'], 10, 4);
         add_action('firephage_security_settings_changed', [$this, 'syncSchedules']);
         add_filter('cron_schedules', [$this, 'registerSchedules']);
         add_action('template_redirect', [$this->notifications, 'maybeHandleEmailPreferenceAction']);
@@ -121,6 +127,58 @@ final class Plugin
 
         $this->scanner->registerHooks();
         $this->bruteForceProtection->registerHooks();
+    }
+
+    /**
+     * Trigger a full edge-cache purge after public content is created or updated.
+     *
+     * @param int $postId
+     * @param \WP_Post $post
+     * @param bool $update
+     * @param \WP_Post|null $postBefore
+     */
+    public function maybePurgeEdgeCacheAfterContentChange(int $postId, $post, bool $update, $postBefore): void
+    {
+        if ($this->cachePurgeQueuedForRequest) {
+            return;
+        }
+
+        if (wp_is_post_revision($postId) || wp_is_post_autosave($postId)) {
+            return;
+        }
+
+        if (! $post instanceof \WP_Post) {
+            return;
+        }
+
+        $postTypeObject = get_post_type_object($post->post_type);
+
+        if (! $postTypeObject || empty($postTypeObject->public)) {
+            return;
+        }
+
+        $currentStatus = (string) $post->post_status;
+        $previousStatus = $postBefore instanceof \WP_Post ? (string) $postBefore->post_status : '';
+
+        if ($currentStatus !== 'publish' && $previousStatus !== 'publish') {
+            return;
+        }
+
+        $settings = $this->settings->all();
+
+        if (($settings['site_token'] ?? '') === '' || ($settings['site_id'] ?? '') === '' || ($settings['connection_status'] ?? '') !== 'connected') {
+            return;
+        }
+
+        $response = $this->client->purgeCache($settings, [
+            'paths' => ['/*'],
+        ]);
+
+        if (is_wp_error($response)) {
+            return;
+        }
+
+        $this->cachePurgeQueuedForRequest = true;
     }
 
     public static function activate(): void

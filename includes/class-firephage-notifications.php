@@ -208,12 +208,14 @@ final class Notifications
     private function buildMalwareAlert(array $state, array $settings): string
     {
         $items = $this->buildMalwareFindingItems($state);
+        $officialChecksumMismatches = (int) ($state['official_checksum_mismatches'] ?? 0);
+        $baselineChanges = (int) ($state['baseline_changes'] ?? 0);
         if ($items === '') {
             $items = '<li>' . esc_html__('Malicious files were detected, but the current alert does not include individual rows.', 'firephage-security') . '</li>';
         }
 
         $content = '<p>' . esc_html__('FirePhage Security detected malicious files during the latest malware scan.', 'firephage-security') . '</p>';
-        $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($state['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Integrity Issues</span><strong>' . (int) ($state['integrity_issues'] ?? 0) . '</strong></div></div>';
+        $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($state['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Official Checksum Mismatches</span><strong>' . $officialChecksumMismatches . '</strong></div><div class="metric-card"><span>Local Baseline Changes</span><strong>' . $baselineChanges . '</strong></div></div>';
         $content .= '<h3>' . esc_html__('Recent malicious paths', 'firephage-security') . '</h3><ul>' . $items . '</ul>';
         $content .= '<p><a class="button" href="' . esc_url(admin_url('admin.php?page=firephage-security')) . '">' . esc_html__('Open FirePhage Security', 'firephage-security') . '</a></p>';
         $content .= $this->muteAlertPanel('malware', $settings);
@@ -258,6 +260,8 @@ final class Notifications
     {
         $malwareItems = $this->buildMalwareFindingItems($state);
         $coreItems = $this->buildCoreIntegrityItems($state);
+        $officialChecksumMismatches = (int) ($state['official_checksum_mismatches'] ?? 0);
+        $baselineChanges = (int) ($state['baseline_changes'] ?? 0);
 
         if ($malwareItems === '') {
             $malwareItems = '<li>' . esc_html__('Malicious files were detected, but the current alert does not include individual rows.', 'firephage-security') . '</li>';
@@ -268,7 +272,7 @@ final class Notifications
         }
 
         $content = '<p>' . esc_html__('FirePhage Security detected both malicious files and unexpected WordPress core file changes during the latest scan.', 'firephage-security') . '</p>';
-        $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($state['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Integrity Issues</span><strong>' . (int) ($state['integrity_issues'] ?? 0) . '</strong></div></div>';
+        $content .= '<div class="metric-row"><div class="metric-card"><span>Malicious Files</span><strong>' . (int) ($state['suspicious_files'] ?? 0) . '</strong></div><div class="metric-card"><span>Official Checksum Mismatches</span><strong>' . $officialChecksumMismatches . '</strong></div><div class="metric-card"><span>Local Baseline Changes</span><strong>' . $baselineChanges . '</strong></div></div>';
         $content .= '<h3>' . esc_html__('Recent malicious paths', 'firephage-security') . '</h3><ul>' . $malwareItems . '</ul>';
         $content .= '<h3>' . esc_html__('Modified core files', 'firephage-security') . '</h3><ul>' . $coreItems . '</ul>';
         $content .= '<p><a class="button" href="' . esc_url(admin_url('admin.php?page=firephage-security')) . '">' . esc_html__('Open FirePhage Security', 'firephage-security') . '</a></p>';

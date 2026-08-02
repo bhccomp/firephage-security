@@ -1752,6 +1752,11 @@
 
     const progressLabel = (state) => {
         const scanModeLabel = state.scan_mode === 'quick' ? 'Quick Scan' : 'Deep Scan';
+        const officialChecksumMismatches = Number(state.official_checksum_mismatches || 0);
+        const baselineChanges = Number(state.baseline_changes || 0);
+        const integritySummary = baselineChanges > 0
+            ? `Official checksum mismatches: ${officialChecksumMismatches}. Local baseline changes: ${baselineChanges}`
+            : `Official checksum mismatches: ${officialChecksumMismatches}`;
 
         if (state.status === 'idle') {
             return 'The scanner is idle. Start a background scan to verify repository integrity and review untrusted code paths.';
@@ -1762,18 +1767,18 @@
         }
 
         if (state.status === 'stopped') {
-            return `${scanModeLabel} cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
+            return `${scanModeLabel} cancelled at ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. ${integritySummary}. Malicious: ${state.suspicious_files}. Use Resume Scan to continue from the saved position.`;
         }
 
         if (state.status === 'completed') {
-            return `${scanModeLabel} completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${state.integrity_issues} integrity mismatches, ${state.suspicious_files} malicious.`;
+            return `${scanModeLabel} completed. ${state.scanned_files} files scanned, ${state.trusted_files} trusted, ${state.clean_files || 0} clean custom files, ${state.skipped_files || 0} skipped, ${integritySummary}, ${state.suspicious_files} malicious.`;
         }
 
         if (state.status === 'failed') {
             return `Scan failed: ${state.last_error || 'Unknown error'}`;
         }
 
-        return `${scanModeLabel}: scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. Integrity mismatches: ${state.integrity_issues}. Malicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
+        return `${scanModeLabel}: scanning ${state.scanned_files} of ${state.discovered_files} discovered files. Trusted: ${state.trusted_files}. Clean custom files: ${state.clean_files || 0}. Skipped: ${state.skipped_files || 0}. ${integritySummary}. Malicious: ${state.suspicious_files}. Current file: ${state.current_file || 'Waiting...'}`;
     };
 
     const pageSizeOptions = (count) => {
@@ -1983,7 +1988,7 @@
 
         [scannerModifiedStat, overviewModifiedStat].forEach((node) => {
             if (node) {
-                node.textContent = `${state.integrity_issues || 0}`;
+                node.textContent = `${state.official_checksum_mismatches || 0}`;
             }
         });
 

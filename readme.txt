@@ -2,9 +2,9 @@
 Contributors: bhccomp
 Tags: security, malware scanner, malware, file integrity, login security
 Requires at least: 5.3
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.1
-Stable tag: 0.1.1
+Stable tag: 0.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,15 @@ Terms: https://firephage.com/terms
 3. Open the FirePhage admin page to run local checks and scans.
 
 == Changelog ==
+
+= 0.1.3 =
+* Automatically refreshes local baselines for unverifiable plugin and theme package files when the installed package version changes.
+* Separates official WordPress.org checksum mismatches from local baseline-only package changes in scan summaries and alert emails.
+* Clarifies local baseline findings so premium plugin and theme updates are less likely to look like core tampering.
+
+= 0.1.2 =
+* Added an automatic full edge-cache purge trigger when public WordPress content is published or updated on connected FirePhage sites.
+* Confirmed compatibility with WordPress 7.0.
 
 = 0.1.1 =
 * Moved brute-force attempt and lockout tracking out of a hot `wp_options` row into dedicated custom database tables.

@@ -296,7 +296,8 @@ final class Admin
         $lastSyncFreshness = $this->humanizeTimestamp((string) ($settings['last_sync_at'] ?? ''));
         $pendingUpdates = (int) (($updates['core_updates'] ?? 0) + ($updates['plugin_updates'] ?? 0) + ($updates['theme_updates'] ?? 0));
         $scannerFindings = (int) ($scan['suspicious_files'] ?? 0);
-        $modifiedFiles = (int) ($scan['integrity_issues'] ?? 0);
+        $officialChecksumMismatches = $this->officialChecksumMismatches($scan);
+        $baselineChanges = $this->baselineChanges($scan);
         $bruteforceWafManaged = ! empty($bruteForce['waf_managed']);
         $dashboardFirewallUrl = $this->dashboardFirewallUrl($settings);
         $remoteProEnabled = ($settings['remote_pro_enabled'] ?? '0') === '1';
@@ -395,7 +396,7 @@ final class Admin
         echo '<p class="firephage-meta-line"><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-overview-last-scan">' . esc_html($lastScanFreshness) . '</span></p>';
         echo '<div class="firephage-mini-grid">';
         echo wp_kses($this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files carefully before deleting anything.', 'firephage-security') : __('No malicious files were found in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-flagged-stat'), $this->adminAllowedHtml());
-        echo wp_kses($this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files differ from a trusted version and should be reviewed.', 'firephage-security') : __('No modified core files were flagged.', 'firephage-security'), 'firephage-stat-card--compact firephage-overview-modified-stat'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(__('Official checksum mismatches', 'firephage-security'), (string) $officialChecksumMismatches, $officialChecksumMismatches > 0 ? __('These files do not match official WordPress.org package checksums and should be reviewed first.', 'firephage-security') : ($baselineChanges > 0 ? __('No official checksum mismatches were found. Some unverifiable package files changed against the local baseline.', 'firephage-security') : __('No official checksum mismatches were found.', 'firephage-security')), 'firephage-stat-card--compact firephage-overview-modified-stat'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-inline-actions">';
         echo '<button type="button" class="button button-primary firephage-overview-start-scan">' . esc_html($scan['status'] === 'stopped' ? __('Resume Malware Scan', 'firephage-security') : __('Scan My Website For Malware', 'firephage-security')) . '</button>';
@@ -437,7 +438,7 @@ final class Admin
         echo '<div class="firephage-mini-grid">';
         echo wp_kses($this->renderStatCard(__('Files checked', 'firephage-security'), (string) ((int) ($scan['scanned_files'] ?? 0)), __('Files reviewed in the current scan.', 'firephage-security'), 'firephage-stat-card--compact'), $this->adminAllowedHtml());
         echo wp_kses($this->renderStatCard(__('Flagged files', 'firephage-security'), (string) $scannerFindings, $scannerFindings > 0 ? __('Review these files before deciding whether to delete them.', 'firephage-security') : __('No malicious files were flagged in the latest scan.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-flagged-stat'), $this->adminAllowedHtml());
-        echo wp_kses($this->renderStatCard(__('Modified files', 'firephage-security'), (string) $modifiedFiles, $modifiedFiles > 0 ? __('These files do not match a trusted version and should be checked.', 'firephage-security') : __('No modified core files were reported.', 'firephage-security'), 'firephage-stat-card--compact firephage-scanner-modified-stat'), $this->adminAllowedHtml());
+        echo wp_kses($this->renderStatCard(__('Official checksum mismatches', 'firephage-security'), (string) $officialChecksumMismatches, $officialChecksumMismatches > 0 ? __('These files do not match official WordPress.org package checksums and should be checked first.', 'firephage-security') : ($baselineChanges > 0 ? __('No official checksum mismatches were found. Some unverifiable package files changed against the local baseline.', 'firephage-security') : __('No official checksum mismatches were reported.', 'firephage-security')), 'firephage-stat-card--compact firephage-scanner-modified-stat'), $this->adminAllowedHtml());
         echo '</div>';
         echo '<div class="firephage-inline-summary firephage-inline-summary--stacked">';
         echo '<span><strong>' . esc_html__('Last scan:', 'firephage-security') . '</strong> <span id="firephage-scanner-last-scan">' . esc_html($lastScanFreshness) . '</span></span>';
@@ -2476,27 +2477,27 @@ SVG;
 
         if ($status === 'stopped') {
             return sprintf(
-                /* translators: 1: Scanned files. 2: Discovered files. 3: Trusted files. 4: Clean custom files. 5: Skipped files. 6: Modified files. 7: Flagged files. */
-                __('The scan was paused after %1$d of %2$d files. Trusted files: %3$d. Clean custom files: %4$d. Skipped: %5$d. Modified files: %6$d. Flagged files: %7$d. Use Resume Scan to continue.', 'firephage-security'),
+                /* translators: 1: Scanned files. 2: Discovered files. 3: Trusted files. 4: Clean custom files. 5: Skipped files. 6: Integrity summary. 7: Flagged files. */
+                __('The scan was paused after %1$d of %2$d files. Trusted files: %3$d. Clean custom files: %4$d. Skipped: %5$d. %6$s. Flagged files: %7$d. Use Resume Scan to continue.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['discovered_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
                 (int) ($scan['clean_files'] ?? 0),
                 (int) ($scan['skipped_files'] ?? 0),
-                (int) ($scan['integrity_issues'] ?? 0),
+                $this->scanIntegritySummary($scan),
                 (int) ($scan['suspicious_files'] ?? 0)
             );
         }
 
         if ($status === 'completed') {
             return sprintf(
-                /* translators: 1: Scanned files. 2: Trusted files. 3: Clean custom files. 4: Skipped files. 5: Modified files. 6: Flagged files. */
-                __('Latest scan finished. %1$d files were checked, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$d modified files, and %6$d flagged files.', 'firephage-security'),
+                /* translators: 1: Scanned files. 2: Trusted files. 3: Clean custom files. 4: Skipped files. 5: Integrity summary. 6: Flagged files. */
+                __('Latest scan finished. %1$d files were checked, %2$d trusted, %3$d clean custom files, %4$d skipped, %5$s, and %6$d flagged files.', 'firephage-security'),
                 (int) ($scan['scanned_files'] ?? 0),
                 (int) ($scan['trusted_files'] ?? 0),
                 (int) ($scan['clean_files'] ?? 0),
                 (int) ($scan['skipped_files'] ?? 0),
-                (int) ($scan['integrity_issues'] ?? 0),
+                $this->scanIntegritySummary($scan),
                 (int) ($scan['suspicious_files'] ?? 0)
             );
         }
@@ -2507,14 +2508,14 @@ SVG;
         }
 
         return sprintf(
-            /* translators: 1: Scanned files. 2: Discovered files. 3: Trusted files. 4: Clean custom files. 5: Skipped files. 6: Modified files. 7: Flagged files. 8: Current file path. */
-            __('Scanning %1$d of %2$d files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. Modified files: %6$d. Flagged files: %7$d. Current file: %8$s', 'firephage-security'),
+            /* translators: 1: Scanned files. 2: Discovered files. 3: Trusted files. 4: Clean custom files. 5: Skipped files. 6: Integrity summary. 7: Flagged files. 8: Current file path. */
+            __('Scanning %1$d of %2$d files. Trusted: %3$d. Clean custom files: %4$d. Skipped: %5$d. %6$s. Flagged files: %7$d. Current file: %8$s', 'firephage-security'),
             (int) ($scan['scanned_files'] ?? 0),
             (int) ($scan['discovered_files'] ?? 0),
             (int) ($scan['trusted_files'] ?? 0),
             (int) ($scan['clean_files'] ?? 0),
             (int) ($scan['skipped_files'] ?? 0),
-            (int) ($scan['integrity_issues'] ?? 0),
+            $this->scanIntegritySummary($scan),
             (int) ($scan['suspicious_files'] ?? 0),
             (string) ($scan['current_file'] ?? '')
         );
@@ -2559,6 +2560,43 @@ SVG;
             default:
                 return __('Idle', 'firephage-security');
         }
+    }
+
+    /**
+     * @param array<string, mixed> $scan
+     */
+    private function officialChecksumMismatches(array $scan): int
+    {
+        return max(0, (int) ($scan['official_checksum_mismatches'] ?? 0));
+    }
+
+    /**
+     * @param array<string, mixed> $scan
+     */
+    private function baselineChanges(array $scan): int
+    {
+        return max(0, (int) ($scan['baseline_changes'] ?? 0));
+    }
+
+    /**
+     * @param array<string, mixed> $scan
+     */
+    private function scanIntegritySummary(array $scan): string
+    {
+        $official = $this->officialChecksumMismatches($scan);
+        $baseline = $this->baselineChanges($scan);
+
+        if ($baseline < 1) {
+            /* translators: %d: Number of official checksum mismatches. */
+            return sprintf(__('Official checksum mismatches: %d', 'firephage-security'), $official);
+        }
+
+        return sprintf(
+            /* translators: 1: Number of official checksum mismatches. 2: Number of local baseline changes. */
+            __('Official checksum mismatches: %1$d. Local baseline changes: %2$d', 'firephage-security'),
+            $official,
+            $baseline
+        );
     }
 
     private function connectionStatusLabel(string $status): string
@@ -2696,11 +2734,12 @@ SVG;
         }
 
         $suspicious = (int) ($scan['suspicious_files'] ?? 0);
-        $integrity = (int) ($scan['integrity_issues'] ?? 0);
+        $officialChecksumMismatches = $this->officialChecksumMismatches($scan);
+        $baselineChanges = $this->baselineChanges($scan);
         $scanStatus = (string) ($scan['status'] ?? 'idle');
         $scannedFiles = (int) ($scan['scanned_files'] ?? 0);
 
-        if ($suspicious === 0 && $integrity === 0 && $scanStatus === 'completed') {
+        if ($suspicious === 0 && $officialChecksumMismatches === 0 && $baselineChanges === 0 && $scanStatus === 'completed') {
             $score += 14;
         } elseif ($scanStatus === 'running') {
             $score += 3;
@@ -2713,9 +2752,14 @@ SVG;
                 $addHint($hints, __('Review the flagged files first.', 'firephage-security'));
             }
 
-            if ($integrity > 0) {
-                $score -= min(28, $integrity * 4);
-                $addHint($hints, __('Review modified WordPress files carefully.', 'firephage-security'));
+            if ($officialChecksumMismatches > 0) {
+                $score -= min(28, $officialChecksumMismatches * 4);
+                $addHint($hints, __('Review official checksum mismatches first.', 'firephage-security'));
+            }
+
+            if ($baselineChanges > 0) {
+                $score -= min(12, $baselineChanges * 1);
+                $addHint($hints, __('Review unverifiable plugin or theme file changes after updates.', 'firephage-security'));
             }
         }
 
@@ -2764,7 +2808,8 @@ SVG;
         $totalChecks = max(0, $goodChecks + $badChecks);
         $pendingUpdates = (int) (($health['updates']['core_updates'] ?? 0) + ($health['updates']['plugin_updates'] ?? 0) + ($health['updates']['theme_updates'] ?? 0));
         $suspicious = (int) ($scan['suspicious_files'] ?? 0);
-        $integrity = (int) ($scan['integrity_issues'] ?? 0);
+        $officialChecksumMismatches = $this->officialChecksumMismatches($scan);
+        $baselineChanges = $this->baselineChanges($scan);
         $scanStatus = (string) ($scan['status'] ?? 'idle');
         $scannedFiles = (int) ($scan['scanned_files'] ?? 0);
         $score = (int) ($securityScore['score'] ?? $this->buildSecurityScore($health, $scan, $bruteForce, $settings)['score']);
@@ -2785,10 +2830,14 @@ SVG;
             $tone = 'critical';
             $label = __('Action needed', 'firephage-security');
             $summary = __('Malware findings were detected. Review the flagged files before treating the site as healthy.', 'firephage-security');
-        } elseif ($integrity > 0) {
+        } elseif ($officialChecksumMismatches > 0) {
             $tone = 'critical';
             $label = __('Action needed', 'firephage-security');
-            $summary = __('Modified WordPress core files were detected. Review them before trusting the current site status.', 'firephage-security');
+            $summary = __('Official WordPress.org checksum mismatches were detected. Review those files before trusting the current site status.', 'firephage-security');
+        } elseif ($baselineChanges > 0) {
+            $tone = 'warning';
+            $label = __('Needs review', 'firephage-security');
+            $summary = __('Some plugin or theme package files changed against the local baseline. This is common right after a premium package update, but it should still be reviewed.', 'firephage-security');
         } elseif ($scanStatus === 'failed') {
             $tone = 'critical';
             $label = __('Action needed', 'firephage-security');
